@@ -15,7 +15,7 @@
     #history { margin-top: 30px; }
     .entry { border: 1px solid #ccc; padding: 10px; border-radius: 5px; margin-bottom: 10px; }
     .entry-header { display: flex; justify-content: space-between; align-items: center; }
-    .entry-buttons button { margin-left:5px; }
+    .entry-buttons button { margin-left: 5px; }
     body.dark-mode { background: #121212; color: #e0e0e0; }
     body.dark-mode #cv, body.dark-mode .entry { background: #1e1e1e; color: #e0e0e0; }
     body.modern-mode { background: #f0f8ff; color: #333; }
@@ -63,15 +63,13 @@
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5a2xhdmlnaXZhZnZwcHRjeXNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcxNjE3NTksImV4cCI6MjA2MjczNzc1OX0.UUYwlUDvEnDr85243CttmH5VvJqQCKBTs24lr-9MeBQ";
   const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // Theme
+  // Tema
   function changeStyle() {
     const val = document.getElementById("styleSelect").value;
-    document.body.className = '';
-    if (val === 'dark') document.body.classList.add('dark-mode');
-    else if (val === 'modern') document.body.classList.add('modern-mode');
+    document.body.className = (val === 'dark') ? 'dark-mode' : (val === 'modern') ? 'modern-mode' : '';
   }
 
-  // Netlify Identity UI
+  // Prisijungimo UI valdymas
   function updateAuthUI(user) {
     const emailSpan = document.getElementById("user-email");
     const loginBtn = document.getElementById("loginBtn");
@@ -93,7 +91,7 @@
   netlifyIdentity.on('logout', () => updateAuthUI(null));
   netlifyIdentity.init();
 
-  // CV structure
+  // CV struktūra
   function getPromptStructure(format) {
     if (format === 'classic') return 'Structure: Contact info, Summary, Work experience, Education, Skills, Languages.';
     if (format === 'linkedin') return 'LinkedIn-style: Summary, Experience, Education, Skills, Certifications.';
@@ -101,7 +99,7 @@
     return '';
   }
 
-  // Generate CV
+  // CV generavimas
   async function generateCV() {
     const job = document.getElementById('job').value;
     const experience = document.getElementById('experience').value;
@@ -129,28 +127,19 @@
     }
   }
 
-  // Save CV
+  // CV išsaugojimas
   async function saveCVToSupabase(cvText) {
     const user = netlifyIdentity.currentUser();
     if (!user) return alert('Prisijunkite, kad išsaugotumėte CV.');
     const { error } = await supabase.from('cv_entries').insert([{ user_id: user.email, content: cvText }]);
-    if (error) {
-      console.error('Klaida saugant CV:', error.message);
-      alert('Nepavyko išsaugoti CV.');
-    }
+    if (error) { console.error('Klaida saugant CV:', error.message); alert('Nepavyko išsaugoti CV.'); }
   }
 
-  // Fetch history
+  // Istorijos gavimas
   async function fetchHistory() {
-    const user = netlifyIdentity.currentUser();
-    if (!user) return;
-    const { data, error } = await supabase
-      .from('cv_entries')
-      .select('*')
-      .eq('user_id', user.email)
-      .order('created_at', { ascending: false });
-    const container = document.getElementById('entries');
-    container.innerHTML = '';
+    const user = netlifyIdentity.currentUser(); if (!user) return;
+    const { data, error } = await supabase.from('cv_entries').select('*').eq('user_id', user.email).order('created_at', { ascending: false });
+    const container = document.getElementById('entries'); container.innerHTML = '';
     if (error) return console.error('Klaida gaunant istoriją:', error.message);
     data.forEach(entry => {
       const div = document.createElement('div'); div.className = 'entry';
@@ -160,56 +149,24 @@
       const btns = document.createElement('div'); btns.className = 'entry-buttons';
       const dlBtn = document.createElement('button'); dlBtn.textContent = 'Atsisiųsti TXT'; dlBtn.onclick = () => downloadText(entry.content, `cv_${entry.id}.txt`);
       const delBtn = document.createElement('button'); delBtn.textContent = 'Ištrinti'; delBtn.onclick = () => deleteEntry(entry.id);
-      btns.append(dlBtn, delBtn);
-      header.appendChild(btns);
-      div.append(header);
-      container.append(div);
+      btns.append(dlBtn, delBtn); header.appendChild(btns); div.appendChild(header);
+      container.appendChild(div);
     });
   }
 
-  function downloadText(text, filename) {
-    const blob = new Blob([text], { type: 'text/plain' });
-    const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = filename; link.click();
-  }
+  function downloadText(text, filename) { const blob = new Blob([text], { type: 'text/plain' }); const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = filename; link.click(); }
+  async function deleteEntry(id) { if (!confirm('Ar tikrai norite ištrinti šį CV?')) return; const { error } = await supabase.from('cv_entries').delete().eq('id', id); if (error) return alert('Nepavyko ištrinti.'); fetchHistory(); }
 
-  async function deleteEntry(id) {
-    if (!confirm('Ar tikrai norite ištrinti šį CV?')) return;
-    const { error } = await supabase.from('cv_entries').delete().eq('id', id);
-    if (error) return alert('Nepavyko ištrinti.');
-    fetchHistory();
-  }
-
-  // Downloads
+  // Atsisiuntimai
   function downloadPDF() { html2pdf().from(document.getElementById('cv')).save('cv.pdf'); }
-  function downloadDOCX() {
-    const text = document.getElementById('cv').innerText;
-    const doc = new docx.Document({ sections: [{ children: [ new docx.Paragraph({ children: [ new docx.TextRun(text) ] }) ] }] });
-    docx.Packer.toBlob(doc).then(blob => { const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'cv.docx'; link.click(); });
-  }
+  function downloadDOCX() { const text = document.getElementById('cv').innerText; const doc = new docx.Document({ sections: [{ children: [ new docx.Paragraph({ children: [ new docx.TextRun(text) ] }) ] }] }); docx.Packer.toBlob(doc).then(blob => { const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'cv.docx'; link.click(); }); }
   function downloadTXT() { downloadText(document.getElementById('cv').innerText, 'cv.txt'); }
-  function downloadEuropassXML() {
-    const lang = document.getElementById('languageSelect').value;
-    const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<Europass>\n  <DocumentInfo><Language>${lang}</Language><CreationDate>${new Date().toISOString()}</CreationDate></DocumentInfo>\n  <Content><CVText><![CDATA[${document.getElementById('cv').innerText}]]></CVText></Content>\n</Europass>`;
-    const blob = new Blob([xml], { type: 'application/xml' });
-    const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'europass-cv.xml'; link.click();
-  }
+  function downloadEuropassXML() { const lang = document.getElementById('languageSelect').value; const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<Europass>\n  <DocumentInfo><Language>${lang}</Language><CreationDate>${new Date().toISOString()}</CreationDate></DocumentInfo>\n  <Content><CVText><![CDATA[${document.getElementById('cv').innerText}]]></CVText></Content>\n</Europass>`; const blob = new Blob([xml], { type: 'application/xml' }); const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'europass-cv.xml'; link.click(); }
 
   // localStorage
-  function saveInputs() {
-    localStorage.setItem('cv_job', document.getElementById('job').value);
-    localStorage.setItem('cv_experience', document.getElementById('experience').value);
-    localStorage.setItem('cv_format', document.getElementById('formatSelect').value);
-    localStorage.setItem('cv_lang', document.getElementById('languageSelect').value);
-    localStorage.setItem('cv_style', document.getElementById('styleSelect').value);
-  }
-  function loadInputs() {
-    if (localStorage.getItem('cv_job')) document.getElementById('job').value = localStorage.getItem('cv_job');
-    if (localStorage.getItem('cv_experience')) document.getElementById('experience').value = localStorage.getItem('cv_experience');
-    if (localStorage.getItem('cv_format')) document.getElementById('formatSelect').value = localStorage.getItem('cv_format');
-    if (localStorage.getItem('cv_lang')) document.getElementById('languageSelect').value = localStorage.getItem('cv_lang');
-    if (localStorage.getItem('cv_style')) { document.getElementById('styleSelect').value = localStorage.getItem('cv_style'); changeStyle(); }
-  }
-  setInterval(saveInputs,2000);
+  function saveInputs() { localStorage.setItem('cv_job', document.getElementById('job').value); localStorage.setItem('cv_experience', document.getElementById('experience').value); localStorage.setItem('cv_format', document.getElementById('formatSelect').value); localStorage.setItem('cv_lang', document.getElementById('languageSelect').value); localStorage.setItem('cv_style', document.getElementById('styleSelect').value); }
+  function loadInputs() { if (localStorage.getItem('cv_job')) document.getElementById('job').value = localStorage.getItem('cv_job'); if (localStorage.getItem('cv_experience')) document.getElementById('experience').value = localStorage.getItem('cv_experience'); if (localStorage.getItem('cv_format')) document.getElementById('formatSelect').value = localStorage.getItem('cv_format'); if (localStorage.getItem('cv_lang')) document.getElementById('languageSelect').value = localStorage.getItem('cv_lang'); if (localStorage.getItem('cv_style')) { document.getElementById('styleSelect').value = localStorage.getItem('cv_style'); changeStyle(); } }
+  setInterval(saveInputs, 2000);
   window.onload = loadInputs;
 </script></body>
 </html>
