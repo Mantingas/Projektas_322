@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>CVX Generatorius</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.min.js"></script>
+  <style>
+    body { font-family: Arial; max-width: 900px; margin: 30px auto; transition: background 0.4s, color 0.4s; }
+    textarea, select { width: 100%; margin-bottom: 10px; padding: 8px; }
+    button { padding: 10px 20px; margin: 5px 5px 10px 0; background: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    /* Iš pradžių paslepiam abu mygtukus */
+    #loginBtn, #logoutBtn { display: none; }
+    #cv { background: #f5f5f5; padding: 20px; border-radius: 10px; white-space: pre-wrap; margin-top: 20px; }
+    #history { margin-top: 30px; }
+    .entry { border: 1px solid #ccc; padding: 10px; border-radius: 5px; margin-bottom: 10px; }
+    .entry-header { display: flex; justify-content: space-between; align-items: center; }
+    .entry-buttons button { margin-left: 5px; }
+    body.dark-mode { background: #121212; color: #e0e0e0; }
+    body.dark-mode #cv, body.dark-mode .entry { background: #1e1e1e; color: #e0e0e0; }
+    body.modern-mode { background: #f0f8ff; color: #333; }
+    body.modern-mode #cv, body.modern-mode .entry { background: #ffffff; border: 1px solid #ccc; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <h2>CV Generatorius</h2>
+  <div>
+    <span id="user-email" style="font-weight:bold;"></span>
+    <button id="loginBtn" onclick="netlifyIdentity.open()">Prisijungti</button>
+    <button id="logoutBtn" onclick="netlifyIdentity.logout()">Atsijungti</button>
+  </div>
+</div>
+
+<label>CV formatas:</label>
+<select id="formatSelect">
+  <option value="classic">Klasikinis</option>
+  <option value="linkedin">LinkedIn</option>
+  <option value="europass">Europass</option>
+</select>
+
+<label>Dizainas:</label>
+<select id="styleSelect" onchange="changeStyle()">
+  <option value="default">Šviesi</option>
+  <option value="dark">Tamsi</option>
+  <option value="modern">Moderni</option>
+</select>
+
+<label>Kalba:</label>
+<select id="languageSelect">
+  <option value="lt">Lietuvių</option>
+  <option value="en">Anglų</option>
+  <option value="de">Vokiečių</option>
+  <option value="fr">Prancūzų</option>
+  <option value="es">Ispanų</option>
+  <option value="it">Italų</option>
+  <option value="pl">Lenkų</option>
+</select>
+
+<label>Darbo skelbimas:</label>
+<textarea id="job" placeholder="Įklijuok darbo skelbimą..."></textarea>
+
+<label>Kandidato patirtis:</label>
+<textarea id="experience" placeholder="Įklijuok kandidato patirtį..."></textarea>
+
+<button onclick="generateCV()">Generuoti CV</button>
+<button onclick="downloadPDF()">PDF</button>
+<button onclick="downloadDOCX()">Word</button>
+<button onclick="downloadTXT()">TXT</button>
+<button onclick="downloadEuropassXML()">Europass XML</button>
+
+<div id="cv">Čia bus rodomas sugeneruotas CV...</div>
+
+<div id="history">
+  <h3>Mano CV istorija</h3>
+  <div id="entries"></div>
+</div>
+
+<script>
+  // Supabase nustatymai
+  const SUPABASE_URL = "https://yyklavigivafvpptcysd.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5a2xhdmlnaXZhZnZwcHRjeXNkIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NzE2MTc1OSwiZXhwIjoyMDYyNzM3NzU5fQ.b2yHpkw1RtPskD_Z16qoa1yFrgcRIAhjQXOyxe-Frsg";
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Tema
+  function changeStyle() {
+    const val = document.getElementById("styleSelect").value;
+    document.body.className = val === 'dark'
+      ? 'dark-mode'
+      : val === 'modern'
+        ? 'modern-mode'
+        : '';
+  }
+
+  // Prisijungimo UI valdymas
+  function updateAuthUI(user) {
+    const emailSpan = document.getElementById("user-email");
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    if (user) {
+      emailSpan.innerText = "Prisijungta: " + user.email;
+      loginBtn.style.display = 'none';
+      logoutBtn.style.display = 'inline-block';
+      fetchHistory();
+    } else {
+      emailSpan.innerText = '';
+      loginBtn.style.display = 'inline-block';
+      logoutBtn.style.display = 'none';
+      document.getElementById('entries').innerHTML = '';
+    }
+  }
+
+  netlifyIdentity.on('init', user => updateAuthUI(user));
+  netlifyIdentity.on('login', user => { updateAuthUI(user); netlifyIdentity.close(); });
+  netlifyIdentity.on('logout', () => updateAuthUI(null));
+  netlifyIdentity.init();
+
+  // CV struktūra
+  function getPromptStructure(format) {
+    if (format === 'classic')    return 'Structure: Contact info, Summary, Work experience, Education, Skills, Languages.';
+    if (format === 'linkedin')   return 'LinkedIn-style: Summary, Experience, Education, Skills, Certifications.';
+    if (format === 'europass')   return 'Europass: Personal info, Experience, Education, Skills, Languages.';
+    return '';
+  }
+
+  // CV generavimas
+  async function generateCV() {
+    const job = document.getElementById('job').value;
+    const experience = document.getElementById('experience').value;
+    const format = document.getElementById('formatSelect').value;
+    const lang = document.getElementById('languageSelect').value;
+    const langMap = { lt: 'Lithuanian', en: 'English', de: 'German', fr: 'French', es: 'Spanish', it: 'Italian', pl: 'Polish' };
+    const apiKey = prompt('Įveskite savo OpenAI API raktą:');
+    if (!apiKey) return alert('API raktas būtinas.');
+
+    document.getElementById('cv').innerText = 'Kraunama...';
+
+    const messages = [
+      { role: 'system', content: `You are a professional CV writer. Write in ${langMap[lang]} language.` },
+      { role: 'user',   content: `Job ad:\n${job}\n\nCandidate experience:\n${experience}\n\nCreate a professional CV using this structure:\n${getPromptStructure(format)}` }
+    ];
+
+    try {
+      const res = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({ model: 'gpt-3.5-turbo', messages, temperature: 0.7 })
+      });
+      const data = await res.json();
+      const cvText = data.choices?.[0]?.message?.content || 'Nėra atsakymo';
+      document.getElementById('cv').innerText = cvText;
+      saveCVToSupabase(cvText);
+    } catch (e) {
+      document.getElementById('cv').innerText = 'Klaida: ' + e.message;
+    }
+  }
+
+  // Išsaugo CV į Supabase
+  async function saveCVToSupabase(cvText) {
+    const user = netlifyIdentity.currentUser();
+    if (!user) return alert('Prisijunkite, kad išsaugotumėte CV.');
+
+    const { error } = await supabase
+      .from('cv_entries')
+      .insert([{ user_id: user.email, content: cvText }]);
+
+    if (error) {
+      console.error('Klaida saugant CV:', error.message);
+      alert('Nepavyko išsaugoti CV.');
+    }
+  }
+
+  // Gauti istoriją
+  async function fetchHistory() {
+    const user = netlifyIdentity.currentUser();
+    if (!user) return;
+
+    const { data, error } = await supabase
+      .from('cv_entries')
+      .select('*')
+      .eq('user_id', user.email)
+      .order('created_at', { ascending: false });
+
+    if (error) return console.error('Klaida gaunant istoriją:', error.message);
+
+    const container = document.getElementById('entries');
+    container.innerHTML = '';
+    data.forEach(entry => {
+      const div = document.createElement('div');
+      div.className = 'entry';
+      const header = document.createElement('div');
+      header.className = 'entry-header';
+      const date = new Date(entry.created_at).toLocaleString();
+      header.innerHTML = `<span>${date}</span>`;
+
+      const btns = document.createElement('div');
+      btns.className = 'entry-buttons';
+      const dlBtn = document.createElement('button');
+      dlBtn.textContent = 'Atsisiųsti TXT';
+      dlBtn.onclick = () => downloadText(entry.content, `cv_${entry.id}.txt`);
+      const delBtn = document.createElement('button');
+      delBtn.textContent = 'Ištrinti';
+      delBtn.onclick = () => deleteEntry(entry.id);
+
+      btns.append(dlBtn, delBtn);
+      header.appendChild(btns);
+      div.appendChild(header);
+      container.appendChild(div);
+    });
+  }
+
+  function downloadText(text, filename) {
+    const blob = new Blob([text], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+  }
+
+  async function deleteEntry(id) {
+    if (!confirm('Ar tikrai norite ištrinti šį CV?')) return;
+    const { error } = await supabase.from('cv_entries').delete().eq('id', id);
+    if (error) return alert('Nepavyko ištrinti.');
+    fetchHistory();
+  }
+
+  // Parsisiuntimo funkcijos
+  function downloadPDF() { html2pdf().from(document.getElementById('cv')).save('cv.pdf'); }
+  function downloadDOCX() {
+    const text = document.getElementById('cv').innerText;
+    const doc = new docx.Document({
+      sections: [{ children: [new docx.Paragraph({ children: [new docx.TextRun(text)] })] }]
+    });
+    docx.Packer.toBlob(doc).then(blob => {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'cv.docx';
+      link.click();
+    });
+  }
+  function downloadTXT() { downloadText(document.getElementById('cv').innerText, 'cv.txt'); }
+  function downloadEuropassXML() {
+    const lang = document.getElementById('languageSelect').value;
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<Europass>\n  <DocumentInfo><Language>${lang}</Language><CreationDate>${new Date().toISOString()}</CreationDate></DocumentInfo>\n  <Content><CVText><![CDATA[${document.getElementById('cv').innerText}]]></CVText></Content>\n</Europass>`;
+    const blob = new Blob([xml], { type: 'application/xml' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'europass-cv.xml';
+    link.click();
+  }
+
+  // Naršyklės atmintis (localStorage)
+  function saveInputs() {
+    localStorage.setItem('cv_job', document.getElementById('job').value);
+    localStorage.setItem('cv_experience', document.getElementById('experience').value);
+    localStorage.setItem('cv_format', document.getElementById('formatSelect').value);
+    localStorage.setItem('cv_lang', document.getElementById('languageSelect').value);
+    localStorage.setItem('cv_style', document.getElementById('styleSelect').value);
+  }
+  function loadInputs() {
+    if (localStorage.getItem('cv_job')) document.getElementById('job').value = localStorage.getItem('cv_job');
+    if (localStorage.getItem('cv_experience')) document.getElementById('experience').value = localStorage.getItem('cv_experience');
+    if (localStorage.getItem('cv_format')) document.getElementById('formatSelect').value = localStorage.getItem('cv_format');
+    if (localStorage.getItem('cv_lang')) document.getElementById('languageSelect').value = localStorage.getItem('cv_lang');
+    if (localStorage.getItem('cv_style')) {
+      document.getElementById('styleSelect').value = localStorage.getItem('cv_style');
+      changeStyle();
+    }
+  }
+  setInterval(saveInputs, 2000);
+  window.onload = loadInputs;
+</script>
+
+</body>
+</html>
