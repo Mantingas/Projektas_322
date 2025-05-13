@@ -71,12 +71,10 @@
 <div id="cv">Čia bus rodomas sugeneruotas CV...</div>
 
 <script>
-  // === Supabase nustatymai (pakeisk į savo) ===
-  const SUPABASE_URL = "https://TAVO_PROJEKTAS.supabase.co";
-  const SUPABASE_ANON_KEY = "eyJhbGciOi..."; // tavo anon public key
+  const SUPABASE_URL = "https://yyklavigivafvpptcysd.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5a2xhdmlnaXZhZnZwcHRjeXNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcxNjE3NTksImV4cCI6MjA2MjczNzc1OX0.UUYwlUDvEnDr85243CttmH5VvJqQCKBTs24lr-9MeBQ";
   const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // === Tema ===
   function changeStyle() {
     const val = document.getElementById("styleSelect").value;
     document.body.className = "";
@@ -84,7 +82,6 @@
     else if (val === "modern") document.body.classList.add("modern-mode");
   }
 
-  // === Prisijungimas per Netlify Identity ===
   netlifyIdentity.on("init", user => {
     if (user) document.getElementById("user-email").innerText = "Prisijungta: " + user.email;
   });
@@ -97,7 +94,6 @@
   });
   netlifyIdentity.init();
 
-  // === CV struktūros pasirinkimas ===
   function getPromptStructure(format) {
     if (format === "classic") return "Structure: Contact info, Summary, Work experience, Education, Skills, Languages.";
     if (format === "linkedin") return "LinkedIn-style: Summary, Experience, Education, Skills, Certifications.";
@@ -105,7 +101,6 @@
     return "";
   }
 
-  // === CV generavimas su OpenAI ===
   async function generateCV() {
     const job = document.getElementById("job").value;
     const exp = document.getElementById("experience").value;
@@ -135,13 +130,12 @@
       const data = await res.json();
       const cvText = data.choices?.[0]?.message?.content || "Nėra atsakymo";
       document.getElementById("cv").innerText = cvText;
-      saveCVToSupabase(cvText); // išsaugo CV į Supabase
+      saveCVToSupabase(cvText);
     } catch (e) {
       document.getElementById("cv").innerText = "Klaida: " + e.message;
     }
   }
 
-  // === CV įrašymas į Supabase ===
   async function saveCVToSupabase(cvText) {
     const user = netlifyIdentity.currentUser();
     if (!user) return alert("Prisijunkite, kad išsaugotumėte CV.");
@@ -154,7 +148,6 @@
     }
   }
 
-  // === Atsisiuntimai ===
   function downloadPDF() {
     html2pdf().from(document.getElementById("cv")).save("cv.pdf");
   }
@@ -194,7 +187,6 @@
     link.click();
   }
 
-  // === Naršyklės atmintis (localStorage) ===
   function saveInputs() {
     localStorage.setItem("cv_job", document.getElementById("job").value);
     localStorage.setItem("cv_experience", document.getElementById("experience").value);
