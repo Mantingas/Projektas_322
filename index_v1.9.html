@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>CV Generatorius su Supabase</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.min.js"></script>
+  <style>
+    body { font-family: Arial; max-width: 900px; margin: 30px auto; }
+    textarea, select { width: 100%; margin-bottom: 10px; padding: 8px; }
+    button { padding: 10px 20px; margin: 5px 5px 10px 0; background: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    #cv { background: #f5f5f5; padding: 20px; border-radius: 10px; white-space: pre-wrap; margin-top: 20px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <h2>CV Generatorius</h2>
+  <div>
+    <span id="user-email" style="font-weight:bold;"></span>
+    <button onclick="netlifyIdentity.open()">Prisijungti</button>
+    <button onclick="netlifyIdentity.logout()">Atsijungti</button>
+  </div>
+</div>
+
+<label>CV formatas:</label>
+<select id="formatSelect">
+  <option value="classic">Klasikinis</option>
+  <option value="linkedin">LinkedIn</option>
+  <option value="europass">Europass</option>
+</select>
+
+<label>Kalba:</label>
+<select id="languageSelect">
+  <option value="lt">Lietuvių</option>
+  <option value="en">Anglų</option>
+  <option value="de">Vokiečių</option>
+</select>
+
+<label>Darbo skelbimas:</label>
+<textarea id="job" placeholder="Įklijuok darbo skelbimą..."></textarea>
+
+<label>Kandidato patirtis:</label>
+<textarea id="experience" placeholder="Įklijuok kandidato patirtį..."></textarea>
+
+<button onclick="generateCV()">Generuoti CV</button>
+<button onclick="downloadPDF()">PDF</button>
+<button onclick="downloadDOCX()">Word</button>
+
+<div id="cv">Čia bus sugeneruotas CV...</div>
+
+<script>
+  // Supabase prisijungimo duomenys (PAKEISK)
+  const SUPABASE_URL = "https://TAVO-PROJEKTAS.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOi...";
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Prisijungimas
+  netlifyIdentity.on("init", user => {
+    if (user) document.getElementById("user-email").innerText = "Prisijungta: " + user.email;
+  });
+  netlifyIdentity.on("login", user => {
+    document.getElementById("user-email").innerText = "Prisijungta: " + user.email;
+    netlifyIdentity.close();
+  });
+  netlifyIdentity.on("logout", () => {
+    document.getElementById("user-email").innerText = "";
+  });
+  netlifyIdentity.init();
+
+  // CV struktūros
+  function getPromptStructure(format) {
+    if (format === "classic") return "Structure: Contact info, Summary, Work experience, Education, Skills, Languages.";
+    if (format === "linkedin") return "LinkedIn-style: Summary, Experience, Education, Skills, Certifications.";
+    if (format === "europass") return "Europass: Personal info, Experience, Education, Skills, Languages.";
+    return "";
+  }
+
+  // Generuoti CV
+  async function generateCV() {
+    const job = document.getElementById("job").value;
+    const exp = document.getElementById("experience").value;
+    const format = document.getElementById("formatSelect").value;
+    const lang = document.getElementById("languageSelect").value;
+
+    const langMap = { lt: "Lithuanian", en: "English", de: "German" };
+
+    const apiKey = prompt("Įveskite savo OpenAI API raktą:");
+    if (!apiKey) return alert("API raktas būtinas.");
+
+    document.getElementById("cv").innerText = "Kraunama...";
+
+    const messages = [
+      { role: "system", content: `You are a professional CV writer. Write in ${langMap[lang]}.` },
+      { role: "user", content: `Job:\n${job}\nExperience:\n${exp}\nStructure:\n${getPromptStructure(format)}` }
+    ];
+
+    try {
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages,
+          temperature: 0.7
+        })
+      });
+
+      const data = await res.json();
+      const cvText = data.choices?.[0]?.message?.content || "Nėra atsakymo";
+      document.getElementById("cv").innerText = cvText;
+
+      saveCVToSupabase(cvText); // išsaugo CV į Supabase
+    } catch (e) {
+      document.getElementById("cv").innerText = "Klaida: " + e.message;
+    }
+  }
+
+  // Išsaugoti CV į Supabase
+  async function saveCVToSupabase(cvText) {
+    const user = netlifyIdentity.currentUser();
+    if (!user) return alert("Prisijunkite, kad išsaugotumėte CV.");
+
+    const { error } = await supabase
+      .from("cv_entries")
+      .insert([{ user_id: user.email, content: cvText }]);
+
+    if (error) {
+      console.error("Klaida saugant CV:", error.message);
+      alert("Nepavyko išsaugoti CV.");
+    } else {
+      console.log("CV išsaugotas!");
+    }
+  }
+
+  function downloadPDF() {
+    html2pdf().from(document.getElementById("cv")).save("cv.pdf");
+  }
+
+  function downloadDOCX() {
+    const text = document.getElementById("cv").innerText;
+    const doc = new docx.Document({
+      sections: [{ children: [new docx.Paragraph({ children: [new docx.TextRun(text)] })] }]
+    });
+    docx.Packer.toBlob(doc).then(blob => {
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "cv.docx";
+      link.click();
+    });
+  }
+</script>
+
+</body>
+</html>
