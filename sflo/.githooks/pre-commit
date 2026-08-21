@@ -1,0 +1,31 @@
+#!/bin/sh
+# SFLO pre-commit hook — run tests before every commit.
+# Install: git config core.hooksPath .githooks
+
+echo "Running SFLO tests..."
+
+# Find python — prefer a venv, but only if it can actually import pytest.
+# _get_factory_env() in src/runner.py creates a BARE .sflo/.venv (no
+# packages installed) for spawned agents. Without the import check below,
+# the hook would pick that bare venv and fail every commit with
+# "No module named pytest" even though the code is fine.
+if [ -f ".sflo/.venv/bin/python3" ] && .sflo/.venv/bin/python3 -c "import pytest" 2>/dev/null; then
+    PY=".sflo/.venv/bin/python3"
+elif [ -f "../.sflo/.venv/bin/python3" ] && ../.sflo/.venv/bin/python3 -c "import pytest" 2>/dev/null; then
+    PY="../.sflo/.venv/bin/python3"
+else
+    PY="python3"
+fi
+
+# Run tests quietly — only show failures
+$PY -m pytest tests/ -q 2>&1
+STATUS=$?
+
+if [ $STATUS -ne 0 ]; then
+    echo ""
+    echo "COMMIT BLOCKED: tests failed. Fix before committing."
+    exit 1
+fi
+
+echo "Tests passed."
+exit 0

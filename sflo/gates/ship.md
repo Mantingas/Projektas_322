@@ -1,0 +1,45 @@
+# Gate 5: Ship Decision
+
+**Agent:** SFLO (the coordinating agent)
+**Input:** All gate artifacts
+**Produces:** `SHIP-DECISION.md`
+
+## SHIP-DECISION.md Template
+
+```markdown
+## Ship Decision: [Project Name]
+
+**Date:** [YYYY-MM-DD]
+
+### Pipeline Evidence
+- SCOPE.md: exists, data verified
+- BUILD-STATUS.md: build passes, real data
+- QA-REPORT.md: grade [X], [N] issues resolved
+- PM-VERIFY.md: all ACs met, approved
+- Deliverables: every file declared in SCOPE.md exists under the project root
+
+### Iterations
+- Discovery: [N] rounds
+- Dev↔QA cycles: [N] rounds
+- PM verification: [N] rounds
+- Total time: [X hours]
+
+### Decision: SHIP / HOLD / KILL
+
+### Deploy Target
+[URL, platform, or "local only"]
+
+### Override (if applicable)
+[Human override reason, if pipeline was bypassed]
+```
+
+## Decision Criteria
+
+**SHIP** — All gates passed with evidence. Product is useful.
+
+Before accepting `SHIP`, SFLO deterministically rechecks each file declared under
+SCOPE.md `## Deliverables` against the persisted User Deliverables Directory.
+
+**HOLD** — Gates passed but external blocker (deployment issue, dependency, timing).
+
+**KILL** — After multiple failed cycles, product isn't viable. Document why and move on.

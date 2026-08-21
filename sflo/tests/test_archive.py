@@ -1,0 +1,73 @@
+"""Tests for src.archive — move-instead-of-delete."""
+
+from src.archive import archive_to_logs
+
+
+class TestArchiveToLogs:
+    def test_moves_file_to_logs(self, tmp_path):
+        sflo_dir = tmp_path / ".sflo"
+        sflo_dir.mkdir()
+        f = sflo_dir / "BUILD-STATUS.md"
+        f.write_text("test content", encoding="utf-8")
+
+        archived = archive_to_logs(str(sflo_dir), [str(f)])
+
+        assert archived == ["BUILD-STATUS.md"], (
+            f"expected ['BUILD-STATUS.md'], got {archived}"
+        )
+        assert not f.exists(), "original file should be removed after archiving"
+        assert (
+            sflo_dir / "logs" / "BUILD-STATUS.md"
+        ).read_text(encoding="utf-8") == "test content", (
+            "archived file content should match original"
+        )
+
+    def test_moves_directory_to_logs(self, tmp_path):
+        sflo_dir = tmp_path / ".sflo"
+        sflo_dir.mkdir()
+        d = sflo_dir / "subdir"
+        d.mkdir()
+        (d / "round-01.md").write_text("round 1", encoding="utf-8")
+
+        archived = archive_to_logs(str(sflo_dir), [str(d)])
+
+        assert archived == ["subdir"], f"expected ['subdir'], got {archived}"
+        assert not d.exists(), "original directory should be removed after archiving"
+        assert (
+            sflo_dir / "logs" / "subdir" / "round-01.md"
+        ).read_text(encoding="utf-8") == "round 1", (
+            "archived directory content should match original"
+        )
+
+    def test_skips_missing_paths(self, tmp_path):
+        sflo_dir = tmp_path / ".sflo"
+        sflo_dir.mkdir()
+        archived = archive_to_logs(str(sflo_dir), [str(sflo_dir / "nonexistent.md")])
+        assert archived == [], "missing paths should be skipped, returning empty list"
+
+    def test_overwrites_existing_in_logs(self, tmp_path):
+        sflo_dir = tmp_path / ".sflo"
+        sflo_dir.mkdir()
+        logs = sflo_dir / "logs"
+        logs.mkdir()
+        (logs / "old.md").write_text("old", encoding="utf-8")
+
+        f = sflo_dir / "old.md"
+        f.write_text("new", encoding="utf-8")
+
+        archive_to_logs(str(sflo_dir), [str(f)])
+        assert (logs / "old.md").read_text(encoding="utf-8") == "new", (
+            "archive should overwrite existing file in logs"
+        )
+
+    def test_never_archives_logs_dir_itself(self, tmp_path):
+        sflo_dir = tmp_path / ".sflo"
+        sflo_dir.mkdir()
+        logs = sflo_dir / "logs"
+        logs.mkdir()
+
+        archived = archive_to_logs(str(sflo_dir), [str(logs)])
+        assert archived == [], "logs dir itself should never be archived"
+        assert logs.exists(), (
+            "logs directory should still exist after attempted self-archive"
+        )
