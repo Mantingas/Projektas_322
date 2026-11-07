@@ -28,7 +28,13 @@ JSON_ALIASES = {  # šalis -> galimi pavadinimai (en/de) ir ISO kodas
     "finland": ("finland", "finnland", "FI"),
 }
 
+# JAV ambasada Vilniuje: Security Alerts (WordPress RSS; adresas nepatikrintas).
+# Kiekvienas NAUJAS ambasados pranešimas siunčiamas visada (jie reti ir svarbūs).
+EMB_FEEDS = ["https://lt.usembassy.gov/category/alert/feed/"]
+ALWAYS_NOTIFY = {"JAV amb."}
+
 URGENT = re.compile(
+    r"shelter in place|air raid|"
     r"reisewarnung|ausreise|verlassen sie|avoid all travel|avoid non-essential travel|"
     r"ordered departure|authori[sz]ed departure|evacuat|leave immediately|"
     r"depart (the country )?immediately|level 4|do not travel|"
@@ -55,7 +61,7 @@ def parse(xml_bytes):
         if not link and g("link") is not None:
             link = g("link").get("href", "")
         body = " ".join(filter(None, [txt("title"), txt("description"),
-                                       txt("summary"), txt("content"), txt("updated")]))
+                                       txt("summary"), txt("content"), txt("encoded"), txt("updated")]))
         out.append((txt("guid") or txt("id") or link or txt("title"),
                     txt("title"), re.sub(r"<[^>]+>", " ", body), link))
     return out
@@ -75,6 +81,12 @@ def collect(fetcher=fetch):
                 items.append(("JK", f"{c}:{i}", t, b, l))
         except Exception as ex:
             print(f"[klaida] JK {c}: {ex}", file=sys.stderr)
+    for url in EMB_FEEDS:
+        try:
+            for i, t, b, l in parse(fetcher(url)):
+                items.append(("JAV amb.", i, t, b, l or url))
+        except Exception as ex:
+            print(f"[klaida] JAV amb.: {ex}", file=sys.stderr)
     for src, url in (("DE", DE_FEED), ("CA", CA_FEED)):
         try:
             for i, t, b, l in parse_json_countries(json.loads(fetcher(url)), src):
@@ -215,8 +227,8 @@ def main():
     send_info = env("SEND_INFO") == "1"
     for urgent, src, title, link in alerts:
         print(("SKUBU " if urgent else "info ") + f"[{src}] {title} {link}")
-        if urgent or send_info:
-            notify(("⚠ SKUBU: " if urgent else "Pokytis: ") + f"[{src}] {title}"[:100],
+        if urgent or send_info or src in ALWAYS_NOTIFY:
+            notify(("⚠ SKUBU: " if urgent else "Naujiena: " if src in ALWAYS_NOTIFY else "Pokytis: ") + f"[{src}] {title}"[:100],
                    f"{title}\n{link}")
 
 

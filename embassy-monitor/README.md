@@ -22,6 +22,13 @@ Pirmas paleidimas tik išsaugo esamą būseną.
 
 Testai: `python3 test_monitor.py`
 
+## JAV ambasada Vilniuje (Security Alerts)
+`EMB_FEEDS` faile `monitor.py` (numatyta `https://lt.usembassy.gov/category/alert/feed/`,
+standartinis WordPress RSS; **adresas nepatikrintas**). Kiekvienas naujas pranešimas siunčiamas
+visada („Naujiena“), su raktažodžiais (ordered departure, evacuat, shelter in place…) – kaip SKUBU.
+Dauguma jų bus eilinės (demonstracijos), tai norma. Jei žurnale `[klaida] JAV amb.`,
+patikrinkite adresą naršyklėje ir pataisykite.
+
 ## Vokietijos ir Kanados šaltiniai
 Tai JSON šaltiniai (`DE_FEED`, `CA_FEED` faile `monitor.py`). Jų tikra struktūra kūrimo metu
 nebuvo patikrinta (tinklas užblokuotas), todėl kodas struktūros nepriklauso: suranda mažiausią
