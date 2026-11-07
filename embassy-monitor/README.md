@@ -1,6 +1,6 @@
 # Ambasadų / kelionių rekomendacijų monitorius
 
-Kas 15 min tikrina JAV (travel.state.gov) ir JK (gov.uk FCDO) rekomendacijas
+Kas 15 min tikrina JAV (travel.state.gov), JK (gov.uk FCDO), Vokietijos (Auswärtiges Amt open data) ir Kanados (travel.gc.ca) rekomendacijas
 Lietuvai, Latvijai, Estijai, Lenkijai, Suomijai. Pokyčiui su raktažodžiais
 (ordered/authorized departure, evacuat…, level 4, do not travel) siunčia **SKUBU** pranešimą.
 Pirmas paleidimas tik išsaugo esamą būseną.
@@ -21,6 +21,13 @@ Pirmas paleidimas tik išsaugo esamą būseną.
     */15 * * * * cd /kelias/embassy-monitor && python3 monitor.py   # crontab
 
 Testai: `python3 test_monitor.py`
+
+## Vokietijos ir Kanados šaltiniai
+Tai JSON šaltiniai (`DE_FEED`, `CA_FEED` faile `monitor.py`). Jų tikra struktūra kūrimo metu
+nebuvo patikrinta (tinklas užblokuotas), todėl kodas struktūros nepriklauso: suranda mažiausią
+objektą, kuriame minima šalis (pvz. Litauen/Lithuania/LT), ir seka jo pokyčius; vokiškas
+`*warning*` laukas, tapęs `true`, laikomas SKUBIU. Po pirmo paleidimo patikrinkite, ar žurnale
+nėra `[klaida] DE` / `[klaida] CA`, ir ar `state.json` turi `DE|…` bei `CA|…` įrašų.
 
 ## Apribojimai
 Tai vėluojantis rodiklis, galimi klaidingi aliarmai; staigaus puolimo atveju

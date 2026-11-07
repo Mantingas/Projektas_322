@@ -19,7 +19,17 @@ COUNTRIES = {"lithuania": "Lietuva", "latvia": "Latvija", "estonia": "Estija",
 US_FEED = "https://travel.state.gov/_res/rss/TAsTWs.xml"
 UK_FEED = "https://www.gov.uk/foreign-travel-advice/{c}.atom"
 
+# Vokietija (Auswärtiges Amt open data) ir Kanada (travel.gc.ca) – JSON.
+DE_FEED = "https://www.auswaertiges-amt.de/opendata/travelwarning"
+CA_FEED = "https://data.international.gc.ca/travel-voyage/index-alpha-eng.json"
+JSON_ALIASES = {  # šalis -> galimi pavadinimai (en/de) ir ISO kodas
+    "lithuania": ("lithuania", "litauen", "LT"), "latvia": ("latvia", "lettland", "LV"),
+    "estonia": ("estonia", "estland", "EE"), "poland": ("poland", "polen", "PL"),
+    "finland": ("finland", "finnland", "FI"),
+}
+
 URGENT = re.compile(
+    r"reisewarnung|ausreise|verlassen sie|avoid all travel|avoid non-essential travel|"
     r"ordered departure|authori[sz]ed departure|evacuat|leave immediately|"
     r"depart (the country )?immediately|level 4|do not travel|"
     r"advise against all travel|suspend(ed)? (embassy )?operations", re.I)
@@ -65,7 +75,58 @@ def collect(fetcher=fetch):
                 items.append(("JK", f"{c}:{i}", t, b, l))
         except Exception as ex:
             print(f"[klaida] JK {c}: {ex}", file=sys.stderr)
+    for src, url in (("DE", DE_FEED), ("CA", CA_FEED)):
+        try:
+            for i, t, b, l in parse_json_countries(json.loads(fetcher(url)), src):
+                items.append((src, i, t, b, l or url))
+        except Exception as ex:
+            print(f"[klaida] {src}: {ex}", file=sys.stderr)
     return items
+
+
+def _walk(node):
+    yield node
+    if isinstance(node, dict):
+        for v in node.values():
+            yield from _walk(v)
+    elif isinstance(node, list):
+        for v in node:
+            yield from _walk(v)
+
+
+def _strings(d):
+    return [v for v in d.values() if isinstance(v, str)]
+
+
+def _flags(d):
+    """Teksto žymė, jei kuris nors '*warning*' loginis laukas yra true."""
+    return " reisewarnung" if any(
+        isinstance(v, bool) and v and "warning" in k.lower() for k, v in d.items()) else ""
+
+
+def _mentions(node, names):
+    """Ar šis objektas (ne jo vaikai) tiesiogiai mini šalį."""
+    pat = re.compile(r"\b(" + "|".join(names[:2]) + r")\b", re.I)
+    return any(v == names[2] or (len(v) > 2 and pat.search(v)) for v in _strings(node))
+
+
+def parse_json_countries(data, src):
+    """Schema-agnostiškai suranda mažiausius objektus, minimus šalį.
+    Grąžina [(id, title, text, link)] kaip ir parse()."""
+    out = []
+    for country, names in JSON_ALIASES.items():
+        for node in _walk(data):
+            if not isinstance(node, dict) or not _mentions(node, names):
+                continue
+            # praleisti, jei kuris nors vidinis objektas pats mini šalį (imame giliausią)
+            if any(n is not node and isinstance(n, dict) and _mentions(n, names)
+                   for v in node.values() for n in _walk(v)):
+                continue
+            title = next((v for v in _strings(node) if len(v) > 2 and _mentions({"x": v}, names)),
+                         country)
+            out.append((f"{country}:{title[:60]}", title[:100],
+                        json.dumps(node, sort_keys=True, ensure_ascii=False) + _flags(node), ""))
+    return out
 
 
 def load():
