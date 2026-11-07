@@ -27,3 +27,20 @@ Tai vėluojantis rodiklis, galimi klaidingi aliarmai; staigaus puolimo atveju
 signalo gali nebūti. Šaltinių URL realiai neišbandyti iš kūrimo aplinkos –
 pirmą kartą paleiskite ir pažiūrėkite, ar nėra „[klaida]“ eilučių.
 Nepakeičia oficialių Lietuvos institucijų (KAM, URM, 112) pranešimų.
+
+## GitHub Actions (be savo serverio)
+Workflow: `.github/workflows/embassy-monitor.yml` (kas 15 min; būsena laikoma Actions cache).
+**Svarbu:** `schedule` veikia tik pagrindinėje (default) šakoje – pirma sujunkite (merge) šią šaką.
+
+Repo → Settings → Secrets and variables → Actions → New repository secret:
+
+- **Telegram:** Telegram'e parašykite @BotFather → `/newbot` → gausite `TELEGRAM_TOKEN`.
+  Savo botui parašykite bet ką, tada atsidarykite
+  `https://api.telegram.org/bot<TOKEN>/getUpdates` ir paimkite `chat.id` → `TELEGRAM_CHAT_ID`.
+- **Push (ntfy):** įdiekite ntfy programėlę, užsiprenumeruokite sunkiai atspėjamą temą
+  (pvz. `ambasados-x7k2q9m4`), tą pačią reikšmę įrašykite į `NTFY_TOPIC`.
+- **El. paštas:** pvz. Gmail su „App password“: `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=587`,
+  `SMTP_USER`, `SMTP_PASS` (app password), `SMTP_FROM`, `EMAIL_TO`.
+
+Tada Actions → Embassy monitor → Run workflow su `test` = true, kad patikrintumėte visus kanalus.
+Pastaba: GitHub gali vėlinti `schedule` paleidimus dešimtis minučių.

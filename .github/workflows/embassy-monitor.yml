@@ -1,0 +1,46 @@
+name: Embassy monitor
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      test:
+        description: "Tik išsiųsti bandomąjį pranešimą (--test)"
+        type: boolean
+        default: false
+
+concurrency: embassy-monitor
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Atkurti būseną
+        uses: actions/cache/restore@v4
+        with:
+          path: embassy-monitor/state.json
+          key: monitor-state-${{ github.run_id }}
+          restore-keys: monitor-state-
+      - name: Paleisti
+        working-directory: embassy-monitor
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_FROM: ${{ secrets.SMTP_FROM }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          if [ "${{ inputs.test }}" = "true" ]; then python3 monitor.py --test; else python3 monitor.py; fi
+      - name: Išsaugoti būseną
+        if: always() && inputs.test != true
+        uses: actions/cache/save@v4
+        with:
+          path: embassy-monitor/state.json
+          key: monitor-state-${{ github.run_id }}
