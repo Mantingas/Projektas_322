@@ -48,3 +48,21 @@ DE3 = json.loads(json.dumps(DE2)); DE3["response"]["1"]["lastModified"] = 2
 t4, b4 = run2(DE3, CA2, t3)
 assert len(b4) == 1 and b4[0][0] is True        # pakitęs tekstas, vis dar su įspėjimu
 print("OK json")
+
+# ---- JAV ambasada ----
+EMB = b"""<rss xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel>
+<item><guid>a1</guid><title>Demonstration Alert</title><link>http://e/1</link>
+<description>Protest near Seimas</description></item></channel></rss>"""
+EMB2 = EMB.replace(b"</channel>", b"""<item><guid>a2</guid><title>Security Alert</title><link>http://e/2</link>
+<description>Embassy ordered departure of family members</description></item></channel>""")
+def run3(emb, state):
+    def f(url):
+        if "usembassy" in url: return emb
+        return b"{}" if "gov.uk" not in url else b"<feed/>"
+    return m.check([x for x in m.collect(f)], state)
+u0, c0 = run3(EMB, None); assert any(k.startswith("JAV amb.|") for k in u0)
+u1, c1 = run3(EMB, u0); assert c1 == []
+u2, c2 = run3(EMB2, u1)
+assert len(c2) == 1 and c2[0][1] == "JAV amb." and c2[0][0] is True
+assert "JAV amb." in m.ALWAYS_NOTIFY
+print("OK embassy")
