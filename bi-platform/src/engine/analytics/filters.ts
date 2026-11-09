@@ -1,6 +1,9 @@
 import type { SalesRecord } from '../types';
 
-export type Dimension = 'customer' | 'product' | 'salesperson' | 'category';
+export type SalesDimension = 'customer' | 'product' | 'salesperson' | 'category';
+export type PurchaseDimension = 'supplier' | 'product' | 'warehouse';
+/** Any breakdown dimension of any module. */
+export type Dimension = SalesDimension | PurchaseDimension;
 
 export interface FilterSpec {
   dateFrom?: string;
@@ -10,6 +13,9 @@ export interface FilterSpec {
   products?: string[];
   salespeople?: string[];
   categories?: string[];
+  /** Purchasing */
+  suppliers?: string[];
+  warehouses?: string[];
   /** Case-insensitive substring over customer, product, document, salesperson, category. */
   text?: string;
 }
@@ -21,9 +27,9 @@ export const dimensionOf = {
   product: (r: SalesRecord) => (r.productName ?? r.productId) ? { key: norm((r.productName ?? r.productId)!), label: (r.productName ?? r.productId)! } : null,
   salesperson: (r: SalesRecord) => (r.salesperson ? { key: norm(r.salesperson), label: r.salesperson } : null),
   category: (r: SalesRecord) => (r.category ? { key: norm(r.category), label: r.category } : null),
-} satisfies Record<Dimension, (r: SalesRecord) => { key: string; label: string } | null>;
+} satisfies Record<SalesDimension, (r: SalesRecord) => { key: string; label: string } | null>;
 
-export const hasDimension = (records: SalesRecord[], d: Dimension) => records.some((r) => dimensionOf[d](r));
+export const hasDimension = (records: SalesRecord[], d: SalesDimension) => records.some((r) => dimensionOf[d](r));
 
 const has = (list: string[] | undefined) => (list && list.length ? new Set(list) : null);
 
@@ -51,4 +57,4 @@ export function applyFilters(records: SalesRecord[], f: FilterSpec): SalesRecord
 }
 
 export const isFilterActive = (f: FilterSpec) =>
-  Boolean(f.customers?.length || f.products?.length || f.salespeople?.length || f.categories?.length || f.text?.trim());
+  Boolean(f.customers?.length || f.products?.length || f.salespeople?.length || f.categories?.length || f.suppliers?.length || f.warehouses?.length || f.text?.trim());

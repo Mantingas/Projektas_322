@@ -29,7 +29,7 @@ export function executiveLines(model: DashboardView, insights: Insight[], lang: 
 
 export function filtersText(filters: FilterSpec, labels: Record<string, string>): string {
   const parts: string[] = [];
-  for (const [k, field] of [['customer', 'customers'], ['product', 'products'], ['salesperson', 'salespeople'], ['category', 'categories']] as const) {
+  for (const [k, field] of [['customer', 'customers'], ['product', 'products'], ['salesperson', 'salespeople'], ['category', 'categories'], ['supplier', 'suppliers'], ['warehouse', 'warehouses']] as const) {
     const keys = (filters[field] as string[] | undefined) ?? [];
     if (keys.length) parts.push(keys.map((x) => labels[`${k}:${x}`] ?? x).join(', '));
   }

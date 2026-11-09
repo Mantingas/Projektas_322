@@ -1,15 +1,15 @@
-import type { Dimension } from './filters';
+import type { Dimension, SalesDimension } from './filters';
 
-export type ChartId = 'trend' | 'comparison' | 'topCustomers' | 'topProducts' | 'salespeople' | 'category' | 'waterfall' | 'pareto';
-export type HiddenReason = 'needs_dimension' | 'too_few_points' | 'no_comparison' | 'too_few_entities';
+export type ChartId = 'trend' | 'comparison' | 'topCustomers' | 'topProducts' | 'salespeople' | 'category' | 'waterfall' | 'pareto' | 'topSuppliers' | 'priceTrend' | 'priceVariance' | 'spendBridge' | 'quantityComparison';
+export type HiddenReason = 'needs_dimension' | 'too_few_points' | 'no_comparison' | 'too_few_entities' | 'no_price_data';
 
 export interface ChartInputs {
   trendPoints: number;
   comparisonUsable: boolean;
   /** Number of entities with positive sales in the current period, per dimension (0 when the column is not mapped). */
-  entities: Record<Dimension, number>;
+  entities: Record<SalesDimension, number>;
   /** Entities whose value changed between the periods, per dimension. */
-  movers: Record<Dimension, number>;
+  movers: Record<SalesDimension, number>;
 }
 
 export interface ChartPlan {
@@ -19,15 +19,15 @@ export interface ChartPlan {
   reason?: HiddenReason;
 }
 
-const WATERFALL_ORDER: Dimension[] = ['customer', 'product', 'category', 'salesperson'];
-const PARETO_ORDER: Dimension[] = ['customer', 'product'];
+const WATERFALL_ORDER: SalesDimension[] = ['customer', 'product', 'category', 'salesperson'];
+const PARETO_ORDER: SalesDimension[] = ['customer', 'product'];
 
 /**
  * Chart configuration layer: decides WHICH charts make sense for the data at hand. UI never shows an empty or meaningless chart;
  * hidden charts carry the reason so analysts can see why.
  */
 export function planCharts(i: ChartInputs): ChartPlan[] {
-  const dim = (id: ChartId, d: Dimension, min = 2): ChartPlan =>
+  const dim = (id: ChartId, d: SalesDimension, min = 2): ChartPlan =>
     i.entities[d] === 0 ? { id, dimension: d, available: false, reason: 'needs_dimension' } : i.entities[d] < min ? { id, dimension: d, available: false, reason: 'too_few_entities' } : { id, dimension: d, available: true };
   const wDim = WATERFALL_ORDER.find((d) => i.movers[d] >= 2);
   const pDim = PARETO_ORDER.find((d) => i.entities[d] >= 5);

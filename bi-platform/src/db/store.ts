@@ -1,22 +1,34 @@
-import type { ConfirmedMapping, ExportMode, ImportStats, SalesRecord } from '@/engine/types';
-import { defaultPolicy, docKey, identityOf, planMerge, type ExistingLine, type Identity, type ImportPolicy, type MergePlan } from '@/engine/import/merge';
-import type { AppDB, ImportRow, SavedMapping, StoredRecord } from './db';
+import type { ConfirmedMapping, ExportMode, ImportStats, ModuleId, PurchaseRecord, SalesRecord } from '@/engine/types';
+import { defaultPolicy, docKey, identityOf, planMerge, type ExistingLine, type Identity, type ImportPolicy, type LineLike, type MergePlan } from '@/engine/import/merge';
+import type { AppDB, ImportRow, SavedMapping, StoredMeta } from './db';
+import type { Table } from 'dexie';
+
+/** A stored line of either module. */
+type Line = (SalesRecord | PurchaseRecord) & StoredMeta;
+type AnyLine = SalesRecord | PurchaseRecord;
+
+const table = (db: AppDB, m: ModuleId): Table<Line, string> => (m === 'purchasing' ? db.purchases : db.sales) as unknown as Table<Line, string>;
+const MODULES: ModuleId[] = ['sales', 'purchasing'];
 
 export interface CommitInput {
   checksum: string;
   fileName: string;
   sheetName: string;
   exportMode: ExportMode;
-  records: SalesRecord[];
+  records: AnyLine[];
   stats: ImportStats;
   mapping: ConfirmedMapping;
   templateId?: string;
+  /** Which module the lines belong to (default: sales). */
+  module?: ModuleId;
   /** Allow importing a file whose checksum was imported before (default: refuse). */
   allowSameChecksum?: boolean;
   /** Choices for ambiguous changes. Defaults to `defaultPolicy`. */
   policy?: ImportPolicy;
   /** The user explicitly confirmed the destructive / ambiguous consequences shown in the preview. */
   confirmed?: boolean;
+  /** Extra facts stored on the import row (e.g. purchasing discount mode). */
+  extra?: Partial<ImportRow>;
 }
 
 export type ConfirmReason = 'replacements' | 'removals' | 'add_alongside' | 'content_overlap';
@@ -33,29 +45,29 @@ export async function findByChecksum(db: AppDB, checksum: string): Promise<Impor
 }
 
 /** Stored lines of the given documents. Few documents: indexed lookup; many: ONE pass with a Set (thousands of index ranges are far slower). */
-async function rowsByDocKeys(db: AppDB, docs: string[]): Promise<StoredRecord[]> {
+async function rowsByDocKeys(db: AppDB, m: ModuleId, docs: string[]): Promise<Line[]> {
   if (docs.length === 0) return [];
-  if (docs.length <= 400) return db.sales.where('docKey').anyOf(docs).toArray();
+  if (docs.length <= 400) return table(db, m).where('docKey').anyOf(docs).toArray();
   const wanted = new Set(docs);
-  return db.sales.filter((r) => Boolean(r.docKey) && wanted.has(r.docKey!)).toArray();
+  return table(db, m).filter((r) => Boolean(r.docKey) && wanted.has(r.docKey!)).toArray();
 }
 
 /** Marks stored lines as replaced. Primary-key reads/writes only, so it stays fast for thousands of lines. */
-async function markSuperseded(db: AppDB, keys: string[], by: string): Promise<void> {
+async function markSuperseded(db: AppDB, m: ModuleId, keys: string[], by: string): Promise<void> {
   if (keys.length === 0) return;
-  const rows = (await db.sales.bulkGet(keys)).filter((r): r is StoredRecord => Boolean(r) && !r!.supersededBy);
-  await db.sales.bulkPut(rows.map((r) => ({ ...r, supersededBy: by })));
+  const rows = (await table(db, m).bulkGet(keys)).filter((r): r is Line => Boolean(r) && !r!.supersededBy);
+  await table(db, m).bulkPut(rows.map((r) => ({ ...r, supersededBy: by })));
 }
 
-async function loadExisting(db: AppDB, records: SalesRecord[]) {
+async function loadExisting(db: AppDB, m: ModuleId, records: AnyLine[]) {
   const keys = records.map((r) => r.key);
-  const found = await db.sales.bulkGet(keys);
+  const found = await table(db, m).bulkGet(keys);
   const existingByKey = new Map<string, ExistingLine>();
   found.forEach((f) => f && existingByKey.set(f.key, f));
-  const docs = [...new Set(records.map(docKey).filter((d): d is string => Boolean(d)))];
+  const docs = [...new Set(records.map((r) => docKey(r)).filter((d): d is string => Boolean(d)))];
   const existingActiveByDoc = new Map<string, ExistingLine[]>();
   if (docs.length) {
-    const rows = await rowsByDocKeys(db, docs);
+    const rows = await rowsByDocKeys(db, m, docs);
     for (const r of rows) {
       if (r.supersededBy || r.heldBy || r.discarded || !r.docKey) continue;
       (existingActiveByDoc.get(r.docKey) ?? existingActiveByDoc.set(r.docKey, []).get(r.docKey)!).push(r);
@@ -64,11 +76,13 @@ async function loadExisting(db: AppDB, records: SalesRecord[]) {
   return { existingByKey, existingActiveByDoc };
 }
 
+const isActive = (r: Line) => !r.supersededBy && !r.heldBy && !r.discarded;
+
 /** Date range of ACTIVE stored data (used by the content-only choices). */
-async function storedRange(db: AppDB): Promise<{ min: string; max: string } | undefined> {
-  const first = await db.sales.orderBy('date').filter((r) => !r.supersededBy && !r.heldBy && !r.discarded).first();
+async function storedRange(db: AppDB, m: ModuleId): Promise<{ min: string; max: string } | undefined> {
+  const first = await table(db, m).orderBy('date').filter(isActive).first();
   if (!first) return undefined;
-  const last = await db.sales.orderBy('date').reverse().filter((r) => !r.supersededBy && !r.heldBy && !r.discarded).first();
+  const last = await table(db, m).orderBy('date').reverse().filter(isActive).first();
   return { min: first.date, max: last!.date };
 }
 
@@ -109,37 +123,37 @@ export interface MergePreview {
   ambiguous: number;
 }
 
-async function plan(db: AppDB, records: SalesRecord[], mode: ExportMode, policyIn?: ImportPolicy) {
-  const { existingByKey, existingActiveByDoc } = await loadExisting(db, records);
+async function plan(db: AppDB, m: ModuleId, records: AnyLine[], mode: ExportMode, policyIn?: ImportPolicy) {
+  const { existingByKey, existingActiveByDoc } = await loadExisting(db, m, records);
   const { identity, coverage } = identityOf(records);
   let overlapRisk = false;
-  const range = await storedRange(db);
+  const range = await storedRange(db, m);
   if (identity !== 'document' && records.length) {
     const dates = records.map((r) => r.date).sort();
     const lo = dates[0]!;
     const hi = dates[dates.length - 1]!;
     // existence check with early exit (an index range over many equal dates is slow; a filtered scan stops at the first hit)
-    overlapRisk = Boolean(await db.sales.filter((r) => r.date >= lo && r.date <= hi && !r.supersededBy && !r.heldBy && !r.discarded).first());
+    overlapRisk = Boolean(await table(db, m).filter((r) => r.date >= lo && r.date <= hi && isActive(r)).first());
   }
   const proposed = defaultPolicy(mode, identity, overlapRisk);
   const policy = policyIn ?? proposed;
-  const mp: MergePlan = planMerge(records, existingByKey, existingActiveByDoc, { mode, policy, stored: range });
+  const mp = planMerge(records as LineLike[], existingByKey, existingActiveByDoc, { mode, policy, stored: range }) as MergePlan<AnyLine>;
   return { mp, identity, coverage, overlapRisk, proposed, policy };
 }
 
 /** Dry run shown to the user before they confirm. Writes nothing. */
-export async function previewImport(db: AppDB, records: SalesRecord[], mode: ExportMode, policyIn?: ImportPolicy): Promise<MergePreview> {
-  const { mp, identity, coverage, overlapRisk, proposed, policy } = await plan(db, records, mode, policyIn);
+export async function previewImport(db: AppDB, records: AnyLine[], mode: ExportMode, policyIn?: ImportPolicy, module: ModuleId = 'sales'): Promise<MergePreview> {
+  const { mp, identity, coverage, overlapRisk, proposed, policy } = await plan(db, module, records, mode, policyIn);
   // stored documents inside the file's date range that the file does not contain (reported only)
   let absentDocs = 0;
   if (identity === 'document' && records.length) {
     const dates = records.map((r) => r.date).sort();
-    const present = new Set(records.map(docKey).filter(Boolean) as string[]);
+    const present = new Set(records.map((r) => docKey(r)).filter(Boolean) as string[]);
     const lo = dates[0]!;
     const hi = dates[dates.length - 1]!;
     const absent = new Set<string>();
-    await db.sales.each((r) => {
-      if (r.date >= lo && r.date <= hi && !r.supersededBy && !r.heldBy && !r.discarded && r.docKey && !present.has(r.docKey)) absent.add(r.docKey);
+    await table(db, module).each((r) => {
+      if (r.date >= lo && r.date <= hi && isActive(r) && r.docKey && !present.has(r.docKey)) absent.add(r.docKey);
     });
     absentDocs = absent.size;
   }
@@ -161,77 +175,90 @@ export async function previewImport(db: AppDB, records: SalesRecord[], mode: Exp
  * and every change is written to the audit log. Destructive / ambiguous consequences require `confirmed: true`.
  */
 export async function commitImport(db: AppDB, input: CommitInput): Promise<CommitResult> {
+  const module = input.module ?? 'sales';
   if (!input.allowSameChecksum) {
     const existing = await findByChecksum(db, input.checksum);
     if (existing) return { status: 'duplicate_file', existing };
   }
-  const preview = await previewImport(db, input.records, input.exportMode, input.policy);
+  const preview = await previewImport(db, input.records, input.exportMode, input.policy, module);
   if (preview.needsConfirmation.length > 0 && !input.confirmed) return { status: 'needs_confirmation', preview };
-  return db.transaction('rw', db.imports, db.sales, db.audit, async () => {
-    const { mp, identity, coverage, policy } = await plan(db, input.records, input.exportMode, input.policy);
+  const tbl = table(db, module);
+  return db.transaction('rw', db.imports, tbl as unknown as Table, db.audit, async () => {
+    const { mp, identity, coverage, policy } = await plan(db, module, input.records, input.exportMode, input.policy);
     const id = newId();
     const row: ImportRow = {
-      id, checksum: input.checksum, fileName: input.fileName, sheetName: input.sheetName, importedAt: Date.now(), exportMode: input.exportMode, stats: input.stats,
+      id, module, checksum: input.checksum, fileName: input.fileName, sheetName: input.sheetName, importedAt: Date.now(), exportMode: input.exportMode, stats: input.stats,
       added: mp.toAdd.length, duplicates: mp.duplicates, conflicts: mp.toHold.length, revisedDocs: mp.docs.replaced, supersededLines: mp.supersede.length, staleLines: mp.stale,
       heldLines: mp.toHold.length, heldDocs: mp.docs.held, removedDocs: mp.docs.removed, skippedLines: mp.skipped,
       policy: { conflicts: policy.conflicts, content: policy.content }, confirmed: Boolean(input.confirmed),
-      identity, idCoverage: coverage, mapping: input.mapping, templateId: input.templateId,
+      identity, idCoverage: coverage, mapping: input.mapping, templateId: input.templateId, ...input.extra,
     };
     await db.imports.add(row);
-    await markSuperseded(db, mp.supersede, id);
-    await db.sales.bulkPut(mp.toAdd.map((r): StoredRecord => ({ ...r, importId: id, docKey: docKey(r) })));
-    await db.sales.bulkPut(mp.toHold.map((r): StoredRecord => ({ ...r, importId: id, docKey: docKey(r), heldBy: id, replaces: mp.holdReplaces.get(docKey(r) ?? '') ?? [] })));
+    await markSuperseded(db, module, mp.supersede, id);
+    await tbl.bulkPut(mp.toAdd.map((r): Line => ({ ...r, importId: id, docKey: docKey(r) })));
+    await tbl.bulkPut(mp.toHold.map((r): Line => ({ ...r, importId: id, docKey: docKey(r), heldBy: id, replaces: mp.holdReplaces.get(docKey(r) ?? '') ?? [] })));
     await db.audit.add({
       at: Date.now(), importId: id, action: 'import',
-      detail: { file: input.fileName, mode: input.exportMode, conflicts: policy.conflicts, content: policy.content, confirmed: Boolean(input.confirmed), added: row.added, duplicates: row.duplicates, replacedDocs: row.revisedDocs, supersededLines: row.supersededLines, removedDocs: mp.docs.removed, heldLines: row.heldLines ?? 0, stale: row.staleLines },
+      detail: { module, file: input.fileName, mode: input.exportMode, conflicts: policy.conflicts, content: policy.content, confirmed: Boolean(input.confirmed), added: row.added, duplicates: row.duplicates, replacedDocs: row.revisedDocs, supersededLines: row.supersededLines, removedDocs: mp.docs.removed, heldLines: row.heldLines ?? 0, stale: row.staleLines },
     });
     return { status: 'ok' as const, import: row };
   });
 }
 
-const isActive = (r: StoredRecord) => !r.supersededBy && !r.heldBy && !r.discarded;
-
-/** Active (not superseded / held / discarded) lines with provenance (`importId`, `sourceRow`). */
-export async function loadAllSales(db: AppDB): Promise<SalesRecord[]> {
-  const rows = await db.sales.filter(isActive).toArray();
-  return rows.map(({ docKey: _d, supersededBy: _s, heldBy: _h, discarded: _x, replaces: _p, ...r }) => {
+function strip<T extends { importId?: string }>(rows: T[]): unknown[] {
+  return (rows as (T & StoredMeta)[]).map(({ docKey: _d, supersededBy: _s, heldBy: _h, discarded: _x, replaces: _p, ...r }) => {
     void _d; void _s; void _h; void _x; void _p;
     return r;
   });
 }
 
-/** Lines waiting for the user's decision. */
-export async function pendingHeldCount(db: AppDB): Promise<number> {
-  return db.sales.where('heldBy').aboveOrEqual('').filter((r) => !r.discarded).count();
+/** Active (not superseded / held / discarded) lines with provenance (`importId`, `sourceRow`). */
+export async function loadAllSales(db: AppDB): Promise<SalesRecord[]> {
+  return strip(await db.sales.filter(isActive as never).toArray()) as SalesRecord[];
+}
+export async function loadAllPurchases(db: AppDB): Promise<PurchaseRecord[]> {
+  return strip(await db.purchases.filter(isActive as never).toArray()) as PurchaseRecord[];
+}
+
+/** Lines waiting for the user's decision (all modules unless one is given). */
+export async function pendingHeldCount(db: AppDB, module?: ModuleId): Promise<number> {
+  let n = 0;
+  for (const m of module ? [module] : MODULES) n += await table(db, m).where('heldBy').aboveOrEqual('').filter((r) => !r.discarded).count();
+  return n;
 }
 
 // ───────── conflict review ─────────
 export interface ConflictGroup {
+  module: ModuleId;
   importId: string;
   fileName: string;
   /** null = lines without a document number */
   docKey: string | null;
-  held: StoredRecord[];
+  held: (AnyLine & StoredMeta)[];
   /** The stored, active lines of the same document (empty for lines without a document number). */
-  stored: StoredRecord[];
+  stored: (AnyLine & StoredMeta)[];
 }
 
 export async function listConflicts(db: AppDB): Promise<ConflictGroup[]> {
-  const held = await db.sales.where('heldBy').aboveOrEqual('').filter((r) => !r.discarded).toArray();
   const imports = new Map((await db.imports.toArray()).map((i) => [i.id, i.fileName]));
-  const groups = new Map<string, ConflictGroup>();
-  for (const r of held) {
-    const k = `${r.heldBy}|${r.docKey ?? ''}`;
-    let g = groups.get(k);
-    if (!g) groups.set(k, (g = { importId: r.heldBy!, fileName: imports.get(r.heldBy!) ?? '?', docKey: r.docKey ?? null, held: [], stored: [] }));
-    g.held.push(r);
+  const out: ConflictGroup[] = [];
+  for (const m of MODULES) {
+    const held = await table(db, m).where('heldBy').aboveOrEqual('').filter((r) => !r.discarded).toArray();
+    const groups = new Map<string, ConflictGroup>();
+    for (const r of held) {
+      const k = `${r.heldBy}|${r.docKey ?? ''}`;
+      let g = groups.get(k);
+      if (!g) groups.set(k, (g = { module: m, importId: r.heldBy!, fileName: imports.get(r.heldBy!) ?? '?', docKey: r.docKey ?? null, held: [], stored: [] }));
+      g.held.push(r);
+    }
+    const docs = [...new Set([...groups.values()].map((g) => g.docKey).filter((d): d is string => Boolean(d)))];
+    if (docs.length) {
+      const rows = (await rowsByDocKeys(db, m, docs)).filter(isActive);
+      for (const g of groups.values()) if (g.docKey) g.stored = rows.filter((r) => r.docKey === g.docKey);
+    }
+    out.push(...groups.values());
   }
-  const docs = [...new Set([...groups.values()].map((g) => g.docKey).filter((d): d is string => Boolean(d)))];
-  if (docs.length) {
-    const rows = (await rowsByDocKeys(db, docs)).filter(isActive);
-    for (const g of groups.values()) if (g.docKey) g.stored = rows.filter((r) => r.docKey === g.docKey);
-  }
-  return [...groups.values()].sort((a, b) => (a.docKey ?? '').localeCompare(b.docKey ?? ''));
+  return out.sort((a, b) => (a.docKey ?? '').localeCompare(b.docKey ?? ''));
 }
 
 export type ResolveAction = 'use_new' | 'keep_stored' | 'keep_both';
@@ -242,51 +269,56 @@ export type ResolveAction = 'use_new' | 'keep_stored' | 'keep_both';
  * keep_both    – held lines are added next to the stored ones (may double count; the user chose it)
  * Lines without a document number have nothing to replace: use_new / keep_both both add them.
  */
-export async function resolveConflicts(db: AppDB, items: { importId: string; docKey: string | null }[], action: ResolveAction): Promise<number> {
+export async function resolveConflicts(db: AppDB, items: { importId: string; docKey: string | null; module?: ModuleId }[], action: ResolveAction): Promise<number> {
   let touched = 0;
-  await db.transaction('rw', db.sales, db.audit, async () => {
+  await db.transaction('rw', db.sales, db.purchases, db.audit, async () => {
     for (const it of items) {
-      const held = await db.sales.where('heldBy').equals(it.importId).filter((r) => (r.docKey ?? null) === it.docKey && !r.discarded).toArray();
+      const m = it.module ?? 'sales';
+      const tbl = table(db, m);
+      const held = await tbl.where('heldBy').equals(it.importId).filter((r) => (r.docKey ?? null) === it.docKey && !r.discarded).toArray();
       if (held.length === 0) continue;
       if (action === 'keep_stored') {
-        await db.sales.bulkPut(held.map((r) => { const { heldBy: _h, replaces: _r, ...rest } = r; void _h; void _r; return { ...rest, discarded: true }; }));
+        await tbl.bulkPut(held.map((r) => { const { heldBy: _h, replaces: _r, ...rest } = r; void _h; void _r; return { ...rest, discarded: true } as Line; }));
       } else {
         if (action === 'use_new' && it.docKey) {
           // only the stored lines this version actually replaces – lines the new version also contains stay untouched
           const keys = [...new Set(held.flatMap((r) => r.replaces ?? []))];
           if (keys.length) {
-            const rows = (await db.sales.bulkGet(keys)).filter((r): r is StoredRecord => Boolean(r) && isActive(r!));
-            await db.sales.bulkPut(rows.map((r) => ({ ...r, supersededBy: it.importId })));
+            const rows = (await tbl.bulkGet(keys)).filter((r): r is Line => Boolean(r) && isActive(r!));
+            await tbl.bulkPut(rows.map((r) => ({ ...r, supersededBy: it.importId })));
           }
         }
-        await db.sales.bulkPut(held.map((r) => { const { heldBy: _h, replaces: _r, ...rest } = r; void _h; void _r; return rest; }));
+        await tbl.bulkPut(held.map((r) => { const { heldBy: _h, replaces: _r, ...rest } = r; void _h; void _r; return rest as Line; }));
       }
       touched += held.length;
-      await db.audit.add({ at: Date.now(), importId: it.importId, action: 'resolve_conflict', detail: { doc: it.docKey ?? '(no document number)', action, lines: held.length } });
+      await db.audit.add({ at: Date.now(), importId: it.importId, action: 'resolve_conflict', detail: { module: m, doc: it.docKey ?? '(no document number)', action, lines: held.length } });
     }
   });
   return touched;
 }
 
 export async function deleteImport(db: AppDB, id: string): Promise<void> {
-  await db.transaction('rw', db.imports, db.sales, db.audit, async () => {
-    const own = await db.sales.where('importId').equals(id).count();
-    await db.sales.where('importId').equals(id).delete();
+  const row = await db.imports.get(id);
+  const m: ModuleId = row?.module ?? 'sales';
+  const tbl = table(db, m);
+  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.audit], async () => {
+    const own = await tbl.where('importId').equals(id).count();
+    await tbl.where('importId').equals(id).delete();
     // lines this import had replaced become active again
     let restored = 0;
-    await db.sales.where('importId').notEqual(id).filter((r) => r.supersededBy === id).modify((r) => {
+    await tbl.where('importId').notEqual(id).filter((r) => r.supersededBy === id).modify((r) => {
       delete r.supersededBy;
       restored++;
     });
     await db.imports.delete(id);
-    await db.audit.add({ at: Date.now(), importId: id, action: 'delete_import', detail: { removedLines: own, restoredLines: restored } });
+    await db.audit.add({ at: Date.now(), importId: id, action: 'delete_import', detail: { module: m, removedLines: own, restoredLines: restored } });
   });
 }
 
 /** "Delete everything": removes every table's contents. */
 export async function wipeAll(db: AppDB): Promise<void> {
-  await db.transaction('rw', db.imports, db.sales, db.mappings, db.settings, db.audit, async () => {
-    await Promise.all([db.imports.clear(), db.sales.clear(), db.mappings.clear(), db.settings.clear(), db.audit.clear()]);
+  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.mappings, db.settings, db.audit], async () => {
+    await Promise.all([db.imports.clear(), db.sales.clear(), db.purchases.clear(), db.mappings.clear(), db.settings.clear(), db.audit.clear()]);
   });
 }
 
@@ -299,20 +331,22 @@ export interface Backup {
   version: 1;
   exportedAt: string;
   imports: ImportRow[];
-  sales: StoredRecord[];
+  sales: (SalesRecord & StoredMeta)[];
+  purchases?: (PurchaseRecord & StoredMeta)[];
   mappings: SavedMapping[];
   audit?: import('./db').AuditEntry[];
 }
 
 export async function exportBackup(db: AppDB): Promise<Backup> {
-  return { version: 1, exportedAt: new Date().toISOString(), imports: await db.imports.toArray(), sales: await db.sales.toArray(), mappings: await db.mappings.toArray(), audit: await db.audit.toArray() };
+  return { version: 1, exportedAt: new Date().toISOString(), imports: await db.imports.toArray(), sales: await db.sales.toArray(), purchases: await db.purchases.toArray(), mappings: await db.mappings.toArray(), audit: await db.audit.toArray() };
 }
 
 export async function restoreBackup(db: AppDB, b: Backup): Promise<void> {
   if (b?.version !== 1 || !Array.isArray(b.imports) || !Array.isArray(b.sales)) throw new Error('invalid_backup');
-  await db.transaction('rw', db.imports, db.sales, db.mappings, db.audit, async () => {
+  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.mappings, db.audit], async () => {
     await db.imports.bulkPut(b.imports);
-    await db.sales.bulkPut(b.sales.map((r) => ({ ...r, docKey: docKey(r) })));
+    await db.sales.bulkPut(b.sales.map((r) => ({ ...r, docKey: docKey(r) })) as never);
+    if (Array.isArray(b.purchases)) await db.purchases.bulkPut(b.purchases.map((r) => ({ ...r, docKey: docKey(r) })) as never);
     await db.mappings.bulkPut(b.mappings ?? []);
     if (Array.isArray(b.audit)) await db.audit.bulkPut(b.audit.map(({ id: _id, ...a }) => (void _id, a)));
   });

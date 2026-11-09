@@ -1,0 +1,357 @@
+﻿Data;Tiekėjo sąskaitos Nr.;Tiekėjas;Tiekėjo kodas;Prekės kodas;Prekė;Kiekis;Matavimo vnt.;Kaina;Suma be PVM;Sandėlis
+2025-09-01;TS-5001;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;80;l;0,6000;48,00;Kaunas
+2025-09-01;TS-5002;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;206;kg;1,0000;206,00;Vilnius
+2025-09-01;TS-5003;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;59;kg;7,5000;442,50;Kaunas
+2025-09-01;TS-5004;UAB Žemaitijos pienas;S1;P04;Cukrus;639;kg;1,2000;766,80;Vilnius
+2025-09-01;TS-5005;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;55;l;2,2000;114,95;Kaunas
+2025-09-01;TS-5006;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;24;dėž.;14,0000;336,00;Vilnius
+2025-09-02;TS-5007;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;98;l;0,6000;58,80;Kaunas
+2025-09-02;TS-5008;MB Šaltinis;S4;P03;Sviestas 82 %;34;kg;9,0000;306,00;Vilnius
+2025-09-02;TS-5009;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;65;l;2,0000;130,00;Kaunas
+2025-09-02;TS-5010;MB Šaltinis;S4;P06;Kefyras 1 l;13;l;2,5000;32,50;Vilnius
+2025-09-02;TS-5011;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;90;l;1,3000;117,00;Kaunas
+2025-09-03;TS-5012;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;90;l;0,6000;54,00;Vilnius
+2025-09-03;TS-5013;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;215;kg;1,0000;215,00;Kaunas
+2025-09-03;TS-5014;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Vilnius
+2025-09-03;TS-5015;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;18;kg;11,0000;198,00;Kaunas
+2025-09-04;TS-5016;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;100;l;0,6000;60,00;Vilnius
+2025-09-04;TS-5017;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;43;kg;7,5000;322,50;Kaunas
+2025-09-04;TS-5018;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;63;l;2,0000;126,00;Vilnius
+2025-09-04;TS-5019;UAB Baltijos ūkis;S3;P11;Kiaušiniai L;30;vnt.;0,2000;6,00;Kaunas
+2025-09-05;TS-5020;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;91;l;0,6000;54,60;Vilnius
+2025-09-05;TS-5021;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;253;kg;1,0000;253,00;Kaunas
+2025-09-05;TS-5022;MB Šaltinis;S4;P03;Sviestas 82 %;35;kg;9,0000;315,00;Vilnius
+2025-09-05;TS-5023;UAB Žemaitijos pienas;S1;P04;Cukrus;695;kg;1,2000;834,00;Kaunas
+2025-09-08;TS-5024;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;89;l;0,6000;53,40;Vilnius
+2025-09-08;TS-5025;MB Šaltinis;S4;P03;Sviestas 82 %;47;kg;9,0000;423,00;Kaunas
+2025-09-08;TS-5026;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;61;l;2,0000;122,00;Vilnius
+2025-09-08;TS-5027;MB Šaltinis;S4;P06;Kefyras 1 l;10;l;2,5000;25,00;Kaunas
+2025-09-08;TS-5028;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;21;dėž.;14,0000;294,00;Vilnius
+2025-09-09;TS-5029;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;91;l;0,6000;54,60;Kaunas
+2025-09-09;TS-5030;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;254;kg;1,0000;254,00;Vilnius
+2025-09-09;TS-5031;UAB Žemaitijos pienas;S1;P04;Cukrus;652;kg;1,2000;782,40;Kaunas
+2025-09-09;TS-5032;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;10;kg;11,0000;110,00;Vilnius
+2025-09-09;TS-5033;UAB Baltijos ūkis;S3;P11;Kiaušiniai L;30;vnt.;0,2000;6,00;Kaunas
+2025-09-10;TS-5034;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;116;l;0,6000;69,60;Vilnius
+2025-09-10;TS-5035;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;51;kg;7,5000;382,50;Kaunas
+2025-09-10;TS-5036;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;66;l;2,0000;132,00;Vilnius
+2025-09-10;TS-5037;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;90;l;1,3000;117,00;Kaunas
+2025-09-11;TS-5038;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;107;l;0,6000;64,20;Vilnius
+2025-09-11;TS-5039;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;296;kg;1,0000;296,00;Kaunas
+2025-09-11;TS-5040;MB Šaltinis;S4;P03;Sviestas 82 %;42;kg;9,0000;378,00;Vilnius
+2025-09-11;TS-5041;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Kaunas
+2025-09-11;TS-5042;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;59;l;2,2000;123,31;Vilnius
+2025-09-12;TS-5043;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;113;l;0,6000;67,80;Kaunas
+2025-09-12;TS-5044;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;60;l;2,0000;120,00;Vilnius
+2025-09-12;TS-5045;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;11;kg;11,0000;121,00;Kaunas
+2025-09-15;TS-5046;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;94;l;0,6000;56,40;Vilnius
+2025-09-15;TS-5047;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;242;kg;1,0000;242,00;Kaunas
+2025-09-15;TS-5048;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Vilnius
+2025-09-15;TS-5049;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;10;kg;11,0000;110,00;Kaunas
+2025-09-15;TS-5050;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;20;dėž.;14,0000;280,00;Vilnius
+2025-09-16;TS-5051;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;110;l;0,6000;66,00;Kaunas
+2025-09-16;TS-5052;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;47;kg;7,5000;352,50;Vilnius
+2025-09-16;TS-5053;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;64;l;2,0000;128,00;Kaunas
+2025-09-16;TS-5054;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;54;l;2,2000;112,86;Vilnius
+2025-09-17;TS-5055;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;117;l;0,6000;70,20;Kaunas
+2025-09-17;TS-5056;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;270;kg;1,0000;270,00;Vilnius
+2025-09-17;TS-5057;MB Šaltinis;S4;P03;Sviestas 82 %;43;kg;9,0000;387,00;Kaunas
+2025-09-17;TS-5058;UAB Žemaitijos pienas;S1;P04;Cukrus;566;kg;1,2000;679,20;Vilnius
+2025-09-18;TS-5059;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;94;l;0,6000;56,40;Kaunas
+2025-09-18;TS-5060;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;61;l;2,0000;122,00;Vilnius
+2025-09-18;TS-5061;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;11;kg;11,0000;121,00;Kaunas
+2025-09-18;TS-5062;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;90;l;1,3000;117,00;Vilnius
+2025-09-19;TS-5063;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;116;l;0,6000;69,60;Kaunas
+2025-09-19;TS-5064;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;232;kg;1,0000;232,00;Vilnius
+2025-09-19;TS-5065;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;43;kg;7,5000;322,50;Kaunas
+2025-09-19;TS-5066;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Vilnius
+2025-09-19;TS-5067;UAB Baltijos ūkis;S3;P11;Kiaušiniai L;30;vnt.;0,2000;6,00;Kaunas
+2025-09-22;TS-5068;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;105;l;0,6000;63,00;Vilnius
+2025-09-22;TS-5069;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;46;kg;7,5000;345,00;Kaunas
+2025-09-22;TS-5070;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;60;l;2,0000;120,00;Vilnius
+2025-09-22;TS-5071;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;26;dėž.;14,0000;364,00;Kaunas
+2025-09-22;TS-5072;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;90;l;1,3000;117,00;Vilnius
+2025-09-23;TS-5073;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;116;l;0,6000;69,60;Kaunas
+2025-09-23;TS-5074;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;254;kg;1,0000;254,00;Vilnius
+2025-09-23;TS-5075;MB Šaltinis;S4;P03;Sviestas 82 %;46;kg;9,0000;414,00;Kaunas
+2025-09-23;TS-5076;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Vilnius
+2025-09-24;TS-5077;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;106;l;0,6000;63,60;Kaunas
+2025-09-24;TS-5078;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;69;l;2,0000;138,00;Vilnius
+2025-09-24;TS-5079;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;11;kg;11,0000;121,00;Kaunas
+2025-09-24;TS-5080;UAB Baltijos ūkis;S3;P11;Kiaušiniai L;30;vnt.;0,2000;6,00;Vilnius
+2025-09-25;TS-5081;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;101;l;0,6000;60,60;Kaunas
+2025-09-25;TS-5082;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;264;kg;1,0000;264,00;Vilnius
+2025-09-25;TS-5083;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;57;kg;7,5000;427,50;Kaunas
+2025-09-25;TS-5084;UAB Žemaitijos pienas;S1;P04;Cukrus;692;kg;1,2000;830,40;Vilnius
+2025-09-26;TS-5085;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;113;l;0,6000;67,80;Kaunas
+2025-09-26;TS-5086;MB Šaltinis;S4;P03;Sviestas 82 %;41;kg;9,0000;369,00;Vilnius
+2025-09-26;TS-5087;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;69;l;2,0000;138,00;Kaunas
+2025-09-26;TS-5088;MB Šaltinis;S4;P06;Kefyras 1 l;14;l;2,5000;35,00;Vilnius
+2025-09-26;TS-5089;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;55;l;2,2000;114,95;Kaunas
+2025-09-26;TS-5090;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;90;l;1,3000;117,00;Vilnius
+2025-09-29;TS-5091;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;112;l;0,6000;67,20;Kaunas
+2025-09-29;TS-5092;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;200;kg;1,0000;200,00;Vilnius
+2025-09-29;TS-5093;MB Šaltinis;S4;P03;Sviestas 82 %;40;kg;9,0000;360,00;Kaunas
+2025-09-29;TS-5094;UAB Žemaitijos pienas;S1;P04;Cukrus;565;kg;1,2000;678,00;Vilnius
+2025-09-29;TS-5095;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;27;dėž.;14,0000;378,00;Kaunas
+2025-09-29;TS-5096;UAB Baltijos ūkis;S3;P11;Kiaušiniai L;30;vnt.;0,2000;6,00;Vilnius
+2025-09-30;TS-5097;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;101;l;0,6000;60,60;Kaunas
+2025-09-30;TS-5098;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;67;l;2,0000;134,00;Vilnius
+2025-09-30;TS-5099;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;20;kg;11,0000;220,00;Kaunas
+2025-09-30;TS-5100;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;90;l;1,3000;117,00;Vilnius
+2025-10-01;TS-5101;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;102;l;0,6000;61,20;Kaunas
+2025-10-01;TS-5102;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;282;kg;1,0000;282,00;Vilnius
+2025-10-01;TS-5103;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;48;kg;7,5000;360,00;Kaunas
+2025-10-01;TS-5104;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Vilnius
+2025-10-01;TS-5105;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;56;l;2,2000;117,04;Kaunas
+2025-10-02;TS-5106;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;109;l;0,6000;65,40;Vilnius
+2025-10-02;TS-5107;MB Šaltinis;S4;P03;Sviestas 82 %;41;kg;9,0000;369,00;Kaunas
+2025-10-02;TS-5108;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;63;l;2,0000;126,00;Vilnius
+2025-10-02;TS-5109;MB Šaltinis;S4;P06;Kefyras 1 l;11;l;2,5000;27,50;Kaunas
+2025-10-03;TS-5110;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;80;l;0,6000;48,00;Vilnius
+2025-10-03;TS-5111;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;202;kg;1,0000;202,00;Kaunas
+2025-10-03;TS-5112;UAB Žemaitijos pienas;S1;P04;Cukrus;688;kg;1,2000;825,60;Vilnius
+2025-10-03;TS-5113;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;19;kg;11,0000;209,00;Kaunas
+2025-10-06;TS-5114;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;105;l;0,6000;63,00;Vilnius
+2025-10-06;TS-5115;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;60;l;2,0000;120,00;Kaunas
+2025-10-06;TS-5116;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;16;kg;11,0000;176,00;Vilnius
+2025-10-06;TS-5117;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;55;l;2,2000;114,95;Kaunas
+2025-10-06;TS-5118;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;27;dėž.;14,0000;378,00;Vilnius
+2025-10-07;TS-5119;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;119;l;0,6000;71,40;Kaunas
+2025-10-07;TS-5120;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;227;kg;1,0000;227,00;Vilnius
+2025-10-07;TS-5121;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;59;kg;7,5000;442,50;Kaunas
+2025-10-07;TS-5122;UAB Žemaitijos pienas;S1;P04;Cukrus;629;kg;1,2000;754,80;Vilnius
+2025-10-08;TS-5123;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;112;l;0,6000;67,20;Kaunas
+2025-10-08;TS-5124;MB Šaltinis;S4;P03;Sviestas 82 %;42;kg;9,0000;378,00;Vilnius
+2025-10-08;TS-5125;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;68;l;2,0000;136,00;Kaunas
+2025-10-08;TS-5126;MB Šaltinis;S4;P06;Kefyras 1 l;10;l;2,5000;25,00;Vilnius
+2025-10-08;TS-5127;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;90;l;1,3000;117,00;Kaunas
+2025-10-09;TS-5128;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;119;l;0,6000;71,40;Vilnius
+2025-10-09;TS-5129;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;250;kg;1,0000;250,00;Kaunas
+2025-10-09;TS-5130;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Vilnius
+2025-10-09;TS-5131;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;16;kg;11,0000;176,00;Kaunas
+2025-10-09;TS-5132;UAB Baltijos ūkis;S3;P11;Kiaušiniai L;30;vnt.;0,2000;6,00;Vilnius
+2025-10-10;TS-5133;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;86;l;0,6000;51,60;Kaunas
+2025-10-10;TS-5134;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;47;kg;7,5000;352,50;Vilnius
+2025-10-10;TS-5135;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;62;l;2,0000;124,00;Kaunas
+2025-10-13;TS-5136;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;112;l;0,6000;67,20;Vilnius
+2025-10-13;TS-5137;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;286;kg;1,0000;286,00;Kaunas
+2025-10-13;TS-5138;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;54;kg;7,5000;405,00;Vilnius
+2025-10-13;TS-5139;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Kaunas
+2025-10-13;TS-5140;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;26;dėž.;14,0000;364,00;Vilnius
+2025-10-14;TS-5141;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;119;l;0,6000;71,40;Kaunas
+2025-10-14;TS-5142;MB Šaltinis;S4;P03;Sviestas 82 %;42;kg;9,0000;378,00;Vilnius
+2025-10-14;TS-5143;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;67;l;2,0000;134,00;Kaunas
+2025-10-14;TS-5144;MB Šaltinis;S4;P06;Kefyras 1 l;14;l;2,5000;35,00;Vilnius
+2025-10-14;TS-5145;UAB Baltijos ūkis;S3;P11;Kiaušiniai L;30;vnt.;0,2000;6,00;Kaunas
+2025-10-15;TS-5146;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;99;l;0,6000;59,40;Vilnius
+2025-10-15;TS-5147;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;222;kg;1,0000;222,00;Kaunas
+2025-10-15;TS-5148;UAB Žemaitijos pienas;S1;P04;Cukrus;616;kg;1,2000;739,20;Vilnius
+2025-10-15;TS-5149;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;18;kg;11,0000;198,00;Kaunas
+2025-10-16;TS-5150;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;114;l;0,6000;68,40;Vilnius
+2025-10-16;TS-5151;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;43;kg;7,5000;322,50;Kaunas
+2025-10-16;TS-5152;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;65;l;2,0000;130,00;Vilnius
+2025-10-16;TS-5153;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;54;l;2,2000;112,86;Kaunas
+2025-10-16;TS-5154;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;90;l;1,3000;117,00;Vilnius
+2025-10-17;TS-5155;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;101;l;0,6000;60,60;Kaunas
+2025-10-17;TS-5156;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;218;kg;1,0000;218,00;Vilnius
+2025-10-17;TS-5157;MB Šaltinis;S4;P03;Sviestas 82 %;35;kg;9,0000;315,00;Kaunas
+2025-10-17;TS-5158;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Vilnius
+2025-10-20;KR-1;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;-200;l;1,3000;-260,00;Kaunas
+2025-10-20;TS-5159;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;97;l;0,6000;58,20;Kaunas
+2025-10-20;TS-5160;MB Šaltinis;S4;P03;Sviestas 82 %;39;kg;9,0000;351,00;Vilnius
+2025-10-20;TS-5161;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;61;l;2,0000;122,00;Kaunas
+2025-10-20;TS-5162;MB Šaltinis;S4;P06;Kefyras 1 l;10;l;2,5000;25,00;Vilnius
+2025-10-20;TS-5163;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;21;dėž.;14,0000;294,00;Kaunas
+2025-10-20;TS-5164;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;90;l;1,3000;117,00;Vilnius
+2025-10-21;TS-5165;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;80;l;0,6000;48,00;Kaunas
+2025-10-21;TS-5166;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;210;kg;1,0000;210,00;Vilnius
+2025-10-21;TS-5167;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Kaunas
+2025-10-21;TS-5168;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;19;kg;11,0000;209,00;Vilnius
+2025-10-21;TS-5169;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;59;l;2,2000;123,31;Kaunas
+2025-10-22;TS-5170;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;82;l;0,6000;49,20;Vilnius
+2025-10-22;TS-5171;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;43;kg;7,5000;322,50;Kaunas
+2025-10-22;TS-5172;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;64;l;2,0000;128,00;Vilnius
+2025-10-23;TS-5173;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;99;l;0,6000;59,40;Kaunas
+2025-10-23;TS-5174;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;273;kg;1,0000;273,00;Vilnius
+2025-10-23;TS-5175;MB Šaltinis;S4;P03;Sviestas 82 %;37;kg;9,0000;333,00;Kaunas
+2025-10-23;TS-5176;UAB Žemaitijos pienas;S1;P04;Cukrus;572;kg;1,2000;686,40;Vilnius
+2025-10-24;TS-5177;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;111;l;0,6000;66,60;Kaunas
+2025-10-24;TS-5178;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;67;l;2,0000;134,00;Vilnius
+2025-10-24;TS-5179;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;18;kg;11,0000;198,00;Kaunas
+2025-10-24;TS-5180;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;90;l;1,3000;117,00;Vilnius
+2025-10-24;TS-5181;UAB Baltijos ūkis;S3;P11;Kiaušiniai L;30;vnt.;0,2000;6,00;Kaunas
+2025-10-27;KR-2;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;-200;l;1,3000;-260,00;Kaunas
+2025-10-27;TS-5182;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;101;l;0,6000;60,60;Vilnius
+2025-10-27;TS-5183;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;279;kg;1,0000;279,00;Kaunas
+2025-10-27;TS-5184;UAB Žemaitijos pienas;S1;P04;Cukrus;582;kg;1,2000;698,40;Vilnius
+2025-10-27;TS-5185;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;16;kg;11,0000;176,00;Kaunas
+2025-10-27;TS-5186;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;22;dėž.;14,0000;308,00;Vilnius
+2025-10-28;TS-5187;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;101;l;0,6000;60,60;Kaunas
+2025-10-28;TS-5188;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;55;kg;7,5000;412,50;Vilnius
+2025-10-28;TS-5189;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;60;l;2,0000;120,00;Kaunas
+2025-10-28;TS-5190;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;90;l;1,3000;117,00;Vilnius
+2025-10-29;TS-5191;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;90;l;0,6000;54,00;Kaunas
+2025-10-29;TS-5192;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;282;kg;1,0000;282,00;Vilnius
+2025-10-29;TS-5193;MB Šaltinis;S4;P03;Sviestas 82 %;46;kg;9,0000;414,00;Kaunas
+2025-10-29;TS-5194;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Vilnius
+2025-10-29;TS-5195;UAB Baltijos ūkis;S3;P11;Kiaušiniai L;30;vnt.;0,2000;6,00;Kaunas
+2025-10-30;TS-5196;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;110;l;0,6000;66,00;Vilnius
+2025-10-30;TS-5197;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;64;l;2,0000;128,00;Kaunas
+2025-10-30;TS-5198;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;13;kg;11,0000;143,00;Vilnius
+2025-10-31;TS-5199;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;116;l;0,6000;69,60;Kaunas
+2025-10-31;TS-5200;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;225;kg;1,0000;225,00;Vilnius
+2025-10-31;TS-5201;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;47;kg;7,5000;352,50;Kaunas
+2025-10-31;TS-5202;UAB Žemaitijos pienas;S1;P04;Cukrus;595;kg;1,2000;714,00;Vilnius
+2025-10-31;TS-5203;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;58;l;2,2000;121,22;Kaunas
+2025-11-03;TS-5204;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;96;l;0,6000;57,60;Vilnius
+2025-11-03;TS-5205;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;59;kg;7,5000;442,50;Kaunas
+2025-11-03;TS-5206;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;65;l;2,0000;130,00;Vilnius
+2025-11-03;TS-5207;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;24;dėž.;14,0000;336,00;Kaunas
+2025-11-03;TS-5208;UAB Baltijos ūkis;S3;P11;Kiaušiniai L;30;vnt.;0,2000;6,00;Vilnius
+2025-11-04;KR-3;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;-200;l;1,3000;-260,00;Kaunas
+2025-11-04;TS-5209;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;93;l;0,6000;55,80;Kaunas
+2025-11-04;TS-5210;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;253;kg;1,0000;253,00;Vilnius
+2025-11-04;TS-5211;MB Šaltinis;S4;P03;Sviestas 82 %;35;kg;9,0000;315,00;Kaunas
+2025-11-04;TS-5212;UAB Žemaitijos pienas;S1;P04;Cukrus;676;kg;1,2000;811,20;Vilnius
+2025-11-05;TS-5213;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;102;l;0,6000;61,20;Kaunas
+2025-11-05;TS-5214;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;69;l;2,0000;138,00;Vilnius
+2025-11-05;TS-5215;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;19;kg;11,0000;209,00;Kaunas
+2025-11-05;TS-5216;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;54;l;2,2000;112,86;Vilnius
+2025-11-05;TS-5217;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;90;l;1,3000;117,00;Kaunas
+2025-11-06;TS-5218;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;97;l;0,6000;58,20;Vilnius
+2025-11-06;TS-5219;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;269;kg;1,0000;269,00;Kaunas
+2025-11-06;TS-5220;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;58;kg;7,5000;435,00;Vilnius
+2025-11-06;TS-5221;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Kaunas
+2025-11-07;TS-5222;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;102;l;0,6000;61,20;Vilnius
+2025-11-07;TS-5223;MB Šaltinis;S4;P03;Sviestas 82 %;43;kg;9,0000;387,00;Kaunas
+2025-11-07;TS-5224;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;61;l;2,0000;122,00;Vilnius
+2025-11-07;TS-5225;MB Šaltinis;S4;P06;Kefyras 1 l;13;l;2,5000;32,50;Kaunas
+2025-11-10;TS-5226;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;95;l;0,6000;57,00;Vilnius
+2025-11-10;TS-5227;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;260;kg;1,0000;260,00;Kaunas
+2025-11-10;TS-5228;MB Šaltinis;S4;P03;Sviestas 82 %;47;kg;9,0000;423,00;Vilnius
+2025-11-10;TS-5229;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Kaunas
+2025-11-10;TS-5230;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;53;l;2,2000;110,77;Vilnius
+2025-11-10;TS-5231;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;22;dėž.;14,0000;308,00;Kaunas
+2025-11-11;KR-4;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;-200;l;1,3000;-260,00;Kaunas
+2025-11-11;TS-5232;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;83;l;0,6000;49,80;Vilnius
+2025-11-11;TS-5233;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;66;l;2,0000;132,00;Kaunas
+2025-11-11;TS-5234;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;18;kg;11,0000;198,00;Vilnius
+2025-11-12;TS-5235;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;118;l;0,6000;70,80;Kaunas
+2025-11-12;TS-5236;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;231;kg;1,0000;231,00;Vilnius
+2025-11-12;TS-5237;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;45;kg;7,5000;337,50;Kaunas
+2025-11-12;TS-5238;UAB Žemaitijos pienas;S1;P04;Cukrus;513;kg;1,2000;615,60;Vilnius
+2025-11-13;TS-5239;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;108;l;0,6000;64,80;Kaunas
+2025-11-13;TS-5240;MB Šaltinis;S4;P03;Sviestas 82 %;48;kg;9,0000;432,00;Vilnius
+2025-11-13;TS-5241;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;67;l;2,0000;134,00;Kaunas
+2025-11-13;TS-5242;MB Šaltinis;S4;P06;Kefyras 1 l;14;l;2,5000;35,00;Vilnius
+2025-11-13;TS-5243;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;90;l;1,3000;117,00;Kaunas
+2025-11-13;TS-5244;UAB Baltijos ūkis;S3;P11;Kiaušiniai L;30;vnt.;0,2000;6,00;Vilnius
+2025-11-14;TS-5245;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;118;l;0,6000;70,80;Kaunas
+2025-11-14;TS-5246;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;222;kg;1,0000;222,00;Vilnius
+2025-11-14;TS-5247;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Kaunas
+2025-11-14;TS-5248;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;20;kg;11,0000;220,00;Vilnius
+2025-11-17;TS-5249;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;91;l;0,7200;65,52;Kaunas
+2025-11-17;TS-5250;MB Šaltinis;S4;P06;Kefyras 1 l;65;l;2,5000;162,50;Vilnius
+2025-11-17;TS-5251;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;14;kg;11,0000;154,00;Kaunas
+2025-11-17;TS-5252;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;27;dėž.;14,0000;378,00;Vilnius
+2025-11-17;TS-5253;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;40;l;1,3000;52,00;Kaunas
+2025-11-18;TS-5254;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;110;l;0,7200;79,20;Vilnius
+2025-11-18;TS-5255;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;262;kg;0,9000;235,80;Kaunas
+2025-11-18;TS-5256;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;54;kg;7,5000;405,00;Vilnius
+2025-11-18;TS-5257;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Kaunas
+2025-11-18;TS-5258;AB Vilniaus malūnas;S2;P10;Ryžiai;100;kg;1,6000;160,00;Vilnius
+2025-11-19;TS-5259;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;104;l;0,7200;74,88;Kaunas
+2025-11-19;TS-5260;MB Šaltinis;S4;P03;Sviestas 82 %;41;kg;9,0000;369,00;Vilnius
+2025-11-19;TS-5261;MB Šaltinis;S4;P06;Kefyras 1 l;62;l;2,5000;155,00;Kaunas
+2025-11-19;TS-5262;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;14;l;2,0000;28,00;Vilnius
+2025-11-20;TS-5263;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;99;l;0,7200;71,28;Kaunas
+2025-11-20;TS-5264;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;213;kg;0,9000;191,70;Vilnius
+2025-11-20;TS-5265;UAB Žemaitijos pienas;S1;P04;Cukrus;644;kg;1,2000;772,80;Kaunas
+2025-11-20;TS-5266;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;15;kg;11,0000;165,00;Vilnius
+2025-11-20;TS-5267;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;55;l;2,2000;114,95;Kaunas
+2025-11-20;TS-5345;UAB Baltijos ūkis;S3;P99;Druska;100;kg;0,4000;40,00;Kaunas
+2025-11-21;TS-5268;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;102;l;0,7200;73,44;Vilnius
+2025-11-21;TS-5269;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;57;kg;7,5000;427,50;Kaunas
+2025-11-21;TS-5270;MB Šaltinis;S4;P06;Kefyras 1 l;69;l;2,5000;172,50;Vilnius
+2025-11-21;TS-5271;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;40;l;1,3000;52,00;Kaunas
+2025-11-22;TS-5346;MB Šaltinis;S4;P99;Mineralinis vanduo;100;l;0,3000;30,00;Vilnius
+2025-11-24;TS-5272;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;86;l;0,7200;61,92;Vilnius
+2025-11-24;TS-5273;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;210;kg;0,9000;189,00;Kaunas
+2025-11-24;TS-5274;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;45;kg;7,5000;337,50;Vilnius
+2025-11-24;TS-5275;UAB Žemaitijos pienas;S1;P04;Cukrus;604;kg;1,2000;724,80;Kaunas
+2025-11-24;TS-5276;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;23;dėž.;14,0000;322,00;Vilnius
+2025-11-25;TS-5277;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;116;l;0,7200;83,52;Kaunas
+2025-11-25;TS-5278;MB Šaltinis;S4;P03;Sviestas 82 %;47;kg;9,0000;423,00;Vilnius
+2025-11-25;TS-5279;MB Šaltinis;S4;P06;Kefyras 1 l;65;l;2,5000;162,50;Kaunas
+2025-11-25;TS-5280;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;14;l;2,0000;28,00;Vilnius
+2025-11-25;TS-5281;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;52;l;2,2000;108,68;Kaunas
+2025-11-25;TS-5282;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;40;l;1,3000;52,00;Vilnius
+2025-11-26;TS-5283;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;99;l;0,7200;71,28;Kaunas
+2025-11-26;TS-5284;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;292;kg;0,9000;262,80;Vilnius
+2025-11-26;TS-5285;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Kaunas
+2025-11-26;TS-5286;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;17;kg;11,0000;187,00;Vilnius
+2025-11-27;TS-5287;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;111;l;0,7200;79,92;Kaunas
+2025-11-27;TS-5288;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;46;kg;7,5000;345,00;Vilnius
+2025-11-27;TS-5289;MB Šaltinis;S4;P06;Kefyras 1 l;69;l;2,5000;172,50;Kaunas
+2025-11-28;TS-5290;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;118;l;0,7200;84,96;Vilnius
+2025-11-28;TS-5291;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;284;kg;0,9000;255,60;Kaunas
+2025-11-28;TS-5292;MB Šaltinis;S4;P03;Sviestas 82 %;30;kg;9,0000;270,00;Vilnius
+2025-11-28;TS-5293;UAB Žemaitijos pienas;S1;P04;Cukrus;533;kg;1,2000;639,60;Kaunas
+2025-11-28;TS-5294;AB Vilniaus malūnas;S2;P10;Ryžiai;100;kg;1,6000;160,00;Vilnius
+2025-12-01;TS-5295;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;110;l;0,7200;79,20;Kaunas
+2025-12-01;TS-5296;MB Šaltinis;S4;P03;Sviestas 82 %;32;kg;9,0000;288,00;Vilnius
+2025-12-01;TS-5297;MB Šaltinis;S4;P06;Kefyras 1 l;60;l;2,5000;150,00;Kaunas
+2025-12-01;TS-5298;UAB Baltijos ūkis;S3;P06;Kefyras 1 l;14;l;2,0000;28,00;Vilnius
+2025-12-01;TS-5299;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;22;dėž.;14,0000;308,00;Kaunas
+2025-12-01;TS-5347;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;700;dėž.;14,0000;9 800,00;Kaunas
+2025-12-02;TS-5300;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;103;l;0,7200;74,16;Vilnius
+2025-12-02;TS-5301;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;226;kg;0,9000;203,40;Kaunas
+2025-12-02;TS-5302;UAB Žemaitijos pienas;S1;P04;Cukrus;658;kg;1,2000;789,60;Vilnius
+2025-12-02;TS-5303;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;17;kg;11,0000;187,00;Kaunas
+2025-12-02;TS-5348;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;700;dėž.;14,0000;9 800,00;Vilnius
+2025-12-03;TS-5304;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;82;l;0,7200;59,04;Vilnius
+2025-12-03;TS-5305;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;48;kg;7,5000;360,00;Kaunas
+2025-12-03;TS-5306;MB Šaltinis;S4;P06;Kefyras 1 l;69;l;2,5000;172,50;Vilnius
+2025-12-03;TS-5307;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;40;l;1,3000;52,00;Kaunas
+2025-12-03;TS-5308;AB Vilniaus malūnas;S2;P10;Ryžiai;100;kg;1,6000;160,00;Vilnius
+2025-12-03;TS-5349;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;700;dėž.;14,0000;9 800,00;Kaunas
+2025-12-04;TS-5309;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;83;l;0,7200;59,76;Kaunas
+2025-12-04;TS-5310;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;208;kg;0,9000;187,20;Vilnius
+2025-12-04;TS-5311;MB Šaltinis;S4;P03;Sviestas 82 %;37;kg;9,0000;333,00;Kaunas
+2025-12-04;TS-5312;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Vilnius
+2025-12-04;TS-5350;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;700;dėž.;14,0000;9 800,00;Vilnius
+2025-12-05;TS-5313;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;111;l;0,7200;79,92;Kaunas
+2025-12-05;TS-5314;MB Šaltinis;S4;P06;Kefyras 1 l;66;l;2,5000;165,00;Vilnius
+2025-12-05;TS-5315;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;12;kg;11,0000;132,00;Kaunas
+2025-12-05;TS-5316;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;54;l;2,2000;112,86;Vilnius
+2025-12-05;TS-5351;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;700;dėž.;14,0000;9 800,00;Kaunas
+2025-12-08;TS-5317;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;84;l;0,7200;60,48;Kaunas
+2025-12-08;TS-5318;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;248;kg;0,9000;223,20;Vilnius
+2025-12-08;TS-5319;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Kaunas
+2025-12-08;TS-5320;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;14;kg;11,0000;154,00;Vilnius
+2025-12-08;TS-5321;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;25;dėž.;14,0000;350,00;Kaunas
+2025-12-08;TS-5322;AB Vilniaus malūnas;S2;P10;Ryžiai;100;kg;1,6000;160,00;Vilnius
+2025-12-09;TS-5323;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;86;l;0,7200;61,92;Kaunas
+2025-12-09;TS-5324;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;55;kg;7,5000;412,50;Vilnius
+2025-12-09;TS-5325;MB Šaltinis;S4;P06;Kefyras 1 l;63;l;2,5000;157,50;Kaunas
+2025-12-09;TS-ODD1;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;400;kg;11,0000;4 400,00;Vilnius
+2025-12-10;TS-5326;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;107;l;0,7200;77,04;Vilnius
+2025-12-10;TS-5327;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;283;kg;0,9000;254,70;Kaunas
+2025-12-10;TS-5328;MB Šaltinis;S4;P03;Sviestas 82 %;30;kg;9,0000;270,00;Vilnius
+2025-12-10;TS-5329;UAB Žemaitijos pienas;S1;P04;Cukrus;536;kg;1,2000;643,20;Kaunas
+2025-12-10;TS-5330;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;57;l;2,2000;119,13;Vilnius
+2025-12-11;TS-5331;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;115;l;0,7200;82,80;Kaunas
+2025-12-11;TS-5332;MB Šaltinis;S4;P06;Kefyras 1 l;62;l;2,5000;155,00;Vilnius
+2025-12-11;TS-5333;UAB Nemuno gėrimai;S5;P05;Sūris Džiugas;19;kg;11,0000;209,00;Kaunas
+2025-12-11;TS-5334;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;40;l;1,3000;52,00;Vilnius
+2025-12-12;TS-5335;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;105;l;0,7200;75,60;Kaunas
+2025-12-12;TS-5336;AB Vilniaus malūnas;S2;P02;Miltai kvietiniai;232;kg;0,9000;208,80;Vilnius
+2025-12-12;TS-5337;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;41;kg;7,5000;307,50;Kaunas
+2025-12-12;TS-5338;AB Vilniaus malūnas;S2;P04;Cukrus;300000;g;0,0012;360,00;Vilnius
+2025-12-15;TS-5339;UAB Žemaitijos pienas;S1;P01;Pienas 1 l;84;l;0,7200;60,48;Kaunas
+2025-12-15;TS-5340;UAB Baltijos ūkis;S3;P03;Sviestas 82 %;59;kg;7,5000;442,50;Vilnius
+2025-12-15;TS-5341;MB Šaltinis;S4;P06;Kefyras 1 l;66;l;2,5000;165,00;Kaunas
+2025-12-15;TS-5342;UAB Nemuno gėrimai;S5;P07;Aliejus rapsų;52;l;2,2000;108,68;Vilnius
+2025-12-15;TS-5343;UAB Ąžuolo pakuotė;S6;P08;Dėžės kartoninės;25;dėž.;14,0000;350,00;Kaunas
+2025-12-15;TS-5344;UAB Nemuno gėrimai;S5;P09;Obuolių sultys;40;l;1,3000;52,00;Vilnius

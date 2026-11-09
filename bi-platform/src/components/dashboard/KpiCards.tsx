@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useLang } from '../LangProvider';
 import { Card } from '../ui/card';
 import { cn } from '@/lib/cn';
-import type { DashboardView } from '@/engine/analytics/dashboard';
+import type { ChartModel } from '@/engine/analytics/view';
 import { changeText, fmtUnit, metricLabel } from '@/lib/dashFormat';
 import type { DrillSpec } from '@/engine/analytics/provenance';
 import type { FilterSpec } from '@/engine/analytics/filters';
@@ -11,11 +11,11 @@ import type { MessageKey } from '@/i18n';
 
 const TONE = { good: 'text-emerald-700 dark:text-emerald-400', bad: 'text-red-700 dark:text-red-400', flat: 'text-slate-500', na: 'text-slate-400' };
 
-export function KpiCards({ model, filters, onDrill, showHidden }: { model: DashboardView; filters: FilterSpec; onDrill: (title: string, spec: DrillSpec) => void; showHidden: boolean }) {
+export function KpiCards({ model, filters, onDrill, showHidden }: { model: ChartModel; filters: FilterSpec; onDrill: (title: string, spec: DrillSpec) => void; showHidden: boolean }) {
   const { t, lang } = useLang();
   const cur = model.series.currency;
   const [open, setOpen] = useState<string | null>(null);
-  const shown = model.kpis.filter((k) => k.current !== null && !(k.id === 'returns' && k.current === 0 && (k.previous ?? 0) === 0));
+  const shown = model.kpis.filter((k) => k.current !== null && !((k.id === 'returns' || k.id === 'p_credits') && k.current === 0 && (k.previous ?? 0) === 0));
   const hidden = model.kpis.filter((k) => k.current === null);
   return (
     <section aria-label="KPI" className="space-y-3">
@@ -34,9 +34,9 @@ export function KpiCards({ model, filters, onDrill, showHidden }: { model: Dashb
               </div>
               <div className="mt-3 flex flex-wrap gap-3 text-xs">
                 <button className="text-indigo-700 underline dark:text-indigo-300" onClick={() => setOpen(open === k.id ? null : k.id)} aria-expanded={open === k.id}>{t('kpi.howCalc')}</button>
-                <button className="text-indigo-700 underline dark:text-indigo-300" data-testid={`drill-${k.id}`} onClick={() => onDrill(label, { filter: k.id === 'returns' ? { ...filters } : { ...filters }, range: model.periods.current, ...(k.id === 'returns' ? { sign: 'negative' as const } : {}) })}>{t('kpi.viewRecords')}</button>
+                <button className="text-indigo-700 underline dark:text-indigo-300" data-testid={`drill-${k.id}`} onClick={() => onDrill(label, { filter: { ...filters }, range: model.periods.current, ...(k.id === 'returns' || k.id === 'p_credits' ? { sign: 'negative' as const } : {}) })}>{t('kpi.viewRecords')}</button>
               </div>
-              {open === k.id && <p className="mt-2 rounded-md bg-slate-50 p-2 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300">{t(`explain.${k.id}` as MessageKey, { ...inputs, returns: { money: inputs.returns ?? 0 } })}</p>}
+              {open === k.id && <p className="mt-2 rounded-md bg-slate-50 p-2 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300">{t(`explain.${k.id}` as MessageKey, { ...inputs, returns: { money: inputs.returns ?? 0 }, credits: { money: inputs.credits ?? 0 } })}</p>}
             </Card>
           );
         })}

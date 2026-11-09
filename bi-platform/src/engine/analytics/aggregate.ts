@@ -1,5 +1,5 @@
 import type { AmountBasis, SalesRecord } from '../types';
-import { dimensionOf, type Dimension } from './filters';
+import { dimensionOf, type SalesDimension } from './filters';
 
 /** Everything any metric needs, computed in ONE pass. All KPIs, charts, tables and reports derive from this. */
 export interface Aggregate {
@@ -84,7 +84,7 @@ export interface EntityAgg {
 }
 
 /** Aggregates per entity of a dimension. Lines without the dimension go to `unassigned` so totals always reconcile. */
-export function groupAggregates(records: SalesRecord[], dim: Dimension): { groups: Map<string, EntityAgg>; unassigned: Aggregate } {
+export function groupAggregates(records: SalesRecord[], dim: SalesDimension): { groups: Map<string, EntityAgg>; unassigned: Aggregate } {
   const groups = new Map<string, EntityAgg>();
   const unassigned = emptyAggregate();
   for (const r of records) {

@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { Bar, BarChart, CartesianGrid, ComposedChart, Legend, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis, Cell } from 'recharts';
 import { useLang } from '../LangProvider';
 import { Card, CardTitle } from '../ui/card';
-import type { DashboardView } from '@/engine/analytics/dashboard';
+import type { ChartModel } from '@/engine/analytics/view';
 import { composition, pareto, topBottom, waterfall, type EntityRow } from '@/engine/analytics/compare';
 import type { ChartId } from '@/engine/analytics/charts';
 import type { Dimension } from '@/engine/analytics/filters';
@@ -13,7 +13,7 @@ import { fmtDate, money, num, pct, type MessageKey } from '@/i18n';
 const COLORS = { cur: '#4f46e5', prev: '#94a3b8', up: '#059669', down: '#dc2626', total: '#4f46e5', grid: '#94a3b855' };
 
 export interface ChartProps {
-  model: DashboardView;
+  model: ChartModel;
   onFilter: (dim: Dimension, key: string) => void;
 }
 
@@ -45,25 +45,29 @@ export function ChartCard({ id, title, subtitle, unit, alt, children, note }: { 
   );
 }
 
-function useFmt(model: DashboardView) {
+function useFmt(model: ChartModel) {
   const { lang, t } = useLang();
   const cur = model.series.currency;
   const m = (n: number) => money(n, { lang, currency: cur });
   const short = (n: number) => new Intl.NumberFormat(lang === 'en' ? 'en-GB' : lang === 'pl' ? 'pl-PL' : 'lt-LT', { notation: 'compact', maximumFractionDigits: 1 }).format(n);
-  return { lang, t, cur, m, short };
+  const purchasing = model.module === 'purchasing';
+  /** the value series is called "Sales" or "Spend"; the main titles differ per module */
+  const vl = t(purchasing ? 'ch.spend' : 'ch.sales');
+  const ttl = (id: 'trend' | 'comparison' | 'waterfall' | 'pareto') => t((purchasing ? `pch.${id}` : `ch.${id}`) as MessageKey);
+  return { lang, t, cur, m, short, vl, ttl, purchasing };
 }
 
 export function TrendChart({ model }: ChartProps) {
-  const { lang, t, cur, m, short } = useFmt(model);
+  const { lang, t, cur, m, short, vl, ttl } = useFmt(model);
   const data = model.trend.map((p) => ({ name: p.start, revenue: p.revenue }));
   return (
-    <ChartCard id="trend" title={t('ch.trend')} subtitle={dateRange(model.bounds.dateMin, model.bounds.dateMax, lang)} unit={t('ch.unit', { currency: cur })} alt={{ headers: [t('ch.date'), t('ch.sales')], rows: data.map((d) => [fmtDate(d.name, lang), m(d.revenue)]) }}>
+    <ChartCard id="trend" title={ttl('trend')} subtitle={dateRange(model.bounds.dateMin, model.bounds.dateMax, lang)} unit={t('ch.unit', { currency: cur })} alt={{ headers: [t('ch.date'), vl], rows: data.map((d) => [fmtDate(d.name, lang), m(d.revenue)]) }}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data} margin={{ left: 4, right: 12, top: 8, bottom: 4 }}>
           <CartesianGrid stroke={COLORS.grid} vertical={false} />
           <XAxis dataKey="name" tickFormatter={(v: string) => fmtDate(v, lang).slice(0, 5)} tick={{ fontSize: 11 }} minTickGap={24} />
           <YAxis tickFormatter={short} width={52} tick={{ fontSize: 11 }} />
-          <Tooltip labelFormatter={(v) => fmtDate(String(v), lang)} formatter={(v) => [m(Number(v)), t('ch.sales')]} />
+          <Tooltip labelFormatter={(v) => fmtDate(String(v), lang)} formatter={(v) => [m(Number(v)), vl]} />
           <Line type="linear" dataKey="revenue" stroke={COLORS.cur} strokeWidth={2} dot={false} isAnimationActive={false} />
         </LineChart>
       </ResponsiveContainer>
@@ -72,13 +76,13 @@ export function TrendChart({ model }: ChartProps) {
 }
 
 export function ComparisonChart({ model }: ChartProps) {
-  const { lang, t, cur, m, short } = useFmt(model);
+  const { lang, t, cur, m, short, ttl } = useFmt(model);
   const { points, bucketDays } = model.aligned;
   const p = model.periods;
   const data = points.map((x) => ({ name: x.index + 1, current: x.current, previous: x.previous, cd: x.currentFrom, pd: x.previousFrom }));
   const unitLabel = bucketDays === 1 ? '' : ` (${bucketDays} d.)`;
   return (
-    <ChartCard id="comparison" title={t('ch.comparison')} subtitle={t('per.describe', { cfrom: fmtDate(p.current.from, lang), cto: fmtDate(p.current.to, lang), cdays: p.currentDays, pfrom: fmtDate(p.previous.from, lang), pto: fmtDate(p.previous.to, lang), pdays: p.previousDays })} unit={t('ch.unit', { currency: cur })}
+    <ChartCard id="comparison" title={ttl('comparison')} subtitle={t('per.describe', { cfrom: fmtDate(p.current.from, lang), cto: fmtDate(p.current.to, lang), cdays: p.currentDays, pfrom: fmtDate(p.previous.from, lang), pto: fmtDate(p.previous.to, lang), pdays: p.previousDays })} unit={t('ch.unit', { currency: cur })}
       alt={{ headers: [t('ch.date'), t('per.current'), t('per.previous')], rows: data.map((d) => [`${fmtDate(d.cd, lang)} / ${fmtDate(d.pd, lang)}`, m(d.current), m(d.previous)]) }}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data} margin={{ left: 4, right: 12, top: 8, bottom: 4 }}>
@@ -95,8 +99,8 @@ export function ComparisonChart({ model }: ChartProps) {
   );
 }
 
-function RankBars({ rows, dim, onFilter, color, model }: { rows: EntityRow[]; dim: Dimension; onFilter: ChartProps['onFilter']; color: string; model: DashboardView }) {
-  const { m, short, t } = useFmt(model);
+function RankBars({ rows, dim, onFilter, color, model }: { rows: EntityRow[]; dim: Dimension; onFilter: ChartProps['onFilter']; color: string; model: ChartModel }) {
+  const { m, short, vl } = useFmt(model);
   const h = Math.max(120, rows.length * 30 + 24);
   return (
     <div style={{ height: h }} className="w-full">
@@ -105,7 +109,7 @@ function RankBars({ rows, dim, onFilter, color, model }: { rows: EntityRow[]; di
           <CartesianGrid stroke={COLORS.grid} horizontal={false} />
           <XAxis type="number" tickFormatter={short} tick={{ fontSize: 11 }} />
           <YAxis type="category" dataKey="name" width={130} tick={{ fontSize: 11 }} tickFormatter={(v: string) => (v.length > 20 ? v.slice(0, 19) + '…' : v)} />
-          <Tooltip formatter={(v) => [m(Number(v)), t('ch.sales')]} />
+          <Tooltip formatter={(v) => [m(Number(v)), vl]} />
           <Bar dataKey="value" fill={color} radius={[0, 4, 4, 0]} isAnimationActive={false} cursor="pointer" onClick={(d) => onFilter(dim, (d as unknown as { key: string }).key)} />
         </BarChart>
       </ResponsiveContainer>
@@ -114,11 +118,11 @@ function RankBars({ rows, dim, onFilter, color, model }: { rows: EntityRow[]; di
 }
 
 export function RankingChart({ model, dim, onFilter, n = 5 }: ChartProps & { dim: Dimension; n?: number }) {
-  const { lang, t, cur, m } = useFmt(model);
+  const { lang, t, cur, m, vl, purchasing } = useFmt(model);
   const table = model.tables[dim]!;
   const { top, bottom } = topBottom(table.rows, n);
-  const id = dim === 'customer' ? 'topCustomers' : dim === 'product' ? 'topProducts' : 'salespeople';
-  const title = t(`ch.${id}` as MessageKey);
+  const id = dim === 'customer' ? 'topCustomers' : dim === 'supplier' ? 'topSuppliers' : dim === 'product' ? 'topProducts' : 'salespeople';
+  const title = purchasing && dim === 'product' ? t('pch.productRank') : t(`ch.${id}` as MessageKey);
   const all = [...top, ...bottom];
   return (
     <Card className="space-y-3" data-testid={`chart-${id}`} id={`chart-${id}`}>
@@ -128,7 +132,7 @@ export function RankingChart({ model, dim, onFilter, n = 5 }: ChartProps & { dim
       {bottom.length > 0 && (<><div className="text-xs font-medium text-slate-500">{t('ch.bottom')}</div><RankBars rows={bottom} dim={dim} onFilter={onFilter} color={COLORS.prev} model={model} /></>)}
       <details className="text-xs">
         <summary className="cursor-pointer text-indigo-700 dark:text-indigo-300">{t('ch.showTable')}</summary>
-        <table className="mt-2 w-full text-left"><thead><tr><th className="px-2 py-1 text-slate-500">{t('ch.item')}</th><th className="px-2 py-1 text-right text-slate-500">{t('ch.sales')}</th></tr></thead>
+        <table className="mt-2 w-full text-left"><thead><tr><th className="px-2 py-1 text-slate-500">{t('ch.item')}</th><th className="px-2 py-1 text-right text-slate-500">{vl}</th></tr></thead>
           <tbody>{all.map((r) => <tr key={r.key} className="border-t border-slate-100 dark:border-slate-800"><td className="px-2 py-1">{r.label}</td><td className="px-2 py-1 text-right tabular-nums">{m(r.current)}</td></tr>)}</tbody></table>
       </details>
     </Card>
@@ -158,7 +162,7 @@ export function CategoryChart({ model, onFilter }: ChartProps) {
 }
 
 export function WaterfallChart({ model, dim, onFilter }: ChartProps & { dim?: Dimension }) {
-  const { lang, t, cur, m, short } = useFmt(model);
+  const { lang, t, cur, m, short, ttl } = useFmt(model);
   const d = dim ?? model.waterfall!.dimension;
   const table = model.tables[d]!;
   const w = dim ? waterfall(table) : model.waterfall!.data;
@@ -172,7 +176,7 @@ export function WaterfallChart({ model, dim, onFilter }: ChartProps & { dim?: Di
   }
   rows.push({ name: t('ch.end'), base: 0, up: 0, down: 0, total: w.end, delta: w.end });
   return (
-    <ChartCard id="waterfall" title={`${t('ch.waterfall')} – ${t(`dim.${d}` as MessageKey)}`} subtitle={t('per.describe', { cfrom: fmtDate(model.periods.current.from, lang), cto: fmtDate(model.periods.current.to, lang), cdays: model.periods.currentDays, pfrom: fmtDate(model.periods.previous.from, lang), pto: fmtDate(model.periods.previous.to, lang), pdays: model.periods.previousDays })}
+    <ChartCard id="waterfall" title={`${ttl('waterfall')} – ${t(`dim.${d}` as MessageKey)}`} subtitle={t('per.describe', { cfrom: fmtDate(model.periods.current.from, lang), cto: fmtDate(model.periods.current.to, lang), cdays: model.periods.currentDays, pfrom: fmtDate(model.periods.previous.from, lang), pto: fmtDate(model.periods.previous.to, lang), pdays: model.periods.previousDays })}
       unit={t('ch.unit', { currency: cur })} note={t('ch.waterfallNote', { entity: t(`dim1.${d}` as MessageKey) })}
       alt={{ headers: [t('ch.item'), t('ch.delta')], rows: rows.map((r) => [r.name, m(r.delta)]) }}>
       <ResponsiveContainer width="100%" height="100%">
@@ -194,21 +198,21 @@ export function WaterfallChart({ model, dim, onFilter }: ChartProps & { dim?: Di
 }
 
 export function ParetoChart({ model, dim }: ChartProps & { dim?: Dimension }) {
-  const { lang, t, cur, m, short } = useFmt(model);
+  const { lang, t, cur, m, short, vl, ttl } = useFmt(model);
   const d = dim ?? model.pareto!.dimension;
   const p = dim ? { dimension: d, ...pareto(model.tables[d]!.rows) } : model.pareto!;
   const data = p.points.slice(0, 30).map((x, i) => ({ name: x.label, n: i + 1, value: x.value, cum: x.cumulativeShare }));
   return (
-    <ChartCard id="pareto" title={`${t('ch.pareto')} – ${t(`dim.${d}` as MessageKey)}`} subtitle={dateRange(model.periods.current.from, model.periods.current.to, lang)} unit={t('ch.unit', { currency: cur })}
+    <ChartCard id="pareto" title={`${ttl('pareto')} – ${t(`dim.${d}` as MessageKey)}`} subtitle={dateRange(model.periods.current.from, model.periods.current.to, lang)} unit={t('ch.unit', { currency: cur })}
       note={t('ch.pareto80', { n: p.countFor80, total: p.points.length, entity: t(`dim1.${d}` as MessageKey) })}
-      alt={{ headers: [t('ch.item'), t('ch.sales'), t('ch.cumulative')], rows: p.points.map((x) => [x.label, m(x.value), pct(x.cumulativeShare, lang)]) }}>
+      alt={{ headers: [t('ch.item'), vl, t('ch.cumulative')], rows: p.points.map((x) => [x.label, m(x.value), pct(x.cumulativeShare, lang)]) }}>
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={data} margin={{ left: 4, right: 8, top: 8, bottom: 4 }}>
           <CartesianGrid stroke={COLORS.grid} vertical={false} />
           <XAxis dataKey="n" tick={{ fontSize: 11 }} />
           <YAxis yAxisId="l" tickFormatter={short} width={52} tick={{ fontSize: 11 }} />
           <YAxis yAxisId="r" orientation="right" domain={[0, 1]} tickFormatter={(v: number) => pct(v, lang)} width={44} tick={{ fontSize: 11 }} />
-          <Tooltip formatter={(v, n) => (n === 'cum' ? [pct(Number(v), lang), t('ch.cumulative')] : [m(Number(v)), t('ch.sales')])} labelFormatter={(_l, pl) => String((pl?.[0]?.payload as { name?: string } | undefined)?.name ?? '')} />
+          <Tooltip formatter={(v, n) => (n === 'cum' ? [pct(Number(v), lang), t('ch.cumulative')] : [m(Number(v)), vl])} labelFormatter={(_l, pl) => String((pl?.[0]?.payload as { name?: string } | undefined)?.name ?? '')} />
           <ReferenceLine yAxisId="r" y={0.8} stroke={COLORS.down} strokeDasharray="4 4" />
           <Bar yAxisId="l" dataKey="value" fill={COLORS.cur} isAnimationActive={false} />
           <Line yAxisId="r" type="linear" dataKey="cum" stroke={COLORS.down} dot={false} strokeWidth={2} isAnimationActive={false} />
@@ -227,6 +231,7 @@ export function ChartById({ id, model, dim, onFilter }: ChartProps & { id: Chart
     case 'comparison': return <ComparisonChart model={model} onFilter={onFilter} />;
     case 'topCustomers': return model.tables.customer ? <RankingChart model={model} onFilter={onFilter} dim="customer" /> : null;
     case 'topProducts': return model.tables.product ? <RankingChart model={model} onFilter={onFilter} dim="product" /> : null;
+    case 'topSuppliers': return model.tables.supplier ? <RankingChart model={model} onFilter={onFilter} dim="supplier" /> : null;
     case 'salespeople': return model.tables.salesperson ? <RankingChart model={model} onFilter={onFilter} dim="salesperson" n={10} /> : null;
     case 'category': return model.tables.category ? <CategoryChart model={model} onFilter={onFilter} /> : null;
     case 'waterfall': return dim && model.tables[dim] ? <WaterfallChart model={model} onFilter={onFilter} dim={dim} /> : model.waterfall ? <WaterfallChart model={model} onFilter={onFilter} /> : null;

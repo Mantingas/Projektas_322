@@ -1,16 +1,25 @@
 import type { SalesRecord } from '../types';
 import { aggregate, groupAggregates, type Aggregate } from './aggregate';
-import { dimensionOf, type Dimension } from './filters';
+import { dimensionOf, type Dimension, type SalesDimension } from './filters';
 import { addDays, daysBetween, lengthDays, monthStart, weekStart } from './dates';
 import { evaluate, METRICS, type MetricContext, type MetricId, type MetricUnit, type Unavailable } from './metrics';
 import { isComparisonBlocked, type Range, type ResolvedPeriods } from './periods';
 
-export const inRange = (records: SalesRecord[], r: Range) => records.filter((x) => x.date >= r.from && x.date <= r.to);
+export const inRange = <T extends { date: string }>(records: T[], r: Range): T[] => records.filter((x) => x.date >= r.from && x.date <= r.to);
 
 // ───────── metric comparison ─────────
+export interface GenericMetric<A, C> {
+  id: string;
+  unit: MetricUnit;
+  higherIsBetter: boolean;
+  /** Neither direction is "good" (e.g. spend or quantity): the change is shown without red / green. */
+  neutral?: boolean;
+  evaluate(a: A, ctx: C): { value: number | null; unavailable?: string };
+}
+
 export type ChangeStatus = 'ok' | 'unavailable' | 'no_previous_value' | 'zero_base' | 'blocked';
 export interface MetricComparison {
-  id: MetricId;
+  id: string;
   unit: MetricUnit;
   higherIsBetter: boolean;
   current: number | null;
@@ -21,15 +30,20 @@ export interface MetricComparison {
   pct: number | null;
   direction: 'up' | 'down' | 'flat' | null;
   status: ChangeStatus;
-  unavailable?: Unavailable;
+  unavailable?: string;
   /** Whether the change is "good" for the business (null when unknown / flat). */
   good: boolean | null;
 }
 
 export function compareMetric(id: MetricId, cur: Aggregate, prev: Aggregate, ctx: MetricContext, periods?: ResolvedPeriods): MetricComparison {
-  const def = METRICS[id];
-  const c = evaluate(id, cur, ctx);
-  const p = evaluate(id, prev, ctx);
+  return compareWith(METRICS[id], cur, prev, ctx, periods);
+}
+
+/** Generic comparison of ANY registered metric (sales, purchasing …): same rules for zero bases, blocked periods and direction. */
+export function compareWith<A, C>(def: GenericMetric<A, C>, cur: A, prev: A, ctx: C, periods?: ResolvedPeriods): MetricComparison {
+  const id = def.id;
+  const c = def.evaluate(cur, ctx);
+  const p = def.evaluate(prev, ctx);
   const base = { id, unit: def.unit, higherIsBetter: def.higherIsBetter, current: c.value, previous: p.value, abs: null, pct: null, direction: null, good: null } as const;
   if (c.value === null) return { ...base, status: 'unavailable', unavailable: c.unavailable };
   if (periods && isComparisonBlocked(periods)) return { ...base, status: 'blocked' };
@@ -39,7 +53,7 @@ export function compareMetric(id: MetricId, cur: Aggregate, prev: Aggregate, ctx
   const flat = Math.abs(abs) < 1e-9 || (pct !== null && Math.abs(pct) < 0.005) || (def.unit === 'pct' && Math.abs(abs) < 0.005);
   const direction = flat ? 'flat' : abs > 0 ? 'up' : 'down';
   const status: ChangeStatus = p.value === 0 && def.unit !== 'pct' ? 'zero_base' : 'ok';
-  return { ...base, abs, pct, direction, status, good: flat ? null : abs > 0 === def.higherIsBetter };
+  return { ...base, abs, pct, direction, status, good: flat || def.neutral ? null : abs > 0 === def.higherIsBetter };
 }
 
 export interface ComparisonResult {
@@ -71,7 +85,7 @@ export function autoGranularity(days: number): Granularity {
 const bucketStart = (iso: string, g: Granularity) => (g === 'day' ? iso : g === 'week' ? weekStart(iso) : monthStart(iso));
 
 /** Zero-filled sales trend over a range. */
-export function salesTrend(records: SalesRecord[], range: Range, g: Granularity = autoGranularity(lengthDays(range.from, range.to))): TrendPoint[] {
+export function salesTrend(records: { date: string; amount: number }[], range: Range, g: Granularity = autoGranularity(lengthDays(range.from, range.to))): TrendPoint[] {
   const map = new Map<string, TrendPoint>();
   // build buckets
   for (let d = range.from; d <= range.to; d = addDays(d, 1)) {
@@ -99,7 +113,7 @@ export interface AlignedPoint {
 }
 
 /** Current vs previous aligned by position in the period (day 1 vs day 1 …), bucketed when the period is long. */
-export function alignedSeries(records: SalesRecord[], periods: ResolvedPeriods): { bucketDays: number; points: AlignedPoint[] } {
+export function alignedSeries(records: { date: string; amount: number }[], periods: ResolvedPeriods): { bucketDays: number; points: AlignedPoint[] } {
   const n = Math.max(periods.currentDays, periods.previousDays);
   const bucketDays = n <= 45 ? 1 : n <= 200 ? 7 : 30;
   const count = Math.ceil(n / bucketDays);
@@ -139,7 +153,7 @@ export interface EntityTable {
   totalPrevious: number;
 }
 
-export function entityTable(records: SalesRecord[], dim: Dimension, periods: ResolvedPeriods, ctx: MetricContext): EntityTable {
+export function entityTable(records: SalesRecord[], dim: SalesDimension, periods: ResolvedPeriods, ctx: MetricContext): EntityTable {
   const cur = groupAggregates(inRange(records, periods.current), dim);
   const prev = groupAggregates(inRange(records, periods.previous), dim);
   const keys = new Set([...cur.groups.keys(), ...prev.groups.keys()]);

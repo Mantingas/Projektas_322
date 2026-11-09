@@ -17,7 +17,7 @@ export function ConflictReview({ version, onChanged }: { version: number; onChan
   if (groups === null) return null;
 
   const apply = async (items: ConflictGroup[], action: ResolveAction) => {
-    await resolveConflicts(getDb(), items.map((g) => ({ importId: g.importId, docKey: g.docKey })), action);
+    await resolveConflicts(getDb(), items.map((g) => ({ importId: g.importId, docKey: g.docKey, module: g.module })), action);
     await load();
     onChanged();
   };
@@ -38,7 +38,7 @@ export function ConflictReview({ version, onChanged }: { version: number; onChan
             return (
               <Card key={`${g.importId}|${g.docKey}`} className="space-y-3" data-testid="conflict-group">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <CardTitle>{g.docKey ? `${t('cr.doc')} ${g.held[0]?.documentId ?? docLabel(g.docKey)}` : t('cr.noDoc')}</CardTitle>
+                  <CardTitle data-module={g.module}>{g.module === 'purchasing' && <span className="mr-2 rounded-full bg-sky-100 px-2 py-0.5 text-xs font-medium text-sky-800 dark:bg-sky-950 dark:text-sky-300" data-testid="cr-module">{t('mod.purchasing')}</span>}{g.docKey ? `${t('cr.doc')} ${g.held[0]?.documentId ?? docLabel(g.docKey)}` : t('cr.noDoc')}</CardTitle>
                   <span className="text-xs text-slate-500">{g.fileName}</span>
                 </div>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -69,7 +69,7 @@ export function ConflictReview({ version, onChanged }: { version: number; onChan
   );
 }
 
-function LinesTable({ title, rows, cur, sumLabel, testid }: { title: string; rows: { key: string; date: string; productName?: string; productId?: string; quantity?: number; amount: number }[]; cur: string; sumLabel: string; testid: string }) {
+function LinesTable({ title, rows, cur, sumLabel, testid }: { title: string; rows: { key: string; date: string; productName?: string; productId?: string; supplierName?: string; supplierId?: string; unit?: string; quantity?: number; amount: number }[]; cur: string; sumLabel: string; testid: string }) {
   const { t, lang } = useLang();
   return (
     <div data-testid={testid}>
@@ -77,7 +77,7 @@ function LinesTable({ title, rows, cur, sumLabel, testid }: { title: string; row
       <table className="w-full text-left text-xs">
         <thead><tr><th className="px-2 py-1 text-slate-500">{t('cr.date')}</th><th className="px-2 py-1 text-slate-500">{t('cr.product')}</th><th className="px-2 py-1 text-right text-slate-500">{t('cr.amount')}</th></tr></thead>
         <tbody>
-          {rows.map((r) => <tr key={r.key} className="border-t border-slate-100 dark:border-slate-800"><td className="px-2 py-1">{fmtDate(r.date, lang)}</td><td className="px-2 py-1">{r.productName ?? r.productId ?? '–'}</td><td className="px-2 py-1 text-right tabular-nums">{money(r.amount, { lang, currency: cur })}</td></tr>)}
+          {rows.map((r) => <tr key={r.key} className="border-t border-slate-100 dark:border-slate-800"><td className="px-2 py-1">{fmtDate(r.date, lang)}</td><td className="px-2 py-1">{r.supplierName || r.supplierId ? `${r.supplierName ?? r.supplierId} · ` : ''}{r.productName ?? r.productId ?? '–'}{r.quantity !== undefined && r.unit ? ` (${r.quantity} ${r.unit})` : ''}</td><td className="px-2 py-1 text-right tabular-nums">{money(r.amount, { lang, currency: cur })}</td></tr>)}
           <tr className="border-t border-slate-300 font-semibold dark:border-slate-700"><td className="px-2 py-1" colSpan={2}>{sumLabel}</td><td className="px-2 py-1 text-right tabular-nums">{money(rows.reduce((s, r) => s + r.amount, 0), { lang, currency: cur })}</td></tr>
         </tbody>
       </table>

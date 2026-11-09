@@ -31,7 +31,7 @@ export function HistoryView({ version, onChanged }: { version: number; onChanged
         <table className="w-full text-left text-sm" data-testid="history-table">
           <thead className="bg-slate-100 text-xs uppercase text-slate-500 dark:bg-slate-900">
             <tr>
-              {(['hist.file', 'hist.date', 'hist.period', 'hist.rows', 'hist.added', 'hist.dups', 'hist.held', 'hist.revised', 'hist.stale', 'hist.identity', 'hist.mode'] as MessageKey[]).map((k) => <th key={k} className="px-3 py-2">{t(k)}</th>)}
+              {(['hist.file', 'mod.view', 'hist.date', 'hist.period', 'hist.rows', 'hist.added', 'hist.dups', 'hist.held', 'hist.revised', 'hist.stale', 'hist.identity', 'hist.mode'] as MessageKey[]).map((k) => <th key={k} className="px-3 py-2">{t(k)}</th>)}
               <th />
             </tr>
           </thead>
@@ -39,6 +39,7 @@ export function HistoryView({ version, onChanged }: { version: number; onChanged
             {rows.map((r) => (
               <tr key={r.id} className="border-t border-slate-200 dark:border-slate-800">
                 <td className="px-3 py-2 font-medium">{r.fileName}</td>
+                <td className="px-3 py-2" data-testid="hist-module">{t(`mod.${r.module ?? 'sales'}` as MessageKey)}</td>
                 <td className="px-3 py-2">{fmtDate(new Date(r.importedAt).toISOString().slice(0, 10), lang)}</td>
                 <td className="px-3 py-2">{r.stats.dateMin && r.stats.dateMax ? `${fmtDate(r.stats.dateMin, lang)} – ${fmtDate(r.stats.dateMax, lang)}` : '—'}</td>
                 <td className="px-3 py-2">{r.stats.rowsRead}</td>

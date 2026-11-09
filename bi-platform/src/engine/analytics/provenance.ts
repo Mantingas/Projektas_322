@@ -26,7 +26,7 @@ export interface SourceSummary {
 }
 
 /** Which imports the underlying lines came from. */
-export function sourcesOf(records: SalesRecord[]): SourceSummary[] {
+export function sourcesOf(records: { importId?: string; amount: number }[]): SourceSummary[] {
   const m = new Map<string, SourceSummary>();
   for (const r of records) {
     const id = r.importId ?? '?';

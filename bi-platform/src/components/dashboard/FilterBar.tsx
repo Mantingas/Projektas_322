@@ -4,10 +4,8 @@ import { useLang } from '../LangProvider';
 import { Button } from '../ui/button';
 import type { Dimension, FilterSpec } from '@/engine/analytics/filters';
 import type { EntityTable } from '@/engine/analytics/compare';
-import type { MessageKey } from '@/i18n';
 
-const FIELD: Record<Dimension, keyof FilterSpec> = { customer: 'customers', product: 'products', salesperson: 'salespeople', category: 'categories' };
-const LABEL: Record<Dimension, MessageKey> = { customer: 'flt.customers', product: 'flt.products', salesperson: 'flt.salespeople', category: 'flt.categories' };
+import { FILTER_FIELD as FIELD, FILTER_LABEL as LABEL } from '@/lib/dimMaps';
 
 /** option sources: every entity seen in the series (both periods), so filters never depend on the current period */
 export function FilterBar({ filters, onChange, options, labels }: {

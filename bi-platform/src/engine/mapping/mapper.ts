@@ -1,6 +1,5 @@
-import type { ColumnProfile, MappingEntry, MappingProposal, MappingWarning, SalesField } from '../types';
-import { SALES_FIELDS } from '../types';
-import { GROSS_HINT_TOKENS, ID_FIELDS, NET_HINT_TOKENS, NUMERIC_FIELDS, SALES_SYNONYMS, TEXT_FIELDS } from './dictionary';
+import type { ColumnProfile, FieldId, MappingEntry, MappingProposal, MappingWarning, ModuleId } from '../types';
+import { GROSS_HINT_TOKENS, NET_HINT_TOKENS, PURCHASING_WORDS, SALES_WORDS, SPECS, type ModuleSpec } from './dictionary';
 import { levenshtein, normalizeHeader, tokens } from './normalize';
 import { matchTemplate } from './templates';
 import { normalizeCurrency } from '../schema/numbers';
@@ -9,12 +8,12 @@ export const PROPOSE_THRESHOLD = 0.55;
 export const LOW_CONFIDENCE = 0.75;
 
 /** Name-based score of a header for a field: 1 exact, 0.7–0.9 token subset, 0.75 near-match. */
-export function headerScore(header: string, field: SalesField): number {
+export function headerScore(header: string, field: FieldId, module: ModuleId = 'sales'): number {
   const n = normalizeHeader(header);
   if (!n) return 0;
   const toks = n.split(' ');
   let best = 0;
-  for (const syn of SALES_SYNONYMS[field]) {
+  for (const syn of SPECS[module].synonyms(field)) {
     if (syn === n) return 1;
     const st = syn.split(' ');
     if (st.every((t) => toks.includes(t))) best = Math.max(best, 0.6 + 0.1 * Math.min(st.length, 3));
@@ -33,36 +32,41 @@ function basisHint(header: string): 'net' | 'gross' | null {
   return null;
 }
 
-function valueCompat(field: SalesField, p: ColumnProfile): number {
+function valueCompat(field: FieldId, p: ColumnProfile, spec: ModuleSpec): number {
   if (p.nonEmpty === 0) return 0;
   if (field === 'document_date') return Math.max(p.dateRatio, p.serialDateRatio);
-  if (NUMERIC_FIELDS.includes(field)) return p.numberRatio;
-  if (TEXT_FIELDS.includes(field)) return p.numberRatio > 0.8 || p.dateRatio > 0.8 ? 0.1 : p.textRatio;
+  if (spec.numeric.includes(field)) return p.numberRatio;
+  if (field === 'unit' || field === 'document_type') return p.textRatio > 0.8 && p.avgTextLength <= 20 && p.distinctRatio < 0.2 ? 1 : 0.3;
+  if (spec.text.includes(field)) return p.numberRatio > 0.8 || p.dateRatio > 0.8 ? 0.1 : p.textRatio;
   // identifiers carry no value evidence: a generic header such as "Vidinis kodas" must not look confident
-  if (ID_FIELDS.includes(field)) return p.dateRatio > 0.8 ? 0.1 : 0.6;
+  if (spec.ids.includes(field)) return p.dateRatio > 0.8 ? 0.1 : 0.6;
   if (field === 'currency') return p.textRatio > 0.8 && p.avgTextLength <= 5 && p.distinctRatio < 0.2 ? 1 : 0.2;
   return 0.5;
 }
 
 interface Candidate {
-  field: SalesField;
+  field: FieldId;
   column: number;
   score: number;
 }
 
 export interface MapperOptions {
   /** field → normalised header, from a mapping the user confirmed earlier on the same layout. */
-  saved?: Partial<Record<SalesField, string>>;
+  saved?: Partial<Record<FieldId, string>>;
+  /** Which module's vocabulary and fields to use (default: sales). */
+  module?: ModuleId;
 }
 
 export function suggestMapping(profiles: ColumnProfile[], opts: MapperOptions = {}): MappingProposal {
+  const module = opts.module ?? 'sales';
+  const spec = SPECS[module];
   const entries: MappingEntry[] = [];
   const usedCols = new Set<number>();
-  const usedFields = new Set<SalesField>();
+  const usedFields = new Set<FieldId>();
   const normHeaders = profiles.map((p) => normalizeHeader(p.header));
 
-  const apply = (map: Partial<Record<SalesField, string>>, source: MappingEntry['source'], confidence: number) => {
-    for (const [field, nh] of Object.entries(map) as [SalesField, string][]) {
+  const apply = (map: Partial<Record<FieldId, string>>, source: MappingEntry['source'], confidence: number) => {
+    for (const [field, nh] of Object.entries(map) as [FieldId, string][]) {
       const idx = normHeaders.findIndex((h, i) => h === nh && !usedCols.has(i));
       if (idx < 0 || usedFields.has(field)) continue;
       entries.push({ field, columnIndex: idx, confidence, source });
@@ -73,7 +77,7 @@ export function suggestMapping(profiles: ColumnProfile[], opts: MapperOptions = 
 
   let templateId: string | undefined;
   if (opts.saved) apply(opts.saved, 'saved', 0.98);
-  else {
+  else if (module === 'sales') {
     const m = matchTemplate(normHeaders);
     if (m) {
       templateId = m.template.id;
@@ -86,23 +90,23 @@ export function suggestMapping(profiles: ColumnProfile[], opts: MapperOptions = 
   for (const p of profiles) {
     if (usedCols.has(p.index)) continue;
     const hint = basisHint(p.header);
-    for (const field of SALES_FIELDS) {
+    for (const field of spec.fields) {
       if (usedFields.has(field)) continue;
-      let h = headerScore(p.header, field);
+      let h = headerScore(p.header, field, module);
       // VAT basis words in the header decide between net / gross / unspecified.
       if (field === 'net_amount' && hint === 'net' && p.numberRatio >= 0.8) h = Math.max(h, 0.85);
       if (field === 'gross_amount' && hint === 'gross' && p.numberRatio >= 0.8) h = Math.max(h, 0.85);
       if (field === 'amount_unknown_basis' && hint) h = 0;
       if (field === 'net_amount' && hint === 'gross') h = 0;
       if (field === 'gross_amount' && hint === 'net') h = 0;
-      const compat = valueCompat(field, p);
+      const compat = valueCompat(field, p, spec);
       let score: number;
       if (h > 0) {
         score = h * 0.7 + compat * 0.3;
         if (compat < 0.5) score *= 0.4;
       } else if (field === 'document_date' && p.dateRatio >= 0.9) {
         score = 0.58; // values alone are enough for a *proposal* of the date column
-      } else if (field === 'currency' && p.textRatio > 0.9 && p.nonEmpty > 0 && valueCompat('currency', p) === 1) {
+      } else if (field === 'currency' && p.textRatio > 0.9 && p.nonEmpty > 0 && valueCompat('currency', p, spec) === 1) {
         score = 0.58;
       } else continue;
       if (score >= PROPOSE_THRESHOLD) candidates.push({ field, column: p.index, score });
@@ -134,17 +138,18 @@ export function suggestMapping(profiles: ColumnProfile[], opts: MapperOptions = 
     }
   }
 
-  return { entries: entries.sort((a, b) => a.columnIndex - b.columnIndex), templateId, detectedCurrency, warnings: validateMapping(entries) };
+  return { entries: entries.sort((a, b) => a.columnIndex - b.columnIndex), templateId, detectedCurrency, warnings: validateMapping(entries, module) };
 }
 
-export function validateMapping(entries: Pick<MappingEntry, 'field' | 'confidence'>[]): MappingWarning[] {
+export function validateMapping(entries: Pick<MappingEntry, 'field' | 'confidence'>[], module: ModuleId = 'sales'): MappingWarning[] {
   const w: MappingWarning[] = [];
-  const has = (f: SalesField) => entries.some((e) => e.field === f);
+  const has = (f: FieldId) => entries.some((e) => e.field === f);
   if (!has('document_date')) w.push({ code: 'missing_date' });
   const amountFields = (['net_amount', 'gross_amount', 'amount_unknown_basis'] as const).filter(has);
   if (amountFields.length === 0) w.push({ code: 'missing_amount' });
   if (amountFields.length > 1) w.push({ code: 'multiple_amounts' });
   if (amountFields.length === 1 && amountFields[0] === 'amount_unknown_basis') w.push({ code: 'amount_basis_unknown' });
+  if (module === 'purchasing' && !has('supplier_name') && !has('supplier_id')) w.push({ code: 'missing_supplier' });
   for (const e of entries) if (e.confidence < LOW_CONFIDENCE) w.push({ code: 'low_confidence', field: e.field });
   return w;
 }
@@ -155,12 +160,24 @@ export function isMappingConfirmable(warnings: MappingWarning[]): boolean {
 }
 
 /** Makes a mapping reusable on another file with the same layout. */
-export function mappingToSaved(entries: Pick<MappingEntry, 'field' | 'columnIndex'>[], headers: string[]): Partial<Record<SalesField, string>> {
-  const out: Partial<Record<SalesField, string>> = {};
+export function mappingToSaved(entries: Pick<MappingEntry, 'field' | 'columnIndex'>[], headers: string[]): Partial<Record<FieldId, string>> {
+  const out: Partial<Record<FieldId, string>> = {};
   for (const e of entries) out[e.field] = normalizeHeader(headers[e.columnIndex] ?? '');
   return out;
 }
 
-export function layoutSignature(headers: string[]): string {
-  return headers.map(normalizeHeader).filter(Boolean).sort().join('|');
+export function layoutSignature(headers: string[], module: ModuleId = 'sales'): string {
+  const sig = headers.map(normalizeHeader).filter(Boolean).sort().join('|');
+  return module === 'sales' ? sig : `${module}:${sig}`; // sales signatures stay unchanged
+}
+
+/**
+ * Suggests which kind of file this is from header words. Ambiguous words ("kontrahent", "pardavėjas") count for neither;
+ * ties and unclear files default to sales. The user always confirms the choice.
+ */
+export function detectModule(headers: string[]): { module: ModuleId; purchasing: number; sales: number } {
+  const toks = new Set(headers.flatMap((h) => normalizeHeader(h).split(' ')));
+  const purchasing = PURCHASING_WORDS.filter((w) => toks.has(w)).length;
+  const sales = SALES_WORDS.filter((w) => toks.has(w)).length;
+  return { module: purchasing > sales ? 'purchasing' : 'sales', purchasing, sales };
 }

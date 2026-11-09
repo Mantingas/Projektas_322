@@ -34,6 +34,7 @@ export function formatParam(v: ParamValue, ctx: FormatCtx): string {
   if (typeof v === 'string') return v;
   if (typeof v === 'number') return num(v, ctx.lang);
   if ('money' in v) return money(v.money, ctx);
+  if ('price' in v) return new Intl.NumberFormat(LOCALE[ctx.lang], { style: 'currency', currency: ctx.currency, minimumFractionDigits: 2, maximumFractionDigits: 4 }).format(v.price);
   if ('pct' in v) return pct(v.pct, ctx.lang);
   if ('qty' in v) return num(v.qty, ctx.lang);
   return fmtDate(v.date, ctx.lang);
@@ -41,6 +42,6 @@ export function formatParam(v: ParamValue, ctx: FormatCtx): string {
 
 /** Replaces {name} placeholders. Params are formatted for the language; unknown placeholders are left visible. */
 export function translate(lang: Lang, key: MessageKey, params: Record<string, ParamValue> = {}, currency = 'EUR'): string {
-  const raw = DICTS[lang][key] ?? en[key];
+  const raw = DICTS[lang][key] ?? en[key] ?? String(key); // a missing key must never crash the page
   return raw.replace(/\{(\w+)\}/g, (m, name: string) => (name in params ? formatParam(params[name]!, { lang, currency }) : m));
 }

@@ -1,9 +1,11 @@
 import dash from './dash.en';
 import dash2 from './dash2.en';
+import purch from './purch.en';
 
 const en = {
   ...dash,
   ...dash2,
+  ...purch,
   'app.name': 'Excel Insights',
   'app.tagline': 'Business insights from your Excel files',
   'nav.home': 'Home', 'nav.import': 'Import', 'nav.insights': 'Insights', 'nav.history': 'History', 'nav.settings': 'Settings',

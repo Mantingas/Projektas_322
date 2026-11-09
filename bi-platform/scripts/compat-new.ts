@@ -21,7 +21,7 @@ import { analyzeSheet } from '../src/engine/pipeline';
 import { interpretNumberString } from '../src/engine/schema/numbers';
 import { addDays } from '../src/engine/analytics/dates';
 import { parseDate } from '../src/engine/schema/dates';
-import type { CellValue, SalesField } from '../src/engine/types';
+import type { CellValue, FieldId as SalesField } from '../src/engine/types';
 
 const argv = process.argv.slice(2);
 const arg = (n: string) => { const i = argv.indexOf(`--${n}`); return i >= 0 ? argv[i + 1] : undefined; };

@@ -16,8 +16,13 @@ export function formatImpact(i: Insight, lang: Lang, currency: string): string {
   return i.impact.unit === 'money' ? money(i.impact.value, { lang, currency }) : i.impact.unit === 'pct' ? pct(i.impact.value, lang) : num(i.impact.value, lang);
 }
 
+/** Unit prices keep up to 4 decimals (0.0325 EUR per piece is not 0.03). */
+export function priceText(n: number, lang: Lang, currency: string): string {
+  try { return new Intl.NumberFormat(lang === 'en' ? 'en-GB' : lang === 'pl' ? 'pl-PL' : 'lt-LT', { style: 'currency', currency, minimumFractionDigits: 2, maximumFractionDigits: 4 }).format(n); } catch { return `${n.toFixed(4)} ${currency}`; }
+}
+
 export function formatEvidence(e: Insight['evidence'][number], lang: Lang, currency: string): string {
-  const f = (n: number) => (e.unit === 'money' ? money(n, { lang, currency }) : e.unit === 'pct' ? pct(n, lang) : num(n, lang));
+  const f = (n: number) => (e.unit === 'price' ? priceText(n, lang, currency) : e.unit === 'money' ? money(n, { lang, currency }) : e.unit === 'pct' ? pct(n, lang) : num(n, lang));
   return e.previous === undefined ? `${e.label}: ${f(e.current)}` : `${e.label}: ${f(e.previous)} → ${f(e.current)}`;
 }
 

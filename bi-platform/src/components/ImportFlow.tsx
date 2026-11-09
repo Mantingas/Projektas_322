@@ -11,7 +11,7 @@ import { isMappingConfirmable, LOW_CONFIDENCE, validateMapping } from '@/engine/
 import { SALES_TEMPLATES } from '@/engine/mapping/templates';
 import { renderDiagnosticsText } from '@/engine/import/diagnostics';
 import type { ImportPolicy } from '@/engine/import/merge';
-import { SALES_FIELDS, type ExportMode, type ImportStats, type MappingEntry, type SalesField } from '@/engine/types';
+import { PURCHASE_FIELDS, SALES_FIELDS, type ExportMode, type FieldId, type ImportStats, type MappingEntry, type ModuleId } from '@/engine/types';
 import { downloadText } from '@/lib/download';
 import { fmtDate, pct, type MessageKey } from '@/i18n';
 import { cn } from '@/lib/cn';
@@ -22,7 +22,7 @@ const MODES: ExportMode[] = ['full', 'incremental', 'partial', 'unknown'];
 
 type OkPreview = Extract<PreviewResult, { ok: true }>;
 
-export function ImportFlow({ onImported, goInsights, goReview }: { onImported: () => void; goInsights: () => void; goReview: () => void }) {
+export function ImportFlow({ onImported, goInsights, goReview }: { onImported: () => void; goInsights: (m: ModuleId) => void; goReview: () => void }) {
   const { t, lang } = useLang();
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
@@ -30,7 +30,8 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   const [parsed, setParsed] = useState<ParseResult | null>(null);
   const [sheetIdx, setSheetIdx] = useState(0);
   const [analysis, setAnalysis] = useState<AnalysisLite | null>(null);
-  const [assign, setAssign] = useState<Record<number, SalesField | ''>>({});
+  const [module, setModule] = useState<ModuleId>('sales');
+  const [assign, setAssign] = useState<Record<number, FieldId | ''>>({});
   const [confs, setConfs] = useState<Record<number, number>>({});
   const [sources, setSources] = useState<Record<number, MappingEntry['source']>>({});
   const [currency, setCurrency] = useState('EUR');
@@ -41,7 +42,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   const [dupAccepted, setDupAccepted] = useState(false);
   const [pv, setPv] = useState<OkPreview | null>(null);
   const [pvBusy, setPvBusy] = useState(false);
-  const [result, setResult] = useState<{ row: ImportRow; stats: ImportStats } | null>(null);
+  const [result, setResult] = useState<{ row: ImportRow; stats: ImportStats; module: ModuleId } | null>(null);
   const [dragging, setDragging] = useState(false);
   const seq = useRef(0);
 
@@ -55,16 +56,23 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   const reset = useCallback(() => {
     void engine().call('discard', []);
     setParsed(null); setAnalysis(null); setAssign({}); setConfs({}); setSources({}); setError(null); setDupAccepted(false); setResult(null); setSheetIdx(0);
-    setPv(null); setPolicy(null); setConfirmChecked(false); setMode('unknown');
+    setPv(null); setPolicy(null); setConfirmChecked(false); setMode('unknown'); setModule('sales');
     if (input.current) input.current.value = '';
   }, []);
 
-  const analyse = useCallback(async (idx: number) => {
-    const a = await engine().call('analyze', [idx, lang === 'en' ? '.' : ',']);
+  const analyse = useCallback(async (idx: number, requested: ModuleId = 'sales', auto = false) => {
+    let a = await engine().call('analyze', [idx, lang === 'en' ? '.' : ',', requested]);
+    let mod = requested;
+    // the headers clearly describe purchases: start in the purchasing module (the user can switch back)
+    if (auto && a && a.detected.module === 'purchasing' && requested !== 'purchasing') {
+      mod = 'purchasing';
+      a = await engine().call('analyze', [idx, lang === 'en' ? '.' : ',', mod]);
+    }
+    setModule(mod);
     setAnalysis(a);
     setPv(null);
     if (a) {
-      const asg: Record<number, SalesField | ''> = {};
+      const asg: Record<number, FieldId | ''> = {};
       const cf: Record<number, number> = {};
       const src: Record<number, MappingEntry['source']> = {};
       a.profiles.forEach((p) => (asg[p.index] = ''));
@@ -84,7 +92,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
       setParsed(p);
       const idx = Math.max(0, p.sheets.findIndex((s) => s.hasTable));
       setSheetIdx(idx);
-      await analyse(idx);
+      await analyse(idx, 'sales', true);
     } catch (e) {
       setError(errText(e));
       setParsed(null);
@@ -93,7 +101,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
     }
   }, [analyse, errText, reset]);
 
-  const setField = (col: number, field: SalesField | '') => {
+  const setField = (col: number, field: FieldId | '') => {
     setAssign((prev) => {
       const next = { ...prev };
       if (field) for (const k of Object.keys(next)) if (next[Number(k)] === field) next[Number(k)] = '';
@@ -106,8 +114,8 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
     setConfirmChecked(false);
   };
 
-  const entries = Object.entries(assign).filter(([, f]) => f).map(([c, f]) => ({ field: f as SalesField, columnIndex: Number(c), confidence: confs[Number(c)] ?? 1, source: sources[Number(c)] ?? ('user' as const) }));
-  const warnings = validateMapping(entries);
+  const entries = Object.entries(assign).filter(([, f]) => f).map(([c, f]) => ({ field: f as FieldId, columnIndex: Number(c), confidence: confs[Number(c)] ?? 1, source: sources[Number(c)] ?? ('user' as const) }));
+  const warnings = validateMapping(entries, module);
   const hasCurrencyCol = entries.some((e) => e.field === 'currency');
 
   // Dry run in the worker: normalisation + merge plan + diagnostics. Writes nothing.
@@ -117,14 +125,14 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
     const my = ++seq.current;
     setPvBusy(true);
     const timer = setTimeout(() => {
-      engine().call('preview', [{ sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: policy ?? undefined }])
+      engine().call('preview', [{ module, sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: policy ?? undefined }])
         .then((r) => { if (seq.current === my) setPv(r.ok ? r : null); })
         .catch((e: unknown) => { if (seq.current === my) { setPv(null); setError(errText(e)); } })
         .finally(() => { if (seq.current === my) setPvBusy(false); });
     }, 150);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [analysis, entriesKey, currency, mode, policy]);
+  }, [analysis, entriesKey, currency, mode, policy, module]);
 
   const needs = pv?.preview.needsConfirmation ?? [];
   const confirmable = Boolean(pv) && isMappingConfirmable(warnings) && (hasCurrencyCol || Boolean(currency)) && (!parsed?.duplicateOf || dupAccepted) && (needs.length === 0 || confirmChecked) && !pvBusy;
@@ -134,9 +142,9 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
     setBusy(true);
     setError(null);
     try {
-      const r = await engine().call('commit', [{ sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: pv.preview.policy, confirmed: confirmChecked, allowSameChecksum: dupAccepted, remember }]);
+      const r = await engine().call('commit', [{ module, sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: pv.preview.policy, confirmed: confirmChecked, allowSameChecksum: dupAccepted, remember }]);
       if (r.status === 'ok') {
-        setResult({ row: r.import, stats: r.stats });
+        setResult({ row: r.import, stats: r.stats, module });
         onImported();
       } else if (r.status === 'needs_confirmation') {
         setError(t('cf.needed'));
@@ -181,7 +189,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
           </div>
         )}
         <div className="flex flex-wrap gap-2">
-          <Button onClick={goInsights} data-testid="view-insights">{t('import.viewInsights')}</Button>
+          <Button onClick={() => goInsights(result.module)} data-testid="view-insights">{t('import.viewInsights')}</Button>
           {(row.heldLines ?? 0) > 0 && <Button variant="outline" onClick={goReview} data-testid="review-conflicts">{t('import.result.reviewNow')}</Button>}
           <Button variant="outline" onClick={reset}>{t('import.choose')}</Button>
         </div>
@@ -211,7 +219,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   }
 
   // ───────── diagnostics + mapping + preview ─────────
-  const tpl = analysis?.proposal.templateId ? SALES_TEMPLATES.find((x) => x.id === analysis.proposal.templateId) : undefined;
+  const tpl = module === 'sales' && analysis?.proposal.templateId ? SALES_TEMPLATES.find((x) => x.id === analysis.proposal.templateId) : undefined;
   const p = pv?.preview;
   const d = pv?.diagnostics;
   const showConflicts = Boolean(p && (p.revisedDocs + p.heldDocs + p.additionsDocs + p.removedDocs + p.omittedDocs > 0 || (p.proposedPolicy.conflicts === 'replace' && p.identity === 'document' && p.absentDocs + p.duplicates > 0)));
@@ -238,7 +246,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
         <label className="flex items-center gap-2 text-sm">
           {t('import.sheet')}
           <select className="rounded-md border border-slate-300 bg-transparent px-2 py-1 dark:border-slate-700 dark:bg-slate-900" value={sheetIdx} data-testid="sheet-select"
-            onChange={async (e) => { const i = Number(e.target.value); setSheetIdx(i); setBusy(true); try { await analyse(i); } catch (er) { setError(errText(er)); } finally { setBusy(false); } }}>
+            onChange={async (e) => { const i = Number(e.target.value); setSheetIdx(i); setBusy(true); try { await analyse(i, module); } catch (er) { setError(errText(er)); } finally { setBusy(false); } }}>
             {parsed.sheets.map((s, i) => <option key={i} value={i}>{s.name}{s.hasTable ? '' : ' ∅'}</option>)}
           </select>
         </label>
@@ -248,6 +256,18 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
         <p className="rounded-md bg-amber-50 p-3 text-sm dark:bg-amber-950/40">{t('import.noTable')}</p>
       ) : (
         <>
+          <Card className="space-y-2" data-testid="module-card">
+            <CardTitle>{t('mod.label')}</CardTitle>
+            <div role="group" aria-label={t('mod.select')} className="flex overflow-hidden rounded-md border border-slate-300 text-sm dark:border-slate-700 sm:w-fit">
+              {(['sales', 'purchasing'] as ModuleId[]).map((m) => (
+                <button key={m} type="button" data-testid={`module-${m}`} aria-pressed={module === m} disabled={busy}
+                  onClick={async () => { if (m === module) return; setBusy(true); setPv(null); try { await analyse(sheetIdx, m); } catch (er) { setError(errText(er)); } finally { setBusy(false); } }}
+                  className={cn('px-4 py-1.5 font-medium', module === m ? 'bg-indigo-600 text-white' : 'hover:bg-slate-100 dark:hover:bg-slate-800')}>{t(`mod.${m}` as MessageKey)}</button>
+              ))}
+            </div>
+            {analysis.detected.module !== module && (analysis.detected.purchasing !== analysis.detected.sales) && <p className="text-xs text-amber-800 dark:text-amber-300" data-testid="module-hint">{t('mod.detected', { module: t(`mod.${analysis.detected.module}` as MessageKey) })}</p>}
+          </Card>
+
           <Card className="space-y-2" data-testid="diag-structure">
             <CardTitle>{t('diag.structure')}</CardTitle>
             <div className="flex flex-wrap gap-2 text-xs">
@@ -281,9 +301,9 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
                       <td className="max-w-[16rem] truncate px-3 py-2 text-slate-500">{(analysis.samples[col.index] ?? []).join(' · ')}</td>
                       <td className="px-3 py-2"><Badge>{t(`type.${col.type}` as MessageKey)}</Badge></td>
                       <td className="px-3 py-2">
-                        <select aria-label={col.header} data-testid={`map-${col.index}`} value={f} onChange={(e) => setField(col.index, e.target.value as SalesField | '')} className="w-full min-w-[12rem] rounded-md border border-slate-300 bg-transparent px-2 py-1 dark:border-slate-700 dark:bg-slate-900">
+                        <select aria-label={col.header} data-testid={`map-${col.index}`} value={f} onChange={(e) => setField(col.index, e.target.value as FieldId | '')} className="w-full min-w-[12rem] rounded-md border border-slate-300 bg-transparent px-2 py-1 dark:border-slate-700 dark:bg-slate-900">
                           <option value="">{t('import.ignore')}</option>
-                          {SALES_FIELDS.map((sf) => <option key={sf} value={sf}>{t(`field.${sf}` as MessageKey)}</option>)}
+                          {(module === 'purchasing' ? PURCHASE_FIELDS : SALES_FIELDS).map((sf) => <option key={sf} value={sf}>{t(`field.${sf}` as MessageKey)}</option>)}
                         </select>
                       </td>
                       <td className="px-3 py-2">
@@ -303,6 +323,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
                 {w.code === 'missing_amount' && t('import.needAmount')}
                 {w.code === 'amount_basis_unknown' && t('import.basisUnknown')}
                 {w.code === 'multiple_amounts' && t('import.multiAmount')}
+                {w.code === 'missing_supplier' && t('import.needSupplier')}
                 {w.code === 'low_confidence' && t('import.lowConf', { field: t(`field.${w.field}` as MessageKey) })}
               </li>
             ))}
@@ -342,12 +363,13 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
                   <ul className="space-y-1 text-sm">{d.issues.map((x) => <li key={x.level + x.code}><Badge tone={x.level === 'error' ? 'risk' : 'warn'}>{t(`issue.${x.code}` as MessageKey)}: {x.count}</Badge>{x.rows.length > 0 && <span className="ml-2 text-xs text-slate-500">{t('diag.examples', { rows: x.rows.slice(0, 5).join(', ') })}</span>}</li>)}</ul>
                 )}
               </Card>
+              {pv?.discountMode && pv.discountMode !== 'none' && <p className="rounded-md bg-sky-50 p-3 text-sm text-sky-900 dark:bg-sky-950/40 dark:text-sky-200 lg:col-span-2" data-testid="discount-note">ℹ {t(`import.discount.${pv.discountMode}` as MessageKey)}</p>}
               <Card className="space-y-2" data-testid="diag-metrics">
                 <CardTitle>{t('diag.metrics')}</CardTitle>
                 <ul className="space-y-1 text-sm">
                   {d.metrics.map((m) => (
                     <li key={m.id} data-testid={`diag-metric-${m.id}`} data-available={m.available}>
-                      <span className={m.available ? 'text-emerald-700 dark:text-emerald-400' : 'text-slate-500'}>{m.available ? '✓' : '✗'}</span> <b>{t((m.id === 'sales' ? `metric.sales.${pv?.stats && d ? (entries.some((e) => e.field === 'net_amount') ? 'net' : entries.some((e) => e.field === 'gross_amount') ? 'gross' : 'unknown') : 'unknown'}` : `metric.${m.id}`) as MessageKey)}</b>
+                      <span className={m.available ? 'text-emerald-700 dark:text-emerald-400' : 'text-slate-500'}>{m.available ? '✓' : '✗'}</span> <b>{t((m.id === 'sales' || m.id === 'p_spend' ? `metric.${m.id}.${pv?.stats && d ? (entries.some((e) => e.field === 'net_amount') ? 'net' : entries.some((e) => e.field === 'gross_amount') ? 'gross' : 'unknown') : 'unknown'}` : `metric.${m.id}`) as MessageKey)}</b>
                       {!m.available && m.reason && <span className="text-xs text-slate-500"> – {t(`mu.${m.reason}` as MessageKey)}</span>}
                     </li>
                   ))}

@@ -160,3 +160,25 @@ Period-aware insights (`analyzeSalesPeriod`), year-to-date (offered only when da
 
 ## Compatibility framework
 `tests/compat` + `scripts/compat-new.ts` + `docs/COMPATIBILITY.md` (generated). **No vendor is verified**: there is no real export in the repository.
+
+## Phase 3 – Purchasing and supplier intelligence
+
+**Module split.** Sales and purchasing share the import-safety store (`src/db/store.ts`, module-parametrised: `imports`, `sales`, `purchases` tables, schema v4), the merge planner, the period engine, `compareWith`, entity tables, Pareto / waterfall helpers, diagnostics and the report builders. Purchasing-specific code lives in `src/engine/purchasing/*` and `src/engine/validation/normalizePurchases.ts`; the UI in `src/components/purchasing/*`. The page still receives only aggregated models from the worker (`buildPurchasing`, `priceTrendFor`); the record list never crosses the worker boundary except for one drill-down page.
+
+**Recognition.** `PURCHASE_FIELDS` (supplier name/id, product name/SKU, unit, unit price, discount, warehouse, document type …) with LT/PL/EN synonyms. The module is *proposed* from the headers (`detectModule`; ambiguous words such as "kontrahent" count for neither) and always confirmable; mappings are saved per module (`purchasing:` signature prefix).
+
+**Identity and units (no silent conversion).**
+- Supplier = code if present, otherwise name. Supplier document numbers are unique only per supplier, so purchase `docKey` is `currency|supplier|document`.
+- Product = `sku:<code>` (verified) or `name:<name>` (unverified, reliability capped at *low*). One code with several names is *ambiguous* and excluded from price comparison.
+- Prices are compared only for the same product, same unit, same currency and VAT basis. `UnitPolicy` `strict` (default) compares identical units; `metric` (opt-in, announced in the limitations) applies exact SI factors only (g/t→kg, ml→l, cm/mm→m). pcs / box / pack / pallet are never converted. Quantity totals are shown only when all lines share one unit.
+- Credit-type column + positive amount ⇒ sign flipped and counted (`credit_sign_normalised`). Discount arithmetic is checked (`none | included | deducted | unverified`) and the result is shown at import.
+
+**Spend bridge.** Δspend = price (same item, same supplier) + supplier mix + volume + new items + discontinued items + credit notes + not comparable; the last bucket is the remainder, so the steps add up exactly. Tests verify this identity.
+
+**Savings classification.** *Actual* (a lower price was paid than the previous period's price from the same supplier), *potential* (cross-supplier gap in the same period; assumes the cheaper supplier can supply the quantity on the same terms) and *hypothetical* (earlier lower monthly price; no evidence it is available today). The three are displayed and exported side by side and are never summed. "Fewer credit notes" is raised only with ≥3 prior credit documents, ≥2 % of purchases and a fall of both amount and share by half, and says it does not prove missing credits.
+
+**Cross-module preparation.** `src/engine/entities/links.ts` is a design contract, not a join: links are proposed only from equal verified codes (never names), start as `proposed`, need a user decision, and ambiguous codes are never proposed. No analytics use links yet.
+
+**Reports.** `buildPurchasingSummaryDoc` reuses `renderManagementSummary` (self-contained HTML, no scripts) and the CSV builder (formula-injection safe). The savings kind is part of the impact cell.
+
+**Robustness.** `translate()` falls back to English / the key instead of throwing; `tests/purchasing-i18n.test.ts` lists every dynamically built key (a missing `punavail.*` key crashed the page during Phase 3 e2e).

@@ -1,10 +1,12 @@
 import Dexie, { type Table } from 'dexie';
 import { docKey } from '@/engine/import/merge';
-import type { ConfirmedMapping, ExportMode, ImportStats, SalesField, SalesRecord } from '@/engine/types';
+import type { ConfirmedMapping, ExportMode, FieldId, ImportStats, ModuleId, PurchaseRecord, SalesRecord } from '@/engine/types';
 
 /** Everything below lives ONLY in this browser's IndexedDB. Nothing here is ever sent anywhere. */
 export interface ImportRow {
   id: string;
+  /** Which module the file belongs to (rows stored before purchasing existed have none = sales). */
+  module?: ModuleId;
   checksum: string;
   fileName: string;
   sheetName: string;
@@ -29,12 +31,26 @@ export interface ImportRow {
   /** The choices that were applied (and confirmed). */
   policy?: { conflicts: string; content: string };
   confirmed?: boolean;
+  /** Purchasing: what the arithmetic showed about discount columns (none / included / deducted / unverified). */
+  discountMode?: string;
   /** How reliable transaction identity was for this file. */
   identity: 'document' | 'mixed' | 'content';
   idCoverage: number;
   mapping: ConfirmedMapping;
   templateId?: string;
 }
+
+/** Bookkeeping shared by the stored lines of every module. */
+export interface StoredMeta {
+  importId: string;
+  docKey?: string;
+  supersededBy?: string;
+  heldBy?: string;
+  replaces?: string[];
+  discarded?: boolean;
+}
+
+export type StoredPurchase = PurchaseRecord & StoredMeta;
 
 export interface StoredRecord extends SalesRecord {
   importId: string;
@@ -53,7 +69,7 @@ export interface SavedMapping {
   /** layout signature (normalised, sorted header names) */
   signature: string;
   /** field → normalised header */
-  fields: Partial<Record<SalesField, string>>;
+  fields: Partial<Record<FieldId, string>>;
   defaultCurrency?: string;
   updatedAt: number;
 }
@@ -74,6 +90,7 @@ export interface SettingRow {
 export class AppDB extends Dexie {
   imports!: Table<ImportRow, string>;
   sales!: Table<StoredRecord, string>;
+  purchases!: Table<StoredPurchase, string>;
   mappings!: Table<SavedMapping, string>;
   settings!: Table<SettingRow, string>;
   audit!: Table<AuditEntry, number>;
@@ -94,6 +111,8 @@ export class AppDB extends Dexie {
         }),
       );
     this.version(3).stores({ sales: 'key, importId, date, docKey, heldBy', audit: '++id, at, importId' });
+    // v4: purchasing lines live in their own table; everything else is unchanged
+    this.version(4).stores({ purchases: 'key, importId, date, docKey, heldBy' });
   }
 }
 

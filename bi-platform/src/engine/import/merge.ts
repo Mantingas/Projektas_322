@@ -1,13 +1,27 @@
-import type { ExportMode, SalesRecord } from '../types';
+import type { ExportMode } from '../types';
+
+/** The part of a line that merging needs. Sales and purchase lines both satisfy it. */
+export interface LineLike {
+  key: string;
+  date: string;
+  documentId?: string;
+  currency: string;
+  supplierId?: string;
+  supplierName?: string;
+}
 
 /** Document numbers are only comparable within one currency / numbering series. */
-export const docKey = (r: Pick<SalesRecord, 'documentId' | 'currency'>) =>
-  r.documentId ? `${r.currency}|${r.documentId.trim().toLowerCase()}` : undefined;
+export const docKey = (r: { documentId?: string; currency: string; supplierId?: string; supplierName?: string }) => {
+  if (!r.documentId) return undefined;
+  // Purchase-document numbers are only unique per supplier. Sales records have no supplier, so their keys keep the original format.
+  const scope = (r.supplierId ?? r.supplierName ?? '').trim().toLowerCase().replace(/\s+/g, ' ');
+  return scope ? `${r.currency}|${scope}|${r.documentId.trim().toLowerCase()}` : `${r.currency}|${r.documentId.trim().toLowerCase()}`;
+};
 
 export type Identity = 'document' | 'mixed' | 'content';
 
 /** How reliable is the identity of transactions in this set? Without document numbers it is only content-based. */
-export function identityOf(records: Pick<SalesRecord, 'documentId'>[]): { identity: Identity; coverage: number } {
+export function identityOf(records: { documentId?: string }[]): { identity: Identity; coverage: number } {
   if (records.length === 0) return { identity: 'content', coverage: 0 };
   const withId = records.filter((r) => r.documentId).length;
   const coverage = withId / records.length;
@@ -45,11 +59,11 @@ export interface ExistingLine {
   discarded?: boolean;
 }
 
-export interface MergePlan {
+export interface MergePlan<R extends LineLike = LineLike> {
   /** New lines to store as active. */
-  toAdd: SalesRecord[];
+  toAdd: R[];
   /** Lines stored but held out of analytics until the user decides. */
-  toHold: SalesRecord[];
+  toHold: R[];
   /** For held documents: the stored lines that the held version would replace (document key → keys). */
   holdReplaces: Map<string, string[]>;
   /** Keys of active stored lines replaced by this import (kept for audit, excluded from analytics). */
@@ -78,19 +92,19 @@ export interface MergeOptions {
   stored?: { min: string; max: string };
 }
 
-export function planMerge(
-  incoming: SalesRecord[],
+export function planMerge<R extends LineLike>(
+  incoming: R[],
   existingByKey: ReadonlyMap<string, ExistingLine>,
   existingActiveByDoc: ReadonlyMap<string, ExistingLine[]>,
   opts: MergeOptions = { mode: 'unknown', policy: { conflicts: 'hold', content: 'dedupe_exact' } },
-): MergePlan {
-  const plan: MergePlan = {
+): MergePlan<R> {
+  const plan: MergePlan<R> = {
     toAdd: [], toHold: [], holdReplaces: new Map(), supersede: [], duplicates: 0, stale: 0, skipped: 0,
     docs: { added: 0, additions: 0, replaced: 0, removed: 0, held: 0, omitted: 0, identical: 0 },
   };
   const { mode, policy } = opts;
-  const byDoc = new Map<string, SalesRecord[]>();
-  const noDoc: SalesRecord[] = [];
+  const byDoc = new Map<string, R[]>();
+  const noDoc: R[] = [];
   for (const r of incoming) {
     const d = docKey(r);
     if (d) (byDoc.get(d) ?? byDoc.set(d, []).get(d)!).push(r);
@@ -107,7 +121,7 @@ export function planMerge(
       continue;
     }
     let dup = 0;
-    const fresh: SalesRecord[] = [];
+    const fresh: R[] = [];
     for (const r of lines) {
       if (existingByKey.has(r.key)) dup++;
       else fresh.push(r);

@@ -7,7 +7,7 @@ import type { DrillResult } from '@/lib/engineSession';
 import type { DrillSpec } from '@/engine/analytics/provenance';
 import { downloadText } from '@/lib/download';
 import { dateRange } from '@/lib/dashFormat';
-import { fmtDate, money, num } from '@/i18n';
+import { fmtDate, money, num, type MessageKey } from '@/i18n';
 
 export interface DrillState {
   title: string;
@@ -18,7 +18,7 @@ export interface DrillState {
 const PAGE = 25;
 
 /** Shows the exact lines behind a number. The lines stay in the worker; only the visible page is transferred. */
-export function DrillDrawer({ drill, currency, version, seriesKey, importNames, onClose }: { drill: DrillState; currency: string; version: number; seriesKey?: string; importNames: Record<string, string>; onClose: () => void }) {
+export function DrillDrawer({ drill, currency, version, seriesKey, importNames, onClose, module = 'sales' }: { module?: 'sales' | 'purchasing'; drill: DrillState; currency: string; version: number; seriesKey?: string; importNames: Record<string, string>; onClose: () => void }) {
   const { t, lang } = useLang();
   const [page, setPage] = useState(0);
   const [data, setData] = useState<DrillResult | null>(null);
@@ -29,14 +29,18 @@ export function DrillDrawer({ drill, currency, version, seriesKey, importNames, 
   }, [onClose]);
   useEffect(() => {
     let alive = true;
-    engine().call('drill', [{ version, seriesKey, spec: drill.spec, page, pageSize: PAGE }]).then((r) => alive && setData(r)).catch(() => alive && setData({ lines: 0, total: 0, sources: [], rows: [] }));
+    engine().call('drill', [{ module, version, seriesKey, spec: drill.spec, page, pageSize: PAGE }]).then((r) => alive && setData(r)).catch(() => alive && setData({ lines: 0, total: 0, sources: [], rows: [] }));
     return () => { alive = false; };
-  }, [drill.spec, page, version, seriesKey]);
+  }, [drill.spec, page, version, seriesKey, module]);
   const m = (n: number) => money(n, { lang, currency });
   const fileOf = (id?: string) => (id && importNames[id]) || t('drill.unknownSource');
   const pages = data ? Math.max(1, Math.ceil(data.lines / PAGE)) : 1;
+  const purchasing = module === 'purchasing';
+  const cols = (purchasing
+    ? ['drill.date', 'drill.document', 'drill.supplier', 'drill.product', 'drill.qty', 'drill.unit', 'drill.amount', 'drill.source', 'drill.row']
+    : ['drill.date', 'drill.document', 'drill.customer', 'drill.product', 'drill.qty', 'drill.amount', 'drill.source', 'drill.row']) as MessageKey[];
   const exportCsv = async () => {
-    const csv = await engine().call('drillCsv', [{ version, seriesKey, spec: drill.spec, headers: [t('drill.date'), t('drill.document'), t('drill.customer'), t('drill.product'), t('drill.qty'), t('drill.amount'), t('drill.source'), t('drill.row')], fileNames: importNames, unknownFile: t('drill.unknownSource') }]);
+    const csv = await engine().call('drillCsv', [{ module, version, seriesKey, spec: drill.spec, headers: cols.map((k) => t(k)), fileNames: importNames, unknownFile: t('drill.unknownSource') }]);
     downloadText('records.csv', 'text/csv', csv);
   };
   return (
@@ -57,13 +61,13 @@ export function DrillDrawer({ drill, currency, version, seriesKey, importNames, 
         {data && <div className="text-xs"><b>{t('drill.sources')}:</b> {data.sources.map((s) => `${fileOf(s.importId)} (${s.lines})`).join(', ')}</div>}
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-800"><tr>{(['drill.date', 'drill.document', 'drill.customer', 'drill.product', 'drill.qty', 'drill.amount', 'drill.source', 'drill.row'] as const).map((k, i) => <th key={k} className={`px-2 py-1.5 text-slate-500 ${i === 4 || i === 5 ? 'text-right' : ''}`}>{t(k)}</th>)}</tr></thead>
+            <thead className="bg-slate-50 dark:bg-slate-800"><tr>{cols.map((k) => <th key={k} className={`px-2 py-1.5 text-slate-500 ${k === 'drill.qty' || k === 'drill.amount' ? 'text-right' : ''}`}>{t(k)}</th>)}</tr></thead>
             <tbody>
               {(data?.rows ?? []).map((r) => (
                 <tr key={r.key} className="border-t border-slate-100 dark:border-slate-800">
                   <td className="whitespace-nowrap px-2 py-1">{fmtDate(r.date, lang)}</td><td className="px-2 py-1">{r.documentId ?? '–'}</td>
-                  <td className="max-w-[10rem] truncate px-2 py-1">{r.customerName ?? r.customerId ?? '–'}</td><td className="max-w-[10rem] truncate px-2 py-1">{r.productName ?? r.productId ?? '–'}</td>
-                  <td className="px-2 py-1 text-right tabular-nums">{r.quantity ?? '–'}</td><td className="px-2 py-1 text-right tabular-nums">{m(r.amount)}</td>
+                  <td className="max-w-[10rem] truncate px-2 py-1">{r.party ?? '–'}</td><td className="max-w-[10rem] truncate px-2 py-1">{r.product ?? '–'}</td>
+                  <td className="px-2 py-1 text-right tabular-nums">{r.quantity ?? '–'}</td>{purchasing && <td className="px-2 py-1">{r.unit ?? '–'}</td>}<td className="px-2 py-1 text-right tabular-nums">{m(r.amount)}</td>
                   <td className="max-w-[9rem] truncate px-2 py-1">{fileOf(r.importId)}</td><td className="px-2 py-1">{r.sourceRow}</td>
                 </tr>
               ))}

@@ -6,7 +6,7 @@ import {
   type AlignedPoint, type EntityTable, type MetricComparison, type ParetoPoint, type TrendPoint, type Waterfall,
 } from './compare';
 import { lengthDays } from './dates';
-import { applyFilters, hasDimension, type Dimension, type FilterSpec } from './filters';
+import { applyFilters, hasDimension, type FilterSpec, type SalesDimension } from './filters';
 import { KPI_ORDER, type MetricContext, type MetricId } from './metrics';
 import { explainMetricInputs } from './provenance';
 import { inRange } from './compare';
@@ -31,8 +31,8 @@ export interface DashboardOptions {
   identity?: 'document' | 'mixed' | 'content';
   /** Imported lines held for review (not part of any number shown). */
   heldPending?: number;
-  waterfallDimension?: Dimension;
-  paretoDimension?: Dimension;
+  waterfallDimension?: SalesDimension;
+  paretoDimension?: SalesDimension;
 }
 
 export interface DashboardModel {
@@ -46,9 +46,9 @@ export interface DashboardModel {
   kpis: MetricComparison[];
   trend: TrendPoint[];
   aligned: { bucketDays: number; points: AlignedPoint[] };
-  tables: Record<Dimension, EntityTable | null>;
-  pareto: { dimension: Dimension; points: ParetoPoint[]; countFor80: number; total: number } | null;
-  waterfall: { dimension: Dimension; data: Waterfall } | null;
+  tables: Record<SalesDimension, EntityTable | null>;
+  pareto: { dimension: SalesDimension; points: ParetoPoint[]; countFor80: number; total: number } | null;
+  waterfall: { dimension: SalesDimension; data: Waterfall } | null;
   composition: { label: string; value: number; share: number; other?: boolean }[];
   charts: ChartPlan[];
   warnings: PeriodWarning[];
@@ -57,7 +57,7 @@ export interface DashboardModel {
   explain: Partial<Record<MetricId, Record<string, number>>>;
 }
 
-const DIMS: Dimension[] = ['customer', 'product', 'salesperson', 'category'];
+const DIMS: SalesDimension[] = ['customer', 'product', 'salesperson', 'category'];
 
 export function buildDashboard(all: SalesRecord[], o: DashboardOptions): DashboardModel | null {
   const seriesRecords = inSeries(all, o.series);
@@ -85,15 +85,15 @@ export function buildDashboard(all: SalesRecord[], o: DashboardOptions): Dashboa
   const cmp = comparePeriods(records, periods, KPI_ORDER, ctx);
   const comparable = !isComparisonBlocked(periods) && cmp.previous.lines > 0 && cmp.current.lines > 0;
 
-  const tables = Object.fromEntries(DIMS.map((d) => [d, hasDimension(records, d) ? entityTable(records, d, periods, ctx) : null])) as Record<Dimension, EntityTable | null>;
+  const tables = Object.fromEntries(DIMS.map((d) => [d, hasDimension(records, d) ? entityTable(records, d, periods, ctx) : null])) as Record<SalesDimension, EntityTable | null>;
   const trend = salesTrend(records, { from: dateMin, to: dateMax });
-  const entities = Object.fromEntries(DIMS.map((d) => [d, tables[d]?.rows.filter((r) => r.current > 0).length ?? 0])) as Record<Dimension, number>;
-  const movers = Object.fromEntries(DIMS.map((d) => [d, tables[d]?.rows.filter((r) => Math.abs(r.change) > 1e-9).length ?? 0])) as Record<Dimension, number>;
+  const entities = Object.fromEntries(DIMS.map((d) => [d, tables[d]?.rows.filter((r) => r.current > 0).length ?? 0])) as Record<SalesDimension, number>;
+  const movers = Object.fromEntries(DIMS.map((d) => [d, tables[d]?.rows.filter((r) => Math.abs(r.change) > 1e-9).length ?? 0])) as Record<SalesDimension, number>;
   const charts = planCharts({ trendPoints: trend.filter((p) => p.lines > 0).length, comparisonUsable: comparable, entities, movers });
   const wPlan = charts.find((c) => c.id === 'waterfall')!;
   const pPlan = charts.find((c) => c.id === 'pareto')!;
-  const wDim = wPlan.available ? (o.waterfallDimension && tables[o.waterfallDimension] && movers[o.waterfallDimension] >= 2 ? o.waterfallDimension : wPlan.dimension!) : null;
-  const pDim = pPlan.available ? (o.paretoDimension && entities[o.paretoDimension] >= 5 ? o.paretoDimension : pPlan.dimension!) : null;
+  const wDim = wPlan.available ? (o.waterfallDimension && tables[o.waterfallDimension] && movers[o.waterfallDimension] >= 2 ? o.waterfallDimension : (wPlan.dimension as SalesDimension)) : null;
+  const pDim = pPlan.available ? (o.paretoDimension && entities[o.paretoDimension] >= 5 ? o.paretoDimension : (pPlan.dimension as SalesDimension)) : null;
   const par = pDim ? { dimension: pDim, ...pareto(tables[pDim]!.rows) } : null;
 
   const limitations: Limitation[] = [];

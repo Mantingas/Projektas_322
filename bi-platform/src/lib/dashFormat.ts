@@ -1,7 +1,8 @@
 import type { MetricComparison } from '@/engine/analytics/compare';
-import type { MetricId, MetricUnit } from '@/engine/analytics/metrics';
+import type { MetricUnit } from '@/engine/analytics/metrics';
 import type { PeriodWarning } from '@/engine/analytics/periods';
 import type { Limitation } from '@/engine/analytics/dashboard';
+import type { PurchaseLimitation } from '@/engine/purchasing/dashboard';
 import type { AmountBasis, ParamValue } from '@/engine/types';
 import { fmtDate, money, num, pct, type Lang, type MessageKey } from '@/i18n';
 
@@ -11,7 +12,7 @@ export function fmtUnit(unit: MetricUnit, v: number, lang: Lang, currency: strin
   return unit === 'money' ? money(v, { lang, currency }) : unit === 'pct' ? pct(v, lang) : num(v, lang);
 }
 
-export const metricLabel = (id: MetricId, basis: AmountBasis, t: T): string => t((id === 'sales' ? `metric.sales.${basis}` : `metric.${id}`) as MessageKey);
+export const metricLabel = (id: string, basis: AmountBasis, t: T): string => t((id === 'sales' || id === 'p_spend' ? `metric.${id}.${basis}` : `metric.${id}`) as MessageKey);
 
 export function changeText(c: MetricComparison, lang: Lang, currency: string, t: T): { text: string; tone: 'good' | 'bad' | 'flat' | 'na'; arrow: string } {
   if (c.status === 'blocked') return { text: t('kpi.blocked'), tone: 'na', arrow: '–' };
@@ -38,13 +39,10 @@ export function warningText(w: PeriodWarning, t: T): string {
   }
 }
 
-export function limitationText(l: Limitation, t: T): string {
-  switch (l.code) {
-    case 'other_series_hidden': return t('lim.other_series_hidden', { count: l.count });
-    case 'negative_lines': return t('lim.negative_lines', { lines: l.lines });
-    case 'held_pending': return t('lim.held_pending', { lines: l.lines });
-    default: return t(`lim.${l.code}` as MessageKey);
-  }
+export function limitationText(l: Limitation | PurchaseLimitation, t: T): string {
+  const { code, ...params } = l as { code: string } & Record<string, ParamValue>;
+  if (typeof params.pct === 'number') params.pct = { pct: params.pct };
+  return t(`lim.${code}` as MessageKey, Object.keys(params).length ? params : undefined);
 }
 
 export const dateRange = (from: string, to: string, lang: Lang) => (from === to ? fmtDate(from, lang) : `${fmtDate(from, lang)} – ${fmtDate(to, lang)}`);

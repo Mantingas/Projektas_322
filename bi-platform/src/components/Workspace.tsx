@@ -5,6 +5,8 @@ import { pendingHeldCount } from '@/db/store';
 import { useLang } from './LangProvider';
 import { ImportFlow } from './ImportFlow';
 import { InsightsView } from './InsightsView';
+import { PurchasingView } from './purchasing/PurchasingView';
+import type { ModuleId } from '@/engine/types';
 import { HistoryView } from './HistoryView';
 import { SettingsView } from './SettingsView';
 import { cn } from '@/lib/cn';
@@ -16,6 +18,7 @@ const TABS: Tab[] = ['import', 'insights', 'history', 'settings'];
 export function Workspace() {
   const { t } = useLang();
   const [tab, setTab] = useState<Tab>('import');
+  const [module, setModule] = useState<ModuleId>('sales');
   const [version, setVersion] = useState(0);
   const bump = () => setVersion((v) => v + 1);
   const [held, setHeld] = useState(0);
@@ -41,8 +44,17 @@ export function Workspace() {
           </button>
         ))}
       </div>
-      {tab === 'import' && <ImportFlow onImported={bump} goInsights={() => setTab('insights')} goReview={() => setTab('history')} />}
-      {tab === 'insights' && <InsightsView version={version} goImport={() => setTab('import')} />}
+      {tab === 'import' && <ImportFlow onImported={bump} goInsights={(m) => { setModule(m); setTab('insights'); }} goReview={() => setTab('history')} />}
+      {tab === 'insights' && (
+        <div className="space-y-4">
+          <div role="group" aria-label={t('mod.view')} className="no-print flex w-fit overflow-hidden rounded-md border border-slate-300 text-sm dark:border-slate-700">
+            {(['sales', 'purchasing'] as ModuleId[]).map((m) => (
+              <button key={m} data-testid={`module-view-${m}`} aria-pressed={module === m} onClick={() => setModule(m)} className={cn('px-4 py-1.5 font-medium', module === m ? 'bg-indigo-600 text-white' : 'hover:bg-slate-100 dark:hover:bg-slate-800')}>{t(`mod.${m}` as MessageKey)}</button>
+            ))}
+          </div>
+          {module === 'sales' ? <InsightsView version={version} goImport={() => setTab('import')} /> : <PurchasingView version={version} goImport={() => setTab('import')} />}
+        </div>
+      )}
       {tab === 'history' && <HistoryView version={version} onChanged={bump} />}
       {tab === 'settings' && <SettingsView version={version} onChanged={bump} />}
     </div>

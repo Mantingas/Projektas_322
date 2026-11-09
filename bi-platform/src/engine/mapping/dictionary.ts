@@ -81,3 +81,111 @@ export const ID_FIELDS: SalesField[] = ['document_id', 'customer_id', 'product_i
 /** Header tokens that decide VAT basis of an amount. */
 export const NET_HINT_TOKENS = ['netto', 'neto', 'net', 'excl', 'excluding'];
 export const GROSS_HINT_TOKENS = ['brutto', 'bruto', 'gross', 'incl', 'including'];
+
+// ───────────────────────── purchasing ─────────────────────────
+import type { FieldId, ModuleId, PurchaseField } from '../types';
+
+/**
+ * Purchasing-specific header synonyms (normalised). Fields not listed here fall back to SALES_SYNONYMS (date, document, product, amounts…).
+ * Note the deliberate differences from sales: "Pardavėjas" / "Kontrahent" mean the SUPPLIER here, and "vnt" / "szt" are UNITS, not quantities.
+ */
+export const PURCHASE_SYNONYMS: Partial<Record<PurchaseField, string[]>> = {
+  document_date: [
+    'pirkimo data', 'saskaitos gavimo data', 'gavimo data', 'data zakupu', 'data przyjecia', 'data wplywu', 'data otrzymania',
+    'purchase date', 'receipt date', 'bill date', 'invoice date',
+  ],
+  document_id: [
+    'tiekejo saskaitos nr', 'tiekejo saskaita', 'pirkimo dokumentas', 'pirkimo saskaitos nr', 'nr faktury dostawcy', 'numer faktury zakupu', 'faktura zakupu',
+    'supplier invoice', 'supplier invoice no', 'vendor invoice no', 'vendor invoice', 'purchase invoice', 'bill no',
+  ],
+  supplier_name: [
+    'tiekejas', 'tiekejo pavadinimas', 'tiekejas pavadinimas', 'tiekejo', 'pardavejas', 'pardavejo pavadinimas', 'kontrahentas', 'partneris',
+    'dostawca', 'nazwa dostawcy', 'kontrahent', 'nazwa kontrahenta', 'sprzedawca', 'wystawca',
+    'supplier', 'supplier name', 'vendor', 'vendor name', 'seller',
+  ],
+  supplier_id: [
+    'tiekejo kodas', 'tiekejo id', 'tiekejo nr', 'tiekejo imones kodas',
+    'kod dostawcy', 'id dostawcy', 'nip dostawcy', 'symbol dostawcy', 'kod kontrahenta', 'nip',
+    'supplier id', 'supplier code', 'vendor id', 'vendor code', 'vendor no',
+  ],
+  quantity: ['kiekis', 'kiek', 'gautas kiekis', 'pirktas kiekis', 'ilosc', 'il', 'ilosc zakupu', 'quantity', 'qty', 'received quantity', 'purchased quantity'],
+  unit: [
+    'matavimo vnt', 'mato vnt', 'mato vienetas', 'matavimo vienetas', 'vienetas', 'mv', 'unit',
+    'jednostka miary', 'jm', 'j m', 'jednostka', 'miara',
+    'uom', 'unit of measure', 'unit of measurement', 'measure',
+  ],
+  unit_price: [
+    'kaina', 'vieneto kaina', 'pirkimo kaina', 'vnt kaina', 'kaina be pvm', 'savikaina vnt',
+    'cena', 'cena jednostkowa', 'cena zakupu', 'cena zakupu netto', 'cena netto',
+    'price', 'unit price', 'purchase price', 'cost price', 'unit cost',
+  ],
+  discount_amount: [
+    'nuolaida', 'nuolaidos suma', 'nuolaida eur', 'rabatas', 'rabatas suma',
+    'rabat', 'kwota rabatu', 'upust', 'kwota upustu',
+    'discount', 'discount amount', 'rebate', 'rebate amount',
+  ],
+  warehouse: [
+    'sandelis', 'sandelys', 'skyrius', 'padalinys', 'sandelio kodas',
+    'magazyn', 'dzial', 'oddzial', 'miejsce skladowania', 'kod magazynu',
+    'warehouse', 'store', 'location', 'department', 'branch', 'site',
+  ],
+  document_type: [
+    'dokumento tipas', 'dok tipas', 'operacijos tipas', 'dokumento rusis', 'tipas', 'rusis',
+    'typ dokumentu', 'rodzaj dokumentu', 'rodzaj', 'typ',
+    'document type', 'doc type', 'transaction type', 'type',
+  ],
+  net_amount: [
+    'pirkimo suma be pvm', 'pirkimo verte be pvm', 'wartosc zakupu netto', 'kwota zakupu netto', 'zakup netto',
+    'purchase net', 'net cost', 'net purchase amount', 'net spend',
+  ],
+  gross_amount: [
+    'pirkimo suma su pvm', 'pirkimo verte su pvm', 'wartosc zakupu brutto', 'kwota zakupu brutto', 'zakup brutto',
+    'purchase gross', 'gross cost', 'gross purchase amount',
+  ],
+  amount_unknown_basis: [
+    'pirkimo suma', 'pirkimo verte', 'pirkimai', 'islaidos', 'suma', 'verte', 'viso',
+    'wartosc zakupu', 'kwota zakupu', 'zakup', 'wartosc', 'kwota', 'razem',
+    'purchase amount', 'purchase value', 'spend', 'cost', 'line cost', 'amount', 'total', 'value',
+  ],
+};
+
+/** What one module understands. The mapper, validator and import UI all read this. */
+export interface ModuleSpec {
+  id: ModuleId;
+  fields: readonly FieldId[];
+  numeric: FieldId[];
+  text: FieldId[];
+  ids: FieldId[];
+  /** Short categorical text columns (low distinct count). */
+  short: FieldId[];
+  synonyms(field: FieldId): string[];
+}
+
+import { SALES_FIELDS, PURCHASE_FIELDS } from '../types';
+
+export const SALES_SPEC: ModuleSpec = {
+  id: 'sales',
+  fields: SALES_FIELDS,
+  numeric: NUMERIC_FIELDS,
+  text: TEXT_FIELDS,
+  ids: ID_FIELDS,
+  short: ['currency'],
+  synonyms: (f) => SALES_SYNONYMS[f as keyof typeof SALES_SYNONYMS] ?? [],
+};
+
+export const PURCHASE_SPEC: ModuleSpec = {
+  id: 'purchasing',
+  fields: PURCHASE_FIELDS,
+  numeric: ['quantity', 'unit_price', 'discount_amount', 'net_amount', 'gross_amount', 'amount_unknown_basis', 'vat_amount'],
+  text: ['supplier_name', 'product_name', 'warehouse'],
+  ids: ['document_id', 'supplier_id', 'product_id'],
+  short: ['currency', 'unit', 'document_type'],
+  // purchasing-specific words PLUS the shared vocabulary; quantity is the exception: in purchasing "vnt" / "szt" are UNITS
+  synonyms: (f) => [...(PURCHASE_SYNONYMS[f as PurchaseField] ?? []), ...(f === 'quantity' ? [] : SALES_SYNONYMS[f as keyof typeof SALES_SYNONYMS] ?? [])],
+};
+
+export const SPECS: Record<ModuleId, ModuleSpec> = { sales: SALES_SPEC, purchasing: PURCHASE_SPEC };
+
+// Words that identify the kind of file. Ambiguous words (e.g. "kontrahent", "pardavėjas") are deliberately in neither list.
+export const PURCHASING_WORDS = ['tiekejas', 'tiekejo', 'dostawca', 'dostawcy', 'supplier', 'vendor', 'pirkimo', 'pirkimai', 'zakupu', 'zakup', 'purchase', 'purchases'];
+export const SALES_WORDS = ['klientas', 'kliento', 'pirkejas', 'pirkejo', 'nabywca', 'klient', 'klienta', 'odbiorca', 'customer', 'client', 'buyer', 'pardavimo', 'pardavimai', 'sprzedazy', 'sprzedaz', 'sales', 'handlowiec', 'vadybininkas'];

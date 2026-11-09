@@ -8,7 +8,8 @@ import { cn } from '@/lib/cn';
 import { engine, EngineError } from '@/lib/engineClient';
 import type { BuildResult } from '@/lib/engineSession';
 import type { Insight } from '@/engine/types';
-import { type Dimension, type FilterSpec } from '@/engine/analytics/filters';
+import { FILTER_FIELD } from '@/lib/dimMaps';
+import { type Dimension, type FilterSpec, type SalesDimension } from '@/engine/analytics/filters';
 import type { PeriodSelection } from '@/engine/analytics/periods';
 import type { DrillSpec } from '@/engine/analytics/provenance';
 import { renderManagementSummary } from '@/engine/report/summary';
@@ -28,8 +29,8 @@ import type { EntityTable } from '@/engine/analytics/compare';
 import type { MessageKey } from '@/i18n';
 
 type Mode = 'manager' | 'analyst';
-const FIELD: Record<Dimension, keyof FilterSpec> = { customer: 'customers', product: 'products', salesperson: 'salespeople', category: 'categories' };
-const DIMS: Dimension[] = ['customer', 'product', 'salesperson', 'category'];
+const FIELD = FILTER_FIELD;
+const DIMS: SalesDimension[] = ['customer', 'product', 'salesperson', 'category'];
 
 export function InsightsView({ version, goImport }: { version: number; goImport: () => void }) {
   const { t, lang } = useLang();

@@ -83,10 +83,35 @@ export const SALES_FIELDS = [
 ] as const;
 export type SalesField = (typeof SALES_FIELDS)[number];
 
+export const PURCHASE_FIELDS = [
+  'document_date',
+  'document_id',
+  'supplier_name',
+  'supplier_id',
+  'product_name',
+  'product_id',
+  'quantity',
+  'unit',
+  'unit_price',
+  'discount_amount',
+  'net_amount',
+  'gross_amount',
+  'amount_unknown_basis',
+  'vat_amount',
+  'currency',
+  'warehouse',
+  'document_type',
+] as const;
+export type PurchaseField = (typeof PURCHASE_FIELDS)[number];
+
+/** Any semantic field of any module. */
+export type FieldId = SalesField | PurchaseField;
+export type ModuleId = 'sales' | 'purchasing';
+
 export type AmountBasis = 'net' | 'gross' | 'unknown';
 
 export interface MappingEntry {
-  field: SalesField;
+  field: FieldId;
   columnIndex: number;
   /** 0..1 */
   confidence: number;
@@ -105,12 +130,13 @@ export type MappingWarning =
   | { code: 'missing_date' }
   | { code: 'missing_amount' }
   | { code: 'amount_basis_unknown' }
-  | { code: 'low_confidence'; field: SalesField }
+  | { code: 'missing_supplier' }
+  | { code: 'low_confidence'; field: FieldId }
   | { code: 'multiple_amounts' };
 
 export interface ConfirmedMapping {
   /** field → column index */
-  columns: Partial<Record<SalesField, number>>;
+  columns: Partial<Record<FieldId, number>>;
   /** Used when no currency column is mapped. The user must confirm it. */
   defaultCurrency?: string;
 }
@@ -144,6 +170,36 @@ export interface SalesRecord {
   importId?: string;
 }
 
+/** One purchase-document line, normalised. Amounts are never converted between currencies, VAT bases or units. */
+export interface PurchaseRecord {
+  key: string;
+  /** ISO date YYYY-MM-DD */
+  date: string;
+  documentId?: string;
+  supplierName?: string;
+  supplierId?: string;
+  productName?: string;
+  /** Product code / SKU – the only verified product identifier. */
+  productId?: string;
+  quantity?: number;
+  /** Canonical unit code (kg, g, l, pcs, box …) as normalised from the file; undefined = not provided. */
+  unit?: string;
+  /** Listed unit price from the file, when mapped (kept as given; may include or exclude discounts). */
+  unitPrice?: number;
+  /** Discount / rebate on the line, when mapped. */
+  discount?: number;
+  /** Line amount: negative for credit notes and returns. */
+  amount: number;
+  basis: AmountBasis;
+  vatAmount?: number;
+  currency: string;
+  warehouse?: string;
+  /** True when a document-type column said "credit note / return" and the sign was normalised to negative. */
+  creditByType?: boolean;
+  sourceRow: number;
+  importId?: string;
+}
+
 export type IssueCode =
   | 'invalid_date'
   | 'date_out_of_range'
@@ -156,7 +212,15 @@ export type IssueCode =
   | 'unknown_currency'
   | 'ambiguous_number_format'
   | 'missing_customer'
-  | 'missing_product';
+  | 'missing_product'
+  | 'missing_supplier'
+  | 'missing_unit'
+  | 'unknown_unit'
+  | 'invalid_unit_price'
+  | 'invalid_discount'
+  | 'credit_sign_normalised'
+  | 'discount_deducted'
+  | 'price_mismatch';
 
 export interface ImportStats {
   rowsRead: number;
@@ -189,6 +253,7 @@ export type ParamValue =
   | string
   | number
   | { money: number }
+  | { price: number }
   | { pct: number }
   | { qty: number }
   | { date: string };
@@ -200,7 +265,7 @@ export interface EvidenceRow {
   current: number;
   previous?: number;
   /** Unit of the numbers – money in the series currency or plain count */
-  unit: 'money' | 'qty' | 'pct';
+  unit: 'money' | 'qty' | 'pct' | 'price';
 }
 
 export interface Insight {
@@ -217,8 +282,10 @@ export interface Insight {
   /** Why the finding matters. Contributors are associations in the data, never proven causes. */
   whyKey: string;
   /** Dimension the evidence rows belong to, and the chart that best shows the finding. */
-  dimension?: 'customer' | 'product' | 'salesperson' | 'category';
-  chart?: 'trend' | 'comparison' | 'topCustomers' | 'topProducts' | 'salespeople' | 'category' | 'waterfall' | 'pareto';
+  dimension?: 'customer' | 'product' | 'salesperson' | 'category' | 'supplier' | 'warehouse';
+  chart?: 'trend' | 'comparison' | 'topCustomers' | 'topProducts' | 'salespeople' | 'category' | 'waterfall' | 'pareto' | 'topSuppliers' | 'priceTrend' | 'priceVariance' | 'spendBridge' | 'quantityComparison';
+  /** Purchasing: what kind of saving (if any) the finding describes. Never mixed: actual ≠ potential ≠ hypothetical. */
+  savings?: { kind: 'actual' | 'potential' | 'hypothetical'; amount: number };
   params: Record<string, ParamValue>;
   reliability: Reliability;
   reliabilityReasonKey: string;

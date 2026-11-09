@@ -1,6 +1,6 @@
-import type { ColumnProfile, ImportStats, MappingEntry, SalesField, SalesRecord, AmountBasis } from '../types';
+import type { ColumnProfile, ImportStats, MappingEntry, FieldId, SalesRecord, AmountBasis } from '../types';
 import { aggregate } from '../analytics/aggregate';
-import { KPI_ORDER, METRICS, type MetricId, type Unavailable } from '../analytics/metrics';
+import { KPI_ORDER, METRICS } from '../analytics/metrics';
 import type { MappingProposal } from '../types';
 
 /** Everything the import diagnostic screen shows. Contains structure and counts – never cell values. */
@@ -22,7 +22,7 @@ export interface ImportDiagnostics {
     index: number;
     header: string;
     type: ColumnProfile['type'];
-    field?: SalesField;
+    field?: FieldId;
     confidence?: number;
     source?: MappingEntry['source'];
     recognized: boolean;
@@ -30,7 +30,7 @@ export interface ImportDiagnostics {
   unrecognized: string[];
   issues: { level: 'error' | 'warning'; code: string; count: number; rows: number[] }[];
   rows: { read: number; imported: number; skipped: number };
-  metrics: { id: MetricId; available: boolean; reason?: Unavailable }[];
+  metrics: { id: string; available: boolean; reason?: string }[];
 }
 
 export interface DiagnosticInput {
@@ -41,6 +41,8 @@ export interface DiagnosticInput {
   stats?: ImportStats;
   records?: SalesRecord[];
   basis?: AmountBasis;
+  /** Precomputed metric availability (used for non-sales modules). */
+  metrics?: ImportDiagnostics['metrics'];
 }
 
 /** Which metrics the normalised data can support, and why not – so a missing KPI is never a mystery. */
@@ -71,7 +73,7 @@ export function buildDiagnostics(i: DiagnosticInput): ImportDiagnostics {
     unrecognized: columns.filter((c) => !c.recognized && c.type !== 'empty').map((c) => c.header),
     issues,
     rows: { read: i.stats?.rowsRead ?? 0, imported: i.stats?.rowsImported ?? 0, skipped: i.stats?.rowsSkipped ?? 0 },
-    metrics: i.records && i.basis ? predictMetrics(i.records, i.basis) : [],
+    metrics: i.metrics ?? (i.records && i.basis ? predictMetrics(i.records, i.basis) : []),
   };
 }
 

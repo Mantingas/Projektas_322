@@ -4,19 +4,21 @@ import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { Card, CardTitle } from '../ui/card';
 import { ChartById } from './Charts';
-import type { DashboardView } from '@/engine/analytics/dashboard';
-import type { Dimension, FilterSpec } from '@/engine/analytics/filters';
+import type { ChartModel } from '@/engine/analytics/view';
+import type { Dimension } from '@/engine/analytics/filters';
 import type { DrillSpec } from '@/engine/analytics/provenance';
 import { explainInsight } from '@/engine/insights/explain';
 import type { Insight } from '@/engine/types';
 import { formatEvidence, formatImpact, renderInsight } from '@/lib/report';
 import type { MessageKey } from '@/i18n';
 
-const FIELD: Record<Dimension, keyof FilterSpec> = { customer: 'customers', product: 'products', salesperson: 'salespeople', category: 'categories' };
+import { FILTER_FIELD as FIELD } from '@/lib/dimMaps';
 
-export function InsightCard({ insight, model, expanded, onToggle, onDrill, onFilter }: {
+export function InsightCard({ insight, model, expanded, onToggle, onDrill, onFilter, extraChart }: {
+  /** purchasing renders its own charts for price / bridge / variance findings */
+  extraChart?: (insight: Insight) => React.ReactNode;
   insight: Insight;
-  model: DashboardView;
+  model: ChartModel;
   expanded: boolean;
   onToggle: () => void;
   onDrill: (title: string, spec: DrillSpec) => void;
@@ -31,6 +33,7 @@ export function InsightCard({ insight, model, expanded, onToggle, onDrill, onFil
     <Card data-testid="insight" data-insight-id={insight.id} className="space-y-2">
       <div className="flex flex-wrap items-center gap-2">
         <Badge tone={insight.severity}>{t(`sev.${insight.severity}` as MessageKey)}</Badge>
+        {insight.savings && <Badge tone={insight.savings.kind === 'actual' ? 'opportunity' : insight.savings.kind === 'potential' ? 'info' : 'neutral'} data-testid="savings-badge" data-kind={insight.savings.kind} title={t(`sav.${insight.savings.kind}.d` as MessageKey)}>{t(`sav.${insight.savings.kind}` as MessageKey)}</Badge>}
         <span className="text-xs text-slate-500">{t('ins.sufficiency')}: <b>{t(`rel.${insight.reliability}` as MessageKey)}</b> · {t('ins.impact')}: <b>{formatImpact(insight, lang, cur)}</b></span>
       </div>
       <CardTitle className="text-lg">{r.title}</CardTitle>
@@ -62,10 +65,11 @@ export function InsightCard({ insight, model, expanded, onToggle, onDrill, onFil
               <p className="mt-2 rounded-md bg-amber-50 p-2 text-xs text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">{t('ins.association')}</p>
             </Section>
           )}
+          {insight.savings && <Section title={t(`sav.${insight.savings.kind}` as MessageKey)}>{t(`sav.${insight.savings.kind}.d` as MessageKey)}</Section>}
           <Section title={t('ins.why')}>{t(insight.whyKey as MessageKey)}</Section>
           <Section title={t('ins.action')}>{r.action}</Section>
           <Section title={t('ins.sufficiency')}>{t(`rel.${insight.reliability}` as MessageKey)} – {r.reliabilityReason}</Section>
-          {insight.chart && <Section title={t('ins.chart')}><ChartById id={insight.chart} model={model} dim={insight.dimension} onFilter={onFilter} /></Section>}
+          {insight.chart && <Section title={t('ins.chart')}>{extraChart?.(insight) ?? <ChartById id={insight.chart} model={model} dim={insight.dimension} onFilter={onFilter} />}</Section>}
         </div>
       )}
     </Card>

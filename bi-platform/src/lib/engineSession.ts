@@ -1,21 +1,32 @@
-import type { ColumnProfile, ExportMode, ImportStats, MappingEntry, ParsedFile, SalesField, SalesRecord } from '@/engine/types';
+import type { ColumnProfile, ExportMode, FieldId, ImportStats, MappingEntry, ModuleId, ParsedFile, PurchaseRecord, SalesRecord } from '@/engine/types';
 import { parseFile, ParseError } from '@/engine/parsing/parseFile';
 import { analyzeSheet, confirmedFromEntries, type SheetAnalysis } from '@/engine/pipeline';
 import { normalizeSales, MappingError } from '@/engine/validation/normalize';
 import { sha256Hex } from '@/engine/import/hash';
 import { buildDiagnostics, type ImportDiagnostics } from '@/engine/import/diagnostics';
 import type { ImportPolicy } from '@/engine/import/merge';
-import { mappingToSaved } from '@/engine/mapping/mapper';
+import { detectModule, mappingToSaved } from '@/engine/mapping/mapper';
+import { normalizePurchases } from '@/engine/validation/normalizePurchases';
+import { buildPurchasingDashboard, type PurchasingOptions, type PurchasingView } from '@/engine/purchasing/dashboard';
+import { analyzePurchasingPeriod, type PurchasingAnalysis } from '@/engine/purchasing/insights';
+import { drillPurchaseRecords } from '@/engine/purchasing/drill';
+import { applyPurchaseFilters } from '@/engine/purchasing/entities';
+import { groupPurchaseAggregates } from '@/engine/purchasing/aggregate';
+import { predictPurchaseMetrics } from '@/engine/purchasing/metrics';
+import { priceTrend, toPriceLines } from '@/engine/purchasing/prices';
+import type { PeriodSelection as PeriodSel } from '@/engine/analytics/periods';
+import type { UnitPolicy } from '@/engine/purchasing/units';
 import { analyzeSales, type SalesAnalysis } from '@/engine/insights/engine';
 import { buildDashboardWithInsights, type DashboardOptions, type DashboardView } from '@/engine/analytics/dashboard';
 import { availablePresets, type PeriodPreset } from '@/engine/analytics/periods';
-import { dimensionOf, type Dimension, type FilterSpec } from '@/engine/analytics/filters';
+import { dimensionOf, type Dimension, type SalesDimension, type PurchaseDimension, type FilterSpec } from '@/engine/analytics/filters';
 import { groupAggregates } from '@/engine/analytics/aggregate';
 import { drillRecords, sourcesOf, type DrillSpec, type SourceSummary } from '@/engine/analytics/provenance';
 import { csvCell } from '@/engine/report/export';
 import { listSeries, type Series } from '@/engine/sales/kpi';
 import { getDb, type AppDB, type ImportRow } from '@/db/db';
-import { commitImport, getSavedMapping, loadAllSales, pendingHeldCount, previewImport, saveMapping, type CommitResult, type MergePreview } from '@/db/store';
+import { commitImport, getSavedMapping, loadAllPurchases, loadAllSales, pendingHeldCount, previewImport, saveMapping, type CommitResult, type MergePreview } from '@/db/store';
+import { purchaseDimensionOf } from '@/engine/purchasing/entities';
 
 // ───────── message shapes (plain data only: they cross the worker boundary) ─────────
 export interface ParseResult {
@@ -46,16 +57,20 @@ export interface AnalysisLite {
   usedSaved: boolean;
   savedCurrency?: string;
   structure: ImportDiagnostics['structure'];
+  /** Which module this analysis was done for, and what the headers suggest. */
+  module: ModuleId;
+  detected: { module: ModuleId; purchasing: number; sales: number };
 }
 
 export interface ImportRequest {
   sheetIdx: number;
+  module?: ModuleId;
   entries: Pick<MappingEntry, 'field' | 'columnIndex' | 'confidence' | 'source'>[];
   currency?: string;
   mode: ExportMode;
   policy?: ImportPolicy;
 }
-export type PreviewResult = { ok: true; preview: MergePreview; stats: ImportStats; diagnostics: ImportDiagnostics } | { ok: false; error: 'missing_date' | 'missing_amount' | 'currency_required' };
+export type PreviewResult = { ok: true; preview: MergePreview; stats: ImportStats; diagnostics: ImportDiagnostics; discountMode?: string } | { ok: false; error: 'missing_date' | 'missing_amount' | 'currency_required' };
 export type CommitOutcome =
   | { status: 'duplicate_file'; existing: ImportRow }
   | { status: 'needs_confirmation'; preview: MergePreview }
@@ -89,18 +104,58 @@ export interface BuildResult {
   identity: 'document' | 'mixed' | 'content';
 }
 export interface DrillRequest {
+  module?: ModuleId;
   version: number;
   seriesKey?: string;
   spec: DrillSpec;
   page: number;
   pageSize: number;
 }
+/** One underlying line, in the shape the drill-down table needs (both modules). */
+export interface DrillRow {
+  key: string;
+  date: string;
+  documentId?: string;
+  /** customer (sales) or supplier (purchasing) */
+  party?: string;
+  product?: string;
+  quantity?: number;
+  unit?: string;
+  amount: number;
+  importId?: string;
+  sourceRow: number;
+}
+
 export interface DrillResult {
   lines: number;
   total: number;
   sources: SourceSummary[];
-  rows: SalesRecord[];
+  rows: DrillRow[];
 }
+
+export interface BuildPurchasingRequest {
+  version: number;
+  seriesKey?: string;
+  filters: FilterSpec;
+  period: PeriodSel;
+  unitPolicy?: UnitPolicy;
+}
+export interface BuildPurchasingResult {
+  empty: boolean;
+  series?: Series;
+  allSeries: Series[];
+  model?: PurchasingView;
+  analysis?: PurchasingAnalysis | null;
+  options: Partial<Record<Dimension, EntityOption[]>>;
+  bounds?: { dateMin: string; dateMax: string };
+  presets: PeriodPreset[];
+  imports: { id: string; fileName: string; added: number }[];
+  pendingHeld: number;
+  identity: 'document' | 'mixed' | 'content';
+}
+
+const toRow = (r: SalesRecord): DrillRow => ({ key: r.key, date: r.date, documentId: r.documentId, party: r.customerName ?? r.customerId, product: r.productName ?? r.productId, quantity: r.quantity, amount: r.amount, importId: r.importId, sourceRow: r.sourceRow });
+const toPurchaseRow = (r: PurchaseRecord): DrillRow => ({ key: r.key, date: r.date, documentId: r.documentId, party: r.supplierName ?? r.supplierId, product: r.productName ?? r.productId, quantity: r.quantity, unit: r.unit, amount: r.amount, importId: r.importId, sourceRow: r.sourceRow });
 
 const short = (v: unknown, n = 60) => {
   const s = v === null || v === undefined ? '' : String(v);
@@ -114,9 +169,10 @@ const short = (v: unknown, n = 60) => {
 export class EngineSession {
   private parsed: { file: ParsedFile; checksum: string } | null = null;
   private analyses = new Map<string, AnalysisLite & { raw: SheetAnalysis }>();
-  private norm: { key: string; records: SalesRecord[]; stats: ImportStats; basis: SalesRecord['basis'] } | null = null;
+  private norm: { key: string; module: ModuleId; records: (SalesRecord | PurchaseRecord)[]; stats: ImportStats; basis: SalesRecord['basis']; discountMode?: string } | null = null;
   private cache: { version: number; records: SalesRecord[] } | null = null;
-  private drillCache: { key: string; rows: SalesRecord[] } | null = null;
+  private pcache: { version: number; records: PurchaseRecord[] } | null = null;
+  private drillCache: { key: string; rows: DrillRow[] } | null = null;
 
   constructor(private db: AppDB = getDb()) {}
 
@@ -138,17 +194,17 @@ export class EngineSession {
     };
   }
 
-  async analyze(sheetIdx: number, decimalHint: ',' | '.'): Promise<AnalysisLite | null> {
+  async analyze(sheetIdx: number, decimalHint: ',' | '.', module: ModuleId = 'sales'): Promise<AnalysisLite | null> {
     if (!this.parsed) throw new Error('no_file');
     const sheet = this.parsed.file.sheets[sheetIdx];
     if (!sheet) return null;
-    let a = analyzeSheet(sheet, { decimalHint });
+    let a = analyzeSheet(sheet, { decimalHint, module });
     if (!a) return null;
     let usedSaved = false;
     let savedCurrency: string | undefined;
     const saved = await getSavedMapping(this.db, a.signature);
     if (saved) {
-      a = analyzeSheet(sheet, { decimalHint, savedMapping: saved.fields }) ?? a;
+      a = analyzeSheet(sheet, { decimalHint, savedMapping: saved.fields, module }) ?? a;
       usedSaved = true;
       savedCurrency = saved.defaultCurrency;
     }
@@ -158,31 +214,39 @@ export class EngineSession {
       skippedTotalRows: t.skippedTotalRows, rowCount: t.dataRows.length, truncated: sheet.truncated,
       samples: a.profiles.map((p) => t.dataRows.slice(0, 3).map((r) => short(r[p.index], 40)).filter(Boolean)),
       previewRows: t.dataRows.slice(0, 8).map((r) => t.headers.map((_, ci) => short(r[ci]))),
-      usedSaved, savedCurrency,
+      usedSaved, savedCurrency, module, detected: detectModule(t.headers),
       structure: {
         kind: this.parsed.file.kind, sheet: sheet.name, sheets: this.parsed.file.sheets.length, encoding: this.parsed.file.encoding, delimiter: this.parsed.file.delimiter,
         rows: t.dataRows.length, columns: t.headers.length, headerRow: t.headerRow + 1, headerConfidence: t.confidence, skippedTotalRows: t.skippedTotalRows, truncated: sheet.truncated,
       },
     };
-    this.analyses.set(String(sheetIdx), { ...lite, raw: a });
+    this.analyses.set(`${module}:${sheetIdx}`, { ...lite, raw: a });
+    this.analyses.set(String(sheetIdx), { ...lite, raw: a }); // latest analysis of this sheet
     this.norm = null;
     return lite;
   }
 
-  private normalise(req: ImportRequest): { ok: true; records: SalesRecord[]; stats: ImportStats; basis: SalesRecord['basis'] } | { ok: false; error: 'missing_date' | 'missing_amount' | 'currency_required' } {
-    const cached = this.analyses.get(String(req.sheetIdx));
+  private normalise(req: ImportRequest): { ok: true; module: ModuleId; records: (SalesRecord | PurchaseRecord)[]; stats: ImportStats; basis: SalesRecord['basis']; discountMode?: string } | { ok: false; error: 'missing_date' | 'missing_amount' | 'currency_required' } {
+    const module = req.module ?? 'sales';
+    const cached = this.analyses.get(`${module}:${req.sheetIdx}`);
     if (!cached) throw new Error('no_analysis');
     const hasCurrencyCol = req.entries.some((e) => e.field === 'currency');
-    const key = JSON.stringify([req.sheetIdx, req.entries.map((e) => [e.field, e.columnIndex]), hasCurrencyCol ? '' : req.currency ?? '']);
+    const key = JSON.stringify([module, req.sheetIdx, req.entries.map((e) => [e.field, e.columnIndex]), hasCurrencyCol ? '' : req.currency ?? '']);
     if (this.norm?.key === key) return { ok: true, ...this.norm };
     try {
       const mapping = confirmedFromEntries(req.entries, hasCurrencyCol ? undefined : req.currency);
-      const { records, stats } = normalizeSales(cached.raw.table.dataRows, {
-        profiles: cached.raw.profiles, mapping, rowNumbers: cached.raw.table.dataRowNumbers, skippedTotalRows: cached.raw.table.skippedTotalRows,
-      });
-      const basis = records[0]?.basis ?? (mapping.columns.net_amount !== undefined ? 'net' : mapping.columns.gross_amount !== undefined ? 'gross' : 'unknown');
-      this.norm = { key, records, stats, basis };
-      return { ok: true, records, stats, basis };
+      const opts = { profiles: cached.raw.profiles, mapping, rowNumbers: cached.raw.table.dataRowNumbers, skippedTotalRows: cached.raw.table.skippedTotalRows };
+      const amountBasis = mapping.columns.net_amount !== undefined ? 'net' : mapping.columns.gross_amount !== undefined ? 'gross' : 'unknown';
+      let res: { key: string; module: ModuleId; records: (SalesRecord | PurchaseRecord)[]; stats: ImportStats; basis: SalesRecord['basis']; discountMode?: string };
+      if (module === 'purchasing') {
+        const r = normalizePurchases(cached.raw.table.dataRows, opts);
+        res = { key, module, records: r.records, stats: r.stats, basis: r.records[0]?.basis ?? amountBasis, discountMode: r.discountMode };
+      } else {
+        const r = normalizeSales(cached.raw.table.dataRows, opts);
+        res = { key, module, records: r.records, stats: r.stats, basis: r.records[0]?.basis ?? amountBasis };
+      }
+      this.norm = res;
+      return { ok: true, ...res };
     } catch (e) {
       if (e instanceof MappingError) return { ok: false, error: e.code };
       throw e;
@@ -192,20 +256,24 @@ export class EngineSession {
   async preview(req: ImportRequest): Promise<PreviewResult> {
     const n = this.normalise(req);
     if (!n.ok) return n;
-    const cached = this.analyses.get(String(req.sheetIdx))!;
-    const preview = await previewImport(this.db, n.records, req.mode, req.policy);
-    const diagnostics = buildDiagnostics({ structure: cached.structure, profiles: cached.profiles, entries: req.entries, stats: n.stats, records: n.records, basis: n.basis });
-    return { ok: true, preview, stats: n.stats, diagnostics };
+    const cached = this.analyses.get(`${n.module}:${req.sheetIdx}`)!;
+    const preview = await previewImport(this.db, n.records, req.mode, req.policy, n.module);
+    const diagnostics = buildDiagnostics({
+      structure: cached.structure, profiles: cached.profiles, entries: req.entries, stats: n.stats,
+      ...(n.module === 'purchasing' ? { metrics: predictPurchaseMetrics(n.records as PurchaseRecord[], n.basis) } : { records: n.records as SalesRecord[], basis: n.basis }),
+    });
+    return { ok: true, preview, stats: n.stats, diagnostics, discountMode: n.discountMode };
   }
 
   async commit(req: ImportRequest & { confirmed: boolean; allowSameChecksum: boolean; remember: boolean }): Promise<CommitOutcome> {
     if (!this.parsed) throw new Error('no_file');
     const n = this.normalise(req);
     if (!n.ok) return { status: 'error', error: n.error };
-    const cached = this.analyses.get(String(req.sheetIdx))!;
+    const cached = this.analyses.get(`${n.module}:${req.sheetIdx}`)!;
     const hasCurrencyCol = req.entries.some((e) => e.field === 'currency');
     const mapping = confirmedFromEntries(req.entries, hasCurrencyCol ? undefined : req.currency);
     const res: CommitResult = await commitImport(this.db, {
+      module: n.module, extra: n.discountMode ? { discountMode: n.discountMode } : undefined,
       checksum: this.parsed.checksum, fileName: this.parsed.file.fileName, sheetName: this.parsed.file.sheets[req.sheetIdx]!.name, exportMode: req.mode,
       records: n.records, stats: n.stats, mapping, templateId: cached.proposal.templateId, allowSameChecksum: req.allowSameChecksum, policy: req.policy, confirmed: req.confirmed,
     });
@@ -214,6 +282,8 @@ export class EngineSession {
       await saveMapping(this.db, { signature: cached.signature, fields: mappingToSaved(req.entries, cached.headers), defaultCurrency: hasCurrencyCol ? undefined : req.currency, updatedAt: Date.now() });
     }
     this.cache = null; // stored data changed
+    this.pcache = null;
+    this.drillCache = null;
     return { status: 'ok', import: res.import, stats: n.stats };
   }
 
@@ -224,6 +294,14 @@ export class EngineSession {
   }
 
   // ───────── dashboard ─────────
+  private async purchases(version: number): Promise<PurchaseRecord[]> {
+    if (!this.pcache || this.pcache.version !== version) {
+      this.pcache = { version, records: await loadAllPurchases(this.db) };
+      this.drillCache = null;
+    }
+    return this.pcache.records;
+  }
+
   private async sales(version: number): Promise<SalesRecord[]> {
     if (!this.cache || this.cache.version !== version) {
       this.cache = { version, records: await loadAllSales(this.db) };
@@ -251,7 +329,7 @@ export class EngineSession {
       if (r.date > dmax) dmax = r.date;
     }
     const options: BuildResult['options'] = {};
-    for (const d of ['customer', 'product', 'salesperson', 'category'] as Dimension[]) {
+    for (const d of ['customer', 'product', 'salesperson', 'category'] as SalesDimension[]) {
       if (!seriesRecords.some((r) => dimensionOf[d](r))) continue;
       const { groups } = groupAggregates(seriesRecords, d);
       options[d] = [...groups.values()].map((g) => ({ key: g.key, label: g.label, value: g.agg.revenue })).sort((a, b) => b.value - a.value).slice(0, 2000);
@@ -263,14 +341,22 @@ export class EngineSession {
     };
   }
 
-  private async drillRows(req: Pick<DrillRequest, 'version' | 'seriesKey' | 'spec'>): Promise<SalesRecord[]> {
-    const all = await this.sales(req.version);
-    const key = JSON.stringify([req.version, req.seriesKey, req.spec]);
+  private async drillRows(req: Pick<DrillRequest, 'module' | 'version' | 'seriesKey' | 'spec'>): Promise<DrillRow[]> {
+    const key = JSON.stringify([req.module ?? 'sales', req.version, req.seriesKey, req.spec]);
     if (this.drillCache?.key === key) return this.drillCache.rows;
-    const series = listSeries(all).find((s) => `${s.currency}|${s.basis}` === req.seriesKey) ?? listSeries(all)[0];
-    const seriesRecords = series ? all.filter((r) => r.currency === series.currency && r.basis === series.basis) : [];
-    const rows = drillRecords(seriesRecords, { ...req.spec, filter: { ...req.spec.filter, dateFrom: undefined, dateTo: undefined } })
-      .sort((a, b) => b.date.localeCompare(a.date) || (a.documentId ?? '').localeCompare(b.documentId ?? '') || a.sourceRow - b.sourceRow);
+    const spec = { ...req.spec, filter: { ...req.spec.filter, dateFrom: undefined, dateTo: undefined } };
+    const order = (a: DrillRow, b: DrillRow) => b.date.localeCompare(a.date) || (a.documentId ?? '').localeCompare(b.documentId ?? '') || a.sourceRow - b.sourceRow;
+    let rows: DrillRow[];
+    if (req.module === 'purchasing') {
+      const all = await this.purchases(req.version);
+      const series = listSeries(all as never).find((x) => `${x.currency}|${x.basis}` === req.seriesKey) ?? listSeries(all as never)[0];
+      rows = drillPurchaseRecords(series ? (all.filter((r) => r.currency === series.currency && r.basis === series.basis)) : [], spec).map(toPurchaseRow);
+    } else {
+      const all = await this.sales(req.version);
+      const series = listSeries(all).find((x) => `${x.currency}|${x.basis}` === req.seriesKey) ?? listSeries(all)[0];
+      rows = drillRecords(series ? all.filter((r) => r.currency === series.currency && r.basis === series.basis) : [], spec).map(toRow);
+    }
+    rows.sort(order);
     this.drillCache = { key, rows };
     return rows;
   }
@@ -282,10 +368,52 @@ export class EngineSession {
     return { lines: rows.length, total, sources: sourcesOf(rows), rows: rows.slice(req.page * req.pageSize, (req.page + 1) * req.pageSize) };
   }
 
-  async drillCsv(req: Pick<DrillRequest, 'version' | 'seriesKey' | 'spec'> & { headers: string[]; fileNames: Record<string, string>; unknownFile: string }): Promise<string> {
+  async drillCsv(req: Pick<DrillRequest, 'module' | 'version' | 'seriesKey' | 'spec'> & { headers: string[]; fileNames: Record<string, string>; unknownFile: string }): Promise<string> {
     const rows = await this.drillRows(req);
-    const lines = [req.headers, ...rows.map((r) => [r.date, r.documentId ?? '', r.customerName ?? r.customerId ?? '', r.productName ?? r.productId ?? '', r.quantity ?? '', r.amount, (r.importId && req.fileNames[r.importId]) || req.unknownFile, r.sourceRow])];
-    return '﻿' + lines.map((l) => l.map((c) => csvCell(typeof c === 'number' ? c : String(c))).join(';')).join('\r\n') + '\r\n';
+    const purchasing = req.module === 'purchasing';
+    const lines = [req.headers, ...rows.map((r) => [r.date, r.documentId ?? '', r.party ?? '', r.product ?? '', r.quantity ?? '', ...(purchasing ? [r.unit ?? ''] : []), r.amount, (r.importId && req.fileNames[r.importId]) || req.unknownFile, r.sourceRow])];
+    return '\ufeff' + lines.map((l) => l.map((c) => csvCell(typeof c === 'number' ? c : String(c))).join(';')).join('\r\n') + '\r\n';
+  }
+
+  // ───────── purchasing dashboard ─────────
+  async buildPurchasing(req: BuildPurchasingRequest): Promise<BuildPurchasingResult> {
+    const records = await this.purchases(req.version);
+    const imports = await this.db.imports.toArray();
+    const pendingHeld = await pendingHeldCount(this.db, 'purchasing');
+    const mine = imports.filter((i) => i.module === 'purchasing');
+    const identity = mine.some((i) => i.added > 0 && i.identity === 'content') ? 'content' : mine.some((i) => i.added > 0 && i.identity === 'mixed') ? 'mixed' : 'document';
+    const importsLite = mine.map((i) => ({ id: i.id, fileName: i.fileName, added: i.added }));
+    const allSeries = listSeries(records as never);
+    if (allSeries.length === 0) return { empty: true, allSeries, options: {}, presets: [], imports: importsLite, pendingHeld, identity };
+    const series = allSeries.find((x) => `${x.currency}|${x.basis}` === req.seriesKey) ?? allSeries[0]!;
+    const seriesRecords = records.filter((r) => r.currency === series.currency && r.basis === series.basis);
+    const opts: PurchasingOptions = { series, filters: req.filters, period: req.period, unitPolicy: req.unitPolicy, identity, heldPending: pendingHeld, discountUnverified: mine.some((i) => i.discountMode === 'unverified') };
+    const model = buildPurchasingDashboard(records, opts)!;
+    const analysis = analyzePurchasingPeriod(model);
+    const { records: _r, analysis: _a, ...view } = model;
+    void _r; void _a;
+    let dmin = seriesRecords[0]!.date;
+    let dmax = dmin;
+    for (const r of seriesRecords) { if (r.date < dmin) dmin = r.date; if (r.date > dmax) dmax = r.date; }
+    const options: BuildPurchasingResult['options'] = {};
+    for (const d of ['supplier', 'product', 'warehouse'] as PurchaseDimension[]) {
+      if (!seriesRecords.some((r) => purchaseDimensionOf[d](r))) continue;
+      const { groups } = groupPurchaseAggregates(seriesRecords, d);
+      options[d] = [...groups.values()].map((g) => ({ key: g.key, label: g.label, value: g.agg.spend })).sort((x, y) => y.value - x.value).slice(0, 2000);
+    }
+    return { empty: false, series, allSeries, model: view, analysis, options, bounds: { dateMin: dmin, dateMax: dmax }, presets: availablePresets({ dateMin: dmin, dateMax: dmax }), imports: importsLite, pendingHeld, identity };
+  }
+
+  /** Quantity-weighted unit price per bucket for one comparable item (price-trend chart), overall and per supplier. */
+  async priceTrendFor(req: { version: number; seriesKey?: string; filters: FilterSpec; gk: string; unitPolicy?: UnitPolicy }) {
+    const records = await this.purchases(req.version);
+    const series = listSeries(records as never).find((x) => `${x.currency}|${x.basis}` === req.seriesKey) ?? listSeries(records as never)[0];
+    if (!series) return { points: [], suppliers: [] };
+    const seriesRecords = applyPurchaseFilters(records.filter((r) => r.currency === series.currency && r.basis === series.basis), { ...req.filters, dateFrom: undefined, dateTo: undefined });
+    const { lines } = toPriceLines(seriesRecords, { policy: req.unitPolicy ?? 'strict', hasUnitColumn: seriesRecords.some((r) => r.unit !== undefined) });
+    const dates = lines.filter((l) => l.gk === req.gk).map((l) => l.date).sort();
+    if (!dates.length) return { points: [], suppliers: [] };
+    return priceTrend(lines, req.gk, { from: dates[0]!, to: dates[dates.length - 1]! });
   }
 
   /** Test helper: the cached normalised records of the last preview. */
@@ -295,4 +423,4 @@ export class EngineSession {
 }
 
 export { ParseError };
-export type { SalesField };
+export type { FieldId };

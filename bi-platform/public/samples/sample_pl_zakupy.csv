@@ -1,0 +1,357 @@
+Data zakupu;Numer faktury zakupu;Dostawca;Kod towaru;Nazwa towaru;IloúÊ;JM;Cena zakupu netto;WartoúÊ netto;Magazyn;Waluta
+01.09.2025;FZ-5001;Mleczarnia £Ûdzka;P01;Mleko 1 l;114;l;0,6000;68,40;Katowice;PLN
+01.09.2025;FZ-5002;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;215;kg;1,0000;215,00;£Ûdü;PLN
+01.09.2025;FZ-5003;Hurtownia ålπska;P03;Mas≥o extra;41;kg;7,5000;307,50;Katowice;PLN
+01.09.2025;FZ-5004;Mleczarnia £Ûdzka;P04;Cukier;527;kg;1,2000;632,40;£Ûdü;PLN
+01.09.2025;FZ-5005;Napoje PÛ≥noc;P07;Olej rzepakowy;53;l;2,2000;110,77;Katowice;PLN
+01.09.2025;FZ-5006;Opakowania ∆wik;P08;Kartony;24;karton;14,0000;336,00;£Ûdü;PLN
+02.09.2025;FZ-5007;Mleczarnia £Ûdzka;P01;Mleko 1 l;105;l;0,6000;63,00;Katowice;PLN
+02.09.2025;FZ-5008;Zak≥ad èrÛd≥o;P03;Mas≥o extra;39;kg;9,0000;351,00;£Ûdü;PLN
+02.09.2025;FZ-5009;Hurtownia ålπska;P06;Kefir 1 l;64;l;2,0000;128,00;Katowice;PLN
+02.09.2025;FZ-5010;Zak≥ad èrÛd≥o;P06;Kefir 1 l;14;l;2,5000;35,00;£Ûdü;PLN
+02.09.2025;FZ-5011;Napoje PÛ≥noc;P09;Sok jab≥kowy;90;l;1,3000;117,00;Katowice;PLN
+03.09.2025;FZ-5012;Mleczarnia £Ûdzka;P01;Mleko 1 l;88;l;0,6000;52,80;£Ûdü;PLN
+03.09.2025;FZ-5013;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;268;kg;1,0000;268,00;Katowice;PLN
+03.09.2025;FZ-5014;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;£Ûdü;PLN
+03.09.2025;FZ-5015;Napoje PÛ≥noc;P05;Ser Oscypek;15;kg;11,0000;165,00;Katowice;PLN
+04.09.2025;FZ-5016;Mleczarnia £Ûdzka;P01;Mleko 1 l;100;l;0,6000;60,00;£Ûdü;PLN
+04.09.2025;FZ-5017;Hurtownia ålπska;P03;Mas≥o extra;42;kg;7,5000;315,00;Katowice;PLN
+04.09.2025;FZ-5018;Hurtownia ålπska;P06;Kefir 1 l;61;l;2,0000;122,00;£Ûdü;PLN
+04.09.2025;FZ-5019;Hurtownia ålπska;P11;Jaja L;30;szt;0,2000;6,00;Katowice;PLN
+05.09.2025;FZ-5020;Mleczarnia £Ûdzka;P01;Mleko 1 l;102;l;0,6000;61,20;£Ûdü;PLN
+05.09.2025;FZ-5021;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;208;kg;1,0000;208,00;Katowice;PLN
+05.09.2025;FZ-5022;Zak≥ad èrÛd≥o;P03;Mas≥o extra;39;kg;9,0000;351,00;£Ûdü;PLN
+05.09.2025;FZ-5023;Mleczarnia £Ûdzka;P04;Cukier;682;kg;1,2000;818,40;Katowice;PLN
+08.09.2025;FZ-5024;Mleczarnia £Ûdzka;P01;Mleko 1 l;85;l;0,6000;51,00;£Ûdü;PLN
+08.09.2025;FZ-5025;Zak≥ad èrÛd≥o;P03;Mas≥o extra;39;kg;9,0000;351,00;Katowice;PLN
+08.09.2025;FZ-5026;Hurtownia ålπska;P06;Kefir 1 l;68;l;2,0000;136,00;£Ûdü;PLN
+08.09.2025;FZ-5027;Zak≥ad èrÛd≥o;P06;Kefir 1 l;14;l;2,5000;35,00;Katowice;PLN
+08.09.2025;FZ-5028;Opakowania ∆wik;P08;Kartony;21;karton;14,0000;294,00;£Ûdü;PLN
+09.09.2025;FZ-5029;Mleczarnia £Ûdzka;P01;Mleko 1 l;110;l;0,6000;66,00;Katowice;PLN
+09.09.2025;FZ-5030;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;274;kg;1,0000;274,00;£Ûdü;PLN
+09.09.2025;FZ-5031;Mleczarnia £Ûdzka;P04;Cukier;643;kg;1,2000;771,60;Katowice;PLN
+09.09.2025;FZ-5032;Napoje PÛ≥noc;P05;Ser Oscypek;11;kg;11,0000;121,00;£Ûdü;PLN
+09.09.2025;FZ-5033;Hurtownia ålπska;P11;Jaja L;30;szt;0,2000;6,00;Katowice;PLN
+10.09.2025;FZ-5034;Mleczarnia £Ûdzka;P01;Mleko 1 l;110;l;0,6000;66,00;£Ûdü;PLN
+10.09.2025;FZ-5035;Hurtownia ålπska;P03;Mas≥o extra;44;kg;7,5000;330,00;Katowice;PLN
+10.09.2025;FZ-5036;Hurtownia ålπska;P06;Kefir 1 l;68;l;2,0000;136,00;£Ûdü;PLN
+10.09.2025;FZ-5037;Napoje PÛ≥noc;P09;Sok jab≥kowy;90;l;1,3000;117,00;Katowice;PLN
+11.09.2025;FZ-5038;Mleczarnia £Ûdzka;P01;Mleko 1 l;94;l;0,6000;56,40;£Ûdü;PLN
+11.09.2025;FZ-5039;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;256;kg;1,0000;256,00;Katowice;PLN
+11.09.2025;FZ-5040;Zak≥ad èrÛd≥o;P03;Mas≥o extra;34;kg;9,0000;306,00;£Ûdü;PLN
+11.09.2025;FZ-5041;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;Katowice;PLN
+11.09.2025;FZ-5042;Napoje PÛ≥noc;P07;Olej rzepakowy;59;l;2,2000;123,31;£Ûdü;PLN
+12.09.2025;FZ-5043;Mleczarnia £Ûdzka;P01;Mleko 1 l;93;l;0,6000;55,80;Katowice;PLN
+12.09.2025;FZ-5044;Hurtownia ålπska;P06;Kefir 1 l;69;l;2,0000;138,00;£Ûdü;PLN
+12.09.2025;FZ-5045;Napoje PÛ≥noc;P05;Ser Oscypek;10;kg;11,0000;110,00;Katowice;PLN
+15.09.2025;FZ-5046;Mleczarnia £Ûdzka;P01;Mleko 1 l;109;l;0,6000;65,40;£Ûdü;PLN
+15.09.2025;FZ-5047;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;264;kg;1,0000;264,00;Katowice;PLN
+15.09.2025;FZ-5048;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;£Ûdü;PLN
+15.09.2025;FZ-5049;Napoje PÛ≥noc;P05;Ser Oscypek;10;kg;11,0000;110,00;Katowice;PLN
+15.09.2025;FZ-5050;Opakowania ∆wik;P08;Kartony;21;karton;14,0000;294,00;£Ûdü;PLN
+16.09.2025;FZ-5051;Mleczarnia £Ûdzka;P01;Mleko 1 l;105;l;0,6000;63,00;Katowice;PLN
+16.09.2025;FZ-5052;Hurtownia ålπska;P03;Mas≥o extra;49;kg;7,5000;367,50;£Ûdü;PLN
+16.09.2025;FZ-5053;Hurtownia ålπska;P06;Kefir 1 l;60;l;2,0000;120,00;Katowice;PLN
+16.09.2025;FZ-5054;Napoje PÛ≥noc;P07;Olej rzepakowy;54;l;2,2000;112,86;£Ûdü;PLN
+17.09.2025;FZ-5055;Mleczarnia £Ûdzka;P01;Mleko 1 l;101;l;0,6000;60,60;Katowice;PLN
+17.09.2025;FZ-5056;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;264;kg;1,0000;264,00;£Ûdü;PLN
+17.09.2025;FZ-5057;Zak≥ad èrÛd≥o;P03;Mas≥o extra;35;kg;9,0000;315,00;Katowice;PLN
+17.09.2025;FZ-5058;Mleczarnia £Ûdzka;P04;Cukier;642;kg;1,2000;770,40;£Ûdü;PLN
+18.09.2025;FZ-5059;Mleczarnia £Ûdzka;P01;Mleko 1 l;105;l;0,6000;63,00;Katowice;PLN
+18.09.2025;FZ-5060;Hurtownia ålπska;P06;Kefir 1 l;68;l;2,0000;136,00;£Ûdü;PLN
+18.09.2025;FZ-5061;Napoje PÛ≥noc;P05;Ser Oscypek;16;kg;11,0000;176,00;Katowice;PLN
+18.09.2025;FZ-5062;Napoje PÛ≥noc;P09;Sok jab≥kowy;90;l;1,3000;117,00;£Ûdü;PLN
+19.09.2025;FZ-5063;Mleczarnia £Ûdzka;P01;Mleko 1 l;109;l;0,6000;65,40;Katowice;PLN
+19.09.2025;FZ-5064;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;274;kg;1,0000;274,00;£Ûdü;PLN
+19.09.2025;FZ-5065;Hurtownia ålπska;P03;Mas≥o extra;57;kg;7,5000;427,50;Katowice;PLN
+19.09.2025;FZ-5066;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;£Ûdü;PLN
+19.09.2025;FZ-5067;Hurtownia ålπska;P11;Jaja L;30;szt;0,2000;6,00;Katowice;PLN
+22.09.2025;FZ-5068;Mleczarnia £Ûdzka;P01;Mleko 1 l;80;l;0,6000;48,00;£Ûdü;PLN
+22.09.2025;FZ-5069;Hurtownia ålπska;P03;Mas≥o extra;59;kg;7,5000;442,50;Katowice;PLN
+22.09.2025;FZ-5070;Hurtownia ålπska;P06;Kefir 1 l;62;l;2,0000;124,00;£Ûdü;PLN
+22.09.2025;FZ-5071;Opakowania ∆wik;P08;Kartony;29;karton;14,0000;406,00;Katowice;PLN
+22.09.2025;FZ-5072;Napoje PÛ≥noc;P09;Sok jab≥kowy;90;l;1,3000;117,00;£Ûdü;PLN
+23.09.2025;FZ-5073;Mleczarnia £Ûdzka;P01;Mleko 1 l;97;l;0,6000;58,20;Katowice;PLN
+23.09.2025;FZ-5074;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;260;kg;1,0000;260,00;£Ûdü;PLN
+23.09.2025;FZ-5075;Zak≥ad èrÛd≥o;P03;Mas≥o extra;48;kg;9,0000;432,00;Katowice;PLN
+23.09.2025;FZ-5076;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;£Ûdü;PLN
+24.09.2025;FZ-5077;Mleczarnia £Ûdzka;P01;Mleko 1 l;107;l;0,6000;64,20;Katowice;PLN
+24.09.2025;FZ-5078;Hurtownia ålπska;P06;Kefir 1 l;68;l;2,0000;136,00;£Ûdü;PLN
+24.09.2025;FZ-5079;Napoje PÛ≥noc;P05;Ser Oscypek;16;kg;11,0000;176,00;Katowice;PLN
+24.09.2025;FZ-5080;Hurtownia ålπska;P11;Jaja L;30;szt;0,2000;6,00;£Ûdü;PLN
+25.09.2025;FZ-5081;Mleczarnia £Ûdzka;P01;Mleko 1 l;99;l;0,6000;59,40;Katowice;PLN
+25.09.2025;FZ-5082;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;230;kg;1,0000;230,00;£Ûdü;PLN
+25.09.2025;FZ-5083;Hurtownia ålπska;P03;Mas≥o extra;44;kg;7,5000;330,00;Katowice;PLN
+25.09.2025;FZ-5084;Mleczarnia £Ûdzka;P04;Cukier;640;kg;1,2000;768,00;£Ûdü;PLN
+26.09.2025;FZ-5085;Mleczarnia £Ûdzka;P01;Mleko 1 l;92;l;0,6000;55,20;Katowice;PLN
+26.09.2025;FZ-5086;Zak≥ad èrÛd≥o;P03;Mas≥o extra;39;kg;9,0000;351,00;£Ûdü;PLN
+26.09.2025;FZ-5087;Hurtownia ålπska;P06;Kefir 1 l;68;l;2,0000;136,00;Katowice;PLN
+26.09.2025;FZ-5088;Zak≥ad èrÛd≥o;P06;Kefir 1 l;13;l;2,5000;32,50;£Ûdü;PLN
+26.09.2025;FZ-5089;Napoje PÛ≥noc;P07;Olej rzepakowy;53;l;2,2000;110,77;Katowice;PLN
+26.09.2025;FZ-5090;Napoje PÛ≥noc;P09;Sok jab≥kowy;90;l;1,3000;117,00;£Ûdü;PLN
+29.09.2025;FZ-5091;Mleczarnia £Ûdzka;P01;Mleko 1 l;98;l;0,6000;58,80;Katowice;PLN
+29.09.2025;FZ-5092;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;255;kg;1,0000;255,00;£Ûdü;PLN
+29.09.2025;FZ-5093;Zak≥ad èrÛd≥o;P03;Mas≥o extra;47;kg;9,0000;423,00;Katowice;PLN
+29.09.2025;FZ-5094;Mleczarnia £Ûdzka;P04;Cukier;621;kg;1,2000;745,20;£Ûdü;PLN
+29.09.2025;FZ-5095;Opakowania ∆wik;P08;Kartony;23;karton;14,0000;322,00;Katowice;PLN
+29.09.2025;FZ-5096;Hurtownia ålπska;P11;Jaja L;30;szt;0,2000;6,00;£Ûdü;PLN
+30.09.2025;FZ-5097;Mleczarnia £Ûdzka;P01;Mleko 1 l;119;l;0,6000;71,40;Katowice;PLN
+30.09.2025;FZ-5098;Hurtownia ålπska;P06;Kefir 1 l;60;l;2,0000;120,00;£Ûdü;PLN
+30.09.2025;FZ-5099;Napoje PÛ≥noc;P05;Ser Oscypek;15;kg;11,0000;165,00;Katowice;PLN
+30.09.2025;FZ-5100;Napoje PÛ≥noc;P09;Sok jab≥kowy;90;l;1,3000;117,00;£Ûdü;PLN
+01.10.2025;FZ-5101;Mleczarnia £Ûdzka;P01;Mleko 1 l;104;l;0,6000;62,40;Katowice;PLN
+01.10.2025;FZ-5102;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;289;kg;1,0000;289,00;£Ûdü;PLN
+01.10.2025;FZ-5103;Hurtownia ålπska;P03;Mas≥o extra;44;kg;7,5000;330,00;Katowice;PLN
+01.10.2025;FZ-5104;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;£Ûdü;PLN
+01.10.2025;FZ-5105;Napoje PÛ≥noc;P07;Olej rzepakowy;59;l;2,2000;123,31;Katowice;PLN
+02.10.2025;FZ-5106;Mleczarnia £Ûdzka;P01;Mleko 1 l;110;l;0,6000;66,00;£Ûdü;PLN
+02.10.2025;FZ-5107;Zak≥ad èrÛd≥o;P03;Mas≥o extra;45;kg;9,0000;405,00;Katowice;PLN
+02.10.2025;FZ-5108;Hurtownia ålπska;P06;Kefir 1 l;68;l;2,0000;136,00;£Ûdü;PLN
+02.10.2025;FZ-5109;Zak≥ad èrÛd≥o;P06;Kefir 1 l;10;l;2,5000;25,00;Katowice;PLN
+03.10.2025;FZ-5110;Mleczarnia £Ûdzka;P01;Mleko 1 l;108;l;0,6000;64,80;£Ûdü;PLN
+03.10.2025;FZ-5111;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;272;kg;1,0000;272,00;Katowice;PLN
+03.10.2025;FZ-5112;Mleczarnia £Ûdzka;P04;Cukier;650;kg;1,2000;780,00;£Ûdü;PLN
+03.10.2025;FZ-5113;Napoje PÛ≥noc;P05;Ser Oscypek;16;kg;11,0000;176,00;Katowice;PLN
+06.10.2025;FZ-5114;Mleczarnia £Ûdzka;P01;Mleko 1 l;80;l;0,6000;48,00;£Ûdü;PLN
+06.10.2025;FZ-5115;Hurtownia ålπska;P06;Kefir 1 l;69;l;2,0000;138,00;Katowice;PLN
+06.10.2025;FZ-5116;Napoje PÛ≥noc;P05;Ser Oscypek;13;kg;11,0000;143,00;£Ûdü;PLN
+06.10.2025;FZ-5117;Napoje PÛ≥noc;P07;Olej rzepakowy;57;l;2,2000;119,13;Katowice;PLN
+06.10.2025;FZ-5118;Opakowania ∆wik;P08;Kartony;20;karton;14,0000;280,00;£Ûdü;PLN
+07.10.2025;FZ-5119;Mleczarnia £Ûdzka;P01;Mleko 1 l;101;l;0,6000;60,60;Katowice;PLN
+07.10.2025;FZ-5120;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;283;kg;1,0000;283,00;£Ûdü;PLN
+07.10.2025;FZ-5121;Hurtownia ålπska;P03;Mas≥o extra;50;kg;7,5000;375,00;Katowice;PLN
+07.10.2025;FZ-5122;Mleczarnia £Ûdzka;P04;Cukier;667;kg;1,2000;800,40;£Ûdü;PLN
+08.10.2025;FZ-5123;Mleczarnia £Ûdzka;P01;Mleko 1 l;109;l;0,6000;65,40;Katowice;PLN
+08.10.2025;FZ-5124;Zak≥ad èrÛd≥o;P03;Mas≥o extra;37;kg;9,0000;333,00;£Ûdü;PLN
+08.10.2025;FZ-5125;Hurtownia ålπska;P06;Kefir 1 l;64;l;2,0000;128,00;Katowice;PLN
+08.10.2025;FZ-5126;Zak≥ad èrÛd≥o;P06;Kefir 1 l;11;l;2,5000;27,50;£Ûdü;PLN
+08.10.2025;FZ-5127;Napoje PÛ≥noc;P09;Sok jab≥kowy;90;l;1,3000;117,00;Katowice;PLN
+09.10.2025;FZ-5128;Mleczarnia £Ûdzka;P01;Mleko 1 l;108;l;0,6000;64,80;£Ûdü;PLN
+09.10.2025;FZ-5129;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;294;kg;1,0000;294,00;Katowice;PLN
+09.10.2025;FZ-5130;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;£Ûdü;PLN
+09.10.2025;FZ-5131;Napoje PÛ≥noc;P05;Ser Oscypek;17;kg;11,0000;187,00;Katowice;PLN
+09.10.2025;FZ-5132;Hurtownia ålπska;P11;Jaja L;30;szt;0,2000;6,00;£Ûdü;PLN
+10.10.2025;FZ-5133;Mleczarnia £Ûdzka;P01;Mleko 1 l;93;l;0,6000;55,80;Katowice;PLN
+10.10.2025;FZ-5134;Hurtownia ålπska;P03;Mas≥o extra;56;kg;7,5000;420,00;£Ûdü;PLN
+10.10.2025;FZ-5135;Hurtownia ålπska;P06;Kefir 1 l;63;l;2,0000;126,00;Katowice;PLN
+13.10.2025;FZ-5136;Mleczarnia £Ûdzka;P01;Mleko 1 l;96;l;0,6000;57,60;£Ûdü;PLN
+13.10.2025;FZ-5137;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;245;kg;1,0000;245,00;Katowice;PLN
+13.10.2025;FZ-5138;Hurtownia ålπska;P03;Mas≥o extra;43;kg;7,5000;322,50;£Ûdü;PLN
+13.10.2025;FZ-5139;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;Katowice;PLN
+13.10.2025;FZ-5140;Opakowania ∆wik;P08;Kartony;21;karton;14,0000;294,00;£Ûdü;PLN
+14.10.2025;FZ-5141;Mleczarnia £Ûdzka;P01;Mleko 1 l;100;l;0,6000;60,00;Katowice;PLN
+14.10.2025;FZ-5142;Zak≥ad èrÛd≥o;P03;Mas≥o extra;35;kg;9,0000;315,00;£Ûdü;PLN
+14.10.2025;FZ-5143;Hurtownia ålπska;P06;Kefir 1 l;61;l;2,0000;122,00;Katowice;PLN
+14.10.2025;FZ-5144;Zak≥ad èrÛd≥o;P06;Kefir 1 l;14;l;2,5000;35,00;£Ûdü;PLN
+14.10.2025;FZ-5145;Hurtownia ålπska;P11;Jaja L;30;szt;0,2000;6,00;Katowice;PLN
+15.10.2025;FZ-5146;Mleczarnia £Ûdzka;P01;Mleko 1 l;115;l;0,6000;69,00;£Ûdü;PLN
+15.10.2025;FZ-5147;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;273;kg;1,0000;273,00;Katowice;PLN
+15.10.2025;FZ-5148;Mleczarnia £Ûdzka;P04;Cukier;601;kg;1,2000;721,20;£Ûdü;PLN
+15.10.2025;FZ-5149;Napoje PÛ≥noc;P05;Ser Oscypek;17;kg;11,0000;187,00;Katowice;PLN
+16.10.2025;FZ-5150;Mleczarnia £Ûdzka;P01;Mleko 1 l;117;l;0,6000;70,20;£Ûdü;PLN
+16.10.2025;FZ-5151;Hurtownia ålπska;P03;Mas≥o extra;59;kg;7,5000;442,50;Katowice;PLN
+16.10.2025;FZ-5152;Hurtownia ålπska;P06;Kefir 1 l;60;l;2,0000;120,00;£Ûdü;PLN
+16.10.2025;FZ-5153;Napoje PÛ≥noc;P07;Olej rzepakowy;53;l;2,2000;110,77;Katowice;PLN
+16.10.2025;FZ-5154;Napoje PÛ≥noc;P09;Sok jab≥kowy;90;l;1,3000;117,00;£Ûdü;PLN
+17.10.2025;FZ-5155;Mleczarnia £Ûdzka;P01;Mleko 1 l;88;l;0,6000;52,80;Katowice;PLN
+17.10.2025;FZ-5156;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;258;kg;1,0000;258,00;£Ûdü;PLN
+17.10.2025;FZ-5157;Zak≥ad èrÛd≥o;P03;Mas≥o extra;46;kg;9,0000;414,00;Katowice;PLN
+17.10.2025;FZ-5158;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;£Ûdü;PLN
+20.10.2025;FZ-5159;Mleczarnia £Ûdzka;P01;Mleko 1 l;81;l;0,6000;48,60;Katowice;PLN
+20.10.2025;FZ-5160;Zak≥ad èrÛd≥o;P03;Mas≥o extra;47;kg;9,0000;423,00;£Ûdü;PLN
+20.10.2025;FZ-5161;Hurtownia ålπska;P06;Kefir 1 l;65;l;2,0000;130,00;Katowice;PLN
+20.10.2025;FZ-5162;Zak≥ad èrÛd≥o;P06;Kefir 1 l;11;l;2,5000;27,50;£Ûdü;PLN
+20.10.2025;FZ-5163;Opakowania ∆wik;P08;Kartony;22;karton;14,0000;308,00;Katowice;PLN
+20.10.2025;FZ-5164;Napoje PÛ≥noc;P09;Sok jab≥kowy;90;l;1,3000;117,00;£Ûdü;PLN
+20.10.2025;KFZ-1;Napoje PÛ≥noc;P09;Sok jab≥kowy;-200;l;1,3000;-260,00;Katowice;PLN
+21.10.2025;FZ-5165;Mleczarnia £Ûdzka;P01;Mleko 1 l;81;l;0,6000;48,60;Katowice;PLN
+21.10.2025;FZ-5166;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;267;kg;1,0000;267,00;£Ûdü;PLN
+21.10.2025;FZ-5167;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;Katowice;PLN
+21.10.2025;FZ-5168;Napoje PÛ≥noc;P05;Ser Oscypek;15;kg;11,0000;165,00;£Ûdü;PLN
+21.10.2025;FZ-5169;Napoje PÛ≥noc;P07;Olej rzepakowy;53;l;2,2000;110,77;Katowice;PLN
+22.10.2025;FZ-5170;Mleczarnia £Ûdzka;P01;Mleko 1 l;83;l;0,6000;49,80;£Ûdü;PLN
+22.10.2025;FZ-5171;Hurtownia ålπska;P03;Mas≥o extra;59;kg;7,5000;442,50;Katowice;PLN
+22.10.2025;FZ-5172;Hurtownia ålπska;P06;Kefir 1 l;67;l;2,0000;134,00;£Ûdü;PLN
+23.10.2025;FZ-5173;Mleczarnia £Ûdzka;P01;Mleko 1 l;106;l;0,6000;63,60;Katowice;PLN
+23.10.2025;FZ-5174;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;232;kg;1,0000;232,00;£Ûdü;PLN
+23.10.2025;FZ-5175;Zak≥ad èrÛd≥o;P03;Mas≥o extra;44;kg;9,0000;396,00;Katowice;PLN
+23.10.2025;FZ-5176;Mleczarnia £Ûdzka;P04;Cukier;602;kg;1,2000;722,40;£Ûdü;PLN
+24.10.2025;FZ-5177;Mleczarnia £Ûdzka;P01;Mleko 1 l;104;l;0,6000;62,40;Katowice;PLN
+24.10.2025;FZ-5178;Hurtownia ålπska;P06;Kefir 1 l;69;l;2,0000;138,00;£Ûdü;PLN
+24.10.2025;FZ-5179;Napoje PÛ≥noc;P05;Ser Oscypek;19;kg;11,0000;209,00;Katowice;PLN
+24.10.2025;FZ-5180;Napoje PÛ≥noc;P09;Sok jab≥kowy;90;l;1,3000;117,00;£Ûdü;PLN
+24.10.2025;FZ-5181;Hurtownia ålπska;P11;Jaja L;30;szt;0,2000;6,00;Katowice;PLN
+27.10.2025;FZ-5182;Mleczarnia £Ûdzka;P01;Mleko 1 l;89;l;0,6000;53,40;£Ûdü;PLN
+27.10.2025;FZ-5183;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;286;kg;1,0000;286,00;Katowice;PLN
+27.10.2025;FZ-5184;Mleczarnia £Ûdzka;P04;Cukier;594;kg;1,2000;712,80;£Ûdü;PLN
+27.10.2025;FZ-5185;Napoje PÛ≥noc;P05;Ser Oscypek;12;kg;11,0000;132,00;Katowice;PLN
+27.10.2025;FZ-5186;Opakowania ∆wik;P08;Kartony;24;karton;14,0000;336,00;£Ûdü;PLN
+27.10.2025;KFZ-2;Napoje PÛ≥noc;P09;Sok jab≥kowy;-200;l;1,3000;-260,00;Katowice;PLN
+28.10.2025;FZ-5187;Mleczarnia £Ûdzka;P01;Mleko 1 l;114;l;0,6000;68,40;Katowice;PLN
+28.10.2025;FZ-5188;Hurtownia ålπska;P03;Mas≥o extra;53;kg;7,5000;397,50;£Ûdü;PLN
+28.10.2025;FZ-5189;Hurtownia ålπska;P06;Kefir 1 l;69;l;2,0000;138,00;Katowice;PLN
+28.10.2025;FZ-5190;Napoje PÛ≥noc;P09;Sok jab≥kowy;90;l;1,3000;117,00;£Ûdü;PLN
+29.10.2025;FZ-5191;Mleczarnia £Ûdzka;P01;Mleko 1 l;89;l;0,6000;53,40;Katowice;PLN
+29.10.2025;FZ-5192;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;204;kg;1,0000;204,00;£Ûdü;PLN
+29.10.2025;FZ-5193;Zak≥ad èrÛd≥o;P03;Mas≥o extra;46;kg;9,0000;414,00;Katowice;PLN
+29.10.2025;FZ-5194;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;£Ûdü;PLN
+29.10.2025;FZ-5195;Hurtownia ålπska;P11;Jaja L;30;szt;0,2000;6,00;Katowice;PLN
+30.10.2025;FZ-5196;Mleczarnia £Ûdzka;P01;Mleko 1 l;82;l;0,6000;49,20;£Ûdü;PLN
+30.10.2025;FZ-5197;Hurtownia ålπska;P06;Kefir 1 l;68;l;2,0000;136,00;Katowice;PLN
+30.10.2025;FZ-5198;Napoje PÛ≥noc;P05;Ser Oscypek;11;kg;11,0000;121,00;£Ûdü;PLN
+31.10.2025;FZ-5199;Mleczarnia £Ûdzka;P01;Mleko 1 l;118;l;0,6000;70,80;Katowice;PLN
+31.10.2025;FZ-5200;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;239;kg;1,0000;239,00;£Ûdü;PLN
+31.10.2025;FZ-5201;Hurtownia ålπska;P03;Mas≥o extra;53;kg;7,5000;397,50;Katowice;PLN
+31.10.2025;FZ-5202;Mleczarnia £Ûdzka;P04;Cukier;519;kg;1,2000;622,80;£Ûdü;PLN
+31.10.2025;FZ-5203;Napoje PÛ≥noc;P07;Olej rzepakowy;50;l;2,2000;104,50;Katowice;PLN
+03.11.2025;FZ-5204;Mleczarnia £Ûdzka;P01;Mleko 1 l;111;l;0,6000;66,60;£Ûdü;PLN
+03.11.2025;FZ-5205;Hurtownia ålπska;P03;Mas≥o extra;58;kg;7,5000;435,00;Katowice;PLN
+03.11.2025;FZ-5206;Hurtownia ålπska;P06;Kefir 1 l;62;l;2,0000;124,00;£Ûdü;PLN
+03.11.2025;FZ-5207;Opakowania ∆wik;P08;Kartony;29;karton;14,0000;406,00;Katowice;PLN
+03.11.2025;FZ-5208;Hurtownia ålπska;P11;Jaja L;30;szt;0,2000;6,00;£Ûdü;PLN
+04.11.2025;FZ-5209;Mleczarnia £Ûdzka;P01;Mleko 1 l;96;l;0,6000;57,60;Katowice;PLN
+04.11.2025;FZ-5210;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;261;kg;1,0000;261,00;£Ûdü;PLN
+04.11.2025;FZ-5211;Zak≥ad èrÛd≥o;P03;Mas≥o extra;46;kg;9,0000;414,00;Katowice;PLN
+04.11.2025;FZ-5212;Mleczarnia £Ûdzka;P04;Cukier;596;kg;1,2000;715,20;£Ûdü;PLN
+04.11.2025;KFZ-3;Napoje PÛ≥noc;P09;Sok jab≥kowy;-200;l;1,3000;-260,00;Katowice;PLN
+05.11.2025;FZ-5213;Mleczarnia £Ûdzka;P01;Mleko 1 l;88;l;0,6000;52,80;Katowice;PLN
+05.11.2025;FZ-5214;Hurtownia ålπska;P06;Kefir 1 l;61;l;2,0000;122,00;£Ûdü;PLN
+05.11.2025;FZ-5215;Napoje PÛ≥noc;P05;Ser Oscypek;18;kg;11,0000;198,00;Katowice;PLN
+05.11.2025;FZ-5216;Napoje PÛ≥noc;P07;Olej rzepakowy;51;l;2,2000;106,59;£Ûdü;PLN
+05.11.2025;FZ-5217;Napoje PÛ≥noc;P09;Sok jab≥kowy;90;l;1,3000;117,00;Katowice;PLN
+06.11.2025;FZ-5218;Mleczarnia £Ûdzka;P01;Mleko 1 l;88;l;0,6000;52,80;£Ûdü;PLN
+06.11.2025;FZ-5219;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;216;kg;1,0000;216,00;Katowice;PLN
+06.11.2025;FZ-5220;Hurtownia ålπska;P03;Mas≥o extra;52;kg;7,5000;390,00;£Ûdü;PLN
+06.11.2025;FZ-5221;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;Katowice;PLN
+07.11.2025;FZ-5222;Mleczarnia £Ûdzka;P01;Mleko 1 l;106;l;0,6000;63,60;£Ûdü;PLN
+07.11.2025;FZ-5223;Zak≥ad èrÛd≥o;P03;Mas≥o extra;44;kg;9,0000;396,00;Katowice;PLN
+07.11.2025;FZ-5224;Hurtownia ålπska;P06;Kefir 1 l;68;l;2,0000;136,00;£Ûdü;PLN
+07.11.2025;FZ-5225;Zak≥ad èrÛd≥o;P06;Kefir 1 l;14;l;2,5000;35,00;Katowice;PLN
+10.11.2025;FZ-5226;Mleczarnia £Ûdzka;P01;Mleko 1 l;104;l;0,6000;62,40;£Ûdü;PLN
+10.11.2025;FZ-5227;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;238;kg;1,0000;238,00;Katowice;PLN
+10.11.2025;FZ-5228;Zak≥ad èrÛd≥o;P03;Mas≥o extra;43;kg;9,0000;387,00;£Ûdü;PLN
+10.11.2025;FZ-5229;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;Katowice;PLN
+10.11.2025;FZ-5230;Napoje PÛ≥noc;P07;Olej rzepakowy;58;l;2,2000;121,22;£Ûdü;PLN
+10.11.2025;FZ-5231;Opakowania ∆wik;P08;Kartony;20;karton;14,0000;280,00;Katowice;PLN
+11.11.2025;FZ-5232;Mleczarnia £Ûdzka;P01;Mleko 1 l;109;l;0,6000;65,40;£Ûdü;PLN
+11.11.2025;FZ-5233;Hurtownia ålπska;P06;Kefir 1 l;65;l;2,0000;130,00;Katowice;PLN
+11.11.2025;FZ-5234;Napoje PÛ≥noc;P05;Ser Oscypek;10;kg;11,0000;110,00;£Ûdü;PLN
+11.11.2025;KFZ-4;Napoje PÛ≥noc;P09;Sok jab≥kowy;-200;l;1,3000;-260,00;Katowice;PLN
+12.11.2025;FZ-5235;Mleczarnia £Ûdzka;P01;Mleko 1 l;89;l;0,6000;53,40;Katowice;PLN
+12.11.2025;FZ-5236;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;293;kg;1,0000;293,00;£Ûdü;PLN
+12.11.2025;FZ-5237;Hurtownia ålπska;P03;Mas≥o extra;49;kg;7,5000;367,50;Katowice;PLN
+12.11.2025;FZ-5238;Mleczarnia £Ûdzka;P04;Cukier;609;kg;1,2000;730,80;£Ûdü;PLN
+13.11.2025;FZ-5239;Mleczarnia £Ûdzka;P01;Mleko 1 l;97;l;0,6000;58,20;Katowice;PLN
+13.11.2025;FZ-5240;Zak≥ad èrÛd≥o;P03;Mas≥o extra;49;kg;9,0000;441,00;£Ûdü;PLN
+13.11.2025;FZ-5241;Hurtownia ålπska;P06;Kefir 1 l;63;l;2,0000;126,00;Katowice;PLN
+13.11.2025;FZ-5242;Zak≥ad èrÛd≥o;P06;Kefir 1 l;10;l;2,5000;25,00;£Ûdü;PLN
+13.11.2025;FZ-5243;Napoje PÛ≥noc;P09;Sok jab≥kowy;90;l;1,3000;117,00;Katowice;PLN
+13.11.2025;FZ-5244;Hurtownia ålπska;P11;Jaja L;30;szt;0,2000;6,00;£Ûdü;PLN
+14.11.2025;FZ-5245;Mleczarnia £Ûdzka;P01;Mleko 1 l;115;l;0,6000;69,00;Katowice;PLN
+14.11.2025;FZ-5246;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;253;kg;1,0000;253,00;£Ûdü;PLN
+14.11.2025;FZ-5247;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;Katowice;PLN
+14.11.2025;FZ-5248;Napoje PÛ≥noc;P05;Ser Oscypek;12;kg;11,0000;132,00;£Ûdü;PLN
+17.11.2025;FZ-5249;Mleczarnia £Ûdzka;P01;Mleko 1 l;82;l;0,7200;59,04;Katowice;PLN
+17.11.2025;FZ-5250;Zak≥ad èrÛd≥o;P06;Kefir 1 l;62;l;2,5000;155,00;£Ûdü;PLN
+17.11.2025;FZ-5251;Napoje PÛ≥noc;P05;Ser Oscypek;13;kg;11,0000;143,00;Katowice;PLN
+17.11.2025;FZ-5252;Opakowania ∆wik;P08;Kartony;26;karton;14,0000;364,00;£Ûdü;PLN
+17.11.2025;FZ-5253;Napoje PÛ≥noc;P09;Sok jab≥kowy;40;l;1,3000;52,00;Katowice;PLN
+18.11.2025;FZ-5254;Mleczarnia £Ûdzka;P01;Mleko 1 l;86;l;0,7200;61,92;£Ûdü;PLN
+18.11.2025;FZ-5255;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;255;kg;0,9000;229,50;Katowice;PLN
+18.11.2025;FZ-5256;Hurtownia ålπska;P03;Mas≥o extra;51;kg;7,5000;382,50;£Ûdü;PLN
+18.11.2025;FZ-5257;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;Katowice;PLN
+18.11.2025;FZ-5258;M≥yn Øuraw Sp. z o.o.;P10;Ryø;100;kg;1,6000;160,00;£Ûdü;PLN
+19.11.2025;FZ-5259;Mleczarnia £Ûdzka;P01;Mleko 1 l;115;l;0,7200;82,80;Katowice;PLN
+19.11.2025;FZ-5260;Zak≥ad èrÛd≥o;P03;Mas≥o extra;45;kg;9,0000;405,00;£Ûdü;PLN
+19.11.2025;FZ-5261;Zak≥ad èrÛd≥o;P06;Kefir 1 l;63;l;2,5000;157,50;Katowice;PLN
+19.11.2025;FZ-5262;Hurtownia ålπska;P06;Kefir 1 l;11;l;2,0000;22,00;£Ûdü;PLN
+20.11.2025;FZ-5263;Mleczarnia £Ûdzka;P01;Mleko 1 l;92;l;0,7200;66,24;Katowice;PLN
+20.11.2025;FZ-5264;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;258;kg;0,9000;232,20;£Ûdü;PLN
+20.11.2025;FZ-5265;Mleczarnia £Ûdzka;P04;Cukier;564;kg;1,2000;676,80;Katowice;PLN
+20.11.2025;FZ-5266;Napoje PÛ≥noc;P05;Ser Oscypek;15;kg;11,0000;165,00;£Ûdü;PLN
+20.11.2025;FZ-5267;Napoje PÛ≥noc;P07;Olej rzepakowy;53;l;2,2000;110,77;Katowice;PLN
+20.11.2025;FZ-5345;Hurtownia ålπska;P99;SÛl;100;kg;0,4000;40,00;Katowice;PLN
+21.11.2025;FZ-5268;Mleczarnia £Ûdzka;P01;Mleko 1 l;102;l;0,7200;73,44;£Ûdü;PLN
+21.11.2025;FZ-5269;Hurtownia ålπska;P03;Mas≥o extra;59;kg;7,5000;442,50;Katowice;PLN
+21.11.2025;FZ-5270;Zak≥ad èrÛd≥o;P06;Kefir 1 l;66;l;2,5000;165,00;£Ûdü;PLN
+21.11.2025;FZ-5271;Napoje PÛ≥noc;P09;Sok jab≥kowy;40;l;1,3000;52,00;Katowice;PLN
+22.11.2025;FZ-5346;Zak≥ad èrÛd≥o;P99;Mineralinis vanduo;100;l;0,3000;30,00;£Ûdü;PLN
+24.11.2025;FZ-5272;Mleczarnia £Ûdzka;P01;Mleko 1 l;110;l;0,7200;79,20;£Ûdü;PLN
+24.11.2025;FZ-5273;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;219;kg;0,9000;197,10;Katowice;PLN
+24.11.2025;FZ-5274;Hurtownia ålπska;P03;Mas≥o extra;56;kg;7,5000;420,00;£Ûdü;PLN
+24.11.2025;FZ-5275;Mleczarnia £Ûdzka;P04;Cukier;597;kg;1,2000;716,40;Katowice;PLN
+24.11.2025;FZ-5276;Opakowania ∆wik;P08;Kartony;22;karton;14,0000;308,00;£Ûdü;PLN
+25.11.2025;FZ-5277;Mleczarnia £Ûdzka;P01;Mleko 1 l;118;l;0,7200;84,96;Katowice;PLN
+25.11.2025;FZ-5278;Zak≥ad èrÛd≥o;P03;Mas≥o extra;40;kg;9,0000;360,00;£Ûdü;PLN
+25.11.2025;FZ-5279;Zak≥ad èrÛd≥o;P06;Kefir 1 l;60;l;2,5000;150,00;Katowice;PLN
+25.11.2025;FZ-5280;Hurtownia ålπska;P06;Kefir 1 l;10;l;2,0000;20,00;£Ûdü;PLN
+25.11.2025;FZ-5281;Napoje PÛ≥noc;P07;Olej rzepakowy;52;l;2,2000;108,68;Katowice;PLN
+25.11.2025;FZ-5282;Napoje PÛ≥noc;P09;Sok jab≥kowy;40;l;1,3000;52,00;£Ûdü;PLN
+26.11.2025;FZ-5283;Mleczarnia £Ûdzka;P01;Mleko 1 l;86;l;0,7200;61,92;Katowice;PLN
+26.11.2025;FZ-5284;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;226;kg;0,9000;203,40;£Ûdü;PLN
+26.11.2025;FZ-5285;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;Katowice;PLN
+26.11.2025;FZ-5286;Napoje PÛ≥noc;P05;Ser Oscypek;18;kg;11,0000;198,00;£Ûdü;PLN
+27.11.2025;FZ-5287;Mleczarnia £Ûdzka;P01;Mleko 1 l;86;l;0,7200;61,92;Katowice;PLN
+27.11.2025;FZ-5288;Hurtownia ålπska;P03;Mas≥o extra;58;kg;7,5000;435,00;£Ûdü;PLN
+27.11.2025;FZ-5289;Zak≥ad èrÛd≥o;P06;Kefir 1 l;67;l;2,5000;167,50;Katowice;PLN
+28.11.2025;FZ-5290;Mleczarnia £Ûdzka;P01;Mleko 1 l;88;l;0,7200;63,36;£Ûdü;PLN
+28.11.2025;FZ-5291;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;278;kg;0,9000;250,20;Katowice;PLN
+28.11.2025;FZ-5292;Zak≥ad èrÛd≥o;P03;Mas≥o extra;36;kg;9,0000;324,00;£Ûdü;PLN
+28.11.2025;FZ-5293;Mleczarnia £Ûdzka;P04;Cukier;669;kg;1,2000;802,80;Katowice;PLN
+28.11.2025;FZ-5294;M≥yn Øuraw Sp. z o.o.;P10;Ryø;100;kg;1,6000;160,00;£Ûdü;PLN
+01.12.2025;FZ-5295;Mleczarnia £Ûdzka;P01;Mleko 1 l;106;l;0,7200;76,32;Katowice;PLN
+01.12.2025;FZ-5296;Zak≥ad èrÛd≥o;P03;Mas≥o extra;43;kg;9,0000;387,00;£Ûdü;PLN
+01.12.2025;FZ-5297;Zak≥ad èrÛd≥o;P06;Kefir 1 l;68;l;2,5000;170,00;Katowice;PLN
+01.12.2025;FZ-5298;Hurtownia ålπska;P06;Kefir 1 l;10;l;2,0000;20,00;£Ûdü;PLN
+01.12.2025;FZ-5299;Opakowania ∆wik;P08;Kartony;27;karton;14,0000;378,00;Katowice;PLN
+01.12.2025;FZ-5347;Opakowania ∆wik;P08;Kartony;700;karton;14,0000;9†800,00;Katowice;PLN
+02.12.2025;FZ-5300;Mleczarnia £Ûdzka;P01;Mleko 1 l;105;l;0,7200;75,60;£Ûdü;PLN
+02.12.2025;FZ-5301;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;228;kg;0,9000;205,20;Katowice;PLN
+02.12.2025;FZ-5302;Mleczarnia £Ûdzka;P04;Cukier;694;kg;1,2000;832,80;£Ûdü;PLN
+02.12.2025;FZ-5303;Napoje PÛ≥noc;P05;Ser Oscypek;18;kg;11,0000;198,00;Katowice;PLN
+02.12.2025;FZ-5348;Opakowania ∆wik;P08;Kartony;700;karton;14,0000;9†800,00;£Ûdü;PLN
+03.12.2025;FZ-5304;Mleczarnia £Ûdzka;P01;Mleko 1 l;96;l;0,7200;69,12;£Ûdü;PLN
+03.12.2025;FZ-5305;Hurtownia ålπska;P03;Mas≥o extra;41;kg;7,5000;307,50;Katowice;PLN
+03.12.2025;FZ-5306;Zak≥ad èrÛd≥o;P06;Kefir 1 l;63;l;2,5000;157,50;£Ûdü;PLN
+03.12.2025;FZ-5307;Napoje PÛ≥noc;P09;Sok jab≥kowy;40;l;1,3000;52,00;Katowice;PLN
+03.12.2025;FZ-5308;M≥yn Øuraw Sp. z o.o.;P10;Ryø;100;kg;1,6000;160,00;£Ûdü;PLN
+03.12.2025;FZ-5349;Opakowania ∆wik;P08;Kartony;700;karton;14,0000;9†800,00;Katowice;PLN
+04.12.2025;FZ-5309;Mleczarnia £Ûdzka;P01;Mleko 1 l;98;l;0,7200;70,56;Katowice;PLN
+04.12.2025;FZ-5310;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;281;kg;0,9000;252,90;£Ûdü;PLN
+04.12.2025;FZ-5311;Zak≥ad èrÛd≥o;P03;Mas≥o extra;41;kg;9,0000;369,00;Katowice;PLN
+04.12.2025;FZ-5312;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;£Ûdü;PLN
+04.12.2025;FZ-5350;Opakowania ∆wik;P08;Kartony;700;karton;14,0000;9†800,00;£Ûdü;PLN
+05.12.2025;FZ-5313;Mleczarnia £Ûdzka;P01;Mleko 1 l;99;l;0,7200;71,28;Katowice;PLN
+05.12.2025;FZ-5314;Zak≥ad èrÛd≥o;P06;Kefir 1 l;60;l;2,5000;150,00;£Ûdü;PLN
+05.12.2025;FZ-5315;Napoje PÛ≥noc;P05;Ser Oscypek;13;kg;11,0000;143,00;Katowice;PLN
+05.12.2025;FZ-5316;Napoje PÛ≥noc;P07;Olej rzepakowy;55;l;2,2000;114,95;£Ûdü;PLN
+05.12.2025;FZ-5351;Opakowania ∆wik;P08;Kartony;700;karton;14,0000;9†800,00;Katowice;PLN
+08.12.2025;FZ-5317;Mleczarnia £Ûdzka;P01;Mleko 1 l;106;l;0,7200;76,32;Katowice;PLN
+08.12.2025;FZ-5318;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;227;kg;0,9000;204,30;£Ûdü;PLN
+08.12.2025;FZ-5319;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;Katowice;PLN
+08.12.2025;FZ-5320;Napoje PÛ≥noc;P05;Ser Oscypek;18;kg;11,0000;198,00;£Ûdü;PLN
+08.12.2025;FZ-5321;Opakowania ∆wik;P08;Kartony;20;karton;14,0000;280,00;Katowice;PLN
+08.12.2025;FZ-5322;M≥yn Øuraw Sp. z o.o.;P10;Ryø;100;kg;1,6000;160,00;£Ûdü;PLN
+09.12.2025;FZ-5323;Mleczarnia £Ûdzka;P01;Mleko 1 l;104;l;0,7200;74,88;Katowice;PLN
+09.12.2025;FZ-5324;Hurtownia ålπska;P03;Mas≥o extra;42;kg;7,5000;315,00;£Ûdü;PLN
+09.12.2025;FZ-5325;Zak≥ad èrÛd≥o;P06;Kefir 1 l;67;l;2,5000;167,50;Katowice;PLN
+09.12.2025;FZ-ODD1;Napoje PÛ≥noc;P05;Ser Oscypek;400;kg;11,0000;4†400,00;£Ûdü;PLN
+10.12.2025;FZ-5326;Mleczarnia £Ûdzka;P01;Mleko 1 l;82;l;0,7200;59,04;£Ûdü;PLN
+10.12.2025;FZ-5327;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;214;kg;0,9000;192,60;Katowice;PLN
+10.12.2025;FZ-5328;Zak≥ad èrÛd≥o;P03;Mas≥o extra;34;kg;9,0000;306,00;£Ûdü;PLN
+10.12.2025;FZ-5329;Mleczarnia £Ûdzka;P04;Cukier;599;kg;1,2000;718,80;Katowice;PLN
+10.12.2025;FZ-5330;Napoje PÛ≥noc;P07;Olej rzepakowy;51;l;2,2000;106,59;£Ûdü;PLN
+11.12.2025;FZ-5331;Mleczarnia £Ûdzka;P01;Mleko 1 l;94;l;0,7200;67,68;Katowice;PLN
+11.12.2025;FZ-5332;Zak≥ad èrÛd≥o;P06;Kefir 1 l;68;l;2,5000;170,00;£Ûdü;PLN
+11.12.2025;FZ-5333;Napoje PÛ≥noc;P05;Ser Oscypek;18;kg;11,0000;198,00;Katowice;PLN
+11.12.2025;FZ-5334;Napoje PÛ≥noc;P09;Sok jab≥kowy;40;l;1,3000;52,00;£Ûdü;PLN
+12.12.2025;FZ-5335;Mleczarnia £Ûdzka;P01;Mleko 1 l;96;l;0,7200;69,12;Katowice;PLN
+12.12.2025;FZ-5336;M≥yn Øuraw Sp. z o.o.;P02;Mπka pszenna;250;kg;0,9000;225,00;£Ûdü;PLN
+12.12.2025;FZ-5337;Hurtownia ålπska;P03;Mas≥o extra;45;kg;7,5000;337,50;Katowice;PLN
+12.12.2025;FZ-5338;M≥yn Øuraw Sp. z o.o.;P04;Cukier;300000;g;0,0012;360,00;£Ûdü;PLN
+15.12.2025;FZ-5339;Mleczarnia £Ûdzka;P01;Mleko 1 l;88;l;0,7200;63,36;Katowice;PLN
+15.12.2025;FZ-5340;Hurtownia ålπska;P03;Mas≥o extra;57;kg;7,5000;427,50;£Ûdü;PLN
+15.12.2025;FZ-5341;Zak≥ad èrÛd≥o;P06;Kefir 1 l;61;l;2,5000;152,50;Katowice;PLN
+15.12.2025;FZ-5342;Napoje PÛ≥noc;P07;Olej rzepakowy;52;l;2,2000;108,68;£Ûdü;PLN
+15.12.2025;FZ-5343;Opakowania ∆wik;P08;Kartony;27;karton;14,0000;378,00;Katowice;PLN
+15.12.2025;FZ-5344;Napoje PÛ≥noc;P09;Sok jab≥kowy;40;l;1,3000;52,00;£Ûdü;PLN

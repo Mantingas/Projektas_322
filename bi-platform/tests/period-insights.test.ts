@@ -115,7 +115,7 @@ describe('financial amounts reconcile across KPIs, insights, tables, charts and 
     for (const id of ['sales.customers_declined', 'sales.product_decline', 'sales.product_growth']) {
       const ins = find(analysis?.insights, id);
       if (!ins) continue;
-      const table = model.tables[ins.dimension!]!;
+      const table = model.tables[ins.dimension as 'customer' | 'product']!;
       for (const e of ins.evidence) {
         const row = table.rows.find((r) => r.key === e.key)!;
         expect(row, `${id}:${e.label}`).toBeDefined();

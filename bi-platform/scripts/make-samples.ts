@@ -1,6 +1,7 @@
 // Writes synthetic sample files to public/samples. All data is generated; none of it is real.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { buildFixtures } from '../tests/fixtures/formats';
+import { buildPurchasingFixtures } from '../tests/fixtures/purchasingFormats';
 
 const names: Record<string, string> = {
   'lt-csv-utf8': 'sample_lt_pardavimai.csv',
@@ -11,6 +12,15 @@ const names: Record<string, string> = {
 mkdirSync('public/samples', { recursive: true });
 for (const f of await buildFixtures()) {
   const name = names[f.id];
+  if (name) writeFileSync(`public/samples/${name}`, f.bytes);
+}
+const pNames: Record<string, string> = {
+  'lt-csv-utf8': 'sample_lt_pirkimai.csv',
+  'pl-csv-1250': 'sample_pl_zakupy.csv',
+  'en-xlsx-title': 'sample_en_purchases.xlsx',
+};
+for (const f of await buildPurchasingFixtures()) {
+  const name = pNames[f.id];
   if (name) writeFileSync(`public/samples/${name}`, f.bytes);
 }
 console.log('samples written');
