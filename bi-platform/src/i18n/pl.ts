@@ -1,6 +1,8 @@
 import type { Messages } from './en';
+import dash from './dash.pl';
 
 const pl: Messages = {
+  ...dash,
   'app.name': 'Excel Insights',
   'app.tagline': 'Wnioski biznesowe z Twoich plików Excel',
   'nav.home': 'Start', 'nav.import': 'Import', 'nav.insights': 'Wnioski', 'nav.history': 'Historia', 'nav.settings': 'Ustawienia',
@@ -53,7 +55,7 @@ const pl: Messages = {
   'field.document_date': 'Data dokumentu', 'field.document_id': 'Numer dokumentu', 'field.customer_name': 'Nazwa klienta', 'field.customer_id': 'Kod klienta',
   'field.product_name': 'Nazwa towaru', 'field.product_id': 'Kod towaru', 'field.quantity': 'Ilość', 'field.unit_price': 'Cena jednostkowa',
   'field.net_amount': 'Kwota netto', 'field.gross_amount': 'Kwota brutto', 'field.amount_unknown_basis': 'Kwota (status VAT nieznany)',
-  'field.vat_amount': 'Kwota VAT', 'field.cost_amount': 'Koszt pozycji (razem)', 'field.unit_cost': 'Koszt jednostkowy', 'field.currency': 'Waluta', 'field.salesperson': 'Handlowiec',
+  'field.vat_amount': 'Kwota VAT', 'field.cost_amount': 'Koszt pozycji (razem)', 'field.unit_cost': 'Koszt jednostkowy', 'field.currency': 'Waluta', 'field.product_category': 'Grupa towarowa', 'field.salesperson': 'Handlowiec',
   'type.date': 'data', 'type.number': 'liczba', 'type.text': 'tekst', 'type.empty': 'pusta',
   'issue.invalid_date': 'Nieczytelna data', 'issue.date_out_of_range': 'Data poza zakresem', 'issue.invalid_amount': 'Nieczytelna kwota', 'issue.empty_amount': 'Pusta kwota',
   'issue.total_row': 'Pominięto wiersz sum', 'issue.negative_amount': 'Kwota ujemna (korekta / zwrot)', 'issue.invalid_quantity': 'Nieczytelna ilość',
@@ -62,6 +64,7 @@ const pl: Messages = {
   'err.file_too_large': 'Plik jest większy niż 50 MB.', 'err.unsupported_format': 'Nieobsługiwany typ pliku. Użyj .xlsx, .csv lub .tsv.',
   'err.legacy_xls': 'Stare pliki .xls nie są obsługiwane. Otwórz w Excelu i zapisz jako .xlsx.', 'err.corrupt_file': 'Plik wygląda na uszkodzony lub nie jest prawidłowym skoroszytem.',
   'err.empty_file': 'Plik nie zawiera danych.', 'err.password_protected': 'Plik jest chroniony hasłem.', 'err.unknown': 'Nieoczekiwany błąd podczas odczytu pliku.',
+  'err.zip_limits': 'Skoroszyt rozpakowuje się do niebezpiecznego rozmiaru (możliwa bomba dekompresyjna) i został odrzucony.',
   'err.currency_required': 'Wybierz walutę.',
 
   'ins.title': 'Wnioski', 'ins.empty': 'Brak danych. Zaimportuj plik, aby zobaczyć wnioski.', 'ins.goImport': 'Importuj plik',

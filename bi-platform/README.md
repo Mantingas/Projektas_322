@@ -19,6 +19,11 @@ npm run samples        # regenerate synthetic files in public/samples
 npm run build && PW_CHROMIUM_PATH=/path/to/chromium npm run test:e2e   # omit PW_CHROMIUM_PATH after `npx playwright install chromium`
 ```
 
+## Phase 2 additions
+- Sales dashboard with **Manager** and **Analyst** modes, KPI cards with previous-period comparison and calculation explanations, period comparison (DoD/WoW/MoM/YoY, rolling 7/30/90, custom) with partial-period warnings, 8 chart types chosen from the available data (each with a table alternative), sortable/searchable/paged tables with CSV export, drill-down to source rows, insight details, printable management summary.
+- Corrected invoices are superseded (not lost), overlap risk without document numbers is disclosed, ZIP decompression limits.
+- Shared engine: `src/engine/analytics` (see docs/ARCHITECTURE.md).
+
 ## What works
 - LT / PL / EN interface; `.xlsx`, `.csv`, `.tsv`; sheet selection; header row detection under report titles; totals rows skipped.
 - UTF-8 / Windows-1257 / Windows-1250 CSV; `1 234,56`, `1.234,56`, `1,234.56`, `€`/`zł` suffixes; ISO, `dd.mm.yyyy`, `dd/mm/yyyy`, `yyyy.mm.dd`, Excel serial dates.
@@ -27,4 +32,4 @@ npm run build && PW_CHROMIUM_PATH=/path/to/chromium npm run test:e2e   # omit PW
 - Import history, file checksum + line-level duplicate prevention, backup/restore, delete-all, HTML/CSV report export.
 
 ## Known limitations
-See the final report in the pull request / session summary. Notably: legacy `.xls` unsupported; templates are generic header signatures, not real ERP exports; tested only on synthetic files; ZIP-bomb protection is limited to file size; PDF = browser print.
+See the final report in the pull request / session summary. Notably: legacy `.xls` unsupported; templates are generic header signatures, not real ERP exports; tested only on synthetic files; ZIP limits trust sizes declared in the archive header; PDF = browser print.

@@ -150,6 +150,7 @@ export function normalizeSales(dataRows: CellValue[][], opts: NormalizeOptions):
       cost,
       currency: currency!,
       salesperson: clean(get(row, 'salesperson')),
+      category: clean(get(row, 'product_category')),
       sourceRow: rowNo,
     });
   });

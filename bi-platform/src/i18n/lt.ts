@@ -1,6 +1,8 @@
 import type { Messages } from './en';
+import dash from './dash.lt';
 
 const lt: Messages = {
+  ...dash,
   'app.name': 'Excel įžvalgos',
   'app.tagline': 'Verslo įžvalgos iš jūsų Excel failų',
   'nav.home': 'Pradžia', 'nav.import': 'Importas', 'nav.insights': 'Įžvalgos', 'nav.history': 'Istorija', 'nav.settings': 'Nustatymai',
@@ -53,7 +55,7 @@ const lt: Messages = {
   'field.document_date': 'Dokumento data', 'field.document_id': 'Dokumento numeris', 'field.customer_name': 'Kliento pavadinimas', 'field.customer_id': 'Kliento kodas',
   'field.product_name': 'Prekės pavadinimas', 'field.product_id': 'Prekės kodas', 'field.quantity': 'Kiekis', 'field.unit_price': 'Vieneto kaina',
   'field.net_amount': 'Suma be PVM', 'field.gross_amount': 'Suma su PVM', 'field.amount_unknown_basis': 'Suma (PVM statusas nežinomas)',
-  'field.vat_amount': 'PVM suma', 'field.cost_amount': 'Eilutės savikaina (viso)', 'field.unit_cost': 'Vieneto savikaina', 'field.currency': 'Valiuta', 'field.salesperson': 'Pardavėjas',
+  'field.vat_amount': 'PVM suma', 'field.cost_amount': 'Eilutės savikaina (viso)', 'field.unit_cost': 'Vieneto savikaina', 'field.currency': 'Valiuta', 'field.product_category': 'Prekių grupė', 'field.salesperson': 'Pardavėjas',
   'type.date': 'data', 'type.number': 'skaičius', 'type.text': 'tekstas', 'type.empty': 'tuščias',
   'issue.invalid_date': 'Neperskaitoma data', 'issue.date_out_of_range': 'Data už leistino intervalo', 'issue.invalid_amount': 'Neperskaitoma suma', 'issue.empty_amount': 'Tuščia suma',
   'issue.total_row': 'Praleista sumų eilutė', 'issue.negative_amount': 'Neigiama suma (kreditinė / grąžinimas)', 'issue.invalid_quantity': 'Neperskaitomas kiekis',
@@ -62,6 +64,7 @@ const lt: Messages = {
   'err.file_too_large': 'Failas didesnis nei 50 MB.', 'err.unsupported_format': 'Nepalaikomas failo tipas. Naudokite .xlsx, .csv arba .tsv.',
   'err.legacy_xls': 'Seni .xls failai nepalaikomi. Atidarykite Excel ir išsaugokite kaip .xlsx.', 'err.corrupt_file': 'Failas atrodo sugadintas arba nėra tinkama darbaknygė.',
   'err.empty_file': 'Faile nėra duomenų.', 'err.password_protected': 'Failas apsaugotas slaptažodžiu.', 'err.unknown': 'Netikėta klaida skaitant failą.',
+  'err.zip_limits': 'Darbaknygė išsiskleidžia į nesaugų dydį (galima dekompresijos ataka), todėl atmesta.',
   'err.currency_required': 'Pasirinkite valiutą.',
 
   'ins.title': 'Įžvalgos', 'ins.empty': 'Duomenų dar nėra. Importuokite failą, kad pamatytumėte įžvalgas.', 'ins.goImport': 'Importuoti failą',

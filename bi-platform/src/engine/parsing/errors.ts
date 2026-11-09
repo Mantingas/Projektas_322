@@ -4,7 +4,8 @@ export type ParseErrorCode =
   | 'legacy_xls'
   | 'corrupt_file'
   | 'empty_file'
-  | 'password_protected';
+  | 'password_protected'
+  | 'zip_limits';
 
 export class ParseError extends Error {
   constructor(public readonly code: ParseErrorCode) {

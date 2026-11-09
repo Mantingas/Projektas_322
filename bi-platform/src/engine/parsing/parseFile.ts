@@ -3,6 +3,7 @@ import { MAX_FILE_BYTES } from './limits';
 import { ParseError } from './errors';
 import { parseCsv } from './csv';
 import { parseXlsx } from './xlsx';
+import { inspectZip } from './zip';
 
 export { ParseError } from './errors';
 
@@ -22,6 +23,7 @@ export async function parseFile(bytes: Uint8Array, fileName: string): Promise<Pa
   if (isOle) throw new ParseError('legacy_xls'); // legacy .xls or an encrypted OOXML container
   if (e === 'xlsx' || e === 'xlsm') {
     if (!isZip) throw new ParseError('corrupt_file');
+    inspectZip(bytes); // before anything is inflated
     return parseXlsx(bytes, fileName);
   }
   if (e === 'csv' || e === 'tsv' || e === 'txt') return parseCsv(bytes, fileName);

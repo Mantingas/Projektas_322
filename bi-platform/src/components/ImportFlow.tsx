@@ -1,16 +1,18 @@
 'use client';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLang } from './LangProvider';
 import { Button } from './ui/button';
 import { Card, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { getDb } from '@/db/db';
 import type { ImportRow } from '@/db/db';
-import { commitImport, findByChecksum, getSavedMapping, saveMapping } from '@/db/store';
+import { commitImport, findByChecksum, getSavedMapping, previewImport, type MergePreview } from '@/db/store';
+import { saveMapping } from '@/db/store';
 import { analyzeSheet, confirmedFromEntries, type SheetAnalysis } from '@/engine/pipeline';
 import { isMappingConfirmable, mappingToSaved, validateMapping, LOW_CONFIDENCE } from '@/engine/mapping/mapper';
 import { SALES_TEMPLATES } from '@/engine/mapping/templates';
 import { MappingError, normalizeSales } from '@/engine/validation/normalize';
+import type { SalesRecord } from '@/engine/types';
 import { sha256Hex } from '@/engine/import/hash';
 import { SALES_FIELDS, type ExportMode, type ImportStats, type MappingEntry, type ParsedFile, type SalesField } from '@/engine/types';
 import { ClientParseError, parseInWorker } from '@/lib/parseClient';
@@ -45,9 +47,10 @@ export function ImportFlow({ onImported, goInsights }: { onImported: () => void;
   const [dupAccepted, setDupAccepted] = useState(false);
   const [result, setResult] = useState<{ row: ImportRow; stats: ImportStats } | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [preview, setPreview] = useState<MergePreview | null>(null);
 
   const reset = () => {
-    setLoaded(null); setAnalysis(null); setAssign({}); setConfs({}); setError(null); setDup(null); setDupAccepted(false); setResult(null); setSheetIdx(0); setUsedSaved(false);
+    setLoaded(null); setAnalysis(null); setAssign({}); setConfs({}); setError(null); setDup(null); setDupAccepted(false); setResult(null); setSheetIdx(0); setUsedSaved(false); setPreview(null);
     if (input.current) input.current.value = '';
   };
 
@@ -125,6 +128,24 @@ export function ImportFlow({ onImported, goInsights }: { onImported: () => void;
   const hasCurrencyCol = entries.some((e) => e.field === 'currency');
   const confirmable = isMappingConfirmable(warnings) && (hasCurrencyCol || Boolean(currency)) && (!dup || dupAccepted);
 
+  // Dry run: what would happen on import (duplicates, corrections, overlap risk). Writes nothing.
+  const normalized = useMemo<{ records: SalesRecord[] } | null>(() => {
+    if (!analysis || !isMappingConfirmable(warnings) || (!hasCurrencyCol && !currency)) return null;
+    try {
+      const mapping = confirmedFromEntries(entries, hasCurrencyCol ? undefined : currency);
+      return normalizeSales(analysis.table.dataRows, { profiles: analysis.profiles, mapping, rowNumbers: analysis.table.dataRowNumbers, skippedTotalRows: analysis.table.skippedTotalRows });
+    } catch {
+      return null;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [analysis, assign, currency]);
+  useEffect(() => {
+    let alive = true;
+    if (!normalized) { setPreview(null); return; }
+    previewImport(getDb(), normalized.records, mode).then((p) => alive && setPreview(p)).catch(() => alive && setPreview(null));
+    return () => { alive = false; };
+  }, [normalized, mode]);
+
   const confirm = async () => {
     if (!loaded || !analysis) return;
     setBusy(true);
@@ -168,7 +189,10 @@ export function ImportFlow({ onImported, goInsights }: { onImported: () => void;
           <Stat label={t('import.result.added')} value={row.added} testid="stat-added" />
           <Stat label={t('import.result.duplicates')} value={row.duplicates} testid="stat-dups" />
           <Stat label={t('import.result.skipped')} value={stats.rowsSkipped} />
-          {row.conflicts > 0 && <Stat label={t('import.result.conflicts')} value={row.conflicts} />}
+          {row.conflicts > 0 && <Stat label={t('import.preview.ambiguous')} value={row.conflicts} />}
+          {row.revisedDocs > 0 && <Stat label={t('import.result.revised')} value={row.revisedDocs} testid="stat-revised" />}
+          {row.staleLines > 0 && <Stat label={t('import.result.stale')} value={row.staleLines} />}
+          <Stat label={t('import.result.identity')} value={t(`identity.${row.identity}` as MessageKey)} />
           {stats.dateMin && stats.dateMax && <Stat label={t('import.result.period')} value={`${fmtDate(stats.dateMin, lang)} – ${fmtDate(stats.dateMax, lang)}`} />}
         </dl>
         {issueEntries.length > 0 && (
@@ -331,6 +355,22 @@ export function ImportFlow({ onImported, goInsights }: { onImported: () => void;
           <label className="flex items-center gap-2 text-sm">
             <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} /> {t('import.remember')}
           </label>
+
+          {preview && (
+            <Card className="space-y-2" data-testid="import-preview">
+              <CardTitle>{t('import.previewTitle')}</CardTitle>
+              <dl className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
+                <Stat label={t('import.preview.added')} value={preview.added} testid="pv-added" />
+                <Stat label={t('import.preview.duplicates')} value={preview.duplicates} testid="pv-dups" />
+                {preview.revisedDocs > 0 && <Stat label={t('import.preview.revised')} value={`${preview.revisedDocs} (${preview.supersededLines})`} testid="pv-revised" />}
+                {preview.stale > 0 && <Stat label={t('import.preview.stale')} value={preview.stale} />}
+                {preview.ambiguous > 0 && <Stat label={t('import.preview.ambiguous')} value={preview.ambiguous} />}
+                <Stat label={t('import.result.identity')} value={t(`identity.${preview.identity}` as MessageKey)} />
+              </dl>
+              {preview.overlapRisk && <p role="alert" className="rounded-md bg-amber-50 p-3 text-sm text-amber-900 dark:bg-amber-950/40 dark:text-amber-200" data-testid="overlap-risk">⚠ {t('import.preview.overlapRisk')}</p>}
+              {preview.identity === 'content' && !preview.overlapRisk && <p className="text-xs text-slate-500">{t('import.preview.contentIdentity')}</p>}
+            </Card>
+          )}
 
           <details className="rounded-xl border border-slate-200 p-3 dark:border-slate-800" open>
             <summary className="cursor-pointer text-sm font-medium">{t('import.preview')}</summary>

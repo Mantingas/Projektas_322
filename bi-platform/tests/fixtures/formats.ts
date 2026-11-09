@@ -111,9 +111,9 @@ export async function buildFixtures(): Promise<Fixture[]> {
   // 5. EN CSV, comma delimiter, quoted "1,234.56", ISO dates
   out.push({
     id: 'en-csv', label: 'EN CSV (1,234.56)', fileName: 'sales_detail.csv', truth: lt,
-    bytes: utf8(csv([['Invoice Date', 'Invoice No', 'Customer', 'SKU', 'Product', 'Qty', 'Net Amount', 'Currency', 'Sales Rep'],
-      ...lt.map((t) => [t.date, t.doc, t.customer, t.sku, t.product, String(t.qty), fmtMoney(t.net, 'en'), 'EUR', t.person])], ',')),
-    expectFields: ['document_date', 'document_id', 'customer_name', 'product_id', 'product_name', 'quantity', 'net_amount', 'currency', 'salesperson'],
+    bytes: utf8(csv([['Invoice Date', 'Invoice No', 'Customer', 'SKU', 'Product', 'Category', 'Qty', 'Net Amount', 'Currency', 'Sales Rep'],
+      ...lt.map((t) => [t.date, t.doc, t.customer, t.sku, t.product, t.category, String(t.qty), fmtMoney(t.net, 'en'), 'EUR', t.person])], ',')),
+    expectFields: ['document_date', 'document_id', 'customer_name', 'product_id', 'product_name', 'product_category', 'quantity', 'net_amount', 'currency', 'salesperson'],
     expectBasis: 'net', expectCurrency: 'EUR',
   });
 
@@ -125,11 +125,11 @@ export async function buildFixtures(): Promise<Fixture[]> {
       ws.addRow(['UAB Pavyzdys – pardavimų ataskaita']);
       ws.addRow(['Laikotarpis: 2025-09-01 – 2025-12-15']);
       ws.addRow([]);
-      ws.addRow(['Data', 'Dokumentas', 'Klientas', 'Prekės kodas', 'Prekės pavadinimas', 'Kiekis', 'Suma be PVM', 'Suma su PVM', 'Savikaina']);
-      for (const t of lt) ws.addRow([utcDate(t.date), t.doc, t.customer, t.sku, t.product, t.qty, t.net / 100, (t.net + t.vat) / 100, t.cost / 100]);
+      ws.addRow(['Data', 'Dokumentas', 'Klientas', 'Prekės kodas', 'Prekės pavadinimas', 'Prekių grupė', 'Kiekis', 'Suma be PVM', 'Suma su PVM', 'Savikaina']);
+      for (const t of lt) ws.addRow([utcDate(t.date), t.doc, t.customer, t.sku, t.product, t.category, t.qty, t.net / 100, (t.net + t.vat) / 100, t.cost / 100]);
       ws.addRow(['Iš viso', null, null, null, null, lt.reduce((a, t) => a + t.qty, 0), lt.reduce((a, t) => a + t.net, 0) / 100, null, null]);
     }),
-    expectFields: ['document_date', 'document_id', 'customer_name', 'product_id', 'product_name', 'quantity', 'net_amount', 'gross_amount', 'cost_amount'],
+    expectFields: ['document_date', 'document_id', 'customer_name', 'product_id', 'product_name', 'product_category', 'quantity', 'net_amount', 'gross_amount', 'cost_amount'],
     expectBasis: 'net', defaultCurrency: 'EUR', expectCurrency: 'EUR', expectCost: true, expectHeaderRow: 3,
   });
 

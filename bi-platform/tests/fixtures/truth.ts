@@ -14,6 +14,7 @@ export interface TruthLine {
   vat: number; // cents
   cost: number; // cents, total cost of the line
   person: string;
+  category: string;
 }
 
 function rng(seed: number) {
@@ -26,7 +27,11 @@ function rng(seed: number) {
   };
 }
 
+const CATS_LT = ['Pieno produktai', 'Duona ir kepiniai', 'Gėrimai', 'Bakalėja'];
+const CATS_PL = ['Nabiał', 'Pieczywo', 'Napoje', 'Artykuły spożywcze'];
+
 const LT = {
+  cats: CATS_LT,
   vat: 0.21,
   customers: [
     'UAB Baltic Trade', 'UAB Šilainių prekyba', 'AB Žalgiris Maistas', 'MB Ąžuolas', 'UAB Vilniaus duona', 'UAB Kauno statyba',
@@ -44,6 +49,7 @@ const LT = {
 };
 
 const PL = {
+  cats: CATS_PL,
   vat: 0.23,
   customers: [
     'Hurtownia Żubr Sp. z o.o.', 'Piekarnia Źródło', 'Zakłady Mięsne Łużycka', 'Sklep Ćwikła', 'Przedsiębiorstwo Ługowski', 'Delikatesy Świt',
@@ -107,7 +113,7 @@ export function makeTruth(locale: Locale, seed = 42): TruthLine[] {
         out.push({
           date: iso, doc, customer: L.customers[ci]!, customerId: `K${String(ci + 1).padStart(4, '0')}`,
           sku: `P${String(pi + 1).padStart(4, '0')}`, product: L.products[pi]!, qty, net, vat: Math.round(net * L.vat), cost,
-          person: L.persons[(ci + pi) % L.persons.length]!,
+          person: L.persons[(ci + pi) % L.persons.length]!, category: L.cats[pi % 4]!,
         });
       }
     }
@@ -119,7 +125,7 @@ export function makeTruth(locale: Locale, seed = 42): TruthLine[] {
     out.push({
       date: iso, doc: `KR-${dayOffset}`, customer: L.customers[ci]!, customerId: `K${String(ci + 1).padStart(4, '0')}`,
       sku: `P${String(pi + 1).padStart(4, '0')}`, product: L.products[pi]!, qty: -10, net, vat: Math.round(net * L.vat), cost: Math.round(net * 0.7),
-      person: L.persons[0]!,
+      person: L.persons[0]!, category: L.cats[pi % 4]!,
     });
   }
   return out.sort((a, b) => a.date.localeCompare(b.date) || a.doc.localeCompare(b.doc));

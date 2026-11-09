@@ -26,7 +26,7 @@ export function HistoryView({ version, onChanged }: { version: number; onChanged
         <table className="w-full text-left text-sm" data-testid="history-table">
           <thead className="bg-slate-100 text-xs uppercase text-slate-500 dark:bg-slate-900">
             <tr>
-              {(['hist.file', 'hist.date', 'hist.period', 'hist.rows', 'hist.added', 'hist.dups', 'hist.conflicts', 'hist.mode'] as MessageKey[]).map((k) => <th key={k} className="px-3 py-2">{t(k)}</th>)}
+              {(['hist.file', 'hist.date', 'hist.period', 'hist.rows', 'hist.added', 'hist.dups', 'hist.revised', 'hist.stale', 'hist.identity', 'hist.mode'] as MessageKey[]).map((k) => <th key={k} className="px-3 py-2">{t(k)}</th>)}
               <th />
             </tr>
           </thead>
@@ -39,7 +39,9 @@ export function HistoryView({ version, onChanged }: { version: number; onChanged
                 <td className="px-3 py-2">{r.stats.rowsRead}</td>
                 <td className="px-3 py-2">{r.added}</td>
                 <td className="px-3 py-2">{r.duplicates}</td>
-                <td className="px-3 py-2">{r.conflicts}</td>
+                <td className="px-3 py-2">{r.revisedDocs ?? 0}</td>
+                <td className="px-3 py-2">{r.staleLines ?? 0}</td>
+                <td className="px-3 py-2">{r.identity ? t(`identity.${r.identity}` as MessageKey) : '–'}</td>
                 <td className="px-3 py-2">{t(`mode.${r.exportMode}` as MessageKey)}</td>
                 <td className="px-3 py-2 text-right">
                   <Button size="sm" variant="ghost" onClick={async () => { if (window.confirm(t('hist.confirmDelete'))) { await deleteImport(getDb(), r.id); onChanged(); } }}>{t('hist.delete')}</Button>

@@ -1,5 +1,5 @@
 import type { ConfirmedMapping, ExportMode, ImportStats, SalesRecord } from '@/engine/types';
-import { docKey, planMerge } from '@/engine/import/merge';
+import { docKey, identityOf, planMerge, type ExistingLine, type Identity } from '@/engine/import/merge';
 import type { AppDB, ImportRow, SavedMapping, StoredRecord } from './db';
 
 export interface CommitInput {
@@ -25,29 +25,64 @@ export async function findByChecksum(db: AppDB, checksum: string): Promise<Impor
   return db.imports.where('checksum').equals(checksum).first();
 }
 
-/** Adds only lines that are not stored yet, so overlapping exports are never double-counted. */
+async function loadExisting(db: AppDB, records: SalesRecord[]) {
+  const keys = records.map((r) => r.key);
+  const found = await db.sales.bulkGet(keys);
+  const existingByKey = new Map<string, ExistingLine>();
+  found.forEach((f) => f && existingByKey.set(f.key, f));
+  const docs = [...new Set(records.map(docKey).filter((d): d is string => Boolean(d)))];
+  const existingActiveByDoc = new Map<string, ExistingLine[]>();
+  if (docs.length) {
+    const rows = await db.sales.where('docKey').anyOf(docs).toArray();
+    for (const r of rows) {
+      if (r.supersededBy || !r.docKey) continue;
+      (existingActiveByDoc.get(r.docKey) ?? existingActiveByDoc.set(r.docKey, []).get(r.docKey)!).push(r);
+    }
+  }
+  return { existingByKey, existingActiveByDoc };
+}
+
+export interface MergePreview {
+  added: number;
+  duplicates: number;
+  stale: number;
+  revisedDocs: number;
+  supersededLines: number;
+  ambiguous: number;
+  identity: Identity;
+  idCoverage: number;
+  /** Content-only identity AND the date range overlaps data that is already stored → double-counting cannot be ruled out. */
+  overlapRisk: boolean;
+}
+
+/** Dry run shown to the user before they confirm. Writes nothing. */
+export async function previewImport(db: AppDB, records: SalesRecord[], mode: ExportMode): Promise<MergePreview> {
+  const { existingByKey, existingActiveByDoc } = await loadExisting(db, records);
+  const plan = planMerge(records, existingByKey, existingActiveByDoc, mode);
+  const { identity, coverage } = identityOf(records);
+  let overlapRisk = false;
+  if (identity !== 'document' && records.length) {
+    const dates = records.map((r) => r.date).sort();
+    const lo = dates[0]!;
+    const hi = dates[dates.length - 1]!;
+    overlapRisk = (await db.sales.where('date').between(lo, hi, true, true).filter((r) => !r.supersededBy).count()) > 0;
+  }
+  return { added: plan.toAdd.length, duplicates: plan.duplicates, stale: plan.stale, revisedDocs: plan.revisedDocs, supersededLines: plan.supersede.length, ambiguous: plan.ambiguous, identity, idCoverage: coverage, overlapRisk };
+}
+
+/**
+ * Stores new lines, never silently drops a corrected one: replaced lines are kept (flagged `supersededBy`) so the change can be
+ * audited and undone by deleting the import.
+ */
 export async function commitImport(db: AppDB, input: CommitInput): Promise<CommitResult> {
   if (!input.allowSameChecksum) {
     const existing = await findByChecksum(db, input.checksum);
     if (existing) return { status: 'duplicate_file', existing };
   }
   return db.transaction('rw', db.imports, db.sales, async () => {
-    const keys = input.records.map((r) => r.key);
-    const found = await db.sales.bulkGet(keys);
-    const existingKeys = new Set<string>();
-    found.forEach((f, i) => f && existingKeys.add(keys[i]!));
-    // documents that are already stored
-    const docIds = [...new Set(input.records.map(docKey).filter((d): d is string => Boolean(d)))];
-    const existingDocs = new Set<string>();
-    if (docIds.length) {
-      const all = await db.sales.toArray();
-      const wanted = new Set(docIds);
-      for (const r of all) {
-        const d = docKey(r);
-        if (d && wanted.has(d)) existingDocs.add(d);
-      }
-    }
-    const plan = planMerge(input.records, existingKeys, existingDocs);
+    const { existingByKey, existingActiveByDoc } = await loadExisting(db, input.records);
+    const plan = planMerge(input.records, existingByKey, existingActiveByDoc, input.exportMode);
+    const { identity, coverage } = identityOf(input.records);
     const id = newId();
     const row: ImportRow = {
       id,
@@ -59,21 +94,28 @@ export async function commitImport(db: AppDB, input: CommitInput): Promise<Commi
       stats: input.stats,
       added: plan.toAdd.length,
       duplicates: plan.duplicates,
-      conflicts: plan.conflicts.length,
+      conflicts: plan.ambiguous,
+      revisedDocs: plan.revisedDocs,
+      supersededLines: plan.supersede.length,
+      staleLines: plan.stale,
+      identity,
+      idCoverage: coverage,
       mapping: input.mapping,
       templateId: input.templateId,
     };
     await db.imports.add(row);
-    const stored: StoredRecord[] = plan.toAdd.map((r) => ({ ...r, importId: id }));
-    await db.sales.bulkPut(stored);
+    if (plan.supersede.length) await db.sales.where('key').anyOf(plan.supersede).modify({ supersededBy: id });
+    await db.sales.bulkPut(plan.toAdd.map((r): StoredRecord => ({ ...r, importId: id, docKey: docKey(r) })));
     return { status: 'ok' as const, import: row };
   });
 }
 
+/** Active (not superseded) lines with provenance (`importId`, `sourceRow`). */
 export async function loadAllSales(db: AppDB): Promise<SalesRecord[]> {
-  const rows = await db.sales.toArray();
-  return rows.map(({ importId: _importId, ...r }) => {
-    void _importId;
+  const rows = await db.sales.filter((r) => !r.supersededBy).toArray();
+  return rows.map(({ docKey: _d, supersededBy: _s, ...r }) => {
+    void _d;
+    void _s;
     return r;
   });
 }
@@ -81,6 +123,10 @@ export async function loadAllSales(db: AppDB): Promise<SalesRecord[]> {
 export async function deleteImport(db: AppDB, id: string): Promise<void> {
   await db.transaction('rw', db.imports, db.sales, async () => {
     await db.sales.where('importId').equals(id).delete();
+    // lines this import had replaced become active again
+    await db.sales.where('importId').notEqual(id).filter((r) => r.supersededBy === id).modify((r) => {
+      delete r.supersededBy;
+    });
     await db.imports.delete(id);
   });
 }
@@ -113,7 +159,7 @@ export async function restoreBackup(db: AppDB, b: Backup): Promise<void> {
   if (b?.version !== 1 || !Array.isArray(b.imports) || !Array.isArray(b.sales)) throw new Error('invalid_backup');
   await db.transaction('rw', db.imports, db.sales, db.mappings, async () => {
     await db.imports.bulkPut(b.imports);
-    await db.sales.bulkPut(b.sales);
+    await db.sales.bulkPut(b.sales.map((r) => ({ ...r, docKey: docKey(r) })));
     await db.mappings.bulkPut(b.mappings ?? []);
   });
 }

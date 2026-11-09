@@ -6,6 +6,7 @@ import { Header } from '@/components/Header';
 
 export const metadata: Metadata = {
   title: 'Excel Insights',
+  icons: { icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAFklEQVR4nGPwd3tKEmIY1TCqYfhqAABe7noQUrS/JQAAAABJRU5ErkJggg==" },
   description: 'Upload your Excel. Discover what matters in your business data. Your data stays on your computer.',
 };
 export const viewport: Viewport = { width: 'device-width', initialScale: 1 };

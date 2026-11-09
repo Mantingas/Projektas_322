@@ -1,4 +1,7 @@
+import dash from './dash.en';
+
 const en = {
+  ...dash,
   'app.name': 'Excel Insights',
   'app.tagline': 'Business insights from your Excel files',
   'nav.home': 'Home', 'nav.import': 'Import', 'nav.insights': 'Insights', 'nav.history': 'History', 'nav.settings': 'Settings',
@@ -51,7 +54,7 @@ const en = {
   'field.document_date': 'Document date', 'field.document_id': 'Document number', 'field.customer_name': 'Customer name', 'field.customer_id': 'Customer code',
   'field.product_name': 'Product name', 'field.product_id': 'Product code', 'field.quantity': 'Quantity', 'field.unit_price': 'Unit price',
   'field.net_amount': 'Amount excl. VAT', 'field.gross_amount': 'Amount incl. VAT', 'field.amount_unknown_basis': 'Amount (VAT status unknown)',
-  'field.vat_amount': 'VAT amount', 'field.cost_amount': 'Cost of line (total)', 'field.unit_cost': 'Unit cost', 'field.currency': 'Currency', 'field.salesperson': 'Salesperson',
+  'field.vat_amount': 'VAT amount', 'field.cost_amount': 'Cost of line (total)', 'field.unit_cost': 'Unit cost', 'field.currency': 'Currency', 'field.product_category': 'Product category', 'field.salesperson': 'Salesperson',
   'type.date': 'date', 'type.number': 'number', 'type.text': 'text', 'type.empty': 'empty',
   'issue.invalid_date': 'Unreadable date', 'issue.date_out_of_range': 'Date out of range', 'issue.invalid_amount': 'Unreadable amount', 'issue.empty_amount': 'Empty amount',
   'issue.total_row': 'Totals row skipped', 'issue.negative_amount': 'Negative amount (credit note / return)', 'issue.invalid_quantity': 'Unreadable quantity',
@@ -60,6 +63,7 @@ const en = {
   'err.file_too_large': 'The file is larger than 50 MB.', 'err.unsupported_format': 'Unsupported file type. Use .xlsx, .csv or .tsv.',
   'err.legacy_xls': 'Legacy .xls files are not supported. Open it in Excel and save as .xlsx.', 'err.corrupt_file': 'The file looks damaged or is not a valid workbook.',
   'err.empty_file': 'The file contains no data.', 'err.password_protected': 'The file is password protected.', 'err.unknown': 'Unexpected error while reading the file.',
+  'err.zip_limits': 'The workbook expands to an unsafe size (possible decompression bomb) and was rejected.',
   'err.currency_required': 'Choose a currency.',
 
   'ins.title': 'Insights', 'ins.empty': 'No data yet. Import a file to see insights.', 'ins.goImport': 'Import a file',

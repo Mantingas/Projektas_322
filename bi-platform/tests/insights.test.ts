@@ -72,7 +72,7 @@ describe('sales insights are computed, not invented', () => {
 
   it('near-duplicate insights on one topic collapse to the best one', () => {
     const mk = (id: string, value: number): Insight => ({
-      id, topic: 'same', group: 'decline', module: 'sales', severity: 'risk', titleKey: 't', bodyKey: 'b', actionKey: 'a', params: {},
+      id, topic: 'same', group: 'decline', module: 'sales', severity: 'risk', titleKey: 't', bodyKey: 'b', actionKey: 'a', whyKey: 'w', params: {},
       reliability: 'high', reliabilityReasonKey: 'r', impact: { value, unit: 'money' }, actionable: true, evidence: [], score: 0,
     });
     const out = rankInsights([mk('a', 10), mk('b', 50), mk('c', 20)], { total: 100, window: 100 });

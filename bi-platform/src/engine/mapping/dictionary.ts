@@ -60,6 +60,11 @@ export const SALES_SYNONYMS: Record<SalesField, string[]> = {
   ],
   unit_cost: ['vieneto savikaina', 'vnt savikaina', 'cena zakupu', 'koszt jednostkowy', 'cena nabycia', 'cena zakupu netto', 'unit cost', 'purchase price'],
   currency: ['valiuta', 'val', 'waluta', 'currency', 'ccy', 'cur'],
+  product_category: [
+    'prekiu grupe', 'grupe', 'kategorija', 'prekes grupe', 'prekiu kategorija', 'asortimento grupe',
+    'grupa towarowa', 'kategoria', 'grupa', 'grupa produktow', 'kategoria towaru',
+    'category', 'product group', 'product category', 'item group', 'group',
+  ],
   salesperson: [
     'pardavejas', 'vadybininkas', 'atsakingas', 'pardavimu vadybininkas', 'vadyb',
     'handlowiec', 'sprzedawca', 'opiekun', 'przedstawiciel', 'opiekun handlowy',
@@ -70,7 +75,7 @@ export const SALES_SYNONYMS: Record<SalesField, string[]> = {
 export const NUMERIC_FIELDS: SalesField[] = [
   'quantity', 'unit_price', 'net_amount', 'gross_amount', 'amount_unknown_basis', 'vat_amount', 'cost_amount', 'unit_cost',
 ];
-export const TEXT_FIELDS: SalesField[] = ['customer_name', 'product_name', 'salesperson'];
+export const TEXT_FIELDS: SalesField[] = ['customer_name', 'product_name', 'salesperson', 'product_category'];
 export const ID_FIELDS: SalesField[] = ['document_id', 'customer_id', 'product_id'];
 
 /** Header tokens that decide VAT basis of an amount. */

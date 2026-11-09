@@ -79,3 +79,40 @@ Pagrindiniai sprendimai:
 | A7 | Įkėlimo metu naršyklė neišsiunčia jokių užklausų ne į savo kilmę ir jokių POST | `e2e/privacy.spec.ts` |
 | A8 | Duomenys išlieka perkrovus puslapį; „Ištrinti viską“ išvalo visas lenteles | `e2e/flow.spec.ts` |
 | A9 | `tsc --noEmit`, `vitest run`, `next build` be klaidų | CI komandos |
+
+---
+
+# Phase 2 – analytics, comparisons, visualisations
+
+## Audit findings (fixed before any new feature; each has a regression test in `tests/audit-fixes.test.ts`)
+
+| # | Finding | Evidence | Fix |
+|---|---|---|---|
+| 1 | Corrected invoice lost: the new line was parked as a "conflict" and never stored | stored 150 € instead of 170 € | Document-level merge: replaced lines are **kept** (`supersededBy`) but leave analytics; deleting the correcting import restores them; older versions arriving later are ignored (`stale`) |
+| 2 | No document number → corrected line double-counted | 220 € instead of 120 € | Identity reliability (`document` / `mixed` / `content`) stored per import; dry-run preview warns about overlap risk; dashboard shows a data limitation. Not "fixed" – it cannot be fixed without identifiers; it is disclosed |
+| 3 | No ZIP decompression limits | 150 KB file inflated to 150 MB (+371 MB RAM) | Central directory inspected before inflating: entry count, per-entry/total size, compression ratio, ZIP64 rejected |
+| 4 | Average order value included credit-note documents | 33.3 instead of 100 | Orders = documents with a positive total |
+| 5 | Records lost provenance (`importId`) | – | Kept in loaded records, used by drill-down |
+| 6 | Conflict lookup loaded the whole sales table | – | Indexed `docKey` (Dexie schema v2 with migration) |
+| 7 | Table names sorted by code point (Š, Ž, Ł misplaced) | found by an e2e test | `Intl.Collator` per UI language |
+| 8 | Mobile analyst view overflowed by 457 px | found by an e2e test | `min-w-0` on cards / single-column grids |
+
+## Shared analytics layer (`src/engine/analytics`, no React)
+
+```
+filters.ts      one filter implementation (entity keys, text) – used by KPIs, charts, tables, drill-down, reports
+periods.ts      day/week/month/year-over-year, rolling 7/30/90, custom; like-for-like by default; partial-period & data-gap warnings
+aggregate.ts    ONE pass → Aggregate; per-entity aggregates with an "unassigned" bucket so totals always reconcile
+metrics.ts      metric registry: pure functions of an Aggregate + availability rules (new modules register here)
+compare.ts      metric comparison (abs, %, direction, zero-base), trend, aligned series, entity tables, rankings, Pareto, waterfall, composition
+charts.ts       chart configuration: which charts make sense for the data, and why a chart is hidden
+provenance.ts   drill-down on the same filter engine; source summary; metric input explanations
+dashboard.ts    buildDashboard(): the single model consumed by UI, drill-down and the management summary
+insights/explain.ts   normalised insight explanation (what / how much / contributors / why / action / sufficiency)
+report/summary.ts, report/svg.ts   printable management summary with dependency-free SVG charts
+```
+
+Consistency guarantee (tested): Σ entity rows + unassigned = KPI sales; trend total, aligned series, Pareto total and composition agree with the KPI; waterfall start + Σ steps = end; drill-down total = KPI value.
+
+## Phase 2 acceptance results
+See the final report; numbers are produced by `npm test` and `npm run test:e2e`.

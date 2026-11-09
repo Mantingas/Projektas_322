@@ -42,7 +42,7 @@ export function revenueChange(ctx: RuleContext): RuleResult {
   const rel = reliabilityFor(Math.min(p.current.length, p.previous.length), p.days);
   const down = change < 0;
   return ok({
-    id: 'sales.revenue_change',
+    id: 'sales.revenue_change', whyKey: 'sales.revenue_change.why', chart: 'comparison',
     topic: 'revenue_trend',
     group: down ? 'decline' : 'growth',
     severity: down ? 'risk' : 'opportunity',
@@ -69,7 +69,7 @@ export function customersDeclined(ctx: RuleContext): RuleResult {
   const loss = sum(rows.map((x) => x.previous - x.current));
   const rel = reliabilityFor(sum(rows.map((x) => x.previousLines)), ctx.periods.days);
   return ok({
-    id: 'sales.customers_declined',
+    id: 'sales.customers_declined', whyKey: 'sales.customers_declined.why', dimension: 'customer', chart: 'waterfall',
     topic: 'customers_declined',
     group: 'decline',
     severity: 'risk',
@@ -80,7 +80,7 @@ export function customersDeclined(ctx: RuleContext): RuleResult {
     reliability: rel.level,
     reliabilityReasonKey: rel.reasonKey,
     impact: { value: loss, unit: 'money' },
-    evidence: top(rows, 5, (x) => x.previous - x.current).map((x) => ({ label: x.label, current: x.current, previous: x.previous, unit: 'money' as const })),
+    evidence: top(rows, 5, (x) => x.previous - x.current).map((x) => ({ key: x.key, label: x.label, current: x.current, previous: x.previous, unit: 'money' as const })),
   });
 }
 
@@ -97,7 +97,7 @@ export function customerConcentration(ctx: RuleContext): RuleResult {
   if (top1 < 0.25 && top3 < 0.6) return { unavailable: 'nothing_found' };
   const rel = reliabilityFor(sum(sorted.map((g) => g.lines)));
   return ok({
-    id: 'sales.customer_concentration',
+    id: 'sales.customer_concentration', whyKey: 'sales.customer_concentration.why', dimension: 'customer', chart: 'pareto',
     topic: 'customer_concentration',
     group: 'concentration',
     severity: 'risk',
@@ -108,7 +108,7 @@ export function customerConcentration(ctx: RuleContext): RuleResult {
     reliability: rel.level,
     reliabilityReasonKey: rel.reasonKey,
     impact: { value: sum(sorted.slice(0, 3).map((g) => g.revenue)), unit: 'money' },
-    evidence: sorted.slice(0, 5).map((g) => ({ label: g.label, current: g.revenue, unit: 'money' as const })),
+    evidence: sorted.slice(0, 5).map((g) => ({ key: g.key, label: g.label, current: g.revenue, unit: 'money' as const })),
   });
 }
 
@@ -130,7 +130,7 @@ export function productConcentration(ctx: RuleContext): RuleResult {
   if (share > 0.3) return { unavailable: 'nothing_found' };
   const rel = reliabilityFor(sum(sorted.map((g) => g.lines)));
   return ok({
-    id: 'sales.product_pareto',
+    id: 'sales.product_pareto', whyKey: 'sales.product_pareto.why', dimension: 'product', chart: 'pareto',
     topic: 'product_concentration',
     group: 'concentration',
     severity: 'info',
@@ -141,7 +141,7 @@ export function productConcentration(ctx: RuleContext): RuleResult {
     reliability: rel.level,
     reliabilityReasonKey: rel.reasonKey,
     impact: { value: total - acc, unit: 'money' },
-    evidence: sorted.slice(0, 5).map((g) => ({ label: g.label, current: g.revenue, unit: 'money' as const })),
+    evidence: sorted.slice(0, 5).map((g) => ({ key: g.key, label: g.label, current: g.revenue, unit: 'money' as const })),
   });
 }
 
@@ -159,23 +159,23 @@ export function productMovers(ctx: RuleContext): RuleResult[] {
   if (down.length) {
     const rel = reliabilityFor(sum(down.map((x) => x.previousLines)), days);
     out.push(ok({
-      id: 'sales.product_decline', topic: 'product_decline', group: 'decline', severity: 'risk',
+      id: 'sales.product_decline', whyKey: 'sales.product_decline.why', dimension: 'product', chart: 'waterfall', topic: 'product_decline', group: 'decline', severity: 'risk',
       titleKey: 'sales.product_decline.title', bodyKey: 'sales.product_decline.body', actionKey: 'sales.product_decline.action',
       params: { count: down.length, loss: { money: sum(down.map((x) => x.previous - x.current)) }, name: top(down, 1, (x) => x.previous - x.current)[0]!.label, days },
       reliability: rel.level, reliabilityReasonKey: rel.reasonKey,
       impact: { value: sum(down.map((x) => x.previous - x.current)), unit: 'money' },
-      evidence: top(down, 5, (x) => x.previous - x.current).map((x) => ({ label: x.label, current: x.current, previous: x.previous, unit: 'money' as const })),
+      evidence: top(down, 5, (x) => x.previous - x.current).map((x) => ({ key: x.key, label: x.label, current: x.current, previous: x.previous, unit: 'money' as const })),
     }));
   } else out.push({ unavailable: 'nothing_found' });
   if (up.length) {
     const rel = reliabilityFor(sum(up.map((x) => x.currentLines)), days);
     out.push(ok({
-      id: 'sales.product_growth', topic: 'product_growth', group: 'growth', severity: 'opportunity',
+      id: 'sales.product_growth', whyKey: 'sales.product_growth.why', dimension: 'product', chart: 'waterfall', topic: 'product_growth', group: 'growth', severity: 'opportunity',
       titleKey: 'sales.product_growth.title', bodyKey: 'sales.product_growth.body', actionKey: 'sales.product_growth.action',
       params: { count: up.length, gain: { money: sum(up.map((x) => x.current - x.previous)) }, name: top(up, 1, (x) => x.current - x.previous)[0]!.label, days },
       reliability: rel.level, reliabilityReasonKey: rel.reasonKey,
       impact: { value: sum(up.map((x) => x.current - x.previous)), unit: 'money' },
-      evidence: top(up, 5, (x) => x.current - x.previous).map((x) => ({ label: x.label, current: x.current, previous: x.previous, unit: 'money' as const })),
+      evidence: top(up, 5, (x) => x.current - x.previous).map((x) => ({ key: x.key, label: x.label, current: x.current, previous: x.previous, unit: 'money' as const })),
     }));
   } else out.push({ unavailable: 'nothing_found' });
   return out;
@@ -200,13 +200,13 @@ export function newCustomers(ctx: RuleContext): RuleResult {
   if (cur.length === 0 || total <= 0 || rev / total < 0.05) return { unavailable: 'nothing_found' };
   const rel = reliabilityFor(sum(cur.map((g) => g.lines)), p.days);
   return ok({
-    id: 'sales.new_customers', topic: 'new_customers', group: 'growth', severity: 'opportunity',
+    id: 'sales.new_customers', whyKey: 'sales.new_customers.why', dimension: 'customer', chart: 'topCustomers', topic: 'new_customers', group: 'growth', severity: 'opportunity',
     titleKey: 'sales.new_customers.title', bodyKey: 'sales.new_customers.body', actionKey: 'sales.new_customers.action',
     params: { count: cur.length, revenue: { money: rev }, share: { pct: rev / total }, since: { date: ctx.kpis.dateMin } },
     reliability: rel.level === 'high' ? 'medium' : rel.level, // "new" is only relative to the loaded history
     reliabilityReasonKey: 'rel.limitedHistory',
     impact: { value: rev, unit: 'money' },
-    evidence: top(cur, 5, (g) => g.revenue).map((g) => ({ label: g.label, current: g.revenue, unit: 'money' as const })),
+    evidence: top(cur, 5, (g) => g.revenue).map((g) => ({ key: g.key, label: g.label, current: g.revenue, unit: 'money' as const })),
   });
 }
 
@@ -220,12 +220,12 @@ export function salespersonDecline(ctx: RuleContext): RuleResult {
   const worst = top(rows, 1, (x) => x.previous - x.current)[0]!;
   const rel = reliabilityFor(worst.previousLines, ctx.periods.days);
   return ok({
-    id: 'sales.salesperson_decline', topic: 'salesperson_decline', group: 'decline', severity: 'risk',
+    id: 'sales.salesperson_decline', whyKey: 'sales.salesperson_decline.why', dimension: 'salesperson', chart: 'salespeople', topic: 'salesperson_decline', group: 'decline', severity: 'risk',
     titleKey: 'sales.salesperson_decline.title', bodyKey: 'sales.salesperson_decline.body', actionKey: 'sales.salesperson_decline.action',
     params: { count: rows.length, name: worst.label, pct: { pct: pctChange(worst.current, worst.previous) * -1 }, loss: { money: worst.previous - worst.current }, days: ctx.periods.days },
     reliability: rel.level, reliabilityReasonKey: rel.reasonKey,
     impact: { value: sum(rows.map((x) => x.previous - x.current)), unit: 'money' },
-    evidence: top(rows, 5, (x) => x.previous - x.current).map((x) => ({ label: x.label, current: x.current, previous: x.previous, unit: 'money' as const })),
+    evidence: top(rows, 5, (x) => x.previous - x.current).map((x) => ({ key: x.key, label: x.label, current: x.current, previous: x.previous, unit: 'money' as const })),
   });
 }
 
@@ -238,7 +238,7 @@ export function lowMargin(ctx: RuleContext): RuleResult {
   const low = products.filter((g: Group) => g.revenueWithCost >= ctx.kpis.revenue * 0.01 && (g.revenueWithCost - g.cost) / g.revenueWithCost < Math.min(0.1, m.marginPct / 2));
   if (low.length === 0) {
     return ok({
-      id: 'sales.margin_overview', topic: 'margin', group: 'margin', severity: 'info', actionable: false,
+      id: 'sales.margin_overview', whyKey: 'sales.margin_overview.why', dimension: 'product', chart: 'topProducts', topic: 'margin', group: 'margin', severity: 'info', actionable: false,
       titleKey: 'sales.margin_overview.title', bodyKey: 'sales.margin_overview.body', actionKey: 'sales.margin_overview.action',
       params: { margin: { pct: m.marginPct }, profit: { money: m.profit }, coverage: { pct: m.costCoverage } },
       reliability: m.costCoverage >= 0.95 ? rel.level : 'medium', reliabilityReasonKey: m.costCoverage >= 0.95 ? rel.reasonKey : 'rel.partialCost',
@@ -247,12 +247,12 @@ export function lowMargin(ctx: RuleContext): RuleResult {
   }
   const lowRev = sum(low.map((g) => g.revenueWithCost));
   return ok({
-    id: 'sales.low_margin_products', topic: 'margin', group: 'margin', severity: 'risk',
+    id: 'sales.low_margin_products', whyKey: 'sales.low_margin_products.why', dimension: 'product', chart: 'topProducts', topic: 'margin', group: 'margin', severity: 'risk',
     titleKey: 'sales.low_margin_products.title', bodyKey: 'sales.low_margin_products.body', actionKey: 'sales.low_margin_products.action',
     params: { count: low.length, revenue: { money: lowRev }, margin: { pct: m.marginPct }, coverage: { pct: m.costCoverage } },
     reliability: m.costCoverage >= 0.95 ? rel.level : 'medium', reliabilityReasonKey: m.costCoverage >= 0.95 ? rel.reasonKey : 'rel.partialCost',
     impact: { value: lowRev, unit: 'money' },
-    evidence: top(low, 5, (g) => g.revenueWithCost).map((g) => ({ label: g.label, current: (g.revenueWithCost - g.cost) / g.revenueWithCost, unit: 'pct' as const })),
+    evidence: top(low, 5, (g) => g.revenueWithCost).map((g) => ({ key: g.key, label: g.label, current: (g.revenueWithCost - g.cost) / g.revenueWithCost, unit: 'pct' as const })),
   });
 }
 
@@ -265,11 +265,11 @@ export function creditNotes(ctx: RuleContext): RuleResult {
   const rel = reliabilityFor(neg.length);
   const byCustomer = [...groupBy(neg, customerOf).values()];
   return ok({
-    id: 'sales.credit_notes', topic: 'credit_notes', group: 'quality', severity: 'risk',
+    id: 'sales.credit_notes', whyKey: 'sales.credit_notes.why', dimension: 'customer', chart: 'trend', topic: 'credit_notes', group: 'quality', severity: 'risk',
     titleKey: 'sales.credit_notes.title', bodyKey: 'sales.credit_notes.body', actionKey: 'sales.credit_notes.action',
     params: { lines: neg.length, amount: { money: negSum }, share: { pct: negSum / pos } },
     reliability: rel.level, reliabilityReasonKey: rel.reasonKey,
     impact: { value: negSum, unit: 'money' },
-    evidence: top(byCustomer, 5, (g) => Math.abs(g.revenue)).map((g) => ({ label: g.label, current: Math.abs(g.revenue), unit: 'money' as const })),
+    evidence: top(byCustomer, 5, (g) => Math.abs(g.revenue)).map((g) => ({ key: g.key, label: g.label, current: Math.abs(g.revenue), unit: 'money' as const })),
   });
 }

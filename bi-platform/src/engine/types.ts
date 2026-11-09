@@ -79,6 +79,7 @@ export const SALES_FIELDS = [
   'unit_cost',
   'currency',
   'salesperson',
+  'product_category',
 ] as const;
 export type SalesField = (typeof SALES_FIELDS)[number];
 
@@ -137,6 +138,10 @@ export interface SalesRecord {
   salesperson?: string;
   /** 1-based row number in the source sheet. */
   sourceRow: number;
+  /** Product category / group, when the file has one. */
+  category?: string;
+  /** Which import brought this line in (provenance). Set when loaded from the store. */
+  importId?: string;
 }
 
 export type IssueCode =
@@ -182,6 +187,8 @@ export type ParamValue =
   | { date: string };
 
 export interface EvidenceRow {
+  /** Entity key (matches the filter engine) so "View details" can drill into it. */
+  key?: string;
   label: string;
   current: number;
   previous?: number;
@@ -200,6 +207,11 @@ export interface Insight {
   titleKey: string;
   bodyKey: string;
   actionKey: string;
+  /** Why the finding matters. Contributors are associations in the data, never proven causes. */
+  whyKey: string;
+  /** Dimension the evidence rows belong to, and the chart that best shows the finding. */
+  dimension?: 'customer' | 'product' | 'salesperson' | 'category';
+  chart?: 'trend' | 'comparison' | 'topCustomers' | 'topProducts' | 'salespeople' | 'category' | 'waterfall' | 'pareto';
   params: Record<string, ParamValue>;
   reliability: Reliability;
   reliabilityReasonKey: string;

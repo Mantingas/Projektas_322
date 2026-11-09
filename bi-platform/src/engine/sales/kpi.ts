@@ -110,6 +110,9 @@ export interface SalesKpis {
   customers?: number;
   products?: number;
   quantity?: number;
+  /** Documents whose total is positive (credit notes are not orders). */
+  orders?: number;
+  /** Sales of positive documents / orders. */
   averageDocumentValue?: number;
   dateMin: string;
   dateMax: string;
@@ -126,6 +129,7 @@ export function computeKpis(records: SalesRecord[], series: Pick<Series, 'curren
   let dateMin = records[0]!.date;
   let dateMax = records[0]!.date;
   const docs = new Set<string>();
+  const docTotals = new Map<string, number>();
   const customers = new Set<string>();
   const products = new Set<string>();
   const monthly = new Map<string, number>();
@@ -139,7 +143,11 @@ export function computeKpis(records: SalesRecord[], series: Pick<Series, 'curren
     revenue += r.amount;
     if (r.date < dateMin) dateMin = r.date;
     if (r.date > dateMax) dateMax = r.date;
-    if (r.documentId) docs.add(r.documentId.trim().toLowerCase());
+    if (r.documentId) {
+      const dk = r.documentId.trim().toLowerCase();
+      docs.add(dk);
+      docTotals.set(dk, (docTotals.get(dk) ?? 0) + r.amount);
+    }
     const c = customerOf(r);
     if (c) customers.add(c.key);
     const p = productOf(r);
@@ -168,11 +176,17 @@ export function computeKpis(records: SalesRecord[], series: Pick<Series, 'curren
     customers: customers.size || undefined,
     products: products.size || undefined,
     quantity: hasQty ? qty : undefined,
-    averageDocumentValue: docs.size ? revenue / docs.size : undefined,
+    orders: undefined,
+    averageDocumentValue: undefined,
     dateMin,
     dateMax,
     monthly: [...monthly.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([month, rev]) => ({ month, revenue: rev })),
   };
+  const positiveDocs = [...docTotals.values()].filter((v) => v > 0);
+  if (positiveDocs.length) {
+    kpis.orders = positiveDocs.length;
+    kpis.averageDocumentValue = positiveDocs.reduce((a, b) => a + b, 0) / positiveDocs.length;
+  }
   // Margin only on net revenue, only with sufficient cost coverage; computed on lines that actually have a cost.
   if (series.basis === 'net' && positive > 0 && withCost / positive >= MIN_COST_COVERAGE) {
     const profit = revWithCost - cost;
