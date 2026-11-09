@@ -4,7 +4,7 @@ import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { Card, CardTitle } from '../ui/card';
 import { ChartById } from './Charts';
-import type { DashboardModel } from '@/engine/analytics/dashboard';
+import type { DashboardView } from '@/engine/analytics/dashboard';
 import type { Dimension, FilterSpec } from '@/engine/analytics/filters';
 import type { DrillSpec } from '@/engine/analytics/provenance';
 import { explainInsight } from '@/engine/insights/explain';
@@ -16,7 +16,7 @@ const FIELD: Record<Dimension, keyof FilterSpec> = { customer: 'customers', prod
 
 export function InsightCard({ insight, model, expanded, onToggle, onDrill, onFilter }: {
   insight: Insight;
-  model: DashboardModel;
+  model: DashboardView;
   expanded: boolean;
   onToggle: () => void;
   onDrill: (title: string, spec: DrillSpec) => void;

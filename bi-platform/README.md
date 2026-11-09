@@ -15,6 +15,8 @@ npm run typecheck
 npm run build          # static export to ./out
 npm run start          # serve ./out
 npm run samples        # regenerate synthetic files in public/samples
+npm run compat:report  # regenerate docs/COMPATIBILITY.md
+npm run compat:new -- <export> --vendor rivile --id rivile-001   # anonymise a real export locally (see tests/compat/README.md)
 # e2e (needs a built ./out and Chromium):
 npm run build && PW_CHROMIUM_PATH=/path/to/chromium npm run test:e2e   # omit PW_CHROMIUM_PATH after `npx playwright install chromium`
 ```
@@ -23,6 +25,12 @@ npm run build && PW_CHROMIUM_PATH=/path/to/chromium npm run test:e2e   # omit PW
 - Sales dashboard with **Manager** and **Analyst** modes, KPI cards with previous-period comparison and calculation explanations, period comparison (DoD/WoW/MoM/YoY, rolling 7/30/90, custom) with partial-period warnings, 8 chart types chosen from the available data (each with a table alternative), sortable/searchable/paged tables with CSV export, drill-down to source rows, insight details, printable management summary.
 - Corrected invoices are superseded (not lost), overlap risk without document numbers is disclosed, ZIP decompression limits.
 - Shared engine: `src/engine/analytics` (see docs/ARCHITECTURE.md).
+
+## Phase 2.1 additions
+- Insights follow the selected period, filters, currency and VAT basis (rolling-window alerts are separate and labelled); year-to-date; period-status indicator.
+- Safe import replacement: export-mode choice, import preview, explicit confirmation for replacements/removals, held lines + **Conflict review**, audit log, reversible imports.
+- Hardened XLSX validation (measured decompression, DTD refusal, bounded dimensions) and the engine running in a Web Worker.
+- Import diagnostics screen; real-export compatibility framework (`tests/compat`, `npm run compat:new`, `npm run compat:report`) – **no accounting program is verified yet**, see `docs/COMPATIBILITY.md`.
 
 ## What works
 - LT / PL / EN interface; `.xlsx`, `.csv`, `.tsv`; sheet selection; header row detection under report titles; totals rows skipped.

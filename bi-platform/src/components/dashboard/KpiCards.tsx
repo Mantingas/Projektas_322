@@ -3,10 +3,7 @@ import { useState } from 'react';
 import { useLang } from '../LangProvider';
 import { Card } from '../ui/card';
 import { cn } from '@/lib/cn';
-import type { DashboardModel } from '@/engine/analytics/dashboard';
-import { aggregate } from '@/engine/analytics/aggregate';
-import { inRange } from '@/engine/analytics/compare';
-import { explainMetricInputs } from '@/engine/analytics/provenance';
+import type { DashboardView } from '@/engine/analytics/dashboard';
 import { changeText, fmtUnit, metricLabel } from '@/lib/dashFormat';
 import type { DrillSpec } from '@/engine/analytics/provenance';
 import type { FilterSpec } from '@/engine/analytics/filters';
@@ -14,20 +11,19 @@ import type { MessageKey } from '@/i18n';
 
 const TONE = { good: 'text-emerald-700 dark:text-emerald-400', bad: 'text-red-700 dark:text-red-400', flat: 'text-slate-500', na: 'text-slate-400' };
 
-export function KpiCards({ model, filters, onDrill, showHidden }: { model: DashboardModel; filters: FilterSpec; onDrill: (title: string, spec: DrillSpec) => void; showHidden: boolean }) {
+export function KpiCards({ model, filters, onDrill, showHidden }: { model: DashboardView; filters: FilterSpec; onDrill: (title: string, spec: DrillSpec) => void; showHidden: boolean }) {
   const { t, lang } = useLang();
   const cur = model.series.currency;
   const [open, setOpen] = useState<string | null>(null);
   const shown = model.kpis.filter((k) => k.current !== null && !(k.id === 'returns' && k.current === 0 && (k.previous ?? 0) === 0));
   const hidden = model.kpis.filter((k) => k.current === null);
-  const curAgg = aggregate(inRange(model.records, model.periods.current));
   return (
     <section aria-label="KPI" className="space-y-3">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {shown.map((k) => {
           const label = metricLabel(k.id, model.series.basis, t);
           const ch = changeText(k, lang, cur, t);
-          const inputs = Object.fromEntries(Object.entries(explainMetricInputs(k.id, curAgg)).map(([a, b]) => [a, b]));
+          const inputs = model.explain[k.id] ?? {};
           return (
             <Card key={k.id} className="flex flex-col p-4" data-testid={`kpi-card-${k.id}`}>
               <div className="text-xs font-medium text-slate-500">{label}</div>

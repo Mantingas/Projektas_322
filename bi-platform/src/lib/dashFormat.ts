@@ -30,6 +30,7 @@ export function warningText(w: PeriodWarning, t: T): string {
     case 'previous_capped': return t('pw.previous_capped', { days: w.days });
     case 'previous_full_vs_partial': return t('pw.previous_full_vs_partial', { elapsed: w.elapsed, total: w.total });
     case 'history_starts_late': return t('pw.history_starts_late', { dataFrom: w.dataFrom });
+    case 'ytd_coverage': return t('pw.ytd_coverage', { dataFrom: w.dataFrom });
     case 'no_previous_data': return t('pw.no_previous_data');
     case 'no_current_data': return t('pw.no_current_data');
     case 'length_mismatch': return t('pw.length_mismatch', { current: w.current, previous: w.previous });
@@ -41,6 +42,7 @@ export function limitationText(l: Limitation, t: T): string {
   switch (l.code) {
     case 'other_series_hidden': return t('lim.other_series_hidden', { count: l.count });
     case 'negative_lines': return t('lim.negative_lines', { lines: l.lines });
+    case 'held_pending': return t('lim.held_pending', { lines: l.lines });
     default: return t(`lim.${l.code}` as MessageKey);
   }
 }

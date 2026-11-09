@@ -19,6 +19,16 @@ export interface ImportRow {
   revisedDocs: number;
   supersededLines: number;
   staleLines: number;
+  /** Lines stored but held out of analytics until the user decides (ambiguous changes). */
+  heldLines?: number;
+  heldDocs?: number;
+  /** Documents that lost lines with no replacement (only from an explicitly confirmed full snapshot). */
+  removedDocs?: number;
+  /** Lines skipped by the "only new dates" choice. */
+  skippedLines?: number;
+  /** The choices that were applied (and confirmed). */
+  policy?: { conflicts: string; content: string };
+  confirmed?: boolean;
   /** How reliable transaction identity was for this file. */
   identity: 'document' | 'mixed' | 'content';
   idCoverage: number;
@@ -31,6 +41,12 @@ export interface StoredRecord extends SalesRecord {
   docKey?: string;
   /** Import that replaced this line with a corrected version. Superseded lines are kept for audit but excluded from analytics. */
   supersededBy?: string;
+  /** Import that holds this line for review: excluded from analytics until the user resolves it. */
+  heldBy?: string;
+  /** For held lines: the stored lines a "use new version" decision would replace. */
+  replaces?: string[];
+  /** The user kept the stored version instead; retained for audit. */
+  discarded?: boolean;
 }
 
 export interface SavedMapping {
@@ -40,6 +56,14 @@ export interface SavedMapping {
   fields: Partial<Record<SalesField, string>>;
   defaultCurrency?: string;
   updatedAt: number;
+}
+
+export interface AuditEntry {
+  id?: number;
+  at: number;
+  importId?: string;
+  action: 'import' | 'delete_import' | 'resolve_conflict';
+  detail: Record<string, string | number | boolean>;
 }
 
 export interface SettingRow {
@@ -52,6 +76,7 @@ export class AppDB extends Dexie {
   sales!: Table<StoredRecord, string>;
   mappings!: Table<SavedMapping, string>;
   settings!: Table<SettingRow, string>;
+  audit!: Table<AuditEntry, number>;
 
   constructor(name = 'bi-platform') {
     super(name);
@@ -68,6 +93,7 @@ export class AppDB extends Dexie {
           r.docKey = docKey(r);
         }),
       );
+    this.version(3).stores({ sales: 'key, importId, date, docKey, heldBy', audit: '++id, at, importId' });
   }
 }
 

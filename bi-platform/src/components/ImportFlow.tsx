@@ -1,87 +1,76 @@
 'use client';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLang } from './LangProvider';
 import { Button } from './ui/button';
 import { Card, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
-import { getDb } from '@/db/db';
 import type { ImportRow } from '@/db/db';
-import { commitImport, findByChecksum, getSavedMapping, previewImport, type MergePreview } from '@/db/store';
-import { saveMapping } from '@/db/store';
-import { analyzeSheet, confirmedFromEntries, type SheetAnalysis } from '@/engine/pipeline';
-import { isMappingConfirmable, mappingToSaved, validateMapping, LOW_CONFIDENCE } from '@/engine/mapping/mapper';
+import { engine, EngineError } from '@/lib/engineClient';
+import type { AnalysisLite, ParseResult, PreviewResult } from '@/lib/engineSession';
+import { isMappingConfirmable, LOW_CONFIDENCE, validateMapping } from '@/engine/mapping/mapper';
 import { SALES_TEMPLATES } from '@/engine/mapping/templates';
-import { MappingError, normalizeSales } from '@/engine/validation/normalize';
-import type { SalesRecord } from '@/engine/types';
-import { sha256Hex } from '@/engine/import/hash';
-import { SALES_FIELDS, type ExportMode, type ImportStats, type MappingEntry, type ParsedFile, type SalesField } from '@/engine/types';
-import { ClientParseError, parseInWorker } from '@/lib/parseClient';
-import { fmtDate } from '@/i18n';
-import type { MessageKey } from '@/i18n';
+import { renderDiagnosticsText } from '@/engine/import/diagnostics';
+import type { ImportPolicy } from '@/engine/import/merge';
+import { SALES_FIELDS, type ExportMode, type ImportStats, type MappingEntry, type SalesField } from '@/engine/types';
+import { downloadText } from '@/lib/download';
+import { fmtDate, pct, type MessageKey } from '@/i18n';
 import { cn } from '@/lib/cn';
 
 const CURRENCIES = ['EUR', 'PLN', 'USD', 'GBP', 'CZK', 'SEK'];
 const MAX_BYTES = 50 * 1024 * 1024;
+const MODES: ExportMode[] = ['full', 'incremental', 'partial', 'unknown'];
 
-interface Loaded {
-  fileName: string;
-  checksum: string;
-  parsed: ParsedFile;
-}
+type OkPreview = Extract<PreviewResult, { ok: true }>;
 
-export function ImportFlow({ onImported, goInsights }: { onImported: () => void; goInsights: () => void }) {
+export function ImportFlow({ onImported, goInsights, goReview }: { onImported: () => void; goInsights: () => void; goReview: () => void }) {
   const { t, lang } = useLang();
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [loaded, setLoaded] = useState<Loaded | null>(null);
+  const [parsed, setParsed] = useState<ParseResult | null>(null);
   const [sheetIdx, setSheetIdx] = useState(0);
-  const [analysis, setAnalysis] = useState<SheetAnalysis | null>(null);
-  const [usedSaved, setUsedSaved] = useState(false);
+  const [analysis, setAnalysis] = useState<AnalysisLite | null>(null);
   const [assign, setAssign] = useState<Record<number, SalesField | ''>>({});
   const [confs, setConfs] = useState<Record<number, number>>({});
+  const [sources, setSources] = useState<Record<number, MappingEntry['source']>>({});
   const [currency, setCurrency] = useState('EUR');
   const [mode, setMode] = useState<ExportMode>('unknown');
+  const [policy, setPolicy] = useState<ImportPolicy | null>(null);
+  const [confirmChecked, setConfirmChecked] = useState(false);
   const [remember, setRemember] = useState(true);
-  const [dup, setDup] = useState<ImportRow | null>(null);
   const [dupAccepted, setDupAccepted] = useState(false);
+  const [pv, setPv] = useState<OkPreview | null>(null);
+  const [pvBusy, setPvBusy] = useState(false);
   const [result, setResult] = useState<{ row: ImportRow; stats: ImportStats } | null>(null);
   const [dragging, setDragging] = useState(false);
-  const [preview, setPreview] = useState<MergePreview | null>(null);
+  const seq = useRef(0);
 
-  const reset = () => {
-    setLoaded(null); setAnalysis(null); setAssign({}); setConfs({}); setError(null); setDup(null); setDupAccepted(false); setResult(null); setSheetIdx(0); setUsedSaved(false); setPreview(null);
+  const errText = useCallback((e: unknown) => {
+    const code = e instanceof EngineError ? e.code : 'unknown';
+    if (code === 'worker') return t('err.worker');
+    const key = `err.${code}` as MessageKey;
+    return t(['file_too_large', 'unsupported_format', 'legacy_xls', 'corrupt_file', 'empty_file', 'password_protected', 'zip_limits', 'unsafe_archive', 'timeout', 'sheet_limits'].includes(code) ? key : 'err.unknown');
+  }, [t]);
+
+  const reset = useCallback(() => {
+    void engine().call('discard', []);
+    setParsed(null); setAnalysis(null); setAssign({}); setConfs({}); setSources({}); setError(null); setDupAccepted(false); setResult(null); setSheetIdx(0);
+    setPv(null); setPolicy(null); setConfirmChecked(false); setMode('unknown');
     if (input.current) input.current.value = '';
-  };
+  }, []);
 
-  const analyse = useCallback(async (parsed: ParsedFile, idx: number) => {
-    const sheet = parsed.sheets[idx];
-    if (!sheet) return;
-    const hint = lang === 'en' ? '.' : ',';
-    let a = analyzeSheet(sheet, { decimalHint: hint });
-    let saved = false;
-    let savedCurrency: string | undefined;
-    if (a) {
-      const s = await getSavedMapping(getDb(), a.signature);
-      if (s) {
-        a = analyzeSheet(sheet, { decimalHint: hint, savedMapping: s.fields }) ?? a;
-        saved = true;
-        savedCurrency = s.defaultCurrency;
-      }
-    }
+  const analyse = useCallback(async (idx: number) => {
+    const a = await engine().call('analyze', [idx, lang === 'en' ? '.' : ',']);
     setAnalysis(a);
-    setUsedSaved(saved);
+    setPv(null);
     if (a) {
       const asg: Record<number, SalesField | ''> = {};
       const cf: Record<number, number> = {};
+      const src: Record<number, MappingEntry['source']> = {};
       a.profiles.forEach((p) => (asg[p.index] = ''));
-      for (const e of a.proposal.entries) {
-        asg[e.columnIndex] = e.field;
-        cf[e.columnIndex] = e.confidence;
-      }
-      setAssign(asg);
-      setConfs(cf);
-      setCurrency(savedCurrency ?? a.proposal.detectedCurrency ?? (lang === 'pl' ? 'PLN' : 'EUR'));
+      for (const e of a.proposal.entries) { asg[e.columnIndex] = e.field; cf[e.columnIndex] = e.confidence; src[e.columnIndex] = e.source; }
+      setAssign(asg); setConfs(cf); setSources(src);
+      setCurrency(a.savedCurrency ?? a.proposal.detectedCurrency ?? (lang === 'pl' ? 'PLN' : 'EUR'));
     }
   }, [lang]);
 
@@ -89,27 +78,20 @@ export function ImportFlow({ onImported, goInsights }: { onImported: () => void;
     reset();
     setBusy(true);
     try {
-      if (file.size > MAX_BYTES) throw new ClientParseError('file_too_large');
+      if (file.size > MAX_BYTES) throw new EngineError('file_too_large');
       const buf = await file.arrayBuffer();
-      const checksum = await sha256Hex(new Uint8Array(buf));
-      const parsed = await parseInWorker(buf, file.name);
-      const existing = await findByChecksum(getDb(), checksum);
-      setDup(existing ?? null);
-      setLoaded({ fileName: file.name, checksum, parsed });
-      // first sheet that contains a table
-      let idx = 0;
-      for (let i = 0; i < parsed.sheets.length; i++) {
-        if (analyzeSheet(parsed.sheets[i]!)) { idx = i; break; }
-      }
+      const p = await engine().call('parse', [buf, file.name], [buf]);
+      setParsed(p);
+      const idx = Math.max(0, p.sheets.findIndex((s) => s.hasTable));
       setSheetIdx(idx);
-      await analyse(parsed, idx);
+      await analyse(idx);
     } catch (e) {
-      setError(e instanceof ClientParseError ? t(`err.${e.code}` as MessageKey) : t('err.unknown'));
+      setError(errText(e));
+      setParsed(null);
     } finally {
       setBusy(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [analyse, t]);
+  }, [analyse, errText, reset]);
 
   const setField = (col: number, field: SalesField | '') => {
     setAssign((prev) => {
@@ -119,65 +101,60 @@ export function ImportFlow({ onImported, goInsights }: { onImported: () => void;
       return next;
     });
     setConfs((c) => ({ ...c, [col]: 1 }));
+    setSources((s) => ({ ...s, [col]: 'user' }));
+    setPolicy(null);
+    setConfirmChecked(false);
   };
 
-  const entries: MappingEntry[] = Object.entries(assign)
-    .filter(([, f]) => f)
-    .map(([c, f]) => ({ field: f as SalesField, columnIndex: Number(c), confidence: confs[Number(c)] ?? 1, source: 'user' as const }));
+  const entries = Object.entries(assign).filter(([, f]) => f).map(([c, f]) => ({ field: f as SalesField, columnIndex: Number(c), confidence: confs[Number(c)] ?? 1, source: sources[Number(c)] ?? ('user' as const) }));
   const warnings = validateMapping(entries);
   const hasCurrencyCol = entries.some((e) => e.field === 'currency');
-  const confirmable = isMappingConfirmable(warnings) && (hasCurrencyCol || Boolean(currency)) && (!dup || dupAccepted);
 
-  // Dry run: what would happen on import (duplicates, corrections, overlap risk). Writes nothing.
-  const normalized = useMemo<{ records: SalesRecord[] } | null>(() => {
-    if (!analysis || !isMappingConfirmable(warnings) || (!hasCurrencyCol && !currency)) return null;
-    try {
-      const mapping = confirmedFromEntries(entries, hasCurrencyCol ? undefined : currency);
-      return normalizeSales(analysis.table.dataRows, { profiles: analysis.profiles, mapping, rowNumbers: analysis.table.dataRowNumbers, skippedTotalRows: analysis.table.skippedTotalRows });
-    } catch {
-      return null;
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [analysis, assign, currency]);
+  // Dry run in the worker: normalisation + merge plan + diagnostics. Writes nothing.
+  const entriesKey = JSON.stringify(entries.map((e) => [e.field, e.columnIndex]));
   useEffect(() => {
-    let alive = true;
-    if (!normalized) { setPreview(null); return; }
-    previewImport(getDb(), normalized.records, mode).then((p) => alive && setPreview(p)).catch(() => alive && setPreview(null));
-    return () => { alive = false; };
-  }, [normalized, mode]);
+    if (!analysis || !isMappingConfirmable(warnings) || (!hasCurrencyCol && !currency)) { setPv(null); return; }
+    const my = ++seq.current;
+    setPvBusy(true);
+    const timer = setTimeout(() => {
+      engine().call('preview', [{ sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: policy ?? undefined }])
+        .then((r) => { if (seq.current === my) setPv(r.ok ? r : null); })
+        .catch((e: unknown) => { if (seq.current === my) { setPv(null); setError(errText(e)); } })
+        .finally(() => { if (seq.current === my) setPvBusy(false); });
+    }, 150);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [analysis, entriesKey, currency, mode, policy]);
+
+  const needs = pv?.preview.needsConfirmation ?? [];
+  const confirmable = Boolean(pv) && isMappingConfirmable(warnings) && (hasCurrencyCol || Boolean(currency)) && (!parsed?.duplicateOf || dupAccepted) && (needs.length === 0 || confirmChecked) && !pvBusy;
 
   const confirm = async () => {
-    if (!loaded || !analysis) return;
+    if (!parsed || !pv) return;
     setBusy(true);
     setError(null);
     try {
-      const mapping = confirmedFromEntries(entries, hasCurrencyCol ? undefined : currency);
-      const { records, stats } = normalizeSales(analysis.table.dataRows, {
-        profiles: analysis.profiles, mapping, rowNumbers: analysis.table.dataRowNumbers, skippedTotalRows: analysis.table.skippedTotalRows,
-      });
-      const res = await commitImport(getDb(), {
-        checksum: loaded.checksum, fileName: loaded.fileName, sheetName: loaded.parsed.sheets[sheetIdx]!.name, exportMode: mode,
-        records, stats, mapping, templateId: analysis.proposal.templateId, allowSameChecksum: dupAccepted,
-      });
-      if (res.status === 'duplicate_file') {
-        setDup(res.existing);
-        return;
+      const r = await engine().call('commit', [{ sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: pv.preview.policy, confirmed: confirmChecked, allowSameChecksum: dupAccepted, remember }]);
+      if (r.status === 'ok') {
+        setResult({ row: r.import, stats: r.stats });
+        onImported();
+      } else if (r.status === 'needs_confirmation') {
+        setError(t('cf.needed'));
+      } else if (r.status === 'duplicate_file') {
+        setError(t('import.dupFile', { date: fmtDate(new Date(r.existing.importedAt).toISOString().slice(0, 10), lang) }));
+      } else {
+        setError(t(r.error === 'currency_required' ? 'err.currency_required' : r.error === 'missing_date' ? 'import.needDate' : 'import.needAmount'));
       }
-      if (remember) {
-        await saveMapping(getDb(), {
-          signature: analysis.signature, fields: mappingToSaved(entries, analysis.table.headers), defaultCurrency: hasCurrencyCol ? undefined : currency, updatedAt: Date.now(),
-        });
-      }
-      setResult({ row: res.import, stats });
-      onImported();
     } catch (e) {
-      setError(e instanceof MappingError ? t(e.code === 'currency_required' ? 'err.currency_required' : e.code === 'missing_date' ? 'import.needDate' : 'import.needAmount') : t('err.unknown'));
+      setError(errText(e));
     } finally {
       setBusy(false);
     }
   };
 
-  // ---------- result screen ----------
+  const setPol = (patch: Partial<ImportPolicy>) => { setPolicy({ ...(pv?.preview.policy ?? { conflicts: 'hold', content: 'dedupe_exact' }), ...patch }); setConfirmChecked(false); };
+
+  // ───────── result ─────────
   if (result) {
     const { row, stats } = result;
     const issueEntries = [...Object.entries(stats.errors), ...Object.entries(stats.warnings)] as [string, number][];
@@ -189,32 +166,31 @@ export function ImportFlow({ onImported, goInsights }: { onImported: () => void;
           <Stat label={t('import.result.added')} value={row.added} testid="stat-added" />
           <Stat label={t('import.result.duplicates')} value={row.duplicates} testid="stat-dups" />
           <Stat label={t('import.result.skipped')} value={stats.rowsSkipped} />
-          {row.conflicts > 0 && <Stat label={t('import.preview.ambiguous')} value={row.conflicts} />}
+          {(row.heldLines ?? 0) > 0 && <Stat label={t('import.result.held')} value={row.heldLines!} testid="stat-held" />}
           {row.revisedDocs > 0 && <Stat label={t('import.result.revised')} value={row.revisedDocs} testid="stat-revised" />}
+          {(row.removedDocs ?? 0) > 0 && <Stat label={t('import.result.removed')} value={row.removedDocs!} />}
           {row.staleLines > 0 && <Stat label={t('import.result.stale')} value={row.staleLines} />}
           <Stat label={t('import.result.identity')} value={t(`identity.${row.identity}` as MessageKey)} />
           {stats.dateMin && stats.dateMax && <Stat label={t('import.result.period')} value={`${fmtDate(stats.dateMin, lang)} – ${fmtDate(stats.dateMax, lang)}`} />}
         </dl>
+        {(row.heldLines ?? 0) > 0 && <p role="status" className="rounded-md bg-amber-50 p-3 text-sm text-amber-900 dark:bg-amber-950/40 dark:text-amber-200" data-testid="held-notice">⚠ {t('mp.heldNote')}</p>}
         {issueEntries.length > 0 && (
           <div>
             <div className="mb-1 text-sm font-medium">{t('import.issues')}</div>
-            <ul className="flex flex-wrap gap-2">
-              {issueEntries.map(([code, n]) => (
-                <li key={code}><Badge tone={code in stats.errors ? 'risk' : 'warn'}>{t(`issue.${code}` as MessageKey)}: {n}</Badge></li>
-              ))}
-            </ul>
+            <ul className="flex flex-wrap gap-2">{issueEntries.map(([code, n]) => <li key={code}><Badge tone={code in stats.errors ? 'risk' : 'warn'}>{t(`issue.${code}` as MessageKey)}: {n}</Badge></li>)}</ul>
           </div>
         )}
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button onClick={goInsights} data-testid="view-insights">{t('import.viewInsights')}</Button>
+          {(row.heldLines ?? 0) > 0 && <Button variant="outline" onClick={goReview} data-testid="review-conflicts">{t('import.result.reviewNow')}</Button>}
           <Button variant="outline" onClick={reset}>{t('import.choose')}</Button>
         </div>
       </Card>
     );
   }
 
-  // ---------- upload screen ----------
-  if (!loaded) {
+  // ───────── upload ─────────
+  if (!parsed) {
     return (
       <div className="space-y-4">
         <h1 className="text-2xl font-bold">{t('import.title')}</h1>
@@ -234,35 +210,36 @@ export function ImportFlow({ onImported, goInsights }: { onImported: () => void;
     );
   }
 
-  // ---------- mapping screen ----------
-  const sheet = loaded.parsed.sheets[sheetIdx]!;
+  // ───────── diagnostics + mapping + preview ─────────
   const tpl = analysis?.proposal.templateId ? SALES_TEMPLATES.find((x) => x.id === analysis.proposal.templateId) : undefined;
+  const p = pv?.preview;
+  const d = pv?.diagnostics;
+  const showConflicts = Boolean(p && (p.revisedDocs + p.heldDocs + p.additionsDocs + p.removedDocs + p.omittedDocs > 0 || (p.proposedPolicy.conflicts === 'replace' && p.identity === 'document' && p.absentDocs + p.duplicates > 0)));
+  const showContent = Boolean(p && p.identity !== 'document' && p.overlapRisk);
+  const downloadDiag = () => d && downloadText('import-diagnostics.txt', 'text/plain', renderDiagnosticsText(d, { app: t('app.name'), generatedAt: new Date().toISOString().slice(0, 16).replace('T', ' ') }));
+
   return (
-    <div className="space-y-5">
+    <div className="space-y-5" data-testid="import-diagnostics">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h1 className="text-2xl font-bold">{t('import.mappingTitle')}</h1>
+        <h1 className="text-2xl font-bold">{t('diag.title')}</h1>
         <Button variant="ghost" size="sm" onClick={reset}>{t('import.cancel')}</Button>
       </div>
-      <p className="text-sm text-slate-600 dark:text-slate-400">📄 {loaded.fileName}</p>
+      <p className="text-sm text-slate-600 dark:text-slate-400">📄 {parsed.fileName}</p>
       {error && <p role="alert" className="rounded-md bg-red-50 p-3 text-sm text-red-800 dark:bg-red-950 dark:text-red-200">{error}</p>}
 
-      {dup && (
+      {parsed.duplicateOf && (
         <Card className="border-amber-300 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/40" data-testid="dup-file">
-          <p className="text-sm">{t('import.dupFile', { date: fmtDate(new Date(dup.importedAt).toISOString().slice(0, 10), lang) })}</p>
+          <p className="text-sm">{t('import.dupFile', { date: fmtDate(new Date(parsed.duplicateOf.importedAt).toISOString().slice(0, 10), lang) })}</p>
           {!dupAccepted && <Button className="mt-2" size="sm" variant="outline" onClick={() => setDupAccepted(true)} data-testid="import-anyway">{t('import.importAnyway')}</Button>}
         </Card>
       )}
 
-      {loaded.parsed.sheets.length > 1 && (
+      {parsed.sheets.length > 1 && (
         <label className="flex items-center gap-2 text-sm">
           {t('import.sheet')}
-          <select
-            className="rounded-md border border-slate-300 bg-transparent px-2 py-1 dark:border-slate-700 dark:bg-slate-900"
-            value={sheetIdx}
-            data-testid="sheet-select"
-            onChange={async (e) => { const i = Number(e.target.value); setSheetIdx(i); await analyse(loaded.parsed, i); }}
-          >
-            {loaded.parsed.sheets.map((s, i) => <option key={i} value={i}>{s.name}</option>)}
+          <select className="rounded-md border border-slate-300 bg-transparent px-2 py-1 dark:border-slate-700 dark:bg-slate-900" value={sheetIdx} data-testid="sheet-select"
+            onChange={async (e) => { const i = Number(e.target.value); setSheetIdx(i); setBusy(true); try { await analyse(i); } catch (er) { setError(errText(er)); } finally { setBusy(false); } }}>
+            {parsed.sheets.map((s, i) => <option key={i} value={i}>{s.name}{s.hasTable ? '' : ' ∅'}</option>)}
           </select>
         </label>
       )}
@@ -271,50 +248,46 @@ export function ImportFlow({ onImported, goInsights }: { onImported: () => void;
         <p className="rounded-md bg-amber-50 p-3 text-sm dark:bg-amber-950/40">{t('import.noTable')}</p>
       ) : (
         <>
-          <div className="flex flex-wrap gap-2 text-xs">
-            <Badge>{t('import.headerRow', { row: analysis.table.headerRow + 1 })}</Badge>
-            {analysis.table.skippedTotalRows > 0 && <Badge>{t('import.totalSkipped', { n: analysis.table.skippedTotalRows })}</Badge>}
-            {sheet.truncated && <Badge tone="warn">{t('import.truncated', { n: sheet.rows.length })}</Badge>}
-            {tpl && <Badge tone="info">{t('import.template', { name: tpl.name })}</Badge>}
-            {usedSaved && <Badge tone="info">{t('import.saved')}</Badge>}
-          </div>
-          <p className="text-sm text-slate-600 dark:text-slate-400">{t('import.mappingHelp')}</p>
+          <Card className="space-y-2" data-testid="diag-structure">
+            <CardTitle>{t('diag.structure')}</CardTitle>
+            <div className="flex flex-wrap gap-2 text-xs">
+              <Badge>{t('diag.kind')}: {analysis.structure.kind}</Badge>
+              {analysis.structure.encoding && <Badge>{t('diag.encoding')}: {analysis.structure.encoding}</Badge>}
+              {analysis.structure.delimiter && <Badge>{t('diag.delimiter')}: {analysis.structure.delimiter === '\t' ? 'TAB' : analysis.structure.delimiter}</Badge>}
+              <Badge>{t('diag.sheet')}: {analysis.structure.sheet} ({analysis.structure.sheets})</Badge>
+              <Badge>{t('diag.size', { rows: analysis.structure.rows, cols: analysis.structure.columns })}</Badge>
+              <Badge tone={analysis.headerConfidence >= 0.6 ? 'opportunity' : 'warn'}>{t('diag.headerRow', { row: analysis.structure.headerRow, pct: pct(analysis.headerConfidence, lang) })}</Badge>
+              {analysis.skippedTotalRows > 0 && <Badge>{t('import.totalSkipped', { n: analysis.skippedTotalRows })}</Badge>}
+              {analysis.truncated && <Badge tone="warn">{t('diag.truncated')}</Badge>}
+              {tpl && <Badge tone="info">{t('import.template', { name: tpl.name })}</Badge>}
+              {analysis.usedSaved && <Badge tone="info">{t('import.saved')}</Badge>}
+            </div>
+          </Card>
 
+          <h2 className="text-lg font-semibold">{t('diag.columns')}</h2>
+          <p className="text-sm text-slate-600 dark:text-slate-400">{t('import.mappingHelp')}</p>
           <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
             <table className="w-full text-left text-sm" data-testid="mapping-table">
               <thead className="bg-slate-100 text-xs uppercase text-slate-500 dark:bg-slate-900">
-                <tr>
-                  <th className="px-3 py-2">{t('import.column')}</th>
-                  <th className="px-3 py-2">{t('import.sample')}</th>
-                  <th className="px-3 py-2">{t('import.type')}</th>
-                  <th className="px-3 py-2">{t('import.meaning')}</th>
-                  <th className="px-3 py-2">{t('import.confidence')}</th>
-                </tr>
+                <tr><th className="px-3 py-2">{t('import.column')}</th><th className="px-3 py-2">{t('import.sample')}</th><th className="px-3 py-2">{t('import.type')}</th><th className="px-3 py-2">{t('import.meaning')}</th><th className="px-3 py-2">{t('import.confidence')}</th></tr>
               </thead>
               <tbody>
-                {analysis.profiles.map((p) => {
-                  const f = assign[p.index] ?? '';
-                  const c = confs[p.index];
-                  const samples = analysis.table.dataRows.slice(0, 3).map((r) => String(r[p.index] ?? '')).filter(Boolean);
+                {analysis.profiles.map((col) => {
+                  const f = assign[col.index] ?? '';
+                  const c = confs[col.index];
                   return (
-                    <tr key={p.index} className="border-t border-slate-200 dark:border-slate-800">
-                      <td className="px-3 py-2 font-medium">{p.header}</td>
-                      <td className="max-w-[16rem] truncate px-3 py-2 text-slate-500">{samples.join(' · ')}</td>
-                      <td className="px-3 py-2"><Badge>{t(`type.${p.type}` as MessageKey)}</Badge></td>
+                    <tr key={col.index} className="border-t border-slate-200 dark:border-slate-800">
+                      <td className="px-3 py-2 font-medium">{col.header}</td>
+                      <td className="max-w-[16rem] truncate px-3 py-2 text-slate-500">{(analysis.samples[col.index] ?? []).join(' · ')}</td>
+                      <td className="px-3 py-2"><Badge>{t(`type.${col.type}` as MessageKey)}</Badge></td>
                       <td className="px-3 py-2">
-                        <select
-                          aria-label={p.header}
-                          data-testid={`map-${p.index}`}
-                          value={f}
-                          onChange={(e) => setField(p.index, e.target.value as SalesField | '')}
-                          className="w-full min-w-[12rem] rounded-md border border-slate-300 bg-transparent px-2 py-1 dark:border-slate-700 dark:bg-slate-900"
-                        >
+                        <select aria-label={col.header} data-testid={`map-${col.index}`} value={f} onChange={(e) => setField(col.index, e.target.value as SalesField | '')} className="w-full min-w-[12rem] rounded-md border border-slate-300 bg-transparent px-2 py-1 dark:border-slate-700 dark:bg-slate-900">
                           <option value="">{t('import.ignore')}</option>
                           {SALES_FIELDS.map((sf) => <option key={sf} value={sf}>{t(`field.${sf}` as MessageKey)}</option>)}
                         </select>
                       </td>
                       <td className="px-3 py-2">
-                        {f && c !== undefined && <Badge tone={c >= LOW_CONFIDENCE ? 'opportunity' : 'warn'}>{Math.round(c * 100)} %</Badge>}
+                        {f && c !== undefined && <span className="inline-flex flex-wrap items-center gap-1"><Badge tone={c >= LOW_CONFIDENCE ? 'opportunity' : 'warn'}>{Math.round(c * 100)} %</Badge><span className="text-xs text-slate-500">{t(`diag.source.${sources[col.index] ?? 'user'}` as MessageKey)}</span></span>}
                       </td>
                     </tr>
                   );
@@ -335,63 +308,127 @@ export function ImportFlow({ onImported, goInsights }: { onImported: () => void;
             ))}
           </ul>
 
+          <Card className="space-y-2" data-testid="diag-unrecognized">
+            <CardTitle>{t('diag.unrecognized')}</CardTitle>
+            {(() => {
+              const un = analysis.profiles.filter((c) => c.type !== 'empty' && !assign[c.index]).map((c) => c.header);
+              return un.length ? <ul className="flex flex-wrap gap-2">{un.map((h) => <li key={h}><Badge tone="warn">{h}</Badge></li>)}</ul> : <p className="text-sm text-slate-500">{t('diag.noneUnrecognized')}</p>;
+            })()}
+          </Card>
+
           <div className="grid gap-4 sm:grid-cols-2">
             {!hasCurrencyCol && (
               <label className="space-y-1 text-sm">
                 <span className="font-medium">{t('import.currency')}</span>
-                <select data-testid="currency-select" value={currency} onChange={(e) => setCurrency(e.target.value)} className="block w-full rounded-md border border-slate-300 bg-transparent px-2 py-2 dark:border-slate-700 dark:bg-slate-900">
-                  {CURRENCIES.map((c) => <option key={c}>{c}</option>)}
-                </select>
+                <select data-testid="currency-select" value={currency} onChange={(e) => setCurrency(e.target.value)} className="block w-full rounded-md border border-slate-300 bg-transparent px-2 py-2 dark:border-slate-700 dark:bg-slate-900">{CURRENCIES.map((c) => <option key={c}>{c}</option>)}</select>
                 <span className="block text-xs text-slate-500">{analysis.proposal.detectedCurrency ? t('import.currencyDetected', { c: analysis.proposal.detectedCurrency }) : t('import.currencyHint')}</span>
               </label>
             )}
             <label className="space-y-1 text-sm">
               <span className="font-medium">{t('import.exportMode')}</span>
-              <select data-testid="mode-select" value={mode} onChange={(e) => setMode(e.target.value as ExportMode)} className="block w-full rounded-md border border-slate-300 bg-transparent px-2 py-2 dark:border-slate-700 dark:bg-slate-900">
-                {(['full', 'incremental', 'unknown'] as const).map((m) => <option key={m} value={m}>{t(`mode.${m}` as MessageKey)}</option>)}
+              <select data-testid="mode-select" value={mode} onChange={(e) => { setMode(e.target.value as ExportMode); setPolicy(null); setConfirmChecked(false); }} className="block w-full rounded-md border border-slate-300 bg-transparent px-2 py-2 dark:border-slate-700 dark:bg-slate-900">
+                {MODES.map((m) => <option key={m} value={m}>{t(`mode.${m}` as MessageKey)}</option>)}
               </select>
+              <span className="block text-xs text-slate-500" data-testid="mode-help">{t(`mode.help.${mode}` as MessageKey)}</span>
             </label>
           </div>
-          <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} /> {t('import.remember')}
-          </label>
 
-          {preview && (
-            <Card className="space-y-2" data-testid="import-preview">
+          {d && (
+            <div className="grid gap-4 lg:grid-cols-2">
+              <Card className="space-y-2" data-testid="diag-validation">
+                <CardTitle>{t('diag.validation')}</CardTitle>
+                <p className="text-sm text-slate-600 dark:text-slate-400">{t('diag.rows', { read: d.rows.read, imported: d.rows.imported, skipped: d.rows.skipped })}</p>
+                {d.issues.length === 0 ? <p className="text-sm text-slate-500">{t('diag.noIssues')}</p> : (
+                  <ul className="space-y-1 text-sm">{d.issues.map((x) => <li key={x.level + x.code}><Badge tone={x.level === 'error' ? 'risk' : 'warn'}>{t(`issue.${x.code}` as MessageKey)}: {x.count}</Badge>{x.rows.length > 0 && <span className="ml-2 text-xs text-slate-500">{t('diag.examples', { rows: x.rows.slice(0, 5).join(', ') })}</span>}</li>)}</ul>
+                )}
+              </Card>
+              <Card className="space-y-2" data-testid="diag-metrics">
+                <CardTitle>{t('diag.metrics')}</CardTitle>
+                <ul className="space-y-1 text-sm">
+                  {d.metrics.map((m) => (
+                    <li key={m.id} data-testid={`diag-metric-${m.id}`} data-available={m.available}>
+                      <span className={m.available ? 'text-emerald-700 dark:text-emerald-400' : 'text-slate-500'}>{m.available ? '✓' : '✗'}</span> <b>{t((m.id === 'sales' ? `metric.sales.${pv?.stats && d ? (entries.some((e) => e.field === 'net_amount') ? 'net' : entries.some((e) => e.field === 'gross_amount') ? 'gross' : 'unknown') : 'unknown'}` : `metric.${m.id}`) as MessageKey)}</b>
+                      {!m.available && m.reason && <span className="text-xs text-slate-500"> – {t(`mu.${m.reason}` as MessageKey)}</span>}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs text-slate-500">{t('diag.aspNote')}</p>
+              </Card>
+            </div>
+          )}
+
+          {p && (
+            <Card className="space-y-3" data-testid="import-preview">
               <CardTitle>{t('import.previewTitle')}</CardTitle>
               <dl className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
-                <Stat label={t('import.preview.added')} value={preview.added} testid="pv-added" />
-                <Stat label={t('import.preview.duplicates')} value={preview.duplicates} testid="pv-dups" />
-                {preview.revisedDocs > 0 && <Stat label={t('import.preview.revised')} value={`${preview.revisedDocs} (${preview.supersededLines})`} testid="pv-revised" />}
-                {preview.stale > 0 && <Stat label={t('import.preview.stale')} value={preview.stale} />}
-                {preview.ambiguous > 0 && <Stat label={t('import.preview.ambiguous')} value={preview.ambiguous} />}
-                <Stat label={t('import.result.identity')} value={t(`identity.${preview.identity}` as MessageKey)} />
+                <Stat label={t('import.preview.added')} value={p.added} testid="pv-added" />
+                <Stat label={t('mp.newDocs')} value={p.newDocs} />
+                {p.additionsDocs > 0 && <Stat label={t('mp.additions')} value={p.additionsDocs} testid="pv-additions" />}
+                <Stat label={t('import.preview.duplicates')} value={p.duplicates} testid="pv-dups" />
+                {p.revisedDocs > 0 && <Stat label={t('import.preview.revised')} value={`${p.revisedDocs} (${p.supersededLines})`} testid="pv-revised" />}
+                {p.removedDocs > 0 && <Stat label={t('mp.removed')} value={p.removedDocs} testid="pv-removed" />}
+                {p.heldLines > 0 && <Stat label={t('mp.held')} value={`${p.heldLines} (${p.heldDocs || '–'})`} testid="pv-held" />}
+                {p.omittedDocs > 0 && <Stat label={t('mp.omitted')} value={p.omittedDocs} />}
+                {p.absentDocs > 0 && <Stat label={t('mp.absent')} value={p.absentDocs} testid="pv-absent" />}
+                {p.stale > 0 && <Stat label={t('import.preview.stale')} value={p.stale} />}
+                {p.skippedLines > 0 && <Stat label={t('mp.skipped')} value={p.skippedLines} />}
+                <Stat label={t('import.result.identity')} value={t(`identity.${p.identity}` as MessageKey)} />
               </dl>
-              {preview.overlapRisk && <p role="alert" className="rounded-md bg-amber-50 p-3 text-sm text-amber-900 dark:bg-amber-950/40 dark:text-amber-200" data-testid="overlap-risk">⚠ {t('import.preview.overlapRisk')}</p>}
-              {preview.identity === 'content' && !preview.overlapRisk && <p className="text-xs text-slate-500">{t('import.preview.contentIdentity')}</p>}
+              {p.heldLines > 0 && <p className="rounded-md bg-sky-50 p-3 text-sm text-sky-900 dark:bg-sky-950/40 dark:text-sky-200">ℹ {t('mp.heldNote')}</p>}
+              {p.overlapRisk && <p role="alert" className="rounded-md bg-amber-50 p-3 text-sm text-amber-900 dark:bg-amber-950/40 dark:text-amber-200" data-testid="overlap-risk">⚠ {t('import.preview.overlapRisk')}</p>}
+              {p.identity === 'content' && !p.overlapRisk && <p className="text-xs text-slate-500">{t('import.preview.contentIdentity')}</p>}
+              {p.heldLines + p.revisedDocs + p.removedDocs === 0 && needs.length === 0 && <p className="text-sm text-emerald-700 dark:text-emerald-400" data-testid="pv-safe">✓ {t('mp.safe')}</p>}
+
+              {showConflicts && (
+                <fieldset className="space-y-1 text-sm" data-testid="policy-conflicts">
+                  <legend className="mb-1 font-medium">{t('pol.conflicts')}</legend>
+                  {(['hold', 'replace', 'add_alongside'] as const).map((o) => (
+                    <label key={o} className="flex items-start gap-2"><input type="radio" name="pc" value={o} checked={(policy ?? p.policy).conflicts === o} onChange={() => setPol({ conflicts: o })} data-testid={`pol-${o}`} />
+                      <span>{t(`pol.${o}` as MessageKey)}{p.proposedPolicy.conflicts === o && <Badge className="ml-2" tone="info">{t('pol.proposed')}</Badge>}</span></label>
+                  ))}
+                </fieldset>
+              )}
+              {showContent && (
+                <fieldset className="space-y-1 text-sm" data-testid="policy-content">
+                  <legend className="mb-1 font-medium">{t('pol.content')}</legend>
+                  {(['hold_overlap', 'only_new_dates', 'dedupe_exact'] as const).map((o) => (
+                    <label key={o} className="flex items-start gap-2"><input type="radio" name="pk" value={o} checked={(policy ?? p.policy).content === o} onChange={() => setPol({ content: o })} data-testid={`pol-${o}`} />
+                      <span>{t(`pol.${o}` as MessageKey)}{p.proposedPolicy.content === o && <Badge className="ml-2" tone="info">{t('pol.proposed')}</Badge>}</span></label>
+                  ))}
+                </fieldset>
+              )}
+
+              {needs.length > 0 && (
+                <div className="space-y-2 rounded-md border border-red-300 bg-red-50 p-3 text-sm dark:border-red-900 dark:bg-red-950/30" data-testid="confirm-box" role="group" aria-label={t('cf.title')}>
+                  <div className="font-semibold">{t('cf.title')}</div>
+                  <ul className="list-disc space-y-1 pl-5">
+                    {needs.map((r) => <li key={r}>{t(`cf.${r}` as MessageKey, { n: r === 'replacements' ? p.revisedDocs : p.removedDocs })}</li>)}
+                  </ul>
+                  <label className="flex items-center gap-2 font-medium"><input type="checkbox" data-testid="confirm-checkbox" checked={confirmChecked} onChange={(e) => setConfirmChecked(e.target.checked)} />{t('cf.checkbox')}</label>
+                </div>
+              )}
             </Card>
           )}
 
-          <details className="rounded-xl border border-slate-200 p-3 dark:border-slate-800" open>
+          <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} /> {t('import.remember')}</label>
+
+          <details className="rounded-xl border border-slate-200 p-3 dark:border-slate-800">
             <summary className="cursor-pointer text-sm font-medium">{t('import.preview')}</summary>
             <div className="mt-3 overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead><tr>{analysis.table.headers.map((h, i) => <th key={i} className="px-2 py-1 text-slate-500">{h}</th>)}</tr></thead>
-                <tbody>
-                  {analysis.table.dataRows.slice(0, 8).map((r, ri) => (
-                    <tr key={ri} className="border-t border-slate-100 dark:border-slate-800">
-                      {analysis.table.headers.map((_, ci) => <td key={ci} className="max-w-[12rem] truncate px-2 py-1">{String(r[ci] ?? '')}</td>)}
-                    </tr>
-                  ))}
-                </tbody>
+                <thead><tr>{analysis.headers.map((h, i) => <th key={i} className="px-2 py-1 text-slate-500">{h}</th>)}</tr></thead>
+                <tbody>{analysis.previewRows.map((r, ri) => <tr key={ri} className="border-t border-slate-100 dark:border-slate-800">{r.map((c, ci) => <td key={ci} className="max-w-[12rem] truncate px-2 py-1">{c}</td>)}</tr>)}</tbody>
               </table>
             </div>
           </details>
 
-          <div className="flex gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <Button onClick={confirm} disabled={!confirmable || busy} data-testid="confirm-import">{t('import.confirm')}</Button>
             <Button variant="outline" onClick={reset}>{t('import.cancel')}</Button>
+            {d && <Button variant="ghost" size="sm" onClick={downloadDiag} data-testid="download-diagnostics">{t('diag.download')}</Button>}
+            {pvBusy && <span className="text-xs text-slate-500">{t('diag.working')}</span>}
           </div>
+          {d && <p className="text-xs text-slate-500">{t('diag.privacy')}</p>}
         </>
       )}
     </div>

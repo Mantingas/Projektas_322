@@ -1,0 +1,11 @@
+{
+  "_note": "Support is claimed ONLY for a vendor with at least one passing fixture whose provenance is 'real-anonymized'. Synthetic fixtures never count. Do not edit statuses by hand: they are computed.",
+  "vendors": [
+    { "id": "rivile", "name": "Rivilė", "country": "LT" },
+    { "id": "finvalda", "name": "Finvalda", "country": "LT" },
+    { "id": "dynamics-nav-bc", "name": "Microsoft Dynamics NAV / Business Central", "country": "LT/PL" },
+    { "id": "comarch-optima", "name": "Comarch ERP Optima", "country": "PL" },
+    { "id": "insert-subiekt", "name": "InsERT Subiekt", "country": "PL" },
+    { "id": "symfonia", "name": "Symfonia", "country": "PL" }
+  ]
+}

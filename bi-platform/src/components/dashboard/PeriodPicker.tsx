@@ -5,9 +5,19 @@ import { addDays } from '@/engine/analytics/dates';
 import { dateRange, warningText } from '@/lib/dashFormat';
 import type { MessageKey } from '@/i18n';
 
-const PRESETS: PeriodPreset[] = ['r30', 'mom', 'wow', 'dod', 'yoy', 'r7', 'r90', 'custom'];
 
-export function PeriodPicker({ value, onChange, resolved, dateMax }: { value: PeriodSelection; onChange: (v: PeriodSelection) => void; resolved: ResolvedPeriods; dateMax: string }) {
+export function PeriodStatusChip({ resolved }: { resolved: ResolvedPeriods }) {
+  const { t } = useLang();
+  const s = resolved.status;
+  const text = s.kind === 'complete' ? t('st.complete', { days: s.days }) : s.kind === 'partial' ? t('st.partial', { elapsed: s.elapsed, total: s.total }) : t('st.to_date', { elapsed: s.elapsed, total: s.total });
+  return (
+    <span data-testid="period-status" data-kind={s.kind} title={t('st.title')} className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${s.kind === 'complete' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-300'}`}>
+      {s.kind === 'complete' ? '✓' : '◐'} {text}
+    </span>
+  );
+}
+
+export function PeriodPicker({ value, onChange, resolved, dateMax, presets }: { value: PeriodSelection; onChange: (v: PeriodSelection) => void; resolved: ResolvedPeriods; dateMax: string; presets: PeriodPreset[] }) {
   const { t, lang } = useLang();
   const hasPartial = resolved.warnings.some((w) => w.code === 'partial_current' || w.code === 'previous_full_vs_partial');
   const custom = value.custom ?? { current: resolved.current, previous: resolved.previous };
@@ -19,9 +29,10 @@ export function PeriodPicker({ value, onChange, resolved, dateMax }: { value: Pe
         <label className="flex items-center gap-2 text-sm font-medium">
           {t('per.label')}
           <select data-testid="period-preset" value={value.preset} onChange={(e) => onChange({ preset: e.target.value as PeriodPreset, custom: e.target.value === 'custom' ? { current: resolved.current, previous: resolved.previous } : undefined })} className={input}>
-            {PRESETS.map((p) => <option key={p} value={p}>{t(`per.${p}` as MessageKey)}</option>)}
+            {presets.map((p) => <option key={p} value={p}>{t(`per.${p}` as MessageKey)}</option>)}
           </select>
         </label>
+        <PeriodStatusChip resolved={resolved} />
         {(hasPartial || value.fullPrevious) && ['mom', 'wow', 'yoy'].includes(value.preset) && (
           <label className="flex items-center gap-2 text-xs">
             <input type="checkbox" data-testid="full-previous" checked={Boolean(value.fullPrevious)} onChange={(e) => onChange({ ...value, fullPrevious: e.target.checked })} />

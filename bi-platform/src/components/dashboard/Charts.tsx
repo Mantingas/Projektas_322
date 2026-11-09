@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { Bar, BarChart, CartesianGrid, ComposedChart, Legend, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis, Cell } from 'recharts';
 import { useLang } from '../LangProvider';
 import { Card, CardTitle } from '../ui/card';
-import type { DashboardModel } from '@/engine/analytics/dashboard';
+import type { DashboardView } from '@/engine/analytics/dashboard';
 import { composition, pareto, topBottom, waterfall, type EntityRow } from '@/engine/analytics/compare';
 import type { ChartId } from '@/engine/analytics/charts';
 import type { Dimension } from '@/engine/analytics/filters';
@@ -13,7 +13,7 @@ import { fmtDate, money, num, pct, type MessageKey } from '@/i18n';
 const COLORS = { cur: '#4f46e5', prev: '#94a3b8', up: '#059669', down: '#dc2626', total: '#4f46e5', grid: '#94a3b855' };
 
 export interface ChartProps {
-  model: DashboardModel;
+  model: DashboardView;
   onFilter: (dim: Dimension, key: string) => void;
 }
 
@@ -45,7 +45,7 @@ export function ChartCard({ id, title, subtitle, unit, alt, children, note }: { 
   );
 }
 
-function useFmt(model: DashboardModel) {
+function useFmt(model: DashboardView) {
   const { lang, t } = useLang();
   const cur = model.series.currency;
   const m = (n: number) => money(n, { lang, currency: cur });
@@ -95,7 +95,7 @@ export function ComparisonChart({ model }: ChartProps) {
   );
 }
 
-function RankBars({ rows, dim, onFilter, color, model }: { rows: EntityRow[]; dim: Dimension; onFilter: ChartProps['onFilter']; color: string; model: DashboardModel }) {
+function RankBars({ rows, dim, onFilter, color, model }: { rows: EntityRow[]; dim: Dimension; onFilter: ChartProps['onFilter']; color: string; model: DashboardView }) {
   const { m, short, t } = useFmt(model);
   const h = Math.max(120, rows.length * 30 + 24);
   return (

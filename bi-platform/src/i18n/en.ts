@@ -1,7 +1,9 @@
 import dash from './dash.en';
+import dash2 from './dash2.en';
 
 const en = {
   ...dash,
+  ...dash2,
   'app.name': 'Excel Insights',
   'app.tagline': 'Business insights from your Excel files',
   'nav.home': 'Home', 'nav.import': 'Import', 'nav.insights': 'Insights', 'nav.history': 'History', 'nav.settings': 'Settings',
@@ -64,6 +66,9 @@ const en = {
   'err.legacy_xls': 'Legacy .xls files are not supported. Open it in Excel and save as .xlsx.', 'err.corrupt_file': 'The file looks damaged or is not a valid workbook.',
   'err.empty_file': 'The file contains no data.', 'err.password_protected': 'The file is password protected.', 'err.unknown': 'Unexpected error while reading the file.',
   'err.zip_limits': 'The workbook expands to an unsafe size (possible decompression bomb) and was rejected.',
+  'err.unsafe_archive': 'The workbook archive contains unsafe entries (encrypted, unsupported or oddly named) and was rejected.',
+  'err.timeout': 'Processing took too long and was stopped.',
+  'err.sheet_limits': 'The sheet exceeds the supported size (rows, columns or cells).',
   'err.currency_required': 'Choose a currency.',
 
   'ins.title': 'Insights', 'ins.empty': 'No data yet. Import a file to see insights.', 'ins.goImport': 'Import a file',
@@ -134,7 +139,7 @@ const en = {
   'sales.credit_notes.title': 'Credit notes / negative lines: {lines}',
   'sales.credit_notes.body': 'Negative lines total {amount}, which is {share} of positive sales.',
   'sales.credit_notes.action': 'Check the reasons for returns and credit notes.',
-  'rel.enoughLines': 'Enough data (30+ lines).', 'rel.someLines': 'Limited data (10–29 lines).', 'rel.fewLines': 'Few lines (under 10) – the finding may be coincidence.',
+  'rel.unequalPeriods': 'The compared periods have different lengths, so totals are not directly comparable.', 'rel.enoughLines': 'Enough data (30+ lines).', 'rel.someLines': 'Limited data (10–29 lines).', 'rel.fewLines': 'Few lines (under 10) – the finding may be coincidence.',
   'rel.shortPeriod': 'The compared periods are shorter than 21 days.', 'rel.limitedHistory': '“New” is judged only against the loaded history.', 'rel.partialCost': 'Cost is missing on some lines.',
 } as const;
 

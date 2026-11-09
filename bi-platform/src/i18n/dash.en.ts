@@ -16,6 +16,12 @@ const dash = {
   'pw.no_current_data': 'There is no data in the current period.',
   'pw.length_mismatch': 'The periods have different lengths ({current} vs {previous} days). Totals are not directly comparable.',
   'pw.sparse_data': 'Only {daysWithData} of {days} days in the {which} period have records. Check the export for missing days.',
+  'per.ytd': 'Year to date',
+  'pw.ytd_coverage': 'Your data starts on {dataFrom}, after 1 January, so this is not a true year-to-date figure.',
+  'st.complete': 'Complete period ({days} days)',
+  'st.partial': 'Incomplete period: {elapsed} of {total} days',
+  'st.to_date': 'Year to date: {elapsed} of {total} days',
+  'st.title': 'Period status',
   'pw.which.current': 'current', 'pw.which.previous': 'previous',
 
   'flt.title': 'Filters', 'flt.customers': 'Customers', 'flt.products': 'Products', 'flt.salespeople': 'Salespeople', 'flt.categories': 'Categories',

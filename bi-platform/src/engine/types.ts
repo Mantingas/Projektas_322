@@ -171,7 +171,14 @@ export interface ImportStats {
   currencies: string[];
 }
 
-export type ExportMode = 'full' | 'incremental' | 'unknown';
+/**
+ * What the user says the file contains:
+ *  full        – a complete snapshot of the covered period (every document is present, with all its lines)
+ *  incremental – only transactions that are new or changed since the previous export
+ *  partial     – documents may be exported with only some of their lines
+ *  unknown     – the user does not know
+ */
+export type ExportMode = 'full' | 'incremental' | 'partial' | 'unknown';
 
 // ---------- Insights ----------
 

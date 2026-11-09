@@ -116,3 +116,47 @@ Consistency guarantee (tested): Σ entity rows + unassigned = KPI sales; trend t
 
 ## Phase 2 acceptance results
 See the final report; numbers are produced by `npm test` and `npm run test:e2e`.
+
+---
+
+# Phase 2.1 – reliability and real-world readiness
+
+## Import replacement policy (what can change stored data, and who decides)
+
+Nothing is ever deleted. "Replaced" lines get `supersededBy`, "held" lines get `heldBy`, discarded lines get `discarded`; every action is written to an audit log and
+deleting an import undoes everything that import did. The user declares what the file contains (`full` / `incremental` / `partial` / `unknown`, default `unknown`).
+
+| Situation (document numbers present) | full | incremental | partial | unknown |
+|---|---|---|---|---|
+| New document | add | add | add | add |
+| Identical lines | skip (duplicate) | skip | skip | skip |
+| File only ADDS lines to a stored document | add | **hold** | add | **hold** |
+| Stored document differs (corrected) | **replace – needs explicit confirmation** (or hold / keep both) | hold | hold | hold |
+| Stored lines missing from the file | **remove – needs explicit confirmation** (or hold) | kept | kept | kept |
+| Stored documents absent from the file | reported only, never touched | – | – | – |
+| Older version of an already-corrected line | ignored (`stale`) | ignored | ignored | ignored |
+
+Without document numbers (identity = content only) nothing can be matched reliably, so the import preview says so and offers three choices:
+*hold overlapping lines* (default when dates overlap), *import only lines after the latest stored date*, or *skip exact duplicates and add the rest* (a corrected line may be
+counted twice → explicit confirmation). Held lines are excluded from every figure; the dashboard states how many are waiting. **History → Conflict review** resolves
+them per document: use the new version / keep what is stored / keep both.
+
+## Engine in a Web Worker
+
+`EngineSession` (`src/lib/engineSession.ts`) holds parse → profile → normalise → merge-plan → commit → dashboard → drill-down. `src/workers/engine.worker.ts` hosts it; the page talks to it
+through `EngineClient` (typed RPC, per-call time budget, the worker is terminated and recreated on timeout). The record list never crosses to the UI thread: only aggregated
+models and the visible drill-down page do. The same class runs in the tests and as a main-thread fallback when `Worker` is unavailable.
+
+## Archive validation (XLSX)
+
+`inspectZip` reads the central directory, then **inflates every entry in 4 KB steps and counts the real output** (declared sizes are not trusted): per-entry and total caps, ratio cap,
+time budget, encrypted / unsupported-method / path-traversal / duplicate-name entries refused, entity declarations (`<!DOCTYPE`, `<!ENTITY`) in XML parts refused (billion-laughs, XXE),
+required workbook parts checked. Sheets are read row-by-row from existing rows only (a sheet that declares row 1 000 000 costs nothing), with row, column, cell and gap limits.
+Residual risk: ExcelJS inflates the archive again, so memory for a legitimate, very large workbook is bounded only by these caps.
+
+## Analytics consistency additions
+Period-aware insights (`analyzeSalesPeriod`), year-to-date (offered only when data reaches back to 1 January; equal elapsed days), explicit period-status chip
+(complete / incomplete n of m / year to date), rolling-window alerts as a separate, labelled section, held-lines limitation.
+
+## Compatibility framework
+`tests/compat` + `scripts/compat-new.ts` + `docs/COMPATIBILITY.md` (generated). **No vendor is verified**: there is no real export in the repository.

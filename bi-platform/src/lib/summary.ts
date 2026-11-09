@@ -1,4 +1,4 @@
-import type { DashboardModel } from '@/engine/analytics/dashboard';
+import type { DashboardView } from '@/engine/analytics/dashboard';
 import { topBottom } from '@/engine/analytics/compare';
 import type { FilterSpec } from '@/engine/analytics/filters';
 import type { Insight } from '@/engine/types';
@@ -8,7 +8,7 @@ import { changeText, dateRange, fmtUnit, limitationText, metricLabel, warningTex
 import { formatEvidence, formatImpact, renderInsight } from './report';
 import { fmtDate, money, translate, type Lang, type MessageKey } from '@/i18n';
 
-export function executiveLines(model: DashboardModel, insights: Insight[], lang: Lang, t: T): string[] {
+export function executiveLines(model: DashboardView, insights: Insight[], lang: Lang, t: T): string[] {
   const cur = model.series.currency;
   const s = model.kpis.find((k) => k.id === 'sales');
   const lines: string[] = [];
@@ -37,7 +37,7 @@ export function filtersText(filters: FilterSpec, labels: Record<string, string>)
   return parts.join(' · ');
 }
 
-export function buildSummaryDoc(model: DashboardModel, insights: Insight[], lang: Lang, labels: Record<string, string>, filters: FilterSpec): SummaryDoc {
+export function buildSummaryDoc(model: DashboardView, insights: Insight[], lang: Lang, labels: Record<string, string>, filters: FilterSpec): SummaryDoc {
   const cur = model.series.currency;
   const t: T = (k, p) => translate(lang, k, p, cur);
   const m = (n: number) => money(n, { lang, currency: cur });

@@ -79,6 +79,9 @@ export interface Periods {
   previousTo: string;
   current: SalesRecord[];
   previous: SalesRecord[];
+  /** Both windows have the same number of days (always true for the legacy rolling split). */
+  equivalent?: boolean;
+  previousDays?: number;
 }
 
 /** Two equal-length windows ending at the latest date. Null when the history is too short to compare honestly. */

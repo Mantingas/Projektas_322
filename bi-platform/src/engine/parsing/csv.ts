@@ -27,10 +27,34 @@ export function decodeCsv(bytes: Uint8Array): { text: string; encoding: string }
   return lt > pl ? { text: t1257, encoding: 'windows-1257' } : { text: t1250, encoding: 'windows-1250' };
 }
 
+const CANDIDATES = [';', '\t', '|', ','] as const;
+
+/**
+ * Picks the delimiter whose field count is most consistent across the first lines. Papa Parse's own guess fails on narrow files
+ * with decimal commas ("2025-01-02;10,00" has the same number of commas as a comma-separated row).
+ * Ties go to ';' > TAB > '|' > ',' (the usual order in LT / PL exports).
+ */
+export function detectDelimiter(text: string): string {
+  const sample = text.split(/\r?\n/).filter((l) => l.trim() !== '').slice(0, 60).join('\n');
+  let best = ',';
+  let bestScore = 0;
+  for (const d of CANDIDATES) {
+    const rows = Papa.parse<string[]>(sample, { delimiter: d, skipEmptyLines: true }).data;
+    const counts = new Map<number, number>();
+    for (const r of rows) counts.set(r.length, (counts.get(r.length) ?? 0) + 1);
+    let modal = 0;
+    let modalN = 0;
+    for (const [len, n] of counts) if (n > modalN || (n === modalN && len > modal)) { modal = len; modalN = n; }
+    const score = modal > 1 ? (modalN / Math.max(1, rows.length)) * 100 + Math.min(modal, 20) / 100 : 0;
+    if (score > bestScore + 1e-9) { best = d; bestScore = score; }
+  }
+  return best;
+}
+
 export function parseCsv(bytes: Uint8Array, fileName: string): ParsedFile {
   const { text, encoding } = decodeCsv(bytes);
   const result = Papa.parse<string[]>(text, {
-    delimitersToGuess: [';', ',', '\t', '|'],
+    delimiter: detectDelimiter(text),
     skipEmptyLines: false,
     dynamicTyping: false,
   });

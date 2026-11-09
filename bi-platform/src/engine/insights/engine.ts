@@ -2,6 +2,7 @@ import type { Insight, SalesRecord } from '../types';
 import { computeKpis, inSeries, listSeries, splitPeriods, type Periods, type Series, type SalesKpis } from '../sales/kpi';
 import * as R from './rules';
 import type { RuleContext, UnavailableReason } from './rules';
+import { isComparisonBlocked, type Range, type ResolvedPeriods } from '../analytics/periods';
 
 export const MAX_INSIGHTS = 10;
 const MAX_PER_GROUP = 3;
@@ -51,16 +52,12 @@ export interface SalesAnalysis {
   unavailable: { rule: string; reason: UnavailableReason }[];
 }
 
-export function analyzeSales(all: SalesRecord[], seriesChoice?: Pick<Series, 'currency' | 'basis'>): SalesAnalysis | null {
-  const allSeries = listSeries(all);
-  if (allSeries.length === 0) return null;
-  const series = (seriesChoice && allSeries.find((s) => s.currency === seriesChoice.currency && s.basis === seriesChoice.basis)) || allSeries[0]!;
-  const records = inSeries(all, series);
-  const kpis = computeKpis(records, series)!;
-  const periods = splitPeriods(records, kpis.dateMin, kpis.dateMax);
-  const ctx: RuleContext = { records, kpis, periods };
+function run(history: SalesRecord[], scope: SalesRecord[], series: Pick<Series, 'currency' | 'basis'>, periods: Periods | null): SalesAnalysis {
+  const kpis = computeKpis(scope.length ? scope : history, series)!;
+  const historyFrom = history.reduce((m, r) => (r.date < m ? r.date : m), history[0]!.date);
+  const ctx: RuleContext = { records: scope, history, historyFrom, kpis, periods };
 
-  const drafts: Insight[] = [];
+  let drafts: Insight[] = [];
   const unavailable: SalesAnalysis['unavailable'] = [];
   const take = (rule: string, r: R.RuleResult) => {
     if ('insights' in r) drafts.push(...r.insights);
@@ -78,11 +75,48 @@ export function analyzeSales(all: SalesRecord[], seriesChoice?: Pick<Series, 'cu
   take('margin', R.lowMargin(ctx));
   take('credit_notes', R.creditNotes(ctx));
 
+  // Windows of different length cannot support a trustworthy "change" statement.
+  if (periods && periods.equivalent === false) {
+    drafts = drafts.map((i) => (i.params.days !== undefined ? { ...i, reliability: 'low' as const, reliabilityReasonKey: 'rel.unequalPeriods' } : i));
+  }
   const sumAmt = (rs: SalesRecord[]) => rs.reduce((acc, r) => acc + r.amount, 0);
   const window = periods ? (sumAmt(periods.current) + sumAmt(periods.previous)) / 2 : kpis.revenue;
   const insights = rankInsights(drafts, { total: kpis.revenue, window });
   const periodInfo = periods
     ? { days: periods.days, currentFrom: periods.currentFrom, currentTo: periods.currentTo, previousFrom: periods.previousFrom, previousTo: periods.previousTo }
     : null;
-  return { series, allSeries, kpis, periods: periodInfo, insights, unavailable };
+  return { series: { ...series, lines: kpis.lines, revenue: kpis.revenue }, allSeries: [], kpis, periods: periodInfo, insights, unavailable };
+}
+
+/**
+ * LEGACY / "rolling alert" analysis: the last N days against the N days before them, regardless of what the user selected.
+ * Anything shown from this must be labelled as a rolling window.
+ */
+export function analyzeSales(all: SalesRecord[], seriesChoice?: Pick<Series, 'currency' | 'basis'>): SalesAnalysis | null {
+  const allSeries = listSeries(all);
+  if (allSeries.length === 0) return null;
+  const series = (seriesChoice && allSeries.find((s) => s.currency === seriesChoice.currency && s.basis === seriesChoice.basis)) || allSeries[0]!;
+  const records = inSeries(all, series);
+  const k = computeKpis(records, series)!;
+  const periods = splitPeriods(records, k.dateMin, k.dateMax);
+  const res = run(records, records, series, periods ? { ...periods, equivalent: true, previousDays: periods.days } : null);
+  return { ...res, allSeries };
+}
+
+/**
+ * PRIMARY analysis: uses exactly the dashboard's series, filters and resolved comparison periods.
+ * `history` = series lines after the dashboard's entity filters (all dates). Lines of the current period are the scope.
+ */
+export function analyzeSalesPeriod(history: SalesRecord[], series: Pick<Series, 'currency' | 'basis'>, rp: ResolvedPeriods): SalesAnalysis | null {
+  if (history.length === 0) return null;
+  const inR = (r: Range) => history.filter((x) => x.date >= r.from && x.date <= r.to);
+  const current = inR(rp.current);
+  const previous = inR(rp.previous);
+  const periods: Periods = {
+    days: rp.currentDays, currentFrom: rp.current.from, currentTo: rp.current.to, previousFrom: rp.previous.from, previousTo: rp.previous.to,
+    current, previous, equivalent: rp.equivalent, previousDays: rp.previousDays,
+  };
+  const blocked = isComparisonBlocked(rp);
+  const res = run(history, current, series, blocked ? null : periods);
+  return { ...res, allSeries: [] };
 }

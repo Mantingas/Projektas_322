@@ -1,8 +1,10 @@
 import type { Messages } from './en';
 import dash from './dash.lt';
+import dash2 from './dash2.lt';
 
 const lt: Messages = {
   ...dash,
+  ...dash2,
   'app.name': 'Excel įžvalgos',
   'app.tagline': 'Verslo įžvalgos iš jūsų Excel failų',
   'nav.home': 'Pradžia', 'nav.import': 'Importas', 'nav.insights': 'Įžvalgos', 'nav.history': 'Istorija', 'nav.settings': 'Nustatymai',
@@ -65,6 +67,9 @@ const lt: Messages = {
   'err.legacy_xls': 'Seni .xls failai nepalaikomi. Atidarykite Excel ir išsaugokite kaip .xlsx.', 'err.corrupt_file': 'Failas atrodo sugadintas arba nėra tinkama darbaknygė.',
   'err.empty_file': 'Faile nėra duomenų.', 'err.password_protected': 'Failas apsaugotas slaptažodžiu.', 'err.unknown': 'Netikėta klaida skaitant failą.',
   'err.zip_limits': 'Darbaknygė išsiskleidžia į nesaugų dydį (galima dekompresijos ataka), todėl atmesta.',
+  'err.unsafe_archive': 'Darbaknygės archyve yra nesaugių įrašų (užšifruotų, nepalaikomų ar keistai pavadintų), todėl ji atmesta.',
+  'err.timeout': 'Apdorojimas užtruko per ilgai ir buvo sustabdytas.',
+  'err.sheet_limits': 'Lapas viršija palaikomą dydį (eilutes, stulpelius ar langelius).',
   'err.currency_required': 'Pasirinkite valiutą.',
 
   'ins.title': 'Įžvalgos', 'ins.empty': 'Duomenų dar nėra. Importuokite failą, kad pamatytumėte įžvalgas.', 'ins.goImport': 'Importuoti failą',
@@ -134,7 +139,7 @@ const lt: Messages = {
   'sales.credit_notes.title': 'Kreditinės / neigiamos eilutės: {lines}',
   'sales.credit_notes.body': 'Neigiamų eilučių suma – {amount}, tai {share} teigiamų pardavimų.',
   'sales.credit_notes.action': 'Patikrinkite grąžinimų ir kreditinių priežastis.',
-  'rel.enoughLines': 'Pakankamai duomenų (30+ eilučių).', 'rel.someLines': 'Ribotas duomenų kiekis (10–29 eilutės).', 'rel.fewLines': 'Mažai eilučių (< 10) – išvada gali būti atsitiktinė.',
+  'rel.unequalPeriods': 'Lyginamų laikotarpių trukmė skiriasi, todėl sumos tiesiogiai nepalyginamos.', 'rel.enoughLines': 'Pakankamai duomenų (30+ eilučių).', 'rel.someLines': 'Ribotas duomenų kiekis (10–29 eilutės).', 'rel.fewLines': 'Mažai eilučių (< 10) – išvada gali būti atsitiktinė.',
   'rel.shortPeriod': 'Lyginami laikotarpiai trumpesni nei 21 d.', 'rel.limitedHistory': '„Naujas“ vertinama tik pagal įkeltą istoriją.', 'rel.partialCost': 'Dalyje eilučių savikainos nėra.',
 };
 export default lt;

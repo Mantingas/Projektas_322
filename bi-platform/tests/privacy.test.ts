@@ -55,4 +55,16 @@ describe('privacy: business data has no path out of the browser', () => {
     const uses = files.filter((f) => /localStorage/.test(read(f)));
     expect(uses.map((f) => f.replace(/\\/g, '/'))).toEqual(['src/components/LangProvider.tsx']);
   });
+
+  it('helper scripts and the compatibility framework open no network connections', () => {
+    const extra = [...walk('scripts'), ...walk('tests/compat')].filter((f) => /\.(ts|mjs|js)$/.test(f));
+    const net = [/\bfetch\s*\(/, /XMLHttpRequest/, /require\(['"](https?|net|tls|dgram)['"]\)/, /from ['"](node:)?(https?|net|tls|dgram)['"]/, /\baxios\b|\bgot\b\(|node-fetch/];
+    for (const re of net) expect(extra.filter((f) => re.test(read(f))), String(re)).toEqual([]);
+  });
+
+  it('the engine worker has no I/O other than IndexedDB and messages to the page', () => {
+    const w = read('src/workers/engine.worker.ts') + read('src/lib/engineClient.ts') + read('src/lib/engineSession.ts');
+    expect(w).not.toMatch(/\bfetch\s*\(|XMLHttpRequest|WebSocket|sendBeacon|importScripts/);
+  });
 });
+

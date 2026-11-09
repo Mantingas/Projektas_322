@@ -239,6 +239,11 @@ test.describe('imports: overlap, corrections and missing identifiers (UI)', () =
     await pick(page, file('b.csv', ['2025-03-01;INV-1;Acme;Widget;1;120,00', '2025-03-01;INV-1;Acme;Gadget;1;50,00', '2025-03-02;INV-2;Beta;Widget;1;70,00']));
     await expect(page.getByTestId('pv-revised')).toContainText('1 (1)');
     await expect(page.getByTestId('pv-dups')).toHaveText('2');
+    // replacing stored lines is destructive: the import button stays locked until the user confirms explicitly
+    await expect(page.getByTestId('confirm-box')).toBeVisible();
+    await expect(page.getByTestId('confirm-import')).toBeDisabled();
+    await page.getByTestId('confirm-checkbox').check();
+    await expect(page.getByTestId('confirm-import')).toBeEnabled();
     await page.getByTestId('confirm-import').click();
     await expect(page.getByTestId('stat-revised')).toHaveText('1');
     await page.getByTestId('view-insights').click();

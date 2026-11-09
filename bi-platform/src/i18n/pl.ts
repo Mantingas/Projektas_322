@@ -1,8 +1,10 @@
 import type { Messages } from './en';
 import dash from './dash.pl';
+import dash2 from './dash2.pl';
 
 const pl: Messages = {
   ...dash,
+  ...dash2,
   'app.name': 'Excel Insights',
   'app.tagline': 'Wnioski biznesowe z Twoich plików Excel',
   'nav.home': 'Start', 'nav.import': 'Import', 'nav.insights': 'Wnioski', 'nav.history': 'Historia', 'nav.settings': 'Ustawienia',
@@ -65,6 +67,9 @@ const pl: Messages = {
   'err.legacy_xls': 'Stare pliki .xls nie są obsługiwane. Otwórz w Excelu i zapisz jako .xlsx.', 'err.corrupt_file': 'Plik wygląda na uszkodzony lub nie jest prawidłowym skoroszytem.',
   'err.empty_file': 'Plik nie zawiera danych.', 'err.password_protected': 'Plik jest chroniony hasłem.', 'err.unknown': 'Nieoczekiwany błąd podczas odczytu pliku.',
   'err.zip_limits': 'Skoroszyt rozpakowuje się do niebezpiecznego rozmiaru (możliwa bomba dekompresyjna) i został odrzucony.',
+  'err.unsafe_archive': 'Archiwum skoroszytu zawiera niebezpieczne elementy (zaszyfrowane, nieobsługiwane lub dziwnie nazwane) i zostało odrzucone.',
+  'err.timeout': 'Przetwarzanie trwało zbyt długo i zostało zatrzymane.',
+  'err.sheet_limits': 'Arkusz przekracza obsługiwany rozmiar (wiersze, kolumny lub komórki).',
   'err.currency_required': 'Wybierz walutę.',
 
   'ins.title': 'Wnioski', 'ins.empty': 'Brak danych. Zaimportuj plik, aby zobaczyć wnioski.', 'ins.goImport': 'Importuj plik',
@@ -134,7 +139,7 @@ const pl: Messages = {
   'sales.credit_notes.title': 'Korekty / pozycje ujemne: {lines}',
   'sales.credit_notes.body': 'Suma pozycji ujemnych to {amount}, czyli {share} sprzedaży dodatniej.',
   'sales.credit_notes.action': 'Sprawdź przyczyny zwrotów i korekt.',
-  'rel.enoughLines': 'Wystarczająco danych (30+ pozycji).', 'rel.someLines': 'Ograniczona ilość danych (10–29 pozycji).', 'rel.fewLines': 'Mało pozycji (< 10) – wniosek może być przypadkowy.',
+  'rel.unequalPeriods': 'Porównywane okresy mają różną długość, więc sum nie można porównywać bezpośrednio.', 'rel.enoughLines': 'Wystarczająco danych (30+ pozycji).', 'rel.someLines': 'Ograniczona ilość danych (10–29 pozycji).', 'rel.fewLines': 'Mało pozycji (< 10) – wniosek może być przypadkowy.',
   'rel.shortPeriod': 'Porównywane okresy są krótsze niż 21 dni.', 'rel.limitedHistory': '„Nowy” oceniono tylko względem wczytanej historii.', 'rel.partialCost': 'W części pozycji brakuje kosztu.',
 };
 export default pl;

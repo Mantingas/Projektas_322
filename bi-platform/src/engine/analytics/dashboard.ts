@@ -7,7 +7,9 @@ import {
 } from './compare';
 import { lengthDays } from './dates';
 import { applyFilters, hasDimension, type Dimension, type FilterSpec } from './filters';
-import { KPI_ORDER, type MetricContext } from './metrics';
+import { KPI_ORDER, type MetricContext, type MetricId } from './metrics';
+import { explainMetricInputs } from './provenance';
+import { inRange } from './compare';
 import { isComparisonBlocked, resolvePeriods, type PeriodSelection, type PeriodWarning, type ResolvedPeriods } from './periods';
 
 export type Limitation =
@@ -18,7 +20,8 @@ export type Limitation =
   | { code: 'other_series_hidden'; count: number }
   | { code: 'filtered' }
   | { code: 'no_comparison' }
-  | { code: 'negative_lines'; lines: number };
+  | { code: 'negative_lines'; lines: number }
+  | { code: 'held_pending'; lines: number };
 
 export interface DashboardOptions {
   series: Series;
@@ -26,6 +29,8 @@ export interface DashboardOptions {
   period: PeriodSelection;
   /** Transaction identity reliability of the stored data (from the imports). */
   identity?: 'document' | 'mixed' | 'content';
+  /** Imported lines held for review (not part of any number shown). */
+  heldPending?: number;
   waterfallDimension?: Dimension;
   paretoDimension?: Dimension;
 }
@@ -48,6 +53,8 @@ export interface DashboardModel {
   charts: ChartPlan[];
   warnings: PeriodWarning[];
   limitations: Limitation[];
+  /** Inputs behind each metric of the current period, for the "how is this calculated" explanation. */
+  explain: Partial<Record<MetricId, Record<string, number>>>;
 }
 
 const DIMS: Dimension[] = ['customer', 'product', 'salesperson', 'category'];
@@ -100,11 +107,15 @@ export function buildDashboard(all: SalesRecord[], o: DashboardOptions): Dashboa
   if (!comparable) limitations.push({ code: 'no_comparison' });
   const neg = records.filter((r) => r.amount < 0).length;
   if (neg) limitations.push({ code: 'negative_lines', lines: neg });
+  if (o.heldPending) limitations.push({ code: 'held_pending', lines: o.heldPending });
+  const curAgg = aggregate(inRange(records, periods.current));
+  const explain: DashboardModel['explain'] = {};
+  for (const k of KPI_ORDER) explain[k] = explainMetricInputs(k, curAgg);
 
   return {
     series: o.series, ctx, bounds: { dateMin, dateMax }, records, periods, comparable, kpis: cmp.metrics, trend, aligned: alignedSeries(records, periods), tables,
     pareto: par, waterfall: wDim ? { dimension: wDim, data: waterfall(tables[wDim]!) } : null,
-    composition: tables.category ? composition(tables.category) : [], charts, warnings: periods.warnings, limitations,
+    composition: tables.category ? composition(tables.category) : [], charts, warnings: periods.warnings, limitations, explain,
   };
 }
 
@@ -112,3 +123,18 @@ export function buildDashboard(all: SalesRecord[], o: DashboardOptions): Dashboa
 export const trendTotal = (m: DashboardModel) => m.trend.reduce((s, p) => s + p.revenue, 0);
 export const spanDays = (m: DashboardModel) => lengthDays(m.bounds.dateMin, m.bounds.dateMax);
 export { aggregate };
+
+import { analyzeSalesPeriod, type SalesAnalysis } from '../insights/engine';
+
+/**
+ * Dashboard model + primary insights computed from the SAME series, filters and comparison periods.
+ * (Rolling-window alerts are a separate, explicitly labelled analysis: see analyzeSales.)
+ */
+export function buildDashboardWithInsights(all: SalesRecord[], o: DashboardOptions): { model: DashboardModel; analysis: SalesAnalysis | null } | null {
+  const model = buildDashboard(all, o);
+  if (!model) return null;
+  return { model, analysis: analyzeSalesPeriod(model.records, o.series, model.periods) };
+}
+
+/** What the UI receives: the model without the (potentially huge) record list, which stays in the worker. */
+export type DashboardView = Omit<DashboardModel, 'records'>;

@@ -5,7 +5,10 @@ export type ParseErrorCode =
   | 'corrupt_file'
   | 'empty_file'
   | 'password_protected'
-  | 'zip_limits';
+  | 'zip_limits'
+  | 'unsafe_archive'
+  | 'timeout'
+  | 'sheet_limits';
 
 export class ParseError extends Error {
   constructor(public readonly code: ParseErrorCode) {

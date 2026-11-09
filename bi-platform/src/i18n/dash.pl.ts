@@ -18,6 +18,12 @@ const dash: Record<keyof typeof dashEn, string> = {
   'pw.no_current_data': 'Brak danych w bieżącym okresie.',
   'pw.length_mismatch': 'Okresy mają różną długość ({current} i {previous} dni). Sum nie można porównywać bezpośrednio.',
   'pw.sparse_data': 'Tylko {daysWithData} z {days} dni ({which} okres) ma zapisy. Sprawdź, czy w eksporcie nie brakuje dni.',
+  'per.ytd': 'Od początku roku',
+  'pw.ytd_coverage': 'Twoje dane zaczynają się {dataFrom}, po 1 stycznia, więc to nie jest prawdziwy wynik od początku roku.',
+  'st.complete': 'Pełny okres ({days} dni)',
+  'st.partial': 'Niepełny okres: {elapsed} z {total} dni',
+  'st.to_date': 'Od początku roku: {elapsed} z {total} dni',
+  'st.title': 'Status okresu',
   'pw.which.current': 'bieżący', 'pw.which.previous': 'poprzedni',
 
   'flt.title': 'Filtry', 'flt.customers': 'Klienci', 'flt.products': 'Towary', 'flt.salespeople': 'Handlowcy', 'flt.categories': 'Grupy',

@@ -18,6 +18,12 @@ const dash: Record<keyof typeof dashEn, string> = {
   'pw.no_current_data': 'Dabartiniame laikotarpyje duomenų nėra.',
   'pw.length_mismatch': 'Laikotarpių trukmė skiriasi ({current} ir {previous} d.). Sumos tiesiogiai nepalyginamos.',
   'pw.sparse_data': 'Tik {daysWithData} iš {days} d. ({which} laikotarpyje) turi įrašų. Patikrinkite, ar eksporte nėra trūkstamų dienų.',
+  'per.ytd': 'Metai iki šiol',
+  'pw.ytd_coverage': 'Jūsų duomenys prasideda {dataFrom}, jau po sausio 1 d., todėl tai nėra tikras metų iki šiol rodiklis.',
+  'st.complete': 'Pilnas laikotarpis ({days} d.)',
+  'st.partial': 'Neužbaigtas laikotarpis: {elapsed} iš {total} d.',
+  'st.to_date': 'Metai iki šiol: {elapsed} iš {total} d.',
+  'st.title': 'Laikotarpio būsena',
   'pw.which.current': 'dabartiniame', 'pw.which.previous': 'ankstesniame',
 
   'flt.title': 'Filtrai', 'flt.customers': 'Klientai', 'flt.products': 'Prekės', 'flt.salespeople': 'Pardavėjai', 'flt.categories': 'Grupės',

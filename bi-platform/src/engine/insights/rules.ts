@@ -5,7 +5,11 @@ import {
 import { pctChange, reliabilityFor } from './helpers';
 
 export interface RuleContext {
+  /** Lines inside the analysed scope (the selected current period on the dashboard; everything for the legacy rolling analysis). */
   records: SalesRecord[];
+  /** All lines of the series under the same filters – used only for availability checks and for "first seen" logic. */
+  history: SalesRecord[];
+  historyFrom: string;
   kpis: SalesKpis;
   periods: Periods | null;
 }
@@ -59,7 +63,7 @@ export function revenueChange(ctx: RuleContext): RuleResult {
 
 // 2 ────────────────────────────────────────────────────────────────────────────
 export function customersDeclined(ctx: RuleContext): RuleResult {
-  if (!ctx.records.some((r) => customerOf(r))) return { unavailable: 'no_customer' };
+  if (!ctx.history.some((r) => customerOf(r))) return { unavailable: 'no_customer' };
   if (!ctx.periods) return { unavailable: 'short_history' };
   const prevTotal = sum(ctx.periods.previous.map((r) => r.amount));
   const minPrev = Math.max(prevTotal * 0.005, 1);
@@ -147,7 +151,7 @@ export function productConcentration(ctx: RuleContext): RuleResult {
 
 // 5 ────────────────────────────────────────────────────────────────────────────
 export function productMovers(ctx: RuleContext): RuleResult[] {
-  if (!ctx.records.some((r) => productOf(r))) return [{ unavailable: 'no_product' }, { unavailable: 'no_product' }];
+  if (!ctx.history.some((r) => productOf(r))) return [{ unavailable: 'no_product' }, { unavailable: 'no_product' }];
   if (!ctx.periods) return [{ unavailable: 'short_history' }, { unavailable: 'short_history' }];
   const prevTotal = sum(ctx.periods.previous.map((r) => r.amount));
   const rows = compare(ctx, productOf);
@@ -183,11 +187,11 @@ export function productMovers(ctx: RuleContext): RuleResult[] {
 
 // 6 ────────────────────────────────────────────────────────────────────────────
 export function newCustomers(ctx: RuleContext): RuleResult {
-  if (!ctx.records.some((r) => customerOf(r))) return { unavailable: 'no_customer' };
+  if (!ctx.history.some((r) => customerOf(r))) return { unavailable: 'no_customer' };
   const p = ctx.periods;
   if (!p) return { unavailable: 'short_history' };
   const before = new Set<string>();
-  for (const r of ctx.records) {
+  for (const r of ctx.history) {
     if (r.date < p.currentFrom) {
       const c = customerOf(r);
       if (c) before.add(c.key);
@@ -202,7 +206,7 @@ export function newCustomers(ctx: RuleContext): RuleResult {
   return ok({
     id: 'sales.new_customers', whyKey: 'sales.new_customers.why', dimension: 'customer', chart: 'topCustomers', topic: 'new_customers', group: 'growth', severity: 'opportunity',
     titleKey: 'sales.new_customers.title', bodyKey: 'sales.new_customers.body', actionKey: 'sales.new_customers.action',
-    params: { count: cur.length, revenue: { money: rev }, share: { pct: rev / total }, since: { date: ctx.kpis.dateMin } },
+    params: { count: cur.length, revenue: { money: rev }, share: { pct: rev / total }, since: { date: ctx.historyFrom } },
     reliability: rel.level === 'high' ? 'medium' : rel.level, // "new" is only relative to the loaded history
     reliabilityReasonKey: 'rel.limitedHistory',
     impact: { value: rev, unit: 'money' },
@@ -212,7 +216,7 @@ export function newCustomers(ctx: RuleContext): RuleResult {
 
 // 7 ────────────────────────────────────────────────────────────────────────────
 export function salespersonDecline(ctx: RuleContext): RuleResult {
-  if (!ctx.records.some((r) => salespersonOf(r))) return { unavailable: 'no_salesperson' };
+  if (!ctx.history.some((r) => salespersonOf(r))) return { unavailable: 'no_salesperson' };
   if (!ctx.periods) return { unavailable: 'short_history' };
   const prevTotal = sum(ctx.periods.previous.map((r) => r.amount));
   const rows = compare(ctx, salespersonOf).filter((x) => x.previous >= Math.max(prevTotal * 0.05, 1) && x.current <= x.previous * 0.8);

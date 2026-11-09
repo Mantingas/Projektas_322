@@ -17,8 +17,9 @@ let db: AppDB;
 beforeEach(() => {
   db = new AppDB('t-' + Math.random().toString(36).slice(2));
 });
-const imp = (n: string, lines: Omit<SalesRecord, 'key'>[], mode: ExportMode = 'full') =>
-  commitImport(db, { checksum: n, fileName: n, sheetName: 's', exportMode: mode, records: assignKeys(lines), stats, mapping: { columns: {} } });
+// `confirmed: true` simulates a user who read the preview and explicitly accepted its consequences
+const imp = (n: string, lines: Omit<SalesRecord, 'key'>[], mode: ExportMode = 'full', extra: Partial<Parameters<typeof commitImport>[1]> = {}) =>
+  commitImport(db, { checksum: n, fileName: n, sheetName: 's', exportMode: mode, records: assignKeys(lines), stats, mapping: { columns: {} }, confirmed: true, ...extra });
 const total = async () => (await loadAllSales(db)).reduce((a, r) => a + r.amount, 0);
 
 describe('corrected invoices are never lost', () => {
@@ -50,11 +51,17 @@ describe('corrected invoices are never lost', () => {
     await imp('b', [mk(), mk({ productName: 'Q', amount: 50 })]);
     expect(await total()).toBe(150);
   });
-  it('incremental exports never supersede; additions to stored documents are flagged', async () => {
+  it('incremental exports never supersede; lines that touch a stored document are HELD for review, not silently added', async () => {
     await imp('a', [mk()]);
     const r = await imp('b', [mk({ amount: 120 })], 'incremental');
-    expect(await total()).toBe(220); // ambiguous: cannot tell a correction from an addition
-    expect(r.status === 'ok' && r.import.conflicts).toBe(1);
+    expect(await total()).toBe(100); // the ambiguous line is not in analytics
+    expect(r.status === 'ok' && [r.import.conflicts, r.import.heldLines]).toEqual([1, 1]);
+    expect(await db.sales.count()).toBe(2); // …but it is stored, awaiting a decision
+  });
+  it('the user may explicitly choose to add such lines next to the stored ones (old behaviour, now opt-in)', async () => {
+    await imp('a', [mk()]);
+    await imp('b', [mk({ amount: 120 })], 'incremental', { policy: { conflicts: 'add_alongside', content: 'dedupe_exact' } });
+    expect(await total()).toBe(220);
   });
   it('the preview reports the same numbers the commit will produce', async () => {
     await imp('a', [mk()]);

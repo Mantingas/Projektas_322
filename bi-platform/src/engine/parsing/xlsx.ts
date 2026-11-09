@@ -1,6 +1,6 @@
 import ExcelJS from 'exceljs';
 import type { CellValue, ParsedFile, RawSheet } from '../types';
-import { MAX_COLUMNS, MAX_ROWS_PER_SHEET, MAX_SHEETS } from './limits';
+import { MAX_CELLS_PER_SHEET, MAX_COLUMNS, MAX_ROW_GAP, MAX_ROWS_PER_SHEET, MAX_SHEETS } from './limits';
 import { ParseError } from './errors';
 import { sanitizeText } from './text';
 import { toIso } from '../schema/dates';
@@ -45,23 +45,30 @@ export async function parseXlsx(bytes: Uint8Array, fileName: string): Promise<Pa
     throw new ParseError('corrupt_file');
   }
   const sheets: RawSheet[] = [];
+  let cells = 0;
   for (const ws of wb.worksheets) {
+    cells = 0;
     if (sheets.length >= MAX_SHEETS) break;
     if (ws.state === 'veryHidden') continue;
     const rows: CellValue[][] = [];
     let truncated = false;
-    const rowCount = ws.actualRowCount > 0 ? ws.rowCount : 0;
-    for (let r = 1; r <= rowCount; r++) {
-      if (rows.length >= MAX_ROWS_PER_SHEET) {
+    let last = 0; // last sheet row number that was emitted
+    // Only rows that exist are visited: a sheet that merely DECLARES a million rows costs nothing.
+    ws.eachRow({ includeEmpty: false }, (row, rowNumber) => {
+      if (truncated) return;
+      const gap = rowNumber - last - 1;
+      if (rows.length + gap + 1 > MAX_ROWS_PER_SHEET || gap > MAX_ROW_GAP || cells + row.cellCount > MAX_CELLS_PER_SHEET) {
         truncated = true;
-        break;
+        return;
       }
-      const row = ws.getRow(r);
-      const cells: CellValue[] = [];
+      for (let g = 0; g < gap; g++) rows.push([]); // keep sheet row numbers aligned for blank rows
+      const out: CellValue[] = [];
       const colCount = Math.min(row.cellCount, MAX_COLUMNS);
-      for (let c = 1; c <= colCount; c++) cells.push(cellToValue(row.getCell(c).value));
-      rows.push(cells);
-    }
+      for (let c = 1; c <= colCount; c++) out.push(cellToValue(row.getCell(c).value));
+      cells += colCount;
+      rows.push(out);
+      last = rowNumber;
+    });
     if (rows.some((r) => r.some((c) => c !== null))) sheets.push({ name: sanitizeText(ws.name), rows, truncated });
   }
   if (sheets.length === 0) throw new ParseError('empty_file');

@@ -1,0 +1,17 @@
+{
+  "id": "example-synthetic-lt-csv",
+  "vendor": "_example",
+  "product": "none – invented layout used only to exercise the framework",
+  "provenance": "synthetic",
+  "status": "ready",
+  "file": "export.csv",
+  "decimalHint": ",",
+  "expect": {
+    "headerRow": 1,
+    "fields": { "document_date": "Data", "document_id": "Dokumento Nr.", "customer_name": "Klientas", "product_name": "Prekė", "quantity": "Kiekis", "net_amount": "Suma be PVM" },
+    "basis": "net",
+    "currency": "EUR",
+    "rowsImported": 5
+  },
+  "controlTotals": { "source": "hand-added from the five invented lines above", "netSales": 1665.06, "lines": 5, "documents": 4 }
+}

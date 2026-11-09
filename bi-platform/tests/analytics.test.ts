@@ -327,7 +327,7 @@ describe('overlapping and corrected imports flow through to the metrics', () => 
     const db = new AppDB('an-' + Math.random());
     const st = { rowsRead: 1, rowsImported: 1, rowsSkipped: 0, errors: {}, warnings: {}, examples: [], currencies: ['EUR'] };
     const lines = (a: number) => assignKeys([{ ...mk({ documentId: 'INV1', amount: a }), key: undefined as never } as never]);
-    const im = async (n: string, a: number) => commitImport(db, { checksum: await sha256Hex(new TextEncoder().encode(n)), fileName: n, sheetName: 's', exportMode: 'full', records: lines(a), stats: st, mapping: { columns: {} } });
+    const im = async (n: string, a: number) => commitImport(db, { checksum: await sha256Hex(new TextEncoder().encode(n)), fileName: n, sheetName: 's', exportMode: 'full', records: lines(a), stats: st, mapping: { columns: {} }, confirmed: true });
     await im('v1', 100);
     await im('v2', 130);
     await im('v2-again', 130); // overlapping re-export of the same period

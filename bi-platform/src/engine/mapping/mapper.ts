@@ -38,7 +38,8 @@ function valueCompat(field: SalesField, p: ColumnProfile): number {
   if (field === 'document_date') return Math.max(p.dateRatio, p.serialDateRatio);
   if (NUMERIC_FIELDS.includes(field)) return p.numberRatio;
   if (TEXT_FIELDS.includes(field)) return p.numberRatio > 0.8 || p.dateRatio > 0.8 ? 0.1 : p.textRatio;
-  if (ID_FIELDS.includes(field)) return p.dateRatio > 0.8 ? 0.1 : 0.9;
+  // identifiers carry no value evidence: a generic header such as "Vidinis kodas" must not look confident
+  if (ID_FIELDS.includes(field)) return p.dateRatio > 0.8 ? 0.1 : 0.6;
   if (field === 'currency') return p.textRatio > 0.8 && p.avgTextLength <= 5 && p.distinctRatio < 0.2 ? 1 : 0.2;
   return 0.5;
 }
