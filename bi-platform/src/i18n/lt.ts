@@ -2,11 +2,13 @@ import type { Messages } from './en';
 import dash from './dash.lt';
 import dash2 from './dash2.lt';
 import purch from './purch.lt';
+import inv from './inv.lt';
 
 const lt: Messages = {
   ...dash,
   ...dash2,
   ...purch,
+  ...inv,
   'app.name': 'Excel įžvalgos',
   'app.tagline': 'Verslo įžvalgos iš jūsų Excel failų',
   'nav.home': 'Pradžia', 'nav.import': 'Importas', 'nav.insights': 'Įžvalgos', 'nav.history': 'Istorija', 'nav.settings': 'Nustatymai',

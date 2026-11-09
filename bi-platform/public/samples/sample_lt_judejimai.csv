@@ -1,0 +1,1544 @@
+﻿Data;Dokumento Nr.;Judėjimo tipas;Sandėlis;Į sandėlį;Prekės kodas;Prekė;Kiekis;Matavimo vnt.;Vieneto savikaina
+2025-06-01;JD-P01-OPEN;Pajamavimas;Vilnius;;P01;Pienas 1 l;802;vnt.;0,8000
+2025-06-01;JD-P02-OPEN;Pajamavimas;Vilnius;;P02;Miltai 1 kg;970;vnt.;0,9000
+2025-06-01;JD-P03-OPEN;Pajamavimas;Kaunas;;P03;Skardinės;1019;vnt.;2,5000
+2025-06-01;JD-P05-OPEN;Pajamavimas;Vilnius;;P05;Planšetė;31;vnt.;120,0000
+2025-06-01;JD-P06-OPEN;Pajamavimas;Vilnius;;P06;Sviestas 200 g;2195;vnt.;1,5000
+2025-06-01;JD-P07-OPEN;Pajamavimas;Vilnius;;P07;Sūris;322;vnt.;6,0000
+2025-06-01;JD-P08-OPEN;Pajamavimas;Vilnius;;P08;Kava 250 g;523;vnt.;4,0000
+2025-06-01;JD-P09-OPEN;Pajamavimas;Kaunas;;P09;Sultys 1 l;842;vnt.;1,1000
+2025-06-01;JD-P10-OPEN;Pajamavimas;Kaunas;;P10;Vanduo 0,5 l;432;vnt.;0,3000
+2025-06-01;JD-P10-OPEN;Pajamavimas;Vilnius;;P10;Vanduo 0,5 l;1055;vnt.;0,3000
+2025-06-01;JD-P11-OPEN;Pajamavimas;Vilnius;;P11;Aliejus 1 l;819;vnt.;2,2000
+2025-06-01;JD-P12-OPEN;Pajamavimas;Vilnius;;P12;Cukrus;1928;kg;1,1000
+2025-06-02;JD-7001;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-06-02;JD-7002;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-06-02;JD-7171;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-02;JD-7397;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-02;JD-7538;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-02;JD-7679;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-02;JD-7820;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-02;JD-7961;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-02;JD-8102;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-02;JD-8243;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-02;JD-8384;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-03;JD-7003;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-06-03;JD-7172;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-03;JD-7398;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-03;JD-7539;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-03;JD-7680;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-03;JD-7821;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-03;JD-7962;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-03;JD-8103;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-03;JD-8244;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-03;JD-8385;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-04;JD-7004;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-06-04;JD-7173;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-04;JD-7345;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-06-04;JD-7399;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-04;JD-7540;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-04;JD-7681;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-04;JD-7822;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-04;JD-7963;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-04;JD-8104;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-04;JD-8245;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-04;JD-8386;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-05;JD-7005;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-06-05;JD-7174;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-05;JD-7400;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-05;JD-7541;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-05;JD-7682;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-05;JD-7823;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-05;JD-7964;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-05;JD-8105;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-05;JD-8246;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-05;JD-8387;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-05;JD-P04-OPEN;Pajamavimas;Vilnius;;P04;Senos prekės;500;vnt.;8,0000
+2025-06-06;JD-7006;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-06-06;JD-7175;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-06;JD-7401;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-06;JD-7542;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-06;JD-7683;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-06;JD-7824;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-06;JD-7965;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-06;JD-8106;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-06;JD-8247;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-06;JD-8388;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-09;JD-7007;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-06-09;JD-7008;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-06-09;JD-7176;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-09;JD-7402;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-09;JD-7543;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-09;JD-7684;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-09;JD-7825;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-09;JD-7966;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-09;JD-8107;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-09;JD-8248;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-09;JD-8389;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-10;JD-7009;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-06-10;JD-7177;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-10;JD-7346;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-06-10;JD-7403;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-10;JD-7544;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-10;JD-7685;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-10;JD-7826;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-10;JD-7967;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-10;JD-8108;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-10;JD-8249;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-10;JD-8390;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-11;JD-7010;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-06-11;JD-7178;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-11;JD-7326;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-06-11;JD-7404;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-11;JD-7545;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-11;JD-7686;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-11;JD-7827;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-11;JD-7968;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-11;JD-8109;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-11;JD-8250;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-11;JD-8391;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-12;JD-7011;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-06-12;JD-7179;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-12;JD-7405;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-12;JD-7546;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-12;JD-7687;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-12;JD-7828;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-12;JD-7969;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-12;JD-8110;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-12;JD-8251;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-12;JD-8392;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-13;JD-7012;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-06-13;JD-7180;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-13;JD-7347;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-06-13;JD-7406;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-13;JD-7547;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-13;JD-7688;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-13;JD-7829;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-13;JD-7970;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-13;JD-8111;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-13;JD-8252;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-13;JD-8393;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-15;JD-7181;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-06-16;JD-7013;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-06-16;JD-7014;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-06-16;JD-7182;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-16;JD-7348;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-06-16;JD-7407;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-16;JD-7548;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-16;JD-7689;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-16;JD-7830;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-16;JD-7971;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-16;JD-8112;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-16;JD-8253;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-16;JD-8394;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-17;JD-7015;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-06-17;JD-7183;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-17;JD-7408;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-17;JD-7549;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-17;JD-7690;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-17;JD-7831;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-17;JD-7972;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-17;JD-8113;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-17;JD-8254;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-17;JD-8395;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-18;JD-7016;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-06-18;JD-7184;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-18;JD-7409;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-18;JD-7550;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-18;JD-7691;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-18;JD-7832;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-18;JD-7973;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-18;JD-8114;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-18;JD-8255;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-18;JD-8396;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-19;JD-7017;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-06-19;JD-7185;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-19;JD-7349;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-06-19;JD-7410;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-19;JD-7551;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-19;JD-7692;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-19;JD-7833;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-19;JD-7974;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-19;JD-8115;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-19;JD-8256;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-19;JD-8397;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-20;JD-7018;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-06-20;JD-7186;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-20;JD-7411;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-20;JD-7552;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-20;JD-7693;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-20;JD-7834;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-20;JD-7975;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-20;JD-8116;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-20;JD-8257;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-20;JD-8398;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-21;JD-7327;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-06-23;JD-7019;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-06-23;JD-7020;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-06-23;JD-7187;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-23;JD-7412;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-23;JD-7553;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-23;JD-7694;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-23;JD-7835;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-23;JD-7976;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-23;JD-8117;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-23;JD-8258;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-23;JD-8399;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-24;JD-7021;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-06-24;JD-7188;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-24;JD-7413;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-24;JD-7554;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-24;JD-7695;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-24;JD-7836;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-24;JD-7977;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-24;JD-8118;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-24;JD-8259;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-24;JD-8400;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-25;JD-7022;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-06-25;JD-7189;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-25;JD-7350;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-06-25;JD-7414;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-25;JD-7555;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-25;JD-7696;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-25;JD-7837;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-25;JD-7978;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-25;JD-8119;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-25;JD-8260;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-25;JD-8401;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-26;JD-7023;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-06-26;JD-7190;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-26;JD-7415;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-26;JD-7556;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-26;JD-7697;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-26;JD-7838;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-26;JD-7979;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-26;JD-8120;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-26;JD-8261;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-26;JD-8402;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-27;JD-7024;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-06-27;JD-7191;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-27;JD-7416;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-27;JD-7557;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-27;JD-7698;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-27;JD-7839;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-27;JD-7980;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-27;JD-8121;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-27;JD-8262;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-27;JD-8403;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-06-29;JD-7192;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-06-30;JD-7025;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-06-30;JD-7026;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-06-30;JD-7193;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-06-30;JD-7417;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-06-30;JD-7558;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-06-30;JD-7699;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-06-30;JD-7840;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-06-30;JD-7981;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-06-30;JD-8122;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-06-30;JD-8263;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-06-30;JD-8404;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-01;JD-7027;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-07-01;JD-7194;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-01;JD-7328;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-07-01;JD-7351;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-07-01;JD-7352;Pajamavimas;Vilnius;;P05;Planšetė;5;vnt.;120,0000
+2025-07-01;JD-7418;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-01;JD-7559;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-01;JD-7700;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-01;JD-7841;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-01;JD-7982;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-01;JD-8123;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-01;JD-8264;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-01;JD-8405;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-02;JD-7028;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-07-02;JD-7195;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-02;JD-7419;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-02;JD-7560;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-02;JD-7701;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-02;JD-7842;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-02;JD-7983;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-02;JD-8124;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-02;JD-8265;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-02;JD-8406;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-03;JD-7029;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-07-03;JD-7196;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-03;JD-7420;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-03;JD-7561;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-03;JD-7702;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-03;JD-7843;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-03;JD-7984;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-03;JD-8125;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-03;JD-8266;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-03;JD-8407;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-04;JD-7030;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-07-04;JD-7197;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-04;JD-7353;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-07-04;JD-7421;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-04;JD-7562;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-04;JD-7703;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-04;JD-7844;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-04;JD-7985;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-04;JD-8126;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-04;JD-8267;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-04;JD-8408;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-07;JD-7031;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-07-07;JD-7032;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-07-07;JD-7198;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-07;JD-7354;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-07-07;JD-7422;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-07;JD-7563;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-07;JD-7704;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-07;JD-7845;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-07;JD-7986;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-07;JD-8127;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-07;JD-8268;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-07;JD-8409;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-08;JD-7033;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-07-08;JD-7199;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-08;JD-7423;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-08;JD-7564;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-08;JD-7705;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-08;JD-7846;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-08;JD-7987;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-08;JD-8128;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-08;JD-8269;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-08;JD-8410;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-09;JD-7034;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-07-09;JD-7200;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-09;JD-7424;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-09;JD-7565;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-09;JD-7706;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-09;JD-7847;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-09;JD-7988;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-09;JD-8129;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-09;JD-8270;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-09;JD-8411;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-10;JD-7035;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-07-10;JD-7201;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-10;JD-7355;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-07-10;JD-7425;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-10;JD-7566;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-10;JD-7707;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-10;JD-7848;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-10;JD-7989;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-10;JD-8130;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-10;JD-8271;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-10;JD-8412;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-11;JD-7036;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-07-11;JD-7202;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-11;JD-7329;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-07-11;JD-7426;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-11;JD-7567;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-11;JD-7708;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-11;JD-7849;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-11;JD-7990;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-11;JD-8131;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-11;JD-8272;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-11;JD-8413;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-13;JD-7203;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-07-14;JD-7037;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-07-14;JD-7038;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-07-14;JD-7204;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-14;JD-7427;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-14;JD-7568;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-14;JD-7709;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-14;JD-7850;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-14;JD-7991;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-14;JD-8132;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-14;JD-8273;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-14;JD-8414;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-15;JD-7039;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-07-15;JD-7205;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-15;JD-7428;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-15;JD-7569;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-15;JD-7710;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-15;JD-7851;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-15;JD-7992;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-15;JD-8133;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-15;JD-8274;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-15;JD-8415;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-16;JD-7040;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-07-16;JD-7206;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-16;JD-7356;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-07-16;JD-7429;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-16;JD-7570;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-16;JD-7711;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-16;JD-7852;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-16;JD-7993;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-16;JD-8134;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-16;JD-8275;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-16;JD-8416;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-17;JD-7041;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-07-17;JD-7207;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-17;JD-7430;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-17;JD-7571;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-17;JD-7712;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-17;JD-7853;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-17;JD-7994;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-17;JD-8135;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-17;JD-8276;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-17;JD-8417;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-18;JD-7042;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-07-18;JD-7208;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-18;JD-7431;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-18;JD-7572;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-18;JD-7713;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-18;JD-7854;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-18;JD-7995;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-18;JD-8136;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-18;JD-8277;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-18;JD-8418;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-21;JD-7043;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-07-21;JD-7044;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-07-21;JD-7209;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-21;JD-7330;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-07-21;JD-7432;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-21;JD-7573;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-21;JD-7714;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-21;JD-7855;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-21;JD-7996;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-21;JD-8137;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-21;JD-8278;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-21;JD-8419;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-22;JD-7045;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-07-22;JD-7210;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-22;JD-7357;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-07-22;JD-7433;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-22;JD-7574;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-22;JD-7715;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-22;JD-7856;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-22;JD-7997;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-22;JD-8138;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-22;JD-8279;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-22;JD-8420;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-23;JD-7046;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-07-23;JD-7211;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-23;JD-7434;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-23;JD-7575;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-23;JD-7716;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-23;JD-7857;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-23;JD-7998;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-23;JD-8139;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-23;JD-8280;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-23;JD-8421;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-24;JD-7047;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-07-24;JD-7212;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-24;JD-7435;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-24;JD-7576;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-24;JD-7717;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-24;JD-7858;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-24;JD-7999;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-24;JD-8140;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-24;JD-8281;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-24;JD-8422;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-25;JD-7048;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-07-25;JD-7213;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-25;JD-7358;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-07-25;JD-7436;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-25;JD-7577;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-25;JD-7718;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-25;JD-7859;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-25;JD-8000;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-25;JD-8141;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-25;JD-8282;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-25;JD-8423;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-27;JD-7214;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-07-28;JD-7049;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-07-28;JD-7050;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-07-28;JD-7215;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-28;JD-7359;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-07-28;JD-7437;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-28;JD-7578;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-28;JD-7719;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-28;JD-7860;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-28;JD-8001;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-28;JD-8142;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-28;JD-8283;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-28;JD-8424;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-29;JD-7051;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-07-29;JD-7216;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-29;JD-7438;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-29;JD-7579;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-29;JD-7720;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-29;JD-7861;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-29;JD-8002;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-29;JD-8143;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-29;JD-8284;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-29;JD-8425;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-30;JD-7052;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-07-30;JD-7217;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-30;JD-7439;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-30;JD-7580;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-30;JD-7721;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-30;JD-7862;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-30;JD-8003;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-30;JD-8144;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-30;JD-8285;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-30;JD-8426;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-07-31;JD-7053;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-07-31;JD-7218;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-07-31;JD-7331;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-07-31;JD-7360;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-07-31;JD-7361;Pajamavimas;Vilnius;;P05;Planšetė;5;vnt.;120,0000
+2025-07-31;JD-7440;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-07-31;JD-7581;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-07-31;JD-7722;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-07-31;JD-7863;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-07-31;JD-8004;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-07-31;JD-8145;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-07-31;JD-8286;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-07-31;JD-8427;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-01;JD-7054;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-08-01;JD-7219;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-01;JD-7441;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-01;JD-7582;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-01;JD-7723;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-01;JD-7864;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-01;JD-8005;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-01;JD-8146;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-01;JD-8287;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-01;JD-8428;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-04;JD-7055;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-08-04;JD-7056;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-08-04;JD-7220;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-04;JD-7442;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-04;JD-7583;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-04;JD-7724;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-04;JD-7865;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-04;JD-8006;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-04;JD-8147;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-04;JD-8288;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-04;JD-8429;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-05;JD-7057;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-08-05;JD-7221;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-05;JD-7443;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-05;JD-7584;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-05;JD-7725;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-05;JD-7866;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-05;JD-8007;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-05;JD-8148;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-05;JD-8289;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-05;JD-8430;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-06;JD-7058;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-08-06;JD-7222;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-06;JD-7362;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-08-06;JD-7444;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-06;JD-7585;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-06;JD-7726;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-06;JD-7867;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-06;JD-8008;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-06;JD-8149;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-06;JD-8290;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-06;JD-8431;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-07;JD-7059;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-08-07;JD-7223;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-07;JD-7445;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-07;JD-7586;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-07;JD-7727;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-07;JD-7868;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-07;JD-8009;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-07;JD-8150;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-07;JD-8291;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-07;JD-8432;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-08;JD-7060;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-08-08;JD-7224;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-08;JD-7446;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-08;JD-7587;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-08;JD-7728;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-08;JD-7869;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-08;JD-8010;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-08;JD-8151;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-08;JD-8292;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-08;JD-8433;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-10;JD-7225;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-08-10;JD-7332;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-08-11;JD-7061;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-08-11;JD-7062;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-08-11;JD-7226;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-11;JD-7447;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-11;JD-7588;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-11;JD-7729;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-11;JD-7870;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-11;JD-8011;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-11;JD-8152;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-11;JD-8293;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-11;JD-8434;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-12;JD-7063;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-08-12;JD-7227;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-12;JD-7363;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-08-12;JD-7448;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-12;JD-7589;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-12;JD-7730;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-12;JD-7871;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-12;JD-8012;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-12;JD-8153;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-12;JD-8294;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-12;JD-8435;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-13;JD-7064;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-08-13;JD-7228;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-13;JD-7449;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-13;JD-7590;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-13;JD-7731;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-13;JD-7872;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-13;JD-8013;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-13;JD-8154;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-13;JD-8295;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-13;JD-8436;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-14;JD-7065;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-08-14;JD-7229;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-14;JD-7450;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-14;JD-7591;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-14;JD-7732;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-14;JD-7873;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-14;JD-8014;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-14;JD-8155;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-14;JD-8296;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-14;JD-8437;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-15;JD-7066;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-08-15;JD-7230;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-15;JD-7364;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-08-15;JD-7451;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-15;JD-7592;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-15;JD-7733;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-15;JD-7874;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-15;JD-8015;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-15;JD-8156;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-15;JD-8297;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-15;JD-8438;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-18;JD-7067;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-08-18;JD-7068;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-08-18;JD-7231;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-18;JD-7365;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-08-18;JD-7452;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-18;JD-7593;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-18;JD-7734;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-18;JD-7875;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-18;JD-8016;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-18;JD-8157;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-18;JD-8298;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-18;JD-8439;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-19;JD-7069;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-08-19;JD-7232;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-19;JD-7453;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-19;JD-7594;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-19;JD-7735;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-19;JD-7876;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-19;JD-8017;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-19;JD-8158;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-19;JD-8299;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-19;JD-8440;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-20;JD-7070;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-08-20;JD-7233;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-20;JD-7333;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-08-20;JD-7454;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-20;JD-7595;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-20;JD-7736;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-20;JD-7877;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-20;JD-8018;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-20;JD-8159;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-20;JD-8300;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-20;JD-8441;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-21;JD-7071;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-08-21;JD-7234;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-21;JD-7366;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-08-21;JD-7455;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-21;JD-7596;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-21;JD-7737;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-21;JD-7878;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-21;JD-8019;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-21;JD-8160;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-21;JD-8301;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-21;JD-8442;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-22;JD-7072;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-08-22;JD-7235;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-22;JD-7456;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-22;JD-7597;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-22;JD-7738;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-22;JD-7879;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-22;JD-8020;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-22;JD-8161;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-22;JD-8302;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-22;JD-8443;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-24;JD-7236;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-08-25;JD-7073;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-08-25;JD-7074;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-08-25;JD-7237;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-25;JD-7457;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-25;JD-7598;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-25;JD-7739;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-25;JD-7880;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-25;JD-8021;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-25;JD-8162;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-25;JD-8303;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-25;JD-8444;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-26;JD-7075;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-08-26;JD-7238;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-26;JD-7458;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-26;JD-7599;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-26;JD-7740;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-26;JD-7881;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-26;JD-8022;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-26;JD-8163;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-26;JD-8304;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-26;JD-8445;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-27;JD-7076;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-08-27;JD-7239;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-27;JD-7367;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-08-27;JD-7459;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-27;JD-7600;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-27;JD-7741;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-27;JD-7882;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-27;JD-8023;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-27;JD-8164;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-27;JD-8305;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-27;JD-8446;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-28;JD-7077;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-08-28;JD-7240;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-28;JD-7460;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-28;JD-7601;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-28;JD-7742;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-28;JD-7883;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-28;JD-8024;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-28;JD-8165;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-28;JD-8306;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-28;JD-8447;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-29;JD-7078;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-08-29;JD-7241;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-08-29;JD-7461;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-08-29;JD-7602;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-08-29;JD-7743;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-08-29;JD-7884;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-08-29;JD-8025;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-08-29;JD-8166;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-08-29;JD-8307;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-08-29;JD-8448;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-08-30;JD-7334;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-08-30;JD-7368;Pajamavimas;Vilnius;;P05;Planšetė;5;vnt.;120,0000
+2025-09-01;JD-7079;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-09-01;JD-7080;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-09-01;JD-7242;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-01;JD-7462;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-01;JD-7603;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-01;JD-7744;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-01;JD-7885;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-01;JD-8026;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-01;JD-8167;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-01;JD-8308;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-01;JD-8449;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-02;JD-7081;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-09-02;JD-7243;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-02;JD-7369;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-09-02;JD-7463;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-02;JD-7604;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-02;JD-7745;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-02;JD-7886;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-02;JD-8027;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-02;JD-8168;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-02;JD-8309;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-02;JD-8450;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-03;JD-7082;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-09-03;JD-7244;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-03;JD-7464;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-03;JD-7605;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-03;JD-7746;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-03;JD-7887;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-03;JD-8028;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-03;JD-8169;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-03;JD-8310;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-03;JD-8451;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-04;JD-7083;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-09-04;JD-7245;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-04;JD-7465;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-04;JD-7606;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-04;JD-7747;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-04;JD-7888;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-04;JD-8029;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-04;JD-8170;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-04;JD-8311;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-04;JD-8452;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-05;JD-7084;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-09-05;JD-7246;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-05;JD-7370;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-09-05;JD-7466;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-05;JD-7607;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-05;JD-7748;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-05;JD-7889;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-05;JD-8030;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-05;JD-8171;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-05;JD-8312;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-05;JD-8453;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-07;JD-7247;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-09-08;JD-7085;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-09-08;JD-7086;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-09-08;JD-7248;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-08;JD-7371;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-09-08;JD-7467;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-08;JD-7608;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-08;JD-7749;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-08;JD-7890;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-08;JD-8031;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-08;JD-8172;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-08;JD-8313;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-08;JD-8454;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-09;JD-7087;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-09-09;JD-7249;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-09;JD-7335;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-09-09;JD-7468;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-09;JD-7609;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-09;JD-7750;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-09;JD-7891;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-09;JD-8032;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-09;JD-8173;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-09;JD-8314;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-09;JD-8455;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-10;JD-7088;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-09-10;JD-7250;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-10;JD-7469;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-10;JD-7610;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-10;JD-7751;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-10;JD-7892;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-10;JD-8033;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-10;JD-8174;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-10;JD-8315;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-10;JD-8456;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-11;JD-7089;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-09-11;JD-7251;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-11;JD-7372;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-09-11;JD-7470;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-11;JD-7611;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-11;JD-7752;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-11;JD-7893;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-11;JD-8034;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-11;JD-8175;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-11;JD-8316;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-11;JD-8457;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-12;JD-7090;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-09-12;JD-7252;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-12;JD-7471;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-12;JD-7612;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-12;JD-7753;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-12;JD-7894;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-12;JD-8035;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-12;JD-8176;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-12;JD-8317;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-12;JD-8458;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-15;JD-7091;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-09-15;JD-7092;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-09-15;JD-7253;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-15;JD-7472;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-15;JD-7613;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-15;JD-7754;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-15;JD-7895;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-15;JD-8036;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-15;JD-8177;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-15;JD-8318;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-15;JD-8459;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-16;JD-7093;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-09-16;JD-7254;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-16;JD-7473;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-16;JD-7614;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-16;JD-7755;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-16;JD-7896;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-16;JD-8037;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-16;JD-8178;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-16;JD-8319;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-16;JD-8460;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-17;JD-7094;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-09-17;JD-7255;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-17;JD-7373;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-09-17;JD-7474;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-17;JD-7615;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-17;JD-7756;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-17;JD-7897;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-17;JD-8038;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-17;JD-8179;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-17;JD-8320;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-17;JD-8461;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-18;JD-7095;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-09-18;JD-7256;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-18;JD-7475;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-18;JD-7616;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-18;JD-7757;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-18;JD-7898;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-18;JD-8039;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-18;JD-8180;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-18;JD-8321;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-18;JD-8462;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-19;JD-7096;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-09-19;JD-7257;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-19;JD-7336;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-09-19;JD-7476;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-19;JD-7617;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-19;JD-7758;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-19;JD-7899;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-19;JD-8040;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-19;JD-8181;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-19;JD-8322;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-19;JD-8463;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-21;JD-7258;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-09-22;JD-7097;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-09-22;JD-7098;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-09-22;JD-7259;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-22;JD-7477;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-22;JD-7618;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-22;JD-7759;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-22;JD-7900;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-22;JD-8041;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-22;JD-8182;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-22;JD-8323;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-22;JD-8464;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-23;JD-7099;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-09-23;JD-7260;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-23;JD-7374;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-09-23;JD-7478;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-23;JD-7619;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-23;JD-7760;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-23;JD-7901;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-23;JD-8042;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-23;JD-8183;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-23;JD-8324;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-23;JD-8465;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-24;JD-7100;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-09-24;JD-7261;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-24;JD-7479;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-24;JD-7620;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-24;JD-7761;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-24;JD-7902;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-24;JD-8043;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-24;JD-8184;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-24;JD-8325;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-24;JD-8466;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-25;JD-7101;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-09-25;JD-7262;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-25;JD-7480;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-25;JD-7621;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-25;JD-7762;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-25;JD-7903;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-25;JD-8044;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-25;JD-8185;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-25;JD-8326;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-25;JD-8467;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-26;JD-7102;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-09-26;JD-7263;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-26;JD-7375;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-09-26;JD-7481;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-26;JD-7622;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-26;JD-7763;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-26;JD-7904;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-26;JD-8045;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-26;JD-8186;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-26;JD-8327;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-26;JD-8468;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-29;JD-7103;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-09-29;JD-7104;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-09-29;JD-7264;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-29;JD-7337;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-09-29;JD-7376;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-09-29;JD-7377;Pajamavimas;Vilnius;;P05;Planšetė;5;vnt.;120,0000
+2025-09-29;JD-7482;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-29;JD-7623;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-29;JD-7764;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-29;JD-7905;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-29;JD-8046;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-29;JD-8187;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-29;JD-8328;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-29;JD-8469;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-09-30;JD-7105;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-09-30;JD-7265;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-09-30;JD-7483;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-09-30;JD-7624;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-09-30;JD-7765;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-09-30;JD-7906;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-09-30;JD-8047;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-09-30;JD-8188;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-09-30;JD-8329;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-09-30;JD-8470;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-01;JD-7106;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-10-01;JD-7266;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-01;JD-7484;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-01;JD-7625;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-01;JD-7766;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-01;JD-7907;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-01;JD-8048;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-01;JD-8189;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-01;JD-8330;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-01;JD-8471;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-02;JD-7107;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-10-02;JD-7267;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-02;JD-7378;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-10-02;JD-7485;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-02;JD-7626;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-02;JD-7767;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-02;JD-7908;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-02;JD-8049;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-02;JD-8190;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-02;JD-8331;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-02;JD-8472;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-03;JD-7108;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-10-03;JD-7268;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-03;JD-7486;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-03;JD-7627;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-03;JD-7768;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-03;JD-7909;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-03;JD-8050;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-03;JD-8191;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-03;JD-8332;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-03;JD-8473;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-05;JD-7269;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-10-06;JD-7109;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-10-06;JD-7110;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-10-06;JD-7270;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-06;JD-7487;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-06;JD-7628;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-06;JD-7769;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-06;JD-7910;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-06;JD-8051;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-06;JD-8192;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-06;JD-8333;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-06;JD-8474;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-07;JD-7111;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-10-07;JD-7271;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-07;JD-7488;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-07;JD-7629;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-07;JD-7770;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-07;JD-7911;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-07;JD-8052;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-07;JD-8193;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-07;JD-8334;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-07;JD-8475;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-08;JD-7112;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-10-08;JD-7272;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-08;JD-7379;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-10-08;JD-7489;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-08;JD-7630;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-08;JD-7771;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-08;JD-7912;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-08;JD-8053;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-08;JD-8194;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-08;JD-8335;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-08;JD-8476;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-09;JD-7113;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-10-09;JD-7273;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-09;JD-7338;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-10-09;JD-7490;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-09;JD-7631;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-09;JD-7772;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-09;JD-7913;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-09;JD-8054;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-09;JD-8195;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-09;JD-8336;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-09;JD-8477;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-10;JD-7114;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-10-10;JD-7274;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-10;JD-7491;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-10;JD-7632;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-10;JD-7773;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-10;JD-7914;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-10;JD-8055;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-10;JD-8196;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-10;JD-8337;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-10;JD-8478;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-13;JD-7115;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-10-13;JD-7116;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-10-13;JD-7275;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-13;JD-7492;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-13;JD-7633;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-13;JD-7774;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-13;JD-7915;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-13;JD-8056;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-13;JD-8197;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-13;JD-8338;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-13;JD-8479;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-14;JD-7117;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-10-14;JD-7276;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-14;JD-7380;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-10-14;JD-7493;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-14;JD-7634;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-14;JD-7775;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-14;JD-7916;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-14;JD-8057;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-14;JD-8198;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-14;JD-8339;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-14;JD-8480;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-15;JD-7118;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-10-15;JD-7277;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-15;JD-7494;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-15;JD-7635;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-15;JD-7776;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-15;JD-7917;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-15;JD-8058;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-15;JD-8199;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-15;JD-8340;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-15;JD-8481;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-16;JD-7119;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-10-16;JD-7278;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-16;JD-7495;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-16;JD-7636;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-16;JD-7777;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-16;JD-7918;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-16;JD-8059;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-16;JD-8200;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-16;JD-8341;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-16;JD-8482;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-17;JD-7120;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-10-17;JD-7279;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-17;JD-7381;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-10-17;JD-7496;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-17;JD-7637;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-17;JD-7778;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-17;JD-7919;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-17;JD-8060;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-17;JD-8201;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-17;JD-8342;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-17;JD-8483;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-19;JD-7280;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-10-19;JD-7339;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-10-20;JD-7121;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-10-20;JD-7122;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-10-20;JD-7281;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-20;JD-7382;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-10-20;JD-7497;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-20;JD-7638;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-20;JD-7779;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-20;JD-7920;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-20;JD-8061;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-20;JD-8202;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-20;JD-8343;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-20;JD-8484;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-21;JD-7123;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-10-21;JD-7282;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-21;JD-7498;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-21;JD-7639;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-21;JD-7780;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-21;JD-7921;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-21;JD-8062;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-21;JD-8203;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-21;JD-8344;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-21;JD-8485;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-22;JD-7124;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-10-22;JD-7283;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-22;JD-7499;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-22;JD-7640;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-22;JD-7781;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-22;JD-7922;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-22;JD-8063;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-22;JD-8204;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-22;JD-8345;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-22;JD-8486;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-23;JD-7125;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-10-23;JD-7284;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-23;JD-7383;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-10-23;JD-7500;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-23;JD-7641;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-23;JD-7782;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-23;JD-7923;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-23;JD-8064;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-23;JD-8205;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-23;JD-8346;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-23;JD-8487;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-24;JD-7126;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-10-24;JD-7285;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-24;JD-7501;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-24;JD-7642;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-24;JD-7783;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-24;JD-7924;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-24;JD-8065;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-24;JD-8206;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-24;JD-8347;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-24;JD-8488;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-27;JD-7127;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-10-27;JD-7128;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-10-27;JD-7286;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-27;JD-7502;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-27;JD-7643;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-27;JD-7784;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-27;JD-7925;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-27;JD-8066;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-27;JD-8207;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-27;JD-8348;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-27;JD-8489;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-28;JD-7129;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-10-28;JD-7287;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-28;JD-7503;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-28;JD-7644;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-28;JD-7785;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-28;JD-7926;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-28;JD-8067;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-28;JD-8208;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-28;JD-8349;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-28;JD-8490;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-29;JD-7130;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-10-29;JD-7288;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-29;JD-7340;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-10-29;JD-7384;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-10-29;JD-7385;Pajamavimas;Vilnius;;P05;Planšetė;5;vnt.;120,0000
+2025-10-29;JD-7504;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-29;JD-7645;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-29;JD-7786;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-29;JD-7927;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-29;JD-8068;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-29;JD-8209;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-29;JD-8350;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-29;JD-8491;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-30;JD-7131;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-10-30;JD-7289;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-30;JD-7505;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-30;JD-7646;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-30;JD-7787;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-30;JD-7928;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-30;JD-8069;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-30;JD-8210;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-30;JD-8351;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-30;JD-8492;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-10-31;JD-7132;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-10-31;JD-7290;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-10-31;JD-7506;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-10-31;JD-7647;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-10-31;JD-7788;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-10-31;JD-7929;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-10-31;JD-8070;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-10-31;JD-8211;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-10-31;JD-8352;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-10-31;JD-8493;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-02;JD-7291;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-11-03;JD-7133;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-11-03;JD-7134;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-11-03;JD-7292;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-03;JD-7507;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-03;JD-7648;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-03;JD-7789;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-03;JD-7930;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-03;JD-8071;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-03;JD-8212;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-03;JD-8353;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-03;JD-8494;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-04;JD-7135;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-11-04;JD-7293;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-04;JD-7386;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-11-04;JD-7508;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-04;JD-7649;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-04;JD-7790;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-04;JD-7931;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-04;JD-8072;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-04;JD-8213;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-04;JD-8354;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-04;JD-8495;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-05;JD-7136;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-11-05;JD-7294;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-05;JD-7509;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-05;JD-7650;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-05;JD-7791;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-05;JD-7932;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-05;JD-8073;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-05;JD-8214;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-05;JD-8355;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-05;JD-8496;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-06;JD-7137;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-11-06;JD-7295;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-06;JD-7510;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-06;JD-7651;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-06;JD-7792;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-06;JD-7933;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-06;JD-8074;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-06;JD-8215;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-06;JD-8356;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-06;JD-8497;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-07;JD-7138;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-11-07;JD-7296;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-07;JD-7387;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-11-07;JD-7511;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-07;JD-7652;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-07;JD-7793;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-07;JD-7934;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-07;JD-8075;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-07;JD-8216;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-07;JD-8357;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-07;JD-8498;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-08;JD-7341;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-11-10;JD-7139;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-11-10;JD-7140;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-11-10;JD-7297;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-10;JD-7388;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-11-10;JD-7512;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-10;JD-7653;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-10;JD-7794;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-10;JD-7935;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-10;JD-8076;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-10;JD-8217;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-10;JD-8358;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-10;JD-8499;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-10;RT-2;Grąžinimas tiekėjui;Vilnius;;P11;Aliejus 1 l;20;vnt.;2,2000
+2025-11-11;JD-7141;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-11-11;JD-7298;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-11;JD-7513;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-11;JD-7654;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-11;JD-7795;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-11;JD-7936;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-11;JD-8077;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-11;JD-8218;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-11;JD-8359;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-11;JD-8500;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-12;JD-7142;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-11-12;JD-7299;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-12;JD-7514;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-12;JD-7655;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-12;JD-7796;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-12;JD-7937;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-12;JD-8078;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-12;JD-8219;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-12;JD-8360;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-12;JD-8501;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-13;JD-7143;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-11-13;JD-7300;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-13;JD-7389;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-11-13;JD-7515;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-13;JD-7656;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-13;JD-7797;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-13;JD-7938;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-13;JD-8079;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-13;JD-8220;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-13;JD-8361;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-13;JD-8502;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-14;JD-7144;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-11-14;JD-7301;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-14;JD-7516;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-14;JD-7657;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-14;JD-7798;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-14;JD-7939;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-14;JD-8080;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-14;JD-8221;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-14;JD-8362;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-14;JD-8503;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-16;JD-7302;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-11-17;JD-7145;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-11-17;JD-7146;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-11-17;JD-7303;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-17;JD-7517;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-17;JD-7658;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-17;JD-7799;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-17;JD-7940;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-17;JD-8081;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-17;JD-8222;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-17;JD-8363;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-17;JD-8504;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-18;JD-7147;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-11-18;JD-7304;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-18;JD-7342;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-11-18;JD-7518;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-18;JD-7659;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-18;JD-7800;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-18;JD-7941;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-18;JD-8082;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-18;JD-8223;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-18;JD-8364;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-18;JD-8505;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-19;JD-7148;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-11-19;JD-7305;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-19;JD-7390;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-11-19;JD-7519;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-19;JD-7660;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-19;JD-7801;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-19;JD-7942;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-19;JD-8083;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-19;JD-8224;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-19;JD-8365;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-19;JD-8506;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-20;JD-7149;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-11-20;JD-7306;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-20;JD-7520;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-20;JD-7661;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-20;JD-7802;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-20;JD-7943;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-20;JD-8084;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-20;JD-8225;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-20;JD-8366;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-20;JD-8507;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-20;TR-1001;Perkėlimas į sandėlį;Kaunas;;P10;Vanduo 0,5 l;100;vnt.;0,3000
+2025-11-20;TR-1001;Perkėlimas iš sandėlio;Vilnius;;P10;Vanduo 0,5 l;100;vnt.;0,3000
+2025-11-21;JD-7150;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-11-21;JD-7307;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-21;JD-7521;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-21;JD-7662;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-21;JD-7803;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-21;JD-7944;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-21;JD-8085;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-21;JD-8226;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-21;JD-8367;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-21;JD-8508;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-24;JD-7151;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-11-24;JD-7152;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-11-24;JD-7308;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-24;JD-7522;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-24;JD-7663;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-24;JD-7804;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-24;JD-7945;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-24;JD-8086;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-24;JD-8227;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-24;JD-8368;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-24;JD-8509;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-25;JD-7153;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-11-25;JD-7309;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-25;JD-7391;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-11-25;JD-7523;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-25;JD-7664;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-25;JD-7805;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-25;JD-7946;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-25;JD-8087;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-25;JD-8228;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-25;JD-8369;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-25;JD-8510;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-26;JD-7154;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-11-26;JD-7310;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-26;JD-7524;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-26;JD-7665;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-26;JD-7806;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-26;JD-7947;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-26;JD-8088;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-26;JD-8229;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-26;JD-8370;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-26;JD-8511;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-27;JD-7155;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-11-27;JD-7311;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-27;JD-7525;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-27;JD-7666;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-27;JD-7807;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-27;JD-7948;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-27;JD-8089;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-27;JD-8230;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-27;JD-8371;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-27;JD-8512;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-28;JD-7156;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-11-28;JD-7312;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-11-28;JD-7343;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-11-28;JD-7392;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-11-28;JD-7393;Pajamavimas;Vilnius;;P05;Planšetė;5;vnt.;120,0000
+2025-11-28;JD-7526;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-11-28;JD-7667;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-11-28;JD-7808;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-11-28;JD-7949;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-11-28;JD-8090;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-11-28;JD-8231;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-11-28;JD-8372;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-11-28;JD-8513;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-11-30;JD-7313;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-12-01;JD-7157;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-12-01;JD-7158;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-12-01;JD-7314;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-12-01;JD-7394;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-12-01;JD-7527;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-12-01;JD-7668;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-12-01;JD-7809;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-12-01;JD-7950;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-12-01;JD-8091;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-12-01;JD-8232;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-12-01;JD-8373;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-12-01;JD-8514;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-12-02;JD-7159;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-12-02;JD-7315;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-12-02;JD-7528;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-12-02;JD-7669;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-12-02;JD-7810;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-12-02;JD-7951;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-12-02;JD-8092;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-12-02;JD-8233;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-12-02;JD-8374;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-12-02;JD-8515;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-12-03;JD-7160;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-12-03;JD-7316;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-12-03;JD-7529;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-12-03;JD-7670;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-12-03;JD-7811;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-12-03;JD-7952;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-12-03;JD-8093;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-12-03;JD-8234;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-12-03;JD-8375;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-12-03;JD-8516;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-12-03;RT-1;Grąžinimas iš pirkėjo;Vilnius;;P11;Aliejus 1 l;30;vnt.;2,2000
+2025-12-04;JD-7161;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-12-04;JD-7317;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-12-04;JD-7395;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-12-04;JD-7530;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-12-04;JD-7671;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-12-04;JD-7812;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-12-04;JD-7953;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-12-04;JD-8094;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-12-04;JD-8235;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-12-04;JD-8376;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-12-04;JD-8517;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-12-05;JD-7162;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-12-05;JD-7318;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-12-05;JD-7531;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-12-05;JD-7672;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-12-05;JD-7813;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-12-05;JD-7954;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-12-05;JD-8095;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-12-05;JD-8236;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-12-05;JD-8377;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-12-05;JD-8518;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-12-05;TR-1002;Perkėlimas tarp sandėlių;Kaunas;Vilnius;P10;Vanduo 0,5 l;50;vnt.;0,3000
+2025-12-08;ADJ-1;Nurašymas;Vilnius;;P11;Aliejus 1 l;15;vnt.;2,2000
+2025-12-08;JD-7163;Išrašymas;Vilnius;;P01;Pienas 1 l;20;vnt.;0,8000
+2025-12-08;JD-7164;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-12-08;JD-7319;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-12-08;JD-7344;Išrašymas;Kaunas;;P03;Skardinės;1;vnt.;2,5000
+2025-12-08;JD-7532;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-12-08;JD-7673;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-12-08;JD-7814;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-12-08;JD-7955;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-12-08;JD-8096;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-12-08;JD-8237;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-12-08;JD-8378;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-12-08;JD-8519;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-12-09;JD-7165;Išrašymas;Vilnius;;P01;Pienas 1 l;21;vnt.;0,8000
+2025-12-09;JD-7320;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-12-09;JD-7533;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-12-09;JD-7674;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-12-09;JD-7815;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-12-09;JD-7956;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-12-09;JD-8097;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-12-09;JD-8238;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-12-09;JD-8379;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-12-09;JD-8520;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-12-10;JD-7166;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-12-10;JD-7321;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-12-10;JD-7396;Išrašymas;Vilnius;;P05;Planšetė;1;vnt.;120,0000
+2025-12-10;JD-7534;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-12-10;JD-7675;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-12-10;JD-7816;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-12-10;JD-7957;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-12-10;JD-8098;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-12-10;JD-8239;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-12-10;JD-8380;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-12-10;JD-8521;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-12-11;JD-7167;Išrašymas;Vilnius;;P01;Pienas 1 l;23;vnt.;0,8000
+2025-12-11;JD-7322;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-12-11;JD-7535;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-12-11;JD-7676;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-12-11;JD-7817;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-12-11;JD-7958;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-12-11;JD-8099;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-12-11;JD-8240;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-12-11;JD-8381;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-12-11;JD-8522;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-12-12;JD-7168;Išrašymas;Vilnius;;P01;Pienas 1 l;24;vnt.;0,8000
+2025-12-12;JD-7323;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-12-12;JD-7536;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-12-12;JD-7677;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-12-12;JD-7818;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-12-12;JD-7959;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-12-12;JD-8100;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-12-12;JD-8241;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-12-12;JD-8382;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-12-12;JD-8523;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000
+2025-12-14;JD-7324;Pajamavimas;Vilnius;;P02;Miltai 1 kg;60;vnt.;0,9000
+2025-12-15;JD-7169;Išrašymas;Vilnius;;P01;Pienas 1 l;22;vnt.;0,8000
+2025-12-15;JD-7170;Pajamavimas;Vilnius;;P01;Pienas 1 l;100;vnt.;0,8000
+2025-12-15;JD-7325;Išrašymas;Vilnius;;P02;Miltai 1 kg;10;vnt.;0,9000
+2025-12-15;JD-7537;Išrašymas;Vilnius;;P06;Sviestas 200 g;15;vnt.;1,5000
+2025-12-15;JD-7678;Išrašymas;Vilnius;;P07;Sūris;2;vnt.;6,0000
+2025-12-15;JD-7819;Išrašymas;Vilnius;;P08;Kava 250 g;3;vnt.;4,0000
+2025-12-15;JD-7960;Išrašymas;Kaunas;;P09;Sultys 1 l;6;vnt.;1,1000
+2025-12-15;JD-8101;Išrašymas;Vilnius;;P10;Vanduo 0,5 l;5;vnt.;0,3000
+2025-12-15;JD-8242;Išrašymas;Vilnius;;P11;Aliejus 1 l;4;vnt.;2,2000
+2025-12-15;JD-8383;Išrašymas;Vilnius;;P12;Cukrus;8;kg;1,1000
+2025-12-15;JD-8524;Išrašymas;Kaunas;;P10;Vanduo 0,5 l;2;vnt.;0,3000

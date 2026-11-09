@@ -104,9 +104,28 @@ export const PURCHASE_FIELDS = [
 ] as const;
 export type PurchaseField = (typeof PURCHASE_FIELDS)[number];
 
+export const INVENTORY_FIELDS = [
+  'snapshot_date',
+  'movement_date',
+  'document_id',
+  'product_id',
+  'product_name',
+  'product_category',
+  'warehouse',
+  'warehouse_to',
+  'quantity',
+  'unit',
+  'unit_cost',
+  'stock_value',
+  'movement_type',
+  'currency',
+  'min_stock',
+] as const;
+export type InventoryField = (typeof INVENTORY_FIELDS)[number];
+
 /** Any semantic field of any module. */
-export type FieldId = SalesField | PurchaseField;
-export type ModuleId = 'sales' | 'purchasing';
+export type FieldId = SalesField | PurchaseField | InventoryField;
+export type ModuleId = 'sales' | 'purchasing' | 'inventory';
 
 export type AmountBasis = 'net' | 'gross' | 'unknown';
 
@@ -131,6 +150,8 @@ export type MappingWarning =
   | { code: 'missing_amount' }
   | { code: 'amount_basis_unknown' }
   | { code: 'missing_supplier' }
+  | { code: 'missing_product' }
+  | { code: 'missing_quantity' }
   | { code: 'low_confidence'; field: FieldId }
   | { code: 'multiple_amounts' };
 
@@ -200,6 +221,43 @@ export interface PurchaseRecord {
   importId?: string;
 }
 
+/** What a stock movement is. Transfers, adjustments and opening balances are never demand, purchases or sales. */
+export type MovementType = 'receipt' | 'issue' | 'transfer' | 'return' | 'adjustment' | 'opening' | 'unknown';
+
+/**
+ * One inventory line. `snapshot` = stock on hand at `date` (balance, valuation or history report row);
+ * `movement` = a stock change on `date`. Values are never converted between currencies or units.
+ */
+export interface InventoryRecord {
+  key: string;
+  kind: 'snapshot' | 'movement';
+  /** ISO date: the snapshot (as-of) date or the movement date. */
+  date: string;
+  /** Movements: the document number. Snapshots: a synthetic id "snap <date> <warehouse>" – a snapshot is the document that a re-import can duplicate or contradict. */
+  documentId?: string;
+  productName?: string;
+  /** Product code / SKU – the only verified product identifier. */
+  productId?: string;
+  category?: string;
+  warehouse?: string;
+  /** Transfers exported as ONE line: the receiving warehouse (the line's quantity leaves `warehouse`). */
+  warehouseTo?: string;
+  /** Snapshot: quantity on hand (may be negative = inconsistent). Movement: SIGNED change of stock in `warehouse` (+ in, − out). */
+  quantity?: number;
+  /** Canonical unit code (kg, g, l, pcs, box …); undefined = not provided. */
+  unit?: string;
+  unitCost?: number;
+  /** Snapshot: stock value as stated. Movement: value of the movement, signed like the quantity. */
+  value?: number;
+  minStock?: number;
+  movementType?: MovementType;
+  /** Constant 'net': valuation at cost has no VAT basis. Kept so the shared series machinery works unchanged. */
+  basis: AmountBasis;
+  currency: string;
+  sourceRow: number;
+  importId?: string;
+}
+
 export type IssueCode =
   | 'invalid_date'
   | 'date_out_of_range'
@@ -220,7 +278,18 @@ export type IssueCode =
   | 'invalid_discount'
   | 'credit_sign_normalised'
   | 'discount_deducted'
-  | 'price_mismatch';
+  | 'price_mismatch'
+  | 'empty_quantity'
+  | 'invalid_stock_value'
+  | 'invalid_min_stock'
+  | 'missing_warehouse'
+  | 'unknown_movement_type'
+  | 'movement_sign_normalised'
+  | 'return_direction_by_sign'
+  | 'value_mismatch'
+  | 'negative_stock'
+  | 'missing_cost'
+  | 'date_from_as_of';
 
 export interface ImportStats {
   rowsRead: number;
@@ -283,7 +352,7 @@ export interface Insight {
   whyKey: string;
   /** Dimension the evidence rows belong to, and the chart that best shows the finding. */
   dimension?: 'customer' | 'product' | 'salesperson' | 'category' | 'supplier' | 'warehouse';
-  chart?: 'trend' | 'comparison' | 'topCustomers' | 'topProducts' | 'salespeople' | 'category' | 'waterfall' | 'pareto' | 'topSuppliers' | 'priceTrend' | 'priceVariance' | 'spendBridge' | 'quantityComparison';
+  chart?: 'stockTrend' | 'warehouseComparison' | 'slowMoving' | 'stockoutRisk' | 'movementTrend' | 'abc' | 'trend' | 'comparison' | 'topCustomers' | 'topProducts' | 'salespeople' | 'category' | 'waterfall' | 'pareto' | 'topSuppliers' | 'priceTrend' | 'priceVariance' | 'spendBridge' | 'quantityComparison';
   /** Purchasing: what kind of saving (if any) the finding describes. Never mixed: actual ≠ potential ≠ hypothetical. */
   savings?: { kind: 'actual' | 'potential' | 'hypothetical'; amount: number };
   params: Record<string, ParamValue>;

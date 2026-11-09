@@ -182,3 +182,25 @@ Period-aware insights (`analyzeSalesPeriod`), year-to-date (offered only when da
 **Reports.** `buildPurchasingSummaryDoc` reuses `renderManagementSummary` (self-contained HTML, no scripts) and the CSV builder (formula-injection safe). The savings kind is part of the impact cell.
 
 **Robustness.** `translate()` falls back to English / the key instead of throwing; `tests/purchasing-i18n.test.ts` lists every dynamically built key (a missing `punavail.*` key crashed the page during Phase 3 e2e).
+
+## Phase 4 – Inventory intelligence
+
+**Module split.** Inventory is a third module on the shared machinery: the generic import-safety store (new `inventory` table, schema v5), the merge planner, period engine, `compareWith`, entity tables, Pareto / waterfall helpers, diagnostics and report builders. Inventory code lives in `src/engine/inventory/*` and `src/engine/validation/normalizeInventory.ts`; UI in `src/components/inventory/*`. The page receives only aggregated models from the worker (`buildInventory`); positions, movement lines and item lists never cross the worker boundary except one drill-down page.
+
+**Dataset types.** Detected from the confirmed mapping and shown before import: *stock balance* (quantities only), *valuation report* (cost / value), *historical snapshots* (several dates), *movements* (a movement type or movement date is mapped). A balance without a date column needs the as-of date the user types. One record type (`InventoryRecord`) holds both kinds; `kind: 'snapshot' | 'movement'`.
+
+**Snapshots are documents.** A snapshot line gets the synthetic document id `snap <date> <warehouse>`, so the existing merge rules apply unchanged: an identical re-export adds nothing, a *conflicting* snapshot of the same date and warehouse is held for review (or replaced after an explicit confirmation), and every decision is audited and reversible. Two sources of one snapshot kept side by side are flagged (`i_multi_source`).
+
+**Position, not sums over time.** Stock value / quantity at a date D is the *latest snapshot of each warehouse on or before D* (`SnapIndex`, `positionAt`). The previous period uses ITS OWN snapshot; if it would be the same snapshot, the change is withheld. A value is the stated value, else quantity × unit cost, else unknown – never estimated; value KPIs need ≥ 80 % valued lines.
+
+**Withheld, not guessed.** Turnover and days on hand need two valued snapshots (opening and closing) and movements that cover the window with enough issue values. Slow-moving, non-moving and excess stock need ≥ 60 days of movement history ending near the closing date (lookback ≤ 180 days). Cover-based stockout risk needs the same history; below-minimum risk needs only the snapshot with a minimum-stock column. No snapshot alone ever produces turnover, "non-moving" or a demand-based stockout. Items that never appear in the movement file are reported as *not classified*, never as non-moving. Rules and thresholds (slow > 180 d cover, excess above 90 d demand, stockout < 14 d cover) are shown to the user.
+
+**Movements.** Types are read from the type column (LT / PL / EN wording; unknown stays unknown and, above 20 %, switches demand metrics off). Sign convention is decided per file (issues printed positive or negative) and reported. **Transfers, adjustments and opening balances are never receipts or issues**; a transfer moves stock between warehouses only (two legs or one line with a destination) and unbalanced transfer documents are reported. Customer returns reduce issues, supplier returns reduce receipts, write-offs always reduce stock.
+
+**Consistency checks.** Negative stock lines, stated value ≠ quantity × cost, unit costs differing ≥ 3-fold between lines, and *snapshot A + movements = snapshot B* (only where the movement file covers the interval, only for items in both snapshots) – differences are findings to check, not proof of loss.
+
+**Units and identity** follow the purchasing rules: strict unit policy by default, exact metric conversion opt-in, pieces / boxes / packs never converted; product = code (verified) or name (unverified, low reliability); one code with several names is excluded from movement-based conclusions. Matching snapshot to movement lines uses product + unit when both files carry units, otherwise product only (with a limitation).
+
+**Insights** (`analyzeInventoryPeriod`): value concentration, value increase, excess stock, slow-moving, non-moving, stockout risk, negative stock, snapshots vs movements, unusual movements, valuation anomalies. Each has evidence, reliability with a stated reason, an action and a "why". Amounts for slow / non-moving / excess stock are *capital tied up, not losses*; no inventory text promises savings (tested).
+
+**Cross-module foundation.** `proposeLinks` / `proposeInventoryLinks` / `confirmedCounterpart` (`src/engine/entities/links.ts`): links are proposed only from equal verified product codes, stay `proposed` until the user decides, name-only matches are unverified candidates, ambiguous codes are never proposed, and another module can reach an item only through a link the user confirmed. Nothing joins data yet.

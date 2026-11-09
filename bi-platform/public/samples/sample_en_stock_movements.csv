@@ -1,0 +1,1544 @@
+Posting date,Document no,Movement type,Warehouse,To warehouse,Item code,Item name,Quantity,UoM,Unit cost
+2025-06-01,JD-P01-OPEN,Goods receipt,Vilnius,,P01,Pienas 1 l,802,pcs,0.8000
+2025-06-01,JD-P02-OPEN,Goods receipt,Vilnius,,P02,Miltai 1 kg,970,pcs,0.9000
+2025-06-01,JD-P03-OPEN,Goods receipt,Kaunas,,P03,Skardinės,1019,pcs,2.5000
+2025-06-01,JD-P05-OPEN,Goods receipt,Vilnius,,P05,Planšetė,31,pcs,120.0000
+2025-06-01,JD-P06-OPEN,Goods receipt,Vilnius,,P06,Sviestas 200 g,2195,pcs,1.5000
+2025-06-01,JD-P07-OPEN,Goods receipt,Vilnius,,P07,Sūris,322,pcs,6.0000
+2025-06-01,JD-P08-OPEN,Goods receipt,Vilnius,,P08,Kava 250 g,523,pcs,4.0000
+2025-06-01,JD-P09-OPEN,Goods receipt,Kaunas,,P09,Sultys 1 l,842,pcs,1.1000
+2025-06-01,JD-P10-OPEN,Goods receipt,Kaunas,,P10,"Vanduo 0,5 l",432,pcs,0.3000
+2025-06-01,JD-P10-OPEN,Goods receipt,Vilnius,,P10,"Vanduo 0,5 l",1055,pcs,0.3000
+2025-06-01,JD-P11-OPEN,Goods receipt,Vilnius,,P11,Aliejus 1 l,819,pcs,2.2000
+2025-06-01,JD-P12-OPEN,Goods receipt,Vilnius,,P12,Cukrus,1928,kg,1.1000
+2025-06-02,JD-7001,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-06-02,JD-7002,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-06-02,JD-7171,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-02,JD-7397,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-02,JD-7538,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-02,JD-7679,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-02,JD-7820,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-02,JD-7961,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-02,JD-8102,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-02,JD-8243,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-02,JD-8384,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-03,JD-7003,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-06-03,JD-7172,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-03,JD-7398,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-03,JD-7539,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-03,JD-7680,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-03,JD-7821,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-03,JD-7962,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-03,JD-8103,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-03,JD-8244,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-03,JD-8385,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-04,JD-7004,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-06-04,JD-7173,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-04,JD-7345,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-06-04,JD-7399,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-04,JD-7540,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-04,JD-7681,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-04,JD-7822,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-04,JD-7963,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-04,JD-8104,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-04,JD-8245,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-04,JD-8386,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-05,JD-7005,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-06-05,JD-7174,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-05,JD-7400,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-05,JD-7541,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-05,JD-7682,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-05,JD-7823,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-05,JD-7964,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-05,JD-8105,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-05,JD-8246,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-05,JD-8387,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-05,JD-P04-OPEN,Goods receipt,Vilnius,,P04,Senos prekės,500,pcs,8.0000
+2025-06-06,JD-7006,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-06-06,JD-7175,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-06,JD-7401,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-06,JD-7542,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-06,JD-7683,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-06,JD-7824,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-06,JD-7965,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-06,JD-8106,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-06,JD-8247,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-06,JD-8388,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-09,JD-7007,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-06-09,JD-7008,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-06-09,JD-7176,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-09,JD-7402,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-09,JD-7543,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-09,JD-7684,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-09,JD-7825,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-09,JD-7966,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-09,JD-8107,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-09,JD-8248,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-09,JD-8389,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-10,JD-7009,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-06-10,JD-7177,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-10,JD-7346,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-06-10,JD-7403,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-10,JD-7544,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-10,JD-7685,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-10,JD-7826,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-10,JD-7967,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-10,JD-8108,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-10,JD-8249,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-10,JD-8390,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-11,JD-7010,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-06-11,JD-7178,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-11,JD-7326,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-06-11,JD-7404,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-11,JD-7545,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-11,JD-7686,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-11,JD-7827,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-11,JD-7968,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-11,JD-8109,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-11,JD-8250,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-11,JD-8391,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-12,JD-7011,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-06-12,JD-7179,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-12,JD-7405,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-12,JD-7546,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-12,JD-7687,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-12,JD-7828,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-12,JD-7969,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-12,JD-8110,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-12,JD-8251,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-12,JD-8392,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-13,JD-7012,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-06-13,JD-7180,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-13,JD-7347,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-06-13,JD-7406,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-13,JD-7547,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-13,JD-7688,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-13,JD-7829,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-13,JD-7970,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-13,JD-8111,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-13,JD-8252,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-13,JD-8393,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-15,JD-7181,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-06-16,JD-7013,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-06-16,JD-7014,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-06-16,JD-7182,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-16,JD-7348,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-06-16,JD-7407,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-16,JD-7548,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-16,JD-7689,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-16,JD-7830,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-16,JD-7971,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-16,JD-8112,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-16,JD-8253,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-16,JD-8394,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-17,JD-7015,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-06-17,JD-7183,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-17,JD-7408,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-17,JD-7549,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-17,JD-7690,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-17,JD-7831,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-17,JD-7972,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-17,JD-8113,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-17,JD-8254,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-17,JD-8395,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-18,JD-7016,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-06-18,JD-7184,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-18,JD-7409,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-18,JD-7550,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-18,JD-7691,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-18,JD-7832,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-18,JD-7973,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-18,JD-8114,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-18,JD-8255,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-18,JD-8396,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-19,JD-7017,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-06-19,JD-7185,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-19,JD-7349,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-06-19,JD-7410,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-19,JD-7551,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-19,JD-7692,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-19,JD-7833,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-19,JD-7974,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-19,JD-8115,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-19,JD-8256,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-19,JD-8397,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-20,JD-7018,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-06-20,JD-7186,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-20,JD-7411,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-20,JD-7552,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-20,JD-7693,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-20,JD-7834,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-20,JD-7975,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-20,JD-8116,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-20,JD-8257,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-20,JD-8398,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-21,JD-7327,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-06-23,JD-7019,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-06-23,JD-7020,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-06-23,JD-7187,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-23,JD-7412,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-23,JD-7553,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-23,JD-7694,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-23,JD-7835,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-23,JD-7976,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-23,JD-8117,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-23,JD-8258,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-23,JD-8399,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-24,JD-7021,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-06-24,JD-7188,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-24,JD-7413,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-24,JD-7554,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-24,JD-7695,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-24,JD-7836,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-24,JD-7977,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-24,JD-8118,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-24,JD-8259,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-24,JD-8400,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-25,JD-7022,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-06-25,JD-7189,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-25,JD-7350,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-06-25,JD-7414,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-25,JD-7555,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-25,JD-7696,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-25,JD-7837,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-25,JD-7978,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-25,JD-8119,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-25,JD-8260,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-25,JD-8401,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-26,JD-7023,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-06-26,JD-7190,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-26,JD-7415,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-26,JD-7556,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-26,JD-7697,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-26,JD-7838,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-26,JD-7979,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-26,JD-8120,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-26,JD-8261,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-26,JD-8402,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-27,JD-7024,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-06-27,JD-7191,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-27,JD-7416,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-27,JD-7557,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-27,JD-7698,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-27,JD-7839,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-27,JD-7980,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-27,JD-8121,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-27,JD-8262,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-27,JD-8403,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-06-29,JD-7192,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-06-30,JD-7025,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-06-30,JD-7026,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-06-30,JD-7193,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-06-30,JD-7417,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-06-30,JD-7558,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-06-30,JD-7699,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-06-30,JD-7840,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-06-30,JD-7981,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-06-30,JD-8122,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-06-30,JD-8263,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-06-30,JD-8404,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-01,JD-7027,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-07-01,JD-7194,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-01,JD-7328,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-07-01,JD-7351,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-07-01,JD-7352,Goods receipt,Vilnius,,P05,Planšetė,5,pcs,120.0000
+2025-07-01,JD-7418,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-01,JD-7559,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-01,JD-7700,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-01,JD-7841,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-01,JD-7982,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-01,JD-8123,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-01,JD-8264,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-01,JD-8405,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-02,JD-7028,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-07-02,JD-7195,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-02,JD-7419,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-02,JD-7560,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-02,JD-7701,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-02,JD-7842,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-02,JD-7983,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-02,JD-8124,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-02,JD-8265,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-02,JD-8406,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-03,JD-7029,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-07-03,JD-7196,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-03,JD-7420,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-03,JD-7561,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-03,JD-7702,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-03,JD-7843,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-03,JD-7984,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-03,JD-8125,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-03,JD-8266,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-03,JD-8407,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-04,JD-7030,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-07-04,JD-7197,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-04,JD-7353,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-07-04,JD-7421,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-04,JD-7562,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-04,JD-7703,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-04,JD-7844,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-04,JD-7985,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-04,JD-8126,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-04,JD-8267,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-04,JD-8408,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-07,JD-7031,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-07-07,JD-7032,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-07-07,JD-7198,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-07,JD-7354,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-07-07,JD-7422,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-07,JD-7563,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-07,JD-7704,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-07,JD-7845,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-07,JD-7986,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-07,JD-8127,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-07,JD-8268,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-07,JD-8409,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-08,JD-7033,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-07-08,JD-7199,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-08,JD-7423,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-08,JD-7564,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-08,JD-7705,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-08,JD-7846,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-08,JD-7987,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-08,JD-8128,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-08,JD-8269,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-08,JD-8410,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-09,JD-7034,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-07-09,JD-7200,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-09,JD-7424,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-09,JD-7565,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-09,JD-7706,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-09,JD-7847,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-09,JD-7988,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-09,JD-8129,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-09,JD-8270,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-09,JD-8411,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-10,JD-7035,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-07-10,JD-7201,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-10,JD-7355,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-07-10,JD-7425,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-10,JD-7566,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-10,JD-7707,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-10,JD-7848,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-10,JD-7989,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-10,JD-8130,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-10,JD-8271,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-10,JD-8412,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-11,JD-7036,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-07-11,JD-7202,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-11,JD-7329,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-07-11,JD-7426,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-11,JD-7567,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-11,JD-7708,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-11,JD-7849,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-11,JD-7990,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-11,JD-8131,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-11,JD-8272,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-11,JD-8413,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-13,JD-7203,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-07-14,JD-7037,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-07-14,JD-7038,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-07-14,JD-7204,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-14,JD-7427,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-14,JD-7568,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-14,JD-7709,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-14,JD-7850,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-14,JD-7991,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-14,JD-8132,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-14,JD-8273,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-14,JD-8414,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-15,JD-7039,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-07-15,JD-7205,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-15,JD-7428,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-15,JD-7569,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-15,JD-7710,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-15,JD-7851,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-15,JD-7992,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-15,JD-8133,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-15,JD-8274,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-15,JD-8415,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-16,JD-7040,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-07-16,JD-7206,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-16,JD-7356,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-07-16,JD-7429,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-16,JD-7570,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-16,JD-7711,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-16,JD-7852,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-16,JD-7993,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-16,JD-8134,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-16,JD-8275,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-16,JD-8416,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-17,JD-7041,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-07-17,JD-7207,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-17,JD-7430,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-17,JD-7571,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-17,JD-7712,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-17,JD-7853,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-17,JD-7994,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-17,JD-8135,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-17,JD-8276,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-17,JD-8417,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-18,JD-7042,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-07-18,JD-7208,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-18,JD-7431,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-18,JD-7572,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-18,JD-7713,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-18,JD-7854,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-18,JD-7995,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-18,JD-8136,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-18,JD-8277,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-18,JD-8418,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-21,JD-7043,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-07-21,JD-7044,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-07-21,JD-7209,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-21,JD-7330,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-07-21,JD-7432,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-21,JD-7573,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-21,JD-7714,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-21,JD-7855,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-21,JD-7996,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-21,JD-8137,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-21,JD-8278,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-21,JD-8419,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-22,JD-7045,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-07-22,JD-7210,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-22,JD-7357,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-07-22,JD-7433,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-22,JD-7574,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-22,JD-7715,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-22,JD-7856,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-22,JD-7997,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-22,JD-8138,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-22,JD-8279,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-22,JD-8420,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-23,JD-7046,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-07-23,JD-7211,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-23,JD-7434,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-23,JD-7575,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-23,JD-7716,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-23,JD-7857,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-23,JD-7998,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-23,JD-8139,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-23,JD-8280,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-23,JD-8421,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-24,JD-7047,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-07-24,JD-7212,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-24,JD-7435,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-24,JD-7576,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-24,JD-7717,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-24,JD-7858,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-24,JD-7999,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-24,JD-8140,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-24,JD-8281,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-24,JD-8422,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-25,JD-7048,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-07-25,JD-7213,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-25,JD-7358,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-07-25,JD-7436,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-25,JD-7577,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-25,JD-7718,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-25,JD-7859,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-25,JD-8000,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-25,JD-8141,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-25,JD-8282,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-25,JD-8423,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-27,JD-7214,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-07-28,JD-7049,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-07-28,JD-7050,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-07-28,JD-7215,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-28,JD-7359,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-07-28,JD-7437,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-28,JD-7578,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-28,JD-7719,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-28,JD-7860,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-28,JD-8001,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-28,JD-8142,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-28,JD-8283,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-28,JD-8424,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-29,JD-7051,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-07-29,JD-7216,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-29,JD-7438,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-29,JD-7579,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-29,JD-7720,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-29,JD-7861,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-29,JD-8002,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-29,JD-8143,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-29,JD-8284,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-29,JD-8425,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-30,JD-7052,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-07-30,JD-7217,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-30,JD-7439,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-30,JD-7580,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-30,JD-7721,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-30,JD-7862,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-30,JD-8003,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-30,JD-8144,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-30,JD-8285,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-30,JD-8426,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-07-31,JD-7053,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-07-31,JD-7218,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-07-31,JD-7331,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-07-31,JD-7360,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-07-31,JD-7361,Goods receipt,Vilnius,,P05,Planšetė,5,pcs,120.0000
+2025-07-31,JD-7440,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-07-31,JD-7581,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-07-31,JD-7722,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-07-31,JD-7863,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-07-31,JD-8004,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-07-31,JD-8145,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-07-31,JD-8286,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-07-31,JD-8427,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-01,JD-7054,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-08-01,JD-7219,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-01,JD-7441,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-01,JD-7582,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-01,JD-7723,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-01,JD-7864,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-01,JD-8005,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-01,JD-8146,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-01,JD-8287,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-01,JD-8428,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-04,JD-7055,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-08-04,JD-7056,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-08-04,JD-7220,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-04,JD-7442,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-04,JD-7583,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-04,JD-7724,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-04,JD-7865,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-04,JD-8006,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-04,JD-8147,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-04,JD-8288,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-04,JD-8429,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-05,JD-7057,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-08-05,JD-7221,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-05,JD-7443,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-05,JD-7584,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-05,JD-7725,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-05,JD-7866,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-05,JD-8007,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-05,JD-8148,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-05,JD-8289,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-05,JD-8430,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-06,JD-7058,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-08-06,JD-7222,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-06,JD-7362,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-08-06,JD-7444,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-06,JD-7585,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-06,JD-7726,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-06,JD-7867,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-06,JD-8008,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-06,JD-8149,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-06,JD-8290,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-06,JD-8431,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-07,JD-7059,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-08-07,JD-7223,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-07,JD-7445,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-07,JD-7586,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-07,JD-7727,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-07,JD-7868,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-07,JD-8009,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-07,JD-8150,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-07,JD-8291,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-07,JD-8432,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-08,JD-7060,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-08-08,JD-7224,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-08,JD-7446,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-08,JD-7587,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-08,JD-7728,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-08,JD-7869,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-08,JD-8010,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-08,JD-8151,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-08,JD-8292,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-08,JD-8433,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-10,JD-7225,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-08-10,JD-7332,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-08-11,JD-7061,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-08-11,JD-7062,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-08-11,JD-7226,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-11,JD-7447,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-11,JD-7588,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-11,JD-7729,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-11,JD-7870,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-11,JD-8011,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-11,JD-8152,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-11,JD-8293,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-11,JD-8434,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-12,JD-7063,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-08-12,JD-7227,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-12,JD-7363,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-08-12,JD-7448,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-12,JD-7589,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-12,JD-7730,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-12,JD-7871,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-12,JD-8012,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-12,JD-8153,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-12,JD-8294,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-12,JD-8435,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-13,JD-7064,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-08-13,JD-7228,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-13,JD-7449,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-13,JD-7590,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-13,JD-7731,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-13,JD-7872,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-13,JD-8013,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-13,JD-8154,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-13,JD-8295,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-13,JD-8436,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-14,JD-7065,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-08-14,JD-7229,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-14,JD-7450,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-14,JD-7591,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-14,JD-7732,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-14,JD-7873,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-14,JD-8014,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-14,JD-8155,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-14,JD-8296,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-14,JD-8437,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-15,JD-7066,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-08-15,JD-7230,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-15,JD-7364,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-08-15,JD-7451,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-15,JD-7592,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-15,JD-7733,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-15,JD-7874,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-15,JD-8015,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-15,JD-8156,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-15,JD-8297,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-15,JD-8438,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-18,JD-7067,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-08-18,JD-7068,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-08-18,JD-7231,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-18,JD-7365,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-08-18,JD-7452,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-18,JD-7593,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-18,JD-7734,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-18,JD-7875,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-18,JD-8016,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-18,JD-8157,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-18,JD-8298,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-18,JD-8439,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-19,JD-7069,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-08-19,JD-7232,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-19,JD-7453,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-19,JD-7594,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-19,JD-7735,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-19,JD-7876,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-19,JD-8017,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-19,JD-8158,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-19,JD-8299,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-19,JD-8440,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-20,JD-7070,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-08-20,JD-7233,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-20,JD-7333,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-08-20,JD-7454,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-20,JD-7595,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-20,JD-7736,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-20,JD-7877,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-20,JD-8018,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-20,JD-8159,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-20,JD-8300,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-20,JD-8441,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-21,JD-7071,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-08-21,JD-7234,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-21,JD-7366,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-08-21,JD-7455,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-21,JD-7596,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-21,JD-7737,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-21,JD-7878,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-21,JD-8019,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-21,JD-8160,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-21,JD-8301,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-21,JD-8442,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-22,JD-7072,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-08-22,JD-7235,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-22,JD-7456,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-22,JD-7597,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-22,JD-7738,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-22,JD-7879,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-22,JD-8020,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-22,JD-8161,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-22,JD-8302,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-22,JD-8443,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-24,JD-7236,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-08-25,JD-7073,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-08-25,JD-7074,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-08-25,JD-7237,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-25,JD-7457,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-25,JD-7598,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-25,JD-7739,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-25,JD-7880,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-25,JD-8021,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-25,JD-8162,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-25,JD-8303,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-25,JD-8444,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-26,JD-7075,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-08-26,JD-7238,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-26,JD-7458,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-26,JD-7599,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-26,JD-7740,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-26,JD-7881,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-26,JD-8022,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-26,JD-8163,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-26,JD-8304,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-26,JD-8445,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-27,JD-7076,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-08-27,JD-7239,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-27,JD-7367,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-08-27,JD-7459,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-27,JD-7600,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-27,JD-7741,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-27,JD-7882,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-27,JD-8023,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-27,JD-8164,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-27,JD-8305,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-27,JD-8446,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-28,JD-7077,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-08-28,JD-7240,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-28,JD-7460,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-28,JD-7601,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-28,JD-7742,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-28,JD-7883,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-28,JD-8024,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-28,JD-8165,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-28,JD-8306,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-28,JD-8447,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-29,JD-7078,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-08-29,JD-7241,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-08-29,JD-7461,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-08-29,JD-7602,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-08-29,JD-7743,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-08-29,JD-7884,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-08-29,JD-8025,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-08-29,JD-8166,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-08-29,JD-8307,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-08-29,JD-8448,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-08-30,JD-7334,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-08-30,JD-7368,Goods receipt,Vilnius,,P05,Planšetė,5,pcs,120.0000
+2025-09-01,JD-7079,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-09-01,JD-7080,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-09-01,JD-7242,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-01,JD-7462,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-01,JD-7603,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-01,JD-7744,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-01,JD-7885,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-01,JD-8026,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-01,JD-8167,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-01,JD-8308,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-01,JD-8449,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-02,JD-7081,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-09-02,JD-7243,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-02,JD-7369,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-09-02,JD-7463,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-02,JD-7604,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-02,JD-7745,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-02,JD-7886,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-02,JD-8027,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-02,JD-8168,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-02,JD-8309,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-02,JD-8450,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-03,JD-7082,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-09-03,JD-7244,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-03,JD-7464,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-03,JD-7605,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-03,JD-7746,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-03,JD-7887,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-03,JD-8028,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-03,JD-8169,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-03,JD-8310,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-03,JD-8451,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-04,JD-7083,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-09-04,JD-7245,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-04,JD-7465,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-04,JD-7606,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-04,JD-7747,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-04,JD-7888,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-04,JD-8029,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-04,JD-8170,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-04,JD-8311,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-04,JD-8452,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-05,JD-7084,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-09-05,JD-7246,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-05,JD-7370,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-09-05,JD-7466,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-05,JD-7607,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-05,JD-7748,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-05,JD-7889,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-05,JD-8030,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-05,JD-8171,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-05,JD-8312,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-05,JD-8453,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-07,JD-7247,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-09-08,JD-7085,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-09-08,JD-7086,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-09-08,JD-7248,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-08,JD-7371,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-09-08,JD-7467,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-08,JD-7608,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-08,JD-7749,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-08,JD-7890,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-08,JD-8031,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-08,JD-8172,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-08,JD-8313,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-08,JD-8454,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-09,JD-7087,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-09-09,JD-7249,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-09,JD-7335,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-09-09,JD-7468,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-09,JD-7609,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-09,JD-7750,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-09,JD-7891,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-09,JD-8032,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-09,JD-8173,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-09,JD-8314,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-09,JD-8455,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-10,JD-7088,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-09-10,JD-7250,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-10,JD-7469,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-10,JD-7610,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-10,JD-7751,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-10,JD-7892,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-10,JD-8033,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-10,JD-8174,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-10,JD-8315,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-10,JD-8456,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-11,JD-7089,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-09-11,JD-7251,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-11,JD-7372,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-09-11,JD-7470,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-11,JD-7611,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-11,JD-7752,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-11,JD-7893,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-11,JD-8034,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-11,JD-8175,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-11,JD-8316,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-11,JD-8457,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-12,JD-7090,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-09-12,JD-7252,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-12,JD-7471,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-12,JD-7612,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-12,JD-7753,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-12,JD-7894,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-12,JD-8035,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-12,JD-8176,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-12,JD-8317,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-12,JD-8458,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-15,JD-7091,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-09-15,JD-7092,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-09-15,JD-7253,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-15,JD-7472,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-15,JD-7613,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-15,JD-7754,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-15,JD-7895,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-15,JD-8036,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-15,JD-8177,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-15,JD-8318,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-15,JD-8459,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-16,JD-7093,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-09-16,JD-7254,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-16,JD-7473,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-16,JD-7614,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-16,JD-7755,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-16,JD-7896,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-16,JD-8037,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-16,JD-8178,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-16,JD-8319,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-16,JD-8460,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-17,JD-7094,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-09-17,JD-7255,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-17,JD-7373,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-09-17,JD-7474,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-17,JD-7615,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-17,JD-7756,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-17,JD-7897,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-17,JD-8038,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-17,JD-8179,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-17,JD-8320,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-17,JD-8461,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-18,JD-7095,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-09-18,JD-7256,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-18,JD-7475,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-18,JD-7616,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-18,JD-7757,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-18,JD-7898,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-18,JD-8039,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-18,JD-8180,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-18,JD-8321,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-18,JD-8462,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-19,JD-7096,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-09-19,JD-7257,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-19,JD-7336,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-09-19,JD-7476,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-19,JD-7617,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-19,JD-7758,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-19,JD-7899,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-19,JD-8040,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-19,JD-8181,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-19,JD-8322,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-19,JD-8463,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-21,JD-7258,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-09-22,JD-7097,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-09-22,JD-7098,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-09-22,JD-7259,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-22,JD-7477,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-22,JD-7618,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-22,JD-7759,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-22,JD-7900,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-22,JD-8041,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-22,JD-8182,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-22,JD-8323,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-22,JD-8464,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-23,JD-7099,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-09-23,JD-7260,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-23,JD-7374,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-09-23,JD-7478,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-23,JD-7619,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-23,JD-7760,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-23,JD-7901,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-23,JD-8042,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-23,JD-8183,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-23,JD-8324,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-23,JD-8465,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-24,JD-7100,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-09-24,JD-7261,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-24,JD-7479,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-24,JD-7620,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-24,JD-7761,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-24,JD-7902,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-24,JD-8043,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-24,JD-8184,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-24,JD-8325,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-24,JD-8466,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-25,JD-7101,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-09-25,JD-7262,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-25,JD-7480,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-25,JD-7621,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-25,JD-7762,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-25,JD-7903,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-25,JD-8044,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-25,JD-8185,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-25,JD-8326,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-25,JD-8467,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-26,JD-7102,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-09-26,JD-7263,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-26,JD-7375,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-09-26,JD-7481,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-26,JD-7622,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-26,JD-7763,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-26,JD-7904,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-26,JD-8045,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-26,JD-8186,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-26,JD-8327,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-26,JD-8468,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-29,JD-7103,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-09-29,JD-7104,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-09-29,JD-7264,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-29,JD-7337,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-09-29,JD-7376,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-09-29,JD-7377,Goods receipt,Vilnius,,P05,Planšetė,5,pcs,120.0000
+2025-09-29,JD-7482,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-29,JD-7623,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-29,JD-7764,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-29,JD-7905,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-29,JD-8046,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-29,JD-8187,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-29,JD-8328,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-29,JD-8469,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-09-30,JD-7105,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-09-30,JD-7265,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-09-30,JD-7483,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-09-30,JD-7624,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-09-30,JD-7765,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-09-30,JD-7906,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-09-30,JD-8047,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-09-30,JD-8188,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-09-30,JD-8329,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-09-30,JD-8470,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-01,JD-7106,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-10-01,JD-7266,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-01,JD-7484,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-01,JD-7625,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-01,JD-7766,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-01,JD-7907,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-01,JD-8048,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-01,JD-8189,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-01,JD-8330,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-01,JD-8471,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-02,JD-7107,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-10-02,JD-7267,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-02,JD-7378,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-10-02,JD-7485,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-02,JD-7626,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-02,JD-7767,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-02,JD-7908,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-02,JD-8049,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-02,JD-8190,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-02,JD-8331,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-02,JD-8472,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-03,JD-7108,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-10-03,JD-7268,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-03,JD-7486,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-03,JD-7627,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-03,JD-7768,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-03,JD-7909,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-03,JD-8050,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-03,JD-8191,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-03,JD-8332,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-03,JD-8473,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-05,JD-7269,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-10-06,JD-7109,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-10-06,JD-7110,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-10-06,JD-7270,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-06,JD-7487,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-06,JD-7628,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-06,JD-7769,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-06,JD-7910,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-06,JD-8051,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-06,JD-8192,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-06,JD-8333,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-06,JD-8474,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-07,JD-7111,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-10-07,JD-7271,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-07,JD-7488,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-07,JD-7629,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-07,JD-7770,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-07,JD-7911,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-07,JD-8052,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-07,JD-8193,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-07,JD-8334,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-07,JD-8475,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-08,JD-7112,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-10-08,JD-7272,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-08,JD-7379,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-10-08,JD-7489,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-08,JD-7630,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-08,JD-7771,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-08,JD-7912,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-08,JD-8053,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-08,JD-8194,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-08,JD-8335,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-08,JD-8476,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-09,JD-7113,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-10-09,JD-7273,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-09,JD-7338,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-10-09,JD-7490,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-09,JD-7631,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-09,JD-7772,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-09,JD-7913,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-09,JD-8054,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-09,JD-8195,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-09,JD-8336,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-09,JD-8477,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-10,JD-7114,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-10-10,JD-7274,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-10,JD-7491,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-10,JD-7632,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-10,JD-7773,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-10,JD-7914,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-10,JD-8055,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-10,JD-8196,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-10,JD-8337,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-10,JD-8478,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-13,JD-7115,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-10-13,JD-7116,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-10-13,JD-7275,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-13,JD-7492,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-13,JD-7633,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-13,JD-7774,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-13,JD-7915,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-13,JD-8056,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-13,JD-8197,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-13,JD-8338,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-13,JD-8479,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-14,JD-7117,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-10-14,JD-7276,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-14,JD-7380,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-10-14,JD-7493,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-14,JD-7634,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-14,JD-7775,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-14,JD-7916,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-14,JD-8057,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-14,JD-8198,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-14,JD-8339,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-14,JD-8480,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-15,JD-7118,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-10-15,JD-7277,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-15,JD-7494,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-15,JD-7635,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-15,JD-7776,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-15,JD-7917,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-15,JD-8058,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-15,JD-8199,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-15,JD-8340,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-15,JD-8481,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-16,JD-7119,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-10-16,JD-7278,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-16,JD-7495,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-16,JD-7636,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-16,JD-7777,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-16,JD-7918,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-16,JD-8059,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-16,JD-8200,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-16,JD-8341,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-16,JD-8482,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-17,JD-7120,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-10-17,JD-7279,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-17,JD-7381,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-10-17,JD-7496,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-17,JD-7637,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-17,JD-7778,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-17,JD-7919,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-17,JD-8060,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-17,JD-8201,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-17,JD-8342,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-17,JD-8483,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-19,JD-7280,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-10-19,JD-7339,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-10-20,JD-7121,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-10-20,JD-7122,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-10-20,JD-7281,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-20,JD-7382,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-10-20,JD-7497,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-20,JD-7638,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-20,JD-7779,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-20,JD-7920,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-20,JD-8061,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-20,JD-8202,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-20,JD-8343,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-20,JD-8484,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-21,JD-7123,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-10-21,JD-7282,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-21,JD-7498,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-21,JD-7639,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-21,JD-7780,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-21,JD-7921,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-21,JD-8062,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-21,JD-8203,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-21,JD-8344,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-21,JD-8485,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-22,JD-7124,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-10-22,JD-7283,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-22,JD-7499,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-22,JD-7640,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-22,JD-7781,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-22,JD-7922,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-22,JD-8063,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-22,JD-8204,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-22,JD-8345,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-22,JD-8486,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-23,JD-7125,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-10-23,JD-7284,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-23,JD-7383,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-10-23,JD-7500,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-23,JD-7641,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-23,JD-7782,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-23,JD-7923,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-23,JD-8064,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-23,JD-8205,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-23,JD-8346,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-23,JD-8487,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-24,JD-7126,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-10-24,JD-7285,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-24,JD-7501,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-24,JD-7642,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-24,JD-7783,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-24,JD-7924,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-24,JD-8065,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-24,JD-8206,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-24,JD-8347,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-24,JD-8488,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-27,JD-7127,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-10-27,JD-7128,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-10-27,JD-7286,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-27,JD-7502,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-27,JD-7643,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-27,JD-7784,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-27,JD-7925,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-27,JD-8066,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-27,JD-8207,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-27,JD-8348,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-27,JD-8489,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-28,JD-7129,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-10-28,JD-7287,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-28,JD-7503,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-28,JD-7644,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-28,JD-7785,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-28,JD-7926,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-28,JD-8067,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-28,JD-8208,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-28,JD-8349,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-28,JD-8490,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-29,JD-7130,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-10-29,JD-7288,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-29,JD-7340,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-10-29,JD-7384,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-10-29,JD-7385,Goods receipt,Vilnius,,P05,Planšetė,5,pcs,120.0000
+2025-10-29,JD-7504,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-29,JD-7645,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-29,JD-7786,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-29,JD-7927,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-29,JD-8068,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-29,JD-8209,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-29,JD-8350,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-29,JD-8491,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-30,JD-7131,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-10-30,JD-7289,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-30,JD-7505,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-30,JD-7646,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-30,JD-7787,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-30,JD-7928,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-30,JD-8069,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-30,JD-8210,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-30,JD-8351,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-30,JD-8492,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-10-31,JD-7132,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-10-31,JD-7290,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-10-31,JD-7506,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-10-31,JD-7647,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-10-31,JD-7788,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-10-31,JD-7929,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-10-31,JD-8070,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-10-31,JD-8211,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-10-31,JD-8352,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-10-31,JD-8493,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-02,JD-7291,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-11-03,JD-7133,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-11-03,JD-7134,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-11-03,JD-7292,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-03,JD-7507,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-03,JD-7648,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-03,JD-7789,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-03,JD-7930,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-03,JD-8071,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-03,JD-8212,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-03,JD-8353,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-03,JD-8494,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-04,JD-7135,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-11-04,JD-7293,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-04,JD-7386,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-11-04,JD-7508,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-04,JD-7649,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-04,JD-7790,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-04,JD-7931,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-04,JD-8072,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-04,JD-8213,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-04,JD-8354,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-04,JD-8495,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-05,JD-7136,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-11-05,JD-7294,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-05,JD-7509,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-05,JD-7650,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-05,JD-7791,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-05,JD-7932,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-05,JD-8073,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-05,JD-8214,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-05,JD-8355,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-05,JD-8496,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-06,JD-7137,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-11-06,JD-7295,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-06,JD-7510,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-06,JD-7651,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-06,JD-7792,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-06,JD-7933,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-06,JD-8074,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-06,JD-8215,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-06,JD-8356,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-06,JD-8497,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-07,JD-7138,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-11-07,JD-7296,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-07,JD-7387,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-11-07,JD-7511,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-07,JD-7652,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-07,JD-7793,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-07,JD-7934,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-07,JD-8075,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-07,JD-8216,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-07,JD-8357,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-07,JD-8498,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-08,JD-7341,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-11-10,JD-7139,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-11-10,JD-7140,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-11-10,JD-7297,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-10,JD-7388,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-11-10,JD-7512,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-10,JD-7653,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-10,JD-7794,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-10,JD-7935,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-10,JD-8076,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-10,JD-8217,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-10,JD-8358,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-10,JD-8499,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-10,RT-2,Supplier return,Vilnius,,P11,Aliejus 1 l,-20,pcs,2.2000
+2025-11-11,JD-7141,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-11-11,JD-7298,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-11,JD-7513,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-11,JD-7654,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-11,JD-7795,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-11,JD-7936,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-11,JD-8077,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-11,JD-8218,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-11,JD-8359,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-11,JD-8500,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-12,JD-7142,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-11-12,JD-7299,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-12,JD-7514,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-12,JD-7655,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-12,JD-7796,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-12,JD-7937,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-12,JD-8078,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-12,JD-8219,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-12,JD-8360,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-12,JD-8501,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-13,JD-7143,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-11-13,JD-7300,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-13,JD-7389,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-11-13,JD-7515,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-13,JD-7656,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-13,JD-7797,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-13,JD-7938,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-13,JD-8079,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-13,JD-8220,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-13,JD-8361,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-13,JD-8502,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-14,JD-7144,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-11-14,JD-7301,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-14,JD-7516,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-14,JD-7657,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-14,JD-7798,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-14,JD-7939,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-14,JD-8080,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-14,JD-8221,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-14,JD-8362,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-14,JD-8503,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-16,JD-7302,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-11-17,JD-7145,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-11-17,JD-7146,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-11-17,JD-7303,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-17,JD-7517,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-17,JD-7658,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-17,JD-7799,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-17,JD-7940,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-17,JD-8081,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-17,JD-8222,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-17,JD-8363,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-17,JD-8504,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-18,JD-7147,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-11-18,JD-7304,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-18,JD-7342,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-11-18,JD-7518,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-18,JD-7659,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-18,JD-7800,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-18,JD-7941,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-18,JD-8082,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-18,JD-8223,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-18,JD-8364,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-18,JD-8505,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-19,JD-7148,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-11-19,JD-7305,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-19,JD-7390,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-11-19,JD-7519,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-19,JD-7660,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-19,JD-7801,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-19,JD-7942,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-19,JD-8083,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-19,JD-8224,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-19,JD-8365,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-19,JD-8506,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-20,JD-7149,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-11-20,JD-7306,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-20,JD-7520,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-20,JD-7661,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-20,JD-7802,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-20,JD-7943,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-20,JD-8084,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-20,JD-8225,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-20,JD-8366,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-20,JD-8507,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-20,TR-1001,Transfer in,Kaunas,,P10,"Vanduo 0,5 l",100,pcs,0.3000
+2025-11-20,TR-1001,Transfer out,Vilnius,,P10,"Vanduo 0,5 l",-100,pcs,0.3000
+2025-11-21,JD-7150,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-11-21,JD-7307,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-21,JD-7521,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-21,JD-7662,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-21,JD-7803,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-21,JD-7944,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-21,JD-8085,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-21,JD-8226,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-21,JD-8367,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-21,JD-8508,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-24,JD-7151,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-11-24,JD-7152,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-11-24,JD-7308,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-24,JD-7522,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-24,JD-7663,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-24,JD-7804,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-24,JD-7945,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-24,JD-8086,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-24,JD-8227,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-24,JD-8368,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-24,JD-8509,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-25,JD-7153,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-11-25,JD-7309,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-25,JD-7391,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-11-25,JD-7523,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-25,JD-7664,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-25,JD-7805,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-25,JD-7946,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-25,JD-8087,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-25,JD-8228,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-25,JD-8369,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-25,JD-8510,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-26,JD-7154,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-11-26,JD-7310,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-26,JD-7524,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-26,JD-7665,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-26,JD-7806,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-26,JD-7947,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-26,JD-8088,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-26,JD-8229,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-26,JD-8370,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-26,JD-8511,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-27,JD-7155,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-11-27,JD-7311,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-27,JD-7525,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-27,JD-7666,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-27,JD-7807,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-27,JD-7948,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-27,JD-8089,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-27,JD-8230,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-27,JD-8371,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-27,JD-8512,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-28,JD-7156,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-11-28,JD-7312,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-11-28,JD-7343,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-11-28,JD-7392,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-11-28,JD-7393,Goods receipt,Vilnius,,P05,Planšetė,5,pcs,120.0000
+2025-11-28,JD-7526,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-11-28,JD-7667,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-11-28,JD-7808,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-11-28,JD-7949,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-11-28,JD-8090,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-11-28,JD-8231,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-11-28,JD-8372,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-11-28,JD-8513,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-11-30,JD-7313,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-12-01,JD-7157,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-12-01,JD-7158,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-12-01,JD-7314,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-12-01,JD-7394,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-12-01,JD-7527,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-12-01,JD-7668,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-12-01,JD-7809,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-12-01,JD-7950,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-12-01,JD-8091,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-12-01,JD-8232,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-12-01,JD-8373,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-12-01,JD-8514,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-12-02,JD-7159,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-12-02,JD-7315,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-12-02,JD-7528,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-12-02,JD-7669,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-12-02,JD-7810,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-12-02,JD-7951,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-12-02,JD-8092,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-12-02,JD-8233,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-12-02,JD-8374,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-12-02,JD-8515,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-12-03,JD-7160,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-12-03,JD-7316,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-12-03,JD-7529,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-12-03,JD-7670,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-12-03,JD-7811,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-12-03,JD-7952,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-12-03,JD-8093,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-12-03,JD-8234,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-12-03,JD-8375,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-12-03,JD-8516,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-12-03,RT-1,Customer return,Vilnius,,P11,Aliejus 1 l,30,pcs,2.2000
+2025-12-04,JD-7161,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-12-04,JD-7317,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-12-04,JD-7395,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-12-04,JD-7530,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-12-04,JD-7671,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-12-04,JD-7812,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-12-04,JD-7953,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-12-04,JD-8094,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-12-04,JD-8235,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-12-04,JD-8376,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-12-04,JD-8517,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-12-05,JD-7162,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-12-05,JD-7318,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-12-05,JD-7531,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-12-05,JD-7672,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-12-05,JD-7813,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-12-05,JD-7954,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-12-05,JD-8095,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-12-05,JD-8236,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-12-05,JD-8377,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-12-05,JD-8518,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-12-05,TR-1002,Stock transfer,Kaunas,Vilnius,P10,"Vanduo 0,5 l",-50,pcs,0.3000
+2025-12-08,ADJ-1,Write-off,Vilnius,,P11,Aliejus 1 l,-15,pcs,2.2000
+2025-12-08,JD-7163,Goods issue,Vilnius,,P01,Pienas 1 l,-20,pcs,0.8000
+2025-12-08,JD-7164,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-12-08,JD-7319,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-12-08,JD-7344,Goods issue,Kaunas,,P03,Skardinės,-1,pcs,2.5000
+2025-12-08,JD-7532,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-12-08,JD-7673,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-12-08,JD-7814,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-12-08,JD-7955,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-12-08,JD-8096,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-12-08,JD-8237,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-12-08,JD-8378,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-12-08,JD-8519,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-12-09,JD-7165,Goods issue,Vilnius,,P01,Pienas 1 l,-21,pcs,0.8000
+2025-12-09,JD-7320,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-12-09,JD-7533,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-12-09,JD-7674,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-12-09,JD-7815,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-12-09,JD-7956,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-12-09,JD-8097,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-12-09,JD-8238,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-12-09,JD-8379,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-12-09,JD-8520,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-12-10,JD-7166,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-12-10,JD-7321,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-12-10,JD-7396,Goods issue,Vilnius,,P05,Planšetė,-1,pcs,120.0000
+2025-12-10,JD-7534,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-12-10,JD-7675,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-12-10,JD-7816,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-12-10,JD-7957,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-12-10,JD-8098,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-12-10,JD-8239,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-12-10,JD-8380,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-12-10,JD-8521,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-12-11,JD-7167,Goods issue,Vilnius,,P01,Pienas 1 l,-23,pcs,0.8000
+2025-12-11,JD-7322,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-12-11,JD-7535,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-12-11,JD-7676,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-12-11,JD-7817,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-12-11,JD-7958,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-12-11,JD-8099,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-12-11,JD-8240,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-12-11,JD-8381,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-12-11,JD-8522,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-12-12,JD-7168,Goods issue,Vilnius,,P01,Pienas 1 l,-24,pcs,0.8000
+2025-12-12,JD-7323,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-12-12,JD-7536,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-12-12,JD-7677,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-12-12,JD-7818,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-12-12,JD-7959,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-12-12,JD-8100,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-12-12,JD-8241,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-12-12,JD-8382,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-12-12,JD-8523,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000
+2025-12-14,JD-7324,Goods receipt,Vilnius,,P02,Miltai 1 kg,60,pcs,0.9000
+2025-12-15,JD-7169,Goods issue,Vilnius,,P01,Pienas 1 l,-22,pcs,0.8000
+2025-12-15,JD-7170,Goods receipt,Vilnius,,P01,Pienas 1 l,100,pcs,0.8000
+2025-12-15,JD-7325,Goods issue,Vilnius,,P02,Miltai 1 kg,-10,pcs,0.9000
+2025-12-15,JD-7537,Goods issue,Vilnius,,P06,Sviestas 200 g,-15,pcs,1.5000
+2025-12-15,JD-7678,Goods issue,Vilnius,,P07,Sūris,-2,pcs,6.0000
+2025-12-15,JD-7819,Goods issue,Vilnius,,P08,Kava 250 g,-3,pcs,4.0000
+2025-12-15,JD-7960,Goods issue,Kaunas,,P09,Sultys 1 l,-6,pcs,1.1000
+2025-12-15,JD-8101,Goods issue,Vilnius,,P10,"Vanduo 0,5 l",-5,pcs,0.3000
+2025-12-15,JD-8242,Goods issue,Vilnius,,P11,Aliejus 1 l,-4,pcs,2.2000
+2025-12-15,JD-8383,Goods issue,Vilnius,,P12,Cukrus,-8,kg,1.1000
+2025-12-15,JD-8524,Goods issue,Kaunas,,P10,"Vanduo 0,5 l",-2,pcs,0.3000

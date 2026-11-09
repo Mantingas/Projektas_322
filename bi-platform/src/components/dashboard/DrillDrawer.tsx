@@ -18,7 +18,7 @@ export interface DrillState {
 const PAGE = 25;
 
 /** Shows the exact lines behind a number. The lines stay in the worker; only the visible page is transferred. */
-export function DrillDrawer({ drill, currency, version, seriesKey, importNames, onClose, module = 'sales' }: { module?: 'sales' | 'purchasing'; drill: DrillState; currency: string; version: number; seriesKey?: string; importNames: Record<string, string>; onClose: () => void }) {
+export function DrillDrawer({ drill, currency, version, seriesKey, importNames, onClose, module = 'sales' }: { module?: 'sales' | 'purchasing' | 'inventory'; drill: DrillState; currency: string; version: number; seriesKey?: string; importNames: Record<string, string>; onClose: () => void }) {
   const { t, lang } = useLang();
   const [page, setPage] = useState(0);
   const [data, setData] = useState<DrillResult | null>(null);
@@ -36,9 +36,12 @@ export function DrillDrawer({ drill, currency, version, seriesKey, importNames, 
   const fileOf = (id?: string) => (id && importNames[id]) || t('drill.unknownSource');
   const pages = data ? Math.max(1, Math.ceil(data.lines / PAGE)) : 1;
   const purchasing = module === 'purchasing';
-  const cols = (purchasing
-    ? ['drill.date', 'drill.document', 'drill.supplier', 'drill.product', 'drill.qty', 'drill.unit', 'drill.amount', 'drill.source', 'drill.row']
-    : ['drill.date', 'drill.document', 'drill.customer', 'drill.product', 'drill.qty', 'drill.amount', 'drill.source', 'drill.row']) as MessageKey[];
+  const inventory = module === 'inventory';
+  const cols = (inventory
+    ? ['drill.date', 'drill.document', 'drill.warehouse', 'drill.product', 'drill.qty', 'drill.unit', 'drill.type', 'drill.amount', 'drill.source', 'drill.row']
+    : purchasing
+      ? ['drill.date', 'drill.document', 'drill.supplier', 'drill.product', 'drill.qty', 'drill.unit', 'drill.amount', 'drill.source', 'drill.row']
+      : ['drill.date', 'drill.document', 'drill.customer', 'drill.product', 'drill.qty', 'drill.amount', 'drill.source', 'drill.row']) as MessageKey[];
   const exportCsv = async () => {
     const csv = await engine().call('drillCsv', [{ module, version, seriesKey, spec: drill.spec, headers: cols.map((k) => t(k)), fileNames: importNames, unknownFile: t('drill.unknownSource') }]);
     downloadText('records.csv', 'text/csv', csv);
@@ -67,7 +70,7 @@ export function DrillDrawer({ drill, currency, version, seriesKey, importNames, 
                 <tr key={r.key} className="border-t border-slate-100 dark:border-slate-800">
                   <td className="whitespace-nowrap px-2 py-1">{fmtDate(r.date, lang)}</td><td className="px-2 py-1">{r.documentId ?? '–'}</td>
                   <td className="max-w-[10rem] truncate px-2 py-1">{r.party ?? '–'}</td><td className="max-w-[10rem] truncate px-2 py-1">{r.product ?? '–'}</td>
-                  <td className="px-2 py-1 text-right tabular-nums">{r.quantity ?? '–'}</td>{purchasing && <td className="px-2 py-1">{r.unit ?? '–'}</td>}<td className="px-2 py-1 text-right tabular-nums">{m(r.amount)}</td>
+                  <td className="px-2 py-1 text-right tabular-nums">{r.quantity ?? '–'}</td>{(purchasing || inventory) && <td className="px-2 py-1">{r.unit ?? '–'}</td>}{inventory && <td className="px-2 py-1" data-testid="drill-type">{r.type ? t(`mt.${r.type}` as MessageKey) : '–'}</td>}<td className="px-2 py-1 text-right tabular-nums">{m(r.amount)}</td>
                   <td className="max-w-[9rem] truncate px-2 py-1">{fileOf(r.importId)}</td><td className="px-2 py-1">{r.sourceRow}</td>
                 </tr>
               ))}

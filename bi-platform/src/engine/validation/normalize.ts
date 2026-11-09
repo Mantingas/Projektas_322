@@ -11,10 +11,12 @@ export interface NormalizeOptions {
   skippedTotalRows?: number;
   /** ISO date used for the "future date" sanity check (injected so tests are deterministic). */
   today?: string;
+  /** Inventory: the snapshot date to use when the file has no date column (the user states it). */
+  asOfDate?: string;
 }
 
 export class MappingError extends Error {
-  constructor(public readonly code: 'missing_date' | 'missing_amount' | 'currency_required') {
+  constructor(public readonly code: 'missing_date' | 'missing_amount' | 'currency_required' | 'missing_product' | 'missing_quantity') {
     super(code);
   }
 }

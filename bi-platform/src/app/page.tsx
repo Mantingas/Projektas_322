@@ -9,8 +9,8 @@ import type { MessageKey } from '@/i18n';
 
 const MODULES: { k: 'sales' | 'purchasing' | 'inventory' | 'debts' | 'universal'; available: boolean }[] = [
   { k: 'sales', available: true },
-  { k: 'purchasing', available: false },
-  { k: 'inventory', available: false },
+  { k: 'purchasing', available: true },
+  { k: 'inventory', available: true },
   { k: 'debts', available: false },
   { k: 'universal', available: false },
 ];

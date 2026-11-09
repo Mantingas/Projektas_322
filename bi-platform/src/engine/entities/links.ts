@@ -1,4 +1,3 @@
-import type { PurchaseRecord, SalesRecord } from '../types';
 
 /**
  * Cross-module identity – DESIGN CONTRACT for linking sales, purchasing, inventory and supplier payables later.
@@ -13,8 +12,10 @@ import type { PurchaseRecord, SalesRecord } from '../types';
  */
 export type Scheme = 'product_code';
 
+export type LinkModule = 'sales' | 'purchasing' | 'inventory' | 'payables';
+
 export interface EntityEnd {
-  module: 'sales' | 'purchasing' | 'inventory' | 'payables';
+  module: LinkModule;
   /** normalised key inside that module (e.g. "sku:p01") */
   key: string;
   label: string;
@@ -42,7 +43,7 @@ export interface LinkProposal {
   proposed: EntityLink[];
   unverified: UnverifiedCandidate[];
   /** Codes (on either side) that stand for more than one product name: never proposed. */
-  ambiguous: { module: 'sales' | 'purchasing'; code: string; names: string[] }[];
+  ambiguous: { module: LinkModule; code: string; names: string[] }[];
 }
 
 const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ');
@@ -67,20 +68,23 @@ function collect(rows: { productId?: string; productName?: string }[]): Map<stri
   return m;
 }
 
-export function proposeProductLinks(sales: Pick<SalesRecord, 'productId' | 'productName'>[], purchases: Pick<PurchaseRecord, 'productId' | 'productName'>[]): LinkProposal {
-  const s = collect(sales);
-  const p = collect(purchases);
+type ProductRow = { productId?: string; productName?: string };
+
+/** Proposes product links between ANY two modules, from equal verified codes only. */
+export function proposeLinks(left: { module: LinkModule; rows: ProductRow[] }, right: { module: LinkModule; rows: ProductRow[] }): LinkProposal {
+  const s = collect(left.rows);
+  const p = collect(right.rows);
   const out: LinkProposal = { proposed: [], unverified: [], ambiguous: [] };
   const amb = new Set<string>();
-  for (const [module, map] of [['sales', s], ['purchasing', p]] as const) {
+  for (const [module, map] of [[left.module, s], [right.module, p]] as const) {
     for (const [k, r] of map) if (r.code && r.names.size > 1) { out.ambiguous.push({ module, code: r.code, names: [...r.names] }); amb.add(`${module}|${k}`); }
   }
   for (const [ks, rs] of s) {
-    if (!rs.code || amb.has(`sales|${ks}`)) continue;
+    if (!rs.code || amb.has(`${left.module}|${ks}`)) continue;
     const rp = p.get(ks);
-    if (!rp || amb.has(`purchasing|${ks}`)) continue;
+    if (!rp || amb.has(`${right.module}|${ks}`)) continue;
     out.proposed.push({
-      id: `product:${ks}`, kind: 'product', a: { module: 'sales', key: ks, label: rs.label }, b: { module: 'purchasing', key: ks, label: rp.label },
+      id: `product:${left.module}-${right.module}:${ks}`, kind: 'product', a: { module: left.module, key: ks, label: rs.label }, b: { module: right.module, key: ks, label: rp.label },
       basis: 'identifier_equal', status: 'proposed', evidence: `equal product code "${rs.code}" on both sides`,
     });
   }
@@ -92,10 +96,27 @@ export function proposeProductLinks(sales: Pick<SalesRecord, 'productId' | 'prod
       const hit = byName.get(n);
       if (!hit || out.proposed.some((l) => l.a.key === ks && l.b.key === hit.key)) continue;
       if (ks === hit.key && ks.startsWith('sku:')) continue; // same code: handled above
-      out.unverified.push({ a: { module: 'sales', key: ks, label: rs.label }, b: { module: 'purchasing', key: hit.key, label: hit.label }, reason: 'same_name_only' });
+      out.unverified.push({ a: { module: left.module, key: ks, label: rs.label }, b: { module: right.module, key: hit.key, label: hit.label }, reason: 'same_name_only' });
     }
   }
   return out;
+}
+
+export const proposeProductLinks = (sales: ProductRow[], purchases: ProductRow[]): LinkProposal => proposeLinks({ module: 'sales', rows: sales }, { module: 'purchasing', rows: purchases });
+/** Inventory ↔ sales / purchasing (e.g. "which stock item is this sale / purchase about?"). */
+export const proposeInventoryLinks = (inventory: ProductRow[], other: { module: 'sales' | 'purchasing'; rows: ProductRow[] }): LinkProposal => proposeLinks({ module: 'inventory', rows: inventory }, other);
+
+/**
+ * The ONLY way another module may reach an item: through a link the user CONFIRMED. Proposed, rejected and name-only candidates never resolve.
+ * Returns the counterpart in `to`, or undefined.
+ */
+export function confirmedCounterpart(links: EntityLink[], from: EntityEnd, to: LinkModule): EntityEnd | undefined {
+  for (const l of links) {
+    if (l.status !== 'confirmed') continue;
+    if (l.a.module === from.module && l.a.key === from.key && l.b.module === to) return l.b;
+    if (l.b.module === from.module && l.b.key === from.key && l.a.module === to) return l.a;
+  }
+  return undefined;
 }
 
 /** Only an explicit user decision changes a link's status. */

@@ -51,10 +51,11 @@ function useFmt(model: ChartModel) {
   const m = (n: number) => money(n, { lang, currency: cur });
   const short = (n: number) => new Intl.NumberFormat(lang === 'en' ? 'en-GB' : lang === 'pl' ? 'pl-PL' : 'lt-LT', { notation: 'compact', maximumFractionDigits: 1 }).format(n);
   const purchasing = model.module === 'purchasing';
-  /** the value series is called "Sales" or "Spend"; the main titles differ per module */
-  const vl = t(purchasing ? 'ch.spend' : 'ch.sales');
-  const ttl = (id: 'trend' | 'comparison' | 'waterfall' | 'pareto') => t((purchasing ? `pch.${id}` : `ch.${id}`) as MessageKey);
-  return { lang, t, cur, m, short, vl, ttl, purchasing };
+  const inventory = model.module === 'inventory';
+  /** the value series is called "Sales", "Spend" or "Value"; the main titles differ per module */
+  const vl = t(inventory ? 'ich.unitValue' : purchasing ? 'ch.spend' : 'ch.sales');
+  const ttl = (id: 'trend' | 'comparison' | 'waterfall' | 'pareto') => t((inventory ? `ich.${id}` : purchasing ? `pch.${id}` : `ch.${id}`) as MessageKey);
+  return { lang, t, cur, m, short, vl, ttl, purchasing, inventory };
 }
 
 export function TrendChart({ model }: ChartProps) {
@@ -118,11 +119,11 @@ function RankBars({ rows, dim, onFilter, color, model }: { rows: EntityRow[]; di
 }
 
 export function RankingChart({ model, dim, onFilter, n = 5 }: ChartProps & { dim: Dimension; n?: number }) {
-  const { lang, t, cur, m, vl, purchasing } = useFmt(model);
+  const { lang, t, cur, m, vl, purchasing, inventory } = useFmt(model);
   const table = model.tables[dim]!;
   const { top, bottom } = topBottom(table.rows, n);
   const id = dim === 'customer' ? 'topCustomers' : dim === 'supplier' ? 'topSuppliers' : dim === 'product' ? 'topProducts' : 'salespeople';
-  const title = purchasing && dim === 'product' ? t('pch.productRank') : t(`ch.${id}` as MessageKey);
+  const title = inventory && dim === 'product' ? t('ich.products') : purchasing && dim === 'product' ? t('pch.productRank') : t(`ch.${id}` as MessageKey);
   const all = [...top, ...bottom];
   return (
     <Card className="space-y-3" data-testid={`chart-${id}`} id={`chart-${id}`}>
@@ -198,13 +199,13 @@ export function WaterfallChart({ model, dim, onFilter }: ChartProps & { dim?: Di
 }
 
 export function ParetoChart({ model, dim }: ChartProps & { dim?: Dimension }) {
-  const { lang, t, cur, m, short, vl, ttl } = useFmt(model);
+  const { lang, t, cur, m, short, vl, ttl, purchasing, inventory } = useFmt(model);
   const d = dim ?? model.pareto!.dimension;
   const p = dim ? { dimension: d, ...pareto(model.tables[d]!.rows) } : model.pareto!;
   const data = p.points.slice(0, 30).map((x, i) => ({ name: x.label, n: i + 1, value: x.value, cum: x.cumulativeShare }));
   return (
     <ChartCard id="pareto" title={`${ttl('pareto')} – ${t(`dim.${d}` as MessageKey)}`} subtitle={dateRange(model.periods.current.from, model.periods.current.to, lang)} unit={t('ch.unit', { currency: cur })}
-      note={t('ch.pareto80', { n: p.countFor80, total: p.points.length, entity: t(`dim1.${d}` as MessageKey) })}
+      note={t((inventory ? 'ch.pareto80.stock' : purchasing ? 'ch.pareto80.spend' : 'ch.pareto80') as MessageKey, { n: p.countFor80, total: p.points.length, entity: t(`dim1.${d}` as MessageKey) })}
       alt={{ headers: [t('ch.item'), vl, t('ch.cumulative')], rows: p.points.map((x) => [x.label, m(x.value), pct(x.cumulativeShare, lang)]) }}>
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={data} margin={{ left: 4, right: 8, top: 8, bottom: 4 }}>

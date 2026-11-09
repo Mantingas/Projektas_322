@@ -129,5 +129,6 @@ const p = {
   'pan.m3': 'Prices are compared only for the same product code (or name, marked unverified), the same unit and the same currency and VAT basis. Nothing is converted silently.',
   'pan.m4': 'The spend bridge splits the change into price (same item, same supplier), supplier mix, volume, new and discontinued items and credit notes; the steps add up exactly.',
   'pan.m5': 'Savings are labelled actual, potential or hypothetical. A lower historical price is never presented as available today.',
+  'ch.pareto80.spend': '{n} of {total} {entity} account for 80% of spend.',
 } as const;
 export default p;

@@ -35,6 +35,9 @@ npm run build && PW_CHROMIUM_PATH=/path/to/chromium npm run test:e2e   # omit PW
 ## Phase 3 additions
 Purchasing and supplier intelligence: import purchase exports (supplier, SKU, unit, unit price, discount, credit notes), a purchasing dashboard with manager / analyst modes, supplier concentration, price changes by item and supplier, a price-volume-mix spend bridge, price variance across suppliers, explainable insights with *actual / potential / hypothetical* savings kept apart, drill-down to source lines and a local management summary. Strict unit policy by default; no silent currency or unit conversion. Samples: `public/samples/sample_lt_pirkimai.csv`, `sample_pl_zakupy.csv`, `sample_en_purchases.xlsx` (synthetic). Details: `docs/ARCHITECTURE.md` (Phase 3), screenshots in `docs/screenshots/phase-3/`.
 
+## Phase 4 additions
+Inventory intelligence: import stock balances, valuation reports, historical snapshots and movement reports (data type recognised and shown before import), a dashboard with manager / analyst modes (stock value and trend, warehouse comparison, top items, ABC / Pareto, turnover and days on hand, slow-moving / non-moving stock, stockout risk, movements, snapshot-vs-movement reconciliation), explainable insights, drill-down to source lines and a local management summary. Metrics that the data cannot support are withheld with the reason. Samples: `public/samples/sample_lt_likuciai.csv`, `sample_lt_judejimai.csv`, `sample_pl_wycena_zapasow.csv`, `sample_en_stock_movements.csv` (synthetic). Details: `docs/ARCHITECTURE.md` (Phase 4), screenshots in `docs/screenshots/phase-4/`.
+
 ## What works
 - LT / PL / EN interface; `.xlsx`, `.csv`, `.tsv`; sheet selection; header row detection under report titles; totals rows skipped.
 - UTF-8 / Windows-1257 / Windows-1250 CSV; `1 234,56`, `1.234,56`, `1,234.56`, `€`/`zł` suffixes; ISO, `dd.mm.yyyy`, `dd/mm/yyyy`, `yyyy.mm.dd`, Excel serial dates.
@@ -51,3 +54,10 @@ See the final report in the pull request / session summary. Notably: legacy `.xl
 - Potential savings assume the cheaper supplier can deliver the same quantity on the same terms; hypothetical scenarios are what-ifs.
 - Payables / inventory / sales cross-module joins are not implemented (only the link contract).
 - Mix effects are computed at item–supplier level; categories are not modelled.
+
+### Phase 4 limitations
+- No real ERP stock or movement export has been verified (only synthetic LT/PL/EN fixtures); see `docs/COMPATIBILITY.md`. Movement-type wording is a vocabulary, not a vendor guarantee.
+- Demand comes only from movement files; sales exports are not joined (the link contract exists, no join). Seasonality and lead times are not modelled, so stockout risk is a warning, not a forecast.
+- Balances are never reconstructed from movements; positions need snapshots. Turnover is per period (not annualised) and uses the average of the opening and closing snapshot only.
+- Lot / batch / expiry, bin locations and multi-currency valuation are not modelled; each currency is its own series.
+- Thresholds (180 / 90 / 14 days, 60-day minimum history) are fixed and shown, not yet configurable.

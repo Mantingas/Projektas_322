@@ -1,14 +1,14 @@
-import type { ConfirmedMapping, ExportMode, ImportStats, ModuleId, PurchaseRecord, SalesRecord } from '@/engine/types';
+import type { ConfirmedMapping, ExportMode, ImportStats, InventoryRecord, ModuleId, PurchaseRecord, SalesRecord } from '@/engine/types';
 import { defaultPolicy, docKey, identityOf, planMerge, type ExistingLine, type Identity, type ImportPolicy, type LineLike, type MergePlan } from '@/engine/import/merge';
 import type { AppDB, ImportRow, SavedMapping, StoredMeta } from './db';
 import type { Table } from 'dexie';
 
 /** A stored line of either module. */
-type Line = (SalesRecord | PurchaseRecord) & StoredMeta;
-type AnyLine = SalesRecord | PurchaseRecord;
+type Line = (SalesRecord | PurchaseRecord | InventoryRecord) & StoredMeta;
+type AnyLine = SalesRecord | PurchaseRecord | InventoryRecord;
 
-const table = (db: AppDB, m: ModuleId): Table<Line, string> => (m === 'purchasing' ? db.purchases : db.sales) as unknown as Table<Line, string>;
-const MODULES: ModuleId[] = ['sales', 'purchasing'];
+const table = (db: AppDB, m: ModuleId): Table<Line, string> => (m === 'purchasing' ? db.purchases : m === 'inventory' ? db.inventory : db.sales) as unknown as Table<Line, string>;
+const MODULES: ModuleId[] = ['sales', 'purchasing', 'inventory'];
 
 export interface CommitInput {
   checksum: string;
@@ -220,6 +220,10 @@ export async function loadAllPurchases(db: AppDB): Promise<PurchaseRecord[]> {
   return strip(await db.purchases.filter(isActive as never).toArray()) as PurchaseRecord[];
 }
 
+export async function loadAllInventory(db: AppDB): Promise<InventoryRecord[]> {
+  return strip(await db.inventory.filter(isActive as never).toArray()) as InventoryRecord[];
+}
+
 /** Lines waiting for the user's decision (all modules unless one is given). */
 export async function pendingHeldCount(db: AppDB, module?: ModuleId): Promise<number> {
   let n = 0;
@@ -228,15 +232,19 @@ export async function pendingHeldCount(db: AppDB, module?: ModuleId): Promise<nu
 }
 
 // ───────── conflict review ─────────
+/** A stored line as the conflict review shows it. Inventory lines get `amount` = their value (0 when unvalued). */
+export type ConflictLine = AnyLine & StoredMeta & { amount: number };
+const asConflictLine = (r: Line): ConflictLine => ('amount' in r ? (r as ConflictLine) : ({ ...r, amount: (r as InventoryRecord).value ?? 0 } as ConflictLine));
+
 export interface ConflictGroup {
   module: ModuleId;
   importId: string;
   fileName: string;
   /** null = lines without a document number */
   docKey: string | null;
-  held: (AnyLine & StoredMeta)[];
+  held: ConflictLine[];
   /** The stored, active lines of the same document (empty for lines without a document number). */
-  stored: (AnyLine & StoredMeta)[];
+  stored: ConflictLine[];
 }
 
 export async function listConflicts(db: AppDB): Promise<ConflictGroup[]> {
@@ -249,12 +257,12 @@ export async function listConflicts(db: AppDB): Promise<ConflictGroup[]> {
       const k = `${r.heldBy}|${r.docKey ?? ''}`;
       let g = groups.get(k);
       if (!g) groups.set(k, (g = { module: m, importId: r.heldBy!, fileName: imports.get(r.heldBy!) ?? '?', docKey: r.docKey ?? null, held: [], stored: [] }));
-      g.held.push(r);
+      g.held.push(asConflictLine(r));
     }
     const docs = [...new Set([...groups.values()].map((g) => g.docKey).filter((d): d is string => Boolean(d)))];
     if (docs.length) {
       const rows = (await rowsByDocKeys(db, m, docs)).filter(isActive);
-      for (const g of groups.values()) if (g.docKey) g.stored = rows.filter((r) => r.docKey === g.docKey);
+      for (const g of groups.values()) if (g.docKey) g.stored = rows.filter((r) => r.docKey === g.docKey).map(asConflictLine);
     }
     out.push(...groups.values());
   }
@@ -271,7 +279,7 @@ export type ResolveAction = 'use_new' | 'keep_stored' | 'keep_both';
  */
 export async function resolveConflicts(db: AppDB, items: { importId: string; docKey: string | null; module?: ModuleId }[], action: ResolveAction): Promise<number> {
   let touched = 0;
-  await db.transaction('rw', db.sales, db.purchases, db.audit, async () => {
+  await db.transaction('rw', [db.sales, db.purchases, db.inventory, db.audit], async () => {
     for (const it of items) {
       const m = it.module ?? 'sales';
       const tbl = table(db, m);
@@ -301,7 +309,7 @@ export async function deleteImport(db: AppDB, id: string): Promise<void> {
   const row = await db.imports.get(id);
   const m: ModuleId = row?.module ?? 'sales';
   const tbl = table(db, m);
-  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.audit], async () => {
+  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.inventory, db.audit], async () => {
     const own = await tbl.where('importId').equals(id).count();
     await tbl.where('importId').equals(id).delete();
     // lines this import had replaced become active again
@@ -317,8 +325,8 @@ export async function deleteImport(db: AppDB, id: string): Promise<void> {
 
 /** "Delete everything": removes every table's contents. */
 export async function wipeAll(db: AppDB): Promise<void> {
-  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.mappings, db.settings, db.audit], async () => {
-    await Promise.all([db.imports.clear(), db.sales.clear(), db.purchases.clear(), db.mappings.clear(), db.settings.clear(), db.audit.clear()]);
+  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.inventory, db.mappings, db.settings, db.audit], async () => {
+    await Promise.all([db.imports.clear(), db.sales.clear(), db.purchases.clear(), db.inventory.clear(), db.mappings.clear(), db.settings.clear(), db.audit.clear()]);
   });
 }
 
@@ -333,20 +341,22 @@ export interface Backup {
   imports: ImportRow[];
   sales: (SalesRecord & StoredMeta)[];
   purchases?: (PurchaseRecord & StoredMeta)[];
+  inventory?: (InventoryRecord & StoredMeta)[];
   mappings: SavedMapping[];
   audit?: import('./db').AuditEntry[];
 }
 
 export async function exportBackup(db: AppDB): Promise<Backup> {
-  return { version: 1, exportedAt: new Date().toISOString(), imports: await db.imports.toArray(), sales: await db.sales.toArray(), purchases: await db.purchases.toArray(), mappings: await db.mappings.toArray(), audit: await db.audit.toArray() };
+  return { version: 1, exportedAt: new Date().toISOString(), imports: await db.imports.toArray(), sales: await db.sales.toArray(), purchases: await db.purchases.toArray(), inventory: await db.inventory.toArray(), mappings: await db.mappings.toArray(), audit: await db.audit.toArray() };
 }
 
 export async function restoreBackup(db: AppDB, b: Backup): Promise<void> {
   if (b?.version !== 1 || !Array.isArray(b.imports) || !Array.isArray(b.sales)) throw new Error('invalid_backup');
-  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.mappings, db.audit], async () => {
+  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.inventory, db.mappings, db.audit], async () => {
     await db.imports.bulkPut(b.imports);
     await db.sales.bulkPut(b.sales.map((r) => ({ ...r, docKey: docKey(r) })) as never);
     if (Array.isArray(b.purchases)) await db.purchases.bulkPut(b.purchases.map((r) => ({ ...r, docKey: docKey(r) })) as never);
+    if (Array.isArray(b.inventory)) await db.inventory.bulkPut(b.inventory.map((r) => ({ ...r, docKey: docKey(r) })) as never);
     await db.mappings.bulkPut(b.mappings ?? []);
     if (Array.isArray(b.audit)) await db.audit.bulkPut(b.audit.map(({ id: _id, ...a }) => (void _id, a)));
   });

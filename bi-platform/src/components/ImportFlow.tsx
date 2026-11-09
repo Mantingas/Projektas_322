@@ -11,7 +11,7 @@ import { isMappingConfirmable, LOW_CONFIDENCE, validateMapping } from '@/engine/
 import { SALES_TEMPLATES } from '@/engine/mapping/templates';
 import { renderDiagnosticsText } from '@/engine/import/diagnostics';
 import type { ImportPolicy } from '@/engine/import/merge';
-import { PURCHASE_FIELDS, SALES_FIELDS, type ExportMode, type FieldId, type ImportStats, type MappingEntry, type ModuleId } from '@/engine/types';
+import { INVENTORY_FIELDS, PURCHASE_FIELDS, SALES_FIELDS, type ExportMode, type FieldId, type ImportStats, type MappingEntry, type ModuleId } from '@/engine/types';
 import { downloadText } from '@/lib/download';
 import { fmtDate, pct, type MessageKey } from '@/i18n';
 import { cn } from '@/lib/cn';
@@ -31,6 +31,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   const [sheetIdx, setSheetIdx] = useState(0);
   const [analysis, setAnalysis] = useState<AnalysisLite | null>(null);
   const [module, setModule] = useState<ModuleId>('sales');
+  const [asOf, setAsOf] = useState('');
   const [assign, setAssign] = useState<Record<number, FieldId | ''>>({});
   const [confs, setConfs] = useState<Record<number, number>>({});
   const [sources, setSources] = useState<Record<number, MappingEntry['source']>>({});
@@ -56,7 +57,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   const reset = useCallback(() => {
     void engine().call('discard', []);
     setParsed(null); setAnalysis(null); setAssign({}); setConfs({}); setSources({}); setError(null); setDupAccepted(false); setResult(null); setSheetIdx(0);
-    setPv(null); setPolicy(null); setConfirmChecked(false); setMode('unknown'); setModule('sales');
+    setPv(null); setPolicy(null); setConfirmChecked(false); setMode('unknown'); setModule('sales'); setAsOf('');
     if (input.current) input.current.value = '';
   }, []);
 
@@ -64,8 +65,8 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
     let a = await engine().call('analyze', [idx, lang === 'en' ? '.' : ',', requested]);
     let mod = requested;
     // the headers clearly describe purchases: start in the purchasing module (the user can switch back)
-    if (auto && a && a.detected.module === 'purchasing' && requested !== 'purchasing') {
-      mod = 'purchasing';
+    if (auto && a && a.detected.module !== 'sales' && requested === 'sales') {
+      mod = a.detected.module;
       a = await engine().call('analyze', [idx, lang === 'en' ? '.' : ',', mod]);
     }
     setModule(mod);
@@ -115,7 +116,8 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   };
 
   const entries = Object.entries(assign).filter(([, f]) => f).map(([c, f]) => ({ field: f as FieldId, columnIndex: Number(c), confidence: confs[Number(c)] ?? 1, source: sources[Number(c)] ?? ('user' as const) }));
-  const warnings = validateMapping(entries, module);
+  const needsAsOf = module === 'inventory' && !entries.some((e) => e.field === 'snapshot_date' || e.field === 'movement_date');
+  const warnings = validateMapping(entries, module, { hasDefaultDate: needsAsOf && /^\d{4}-\d{2}-\d{2}$/.test(asOf) });
   const hasCurrencyCol = entries.some((e) => e.field === 'currency');
 
   // Dry run in the worker: normalisation + merge plan + diagnostics. Writes nothing.
@@ -125,14 +127,14 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
     const my = ++seq.current;
     setPvBusy(true);
     const timer = setTimeout(() => {
-      engine().call('preview', [{ module, sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: policy ?? undefined }])
+      engine().call('preview', [{ module, asOfDate: needsAsOf ? asOf : undefined, sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: policy ?? undefined }])
         .then((r) => { if (seq.current === my) setPv(r.ok ? r : null); })
         .catch((e: unknown) => { if (seq.current === my) { setPv(null); setError(errText(e)); } })
         .finally(() => { if (seq.current === my) setPvBusy(false); });
     }, 150);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [analysis, entriesKey, currency, mode, policy, module]);
+  }, [analysis, entriesKey, currency, mode, policy, module, asOf]);
 
   const needs = pv?.preview.needsConfirmation ?? [];
   const confirmable = Boolean(pv) && isMappingConfirmable(warnings) && (hasCurrencyCol || Boolean(currency)) && (!parsed?.duplicateOf || dupAccepted) && (needs.length === 0 || confirmChecked) && !pvBusy;
@@ -142,7 +144,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
     setBusy(true);
     setError(null);
     try {
-      const r = await engine().call('commit', [{ module, sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: pv.preview.policy, confirmed: confirmChecked, allowSameChecksum: dupAccepted, remember }]);
+      const r = await engine().call('commit', [{ module, asOfDate: needsAsOf ? asOf : undefined, sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: pv.preview.policy, confirmed: confirmChecked, allowSameChecksum: dupAccepted, remember }]);
       if (r.status === 'ok') {
         setResult({ row: r.import, stats: r.stats, module });
         onImported();
@@ -259,13 +261,13 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
           <Card className="space-y-2" data-testid="module-card">
             <CardTitle>{t('mod.label')}</CardTitle>
             <div role="group" aria-label={t('mod.select')} className="flex overflow-hidden rounded-md border border-slate-300 text-sm dark:border-slate-700 sm:w-fit">
-              {(['sales', 'purchasing'] as ModuleId[]).map((m) => (
+              {(['sales', 'purchasing', 'inventory'] as ModuleId[]).map((m) => (
                 <button key={m} type="button" data-testid={`module-${m}`} aria-pressed={module === m} disabled={busy}
                   onClick={async () => { if (m === module) return; setBusy(true); setPv(null); try { await analyse(sheetIdx, m); } catch (er) { setError(errText(er)); } finally { setBusy(false); } }}
                   className={cn('px-4 py-1.5 font-medium', module === m ? 'bg-indigo-600 text-white' : 'hover:bg-slate-100 dark:hover:bg-slate-800')}>{t(`mod.${m}` as MessageKey)}</button>
               ))}
             </div>
-            {analysis.detected.module !== module && (analysis.detected.purchasing !== analysis.detected.sales) && <p className="text-xs text-amber-800 dark:text-amber-300" data-testid="module-hint">{t('mod.detected', { module: t(`mod.${analysis.detected.module}` as MessageKey) })}</p>}
+            {analysis.detected.module !== module && Math.max(analysis.detected.purchasing, analysis.detected.sales, analysis.detected.inventory) > 0 && <p className="text-xs text-amber-800 dark:text-amber-300" data-testid="module-hint">{t('mod.detected', { module: t(`mod.${analysis.detected.module}` as MessageKey) })}</p>}
           </Card>
 
           <Card className="space-y-2" data-testid="diag-structure">
@@ -303,7 +305,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
                       <td className="px-3 py-2">
                         <select aria-label={col.header} data-testid={`map-${col.index}`} value={f} onChange={(e) => setField(col.index, e.target.value as FieldId | '')} className="w-full min-w-[12rem] rounded-md border border-slate-300 bg-transparent px-2 py-1 dark:border-slate-700 dark:bg-slate-900">
                           <option value="">{t('import.ignore')}</option>
-                          {(module === 'purchasing' ? PURCHASE_FIELDS : SALES_FIELDS).map((sf) => <option key={sf} value={sf}>{t(`field.${sf}` as MessageKey)}</option>)}
+                          {(module === 'inventory' ? INVENTORY_FIELDS : module === 'purchasing' ? PURCHASE_FIELDS : SALES_FIELDS).map((sf) => <option key={sf} value={sf}>{t(`field.${sf}` as MessageKey)}</option>)}
                         </select>
                       </td>
                       <td className="px-3 py-2">
@@ -318,8 +320,10 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
 
           <ul className="space-y-1 text-sm" aria-live="polite">
             {warnings.map((w, i) => (
-              <li key={i} className={cn('rounded-md px-3 py-2', w.code === 'missing_date' || w.code === 'missing_amount' ? 'bg-red-50 text-red-800 dark:bg-red-950 dark:text-red-200' : 'bg-amber-50 text-amber-900 dark:bg-amber-950/40 dark:text-amber-200')}>
-                {w.code === 'missing_date' && t('import.needDate')}
+              <li key={i} className={cn('rounded-md px-3 py-2', w.code === 'missing_date' || w.code === 'missing_amount' || w.code === 'missing_product' || w.code === 'missing_quantity' ? 'bg-red-50 text-red-800 dark:bg-red-950 dark:text-red-200' : 'bg-amber-50 text-amber-900 dark:bg-amber-950/40 dark:text-amber-200')}>
+                {w.code === 'missing_date' && t(module === 'inventory' ? 'inv.asOfNeeded' : 'import.needDate')}
+                {w.code === 'missing_product' && t('import.needProduct')}
+                {w.code === 'missing_quantity' && t('import.needQuantity')}
                 {w.code === 'missing_amount' && t('import.needAmount')}
                 {w.code === 'amount_basis_unknown' && t('import.basisUnknown')}
                 {w.code === 'multiple_amounts' && t('import.multiAmount')}
@@ -338,6 +342,13 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
           </Card>
 
           <div className="grid gap-4 sm:grid-cols-2">
+            {needsAsOf && (
+              <label className="space-y-1 text-sm">
+                <span className="font-medium">{t('inv.asOf')}</span>
+                <input type="date" data-testid="asof-input" value={asOf} onChange={(e) => { setAsOf(e.target.value); setPolicy(null); setConfirmChecked(false); }} className="block w-full rounded-md border border-slate-300 bg-transparent px-2 py-2 dark:border-slate-700 dark:bg-slate-900" />
+                <span className="block text-xs text-slate-500">{t('inv.asOfHelp')}</span>
+              </label>
+            )}
             {!hasCurrencyCol && (
               <label className="space-y-1 text-sm">
                 <span className="font-medium">{t('import.currency')}</span>
@@ -363,6 +374,14 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
                   <ul className="space-y-1 text-sm">{d.issues.map((x) => <li key={x.level + x.code}><Badge tone={x.level === 'error' ? 'risk' : 'warn'}>{t(`issue.${x.code}` as MessageKey)}: {x.count}</Badge>{x.rows.length > 0 && <span className="ml-2 text-xs text-slate-500">{t('diag.examples', { rows: x.rows.slice(0, 5).join(', ') })}</span>}</li>)}</ul>
                 )}
               </Card>
+              {pv?.inventoryKind && (
+                <Card className="border-indigo-200 bg-indigo-50 dark:border-indigo-900 dark:bg-indigo-950/30 lg:col-span-2" data-testid="inventory-kind" data-kind={pv.inventoryKind}>
+                  <div className="text-xs font-medium text-slate-500">{t('inv.kind.label')}</div>
+                  <div className="text-base font-semibold">{t(`inv.kind.${pv.inventoryKind}` as MessageKey)}{pv.snapshotDates && pv.snapshotDates.length > 0 && <span className="ml-2 text-sm font-normal text-slate-600 dark:text-slate-300">· {t('inv.snapshotDates', { n: pv.snapshotDates.length })}</span>}</div>
+                  <p className="text-sm text-slate-600 dark:text-slate-300">{t(`inv.kind.d.${pv.inventoryKind}` as MessageKey)}</p>
+                  {pv.inventoryKind === 'movements' && <p className="mt-1 text-xs text-slate-500">{t('inv.movementTypes')}</p>}
+                </Card>
+              )}
               {pv?.discountMode && pv.discountMode !== 'none' && <p className="rounded-md bg-sky-50 p-3 text-sm text-sky-900 dark:bg-sky-950/40 dark:text-sky-200 lg:col-span-2" data-testid="discount-note">ℹ {t(`import.discount.${pv.discountMode}` as MessageKey)}</p>}
               <Card className="space-y-2" data-testid="diag-metrics">
                 <CardTitle>{t('diag.metrics')}</CardTitle>

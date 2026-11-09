@@ -130,5 +130,6 @@ const d: Record<keyof typeof p, string> = {
   'pan.m3': 'Kainos lyginamos tik to paties prekės kodo (arba pavadinimo – pažymėta kaip nepatikrinta), to paties vieneto, valiutos ir PVM pagrindo. Niekas tyliai neperskaičiuojama.',
   'pan.m4': 'Išlaidų tiltelis skaido pokytį į kainą (ta pati prekė, tas pats tiekėjas), tiekėjų struktūrą, apimtį, naujas ir nutrauktas prekes bei kreditines sąskaitas; žingsnių suma tiksliai lygi pokyčiui.',
   'pan.m5': 'Santaupos žymimos kaip faktinės, galimos arba hipotetinės. Mažesnė istorinė kaina niekada nepateikiama kaip šiandien prieinama.',
+  'ch.pareto80.spend': '{n} iš {total} {entity} sudaro 80 % išlaidų.',
 };
 export default d;

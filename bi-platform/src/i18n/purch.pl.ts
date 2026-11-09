@@ -130,5 +130,6 @@ const d: Record<keyof typeof p, string> = {
   'pan.m3': 'Ceny porównuje się tylko dla tego samego kodu towaru (lub nazwy – oznaczone jako niezweryfikowane), tej samej jednostki, waluty i podstawy VAT. Nic nie jest przeliczane po cichu.',
   'pan.m4': 'Most wydatków dzieli zmianę na cenę (ten sam towar, ten sam dostawca), strukturę dostawców, wolumen, nowe i wycofane towary oraz noty kredytowe; kroki sumują się dokładnie do zmiany.',
   'pan.m5': 'Oszczędności są oznaczone jako rzeczywiste, potencjalne lub hipotetyczne. Niższa cena historyczna nigdy nie jest przedstawiana jako dostępna dziś.',
+  'ch.pareto80.spend': '{n} z {total} {entity} stanowi 80% wydatków.',
 };
 export default d;

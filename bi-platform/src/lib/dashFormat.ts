@@ -3,6 +3,7 @@ import type { MetricUnit } from '@/engine/analytics/metrics';
 import type { PeriodWarning } from '@/engine/analytics/periods';
 import type { Limitation } from '@/engine/analytics/dashboard';
 import type { PurchaseLimitation } from '@/engine/purchasing/dashboard';
+import type { InventoryLimitation } from '@/engine/inventory/dashboard';
 import type { AmountBasis, ParamValue } from '@/engine/types';
 import { fmtDate, money, num, pct, type Lang, type MessageKey } from '@/i18n';
 
@@ -39,7 +40,7 @@ export function warningText(w: PeriodWarning, t: T): string {
   }
 }
 
-export function limitationText(l: Limitation | PurchaseLimitation, t: T): string {
+export function limitationText(l: Limitation | PurchaseLimitation | InventoryLimitation, t: T): string {
   const { code, ...params } = l as { code: string } & Record<string, ParamValue>;
   if (typeof params.pct === 'number') params.pct = { pct: params.pct };
   return t(`lim.${code}` as MessageKey, Object.keys(params).length ? params : undefined);

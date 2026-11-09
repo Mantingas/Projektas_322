@@ -6,6 +6,7 @@ import { useLang } from './LangProvider';
 import { ImportFlow } from './ImportFlow';
 import { InsightsView } from './InsightsView';
 import { PurchasingView } from './purchasing/PurchasingView';
+import { InventoryView } from './inventory/InventoryView';
 import type { ModuleId } from '@/engine/types';
 import { HistoryView } from './HistoryView';
 import { SettingsView } from './SettingsView';
@@ -48,11 +49,11 @@ export function Workspace() {
       {tab === 'insights' && (
         <div className="space-y-4">
           <div role="group" aria-label={t('mod.view')} className="no-print flex w-fit overflow-hidden rounded-md border border-slate-300 text-sm dark:border-slate-700">
-            {(['sales', 'purchasing'] as ModuleId[]).map((m) => (
+            {(['sales', 'purchasing', 'inventory'] as ModuleId[]).map((m) => (
               <button key={m} data-testid={`module-view-${m}`} aria-pressed={module === m} onClick={() => setModule(m)} className={cn('px-4 py-1.5 font-medium', module === m ? 'bg-indigo-600 text-white' : 'hover:bg-slate-100 dark:hover:bg-slate-800')}>{t(`mod.${m}` as MessageKey)}</button>
             ))}
           </div>
-          {module === 'sales' ? <InsightsView version={version} goImport={() => setTab('import')} /> : <PurchasingView version={version} goImport={() => setTab('import')} />}
+          {module === 'sales' ? <InsightsView version={version} goImport={() => setTab('import')} /> : module === 'purchasing' ? <PurchasingView version={version} goImport={() => setTab('import')} /> : <InventoryView version={version} goImport={() => setTab('import')} />}
         </div>
       )}
       {tab === 'history' && <HistoryView version={version} onChanged={bump} />}

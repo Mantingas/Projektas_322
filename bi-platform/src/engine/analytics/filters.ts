@@ -2,6 +2,7 @@ import type { SalesRecord } from '../types';
 
 export type SalesDimension = 'customer' | 'product' | 'salesperson' | 'category';
 export type PurchaseDimension = 'supplier' | 'product' | 'warehouse';
+export type InventoryDimension = 'product' | 'warehouse' | 'category';
 /** Any breakdown dimension of any module. */
 export type Dimension = SalesDimension | PurchaseDimension;
 

@@ -83,7 +83,7 @@ export const NET_HINT_TOKENS = ['netto', 'neto', 'net', 'excl', 'excluding'];
 export const GROSS_HINT_TOKENS = ['brutto', 'bruto', 'gross', 'incl', 'including'];
 
 // ───────────────────────── purchasing ─────────────────────────
-import type { FieldId, ModuleId, PurchaseField } from '../types';
+import type { FieldId, InventoryField, ModuleId, PurchaseField } from '../types';
 
 /**
  * Purchasing-specific header synonyms (normalised). Fields not listed here fall back to SALES_SYNONYMS (date, document, product, amounts…).
@@ -161,7 +161,7 @@ export interface ModuleSpec {
   synonyms(field: FieldId): string[];
 }
 
-import { SALES_FIELDS, PURCHASE_FIELDS } from '../types';
+import { SALES_FIELDS, PURCHASE_FIELDS, INVENTORY_FIELDS } from '../types';
 
 export const SALES_SPEC: ModuleSpec = {
   id: 'sales',
@@ -184,8 +184,101 @@ export const PURCHASE_SPEC: ModuleSpec = {
   synonyms: (f) => [...(PURCHASE_SYNONYMS[f as PurchaseField] ?? []), ...(f === 'quantity' ? [] : SALES_SYNONYMS[f as keyof typeof SALES_SYNONYMS] ?? [])],
 };
 
-export const SPECS: Record<ModuleId, ModuleSpec> = { sales: SALES_SPEC, purchasing: PURCHASE_SPEC };
+
+// ───────────────────────── inventory ─────────────────────────
+/**
+ * Inventory-specific header synonyms (normalised). Fields not listed fall back to the purchasing vocabulary for unit / currency / product / category,
+ * and to the sales vocabulary for the rest. "Likutis" (LT) / "Stan" (PL) are quantities HERE, "vnt" / "szt" are units.
+ */
+export const INVENTORY_SYNONYMS: Partial<Record<InventoryField, string[]>> = {
+  snapshot_date: [
+    'likucio data', 'likutis data', 'likutis datai', 'busenos data', 'ataskaitos data', 'inventorizacijos data', 'likutis dienos pabaigoje', 'data pagal',
+    'data stanu', 'stan na dzien', 'stan na', 'data inwentaryzacji', 'data raportu', 'na dzien',
+    'snapshot date', 'as of', 'as of date', 'balance date', 'stock date', 'report date', 'closing date', 'date',
+    'data',
+  ],
+  movement_date: [
+    'judejimo data', 'operacijos data', 'dokumento data', 'judejimo dokumento data', 'israsymo data', 'pajamavimo data',
+    'data ruchu', 'data operacji', 'data dokumentu', 'data wydania', 'data przyjecia',
+    'movement date', 'transaction date', 'posting date', 'document date', 'booking date',
+  ],
+  document_id: [
+    'judejimo dokumentas', 'judejimo dokumento nr', 'dokumento nr', 'dok nr', 'dokumentas', 'operacijos nr',
+    'numer dokumentu', 'nr dokumentu', 'dokument', 'numer ruchu',
+    'document no', 'document number', 'doc no', 'reference', 'ref no', 'movement document',
+  ],
+  product_id: [
+    'prekes kodas', 'prekes nr', 'artikulas', 'sku', 'kodas', 'artikulo kodas', 'medziagos kodas',
+    'kod towaru', 'indeks', 'symbol', 'symbol towaru', 'kod produktu', 'numer katalogowy', 'kod',
+    'item code', 'product code', 'item no', 'part number', 'material', 'material no', 'article number',
+  ],
+  product_name: [
+    'preke', 'prekes pavadinimas', 'pavadinimas', 'produktas', 'prekes aprasymas', 'medziaga',
+    'towar', 'nazwa towaru', 'nazwa', 'produkt', 'nazwa produktu', 'artykul', 'nazwa artykulu',
+    'product', 'product name', 'item', 'item name', 'description', 'material description', 'article',
+  ],
+  product_category: [
+    'prekiu grupe', 'grupe', 'kategorija', 'prekes grupe', 'prekiu kategorija', 'asortimento grupe',
+    'grupa towarowa', 'kategoria', 'grupa', 'grupa produktow', 'kategoria towaru',
+    'category', 'product group', 'product category', 'item group', 'group',
+  ],
+  warehouse: [
+    'sandelis', 'sandelys', 'sandelio kodas', 'sandelis is', 'is sandelio', 'saltinio sandelis', 'skyrius', 'padalinys', 'vieta',
+    'magazyn', 'kod magazynu', 'magazyn zrodlowy', 'z magazynu', 'miejsce skladowania', 'lokalizacja', 'oddzial',
+    'warehouse', 'storage location', 'location', 'from warehouse', 'source warehouse', 'site', 'store', 'branch',
+  ],
+  warehouse_to: [
+    'i sandeli', 'sandelis i', 'kitas sandelis', 'paskirties sandelis', 'gavejo sandelis', 'sandelis kuriam',
+    'magazyn docelowy', 'do magazynu', 'magazyn do', 'magazyn przyjmujacy',
+    'to warehouse', 'destination warehouse', 'target warehouse', 'receiving warehouse', 'destination',
+  ],
+  quantity: [
+    'kiekis', 'likutis', 'likutis kiekis', 'atsargu kiekis', 'kiekis sandelyje', 'likutis vnt', 'faktinis likutis', 'kiek',
+    'ilosc', 'stan', 'stan magazynowy', 'stan ilosciowy', 'il', 'stan koncowy',
+    'quantity', 'qty', 'stock', 'stock qty', 'on hand', 'qty on hand', 'balance', 'stock on hand', 'closing quantity', 'closing stock',
+  ],
+  unit_cost: [
+    'savikaina', 'vieneto savikaina', 'vnt savikaina', 'vidutine savikaina', 'savikaina vnt', 'kaina', 'vieneto kaina', 'vidutine kaina',
+    'cena zakupu', 'koszt jednostkowy', 'cena ewidencyjna', 'sredni koszt', 'cena', 'cena jednostkowa', 'cena nabycia', 'sredni koszt jednostkowy',
+    'unit cost', 'average cost', 'avg cost', 'cost per unit', 'standard cost', 'cost price', 'moving average price', 'unit price',
+  ],
+  stock_value: [
+    'likucio verte', 'atsargu verte', 'verte', 'savikainos suma', 'likutis verte', 'likutis eur', 'bendra verte', 'sandelio verte', 'suma',
+    'wartosc', 'wartosc stanu', 'wartosc magazynowa', 'wartosc zapasu', 'wartosc zapasow', 'wartosc ewidencyjna', 'kwota',
+    'stock value', 'inventory value', 'value', 'total value', 'total cost', 'extended cost', 'amount', 'valuation', 'book value',
+  ],
+  movement_type: [
+    'judejimo tipas', 'operacijos tipas', 'operacija', 'dokumento tipas', 'dok tipas', 'judejimo rusis', 'tipas', 'rusis', 'operacijos rusis',
+    'typ ruchu', 'rodzaj ruchu', 'typ dokumentu', 'rodzaj dokumentu', 'typ operacji', 'rodzaj operacji', 'typ', 'rodzaj',
+    'movement type', 'transaction type', 'operation', 'operation type', 'doc type', 'document type', 'type', 'movement',
+  ],
+  min_stock: [
+    'minimalus likutis', 'min likutis', 'minimalus kiekis', 'minimumas', 'minimalus atsargu lygis', 'atsargu minimumas', 'saugos atsargos', 'uzsakymo riba',
+    'stan minimalny', 'min stan', 'zapas minimalny', 'minimum', 'minimalny stan', 'zapas bezpieczenstwa', 'punkt zamowienia',
+    'minimum stock', 'min stock', 'reorder level', 'reorder point', 'safety stock', 'par level', 'min qty', 'minimum quantity',
+  ],
+};
+
+export const INVENTORY_SPEC: ModuleSpec = {
+  id: 'inventory',
+  fields: INVENTORY_FIELDS,
+  numeric: ['quantity', 'unit_cost', 'stock_value', 'min_stock'],
+  text: ['product_name', 'product_category', 'warehouse', 'warehouse_to'],
+  ids: ['document_id', 'product_id'],
+  short: ['currency', 'unit', 'movement_type'],
+  synonyms: (f) => {
+    const own = INVENTORY_SYNONYMS[f as InventoryField];
+    if (own) return own;
+    if (f === 'unit') return PURCHASE_SYNONYMS.unit ?? [];
+    return SALES_SYNONYMS[f as keyof typeof SALES_SYNONYMS] ?? [];
+  },
+};
+
+export const SPECS: Record<ModuleId, ModuleSpec> = { sales: SALES_SPEC, purchasing: PURCHASE_SPEC, inventory: INVENTORY_SPEC };
 
 // Words that identify the kind of file. Ambiguous words (e.g. "kontrahent", "pardavėjas") are deliberately in neither list.
 export const PURCHASING_WORDS = ['tiekejas', 'tiekejo', 'dostawca', 'dostawcy', 'supplier', 'vendor', 'pirkimo', 'pirkimai', 'zakupu', 'zakup', 'purchase', 'purchases'];
 export const SALES_WORDS = ['klientas', 'kliento', 'pirkejas', 'pirkejo', 'nabywca', 'klient', 'klienta', 'odbiorca', 'customer', 'client', 'buyer', 'pardavimo', 'pardavimai', 'sprzedazy', 'sprzedaz', 'sales', 'handlowiec', 'vadybininkas'];
+
+/** Inventory-only words. "Sandėlis" / "magazyn" / "warehouse" are deliberately in no list: purchase exports have them too. */
+export const INVENTORY_WORDS = ['likutis', 'likuciai', 'likucio', 'atsargos', 'atsargu', 'inventorius', 'stan', 'magazynowy', 'zapas', 'zapasy', 'zapasow', 'stock', 'inventory', 'hand', 'movement', 'judejimo', 'ruchu', 'snapshot', 'reorder', 'minimalus', 'minimalny'];

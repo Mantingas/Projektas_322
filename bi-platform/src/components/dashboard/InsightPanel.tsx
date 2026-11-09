@@ -14,7 +14,9 @@ import type { MessageKey } from '@/i18n';
 
 import { FILTER_FIELD as FIELD } from '@/lib/dimMaps';
 
-export function InsightCard({ insight, model, expanded, onToggle, onDrill, onFilter, extraChart }: {
+export function InsightCard({ insight, model, expanded, onToggle, onDrill, onFilter, extraChart, drillFor }: {
+  /** module-specific records behind one evidence row (inventory: stock lines at the closing date, or movements) */
+  drillFor?: (insight: Insight, key: string) => DrillSpec;
   /** purchasing renders its own charts for price / bridge / variance findings */
   extraChart?: (insight: Insight) => React.ReactNode;
   insight: Insight;
@@ -55,7 +57,7 @@ export function InsightCard({ insight, model, expanded, onToggle, onDrill, onFil
                     <span>{formatEvidence(e, lang, cur)}</span>
                     {e.key && insight.dimension && (
                       <>
-                        <button className="text-xs text-indigo-700 underline dark:text-indigo-300" onClick={() => onDrill(e.label, { filter: { [FIELD[insight.dimension!]]: [e.key!] }, range: insight.params.days !== undefined ? model.periods.current : undefined })}>{t('kpi.viewRecords')}</button>
+                        <button className="text-xs text-indigo-700 underline dark:text-indigo-300" onClick={() => onDrill(e.label, drillFor ? drillFor(insight, e.key!) : { filter: { [FIELD[insight.dimension!]]: [e.key!] }, range: insight.params.days !== undefined ? model.periods.current : undefined })}>{t('kpi.viewRecords')}</button>
                         <button className="text-xs text-indigo-700 underline dark:text-indigo-300" onClick={() => onFilter(insight.dimension!, e.key!)}>{t('flt.title')}</button>
                       </>
                     )}

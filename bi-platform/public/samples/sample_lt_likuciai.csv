@@ -1,0 +1,71 @@
+﻿Likučio data;Sandėlis;Prekės kodas;Prekė;Prekių grupė;Likutis;Matavimo vnt.;Vieneto savikaina;Likučio vertė;Minimalus likutis
+2025-08-31;Vilnius;P01;Pienas 1 l;Pieno produktai;672;vnt.;0,8000;537,60;100
+2025-08-31;Vilnius;P02;Miltai 1 kg;Bakalėja;680;vnt.;0,9000;612,00;
+2025-08-31;Kaunas;P03;Skardinės;Bakalėja;1010;vnt.;2,5000;2525,00;
+2025-08-31;Vilnius;P05;Planšetė;Elektronika;25;vnt.;120,0000;3000,00;
+2025-08-31;Vilnius;P06;Sviestas 200 g;Pieno produktai;1220;vnt.;1,5000;1830,00;50
+2025-08-31;Vilnius;P07;Sūris;Pieno produktai;192;vnt.;6,0000;1152,00;60
+2025-08-31;Vilnius;P08;Kava 250 g;Bakalėja;328;vnt.;4,0000;1312,00;
+2025-08-31;Kaunas;P09;Sultys 1 l;Gėrimai;452;vnt.;1,1000;497,20;
+2025-08-31;Kaunas;P10;Vanduo 0,5 l;Gėrimai;302;vnt.;0,3000;90,60;
+2025-08-31;Vilnius;P10;Vanduo 0,5 l;Gėrimai;730;vnt.;0,3000;219,00;
+2025-08-31;Vilnius;P11;Aliejus 1 l;Bakalėja;559;vnt.;2,2000;1229,80;
+2025-08-31;Vilnius;P12;Cukrus;Bakalėja;1408;kg;1,1000;1548,80;
+2025-08-31;Vilnius;P04;Senos prekės;Kita;500;vnt.;8,0000;4000,00;
+2025-08-31;Kaunas;P12;Cukrus;Bakalėja;300000;g;0,0011;330,00;
+2025-09-30;Vilnius;P01;Pienas 1 l;Pieno produktai;691;vnt.;0,8000;552,80;100
+2025-09-30;Vilnius;P02;Miltai 1 kg;Bakalėja;580;vnt.;0,9000;522,00;
+2025-09-30;Kaunas;P03;Skardinės;Bakalėja;1007;vnt.;2,5000;2517,50;
+2025-09-30;Vilnius;P05;Planšetė;Elektronika;22;vnt.;120,0000;2640,00;
+2025-09-30;Vilnius;P06;Sviestas 200 g;Pieno produktai;890;vnt.;1,5000;1335,00;50
+2025-09-30;Vilnius;P07;Sūris;Pieno produktai;148;vnt.;6,0000;888,00;60
+2025-09-30;Vilnius;P08;Kava 250 g;Bakalėja;262;vnt.;4,0000;1048,00;
+2025-09-30;Kaunas;P09;Sultys 1 l;Gėrimai;320;vnt.;1,1000;352,00;
+2025-09-30;Kaunas;P10;Vanduo 0,5 l;Gėrimai;258;vnt.;0,3000;77,40;
+2025-09-30;Vilnius;P10;Vanduo 0,5 l;Gėrimai;620;vnt.;0,3000;186,00;
+2025-09-30;Vilnius;P11;Aliejus 1 l;Bakalėja;471;vnt.;2,2000;1036,20;
+2025-09-30;Vilnius;P12;Cukrus;Bakalėja;1232;kg;1,1000;1355,20;
+2025-09-30;Vilnius;P04;Senos prekės;Kita;500;vnt.;8,0000;4000,00;
+2025-09-30;Kaunas;P12;Cukrus;Bakalėja;300000;g;0,0011;330,00;
+2025-10-31;Vilnius;P01;Pienas 1 l;Pieno produktai;582;vnt.;0,8000;465,60;100
+2025-10-31;Vilnius;P02;Miltai 1 kg;Bakalėja;470;vnt.;0,9000;423,00;
+2025-10-31;Kaunas;P03;Skardinės;Bakalėja;1004;vnt.;2,5000;2510,00;
+2025-10-31;Vilnius;P05;Planšetė;Elektronika;20;vnt.;120,0000;2400,00;
+2025-10-31;Vilnius;P06;Sviestas 200 g;Pieno produktai;545;vnt.;1,5000;817,50;50
+2025-10-31;Vilnius;P07;Sūris;Pieno produktai;102;vnt.;6,0000;612,00;60
+2025-10-31;Vilnius;P08;Kava 250 g;Bakalėja;193;vnt.;4,0000;772,00;
+2025-10-31;Kaunas;P09;Sultys 1 l;Gėrimai;182;vnt.;1,1000;200,20;
+2025-10-31;Kaunas;P10;Vanduo 0,5 l;Gėrimai;212;vnt.;0,3000;63,60;
+2025-10-31;Vilnius;P10;Vanduo 0,5 l;Gėrimai;505;vnt.;0,3000;151,50;
+2025-10-31;Vilnius;P11;Aliejus 1 l;Bakalėja;379;vnt.;2,2000;833,80;
+2025-10-31;Vilnius;P12;Cukrus;Bakalėja;1048;kg;1,1000;1152,80;
+2025-10-31;Vilnius;P04;Senos prekės;Kita;500;vnt.;8,0000;4000,00;
+2025-10-31;Kaunas;P12;Cukrus;Bakalėja;300000;g;0,0011;330,00;
+2025-11-30;Vilnius;P01;Pienas 1 l;Pieno produktai;542;vnt.;0,8000;433,60;100
+2025-11-30;Vilnius;P02;Miltai 1 kg;Bakalėja;450;vnt.;0,9000;405,00;
+2025-11-30;Kaunas;P03;Skardinės;Bakalėja;1001;vnt.;2,5000;2502,50;
+2025-11-30;Vilnius;P05;Planšetė;Elektronika;18;vnt.;120,0000;2160,00;
+2025-11-30;Vilnius;P06;Sviestas 200 g;Pieno produktai;245;vnt.;1,5000;367,50;50
+2025-11-30;Vilnius;P07;Sūris;Pieno produktai;62;vnt.;6,0000;372,00;60
+2025-11-30;Vilnius;P08;Kava 250 g;Bakalėja;133;vnt.;4,0000;532,00;
+2025-11-30;Kaunas;P09;Sultys 1 l;Gėrimai;62;vnt.;1,1000;68,20;
+2025-11-30;Kaunas;P10;Vanduo 0,5 l;Gėrimai;272;vnt.;0,3000;81,60;
+2025-11-30;Vilnius;P10;Vanduo 0,5 l;Gėrimai;305;vnt.;0,3000;91,50;
+2025-11-30;Vilnius;P11;Aliejus 1 l;Bakalėja;279;vnt.;2,2000;613,80;
+2025-11-30;Vilnius;P12;Cukrus;Bakalėja;888;kg;1,1000;976,80;
+2025-11-30;Vilnius;P04;Senos prekės;Kita;500;vnt.;8,0000;4000,00;
+2025-11-30;Kaunas;P12;Cukrus;Bakalėja;300000;g;0,0011;330,00;
+2025-12-15;Vilnius;P01;Pienas 1 l;Pieno produktai;600;vnt.;0,8000;480,00;100
+2025-12-15;Vilnius;P02;Miltai 1 kg;Bakalėja;400;vnt.;0,9000;360,00;
+2025-12-15;Kaunas;P03;Skardinės;Bakalėja;1000;vnt.;2,5000;2500,00;
+2025-12-15;Vilnius;P05;Planšetė;Elektronika;15;vnt.;120,0000;2160,00;
+2025-12-15;Vilnius;P06;Sviestas 200 g;Pieno produktai;80;vnt.;1,5000;120,00;50
+2025-12-15;Vilnius;P07;Sūris;Pieno produktai;40;vnt.;6,0000;240,00;60
+2025-12-15;Vilnius;P08;Kava 250 g;Bakalėja;93;vnt.;4,0000;372,00;
+2025-12-15;Kaunas;P09;Sultys 1 l;Gėrimai;-4;vnt.;1,1000;-4,40;
+2025-12-15;Kaunas;P10;Vanduo 0,5 l;Gėrimai;200;vnt.;;;
+2025-12-15;Vilnius;P10;Vanduo 0,5 l;Gėrimai;300;vnt.;0,3000;90,00;
+2025-12-15;Vilnius;P11;Aliejus 1 l;Bakalėja;250;vnt.;2,2000;550,00;
+2025-12-15;Vilnius;P12;Cukrus;Bakalėja;800;kg;1,1000;880,00;
+2025-12-15;Vilnius;P04;Senos prekės;Kita;500;vnt.;8,0000;4000,00;
+2025-12-15;Kaunas;P12;Cukrus;Bakalėja;300000;g;0,0011;330,00;

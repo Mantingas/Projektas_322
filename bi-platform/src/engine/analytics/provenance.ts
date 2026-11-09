@@ -11,6 +11,11 @@ export interface DrillSpec {
   range?: Range;
   /** Only negative lines (returns / credit notes) or only positive ones. */
   sign?: 'negative' | 'positive';
+  /** Inventory: show the lines of the stock POSITION at this date (the latest snapshot of every warehouse on or before it) instead of a date range. */
+  asOf?: string;
+  /** Inventory: show movement lines (inside `range`), optionally only these movement types. */
+  movements?: boolean;
+  moveTypes?: string[];
 }
 
 export function drillRecords(records: SalesRecord[], spec: DrillSpec): SalesRecord[] {

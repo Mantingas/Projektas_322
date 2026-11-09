@@ -1,5 +1,5 @@
 import type { ColumnProfile, FieldId, MappingEntry, MappingProposal, MappingWarning, ModuleId } from '../types';
-import { GROSS_HINT_TOKENS, NET_HINT_TOKENS, PURCHASING_WORDS, SALES_WORDS, SPECS, type ModuleSpec } from './dictionary';
+import { GROSS_HINT_TOKENS, INVENTORY_WORDS, NET_HINT_TOKENS, PURCHASING_WORDS, SALES_WORDS, SPECS, type ModuleSpec } from './dictionary';
 import { levenshtein, normalizeHeader, tokens } from './normalize';
 import { matchTemplate } from './templates';
 import { normalizeCurrency } from '../schema/numbers';
@@ -34,9 +34,9 @@ function basisHint(header: string): 'net' | 'gross' | null {
 
 function valueCompat(field: FieldId, p: ColumnProfile, spec: ModuleSpec): number {
   if (p.nonEmpty === 0) return 0;
-  if (field === 'document_date') return Math.max(p.dateRatio, p.serialDateRatio);
+  if (field === 'document_date' || field === 'snapshot_date' || field === 'movement_date') return Math.max(p.dateRatio, p.serialDateRatio);
   if (spec.numeric.includes(field)) return p.numberRatio;
-  if (field === 'unit' || field === 'document_type') return p.textRatio > 0.8 && p.avgTextLength <= 20 && p.distinctRatio < 0.2 ? 1 : 0.3;
+  if (field === 'unit' || field === 'document_type' || field === 'movement_type') return p.textRatio > 0.8 && p.avgTextLength <= 20 && (p.distinctRatio < 0.2 || p.distinctRatio * p.nonEmpty <= 12) ? 1 : 0.3; // few distinct values: a categorical column, even in a short file
   if (spec.text.includes(field)) return p.numberRatio > 0.8 || p.dateRatio > 0.8 ? 0.1 : p.textRatio;
   // identifiers carry no value evidence: a generic header such as "Vidinis kodas" must not look confident
   if (spec.ids.includes(field)) return p.dateRatio > 0.8 ? 0.1 : 0.6;
@@ -104,7 +104,7 @@ export function suggestMapping(profiles: ColumnProfile[], opts: MapperOptions = 
       if (h > 0) {
         score = h * 0.7 + compat * 0.3;
         if (compat < 0.5) score *= 0.4;
-      } else if (field === 'document_date' && p.dateRatio >= 0.9) {
+      } else if ((field === 'document_date' || field === 'snapshot_date') && p.dateRatio >= 0.9) {
         score = 0.58; // values alone are enough for a *proposal* of the date column
       } else if (field === 'currency' && p.textRatio > 0.9 && p.nonEmpty > 0 && valueCompat('currency', p, spec) === 1) {
         score = 0.58;
@@ -123,7 +123,7 @@ export function suggestMapping(profiles: ColumnProfile[], opts: MapperOptions = 
   // Currency from values (e.g. "12,50 €") when there is no currency column.
   let detectedCurrency: string | undefined;
   if (!usedFields.has('currency')) {
-    const amountCols = entries.filter((e) => ['net_amount', 'gross_amount', 'amount_unknown_basis'].includes(e.field));
+    const amountCols = entries.filter((e) => ['net_amount', 'gross_amount', 'amount_unknown_basis', 'stock_value', 'unit_cost'].includes(e.field));
     for (const e of amountCols) {
       const hints = profiles[e.columnIndex]?.currencyHints ?? [];
       if (hints.length === 1) detectedCurrency = normalizeCurrency(hints[0]!) ?? undefined;
@@ -138,12 +138,26 @@ export function suggestMapping(profiles: ColumnProfile[], opts: MapperOptions = 
     }
   }
 
+  // inventory: a date column next to a movement-type column is a MOVEMENT date, not a snapshot date
+  if (module === 'inventory') {
+    const hasType = entries.some((e) => e.field === 'movement_type');
+    const snap = entries.find((e) => e.field === 'snapshot_date');
+    if (hasType && snap && !entries.some((e) => e.field === 'movement_date')) snap.field = 'movement_date';
+  }
   return { entries: entries.sort((a, b) => a.columnIndex - b.columnIndex), templateId, detectedCurrency, warnings: validateMapping(entries, module) };
 }
 
-export function validateMapping(entries: Pick<MappingEntry, 'field' | 'confidence'>[], module: ModuleId = 'sales'): MappingWarning[] {
+export function validateMapping(entries: Pick<MappingEntry, 'field' | 'confidence'>[], module: ModuleId = 'sales', ctx: { hasDefaultDate?: boolean } = {}): MappingWarning[] {
   const w: MappingWarning[] = [];
   const has = (f: FieldId) => entries.some((e) => e.field === f);
+  if (module === 'inventory') {
+    // a stock file needs: a date (a column, or the as-of date the user states), a product, and a quantity or a stock value
+    if (!has('snapshot_date') && !has('movement_date') && !ctx.hasDefaultDate) w.push({ code: 'missing_date' });
+    if (!has('product_id') && !has('product_name')) w.push({ code: 'missing_product' });
+    if (!has('quantity') && !has('stock_value')) w.push({ code: 'missing_quantity' });
+    for (const e of entries) if (e.confidence < LOW_CONFIDENCE) w.push({ code: 'low_confidence', field: e.field });
+    return w;
+  }
   if (!has('document_date')) w.push({ code: 'missing_date' });
   const amountFields = (['net_amount', 'gross_amount', 'amount_unknown_basis'] as const).filter(has);
   if (amountFields.length === 0) w.push({ code: 'missing_amount' });
@@ -156,7 +170,7 @@ export function validateMapping(entries: Pick<MappingEntry, 'field' | 'confidenc
 
 /** A mapping can only be confirmed when it has a date and at least one amount column. */
 export function isMappingConfirmable(warnings: MappingWarning[]): boolean {
-  return !warnings.some((w) => w.code === 'missing_date' || w.code === 'missing_amount');
+  return !warnings.some((w) => w.code === 'missing_date' || w.code === 'missing_amount' || w.code === 'missing_product' || w.code === 'missing_quantity');
 }
 
 /** Makes a mapping reusable on another file with the same layout. */
@@ -175,9 +189,11 @@ export function layoutSignature(headers: string[], module: ModuleId = 'sales'): 
  * Suggests which kind of file this is from header words. Ambiguous words ("kontrahent", "pardavėjas") count for neither;
  * ties and unclear files default to sales. The user always confirms the choice.
  */
-export function detectModule(headers: string[]): { module: ModuleId; purchasing: number; sales: number } {
+export function detectModule(headers: string[]): { module: ModuleId; purchasing: number; sales: number; inventory: number } {
   const toks = new Set(headers.flatMap((h) => normalizeHeader(h).split(' ')));
   const purchasing = PURCHASING_WORDS.filter((w) => toks.has(w)).length;
   const sales = SALES_WORDS.filter((w) => toks.has(w)).length;
-  return { module: purchasing > sales ? 'purchasing' : 'sales', purchasing, sales };
+  const inventory = INVENTORY_WORDS.filter((w) => toks.has(w)).length;
+  const module: ModuleId = inventory > purchasing && inventory > sales ? 'inventory' : purchasing > sales ? 'purchasing' : 'sales';
+  return { module, purchasing, sales, inventory };
 }

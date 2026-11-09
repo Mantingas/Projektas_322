@@ -2,11 +2,13 @@ import type { Messages } from './en';
 import dash from './dash.pl';
 import dash2 from './dash2.pl';
 import purch from './purch.pl';
+import inv from './inv.pl';
 
 const pl: Messages = {
   ...dash,
   ...dash2,
   ...purch,
+  ...inv,
   'app.name': 'Excel Insights',
   'app.tagline': 'Wnioski biznesowe z Twoich plików Excel',
   'nav.home': 'Start', 'nav.import': 'Import', 'nav.insights': 'Wnioski', 'nav.history': 'Historia', 'nav.settings': 'Ustawienia',

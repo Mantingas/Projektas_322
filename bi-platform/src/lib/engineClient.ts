@@ -6,10 +6,10 @@ export class EngineError extends Error {
   }
 }
 
-type Methods = 'parse' | 'analyze' | 'preview' | 'commit' | 'discard' | 'build' | 'drill' | 'drillCsv' | 'buildPurchasing' | 'priceTrendFor';
+type Methods = 'parse' | 'analyze' | 'preview' | 'commit' | 'discard' | 'build' | 'drill' | 'drillCsv' | 'buildPurchasing' | 'priceTrendFor' | 'buildInventory';
 type Fn<K extends Methods> = EngineSession[K] extends (...a: infer A) => infer R ? { args: A; result: Awaited<R> } : never;
 
-const TIMEOUT: Record<Methods, number> = { parse: 90_000, analyze: 60_000, preview: 60_000, commit: 120_000, discard: 5_000, build: 60_000, drill: 30_000, drillCsv: 60_000, buildPurchasing: 60_000, priceTrendFor: 30_000 };
+const TIMEOUT: Record<Methods, number> = { parse: 90_000, analyze: 60_000, preview: 60_000, commit: 120_000, discard: 5_000, build: 60_000, drill: 30_000, drillCsv: 60_000, buildPurchasing: 60_000, priceTrendFor: 30_000, buildInventory: 60_000 };
 
 /**
  * Talks to the engine Web Worker. If a call takes longer than its budget the worker is terminated (a runaway parse or analysis
