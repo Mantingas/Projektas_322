@@ -1,0 +1,627 @@
+﻿Data;Dokumento Nr.;Klientas;Prekės kodas;Prekė;Kiekis;Suma be PVM;Pardavėjas
+2025-09-01;SF-1001;UAB Baltic Trade;P0019;Medus 400 g;22;498,37;Mantas Žukauskas
+2025-09-01;SF-1002;UAB Aukštaitijos sūris;P0020;Šokoladas pieninis;13;236,21;Mantas Žukauskas
+2025-09-01;SF-1002;UAB Aukštaitijos sūris;P0002;Sviestas 82 %;23;451,12;Jonas Kazlauskas
+2025-09-01;SF-1003;UAB Gintaro pienas;P0008;Mineralinis vanduo;30;389,81;Mantas Žukauskas
+2025-09-02;SF-1004;UAB Šilainių prekyba;P0002;Sviestas 82 %;27;538,30;Mantas Žukauskas
+2025-09-02;SF-1005;UAB Saulėtekio centras;P0023;Agurkai marinuoti;18;293,13;Mantas Žukauskas
+2025-09-02;SF-1006;UAB Baltic Trade;P0009;Kava malta 500 g;20;558,78;Jonas Kazlauskas
+2025-09-03;SF-1007;IĮ Jonas Petraitis;P0007;Obuolių sultys;29;525,63;Mantas Žukauskas
+2025-09-03;SF-1007;IĮ Jonas Petraitis;P0020;Šokoladas pieninis;5;100,87;Ieva Ąžuolaitė
+2025-09-03;SF-1007;IĮ Jonas Petraitis;P0022;Žirniai konservuoti;18;388,61;Rūta Šimkutė
+2025-09-03;SF-1008;UAB Čiobreliai;P0018;Kiaušiniai L;12;166,94;Ieva Ąžuolaitė
+2025-09-03;SF-1009;IĮ Jonas Petraitis;P0022;Žirniai konservuoti;18;386,07;Rūta Šimkutė
+2025-09-03;SF-1009;IĮ Jonas Petraitis;P0003;Varškė 9 %;28;330,53;Mantas Žukauskas
+2025-09-03;SF-1009;IĮ Jonas Petraitis;P0022;Žirniai konservuoti;4;84,61;Rūta Šimkutė
+2025-09-04;SF-1010;UAB Pušyno projektai;P0018;Kiaušiniai L;28;371,70;Ieva Ąžuolaitė
+2025-09-04;SF-1011;UAB Baltic Trade;P0009;Kava malta 500 g;9;252,29;Jonas Kazlauskas
+2025-09-04;SF-1011;UAB Baltic Trade;P0008;Mineralinis vanduo;32;379,65;Ieva Ąžuolaitė
+2025-09-04;SF-1012;UAB Panevėžio logistika;P0001;Pienas 2,5 % 1 l;30;185,04;Jonas Kazlauskas
+2025-09-04;SF-1012;UAB Panevėžio logistika;P0022;Žirniai konservuoti;9;195,28;Rūta Šimkutė
+2025-09-05;SF-1013;UAB Baltic Trade;P0018;Kiaušiniai L;12;161,06;Rūta Šimkutė
+2025-09-05;SF-1013;UAB Baltic Trade;P0001;Pienas 2,5 % 1 l;9;59,38;Jonas Kazlauskas
+2025-09-05;SF-1013;UAB Baltic Trade;P0024;Padažas pomidorų;7;20,65;Ieva Ąžuolaitė
+2025-09-05;SF-1014;AB Žalgiris Maistas;P0011;Cukrus 1 kg;17;110,20;Jonas Kazlauskas
+2025-09-05;SF-1014;AB Žalgiris Maistas;P0009;Kava malta 500 g;36;949,81;Mantas Žukauskas
+2025-09-05;SF-1015;UAB Gintaro pienas;P0015;Ryžiai;10;154,28;Rūta Šimkutė
+2025-09-05;SF-1015;UAB Gintaro pienas;P0008;Mineralinis vanduo;27;309,07;Mantas Žukauskas
+2025-09-06;SF-1016;IĮ Jonas Petraitis;P0003;Varškė 9 %;13;144,82;Mantas Žukauskas
+2025-09-08;SF-1017;UAB Vilniaus duona;P0018;Kiaušiniai L;37;552,38;Rūta Šimkutė
+2025-09-08;SF-1017;UAB Vilniaus duona;P0004;Sūris Džiugas;35;891,76;Ieva Ąžuolaitė
+2025-09-08;SF-1018;UAB Rūta Vilnius;P0004;Sūris Džiugas;25;672,70;Rūta Šimkutė
+2025-09-08;SF-1018;UAB Rūta Vilnius;P0010;Arbata juoda;22;394,83;Ieva Ąžuolaitė
+2025-09-08;SF-1019;UAB Panevėžio logistika;P0018;Kiaušiniai L;3;38,53;Rūta Šimkutė
+2025-09-08;SF-1019;UAB Panevėžio logistika;P0013;Aliejus rapsų;28;404,45;Jonas Kazlauskas
+2025-09-08;SF-1019;UAB Panevėžio logistika;P0020;Šokoladas pieninis;26;509,36;Ieva Ąžuolaitė
+2025-09-09;SF-1020;AB Žalgiris Maistas;P0022;Žirniai konservuoti;28;577,22;Ieva Ąžuolaitė
+2025-09-09;SF-1020;AB Žalgiris Maistas;P0016;Dešrelės;14;127,26;Rūta Šimkutė
+2025-09-09;SF-1021;MB Ąžuolas;P0003;Varškė 9 %;26;333,25;Rūta Šimkutė
+2025-09-09;SF-1022;UAB Ąžuolynas;P0017;Šaldyta žuvis;6;134,22;Rūta Šimkutė
+2025-09-09;SF-1022;UAB Ąžuolynas;P0002;Sviestas 82 %;12;228,17;Mantas Žukauskas
+2025-09-09;SF-1023;IĮ Jonas Petraitis;P0019;Medus 400 g;8;206,81;Mantas Žukauskas
+2025-09-09;SF-1023;IĮ Jonas Petraitis;P0011;Cukrus 1 kg;19;117,77;Mantas Žukauskas
+2025-09-09;SF-1023;IĮ Jonas Petraitis;P0008;Mineralinis vanduo;13;146,50;Ieva Ąžuolaitė
+2025-09-10;SF-1024;UAB Kauno statyba;P0016;Dešrelės;18;141,89;Jonas Kazlauskas
+2025-09-10;SF-1024;UAB Kauno statyba;P0004;Sūris Džiugas;38;880,27;Jonas Kazlauskas
+2025-09-10;SF-1025;UAB Vilniaus duona;P0003;Varškė 9 %;33;368,78;Mantas Žukauskas
+2025-09-10;SF-1025;UAB Vilniaus duona;P0006;Batonas;29;194,82;Rūta Šimkutė
+2025-09-10;SF-1026;UAB Pušyno projektai;P0016;Dešrelės;32;274,77;Rūta Šimkutė
+2025-09-10;SF-1026;UAB Pušyno projektai;P0013;Aliejus rapsų;8;100,56;Mantas Žukauskas
+2025-09-10;SF-1026;UAB Pušyno projektai;P0002;Sviestas 82 %;11;218,94;Ieva Ąžuolaitė
+2025-09-11;SF-1027;UAB Pušyno projektai;P0010;Arbata juoda;14;219,17;Ieva Ąžuolaitė
+2025-09-11;SF-1028;UAB Kauno statyba;P0023;Agurkai marinuoti;39;556,22;Ieva Ąžuolaitė
+2025-09-11;SF-1029;UAB Panevėžio logistika;P0017;Šaldyta žuvis;23;572,37;Jonas Kazlauskas
+2025-09-11;SF-1029;UAB Panevėžio logistika;P0012;Miltai kvietiniai;31;732,94;Ieva Ąžuolaitė
+2025-09-11;SF-1029;UAB Panevėžio logistika;P0014;Makaronai;22;614,24;Rūta Šimkutė
+2025-09-11;SF-1030;AB Klaipėdos baldai;P0016;Dešrelės;27;246,34;Mantas Žukauskas
+2025-09-12;SF-1031;AB Žalgiris Maistas;P0010;Arbata juoda;14;230,57;Ieva Ąžuolaitė
+2025-09-12;SF-1031;AB Žalgiris Maistas;P0015;Ryžiai;35;580,95;Jonas Kazlauskas
+2025-09-12;SF-1031;AB Žalgiris Maistas;P0007;Obuolių sultys;39;753,26;Jonas Kazlauskas
+2025-09-12;SF-1032;UAB Gintaro pienas;P0018;Kiaušiniai L;29;381,94;Jonas Kazlauskas
+2025-09-12;SF-1032;UAB Gintaro pienas;P0022;Žirniai konservuoti;22;464,95;Jonas Kazlauskas
+2025-09-12;SF-1032;UAB Gintaro pienas;P0012;Miltai kvietiniai;36;872,31;Mantas Žukauskas
+2025-09-12;SF-1033;UAB Vilniaus duona;P0018;Kiaušiniai L;21;268,16;Rūta Šimkutė
+2025-09-12;SF-1033;UAB Vilniaus duona;P0003;Varškė 9 %;5;59,78;Mantas Žukauskas
+2025-09-12;SF-1034;UAB Aukštaitijos sūris;P0003;Varškė 9 %;2;23,40;Rūta Šimkutė
+2025-09-12;SF-1034;UAB Aukštaitijos sūris;P0007;Obuolių sultys;35;694,91;Rūta Šimkutė
+2025-09-12;SF-1034;UAB Aukštaitijos sūris;P0022;Žirniai konservuoti;14;273,77;Jonas Kazlauskas
+2025-09-12;SF-1035;UAB Šilainių prekyba;P0007;Obuolių sultys;11;222,42;Ieva Ąžuolaitė
+2025-09-12;SF-1035;UAB Šilainių prekyba;P0012;Miltai kvietiniai;24;517,92;Jonas Kazlauskas
+2025-09-13;SF-1036;IĮ Jonas Petraitis;P0003;Varškė 9 %;3;33,35;Mantas Žukauskas
+2025-09-13;SF-1036;IĮ Jonas Petraitis;P0006;Batonas;10;72,84;Rūta Šimkutė
+2025-09-13;SF-1036;IĮ Jonas Petraitis;P0021;Sausainiai;14;161,29;Jonas Kazlauskas
+2025-09-15;SF-1037;UAB Šviesa LT;P0005;Duona ruginė;32;444,42;Jonas Kazlauskas
+2025-09-15;SF-1037;UAB Šviesa LT;P0002;Sviestas 82 %;31;588,33;Rūta Šimkutė
+2025-09-15;SF-1038;UAB Šviesa LT;P0023;Agurkai marinuoti;8;111,21;Mantas Žukauskas
+2025-09-15;SF-1038;UAB Šviesa LT;P0017;Šaldyta žuvis;9;222,29;Jonas Kazlauskas
+2025-09-15;SF-1039;UAB Baltic Trade;P0015;Ryžiai;23;346,02;Mantas Žukauskas
+2025-09-15;SF-1039;UAB Baltic Trade;P0013;Aliejus rapsų;30;374,78;Jonas Kazlauskas
+2025-09-15;SF-1040;UAB Čiobreliai;P0002;Sviestas 82 %;14;280,80;Ieva Ąžuolaitė
+2025-09-15;SF-1041;UAB Šilainių prekyba;P0011;Cukrus 1 kg;8;51,42;Ieva Ąžuolaitė
+2025-09-15;SF-1041;UAB Šilainių prekyba;P0005;Duona ruginė;35;445,53;Rūta Šimkutė
+2025-09-15;SF-1041;UAB Šilainių prekyba;P0024;Padažas pomidorų;9;28,26;Jonas Kazlauskas
+2025-09-16;SF-1042;UAB Vilniaus duona;P0004;Sūris Džiugas;40;1 080,71;Ieva Ąžuolaitė
+2025-09-16;SF-1042;UAB Vilniaus duona;P0005;Duona ruginė;21;306,63;Jonas Kazlauskas
+2025-09-16;SF-1042;UAB Vilniaus duona;P0012;Miltai kvietiniai;11;257,48;Ieva Ąžuolaitė
+2025-09-16;SF-1043;UAB Panevėžio logistika;P0011;Cukrus 1 kg;11;68,80;Mantas Žukauskas
+2025-09-16;SF-1043;UAB Panevėžio logistika;P0016;Dešrelės;3;27,56;Ieva Ąžuolaitė
+2025-09-16;SF-1044;UAB Gintaro pienas;P0002;Sviestas 82 %;24;466,31;Jonas Kazlauskas
+2025-09-16;SF-1044;UAB Gintaro pienas;P0013;Aliejus rapsų;20;271,86;Ieva Ąžuolaitė
+2025-09-16;SF-1044;UAB Gintaro pienas;P0001;Pienas 2,5 % 1 l;29;156,87;Ieva Ąžuolaitė
+2025-09-16;SF-1045;UAB Baltic Trade;P0018;Kiaušiniai L;38;510,42;Rūta Šimkutė
+2025-09-16;SF-1045;UAB Baltic Trade;P0022;Žirniai konservuoti;19;367,16;Rūta Šimkutė
+2025-09-17;SF-1046;UAB Vilniaus duona;P0019;Medus 400 g;5;130,47;Mantas Žukauskas
+2025-09-17;SF-1046;UAB Vilniaus duona;P0023;Agurkai marinuoti;34;506,59;Mantas Žukauskas
+2025-09-17;SF-1047;UAB Medeinos namai;P0013;Aliejus rapsų;20;284,56;Ieva Ąžuolaitė
+2025-09-17;SF-1048;UAB Gintaro pienas;P0016;Dešrelės;40;372,76;Mantas Žukauskas
+2025-09-17;SF-1048;UAB Gintaro pienas;P0020;Šokoladas pieninis;39;760,36;Mantas Žukauskas
+2025-09-17;SF-1048;UAB Gintaro pienas;P0003;Varškė 9 %;40;444,86;Rūta Šimkutė
+2025-09-17;SF-1049;UAB Ąžuolynas;P0019;Medus 400 g;14;374,13;Ieva Ąžuolaitė
+2025-09-17;SF-1049;UAB Ąžuolynas;P0023;Agurkai marinuoti;27;383,81;Ieva Ąžuolaitė
+2025-09-17;SF-1049;UAB Ąžuolynas;P0009;Kava malta 500 g;29;721,23;Rūta Šimkutė
+2025-09-18;SF-1050;UAB Gintaro pienas;P0016;Dešrelės;39;325,64;Mantas Žukauskas
+2025-09-18;SF-1050;UAB Gintaro pienas;P0018;Kiaušiniai L;1;14,57;Jonas Kazlauskas
+2025-09-18;SF-1051;UAB Šilainių prekyba;P0022;Žirniai konservuoti;19;394,28;Mantas Žukauskas
+2025-09-18;SF-1051;UAB Šilainių prekyba;P0016;Dešrelės;13;109,76;Jonas Kazlauskas
+2025-09-18;SF-1052;UAB Verslo ratas;P0015;Ryžiai;3;49,34;Rūta Šimkutė
+2025-09-19;SF-1053;UAB Čiobreliai;P0010;Arbata juoda;24;366,68;Ieva Ąžuolaitė
+2025-09-19;SF-1053;UAB Čiobreliai;P0005;Duona ruginė;28;404,65;Mantas Žukauskas
+2025-09-19;SF-1053;UAB Čiobreliai;P0014;Makaronai;26;716,50;Ieva Ąžuolaitė
+2025-09-19;SF-1054;UAB Baltic Trade;P0003;Varškė 9 %;37;408,34;Mantas Žukauskas
+2025-09-19;SF-1055;UAB Kauno statyba;P0018;Kiaušiniai L;26;328,96;Mantas Žukauskas
+2025-09-19;SF-1056;MB Žemaitijos mėsa;P0005;Duona ruginė;30;428,93;Mantas Žukauskas
+2025-09-19;SF-1056;MB Žemaitijos mėsa;P0016;Dešrelės;24;218,42;Rūta Šimkutė
+2025-09-20;SF-1057;MB Ąžuolas;P0010;Arbata juoda;24;368,69;Jonas Kazlauskas
+2025-09-20;SF-1057;MB Ąžuolas;P0017;Šaldyta žuvis;30;672,33;Ieva Ąžuolaitė
+2025-09-21;KR-20;UAB Šilainių prekyba;P0004;Sūris Džiugas;-10;-3 714,00;Jonas Kazlauskas
+2025-09-22;SF-1058;UAB Vilniaus duona;P0009;Kava malta 500 g;27;808,50;Jonas Kazlauskas
+2025-09-22;SF-1058;UAB Vilniaus duona;P0017;Šaldyta žuvis;14;354,91;Jonas Kazlauskas
+2025-09-22;SF-1059;UAB Medeinos namai;P0004;Sūris Džiugas;13;361,34;Mantas Žukauskas
+2025-09-22;SF-1060;UAB Pušyno projektai;P0016;Dešrelės;25;233,37;Rūta Šimkutė
+2025-09-22;SF-1061;UAB Jūrų prekyba;P0023;Agurkai marinuoti;13;194,99;Ieva Ąžuolaitė
+2025-09-22;SF-1062;UAB Šilainių prekyba;P0023;Agurkai marinuoti;26;374,68;Ieva Ąžuolaitė
+2025-09-23;SF-1063;UAB Vilniaus duona;P0014;Makaronai;36;948,51;Rūta Šimkutė
+2025-09-23;SF-1064;UAB Ąžuolynas;P0021;Sausainiai;18;206,63;Rūta Šimkutė
+2025-09-23;SF-1064;UAB Ąžuolynas;P0015;Ryžiai;27;442,48;Ieva Ąžuolaitė
+2025-09-23;SF-1065;UAB Baltic Trade;P0018;Kiaušiniai L;16;217,05;Rūta Šimkutė
+2025-09-23;SF-1066;UAB Baltic Trade;P0007;Obuolių sultys;2;38,42;Mantas Žukauskas
+2025-09-23;SF-1066;UAB Baltic Trade;P0004;Sūris Džiugas;29;693,24;Ieva Ąžuolaitė
+2025-09-24;SF-1067;AB Žalgiris Maistas;P0015;Ryžiai;19;322,93;Jonas Kazlauskas
+2025-09-24;SF-1067;AB Žalgiris Maistas;P0005;Duona ruginė;14;209,18;Mantas Žukauskas
+2025-09-24;SF-1068;UAB Jūrų prekyba;P0005;Duona ruginė;27;383,00;Rūta Šimkutė
+2025-09-24;SF-1068;UAB Jūrų prekyba;P0023;Agurkai marinuoti;17;248,04;Ieva Ąžuolaitė
+2025-09-24;SF-1069;UAB Rūta Vilnius;P0005;Duona ruginė;2;29,73;Mantas Žukauskas
+2025-09-24;SF-1069;UAB Rūta Vilnius;P0013;Aliejus rapsų;21;293,96;Mantas Žukauskas
+2025-09-24;SF-1070;UAB Kauno statyba;P0013;Aliejus rapsų;37;547,00;Rūta Šimkutė
+2025-09-24;SF-1070;UAB Kauno statyba;P0006;Batonas;37;239,92;Mantas Žukauskas
+2025-09-24;SF-1070;UAB Kauno statyba;P0013;Aliejus rapsų;18;238,44;Rūta Šimkutė
+2025-09-25;SF-1071;UAB Gintaro pienas;P0022;Žirniai konservuoti;10;216,38;Jonas Kazlauskas
+2025-09-25;SF-1071;UAB Gintaro pienas;P0013;Aliejus rapsų;30;417,76;Ieva Ąžuolaitė
+2025-09-25;SF-1071;UAB Gintaro pienas;P0024;Padažas pomidorų;9;28,02;Mantas Žukauskas
+2025-09-25;SF-1072;UAB Baltic Trade;P0003;Varškė 9 %;14;180,80;Mantas Žukauskas
+2025-09-25;SF-1073;UAB Vilniaus duona;P0024;Padažas pomidorų;30;93,57;Ieva Ąžuolaitė
+2025-09-25;SF-1073;UAB Vilniaus duona;P0018;Kiaušiniai L;12;171,48;Rūta Šimkutė
+2025-09-25;SF-1074;UAB Baltic Trade;P0010;Arbata juoda;5;89,14;Rūta Šimkutė
+2025-09-25;SF-1074;UAB Baltic Trade;P0019;Medus 400 g;24;548,27;Mantas Žukauskas
+2025-09-25;SF-1074;UAB Baltic Trade;P0022;Žirniai konservuoti;8;181,70;Rūta Šimkutė
+2025-09-26;SF-1075;UAB Vilniaus duona;P0001;Pienas 2,5 % 1 l;16;87,49;Jonas Kazlauskas
+2025-09-26;SF-1075;UAB Vilniaus duona;P0012;Miltai kvietiniai;17;359,48;Ieva Ąžuolaitė
+2025-09-26;SF-1076;AB Klaipėdos baldai;P0003;Varškė 9 %;8;101,81;Rūta Šimkutė
+2025-09-26;SF-1077;UAB Pušyno projektai;P0022;Žirniai konservuoti;10;221,34;Ieva Ąžuolaitė
+2025-09-26;SF-1077;UAB Pušyno projektai;P0020;Šokoladas pieninis;9;148,72;Rūta Šimkutė
+2025-09-26;SF-1077;UAB Pušyno projektai;P0022;Žirniai konservuoti;38;763,55;Ieva Ąžuolaitė
+2025-09-26;SF-1078;UAB Baltic Trade;P0017;Šaldyta žuvis;26;559,40;Jonas Kazlauskas
+2025-09-26;SF-1078;UAB Baltic Trade;P0017;Šaldyta žuvis;32;677,08;Jonas Kazlauskas
+2025-09-26;SF-1078;UAB Baltic Trade;P0006;Batonas;22;142,11;Rūta Šimkutė
+2025-09-26;SF-1079;UAB Šilainių prekyba;P0024;Padažas pomidorų;23;68,35;Jonas Kazlauskas
+2025-09-26;SF-1079;UAB Šilainių prekyba;P0020;Šokoladas pieninis;2;39,84;Jonas Kazlauskas
+2025-09-26;SF-1079;UAB Šilainių prekyba;P0023;Agurkai marinuoti;38;599,07;Ieva Ąžuolaitė
+2025-09-27;SF-1080;AB Žalgiris Maistas;P0002;Sviestas 82 %;26;504,66;Ieva Ąžuolaitė
+2025-09-29;SF-1081;UAB Čiobreliai;P0022;Žirniai konservuoti;28;609,92;Ieva Ąžuolaitė
+2025-09-29;SF-1082;UAB Dzūkijos medus;P0011;Cukrus 1 kg;5;33,99;Ieva Ąžuolaitė
+2025-09-29;SF-1083;UAB Šilainių prekyba;P0015;Ryžiai;23;362,29;Ieva Ąžuolaitė
+2025-09-29;SF-1083;UAB Šilainių prekyba;P0009;Kava malta 500 g;18;513,96;Rūta Šimkutė
+2025-09-29;SF-1084;UAB Gintaro pienas;P0016;Dešrelės;36;327,84;Mantas Žukauskas
+2025-09-29;SF-1084;UAB Gintaro pienas;P0019;Medus 400 g;6;148,88;Rūta Šimkutė
+2025-09-30;SF-1085;UAB Baltic Trade;P0023;Agurkai marinuoti;18;292,14;Mantas Žukauskas
+2025-09-30;SF-1085;UAB Baltic Trade;P0003;Varškė 9 %;20;263,18;Mantas Žukauskas
+2025-09-30;SF-1085;UAB Baltic Trade;P0012;Miltai kvietiniai;32;725,74;Ieva Ąžuolaitė
+2025-09-30;SF-1086;AB Žalgiris Maistas;P0002;Sviestas 82 %;38;766,39;Ieva Ąžuolaitė
+2025-09-30;SF-1086;AB Žalgiris Maistas;P0008;Mineralinis vanduo;11;129,84;Rūta Šimkutė
+2025-09-30;SF-1086;AB Žalgiris Maistas;P0005;Duona ruginė;2;28,91;Mantas Žukauskas
+2025-09-30;SF-1087;UAB Šilainių prekyba;P0020;Šokoladas pieninis;4;76,84;Jonas Kazlauskas
+2025-09-30;SF-1088;UAB Vilniaus duona;P0016;Dešrelės;24;195,96;Ieva Ąžuolaitė
+2025-09-30;SF-1088;UAB Vilniaus duona;P0021;Sausainiai;30;346,75;Jonas Kazlauskas
+2025-10-01;SF-1089;UAB Čiobreliai;P0008;Mineralinis vanduo;17;202,44;Rūta Šimkutė
+2025-10-01;SF-1089;UAB Čiobreliai;P0017;Šaldyta žuvis;15;329,68;Mantas Žukauskas
+2025-10-01;SF-1089;UAB Čiobreliai;P0019;Medus 400 g;23;631,66;Jonas Kazlauskas
+2025-10-01;SF-1090;UAB Rūta Vilnius;P0013;Aliejus rapsų;16;235,26;Mantas Žukauskas
+2025-10-01;SF-1090;UAB Rūta Vilnius;P0002;Sviestas 82 %;25;434,74;Ieva Ąžuolaitė
+2025-10-01;SF-1091;IĮ Jonas Petraitis;P0006;Batonas;7;45,35;Rūta Šimkutė
+2025-10-01;SF-1092;UAB Vilniaus duona;P0021;Sausainiai;33;351,88;Jonas Kazlauskas
+2025-10-01;SF-1092;UAB Vilniaus duona;P0009;Kava malta 500 g;11;274,06;Jonas Kazlauskas
+2025-10-01;SF-1092;UAB Vilniaus duona;P0019;Medus 400 g;36;898,77;Mantas Žukauskas
+2025-10-02;SF-1093;UAB Gintaro pienas;P0022;Žirniai konservuoti;32;697,51;Jonas Kazlauskas
+2025-10-02;SF-1094;UAB Kauno statyba;P0010;Arbata juoda;39;678,83;Mantas Žukauskas
+2025-10-02;SF-1094;UAB Kauno statyba;P0022;Žirniai konservuoti;29;657,74;Mantas Žukauskas
+2025-10-02;SF-1094;UAB Kauno statyba;P0003;Varškė 9 %;34;407,93;Ieva Ąžuolaitė
+2025-10-02;SF-1095;UAB Panevėžio logistika;P0009;Kava malta 500 g;22;546,42;Jonas Kazlauskas
+2025-10-02;SF-1095;UAB Panevėžio logistika;P0024;Padažas pomidorų;39;124,82;Ieva Ąžuolaitė
+2025-10-02;SF-1096;UAB Baltic Trade;P0022;Žirniai konservuoti;12;244,24;Rūta Šimkutė
+2025-10-03;SF-1097;UAB Šilainių prekyba;P0005;Duona ruginė;10;149,71;Rūta Šimkutė
+2025-10-03;SF-1098;UAB Gintaro pienas;P0019;Medus 400 g;8;203,23;Rūta Šimkutė
+2025-10-03;SF-1098;UAB Gintaro pienas;P0015;Ryžiai;15;239,27;Rūta Šimkutė
+2025-10-03;SF-1099;UAB Kauno statyba;P0006;Batonas;28;197,25;Mantas Žukauskas
+2025-10-03;SF-1099;UAB Kauno statyba;P0004;Sūris Džiugas;14;331,76;Jonas Kazlauskas
+2025-10-03;SF-1100;UAB Baltic Trade;P0019;Medus 400 g;12;271,96;Mantas Žukauskas
+2025-10-03;SF-1100;UAB Baltic Trade;P0002;Sviestas 82 %;32;612,80;Rūta Šimkutė
+2025-10-04;SF-1101;UAB Gintaro pienas;P0013;Aliejus rapsų;34;511,49;Ieva Ąžuolaitė
+2025-10-04;SF-1101;UAB Gintaro pienas;P0001;Pienas 2,5 % 1 l;34;215,95;Ieva Ąžuolaitė
+2025-10-06;SF-1102;UAB Šilainių prekyba;P0020;Šokoladas pieninis;19;323,00;Jonas Kazlauskas
+2025-10-06;SF-1103;UAB Gintaro pienas;P0018;Kiaušiniai L;39;547,37;Jonas Kazlauskas
+2025-10-06;SF-1103;UAB Gintaro pienas;P0022;Žirniai konservuoti;29;660,12;Jonas Kazlauskas
+2025-10-06;SF-1103;UAB Gintaro pienas;P0005;Duona ruginė;3;41,68;Ieva Ąžuolaitė
+2025-10-06;SF-1104;UAB Šilainių prekyba;P0024;Padažas pomidorų;29;100,32;Jonas Kazlauskas
+2025-10-06;SF-1104;UAB Šilainių prekyba;P0020;Šokoladas pieninis;3;52,86;Jonas Kazlauskas
+2025-10-06;SF-1104;UAB Šilainių prekyba;P0016;Dešrelės;40;357,88;Jonas Kazlauskas
+2025-10-07;SF-1105;UAB Verslo ratas;P0021;Sausainiai;25;302,31;Ieva Ąžuolaitė
+2025-10-07;SF-1105;UAB Verslo ratas;P0014;Makaronai;2;49,73;Jonas Kazlauskas
+2025-10-07;SF-1105;UAB Verslo ratas;P0018;Kiaušiniai L;9;130,95;Jonas Kazlauskas
+2025-10-07;SF-1106;AB Klaipėdos baldai;P0001;Pienas 2,5 % 1 l;6;33,80;Ieva Ąžuolaitė
+2025-10-07;SF-1107;UAB Pušyno projektai;P0008;Mineralinis vanduo;36;457,76;Rūta Šimkutė
+2025-10-07;SF-1107;UAB Pušyno projektai;P0008;Mineralinis vanduo;7;86,24;Rūta Šimkutė
+2025-10-07;SF-1108;IĮ Jonas Petraitis;P0021;Sausainiai;28;326,96;Jonas Kazlauskas
+2025-10-07;SF-1108;IĮ Jonas Petraitis;P0007;Obuolių sultys;17;311,25;Mantas Žukauskas
+2025-10-07;SF-1108;IĮ Jonas Petraitis;P0004;Sūris Džiugas;23;620,57;Ieva Ąžuolaitė
+2025-10-07;SF-1109;UAB Rūta Vilnius;P0018;Kiaušiniai L;8;105,64;Ieva Ąžuolaitė
+2025-10-07;SF-1109;UAB Rūta Vilnius;P0022;Žirniai konservuoti;17;385,30;Ieva Ąžuolaitė
+2025-10-07;SF-1109;UAB Rūta Vilnius;P0001;Pienas 2,5 % 1 l;25;146,72;Mantas Žukauskas
+2025-10-08;SF-1110;UAB Ąžuolynas;P0002;Sviestas 82 %;2;36,13;Mantas Žukauskas
+2025-10-08;SF-1111;UAB Saulėtekio centras;P0010;Arbata juoda;20;316,30;Rūta Šimkutė
+2025-10-08;SF-1111;UAB Saulėtekio centras;P0006;Batonas;11;75,71;Rūta Šimkutė
+2025-10-08;SF-1111;UAB Saulėtekio centras;P0012;Miltai kvietiniai;39;919,45;Ieva Ąžuolaitė
+2025-10-08;SF-1112;UAB Rūta Vilnius;P0016;Dešrelės;5;39,51;Rūta Šimkutė
+2025-10-08;SF-1112;UAB Rūta Vilnius;P0024;Padažas pomidorų;14;41,85;Rūta Šimkutė
+2025-10-08;SF-1113;UAB Vilniaus duona;P0009;Kava malta 500 g;21;567,88;Jonas Kazlauskas
+2025-10-08;SF-1113;UAB Vilniaus duona;P0012;Miltai kvietiniai;30;650,80;Ieva Ąžuolaitė
+2025-10-09;SF-1114;UAB Šilainių prekyba;P0023;Agurkai marinuoti;36;552,62;Ieva Ąžuolaitė
+2025-10-09;SF-1114;UAB Šilainių prekyba;P0016;Dešrelės;9;82,92;Jonas Kazlauskas
+2025-10-09;SF-1115;IĮ Jonas Petraitis;P0013;Aliejus rapsų;25;332,42;Jonas Kazlauskas
+2025-10-09;SF-1115;IĮ Jonas Petraitis;P0014;Makaronai;11;280,35;Rūta Šimkutė
+2025-10-09;SF-1115;IĮ Jonas Petraitis;P0009;Kava malta 500 g;19;481,36;Jonas Kazlauskas
+2025-10-09;SF-1116;AB Žalgiris Maistas;P0009;Kava malta 500 g;13;336,99;Mantas Žukauskas
+2025-10-10;SF-1117;UAB Vilniaus duona;P0016;Dešrelės;19;148,26;Ieva Ąžuolaitė
+2025-10-10;SF-1117;UAB Vilniaus duona;P0004;Sūris Džiugas;8;216,04;Ieva Ąžuolaitė
+2025-10-10;SF-1117;UAB Vilniaus duona;P0014;Makaronai;17;457,46;Rūta Šimkutė
+2025-10-10;SF-1118;UAB Kauno statyba;P0015;Ryžiai;16;242,39;Ieva Ąžuolaitė
+2025-10-10;SF-1118;UAB Kauno statyba;P0023;Agurkai marinuoti;38;599,17;Ieva Ąžuolaitė
+2025-10-10;SF-1118;UAB Kauno statyba;P0016;Dešrelės;8;63,73;Jonas Kazlauskas
+2025-10-10;SF-1119;UAB Medeinos namai;P0012;Miltai kvietiniai;22;493,40;Mantas Žukauskas
+2025-10-10;SF-1119;UAB Medeinos namai;P0021;Sausainiai;13;142,99;Ieva Ąžuolaitė
+2025-10-10;SF-1119;UAB Medeinos namai;P0022;Žirniai konservuoti;30;575,50;Jonas Kazlauskas
+2025-10-11;SF-1120;UAB Medeinos namai;P0003;Varškė 9 %;3;36,24;Rūta Šimkutė
+2025-10-13;SF-1121;UAB Panevėžio logistika;P0002;Sviestas 82 %;38;707,32;Rūta Šimkutė
+2025-10-13;SF-1121;UAB Panevėžio logistika;P0008;Mineralinis vanduo;20;256,80;Ieva Ąžuolaitė
+2025-10-13;SF-1122;UAB Aukštaitijos sūris;P0005;Duona ruginė;5;69,27;Ieva Ąžuolaitė
+2025-10-13;SF-1123;AB Klaipėdos baldai;P0015;Ryžiai;38;623,70;Rūta Šimkutė
+2025-10-13;SF-1123;AB Klaipėdos baldai;P0007;Obuolių sultys;7;123,47;Rūta Šimkutė
+2025-10-13;SF-1124;AB Klaipėdos baldai;P0002;Sviestas 82 %;4;73,70;Jonas Kazlauskas
+2025-10-13;SF-1125;UAB Vilniaus duona;P0018;Kiaušiniai L;39;545,84;Rūta Šimkutė
+2025-10-14;SF-1126;UAB Baltic Trade;P0014;Makaronai;4;95,21;Rūta Šimkutė
+2025-10-14;SF-1126;UAB Baltic Trade;P0001;Pienas 2,5 % 1 l;8;50,24;Jonas Kazlauskas
+2025-10-14;SF-1126;UAB Baltic Trade;P0010;Arbata juoda;9;144,46;Rūta Šimkutė
+2025-10-14;SF-1127;UAB Baltic Trade;P0011;Cukrus 1 kg;38;232,95;Mantas Žukauskas
+2025-10-14;SF-1128;UAB Baltic Trade;P0014;Makaronai;40;1 013,70;Rūta Šimkutė
+2025-10-14;SF-1128;UAB Baltic Trade;P0010;Arbata juoda;5;86,67;Rūta Šimkutė
+2025-10-14;SF-1128;UAB Baltic Trade;P0005;Duona ruginė;37;558,38;Jonas Kazlauskas
+2025-10-14;SF-1129;UAB Vilniaus duona;P0017;Šaldyta žuvis;9;197,62;Jonas Kazlauskas
+2025-10-15;SF-1130;MB Ąžuolas;P0005;Duona ruginė;37;499,09;Ieva Ąžuolaitė
+2025-10-15;SF-1130;MB Ąžuolas;P0010;Arbata juoda;15;245,93;Jonas Kazlauskas
+2025-10-15;SF-1130;MB Ąžuolas;P0019;Medus 400 g;19;431,98;Rūta Šimkutė
+2025-10-15;SF-1131;UAB Baltic Trade;P0013;Aliejus rapsų;2;28,91;Jonas Kazlauskas
+2025-10-15;SF-1131;UAB Baltic Trade;P0018;Kiaušiniai L;19;275,17;Rūta Šimkutė
+2025-10-15;SF-1131;UAB Baltic Trade;P0022;Žirniai konservuoti;7;157,66;Rūta Šimkutė
+2025-10-15;SF-1132;UAB Kauno statyba;P0019;Medus 400 g;23;539,73;Ieva Ąžuolaitė
+2025-10-15;SF-1132;UAB Kauno statyba;P0004;Sūris Džiugas;36;995,84;Jonas Kazlauskas
+2025-10-15;SF-1132;UAB Kauno statyba;P0023;Agurkai marinuoti;11;153,85;Ieva Ąžuolaitė
+2025-10-15;SF-1133;UAB Čiobreliai;P0004;Sūris Džiugas;22;518,20;Rūta Šimkutė
+2025-10-15;SF-1134;UAB Jūrų prekyba;P0008;Mineralinis vanduo;19;228,14;Jonas Kazlauskas
+2025-10-15;SF-1134;UAB Jūrų prekyba;P0007;Obuolių sultys;12;214,12;Ieva Ąžuolaitė
+2025-10-16;SF-1135;UAB Vilniaus duona;P0005;Duona ruginė;38;519,67;Jonas Kazlauskas
+2025-10-16;SF-1136;UAB Gintaro pienas;P0010;Arbata juoda;30;495,65;Jonas Kazlauskas
+2025-10-16;SF-1136;UAB Gintaro pienas;P0002;Sviestas 82 %;12;213,25;Jonas Kazlauskas
+2025-10-16;SF-1136;UAB Gintaro pienas;P0019;Medus 400 g;31;776,80;Rūta Šimkutė
+2025-10-16;SF-1137;AB Žalgiris Maistas;P0018;Kiaušiniai L;8;122,39;Ieva Ąžuolaitė
+2025-10-16;SF-1137;AB Žalgiris Maistas;P0002;Sviestas 82 %;14;289,57;Ieva Ąžuolaitė
+2025-10-17;SF-1138;UAB Baltic Trade;P0023;Agurkai marinuoti;31;434,59;Mantas Žukauskas
+2025-10-17;SF-1138;UAB Baltic Trade;P0008;Mineralinis vanduo;9;104,03;Ieva Ąžuolaitė
+2025-10-17;SF-1138;UAB Baltic Trade;P0003;Varškė 9 %;15;170,33;Mantas Žukauskas
+2025-10-17;SF-1139;UAB Baltic Trade;P0024;Padažas pomidorų;11;33,49;Ieva Ąžuolaitė
+2025-10-17;SF-1140;UAB Baltic Trade;P0013;Aliejus rapsų;28;356,09;Jonas Kazlauskas
+2025-10-17;SF-1140;UAB Baltic Trade;P0013;Aliejus rapsų;7;101,73;Jonas Kazlauskas
+2025-10-17;SF-1140;UAB Baltic Trade;P0002;Sviestas 82 %;4;70,63;Rūta Šimkutė
+2025-10-18;SF-1141;IĮ Jonas Petraitis;P0018;Kiaušiniai L;7;94,71;Rūta Šimkutė
+2025-10-18;SF-1141;IĮ Jonas Petraitis;P0021;Sausainiai;13;139,73;Jonas Kazlauskas
+2025-10-20;SF-1142;AB Žalgiris Maistas;P0015;Ryžiai;25;416,53;Jonas Kazlauskas
+2025-10-20;SF-1143;UAB Baltic Trade;P0012;Miltai kvietiniai;28;602,03;Ieva Ąžuolaitė
+2025-10-20;SF-1144;UAB Čiobreliai;P0015;Ryžiai;22;382,89;Jonas Kazlauskas
+2025-10-20;SF-1144;UAB Čiobreliai;P0001;Pienas 2,5 % 1 l;30;166,22;Mantas Žukauskas
+2025-10-20;SF-1144;UAB Čiobreliai;P0021;Sausainiai;21;211,57;Mantas Žukauskas
+2025-10-20;SF-1145;UAB Panevėžio logistika;P0002;Sviestas 82 %;38;718,60;Rūta Šimkutė
+2025-10-21;SF-1146;MB Ąžuolas;P0005;Duona ruginė;37;554,09;Ieva Ąžuolaitė
+2025-10-21;SF-1146;MB Ąžuolas;P0022;Žirniai konservuoti;14;285,67;Jonas Kazlauskas
+2025-10-21;SF-1147;UAB Saulėtekio centras;P0023;Agurkai marinuoti;8;127,74;Mantas Žukauskas
+2025-10-21;SF-1147;UAB Saulėtekio centras;P0018;Kiaušiniai L;10;149,29;Rūta Šimkutė
+2025-10-21;SF-1148;UAB Kauno statyba;P0008;Mineralinis vanduo;4;51,75;Jonas Kazlauskas
+2025-10-21;SF-1148;UAB Kauno statyba;P0001;Pienas 2,5 % 1 l;30;184,31;Rūta Šimkutė
+2025-10-21;SF-1149;IĮ Jonas Petraitis;P0016;Dešrelės;15;131,07;Ieva Ąžuolaitė
+2025-10-22;SF-1150;UAB Baltic Trade;P0004;Sūris Džiugas;14;376,88;Ieva Ąžuolaitė
+2025-10-22;SF-1150;UAB Baltic Trade;P0016;Dešrelės;2;15,68;Ieva Ąžuolaitė
+2025-10-22;SF-1151;UAB Baltic Trade;P0006;Batonas;11;69,37;Rūta Šimkutė
+2025-10-22;SF-1151;UAB Baltic Trade;P0014;Makaronai;40;1 056,19;Rūta Šimkutė
+2025-10-22;SF-1151;UAB Baltic Trade;P0010;Arbata juoda;25;406,51;Rūta Šimkutė
+2025-10-22;SF-1152;UAB Gintaro pienas;P0005;Duona ruginė;2;30,08;Ieva Ąžuolaitė
+2025-10-22;SF-1152;UAB Gintaro pienas;P0006;Batonas;3;20,10;Jonas Kazlauskas
+2025-10-22;SF-1152;UAB Gintaro pienas;P0012;Miltai kvietiniai;32;684,42;Mantas Žukauskas
+2025-10-23;SF-1153;UAB Baltic Trade;P0024;Padažas pomidorų;28;92,26;Ieva Ąžuolaitė
+2025-10-23;SF-1153;UAB Baltic Trade;P0011;Cukrus 1 kg;2;11,95;Mantas Žukauskas
+2025-10-23;SF-1153;UAB Baltic Trade;P0006;Batonas;28;194,12;Rūta Šimkutė
+2025-10-23;SF-1154;UAB Baltic Trade;P0013;Aliejus rapsų;33;476,55;Jonas Kazlauskas
+2025-10-23;SF-1154;UAB Baltic Trade;P0021;Sausainiai;24;243,40;Jonas Kazlauskas
+2025-10-23;SF-1154;UAB Baltic Trade;P0016;Dešrelės;36;291,99;Ieva Ąžuolaitė
+2025-10-23;SF-1155;AB Žalgiris Maistas;P0002;Sviestas 82 %;12;232,47;Ieva Ąžuolaitė
+2025-10-23;SF-1155;AB Žalgiris Maistas;P0004;Sūris Džiugas;8;216,24;Rūta Šimkutė
+2025-10-23;SF-1156;UAB Baltic Trade;P0011;Cukrus 1 kg;13;74,04;Mantas Žukauskas
+2025-10-23;SF-1156;UAB Baltic Trade;P0016;Dešrelės;29;228,83;Ieva Ąžuolaitė
+2025-10-23;SF-1156;UAB Baltic Trade;P0020;Šokoladas pieninis;6;116,56;Ieva Ąžuolaitė
+2025-10-24;SF-1157;MB Ąžuolas;P0008;Mineralinis vanduo;3;36,25;Mantas Žukauskas
+2025-10-24;SF-1157;MB Ąžuolas;P0018;Kiaušiniai L;19;292,97;Jonas Kazlauskas
+2025-10-24;SF-1158;UAB Šviesa LT;P0023;Agurkai marinuoti;26;361,82;Mantas Žukauskas
+2025-10-24;SF-1158;UAB Šviesa LT;P0022;Žirniai konservuoti;2;41,65;Rūta Šimkutė
+2025-10-24;SF-1159;UAB Vilniaus duona;P0011;Cukrus 1 kg;12;75,17;Mantas Žukauskas
+2025-10-24;SF-1159;UAB Vilniaus duona;P0022;Žirniai konservuoti;12;243,03;Rūta Šimkutė
+2025-10-24;SF-1160;UAB Kauno statyba;P0018;Kiaušiniai L;14;203,60;Mantas Žukauskas
+2025-10-25;SF-1161;UAB Medeinos namai;P0006;Batonas;15;95,89;Jonas Kazlauskas
+2025-10-25;SF-1161;UAB Medeinos namai;P0020;Šokoladas pieninis;20;394,80;Mantas Žukauskas
+2025-10-27;SF-1162;UAB Čiobreliai;P0013;Aliejus rapsų;27;394,45;Mantas Žukauskas
+2025-10-27;SF-1162;UAB Čiobreliai;P0017;Šaldyta žuvis;19;435,30;Mantas Žukauskas
+2025-10-27;SF-1162;UAB Čiobreliai;P0021;Sausainiai;5;54,73;Mantas Žukauskas
+2025-10-27;SF-1163;UAB Baltic Trade;P0017;Šaldyta žuvis;17;398,09;Jonas Kazlauskas
+2025-10-27;SF-1163;UAB Baltic Trade;P0010;Arbata juoda;13;231,21;Rūta Šimkutė
+2025-10-27;SF-1163;UAB Baltic Trade;P0007;Obuolių sultys;33;580,45;Mantas Žukauskas
+2025-10-27;SF-1164;IĮ Jonas Petraitis;P0001;Pienas 2,5 % 1 l;39;219,08;Jonas Kazlauskas
+2025-10-27;SF-1164;IĮ Jonas Petraitis;P0005;Duona ruginė;9;136,51;Jonas Kazlauskas
+2025-10-28;SF-1165;UAB Baltic Trade;P0024;Padažas pomidorų;30;101,89;Ieva Ąžuolaitė
+2025-10-28;SF-1166;MB Ąžuolas;P0023;Agurkai marinuoti;27;378,41;Rūta Šimkutė
+2025-10-28;SF-1166;MB Ąžuolas;P0002;Sviestas 82 %;23;447,25;Jonas Kazlauskas
+2025-10-28;SF-1166;MB Ąžuolas;P0014;Makaronai;11;275,91;Jonas Kazlauskas
+2025-10-28;SF-1167;UAB Nemuno žuvys;P0017;Šaldyta žuvis;28;659,50;Rūta Šimkutė
+2025-10-28;SF-1167;UAB Nemuno žuvys;P0014;Makaronai;23;539,79;Mantas Žukauskas
+2025-10-28;SF-1167;UAB Nemuno žuvys;P0003;Varškė 9 %;13;149,07;Ieva Ąžuolaitė
+2025-10-29;SF-1168;UAB Rūta Vilnius;P0016;Dešrelės;28;236,63;Rūta Šimkutė
+2025-10-29;SF-1168;UAB Rūta Vilnius;P0021;Sausainiai;5;60,87;Mantas Žukauskas
+2025-10-29;SF-1169;UAB Aukštaitijos sūris;P0012;Miltai kvietiniai;14;327,18;Mantas Žukauskas
+2025-10-29;SF-1170;UAB Kauno statyba;P0017;Šaldyta žuvis;16;371,07;Rūta Šimkutė
+2025-10-30;SF-1171;UAB Baltic Trade;P0003;Varškė 9 %;39;461,78;Mantas Žukauskas
+2025-10-30;SF-1171;UAB Baltic Trade;P0014;Makaronai;2;52,78;Rūta Šimkutė
+2025-10-30;SF-1172;UAB Baltic Trade;P0018;Kiaušiniai L;27;415,61;Rūta Šimkutė
+2025-10-30;SF-1173;AB Žalgiris Maistas;P0004;Sūris Džiugas;33;791,27;Rūta Šimkutė
+2025-10-30;SF-1173;AB Žalgiris Maistas;P0004;Sūris Džiugas;12;291,71;Rūta Šimkutė
+2025-10-31;KR-60;AB Žalgiris Maistas;P0008;Mineralinis vanduo;-10;-3 257,00;Jonas Kazlauskas
+2025-10-31;SF-1174;UAB Šilainių prekyba;P0009;Kava malta 500 g;11;325,28;Rūta Šimkutė
+2025-10-31;SF-1175;UAB Baltic Trade;P0005;Duona ruginė;31;412,99;Jonas Kazlauskas
+2025-10-31;SF-1176;UAB Baltic Trade;P0021;Sausainiai;28;321,50;Jonas Kazlauskas
+2025-10-31;SF-1176;UAB Baltic Trade;P0022;Žirniai konservuoti;2;43,74;Rūta Šimkutė
+2025-10-31;SF-1177;IĮ Jonas Petraitis;P0022;Žirniai konservuoti;37;743,29;Rūta Šimkutė
+2025-10-31;SF-1177;IĮ Jonas Petraitis;P0009;Kava malta 500 g;12;310,19;Jonas Kazlauskas
+2025-10-31;SF-1177;IĮ Jonas Petraitis;P0024;Padažas pomidorų;20;58,54;Ieva Ąžuolaitė
+2025-10-31;SF-1178;UAB Vilniaus duona;P0021;Sausainiai;25;261,98;Jonas Kazlauskas
+2025-11-01;SF-1179;UAB Ąžuolynas;P0014;Makaronai;18;428,00;Mantas Žukauskas
+2025-11-01;SF-1179;UAB Ąžuolynas;P0011;Cukrus 1 kg;4;25,49;Ieva Ąžuolaitė
+2025-11-03;SF-1180;IĮ Jonas Petraitis;P0004;Sūris Džiugas;38;893,30;Ieva Ąžuolaitė
+2025-11-03;SF-1181;UAB Baltic Trade;P0019;Medus 400 g;2;51,52;Mantas Žukauskas
+2025-11-03;SF-1182;UAB Jūrų prekyba;P0006;Batonas;25;157,10;Mantas Žukauskas
+2025-11-03;SF-1182;UAB Jūrų prekyba;P0001;Pienas 2,5 % 1 l;10;58,88;Rūta Šimkutė
+2025-11-04;SF-1183;UAB Baltic Trade;P0004;Sūris Džiugas;4;104,41;Ieva Ąžuolaitė
+2025-11-04;SF-1183;UAB Baltic Trade;P0014;Makaronai;1;26,58;Rūta Šimkutė
+2025-11-04;SF-1184;UAB Vilniaus duona;P0024;Padažas pomidorų;31;99,01;Ieva Ąžuolaitė
+2025-11-04;SF-1184;UAB Vilniaus duona;P0022;Žirniai konservuoti;33;686,85;Rūta Šimkutė
+2025-11-04;SF-1184;UAB Vilniaus duona;P0014;Makaronai;13;316,48;Rūta Šimkutė
+2025-11-04;SF-1185;UAB Verslo ratas;P0012;Miltai kvietiniai;22;539,04;Mantas Žukauskas
+2025-11-04;SF-1185;UAB Verslo ratas;P0003;Varškė 9 %;2;22,78;Rūta Šimkutė
+2025-11-04;SF-1185;UAB Verslo ratas;P0013;Aliejus rapsų;36;482,85;Ieva Ąžuolaitė
+2025-11-04;SF-1186;AB Klaipėdos baldai;P0011;Cukrus 1 kg;12;79,64;Rūta Šimkutė
+2025-11-04;SF-1187;UAB Baltic Trade;P0012;Miltai kvietiniai;11;238,69;Ieva Ąžuolaitė
+2025-11-04;SF-1187;UAB Baltic Trade;P0013;Aliejus rapsų;28;422,16;Jonas Kazlauskas
+2025-11-05;SF-1188;UAB Baltic Trade;P0002;Sviestas 82 %;37;683,30;Rūta Šimkutė
+2025-11-05;SF-1188;UAB Baltic Trade;P0019;Medus 400 g;23;555,36;Mantas Žukauskas
+2025-11-05;SF-1188;UAB Baltic Trade;P0023;Agurkai marinuoti;24;379,12;Mantas Žukauskas
+2025-11-05;SF-1189;UAB Gintaro pienas;P0005;Duona ruginė;19;253,85;Ieva Ąžuolaitė
+2025-11-05;SF-1189;UAB Gintaro pienas;P0017;Šaldyta žuvis;39;822,90;Ieva Ąžuolaitė
+2025-11-05;SF-1190;AB Klaipėdos baldai;P0023;Agurkai marinuoti;33;481,97;Rūta Šimkutė
+2025-11-05;SF-1191;UAB Pušyno projektai;P0024;Padažas pomidorų;2;6,10;Rūta Šimkutė
+2025-11-05;SF-1191;UAB Pušyno projektai;P0015;Ryžiai;2;34,43;Jonas Kazlauskas
+2025-11-05;SF-1192;UAB Kauno statyba;P0016;Dešrelės;22;201,11;Jonas Kazlauskas
+2025-11-05;SF-1192;UAB Kauno statyba;P0016;Dešrelės;20;166,67;Jonas Kazlauskas
+2025-11-06;SF-1193;UAB Pušyno projektai;P0014;Makaronai;37;987,87;Ieva Ąžuolaitė
+2025-11-06;SF-1193;UAB Pušyno projektai;P0002;Sviestas 82 %;11;218,19;Ieva Ąžuolaitė
+2025-11-06;SF-1193;UAB Pušyno projektai;P0017;Šaldyta žuvis;19;476,85;Mantas Žukauskas
+2025-11-06;SF-1194;UAB Baltic Trade;P0005;Duona ruginė;40;504,33;Jonas Kazlauskas
+2025-11-06;SF-1194;UAB Baltic Trade;P0017;Šaldyta žuvis;28;709,14;Jonas Kazlauskas
+2025-11-06;SF-1195;UAB Šilainių prekyba;P0002;Sviestas 82 %;22;401,09;Mantas Žukauskas
+2025-11-06;SF-1196;UAB Panevėžio logistika;P0009;Kava malta 500 g;20;508,39;Jonas Kazlauskas
+2025-11-06;SF-1196;UAB Panevėžio logistika;P0016;Dešrelės;5;39,56;Ieva Ąžuolaitė
+2025-11-07;SF-1197;UAB Šilainių prekyba;P0018;Kiaušiniai L;2;30,13;Mantas Žukauskas
+2025-11-07;SF-1198;UAB Panevėžio logistika;P0001;Pienas 2,5 % 1 l;23;135,97;Jonas Kazlauskas
+2025-11-07;SF-1199;UAB Šilainių prekyba;P0022;Žirniai konservuoti;10;193,15;Mantas Žukauskas
+2025-11-07;SF-1199;UAB Šilainių prekyba;P0004;Sūris Džiugas;40;924,56;Jonas Kazlauskas
+2025-11-07;SF-1199;UAB Šilainių prekyba;P0015;Ryžiai;22;372,96;Ieva Ąžuolaitė
+2025-11-08;SF-1200;AB Žalgiris Maistas;P0002;Sviestas 82 %;37;642,65;Ieva Ąžuolaitė
+2025-11-08;SF-1200;AB Žalgiris Maistas;P0020;Šokoladas pieninis;25;499,52;Rūta Šimkutė
+2025-11-10;SF-1201;UAB Dzūkijos medus;P0002;Sviestas 82 %;7;130,90;Mantas Žukauskas
+2025-11-10;SF-1201;UAB Dzūkijos medus;P0010;Arbata juoda;20;336,66;Mantas Žukauskas
+2025-11-10;SF-1202;AB Žalgiris Maistas;P0008;Mineralinis vanduo;35;420,41;Rūta Šimkutė
+2025-11-10;SF-1203;AB Klaipėdos baldai;P0012;Miltai kvietiniai;26;572,13;Mantas Žukauskas
+2025-11-10;SF-1203;AB Klaipėdos baldai;P0006;Batonas;8;56,54;Jonas Kazlauskas
+2025-11-10;SF-1203;AB Klaipėdos baldai;P0015;Ryžiai;25;437,00;Rūta Šimkutė
+2025-11-11;SF-1204;UAB Saulėtekio centras;P0014;Makaronai;33;833,40;Rūta Šimkutė
+2025-11-11;SF-1204;UAB Saulėtekio centras;P0014;Makaronai;8;221,14;Rūta Šimkutė
+2025-11-11;SF-1204;UAB Saulėtekio centras;P0024;Padažas pomidorų;36;120,29;Ieva Ąžuolaitė
+2025-11-11;SF-1205;UAB Baltic Trade;P0005;Duona ruginė;33;484,63;Jonas Kazlauskas
+2025-11-11;SF-1205;UAB Baltic Trade;P0020;Šokoladas pieninis;12;225,16;Ieva Ąžuolaitė
+2025-11-11;SF-1206;UAB Saulėtekio centras;P0016;Dešrelės;28;246,01;Ieva Ąžuolaitė
+2025-11-11;SF-1206;UAB Saulėtekio centras;P0016;Dešrelės;28;257,74;Ieva Ąžuolaitė
+2025-11-11;SF-1206;UAB Saulėtekio centras;P0008;Mineralinis vanduo;28;349,81;Ieva Ąžuolaitė
+2025-11-12;SF-1207;AB Klaipėdos baldai;P0009;Kava malta 500 g;40;1 052,09;Ieva Ąžuolaitė
+2025-11-12;SF-1208;UAB Baltic Trade;P0022;Žirniai konservuoti;22;453,65;Rūta Šimkutė
+2025-11-12;SF-1208;UAB Baltic Trade;P0001;Pienas 2,5 % 1 l;28;174,80;Jonas Kazlauskas
+2025-11-12;SF-1208;UAB Baltic Trade;P0024;Padažas pomidorų;36;117,65;Ieva Ąžuolaitė
+2025-11-12;SF-1209;UAB Dzūkijos medus;P0003;Varškė 9 %;33;393,98;Ieva Ąžuolaitė
+2025-11-12;SF-1209;UAB Dzūkijos medus;P0007;Obuolių sultys;29;515,13;Ieva Ąžuolaitė
+2025-11-12;SF-1210;UAB Baltic Trade;P0018;Kiaušiniai L;27;394,37;Rūta Šimkutė
+2025-11-12;SF-1210;UAB Baltic Trade;P0007;Obuolių sultys;14;253,78;Mantas Žukauskas
+2025-11-12;SF-1210;UAB Baltic Trade;P0013;Aliejus rapsų;6;90,32;Jonas Kazlauskas
+2025-11-12;SF-1211;UAB Baltic Trade;P0003;Varškė 9 %;17;193,96;Mantas Žukauskas
+2025-11-12;SF-1211;UAB Baltic Trade;P0011;Cukrus 1 kg;32;183,36;Mantas Žukauskas
+2025-11-13;SF-1212;UAB Baltic Trade;P0008;Mineralinis vanduo;34;432,53;Ieva Ąžuolaitė
+2025-11-13;SF-1213;AB Žalgiris Maistas;P0018;Kiaušiniai L;23;345,02;Ieva Ąžuolaitė
+2025-11-13;SF-1213;AB Žalgiris Maistas;P0017;Šaldyta žuvis;13;334,32;Mantas Žukauskas
+2025-11-13;SF-1214;UAB Rūta Vilnius;P0024;Padažas pomidorų;4;11,44;Rūta Šimkutė
+2025-11-13;SF-1214;UAB Rūta Vilnius;P0024;Padažas pomidorų;3;9,67;Rūta Šimkutė
+2025-11-13;SF-1215;UAB Jūrų prekyba;P0011;Cukrus 1 kg;12;77,57;Ieva Ąžuolaitė
+2025-11-13;SF-1215;UAB Jūrų prekyba;P0012;Miltai kvietiniai;38;822,25;Jonas Kazlauskas
+2025-11-13;SF-1215;UAB Jūrų prekyba;P0007;Obuolių sultys;32;620,19;Ieva Ąžuolaitė
+2025-11-13;SF-1216;UAB Baltic Trade;P0021;Sausainiai;26;314,63;Jonas Kazlauskas
+2025-11-13;SF-1216;UAB Baltic Trade;P0004;Sūris Džiugas;14;365,24;Ieva Ąžuolaitė
+2025-11-13;SF-1216;UAB Baltic Trade;P0012;Miltai kvietiniai;4;102,60;Ieva Ąžuolaitė
+2025-11-14;SF-1217;UAB Šilainių prekyba;P0021;Sausainiai;22;232,02;Rūta Šimkutė
+2025-11-14;SF-1218;UAB Baltic Trade;P0016;Dešrelės;17;142,44;Ieva Ąžuolaitė
+2025-11-14;SF-1218;UAB Baltic Trade;P0011;Cukrus 1 kg;24;140,36;Mantas Žukauskas
+2025-11-14;SF-1218;UAB Baltic Trade;P0004;Sūris Džiugas;6;144,09;Ieva Ąžuolaitė
+2025-11-14;SF-1219;UAB Baltic Trade;P0019;Medus 400 g;7;170,86;Mantas Žukauskas
+2025-11-14;SF-1219;UAB Baltic Trade;P0008;Mineralinis vanduo;40;446,05;Ieva Ąžuolaitė
+2025-11-14;SF-1220;UAB Baltic Trade;P0007;Obuolių sultys;11;216,70;Mantas Žukauskas
+2025-11-14;SF-1220;UAB Baltic Trade;P0020;Šokoladas pieninis;24;474,32;Ieva Ąžuolaitė
+2025-11-14;SF-1221;UAB Šilainių prekyba;P0018;Kiaušiniai L;29;383,94;Mantas Žukauskas
+2025-11-14;SF-1221;UAB Šilainių prekyba;P0022;Žirniai konservuoti;17;387,77;Mantas Žukauskas
+2025-11-14;SF-1221;UAB Šilainių prekyba;P0005;Duona ruginė;29;404,43;Rūta Šimkutė
+2025-11-15;SF-1222;AB Žalgiris Maistas;P0020;Šokoladas pieninis;9;168,48;Rūta Šimkutė
+2025-11-15;SF-1222;AB Žalgiris Maistas;P0009;Kava malta 500 g;19;519,53;Mantas Žukauskas
+2025-11-15;SF-1222;AB Žalgiris Maistas;P0021;Sausainiai;32;379,95;Mantas Žukauskas
+2025-11-17;SF-1223;UAB Nemuno žuvys;P0024;Padažas pomidorų;25;73,59;Jonas Kazlauskas
+2025-11-17;SF-1223;UAB Nemuno žuvys;P0020;Šokoladas pieninis;15;287,10;Jonas Kazlauskas
+2025-11-17;SF-1223;UAB Nemuno žuvys;P0010;Arbata juoda;20;299,54;Mantas Žukauskas
+2025-11-17;SF-1224;UAB Baltic Trade;P0009;Kava malta 500 g;23;576,89;Jonas Kazlauskas
+2025-11-17;SF-1224;UAB Baltic Trade;P0006;Batonas;37;248,40;Rūta Šimkutė
+2025-11-17;SF-1224;UAB Baltic Trade;P0018;Kiaušiniai L;13;180,33;Rūta Šimkutė
+2025-11-17;SF-1225;UAB Baltic Trade;P0016;Dešrelės;3;27,58;Ieva Ąžuolaitė
+2025-11-17;SF-1225;UAB Baltic Trade;P0010;Arbata juoda;10;178,84;Rūta Šimkutė
+2025-11-18;SF-1226;AB Žalgiris Maistas;P0017;Šaldyta žuvis;10;243,91;Mantas Žukauskas
+2025-11-18;SF-1227;UAB Baltic Trade;P0018;Kiaušiniai L;35;540,75;Rūta Šimkutė
+2025-11-18;SF-1227;UAB Baltic Trade;P0004;Sūris Džiugas;12;306,00;Ieva Ąžuolaitė
+2025-11-18;SF-1227;UAB Baltic Trade;P0005;Duona ruginė;4;55,02;Jonas Kazlauskas
+2025-11-18;SF-1228;UAB Verslo ratas;P0021;Sausainiai;24;250,45;Ieva Ąžuolaitė
+2025-11-19;SF-1229;AB Žalgiris Maistas;P0016;Dešrelės;7;65,33;Rūta Šimkutė
+2025-11-19;SF-1229;AB Žalgiris Maistas;P0008;Mineralinis vanduo;1;12,60;Rūta Šimkutė
+2025-11-19;SF-1230;AB Žalgiris Maistas;P0018;Kiaušiniai L;3;45,61;Ieva Ąžuolaitė
+2025-11-19;SF-1230;AB Žalgiris Maistas;P0010;Arbata juoda;4;66,11;Ieva Ąžuolaitė
+2025-11-19;SF-1231;UAB Medeinos namai;P0014;Makaronai;36;958,23;Jonas Kazlauskas
+2025-11-20;SF-1232;UAB Rūta Vilnius;P0019;Medus 400 g;10;236,81;Jonas Kazlauskas
+2025-11-20;SF-1232;UAB Rūta Vilnius;P0009;Kava malta 500 g;15;373,17;Mantas Žukauskas
+2025-11-20;SF-1232;UAB Rūta Vilnius;P0007;Obuolių sultys;17;309,13;Jonas Kazlauskas
+2025-11-20;SF-1233;AB Žalgiris Maistas;P0016;Dešrelės;13;113,54;Rūta Šimkutė
+2025-11-20;SF-1233;AB Žalgiris Maistas;P0021;Sausainiai;28;328,92;Mantas Žukauskas
+2025-11-20;SF-1233;AB Žalgiris Maistas;P0020;Šokoladas pieninis;21;366,87;Rūta Šimkutė
+2025-11-20;SF-1234;UAB Ūkininkų turgus;P0001;Pienas 2,5 % 1 l;10;62,29;Mantas Žukauskas
+2025-11-20;SF-1234;UAB Ūkininkų turgus;P0014;Makaronai;38;963,90;Ieva Ąžuolaitė
+2025-11-20;SF-1235;UAB Ąžuolynas;P0010;Arbata juoda;21;328,68;Mantas Žukauskas
+2025-11-20;SF-1235;UAB Ąžuolynas;P0002;Sviestas 82 %;4;77,35;Mantas Žukauskas
+2025-11-20;SF-1236;UAB Šilainių prekyba;P0020;Šokoladas pieninis;4;73,25;Jonas Kazlauskas
+2025-11-20;SF-1236;UAB Šilainių prekyba;P0002;Sviestas 82 %;12;216,96;Mantas Žukauskas
+2025-11-20;SF-1236;UAB Šilainių prekyba;P0017;Šaldyta žuvis;37;925,68;Rūta Šimkutė
+2025-11-21;SF-1237;UAB Baltic Trade;P0010;Arbata juoda;9;158,34;Rūta Šimkutė
+2025-11-21;SF-1238;UAB Baltic Trade;P0013;Aliejus rapsų;10;128,63;Jonas Kazlauskas
+2025-11-21;SF-1238;UAB Baltic Trade;P0019;Medus 400 g;17;416,02;Mantas Žukauskas
+2025-11-21;SF-1239;UAB Baltic Trade;P0016;Dešrelės;7;63,27;Ieva Ąžuolaitė
+2025-11-21;SF-1240;UAB Dzūkijos medus;P0002;Sviestas 82 %;26;533,90;Mantas Žukauskas
+2025-11-21;SF-1241;UAB Baltic Trade;P0019;Medus 400 g;7;172,41;Mantas Žukauskas
+2025-11-22;SF-1242;UAB Šilainių prekyba;P0005;Duona ruginė;36;460,57;Rūta Šimkutė
+2025-11-22;SF-1242;UAB Šilainių prekyba;P0024;Padažas pomidorų;22;69,72;Jonas Kazlauskas
+2025-11-22;SF-1242;UAB Šilainių prekyba;P0017;Šaldyta žuvis;33;717,69;Rūta Šimkutė
+2025-11-24;SF-1243;AB Žalgiris Maistas;P0020;Šokoladas pieninis;10;177,25;Rūta Šimkutė
+2025-11-24;SF-1243;AB Žalgiris Maistas;P0005;Duona ruginė;40;602,69;Mantas Žukauskas
+2025-11-24;SF-1243;AB Žalgiris Maistas;P0024;Padažas pomidorų;31;92,65;Rūta Šimkutė
+2025-11-24;SF-1244;UAB Baltic Trade;P0002;Sviestas 82 %;4;84,13;Rūta Šimkutė
+2025-11-24;SF-1245;AB Žalgiris Maistas;P0019;Medus 400 g;37;931,59;Jonas Kazlauskas
+2025-11-24;SF-1245;AB Žalgiris Maistas;P0016;Dešrelės;26;238,61;Rūta Šimkutė
+2025-11-24;SF-1245;AB Žalgiris Maistas;P0009;Kava malta 500 g;26;649,61;Mantas Žukauskas
+2025-11-24;SF-1246;UAB Baltic Trade;P0017;Šaldyta žuvis;16;349,87;Jonas Kazlauskas
+2025-11-25;SF-1247;UAB Pušyno projektai;P0015;Ryžiai;4;57,89;Jonas Kazlauskas
+2025-11-25;SF-1248;UAB Dzūkijos medus;P0001;Pienas 2,5 % 1 l;40;251,50;Rūta Šimkutė
+2025-11-25;SF-1249;AB Klaipėdos baldai;P0002;Sviestas 82 %;10;196,69;Jonas Kazlauskas
+2025-11-26;SF-1250;UAB Pušyno projektai;P0006;Batonas;27;179,65;Ieva Ąžuolaitė
+2025-11-26;SF-1250;UAB Pušyno projektai;P0013;Aliejus rapsų;32;481,96;Mantas Žukauskas
+2025-11-26;SF-1251;UAB Baltic Trade;P0024;Padažas pomidorų;16;46,63;Ieva Ąžuolaitė
+2025-11-26;SF-1251;UAB Baltic Trade;P0004;Sūris Džiugas;2;47,74;Ieva Ąžuolaitė
+2025-11-26;SF-1252;UAB Šilainių prekyba;P0013;Aliejus rapsų;29;401,63;Rūta Šimkutė
+2025-11-26;SF-1253;UAB Pušyno projektai;P0019;Medus 400 g;23;560,32;Jonas Kazlauskas
+2025-11-26;SF-1253;UAB Pušyno projektai;P0016;Dešrelės;5;45,72;Rūta Šimkutė
+2025-11-26;SF-1254;UAB Saulėtekio centras;P0013;Aliejus rapsų;32;481,30;Jonas Kazlauskas
+2025-11-26;SF-1254;UAB Saulėtekio centras;P0008;Mineralinis vanduo;28;339,94;Ieva Ąžuolaitė
+2025-11-27;SF-1255;AB Žalgiris Maistas;P0015;Ryžiai;30;489,48;Jonas Kazlauskas
+2025-11-27;SF-1255;AB Žalgiris Maistas;P0001;Pienas 2,5 % 1 l;15;85,63;Mantas Žukauskas
+2025-11-27;SF-1255;AB Žalgiris Maistas;P0017;Šaldyta žuvis;14;357,28;Mantas Žukauskas
+2025-11-27;SF-1256;UAB Šilainių prekyba;P0021;Sausainiai;36;379,83;Rūta Šimkutė
+2025-11-27;SF-1256;UAB Šilainių prekyba;P0020;Šokoladas pieninis;15;285,45;Jonas Kazlauskas
+2025-11-27;SF-1256;UAB Šilainių prekyba;P0024;Padažas pomidorų;40;124,84;Jonas Kazlauskas
+2025-11-27;SF-1257;UAB Aukštaitijos sūris;P0012;Miltai kvietiniai;24;598,79;Mantas Žukauskas
+2025-11-27;SF-1258;UAB Baltic Trade;P0011;Cukrus 1 kg;25;150,81;Mantas Žukauskas
+2025-11-27;SF-1258;UAB Baltic Trade;P0019;Medus 400 g;5;117,60;Mantas Žukauskas
+2025-11-27;SF-1259;UAB Panevėžio logistika;P0018;Kiaušiniai L;13;173,58;Rūta Šimkutė
+2025-11-28;SF-1260;UAB Dzūkijos medus;P0021;Sausainiai;14;143,17;Rūta Šimkutė
+2025-11-28;SF-1261;AB Klaipėdos baldai;P0020;Šokoladas pieninis;10;181,06;Mantas Žukauskas
+2025-11-28;SF-1262;UAB Medeinos namai;P0012;Miltai kvietiniai;33;788,53;Mantas Žukauskas
+2025-11-28;SF-1262;UAB Medeinos namai;P0004;Sūris Džiugas;6;139,22;Mantas Žukauskas
+2025-11-28;SF-1263;UAB Ūkininkų turgus;P0023;Agurkai marinuoti;35;474,43;Jonas Kazlauskas
+2025-11-28;SF-1263;UAB Ūkininkų turgus;P0003;Varškė 9 %;13;155,22;Jonas Kazlauskas
+2025-11-29;SF-1264;UAB Aukštaitijos sūris;P0008;Mineralinis vanduo;14;184,67;Mantas Žukauskas
+2025-11-29;SF-1264;UAB Aukštaitijos sūris;P0020;Šokoladas pieninis;32;615,23;Mantas Žukauskas
+2025-12-01;SF-1265;UAB Šilainių prekyba;P0018;Kiaušiniai L;20;295,60;Mantas Žukauskas
+2025-12-01;SF-1265;UAB Šilainių prekyba;P0014;Makaronai;32;838,58;Mantas Žukauskas
+2025-12-01;SF-1265;UAB Šilainių prekyba;P0010;Arbata juoda;11;191,21;Mantas Žukauskas
+2025-12-01;SF-1266;AB Žalgiris Maistas;P0010;Arbata juoda;8;129,09;Ieva Ąžuolaitė
+2025-12-01;SF-1266;AB Žalgiris Maistas;P0003;Varškė 9 %;6;80,25;Jonas Kazlauskas
+2025-12-01;SF-1267;UAB Baltic Trade;P0009;Kava malta 500 g;35;992,40;Jonas Kazlauskas
+2025-12-01;SF-1267;UAB Baltic Trade;P0016;Dešrelės;35;307,39;Ieva Ąžuolaitė
+2025-12-01;SF-1267;UAB Baltic Trade;P0015;Ryžiai;13;199,11;Mantas Žukauskas
+2025-12-01;SF-1268;UAB Aukštaitijos sūris;P0002;Sviestas 82 %;13;244,59;Jonas Kazlauskas
+2025-12-01;SF-1268;UAB Aukštaitijos sūris;P0020;Šokoladas pieninis;1;18,82;Mantas Žukauskas
+2025-12-01;SF-1268;UAB Aukštaitijos sūris;P0017;Šaldyta žuvis;19;482,02;Ieva Ąžuolaitė
+2025-12-02;SF-1269;UAB Baltic Trade;P0012;Miltai kvietiniai;20;461,02;Ieva Ąžuolaitė
+2025-12-02;SF-1269;UAB Baltic Trade;P0008;Mineralinis vanduo;31;352,54;Ieva Ąžuolaitė
+2025-12-02;SF-1270;UAB Šviesa LT;P0005;Duona ruginė;26;338,77;Jonas Kazlauskas
+2025-12-02;SF-1271;UAB Baltic Trade;P0002;Sviestas 82 %;30;610,25;Rūta Šimkutė
+2025-12-02;SF-1272;UAB Baltic Trade;P0022;Žirniai konservuoti;39;832,94;Rūta Šimkutė
+2025-12-02;SF-1272;UAB Baltic Trade;P0021;Sausainiai;34;378,63;Jonas Kazlauskas
+2025-12-02;SF-1273;UAB Baltic Trade;P0024;Padažas pomidorų;14;48,62;Ieva Ąžuolaitė
+2025-12-02;SF-1273;UAB Baltic Trade;P0002;Sviestas 82 %;12;236,61;Rūta Šimkutė
+2025-12-03;SF-1274;UAB Baltic Trade;P0023;Agurkai marinuoti;6;94,10;Mantas Žukauskas
+2025-12-03;SF-1274;UAB Baltic Trade;P0012;Miltai kvietiniai;3;73,93;Ieva Ąžuolaitė
+2025-12-03;SF-1275;UAB Jūrų prekyba;P0010;Arbata juoda;16;255,06;Mantas Žukauskas
+2025-12-03;SF-1275;UAB Jūrų prekyba;P0015;Ryžiai;24;390,10;Ieva Ąžuolaitė
+2025-12-03;SF-1275;UAB Jūrų prekyba;P0006;Batonas;9;61,43;Mantas Žukauskas
+2025-12-03;SF-1276;UAB Saulėtekio centras;P0007;Obuolių sultys;33;692,71;Mantas Žukauskas
+2025-12-03;SF-1276;UAB Saulėtekio centras;P0006;Batonas;18;126,17;Rūta Šimkutė
+2025-12-03;SF-1277;AB Žalgiris Maistas;P0009;Kava malta 500 g;13;376,49;Mantas Žukauskas
+2025-12-03;SF-1277;AB Žalgiris Maistas;P0004;Sūris Džiugas;31;784,15;Rūta Šimkutė
+2025-12-03;SF-1278;UAB Baltic Trade;P0020;Šokoladas pieninis;24;477,92;Ieva Ąžuolaitė
+2025-12-04;SF-1279;UAB Ūkininkų turgus;P0016;Dešrelės;17;140,05;Rūta Šimkutė
+2025-12-04;SF-1279;UAB Ūkininkų turgus;P0011;Cukrus 1 kg;22;139,15;Jonas Kazlauskas
+2025-12-04;SF-1279;UAB Ūkininkų turgus;P0010;Arbata juoda;12;207,44;Ieva Ąžuolaitė
+2025-12-04;SF-1280;AB Žalgiris Maistas;P0006;Batonas;3;21,49;Ieva Ąžuolaitė
+2025-12-04;SF-1281;UAB Pušyno projektai;P0018;Kiaušiniai L;38;515,02;Ieva Ąžuolaitė
+2025-12-04;SF-1281;UAB Pušyno projektai;P0010;Arbata juoda;4;69,25;Ieva Ąžuolaitė
+2025-12-04;SF-1281;UAB Pušyno projektai;P0020;Šokoladas pieninis;2;34,21;Rūta Šimkutė
+2025-12-04;SF-1282;AB Žalgiris Maistas;P0023;Agurkai marinuoti;26;388,75;Jonas Kazlauskas
+2025-12-04;SF-1282;AB Žalgiris Maistas;P0008;Mineralinis vanduo;39;441,44;Rūta Šimkutė
+2025-12-05;KR-95;UAB Baltic Trade;P0013;Aliejus rapsų;-10;-4 034,00;Jonas Kazlauskas
+2025-12-05;SF-1283;UAB Baltic Trade;P0021;Sausainiai;18;220,29;Jonas Kazlauskas
+2025-12-05;SF-1283;UAB Baltic Trade;P0020;Šokoladas pieninis;35;587,30;Ieva Ąžuolaitė
+2025-12-05;SF-1283;UAB Baltic Trade;P0024;Padažas pomidorų;4;13,02;Ieva Ąžuolaitė
+2025-12-05;SF-1284;UAB Panevėžio logistika;P0009;Kava malta 500 g;19;533,90;Jonas Kazlauskas
+2025-12-05;SF-1284;UAB Panevėžio logistika;P0020;Šokoladas pieninis;1;19,87;Ieva Ąžuolaitė
+2025-12-05;SF-1285;AB Žalgiris Maistas;P0008;Mineralinis vanduo;31;356,93;Rūta Šimkutė
+2025-12-05;SF-1285;AB Žalgiris Maistas;P0012;Miltai kvietiniai;22;484,88;Rūta Šimkutė
+2025-12-05;SF-1285;AB Žalgiris Maistas;P0004;Sūris Džiugas;2;46,91;Rūta Šimkutė
+2025-12-06;SF-1286;UAB Baltic Trade;P0020;Šokoladas pieninis;25;451,04;Ieva Ąžuolaitė
+2025-12-06;SF-1286;UAB Baltic Trade;P0019;Medus 400 g;7;176,54;Mantas Žukauskas
+2025-12-06;SF-1286;UAB Baltic Trade;P0003;Varškė 9 %;18;225,80;Mantas Žukauskas
+2025-12-08;SF-1287;UAB Baltic Trade;P0006;Batonas;3;21,52;Rūta Šimkutė
+2025-12-08;SF-1287;UAB Baltic Trade;P0006;Batonas;32;210,56;Rūta Šimkutė
+2025-12-08;SF-1288;UAB Ąžuolynas;P0011;Cukrus 1 kg;28;185,34;Ieva Ąžuolaitė
+2025-12-08;SF-1289;UAB Ūkininkų turgus;P0007;Obuolių sultys;25;513,12;Jonas Kazlauskas
+2025-12-08;SF-1290;AB Žalgiris Maistas;P0011;Cukrus 1 kg;38;238,14;Jonas Kazlauskas
+2025-12-08;SF-1290;AB Žalgiris Maistas;P0002;Sviestas 82 %;29;541,18;Ieva Ąžuolaitė
+2025-12-08;SF-1291;UAB Dzūkijos medus;P0001;Pienas 2,5 % 1 l;29;159,15;Rūta Šimkutė
+2025-12-09;SF-1292;UAB Saulėtekio centras;P0022;Žirniai konservuoti;12;232,76;Rūta Šimkutė
+2025-12-09;SF-1292;UAB Saulėtekio centras;P0005;Duona ruginė;16;223,66;Jonas Kazlauskas
+2025-12-09;SF-1293;AB Žalgiris Maistas;P0023;Agurkai marinuoti;18;243,79;Jonas Kazlauskas
+2025-12-09;SF-1294;AB Žalgiris Maistas;P0017;Šaldyta žuvis;34;814,76;Mantas Žukauskas
+2025-12-09;SF-1295;MB Žemaitijos mėsa;P0016;Dešrelės;16;123,14;Rūta Šimkutė
+2025-12-09;SF-1295;MB Žemaitijos mėsa;P0011;Cukrus 1 kg;30;172,48;Jonas Kazlauskas
+2025-12-09;SF-1296;UAB Šilainių prekyba;P0015;Ryžiai;9;145,06;Ieva Ąžuolaitė
+2025-12-10;SF-1297;UAB Baltic Trade;P0018;Kiaušiniai L;30;435,44;Rūta Šimkutė
+2025-12-10;SF-1297;UAB Baltic Trade;P0003;Varškė 9 %;22;280,30;Mantas Žukauskas
+2025-12-10;SF-1297;UAB Baltic Trade;P0002;Sviestas 82 %;20;409,66;Rūta Šimkutė
+2025-12-10;SF-1298;UAB Aukštaitijos sūris;P0023;Agurkai marinuoti;31;424,29;Rūta Šimkutė
+2025-12-10;SF-1298;UAB Aukštaitijos sūris;P0011;Cukrus 1 kg;9;61,58;Rūta Šimkutė
+2025-12-10;SF-1298;UAB Aukštaitijos sūris;P0013;Aliejus rapsų;37;490,57;Ieva Ąžuolaitė
+2025-12-10;SF-1299;UAB Baltic Trade;P0024;Padažas pomidorų;19;55,25;Ieva Ąžuolaitė
+2025-12-10;SF-1300;UAB Baltic Trade;P0013;Aliejus rapsų;26;368,62;Jonas Kazlauskas
+2025-12-10;SF-1300;UAB Baltic Trade;P0009;Kava malta 500 g;36;915,00;Jonas Kazlauskas
+2025-12-10;SF-1300;UAB Baltic Trade;P0013;Aliejus rapsų;18;239,49;Jonas Kazlauskas
+2025-12-11;SF-1301;UAB Baltic Trade;P0005;Duona ruginė;8;107,47;Jonas Kazlauskas
+2025-12-11;SF-1301;UAB Baltic Trade;P0023;Agurkai marinuoti;24;357,63;Mantas Žukauskas
+2025-12-11;SF-1301;UAB Baltic Trade;P0016;Dešrelės;16;135,82;Ieva Ąžuolaitė
+2025-12-11;SF-1302;AB Žalgiris Maistas;P0005;Duona ruginė;25;361,03;Mantas Žukauskas
+2025-12-11;SF-1303;UAB Baltic Trade;P0015;Ryžiai;2;30,71;Mantas Žukauskas
+2025-12-11;SF-1303;UAB Baltic Trade;P0011;Cukrus 1 kg;3;18,67;Mantas Žukauskas
+2025-12-12;SF-1304;UAB Baltic Trade;P0001;Pienas 2,5 % 1 l;37;221,61;Jonas Kazlauskas
+2025-12-12;SF-1304;UAB Baltic Trade;P0023;Agurkai marinuoti;16;252,31;Mantas Žukauskas
+2025-12-12;SF-1305;UAB Šilainių prekyba;P0015;Ryžiai;9;151,13;Ieva Ąžuolaitė
+2025-12-12;SF-1305;UAB Šilainių prekyba;P0018;Kiaušiniai L;3;40,78;Mantas Žukauskas
+2025-12-12;SF-1305;UAB Šilainių prekyba;P0001;Pienas 2,5 % 1 l;17;97,16;Rūta Šimkutė
+2025-12-12;SF-1306;UAB Baltic Trade;P0001;Pienas 2,5 % 1 l;31;200,41;Jonas Kazlauskas
+2025-12-12;SF-1306;UAB Baltic Trade;P0006;Batonas;34;229,39;Rūta Šimkutė
+2025-12-12;SF-1307;UAB Rūta Vilnius;P0008;Mineralinis vanduo;23;267,68;Rūta Šimkutė
+2025-12-13;SF-1308;UAB Šviesa LT;P0013;Aliejus rapsų;33;493,91;Jonas Kazlauskas
+2025-12-15;SF-1309;AB Žalgiris Maistas;P0015;Ryžiai;21;305,37;Jonas Kazlauskas
+2025-12-15;SF-1309;AB Žalgiris Maistas;P0010;Arbata juoda;37;624,95;Ieva Ąžuolaitė
+2025-12-15;SF-1310;UAB Panevėžio logistika;P0023;Agurkai marinuoti;20;283,43;Mantas Žukauskas
+2025-12-15;SF-1310;UAB Panevėžio logistika;P0017;Šaldyta žuvis;27;578,94;Jonas Kazlauskas
+2025-12-15;SF-1311;UAB Baltic Trade;P0008;Mineralinis vanduo;34;426,46;Ieva Ąžuolaitė
+2025-12-15;SF-1311;UAB Baltic Trade;P0010;Arbata juoda;8;126,94;Rūta Šimkutė
+2025-12-15;SF-1311;UAB Baltic Trade;P0008;Mineralinis vanduo;10;122,10;Ieva Ąžuolaitė
+2025-12-15;SF-1312;MB Žemaitijos mėsa;P0001;Pienas 2,5 % 1 l;32;191,52;Mantas Žukauskas
+2025-12-15;SF-1313;UAB Rūta Vilnius;P0020;Šokoladas pieninis;25;463,87;Rūta Šimkutė
+2025-12-15;SF-1313;UAB Rūta Vilnius;P0001;Pienas 2,5 % 1 l;23;148,59;Mantas Žukauskas

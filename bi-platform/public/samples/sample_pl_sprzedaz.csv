@@ -1,0 +1,661 @@
+Data sprzedaøy;Numer faktury;Kontrahent;Kod towaru;Nazwa towaru;IloúÊ;WartoúÊ netto;Waluta;Handlowiec
+01.09.2025;FV-1001;Kuchnia £Ûdzka;P0002;Mas≥o extra 82%;9;186,44;PLN;£ukasz Dπbrowski
+01.09.2025;FV-1002;Firma Handlowa WÛjcik;P0016;Kie≥basa úlπska;15;147,96;PLN;Zofia £ukasiewicz
+01.09.2025;FV-1003;Firma Handlowa WÛjcik;P0009;Kawa mielona 500 g;22;594,55;PLN;£ukasz Dπbrowski
+01.09.2025;FV-1003;Firma Handlowa WÛjcik;P0011;Cukier 1 kg;5;39,32;PLN;Piotr Wiúniewski
+02.09.2025;FV-1004;PrzedsiÍbiorstwo £ugowski;P0011;Cukier 1 kg;23;195,02;PLN;£ukasz Dπbrowski
+02.09.2025;FV-1005;Catering Øurawia;P0005;Chleb øytni;12;197,88;PLN;Ma≥gorzata Øak
+02.09.2025;FV-1005;Catering Øurawia;P0023;OgÛrki kiszone;8;145,53;PLN;Zofia £ukasiewicz
+02.09.2025;FV-1006;Market Øabka Partner;P0017;Ryba mroøona;18;372,92;PLN;£ukasz Dπbrowski
+03.09.2025;FV-1007;Zak≥ady MiÍsne £uøycka;P0013;Olej rzepakowy;22;308,88;PLN;£ukasz Dπbrowski
+03.09.2025;FV-1008;Piekarnia èrÛd≥o;P0020;Czekolada mleczna;14;278,96;PLN;Piotr Wiúniewski
+03.09.2025;FV-1008;Piekarnia èrÛd≥o;P0013;Olej rzepakowy;3;37,00;PLN;Zofia £ukasiewicz
+03.09.2025;FV-1008;Piekarnia èrÛd≥o;P0001;Mleko 3,2% 1 l;40;166,57;PLN;Zofia £ukasiewicz
+03.09.2025;FV-1009;Restauracja Z≥ota £Ûdü;P0001;Mleko 3,2% 1 l;37;173,94;PLN;Ma≥gorzata Øak
+03.09.2025;FV-1009;Restauracja Z≥ota £Ûdü;P0009;Kawa mielona 500 g;16;404,61;PLN;Ma≥gorzata Øak
+03.09.2025;FV-1010;PrzetwÛrnia OwocÛw £Íczyca;P0022;Groszek konserwowy;4;93,60;PLN;Zofia £ukasiewicz
+04.09.2025;FV-1011;Dystrybucja PÛ≥noc;P0002;Mas≥o extra 82%;19;360,55;PLN;£ukasz Dπbrowski
+04.09.2025;FV-1011;Dystrybucja PÛ≥noc;P0009;Kawa mielona 500 g;24;697,99;PLN;Zofia £ukasiewicz
+04.09.2025;FV-1011;Dystrybucja PÛ≥noc;P0012;Mπka pszenna;16;358,56;PLN;Piotr Wiúniewski
+04.09.2025;FV-1012;SpÛ≥dzielnia Mleczarska £aÒcut;P0003;TwarÛg pÛ≥t≥usty;7;69,36;PLN;Zofia £ukasiewicz
+04.09.2025;FV-1012;SpÛ≥dzielnia Mleczarska £aÒcut;P0014;Makaron úwiderki;7;187,78;PLN;Piotr Wiúniewski
+04.09.2025;FV-1012;SpÛ≥dzielnia Mleczarska £aÒcut;P0004;Ser Oscypek;1;23,78;PLN;£ukasz Dπbrowski
+04.09.2025;FV-1013;Dystrybucja PÛ≥noc;P0006;Bu≥ka pszenna;5;39,21;PLN;£ukasz Dπbrowski
+04.09.2025;FV-1013;Dystrybucja PÛ≥noc;P0023;OgÛrki kiszone;11;189,51;PLN;Ma≥gorzata Øak
+04.09.2025;FV-1014;Gospodarstwo Rolne åliwa;P0021;Ciastka maúlane;2;17,85;PLN;Piotr Wiúniewski
+04.09.2025;FV-1014;Gospodarstwo Rolne åliwa;P0009;Kawa mielona 500 g;10;304,66;PLN;Piotr Wiúniewski
+04.09.2025;FV-1015;SpÛ≥dzielnia Mleczarska £aÒcut;P0017;Ryba mroøona;21;494,45;PLN;Ma≥gorzata Øak
+05.09.2025;FV-1016;Piekarnia èrÛd≥o;P0006;Bu≥ka pszenna;17;138,78;PLN;£ukasz Dπbrowski
+05.09.2025;FV-1016;Piekarnia èrÛd≥o;P0015;Ryø bia≥y;21;319,31;PLN;Ma≥gorzata Øak
+05.09.2025;FV-1017;Hurtownia Øubr Sp. z o.o.;P0023;OgÛrki kiszone;35;531,56;PLN;£ukasz Dπbrowski
+05.09.2025;FV-1017;Hurtownia Øubr Sp. z o.o.;P0021;Ciastka maúlane;30;275,15;PLN;Piotr Wiúniewski
+05.09.2025;FV-1017;Hurtownia Øubr Sp. z o.o.;P0023;OgÛrki kiszone;38;643,62;PLN;£ukasz Dπbrowski
+05.09.2025;FV-1018;Hurtownia Øubr Sp. z o.o.;P0008;Woda mineralna;14;185,35;PLN;Ma≥gorzata Øak
+06.09.2025;FV-1019;Hurtownia Øubr Sp. z o.o.;P0012;Mπka pszenna;24;504,32;PLN;Ma≥gorzata Øak
+06.09.2025;FV-1019;Hurtownia Øubr Sp. z o.o.;P0011;Cukier 1 kg;17;153,19;PLN;£ukasz Dπbrowski
+08.09.2025;FV-1020;Hurtownia Øubr Sp. z o.o.;P0011;Cukier 1 kg;5;39,38;PLN;£ukasz Dπbrowski
+08.09.2025;FV-1021;Cukiernia ånieøka;P0014;Makaron úwiderki;2;53,38;PLN;£ukasz Dπbrowski
+08.09.2025;FV-1021;Cukiernia ånieøka;P0002;Mas≥o extra 82%;34;602,20;PLN;£ukasz Dπbrowski
+08.09.2025;FV-1022;Gospodarstwo Rolne åliwa;P0023;OgÛrki kiszone;22;344,83;PLN;£ukasz Dπbrowski
+08.09.2025;FV-1023;Zak≥ady MiÍsne £uøycka;P0017;Ryba mroøona;16;378,81;PLN;£ukasz Dπbrowski
+08.09.2025;FV-1023;Zak≥ady MiÍsne £uøycka;P0021;Ciastka maúlane;12;113,94;PLN;£ukasz Dπbrowski
+08.09.2025;FV-1023;Zak≥ady MiÍsne £uøycka;P0010;Herbata czarna;12;203,10;PLN;Ma≥gorzata Øak
+08.09.2025;FV-1024;Delikatesy åwit;P0001;Mleko 3,2% 1 l;26;113,19;PLN;Zofia £ukasiewicz
+08.09.2025;FV-1024;Delikatesy åwit;P0001;Mleko 3,2% 1 l;36;169,59;PLN;Zofia £ukasiewicz
+08.09.2025;FV-1024;Delikatesy åwit;P0010;Herbata czarna;5;89,24;PLN;£ukasz Dπbrowski
+09.09.2025;FV-1025;Gospodarstwo Rolne åliwa;P0019;MiÛd 400 g;15;408,35;PLN;£ukasz Dπbrowski
+09.09.2025;FV-1025;Gospodarstwo Rolne åliwa;P0021;Ciastka maúlane;38;346,87;PLN;Piotr Wiúniewski
+09.09.2025;FV-1026;Hurtownia Øubr Sp. z o.o.;P0013;Olej rzepakowy;21;306,30;PLN;Piotr Wiúniewski
+09.09.2025;FV-1026;Hurtownia Øubr Sp. z o.o.;P0002;Mas≥o extra 82%;21;375,47;PLN;Zofia £ukasiewicz
+09.09.2025;FV-1027;Kuchnia £Ûdzka;P0003;TwarÛg pÛ≥t≥usty;4;42,56;PLN;Ma≥gorzata Øak
+09.09.2025;FV-1027;Kuchnia £Ûdzka;P0018;Jaja klasa L;23;354,31;PLN;£ukasz Dπbrowski
+09.09.2025;FV-1028;Piekarnia èrÛd≥o;P0021;Ciastka maúlane;23;209,04;PLN;Zofia £ukasiewicz
+10.09.2025;FV-1029;PHU Kowalski;P0015;Ryø bia≥y;13;208,66;PLN;Piotr Wiúniewski
+10.09.2025;FV-1029;PHU Kowalski;P0009;Kawa mielona 500 g;7;211,31;PLN;£ukasz Dπbrowski
+10.09.2025;FV-1029;PHU Kowalski;P0012;Mπka pszenna;10;211,29;PLN;Zofia £ukasiewicz
+10.09.2025;FV-1030;Hurtownia Øubr Sp. z o.o.;P0019;MiÛd 400 g;12;289,35;PLN;£ukasz Dπbrowski
+10.09.2025;FV-1030;Hurtownia Øubr Sp. z o.o.;P0024;Sos pomidorowy;31;110,63;PLN;Ma≥gorzata Øak
+10.09.2025;FV-1030;Hurtownia Øubr Sp. z o.o.;P0001;Mleko 3,2% 1 l;30;146,04;PLN;Piotr Wiúniewski
+10.09.2025;FV-1031;Delikatesy åwit;P0014;Makaron úwiderki;38;852,45;PLN;£ukasz Dπbrowski
+10.09.2025;FV-1031;Delikatesy åwit;P0010;Herbata czarna;16;285,93;PLN;£ukasz Dπbrowski
+10.09.2025;FV-1031;Delikatesy åwit;P0004;Ser Oscypek;27;619,42;PLN;Piotr Wiúniewski
+11.09.2025;FV-1032;Warzywniak åwiÍtokrzyski;P0008;Woda mineralna;37;497,44;PLN;Zofia £ukasiewicz
+11.09.2025;FV-1033;PrzedsiÍbiorstwo £ugowski;P0018;Jaja klasa L;31;425,38;PLN;Zofia £ukasiewicz
+11.09.2025;FV-1033;PrzedsiÍbiorstwo £ugowski;P0014;Makaron úwiderki;14;317,19;PLN;Zofia £ukasiewicz
+11.09.2025;FV-1033;PrzedsiÍbiorstwo £ugowski;P0009;Kawa mielona 500 g;33;968,35;PLN;Piotr Wiúniewski
+11.09.2025;FV-1034;Hurtownia Øubr Sp. z o.o.;P0009;Kawa mielona 500 g;19;557,18;PLN;Piotr Wiúniewski
+11.09.2025;FV-1034;Hurtownia Øubr Sp. z o.o.;P0018;Jaja klasa L;1;14,44;PLN;Zofia £ukasiewicz
+11.09.2025;FV-1035;Hurtownia Øubr Sp. z o.o.;P0022;Groszek konserwowy;7;186,92;PLN;Zofia £ukasiewicz
+11.09.2025;FV-1035;Hurtownia Øubr Sp. z o.o.;P0009;Kawa mielona 500 g;33;860,91;PLN;Piotr Wiúniewski
+11.09.2025;FV-1035;Hurtownia Øubr Sp. z o.o.;P0004;Ser Oscypek;6;128,84;PLN;Ma≥gorzata Øak
+12.09.2025;FV-1036;Gospodarstwo Rolne åliwa;P0018;Jaja klasa L;21;286,15;PLN;Zofia £ukasiewicz
+12.09.2025;FV-1036;Gospodarstwo Rolne åliwa;P0021;Ciastka maúlane;16;146,22;PLN;Piotr Wiúniewski
+12.09.2025;FV-1036;Gospodarstwo Rolne åliwa;P0013;Olej rzepakowy;27;387,16;PLN;Piotr Wiúniewski
+12.09.2025;FV-1037;Hurtownia Øubr Sp. z o.o.;P0016;Kie≥basa úlπska;38;380,25;PLN;Ma≥gorzata Øak
+12.09.2025;FV-1038;Catering Øurawia;P0009;Kawa mielona 500 g;37;934,24;PLN;Ma≥gorzata Øak
+12.09.2025;FV-1038;Catering Øurawia;P0017;Ryba mroøona;13;309,89;PLN;Ma≥gorzata Øak
+12.09.2025;FV-1039;Delikatesy åwit;P0012;Mπka pszenna;19;431,82;PLN;Piotr Wiúniewski
+12.09.2025;FV-1040;Delikatesy åwit;P0001;Mleko 3,2% 1 l;10;45,65;PLN;Zofia £ukasiewicz
+12.09.2025;FV-1040;Delikatesy åwit;P0017;Ryba mroøona;7;148,28;PLN;Zofia £ukasiewicz
+13.09.2025;FV-1041;Kuchnia £Ûdzka;P0022;Groszek konserwowy;6;167,24;PLN;£ukasz Dπbrowski
+13.09.2025;FV-1041;Kuchnia £Ûdzka;P0017;Ryba mroøona;39;792,16;PLN;Zofia £ukasiewicz
+15.09.2025;FV-1042;PrzedsiÍbiorstwo £ugowski;P0012;Mπka pszenna;25;527,99;PLN;Ma≥gorzata Øak
+15.09.2025;FV-1042;PrzedsiÍbiorstwo £ugowski;P0023;OgÛrki kiszone;20;314,69;PLN;£ukasz Dπbrowski
+15.09.2025;FV-1042;PrzedsiÍbiorstwo £ugowski;P0019;MiÛd 400 g;17;428,25;PLN;£ukasz Dπbrowski
+15.09.2025;FV-1043;SpÛ≥dzielnia Mleczarska £aÒcut;P0015;Ryø bia≥y;32;520,34;PLN;Zofia £ukasiewicz
+15.09.2025;FV-1043;SpÛ≥dzielnia Mleczarska £aÒcut;P0009;Kawa mielona 500 g;5;144,14;PLN;Ma≥gorzata Øak
+15.09.2025;FV-1043;SpÛ≥dzielnia Mleczarska £aÒcut;P0021;Ciastka maúlane;32;279,39;PLN;Ma≥gorzata Øak
+15.09.2025;FV-1044;Firma Handlowa WÛjcik;P0012;Mπka pszenna;6;145,12;PLN;Zofia £ukasiewicz
+16.09.2025;FV-1045;PPUH Nowak;P0023;OgÛrki kiszone;19;291,31;PLN;£ukasz Dπbrowski
+16.09.2025;FV-1046;Restauracja Z≥ota £Ûdü;P0011;Cukier 1 kg;32;270,27;PLN;Zofia £ukasiewicz
+16.09.2025;FV-1046;Restauracja Z≥ota £Ûdü;P0021;Ciastka maúlane;3;28,74;PLN;Ma≥gorzata Øak
+16.09.2025;FV-1047;Catering Øurawia;P0002;Mas≥o extra 82%;2;41,56;PLN;Piotr Wiúniewski
+16.09.2025;FV-1048;Hurtownia Øubr Sp. z o.o.;P0002;Mas≥o extra 82%;14;274,23;PLN;Zofia £ukasiewicz
+16.09.2025;FV-1049;Cukiernia ånieøka;P0017;Ryba mroøona;1;20,91;PLN;Zofia £ukasiewicz
+17.09.2025;FV-1050;Zak≥ady MiÍsne £uøycka;P0012;Mπka pszenna;29;624,82;PLN;Zofia £ukasiewicz
+17.09.2025;FV-1050;Zak≥ady MiÍsne £uøycka;P0004;Ser Oscypek;3;63,28;PLN;Zofia £ukasiewicz
+17.09.2025;FV-1050;Zak≥ady MiÍsne £uøycka;P0023;OgÛrki kiszone;27;484,17;PLN;Piotr Wiúniewski
+17.09.2025;FV-1051;Hurtownia Øubr Sp. z o.o.;P0005;Chleb øytni;14;247,58;PLN;Piotr Wiúniewski
+17.09.2025;FV-1051;Hurtownia Øubr Sp. z o.o.;P0023;OgÛrki kiszone;25;381,35;PLN;£ukasz Dπbrowski
+17.09.2025;FV-1052;PHU Kowalski;P0012;Mπka pszenna;32;743,73;PLN;Zofia £ukasiewicz
+17.09.2025;FV-1052;PHU Kowalski;P0006;Bu≥ka pszenna;12;102,70;PLN;Ma≥gorzata Øak
+18.09.2025;FV-1053;Zak≥ady MiÍsne £uøycka;P0007;Sok jab≥kowy;7;170,00;PLN;Piotr Wiúniewski
+18.09.2025;FV-1053;Zak≥ady MiÍsne £uøycka;P0022;Groszek konserwowy;29;734,95;PLN;Ma≥gorzata Øak
+18.09.2025;FV-1054;Hurtownia Øubr Sp. z o.o.;P0021;Ciastka maúlane;36;299,82;PLN;Piotr Wiúniewski
+18.09.2025;FV-1054;Hurtownia Øubr Sp. z o.o.;P0010;Herbata czarna;32;571,72;PLN;Zofia £ukasiewicz
+18.09.2025;FV-1055;Hurtownia Øubr Sp. z o.o.;P0002;Mas≥o extra 82%;24;483,55;PLN;Zofia £ukasiewicz
+18.09.2025;FV-1055;Hurtownia Øubr Sp. z o.o.;P0024;Sos pomidorowy;28;95,74;PLN;Ma≥gorzata Øak
+18.09.2025;FV-1055;Hurtownia Øubr Sp. z o.o.;P0024;Sos pomidorowy;39;135,02;PLN;Ma≥gorzata Øak
+18.09.2025;FV-1056;Firma Handlowa WÛjcik;P0019;MiÛd 400 g;19;469,39;PLN;Piotr Wiúniewski
+18.09.2025;FV-1056;Firma Handlowa WÛjcik;P0005;Chleb øytni;9;157,44;PLN;£ukasz Dπbrowski
+18.09.2025;FV-1056;Firma Handlowa WÛjcik;P0024;Sos pomidorowy;10;38,81;PLN;Zofia £ukasiewicz
+19.09.2025;FV-1057;Hurtownia Øubr Sp. z o.o.;P0007;Sok jab≥kowy;2;41,13;PLN;£ukasz Dπbrowski
+19.09.2025;FV-1057;Hurtownia Øubr Sp. z o.o.;P0003;TwarÛg pÛ≥t≥usty;2;20,94;PLN;£ukasz Dπbrowski
+19.09.2025;FV-1057;Hurtownia Øubr Sp. z o.o.;P0010;Herbata czarna;6;112,66;PLN;Zofia £ukasiewicz
+19.09.2025;FV-1058;Hurtownia Øubr Sp. z o.o.;P0015;Ryø bia≥y;13;199,13;PLN;£ukasz Dπbrowski
+19.09.2025;FV-1059;Zak≥ady MiÍsne £uøycka;P0014;Makaron úwiderki;4;92,51;PLN;Ma≥gorzata Øak
+19.09.2025;FV-1059;Zak≥ady MiÍsne £uøycka;P0003;TwarÛg pÛ≥t≥usty;10;107,21;PLN;Piotr Wiúniewski
+19.09.2025;FV-1059;Zak≥ady MiÍsne £uøycka;P0023;OgÛrki kiszone;3;50,62;PLN;Piotr Wiúniewski
+19.09.2025;FV-1060;Warzywniak åwiÍtokrzyski;P0001;Mleko 3,2% 1 l;26;110,64;PLN;£ukasz Dπbrowski
+19.09.2025;FV-1060;Warzywniak åwiÍtokrzyski;P0010;Herbata czarna;13;266,10;PLN;Ma≥gorzata Øak
+20.09.2025;FV-1061;Delikatesy åwit;P0007;Sok jab≥kowy;24;493,43;PLN;Ma≥gorzata Øak
+21.09.2025;KR-20;Piekarnia èrÛd≥o;P0004;Ser Oscypek;-10;-3†256,00;PLN;Piotr Wiúniewski
+22.09.2025;FV-1062;Sklep ∆wik≥a;P0001;Mleko 3,2% 1 l;12;56,73;PLN;Ma≥gorzata Øak
+22.09.2025;FV-1062;Sklep ∆wik≥a;P0023;OgÛrki kiszone;20;336,48;PLN;Zofia £ukasiewicz
+22.09.2025;FV-1063;Hurtownia Øubr Sp. z o.o.;P0023;OgÛrki kiszone;9;155,70;PLN;£ukasz Dπbrowski
+22.09.2025;FV-1063;Hurtownia Øubr Sp. z o.o.;P0021;Ciastka maúlane;26;257,68;PLN;Piotr Wiúniewski
+22.09.2025;FV-1063;Hurtownia Øubr Sp. z o.o.;P0020;Czekolada mleczna;3;63,75;PLN;Ma≥gorzata Øak
+22.09.2025;FV-1064;PPUH Nowak;P0014;Makaron úwiderki;26;585,66;PLN;Zofia £ukasiewicz
+22.09.2025;FV-1065;Gospodarstwo Rolne åliwa;P0024;Sos pomidorowy;13;44,55;PLN;Ma≥gorzata Øak
+22.09.2025;FV-1065;Gospodarstwo Rolne åliwa;P0020;Czekolada mleczna;19;388,21;PLN;Ma≥gorzata Øak
+22.09.2025;FV-1065;Gospodarstwo Rolne åliwa;P0008;Woda mineralna;7;84,46;PLN;Ma≥gorzata Øak
+23.09.2025;FV-1066;PHU Kowalski;P0008;Woda mineralna;4;53,11;PLN;Zofia £ukasiewicz
+23.09.2025;FV-1067;Sklep ∆wik≥a;P0006;Bu≥ka pszenna;6;46,12;PLN;Piotr Wiúniewski
+23.09.2025;FV-1067;Sklep ∆wik≥a;P0020;Czekolada mleczna;12;263,66;PLN;£ukasz Dπbrowski
+23.09.2025;FV-1068;Hurtownia Øubr Sp. z o.o.;P0007;Sok jab≥kowy;39;808,25;PLN;£ukasz Dπbrowski
+23.09.2025;FV-1068;Hurtownia Øubr Sp. z o.o.;P0005;Chleb øytni;19;320,58;PLN;Piotr Wiúniewski
+24.09.2025;FV-1069;SpÛ≥dzielnia Mleczarska £aÒcut;P0011;Cukier 1 kg;19;150,42;PLN;Zofia £ukasiewicz
+24.09.2025;FV-1069;SpÛ≥dzielnia Mleczarska £aÒcut;P0012;Mπka pszenna;33;750,46;PLN;£ukasz Dπbrowski
+24.09.2025;FV-1069;SpÛ≥dzielnia Mleczarska £aÒcut;P0015;Ryø bia≥y;32;447,31;PLN;Zofia £ukasiewicz
+24.09.2025;FV-1070;Gospodarstwo Rolne åliwa;P0011;Cukier 1 kg;13;110,92;PLN;£ukasz Dπbrowski
+24.09.2025;FV-1070;Gospodarstwo Rolne åliwa;P0003;TwarÛg pÛ≥t≥usty;4;41,40;PLN;£ukasz Dπbrowski
+24.09.2025;FV-1071;Piekarnia èrÛd≥o;P0009;Kawa mielona 500 g;33;939,61;PLN;Zofia £ukasiewicz
+24.09.2025;FV-1071;Piekarnia èrÛd≥o;P0022;Groszek konserwowy;16;418,70;PLN;£ukasz Dπbrowski
+24.09.2025;FV-1071;Piekarnia èrÛd≥o;P0013;Olej rzepakowy;21;289,03;PLN;Zofia £ukasiewicz
+24.09.2025;FV-1072;Sklep ∆wik≥a;P0003;TwarÛg pÛ≥t≥usty;16;171,40;PLN;Zofia £ukasiewicz
+25.09.2025;FV-1073;Hurtownia Øubr Sp. z o.o.;P0008;Woda mineralna;33;407,39;PLN;Ma≥gorzata Øak
+25.09.2025;FV-1073;Hurtownia Øubr Sp. z o.o.;P0022;Groszek konserwowy;19;506,42;PLN;Zofia £ukasiewicz
+25.09.2025;FV-1074;PHU Kowalski;P0009;Kawa mielona 500 g;9;237,43;PLN;£ukasz Dπbrowski
+25.09.2025;FV-1074;PHU Kowalski;P0003;TwarÛg pÛ≥t≥usty;28;299,08;PLN;Piotr Wiúniewski
+25.09.2025;FV-1074;PHU Kowalski;P0013;Olej rzepakowy;10;145,64;PLN;£ukasz Dπbrowski
+25.09.2025;FV-1075;Hurtownia Øubr Sp. z o.o.;P0016;Kie≥basa úlπska;6;56,00;PLN;Ma≥gorzata Øak
+25.09.2025;FV-1075;Hurtownia Øubr Sp. z o.o.;P0006;Bu≥ka pszenna;12;101,37;PLN;Zofia £ukasiewicz
+25.09.2025;FV-1076;Szko≥a Podstawowa nr 5;P0002;Mas≥o extra 82%;30;541,80;PLN;Ma≥gorzata Øak
+25.09.2025;FV-1076;Szko≥a Podstawowa nr 5;P0011;Cukier 1 kg;29;259,25;PLN;Piotr Wiúniewski
+25.09.2025;FV-1076;Szko≥a Podstawowa nr 5;P0004;Ser Oscypek;39;943,67;PLN;Zofia £ukasiewicz
+26.09.2025;FV-1077;Bar Mleczny Pod RÛøπ;P0004;Ser Oscypek;32;792,20;PLN;Piotr Wiúniewski
+26.09.2025;FV-1077;Bar Mleczny Pod RÛøπ;P0020;Czekolada mleczna;8;151,26;PLN;Piotr Wiúniewski
+26.09.2025;FV-1078;Piekarnia èrÛd≥o;P0019;MiÛd 400 g;5;118,65;PLN;Ma≥gorzata Øak
+26.09.2025;FV-1079;Delikatesy åwit;P0017;Ryba mroøona;9;183,33;PLN;Zofia £ukasiewicz
+26.09.2025;FV-1079;Delikatesy åwit;P0017;Ryba mroøona;24;501,30;PLN;Zofia £ukasiewicz
+26.09.2025;FV-1079;Delikatesy åwit;P0014;Makaron úwiderki;29;766,46;PLN;£ukasz Dπbrowski
+27.09.2025;FV-1080;PrzedsiÍbiorstwo £ugowski;P0009;Kawa mielona 500 g;33;962,83;PLN;Piotr Wiúniewski
+27.09.2025;FV-1080;PrzedsiÍbiorstwo £ugowski;P0017;Ryba mroøona;19;411,02;PLN;Piotr Wiúniewski
+29.09.2025;FV-1081;Bar Mleczny Pod RÛøπ;P0007;Sok jab≥kowy;13;281,73;PLN;Ma≥gorzata Øak
+29.09.2025;FV-1082;SpÛ≥dzielnia Mleczarska £aÒcut;P0015;Ryø bia≥y;39;642,76;PLN;Zofia £ukasiewicz
+29.09.2025;FV-1082;SpÛ≥dzielnia Mleczarska £aÒcut;P0009;Kawa mielona 500 g;32;882,52;PLN;Ma≥gorzata Øak
+29.09.2025;FV-1083;Sklep ∆wik≥a;P0024;Sos pomidorowy;35;119,48;PLN;£ukasz Dπbrowski
+29.09.2025;FV-1083;Sklep ∆wik≥a;P0005;Chleb øytni;26;418,55;PLN;Ma≥gorzata Øak
+29.09.2025;FV-1083;Sklep ∆wik≥a;P0006;Bu≥ka pszenna;25;190,20;PLN;Piotr Wiúniewski
+30.09.2025;FV-1084;Warzywniak åwiÍtokrzyski;P0023;OgÛrki kiszone;33;584,91;PLN;Piotr Wiúniewski
+30.09.2025;FV-1085;PPUH Nowak;P0008;Woda mineralna;1;12,31;PLN;Ma≥gorzata Øak
+30.09.2025;FV-1085;PPUH Nowak;P0014;Makaron úwiderki;1;26,17;PLN;Zofia £ukasiewicz
+30.09.2025;FV-1086;Piekarnia èrÛd≥o;P0018;Jaja klasa L;17;223,93;PLN;£ukasz Dπbrowski
+30.09.2025;FV-1086;Piekarnia èrÛd≥o;P0011;Cukier 1 kg;36;284,45;PLN;Ma≥gorzata Øak
+30.09.2025;FV-1087;Hurtownia Øubr Sp. z o.o.;P0012;Mπka pszenna;21;448,08;PLN;Ma≥gorzata Øak
+01.10.2025;FV-1088;SpÛ≥dzielnia Mleczarska £aÒcut;P0015;Ryø bia≥y;11;174,83;PLN;Zofia £ukasiewicz
+01.10.2025;FV-1088;SpÛ≥dzielnia Mleczarska £aÒcut;P0005;Chleb øytni;4;75,42;PLN;Ma≥gorzata Øak
+01.10.2025;FV-1088;SpÛ≥dzielnia Mleczarska £aÒcut;P0024;Sos pomidorowy;7;27,09;PLN;£ukasz Dπbrowski
+01.10.2025;FV-1089;PPUH Nowak;P0020;Czekolada mleczna;38;706,79;PLN;Ma≥gorzata Øak
+01.10.2025;FV-1090;PHU Kowalski;P0011;Cukier 1 kg;9;78,56;PLN;Piotr Wiúniewski
+01.10.2025;FV-1090;PHU Kowalski;P0011;Cukier 1 kg;18;154,56;PLN;Piotr Wiúniewski
+01.10.2025;FV-1090;PHU Kowalski;P0021;Ciastka maúlane;16;144,88;PLN;£ukasz Dπbrowski
+01.10.2025;FV-1091;Market Øabka Partner;P0019;MiÛd 400 g;10;227,35;PLN;Piotr Wiúniewski
+01.10.2025;FV-1091;Market Øabka Partner;P0009;Kawa mielona 500 g;3;80,72;PLN;£ukasz Dπbrowski
+01.10.2025;FV-1091;Market Øabka Partner;P0019;MiÛd 400 g;12;293,32;PLN;Piotr Wiúniewski
+01.10.2025;FV-1092;Hurtownia Øubr Sp. z o.o.;P0022;Groszek konserwowy;21;482,56;PLN;Zofia £ukasiewicz
+01.10.2025;FV-1092;Hurtownia Øubr Sp. z o.o.;P0001;Mleko 3,2% 1 l;23;103,53;PLN;Piotr Wiúniewski
+01.10.2025;FV-1092;Hurtownia Øubr Sp. z o.o.;P0018;Jaja klasa L;29;456,89;PLN;Zofia £ukasiewicz
+02.10.2025;FV-1093;Zak≥ady MiÍsne £uøycka;P0022;Groszek konserwowy;17;441,01;PLN;Ma≥gorzata Øak
+02.10.2025;FV-1093;Zak≥ady MiÍsne £uøycka;P0006;Bu≥ka pszenna;20;163,39;PLN;Ma≥gorzata Øak
+02.10.2025;FV-1094;Sklep ∆wik≥a;P0021;Ciastka maúlane;24;227,45;PLN;Ma≥gorzata Øak
+02.10.2025;FV-1094;Sklep ∆wik≥a;P0002;Mas≥o extra 82%;38;704,06;PLN;Piotr Wiúniewski
+02.10.2025;FV-1095;Delikatesy åwit;P0012;Mπka pszenna;22;464,98;PLN;Piotr Wiúniewski
+03.10.2025;FV-1096;Market Øabka Partner;P0001;Mleko 3,2% 1 l;22;89,94;PLN;£ukasz Dπbrowski
+03.10.2025;FV-1096;Market Øabka Partner;P0013;Olej rzepakowy;28;375,73;PLN;£ukasz Dπbrowski
+03.10.2025;FV-1096;Market Øabka Partner;P0008;Woda mineralna;33;390,59;PLN;Zofia £ukasiewicz
+03.10.2025;FV-1097;Zak≥ady MiÍsne £uøycka;P0013;Olej rzepakowy;1;12,17;PLN;£ukasz Dπbrowski
+03.10.2025;FV-1097;Zak≥ady MiÍsne £uøycka;P0023;OgÛrki kiszone;38;692,71;PLN;Piotr Wiúniewski
+03.10.2025;FV-1097;Zak≥ady MiÍsne £uøycka;P0006;Bu≥ka pszenna;25;207,43;PLN;Ma≥gorzata Øak
+03.10.2025;FV-1098;Firma Handlowa WÛjcik;P0007;Sok jab≥kowy;28;608,82;PLN;Piotr Wiúniewski
+03.10.2025;FV-1099;Hurtownia Øubr Sp. z o.o.;P0019;MiÛd 400 g;40;1†023,85;PLN;£ukasz Dπbrowski
+03.10.2025;FV-1100;Zak≥ady MiÍsne £uøycka;P0004;Ser Oscypek;14;313,88;PLN;Zofia £ukasiewicz
+04.10.2025;FV-1101;SieÊ SklepÛw GÛrnik;P0007;Sok jab≥kowy;39;897,42;PLN;Zofia £ukasiewicz
+06.10.2025;FV-1102;Delikatesy åwit;P0022;Groszek konserwowy;22;519,63;PLN;£ukasz Dπbrowski
+06.10.2025;FV-1102;Delikatesy åwit;P0005;Chleb øytni;21;367,23;PLN;Zofia £ukasiewicz
+06.10.2025;FV-1102;Delikatesy åwit;P0020;Czekolada mleczna;11;222,56;PLN;Piotr Wiúniewski
+06.10.2025;FV-1103;Zak≥ady MiÍsne £uøycka;P0006;Bu≥ka pszenna;39;300,46;PLN;Ma≥gorzata Øak
+06.10.2025;FV-1103;Zak≥ady MiÍsne £uøycka;P0007;Sok jab≥kowy;17;368,63;PLN;Piotr Wiúniewski
+06.10.2025;FV-1104;Hurtownia Øubr Sp. z o.o.;P0010;Herbata czarna;33;675,11;PLN;Zofia £ukasiewicz
+06.10.2025;FV-1104;Hurtownia Øubr Sp. z o.o.;P0007;Sok jab≥kowy;34;798,05;PLN;£ukasz Dπbrowski
+06.10.2025;FV-1105;Catering Øurawia;P0002;Mas≥o extra 82%;38;733,05;PLN;Piotr Wiúniewski
+06.10.2025;FV-1106;Hurtownia Øubr Sp. z o.o.;P0010;Herbata czarna;27;501,54;PLN;Zofia £ukasiewicz
+06.10.2025;FV-1106;Hurtownia Øubr Sp. z o.o.;P0013;Olej rzepakowy;34;482,24;PLN;Piotr Wiúniewski
+06.10.2025;FV-1106;Hurtownia Øubr Sp. z o.o.;P0008;Woda mineralna;15;202,65;PLN;Ma≥gorzata Øak
+07.10.2025;FV-1107;Zajazd Pod DÍbem;P0015;Ryø bia≥y;11;155,36;PLN;Zofia £ukasiewicz
+07.10.2025;FV-1108;Hurtownia Øubr Sp. z o.o.;P0002;Mas≥o extra 82%;33;650,86;PLN;Zofia £ukasiewicz
+07.10.2025;FV-1108;Hurtownia Øubr Sp. z o.o.;P0020;Czekolada mleczna;20;425,99;PLN;Ma≥gorzata Øak
+07.10.2025;FV-1109;PHU Kowalski;P0017;Ryba mroøona;7;158,39;PLN;£ukasz Dπbrowski
+08.10.2025;FV-1110;Warzywniak åwiÍtokrzyski;P0002;Mas≥o extra 82%;16;292,74;PLN;Ma≥gorzata Øak
+08.10.2025;FV-1110;Warzywniak åwiÍtokrzyski;P0017;Ryba mroøona;16;370,87;PLN;£ukasz Dπbrowski
+08.10.2025;FV-1110;Warzywniak åwiÍtokrzyski;P0024;Sos pomidorowy;10;34,62;PLN;Zofia £ukasiewicz
+08.10.2025;FV-1111;Hurtownia Øubr Sp. z o.o.;P0018;Jaja klasa L;31;471,11;PLN;Zofia £ukasiewicz
+08.10.2025;FV-1111;Hurtownia Øubr Sp. z o.o.;P0005;Chleb øytni;33;560,16;PLN;Piotr Wiúniewski
+08.10.2025;FV-1112;Zajazd Pod DÍbem;P0019;MiÛd 400 g;37;1†016,76;PLN;Zofia £ukasiewicz
+08.10.2025;FV-1112;Zajazd Pod DÍbem;P0004;Ser Oscypek;4;90,97;PLN;£ukasz Dπbrowski
+09.10.2025;FV-1113;Gospodarstwo Rolne åliwa;P0020;Czekolada mleczna;38;769,62;PLN;Ma≥gorzata Øak
+09.10.2025;FV-1113;Gospodarstwo Rolne åliwa;P0010;Herbata czarna;32;657,78;PLN;Zofia £ukasiewicz
+09.10.2025;FV-1114;SieÊ SklepÛw GÛrnik;P0011;Cukier 1 kg;37;330,50;PLN;Zofia £ukasiewicz
+09.10.2025;FV-1114;SieÊ SklepÛw GÛrnik;P0012;Mπka pszenna;30;664,49;PLN;£ukasz Dπbrowski
+09.10.2025;FV-1115;Hurtownia Øubr Sp. z o.o.;P0017;Ryba mroøona;12;288,40;PLN;Piotr Wiúniewski
+09.10.2025;FV-1115;Hurtownia Øubr Sp. z o.o.;P0005;Chleb øytni;13;233,45;PLN;Piotr Wiúniewski
+09.10.2025;FV-1115;Hurtownia Øubr Sp. z o.o.;P0011;Cukier 1 kg;36;280,49;PLN;£ukasz Dπbrowski
+09.10.2025;FV-1116;Hurtownia Øubr Sp. z o.o.;P0013;Olej rzepakowy;17;229,27;PLN;Piotr Wiúniewski
+09.10.2025;FV-1116;Hurtownia Øubr Sp. z o.o.;P0002;Mas≥o extra 82%;31;648,35;PLN;Zofia £ukasiewicz
+09.10.2025;FV-1116;Hurtownia Øubr Sp. z o.o.;P0002;Mas≥o extra 82%;4;83,56;PLN;Zofia £ukasiewicz
+09.10.2025;FV-1117;PHU Kowalski;P0023;OgÛrki kiszone;32;501,70;PLN;Piotr Wiúniewski
+09.10.2025;FV-1117;PHU Kowalski;P0008;Woda mineralna;30;352,84;PLN;Zofia £ukasiewicz
+09.10.2025;FV-1117;PHU Kowalski;P0011;Cukier 1 kg;18;148,00;PLN;Piotr Wiúniewski
+10.10.2025;FV-1118;Dystrybucja PÛ≥noc;P0019;MiÛd 400 g;40;943,74;PLN;Ma≥gorzata Øak
+10.10.2025;FV-1118;Dystrybucja PÛ≥noc;P0002;Mas≥o extra 82%;24;484,45;PLN;£ukasz Dπbrowski
+10.10.2025;FV-1118;Dystrybucja PÛ≥noc;P0013;Olej rzepakowy;21;283,40;PLN;Zofia £ukasiewicz
+10.10.2025;FV-1119;SieÊ SklepÛw GÛrnik;P0002;Mas≥o extra 82%;11;203,75;PLN;Piotr Wiúniewski
+10.10.2025;FV-1119;SieÊ SklepÛw GÛrnik;P0015;Ryø bia≥y;8;114,04;PLN;Zofia £ukasiewicz
+10.10.2025;FV-1120;Zajazd Pod DÍbem;P0003;TwarÛg pÛ≥t≥usty;10;117,37;PLN;Zofia £ukasiewicz
+11.10.2025;FV-1121;PrzedsiÍbiorstwo £ugowski;P0016;Kie≥basa úlπska;23;215,52;PLN;Ma≥gorzata Øak
+11.10.2025;FV-1121;PrzedsiÍbiorstwo £ugowski;P0007;Sok jab≥kowy;24;567,28;PLN;£ukasz Dπbrowski
+13.10.2025;FV-1122;Hurt-Pol Sp. j.;P0012;Mπka pszenna;14;335,82;PLN;Ma≥gorzata Øak
+13.10.2025;FV-1123;Sklep ∆wik≥a;P0012;Mπka pszenna;16;392,44;PLN;£ukasz Dπbrowski
+13.10.2025;FV-1123;Sklep ∆wik≥a;P0013;Olej rzepakowy;22;285,15;PLN;Ma≥gorzata Øak
+13.10.2025;FV-1124;SpÛ≥dzielnia Mleczarska £aÒcut;P0016;Kie≥basa úlπska;4;38,19;PLN;£ukasz Dπbrowski
+13.10.2025;FV-1124;SpÛ≥dzielnia Mleczarska £aÒcut;P0014;Makaron úwiderki;40;1†023,31;PLN;Piotr Wiúniewski
+13.10.2025;FV-1125;Dystrybucja PÛ≥noc;P0014;Makaron úwiderki;24;613,88;PLN;£ukasz Dπbrowski
+13.10.2025;FV-1125;Dystrybucja PÛ≥noc;P0011;Cukier 1 kg;5;45,00;PLN;Ma≥gorzata Øak
+13.10.2025;FV-1126;Piekarnia èrÛd≥o;P0021;Ciastka maúlane;4;40,29;PLN;Zofia £ukasiewicz
+14.10.2025;FV-1127;Hurtownia Øubr Sp. z o.o.;P0006;Bu≥ka pszenna;13;109,71;PLN;Zofia £ukasiewicz
+14.10.2025;FV-1127;Hurtownia Øubr Sp. z o.o.;P0004;Ser Oscypek;4;89,77;PLN;Ma≥gorzata Øak
+14.10.2025;FV-1128;Zajazd Pod DÍbem;P0019;MiÛd 400 g;35;930,44;PLN;Zofia £ukasiewicz
+14.10.2025;FV-1128;Zajazd Pod DÍbem;P0002;Mas≥o extra 82%;25;480,65;PLN;Piotr Wiúniewski
+14.10.2025;FV-1129;PHU Kowalski;P0002;Mas≥o extra 82%;40;821,39;PLN;Ma≥gorzata Øak
+14.10.2025;FV-1129;PHU Kowalski;P0021;Ciastka maúlane;33;309,42;PLN;£ukasz Dπbrowski
+14.10.2025;FV-1129;PHU Kowalski;P0023;OgÛrki kiszone;27;449,86;PLN;Piotr Wiúniewski
+15.10.2025;FV-1130;PHU Kowalski;P0019;MiÛd 400 g;25;621,37;PLN;Piotr Wiúniewski
+15.10.2025;FV-1130;PHU Kowalski;P0011;Cukier 1 kg;26;212,08;PLN;Piotr Wiúniewski
+15.10.2025;FV-1131;Gospodarstwo Rolne åliwa;P0019;MiÛd 400 g;14;349,00;PLN;£ukasz Dπbrowski
+15.10.2025;FV-1131;Gospodarstwo Rolne åliwa;P0007;Sok jab≥kowy;19;424,85;PLN;£ukasz Dπbrowski
+15.10.2025;FV-1132;Zak≥ady MiÍsne £uøycka;P0019;MiÛd 400 g;38;989,73;PLN;Piotr Wiúniewski
+15.10.2025;FV-1132;Zak≥ady MiÍsne £uøycka;P0016;Kie≥basa úlπska;27;235,21;PLN;Zofia £ukasiewicz
+15.10.2025;FV-1133;Hurtownia Øubr Sp. z o.o.;P0015;Ryø bia≥y;2;29,09;PLN;£ukasz Dπbrowski
+15.10.2025;FV-1133;Hurtownia Øubr Sp. z o.o.;P0004;Ser Oscypek;11;227,89;PLN;Ma≥gorzata Øak
+15.10.2025;FV-1133;Hurtownia Øubr Sp. z o.o.;P0019;MiÛd 400 g;14;360,93;PLN;£ukasz Dπbrowski
+16.10.2025;FV-1134;Hurtownia Øubr Sp. z o.o.;P0014;Makaron úwiderki;24;612,89;PLN;Zofia £ukasiewicz
+16.10.2025;FV-1134;Hurtownia Øubr Sp. z o.o.;P0011;Cukier 1 kg;27;216,67;PLN;£ukasz Dπbrowski
+16.10.2025;FV-1135;Bar Mleczny Pod RÛøπ;P0011;Cukier 1 kg;7;57,97;PLN;Ma≥gorzata Øak
+16.10.2025;FV-1135;Bar Mleczny Pod RÛøπ;P0022;Groszek konserwowy;17;405,22;PLN;£ukasz Dπbrowski
+16.10.2025;FV-1136;Piekarnia èrÛd≥o;P0018;Jaja klasa L;8;121,52;PLN;£ukasz Dπbrowski
+16.10.2025;FV-1136;Piekarnia èrÛd≥o;P0011;Cukier 1 kg;34;291,75;PLN;Ma≥gorzata Øak
+16.10.2025;FV-1136;Piekarnia èrÛd≥o;P0017;Ryba mroøona;34;725,64;PLN;Zofia £ukasiewicz
+17.10.2025;FV-1137;Sklep ∆wik≥a;P0005;Chleb øytni;1;18,66;PLN;Ma≥gorzata Øak
+17.10.2025;FV-1137;Sklep ∆wik≥a;P0021;Ciastka maúlane;18;165,86;PLN;Ma≥gorzata Øak
+17.10.2025;FV-1137;Sklep ∆wik≥a;P0014;Makaron úwiderki;17;437,11;PLN;Piotr Wiúniewski
+17.10.2025;FV-1138;PHU Kowalski;P0017;Ryba mroøona;14;326,10;PLN;£ukasz Dπbrowski
+17.10.2025;FV-1139;Hurtownia Øubr Sp. z o.o.;P0005;Chleb øytni;28;524,04;PLN;Piotr Wiúniewski
+17.10.2025;FV-1140;Restauracja Z≥ota £Ûdü;P0007;Sok jab≥kowy;4;95,57;PLN;Zofia £ukasiewicz
+17.10.2025;FV-1140;Restauracja Z≥ota £Ûdü;P0001;Mleko 3,2% 1 l;22;100,32;PLN;Ma≥gorzata Øak
+17.10.2025;FV-1140;Restauracja Z≥ota £Ûdü;P0015;Ryø bia≥y;8;117,23;PLN;Zofia £ukasiewicz
+18.10.2025;FV-1141;Hurtownia Øubr Sp. z o.o.;P0007;Sok jab≥kowy;40;846,42;PLN;£ukasz Dπbrowski
+18.10.2025;FV-1141;Hurtownia Øubr Sp. z o.o.;P0009;Kawa mielona 500 g;2;53,84;PLN;Piotr Wiúniewski
+20.10.2025;FV-1142;SieÊ SklepÛw GÛrnik;P0012;Mπka pszenna;18;392,36;PLN;£ukasz Dπbrowski
+20.10.2025;FV-1143;Piekarnia èrÛd≥o;P0004;Ser Oscypek;36;835,23;PLN;Piotr Wiúniewski
+20.10.2025;FV-1143;Piekarnia èrÛd≥o;P0021;Ciastka maúlane;8;76,17;PLN;Zofia £ukasiewicz
+20.10.2025;FV-1144;Delikatesy åwit;P0005;Chleb øytni;21;391,03;PLN;Zofia £ukasiewicz
+20.10.2025;FV-1144;Delikatesy åwit;P0022;Groszek konserwowy;16;431,01;PLN;£ukasz Dπbrowski
+20.10.2025;FV-1144;Delikatesy åwit;P0014;Makaron úwiderki;6;160,38;PLN;£ukasz Dπbrowski
+21.10.2025;FV-1145;PPUH Nowak;P0004;Ser Oscypek;22;524,57;PLN;Ma≥gorzata Øak
+21.10.2025;FV-1145;PPUH Nowak;P0007;Sok jab≥kowy;11;245,45;PLN;£ukasz Dπbrowski
+21.10.2025;FV-1146;Hurtownia Øubr Sp. z o.o.;P0015;Ryø bia≥y;16;241,51;PLN;£ukasz Dπbrowski
+21.10.2025;FV-1146;Hurtownia Øubr Sp. z o.o.;P0016;Kie≥basa úlπska;24;235,73;PLN;Ma≥gorzata Øak
+21.10.2025;FV-1147;Zak≥ady MiÍsne £uøycka;P0020;Czekolada mleczna;33;651,99;PLN;Zofia £ukasiewicz
+21.10.2025;FV-1147;Zak≥ady MiÍsne £uøycka;P0020;Czekolada mleczna;5;98,91;PLN;Zofia £ukasiewicz
+21.10.2025;FV-1147;Zak≥ady MiÍsne £uøycka;P0024;Sos pomidorowy;19;65,37;PLN;Zofia £ukasiewicz
+21.10.2025;FV-1148;Kuchnia £Ûdzka;P0002;Mas≥o extra 82%;22;431,04;PLN;£ukasz Dπbrowski
+21.10.2025;FV-1148;Kuchnia £Ûdzka;P0011;Cukier 1 kg;28;253,02;PLN;Ma≥gorzata Øak
+21.10.2025;FV-1148;Kuchnia £Ûdzka;P0003;TwarÛg pÛ≥t≥usty;34;365,88;PLN;Ma≥gorzata Øak
+21.10.2025;FV-1149;PrzetwÛrnia OwocÛw £Íczyca;P0013;Olej rzepakowy;13;183,15;PLN;Piotr Wiúniewski
+22.10.2025;FV-1150;Warzywniak åwiÍtokrzyski;P0002;Mas≥o extra 82%;8;144,42;PLN;Ma≥gorzata Øak
+22.10.2025;FV-1150;Warzywniak åwiÍtokrzyski;P0002;Mas≥o extra 82%;18;359,91;PLN;Ma≥gorzata Øak
+22.10.2025;FV-1151;Hurtownia Øubr Sp. z o.o.;P0008;Woda mineralna;4;49,35;PLN;Ma≥gorzata Øak
+22.10.2025;FV-1152;PPUH Nowak;P0008;Woda mineralna;34;432,07;PLN;Ma≥gorzata Øak
+22.10.2025;FV-1152;PPUH Nowak;P0018;Jaja klasa L;35;502,10;PLN;Zofia £ukasiewicz
+22.10.2025;FV-1152;PPUH Nowak;P0008;Woda mineralna;8;107,02;PLN;Ma≥gorzata Øak
+22.10.2025;FV-1153;Zajazd Pod DÍbem;P0002;Mas≥o extra 82%;39;703,49;PLN;Piotr Wiúniewski
+22.10.2025;FV-1154;PPUH Nowak;P0013;Olej rzepakowy;21;295,07;PLN;Piotr Wiúniewski
+22.10.2025;FV-1154;PPUH Nowak;P0002;Mas≥o extra 82%;40;785,34;PLN;Zofia £ukasiewicz
+22.10.2025;FV-1154;PPUH Nowak;P0004;Ser Oscypek;6;128,08;PLN;Ma≥gorzata Øak
+23.10.2025;FV-1155;Sklep ∆wik≥a;P0011;Cukier 1 kg;33;273,05;PLN;Zofia £ukasiewicz
+23.10.2025;FV-1155;Sklep ∆wik≥a;P0015;Ryø bia≥y;36;560,92;PLN;Zofia £ukasiewicz
+23.10.2025;FV-1155;Sklep ∆wik≥a;P0023;OgÛrki kiszone;25;428,10;PLN;Zofia £ukasiewicz
+23.10.2025;FV-1156;PHU Kowalski;P0024;Sos pomidorowy;27;109,12;PLN;Zofia £ukasiewicz
+23.10.2025;FV-1156;PHU Kowalski;P0023;OgÛrki kiszone;14;239,12;PLN;Piotr Wiúniewski
+23.10.2025;FV-1156;PHU Kowalski;P0011;Cukier 1 kg;35;319,53;PLN;Piotr Wiúniewski
+23.10.2025;FV-1157;Firma Handlowa WÛjcik;P0001;Mleko 3,2% 1 l;25;121,35;PLN;£ukasz Dπbrowski
+23.10.2025;FV-1157;Firma Handlowa WÛjcik;P0019;MiÛd 400 g;15;400,43;PLN;Piotr Wiúniewski
+23.10.2025;FV-1158;PHU Kowalski;P0022;Groszek konserwowy;29;707,56;PLN;Ma≥gorzata Øak
+23.10.2025;FV-1158;PHU Kowalski;P0007;Sok jab≥kowy;29;686,57;PLN;Piotr Wiúniewski
+23.10.2025;FV-1158;PHU Kowalski;P0021;Ciastka maúlane;9;76,27;PLN;£ukasz Dπbrowski
+23.10.2025;FV-1159;Sklep ∆wik≥a;P0001;Mleko 3,2% 1 l;12;56,71;PLN;Ma≥gorzata Øak
+24.10.2025;FV-1160;SpÛ≥dzielnia Mleczarska £aÒcut;P0010;Herbata czarna;26;511,74;PLN;Piotr Wiúniewski
+24.10.2025;FV-1161;Kuchnia £Ûdzka;P0017;Ryba mroøona;34;743,47;PLN;Zofia £ukasiewicz
+24.10.2025;FV-1161;Kuchnia £Ûdzka;P0020;Czekolada mleczna;10;183,35;PLN;Piotr Wiúniewski
+24.10.2025;FV-1162;Bar Mleczny Pod RÛøπ;P0011;Cukier 1 kg;20;172,78;PLN;Ma≥gorzata Øak
+24.10.2025;FV-1162;Bar Mleczny Pod RÛøπ;P0016;Kie≥basa úlπska;20;170,78;PLN;Piotr Wiúniewski
+24.10.2025;FV-1162;Bar Mleczny Pod RÛøπ;P0003;TwarÛg pÛ≥t≥usty;35;383,92;PLN;Ma≥gorzata Øak
+24.10.2025;FV-1163;Hurtownia Øubr Sp. z o.o.;P0004;Ser Oscypek;19;437,56;PLN;Ma≥gorzata Øak
+24.10.2025;FV-1163;Hurtownia Øubr Sp. z o.o.;P0015;Ryø bia≥y;38;578,29;PLN;£ukasz Dπbrowski
+24.10.2025;FV-1163;Hurtownia Øubr Sp. z o.o.;P0015;Ryø bia≥y;29;404,48;PLN;£ukasz Dπbrowski
+25.10.2025;FV-1164;Delikatesy åwit;P0018;Jaja klasa L;38;554,29;PLN;£ukasz Dπbrowski
+27.10.2025;FV-1165;Dystrybucja PÛ≥noc;P0015;Ryø bia≥y;37;562,54;PLN;Ma≥gorzata Øak
+27.10.2025;FV-1166;Piekarnia èrÛd≥o;P0007;Sok jab≥kowy;31;629,46;PLN;Ma≥gorzata Øak
+27.10.2025;FV-1167;Zak≥ady MiÍsne £uøycka;P0003;TwarÛg pÛ≥t≥usty;14;162,80;PLN;Piotr Wiúniewski
+27.10.2025;FV-1168;SpÛ≥dzielnia Mleczarska £aÒcut;P0017;Ryba mroøona;40;835,17;PLN;Ma≥gorzata Øak
+27.10.2025;FV-1169;Hurtownia Øubr Sp. z o.o.;P0023;OgÛrki kiszone;24;368,79;PLN;£ukasz Dπbrowski
+27.10.2025;FV-1169;Hurtownia Øubr Sp. z o.o.;P0007;Sok jab≥kowy;3;63,07;PLN;£ukasz Dπbrowski
+27.10.2025;FV-1169;Hurtownia Øubr Sp. z o.o.;P0020;Czekolada mleczna;24;506,16;PLN;Ma≥gorzata Øak
+28.10.2025;FV-1170;Hurtownia Øubr Sp. z o.o.;P0001;Mleko 3,2% 1 l;36;172,72;PLN;Piotr Wiúniewski
+28.10.2025;FV-1170;Hurtownia Øubr Sp. z o.o.;P0018;Jaja klasa L;37;542,37;PLN;Zofia £ukasiewicz
+28.10.2025;FV-1170;Hurtownia Øubr Sp. z o.o.;P0016;Kie≥basa úlπska;20;174,78;PLN;Ma≥gorzata Øak
+28.10.2025;FV-1171;PrzetwÛrnia OwocÛw £Íczyca;P0021;Ciastka maúlane;38;382,27;PLN;Piotr Wiúniewski
+28.10.2025;FV-1171;PrzetwÛrnia OwocÛw £Íczyca;P0014;Makaron úwiderki;39;897,81;PLN;Zofia £ukasiewicz
+28.10.2025;FV-1172;PHU Kowalski;P0024;Sos pomidorowy;1;3,52;PLN;Zofia £ukasiewicz
+28.10.2025;FV-1172;PHU Kowalski;P0016;Kie≥basa úlπska;22;190,30;PLN;Zofia £ukasiewicz
+28.10.2025;FV-1173;Delikatesy åwit;P0016;Kie≥basa úlπska;4;40,71;PLN;Piotr Wiúniewski
+28.10.2025;FV-1173;Delikatesy åwit;P0023;OgÛrki kiszone;29;503,43;PLN;Ma≥gorzata Øak
+28.10.2025;FV-1173;Delikatesy åwit;P0021;Ciastka maúlane;7;62,87;PLN;Zofia £ukasiewicz
+28.10.2025;FV-1174;Kuchnia £Ûdzka;P0024;Sos pomidorowy;26;97,01;PLN;Piotr Wiúniewski
+28.10.2025;FV-1174;Kuchnia £Ûdzka;P0007;Sok jab≥kowy;30;682,77;PLN;Ma≥gorzata Øak
+28.10.2025;FV-1174;Kuchnia £Ûdzka;P0016;Kie≥basa úlπska;3;27,81;PLN;Piotr Wiúniewski
+29.10.2025;FV-1175;PHU Kowalski;P0008;Woda mineralna;31;417,54;PLN;Zofia £ukasiewicz
+29.10.2025;FV-1176;PrzedsiÍbiorstwo £ugowski;P0020;Czekolada mleczna;1;22,10;PLN;Ma≥gorzata Øak
+29.10.2025;FV-1176;PrzedsiÍbiorstwo £ugowski;P0020;Czekolada mleczna;35;732,16;PLN;Ma≥gorzata Øak
+29.10.2025;FV-1176;PrzedsiÍbiorstwo £ugowski;P0006;Bu≥ka pszenna;4;30,97;PLN;Zofia £ukasiewicz
+29.10.2025;FV-1177;Hurtownia Øubr Sp. z o.o.;P0016;Kie≥basa úlπska;18;181,04;PLN;Ma≥gorzata Øak
+29.10.2025;FV-1177;Hurtownia Øubr Sp. z o.o.;P0013;Olej rzepakowy;6;88,14;PLN;Piotr Wiúniewski
+29.10.2025;FV-1177;Hurtownia Øubr Sp. z o.o.;P0019;MiÛd 400 g;16;368,04;PLN;£ukasz Dπbrowski
+29.10.2025;FV-1178;Hurtownia Øubr Sp. z o.o.;P0022;Groszek konserwowy;4;96,67;PLN;Zofia £ukasiewicz
+30.10.2025;FV-1179;Hurtownia Øubr Sp. z o.o.;P0010;Herbata czarna;27;500,22;PLN;Zofia £ukasiewicz
+30.10.2025;FV-1179;Hurtownia Øubr Sp. z o.o.;P0006;Bu≥ka pszenna;14;108,15;PLN;Zofia £ukasiewicz
+30.10.2025;FV-1179;Hurtownia Øubr Sp. z o.o.;P0013;Olej rzepakowy;6;81,02;PLN;Piotr Wiúniewski
+30.10.2025;FV-1180;Zak≥ady MiÍsne £uøycka;P0001;Mleko 3,2% 1 l;31;138,34;PLN;£ukasz Dπbrowski
+30.10.2025;FV-1181;Zak≥ady MiÍsne £uøycka;P0010;Herbata czarna;12;219,47;PLN;Ma≥gorzata Øak
+30.10.2025;FV-1182;Hurtownia Øubr Sp. z o.o.;P0019;MiÛd 400 g;5;132,86;PLN;£ukasz Dπbrowski
+30.10.2025;FV-1183;Market Øabka Partner;P0005;Chleb øytni;17;272,37;PLN;£ukasz Dπbrowski
+30.10.2025;FV-1183;Market Øabka Partner;P0012;Mπka pszenna;30;716,22;PLN;Zofia £ukasiewicz
+30.10.2025;FV-1183;Market Øabka Partner;P0015;Ryø bia≥y;8;127,96;PLN;Piotr Wiúniewski
+31.10.2025;FV-1184;Gospodarstwo Rolne åliwa;P0015;Ryø bia≥y;11;172,35;PLN;£ukasz Dπbrowski
+31.10.2025;FV-1185;Delikatesy åwit;P0007;Sok jab≥kowy;32;658,91;PLN;Ma≥gorzata Øak
+31.10.2025;FV-1185;Delikatesy åwit;P0017;Ryba mroøona;26;576,09;PLN;Zofia £ukasiewicz
+31.10.2025;FV-1186;Zak≥ady MiÍsne £uøycka;P0015;Ryø bia≥y;25;374,90;PLN;Piotr Wiúniewski
+31.10.2025;FV-1187;Szko≥a Podstawowa nr 5;P0005;Chleb øytni;26;415,54;PLN;£ukasz Dπbrowski
+31.10.2025;FV-1187;Szko≥a Podstawowa nr 5;P0018;Jaja klasa L;3;41,54;PLN;Ma≥gorzata Øak
+31.10.2025;FV-1188;Delikatesy åwit;P0023;OgÛrki kiszone;24;399,20;PLN;Ma≥gorzata Øak
+31.10.2025;FV-1188;Delikatesy åwit;P0009;Kawa mielona 500 g;14;395,53;PLN;Zofia £ukasiewicz
+31.10.2025;FV-1188;Delikatesy åwit;P0010;Herbata czarna;10;205,64;PLN;£ukasz Dπbrowski
+31.10.2025;KR-60;Zak≥ady MiÍsne £uøycka;P0008;Woda mineralna;-10;-4†129,00;PLN;Piotr Wiúniewski
+01.11.2025;FV-1189;PPUH Nowak;P0002;Mas≥o extra 82%;26;522,44;PLN;Zofia £ukasiewicz
+01.11.2025;FV-1189;PPUH Nowak;P0024;Sos pomidorowy;25;98,15;PLN;Ma≥gorzata Øak
+03.11.2025;FV-1190;Piekarnia èrÛd≥o;P0002;Mas≥o extra 82%;29;548,90;PLN;£ukasz Dπbrowski
+03.11.2025;FV-1190;Piekarnia èrÛd≥o;P0018;Jaja klasa L;28;437,52;PLN;£ukasz Dπbrowski
+03.11.2025;FV-1191;Hurtownia Øubr Sp. z o.o.;P0002;Mas≥o extra 82%;39;810,21;PLN;Zofia £ukasiewicz
+03.11.2025;FV-1191;Hurtownia Øubr Sp. z o.o.;P0013;Olej rzepakowy;5;73,64;PLN;Piotr Wiúniewski
+03.11.2025;FV-1191;Hurtownia Øubr Sp. z o.o.;P0007;Sok jab≥kowy;31;697,88;PLN;£ukasz Dπbrowski
+03.11.2025;FV-1192;PrzedsiÍbiorstwo £ugowski;P0003;TwarÛg pÛ≥t≥usty;29;338,93;PLN;£ukasz Dπbrowski
+03.11.2025;FV-1192;PrzedsiÍbiorstwo £ugowski;P0006;Bu≥ka pszenna;28;249,94;PLN;Zofia £ukasiewicz
+03.11.2025;FV-1193;PPUH Nowak;P0004;Ser Oscypek;15;334,15;PLN;Ma≥gorzata Øak
+03.11.2025;FV-1193;PPUH Nowak;P0002;Mas≥o extra 82%;18;319,33;PLN;Zofia £ukasiewicz
+03.11.2025;FV-1193;PPUH Nowak;P0016;Kie≥basa úlπska;10;96,52;PLN;Ma≥gorzata Øak
+04.11.2025;FV-1194;Sklep ∆wik≥a;P0006;Bu≥ka pszenna;36;293,45;PLN;Piotr Wiúniewski
+04.11.2025;FV-1194;Sklep ∆wik≥a;P0006;Bu≥ka pszenna;12;92,55;PLN;Piotr Wiúniewski
+04.11.2025;FV-1195;Hurt-Pol Sp. j.;P0012;Mπka pszenna;22;473,28;PLN;Ma≥gorzata Øak
+04.11.2025;FV-1195;Hurt-Pol Sp. j.;P0024;Sos pomidorowy;17;69,80;PLN;Ma≥gorzata Øak
+04.11.2025;FV-1195;Hurt-Pol Sp. j.;P0020;Czekolada mleczna;5;91,89;PLN;Ma≥gorzata Øak
+04.11.2025;FV-1196;Hurtownia Øubr Sp. z o.o.;P0015;Ryø bia≥y;26;379,15;PLN;£ukasz Dπbrowski
+04.11.2025;FV-1196;Hurtownia Øubr Sp. z o.o.;P0023;OgÛrki kiszone;13;211,38;PLN;£ukasz Dπbrowski
+04.11.2025;FV-1197;PrzedsiÍbiorstwo £ugowski;P0015;Ryø bia≥y;31;467,09;PLN;£ukasz Dπbrowski
+04.11.2025;FV-1197;PrzedsiÍbiorstwo £ugowski;P0015;Ryø bia≥y;13;207,60;PLN;£ukasz Dπbrowski
+04.11.2025;FV-1197;PrzedsiÍbiorstwo £ugowski;P0002;Mas≥o extra 82%;6;106,19;PLN;Zofia £ukasiewicz
+04.11.2025;FV-1198;Delikatesy åwit;P0016;Kie≥basa úlπska;36;339,32;PLN;Piotr Wiúniewski
+04.11.2025;FV-1198;Delikatesy åwit;P0005;Chleb øytni;27;486,78;PLN;Zofia £ukasiewicz
+05.11.2025;FV-1199;Firma Handlowa WÛjcik;P0016;Kie≥basa úlπska;36;305,37;PLN;Zofia £ukasiewicz
+05.11.2025;FV-1200;Sklep ∆wik≥a;P0006;Bu≥ka pszenna;13;108,61;PLN;Piotr Wiúniewski
+05.11.2025;FV-1200;Sklep ∆wik≥a;P0010;Herbata czarna;34;588,16;PLN;Piotr Wiúniewski
+05.11.2025;FV-1201;Restauracja Z≥ota £Ûdü;P0009;Kawa mielona 500 g;33;879,38;PLN;Ma≥gorzata Øak
+05.11.2025;FV-1202;SpÛ≥dzielnia Mleczarska £aÒcut;P0015;Ryø bia≥y;20;330,66;PLN;Zofia £ukasiewicz
+05.11.2025;FV-1202;SpÛ≥dzielnia Mleczarska £aÒcut;P0004;Ser Oscypek;3;62,44;PLN;£ukasz Dπbrowski
+06.11.2025;FV-1203;Hurtownia Øubr Sp. z o.o.;P0011;Cukier 1 kg;25;221,66;PLN;£ukasz Dπbrowski
+06.11.2025;FV-1203;Hurtownia Øubr Sp. z o.o.;P0011;Cukier 1 kg;27;233,55;PLN;£ukasz Dπbrowski
+06.11.2025;FV-1203;Hurtownia Øubr Sp. z o.o.;P0012;Mπka pszenna;34;838,24;PLN;Ma≥gorzata Øak
+06.11.2025;FV-1204;Piekarnia èrÛd≥o;P0016;Kie≥basa úlπska;9;77,68;PLN;Piotr Wiúniewski
+06.11.2025;FV-1204;Piekarnia èrÛd≥o;P0016;Kie≥basa úlπska;36;352,91;PLN;Piotr Wiúniewski
+06.11.2025;FV-1204;Piekarnia èrÛd≥o;P0004;Ser Oscypek;15;316,90;PLN;Piotr Wiúniewski
+06.11.2025;FV-1205;Piekarnia èrÛd≥o;P0001;Mleko 3,2% 1 l;22;94,06;PLN;Zofia £ukasiewicz
+06.11.2025;FV-1205;Piekarnia èrÛd≥o;P0004;Ser Oscypek;33;687,15;PLN;Piotr Wiúniewski
+06.11.2025;FV-1206;Zak≥ady MiÍsne £uøycka;P0019;MiÛd 400 g;24;562,22;PLN;Piotr Wiúniewski
+06.11.2025;FV-1206;Zak≥ady MiÍsne £uøycka;P0010;Herbata czarna;11;217,78;PLN;Ma≥gorzata Øak
+06.11.2025;FV-1206;Zak≥ady MiÍsne £uøycka;P0012;Mπka pszenna;4;91,55;PLN;Zofia £ukasiewicz
+07.11.2025;FV-1207;Dystrybucja PÛ≥noc;P0018;Jaja klasa L;29;450,24;PLN;£ukasz Dπbrowski
+07.11.2025;FV-1208;Warzywniak åwiÍtokrzyski;P0012;Mπka pszenna;23;500,70;PLN;Zofia £ukasiewicz
+07.11.2025;FV-1208;Warzywniak åwiÍtokrzyski;P0003;TwarÛg pÛ≥t≥usty;5;51,39;PLN;Piotr Wiúniewski
+07.11.2025;FV-1208;Warzywniak åwiÍtokrzyski;P0001;Mleko 3,2% 1 l;12;53,99;PLN;£ukasz Dπbrowski
+07.11.2025;FV-1209;Dystrybucja PÛ≥noc;P0001;Mleko 3,2% 1 l;26;127,48;PLN;Zofia £ukasiewicz
+07.11.2025;FV-1209;Dystrybucja PÛ≥noc;P0017;Ryba mroøona;31;645,04;PLN;Zofia £ukasiewicz
+07.11.2025;FV-1209;Dystrybucja PÛ≥noc;P0017;Ryba mroøona;24;509,24;PLN;Zofia £ukasiewicz
+08.11.2025;FV-1210;Restauracja Z≥ota £Ûdü;P0024;Sos pomidorowy;39;159,30;PLN;£ukasz Dπbrowski
+08.11.2025;FV-1210;Restauracja Z≥ota £Ûdü;P0014;Makaron úwiderki;2;53,18;PLN;Piotr Wiúniewski
+08.11.2025;FV-1210;Restauracja Z≥ota £Ûdü;P0017;Ryba mroøona;12;267,68;PLN;Ma≥gorzata Øak
+10.11.2025;FV-1211;Hurtownia Øubr Sp. z o.o.;P0014;Makaron úwiderki;35;928,67;PLN;Zofia £ukasiewicz
+10.11.2025;FV-1211;Hurtownia Øubr Sp. z o.o.;P0007;Sok jab≥kowy;23;542,08;PLN;£ukasz Dπbrowski
+10.11.2025;FV-1212;Zak≥ady MiÍsne £uøycka;P0018;Jaja klasa L;9;129,46;PLN;Ma≥gorzata Øak
+10.11.2025;FV-1212;Zak≥ady MiÍsne £uøycka;P0016;Kie≥basa úlπska;40;391,53;PLN;Zofia £ukasiewicz
+10.11.2025;FV-1212;Zak≥ady MiÍsne £uøycka;P0013;Olej rzepakowy;19;270,10;PLN;£ukasz Dπbrowski
+10.11.2025;FV-1213;Zak≥ady MiÍsne £uøycka;P0004;Ser Oscypek;5;104,28;PLN;Zofia £ukasiewicz
+10.11.2025;FV-1213;Zak≥ady MiÍsne £uøycka;P0020;Czekolada mleczna;12;225,66;PLN;Zofia £ukasiewicz
+10.11.2025;FV-1213;Zak≥ady MiÍsne £uøycka;P0016;Kie≥basa úlπska;39;379,42;PLN;Zofia £ukasiewicz
+10.11.2025;FV-1214;Hurtownia Øubr Sp. z o.o.;P0015;Ryø bia≥y;34;512,19;PLN;£ukasz Dπbrowski
+10.11.2025;FV-1214;Hurtownia Øubr Sp. z o.o.;P0008;Woda mineralna;33;377,82;PLN;Ma≥gorzata Øak
+10.11.2025;FV-1215;Piekarnia èrÛd≥o;P0024;Sos pomidorowy;9;36,20;PLN;Piotr Wiúniewski
+10.11.2025;FV-1215;Piekarnia èrÛd≥o;P0021;Ciastka maúlane;21;210,65;PLN;Zofia £ukasiewicz
+10.11.2025;FV-1215;Piekarnia èrÛd≥o;P0018;Jaja klasa L;32;482,25;PLN;£ukasz Dπbrowski
+11.11.2025;FV-1216;Hurtownia Øubr Sp. z o.o.;P0005;Chleb øytni;32;596,72;PLN;Piotr Wiúniewski
+11.11.2025;FV-1216;Hurtownia Øubr Sp. z o.o.;P0002;Mas≥o extra 82%;20;353,16;PLN;Zofia £ukasiewicz
+11.11.2025;FV-1217;Hurtownia Øubr Sp. z o.o.;P0018;Jaja klasa L;24;365,82;PLN;Zofia £ukasiewicz
+11.11.2025;FV-1217;Hurtownia Øubr Sp. z o.o.;P0024;Sos pomidorowy;27;94,14;PLN;Ma≥gorzata Øak
+11.11.2025;FV-1218;PPUH Nowak;P0004;Ser Oscypek;12;250,30;PLN;Ma≥gorzata Øak
+11.11.2025;FV-1218;PPUH Nowak;P0012;Mπka pszenna;15;306,73;PLN;Ma≥gorzata Øak
+11.11.2025;FV-1219;PPUH Nowak;P0010;Herbata czarna;36;684,32;PLN;Zofia £ukasiewicz
+11.11.2025;FV-1219;PPUH Nowak;P0022;Groszek konserwowy;1;24,23;PLN;Zofia £ukasiewicz
+12.11.2025;FV-1220;Hurtownia Øubr Sp. z o.o.;P0021;Ciastka maúlane;29;267,65;PLN;Piotr Wiúniewski
+12.11.2025;FV-1220;Hurtownia Øubr Sp. z o.o.;P0024;Sos pomidorowy;32;111,81;PLN;Ma≥gorzata Øak
+12.11.2025;FV-1220;Hurtownia Øubr Sp. z o.o.;P0019;MiÛd 400 g;27;710,60;PLN;£ukasz Dπbrowski
+12.11.2025;FV-1221;Piekarnia èrÛd≥o;P0011;Cukier 1 kg;40;309,15;PLN;Ma≥gorzata Øak
+12.11.2025;FV-1221;Piekarnia èrÛd≥o;P0004;Ser Oscypek;37;888,38;PLN;Piotr Wiúniewski
+12.11.2025;FV-1222;Szko≥a Podstawowa nr 5;P0003;TwarÛg pÛ≥t≥usty;6;64,82;PLN;Piotr Wiúniewski
+13.11.2025;FV-1223;Hurtownia Øubr Sp. z o.o.;P0024;Sos pomidorowy;36;128,24;PLN;Ma≥gorzata Øak
+13.11.2025;FV-1223;Hurtownia Øubr Sp. z o.o.;P0007;Sok jab≥kowy;38;795,85;PLN;£ukasz Dπbrowski
+13.11.2025;FV-1224;Hurtownia Øubr Sp. z o.o.;P0020;Czekolada mleczna;2;40,30;PLN;Ma≥gorzata Øak
+13.11.2025;FV-1225;Zak≥ady MiÍsne £uøycka;P0019;MiÛd 400 g;20;458,91;PLN;Piotr Wiúniewski
+13.11.2025;FV-1226;Restauracja Z≥ota £Ûdü;P0006;Bu≥ka pszenna;28;210,93;PLN;Piotr Wiúniewski
+13.11.2025;FV-1226;Restauracja Z≥ota £Ûdü;P0022;Groszek konserwowy;18;492,92;PLN;Piotr Wiúniewski
+13.11.2025;FV-1227;Hurtownia Øubr Sp. z o.o.;P0013;Olej rzepakowy;23;304,59;PLN;Piotr Wiúniewski
+13.11.2025;FV-1227;Hurtownia Øubr Sp. z o.o.;P0010;Herbata czarna;38;749,16;PLN;Zofia £ukasiewicz
+13.11.2025;FV-1227;Hurtownia Øubr Sp. z o.o.;P0013;Olej rzepakowy;7;89,30;PLN;Piotr Wiúniewski
+14.11.2025;FV-1228;Szko≥a Podstawowa nr 5;P0016;Kie≥basa úlπska;26;238,37;PLN;Zofia £ukasiewicz
+14.11.2025;FV-1229;Firma Handlowa WÛjcik;P0004;Ser Oscypek;27;645,78;PLN;Zofia £ukasiewicz
+14.11.2025;FV-1229;Firma Handlowa WÛjcik;P0024;Sos pomidorowy;29;111,73;PLN;Zofia £ukasiewicz
+14.11.2025;FV-1230;Hurtownia Øubr Sp. z o.o.;P0017;Ryba mroøona;1;21,75;PLN;Piotr Wiúniewski
+14.11.2025;FV-1230;Hurtownia Øubr Sp. z o.o.;P0024;Sos pomidorowy;3;12,13;PLN;Ma≥gorzata Øak
+14.11.2025;FV-1231;Bar Mleczny Pod RÛøπ;P0008;Woda mineralna;38;519,74;PLN;Piotr Wiúniewski
+14.11.2025;FV-1231;Bar Mleczny Pod RÛøπ;P0002;Mas≥o extra 82%;1;17,37;PLN;£ukasz Dπbrowski
+15.11.2025;FV-1232;Zak≥ady MiÍsne £uøycka;P0017;Ryba mroøona;11;245,87;PLN;£ukasz Dπbrowski
+15.11.2025;FV-1232;Zak≥ady MiÍsne £uøycka;P0017;Ryba mroøona;36;758,77;PLN;£ukasz Dπbrowski
+15.11.2025;FV-1232;Zak≥ady MiÍsne £uøycka;P0003;TwarÛg pÛ≥t≥usty;37;395,46;PLN;Piotr Wiúniewski
+17.11.2025;FV-1233;Hurtownia Øubr Sp. z o.o.;P0009;Kawa mielona 500 g;19;551,31;PLN;Piotr Wiúniewski
+17.11.2025;FV-1233;Hurtownia Øubr Sp. z o.o.;P0003;TwarÛg pÛ≥t≥usty;25;286,29;PLN;£ukasz Dπbrowski
+17.11.2025;FV-1234;PrzetwÛrnia OwocÛw £Íczyca;P0006;Bu≥ka pszenna;39;295,76;PLN;Zofia £ukasiewicz
+17.11.2025;FV-1234;PrzetwÛrnia OwocÛw £Íczyca;P0012;Mπka pszenna;40;976,59;PLN;Ma≥gorzata Øak
+17.11.2025;FV-1234;PrzetwÛrnia OwocÛw £Íczyca;P0011;Cukier 1 kg;13;109,66;PLN;£ukasz Dπbrowski
+17.11.2025;FV-1235;PPUH Nowak;P0004;Ser Oscypek;15;309,41;PLN;Ma≥gorzata Øak
+17.11.2025;FV-1235;PPUH Nowak;P0009;Kawa mielona 500 g;32;878,09;PLN;Piotr Wiúniewski
+17.11.2025;FV-1236;Hurtownia Øubr Sp. z o.o.;P0010;Herbata czarna;14;271,44;PLN;Zofia £ukasiewicz
+17.11.2025;FV-1236;Hurtownia Øubr Sp. z o.o.;P0015;Ryø bia≥y;25;415,23;PLN;£ukasz Dπbrowski
+17.11.2025;FV-1237;Catering Øurawia;P0009;Kawa mielona 500 g;26;740,01;PLN;Ma≥gorzata Øak
+17.11.2025;FV-1237;Catering Øurawia;P0016;Kie≥basa úlπska;17;161,65;PLN;£ukasz Dπbrowski
+18.11.2025;FV-1238;Dystrybucja PÛ≥noc;P0013;Olej rzepakowy;22;323,14;PLN;Zofia £ukasiewicz
+18.11.2025;FV-1238;Dystrybucja PÛ≥noc;P0013;Olej rzepakowy;29;356,29;PLN;Zofia £ukasiewicz
+18.11.2025;FV-1239;Market Øabka Partner;P0023;OgÛrki kiszone;36;648,61;PLN;Piotr Wiúniewski
+18.11.2025;FV-1239;Market Øabka Partner;P0009;Kawa mielona 500 g;24;600,01;PLN;£ukasz Dπbrowski
+18.11.2025;FV-1239;Market Øabka Partner;P0008;Woda mineralna;27;342,37;PLN;Zofia £ukasiewicz
+18.11.2025;FV-1240;Restauracja Z≥ota £Ûdü;P0014;Makaron úwiderki;18;404,49;PLN;Piotr Wiúniewski
+18.11.2025;FV-1240;Restauracja Z≥ota £Ûdü;P0021;Ciastka maúlane;29;271,20;PLN;Ma≥gorzata Øak
+18.11.2025;FV-1240;Restauracja Z≥ota £Ûdü;P0006;Bu≥ka pszenna;32;234,89;PLN;Piotr Wiúniewski
+18.11.2025;FV-1241;Hurtownia Øubr Sp. z o.o.;P0015;Ryø bia≥y;30;453,38;PLN;£ukasz Dπbrowski
+18.11.2025;FV-1242;Hurtownia Øubr Sp. z o.o.;P0016;Kie≥basa úlπska;7;70,30;PLN;Ma≥gorzata Øak
+19.11.2025;FV-1243;Hurtownia Øubr Sp. z o.o.;P0020;Czekolada mleczna;20;382,61;PLN;Ma≥gorzata Øak
+19.11.2025;FV-1244;Market Øabka Partner;P0013;Olej rzepakowy;36;435,05;PLN;£ukasz Dπbrowski
+19.11.2025;FV-1244;Market Øabka Partner;P0006;Bu≥ka pszenna;40;345,81;PLN;Ma≥gorzata Øak
+19.11.2025;FV-1244;Market Øabka Partner;P0015;Ryø bia≥y;18;298,15;PLN;Piotr Wiúniewski
+19.11.2025;FV-1245;Hurtownia Øubr Sp. z o.o.;P0018;Jaja klasa L;10;135,56;PLN;Zofia £ukasiewicz
+19.11.2025;FV-1246;PPUH Nowak;P0002;Mas≥o extra 82%;32;648,52;PLN;Zofia £ukasiewicz
+19.11.2025;FV-1246;PPUH Nowak;P0018;Jaja klasa L;3;46,49;PLN;Zofia £ukasiewicz
+19.11.2025;FV-1246;PPUH Nowak;P0017;Ryba mroøona;36;846,83;PLN;Piotr Wiúniewski
+20.11.2025;FV-1247;Piekarnia èrÛd≥o;P0004;Ser Oscypek;39;933,69;PLN;Piotr Wiúniewski
+20.11.2025;FV-1247;Piekarnia èrÛd≥o;P0006;Bu≥ka pszenna;19;154,76;PLN;£ukasz Dπbrowski
+20.11.2025;FV-1247;Piekarnia èrÛd≥o;P0016;Kie≥basa úlπska;7;68,31;PLN;Piotr Wiúniewski
+20.11.2025;FV-1248;PPUH Nowak;P0016;Kie≥basa úlπska;16;157,54;PLN;Ma≥gorzata Øak
+20.11.2025;FV-1249;Hurtownia Øubr Sp. z o.o.;P0003;TwarÛg pÛ≥t≥usty;12;118,28;PLN;£ukasz Dπbrowski
+20.11.2025;FV-1249;Hurtownia Øubr Sp. z o.o.;P0016;Kie≥basa úlπska;21;205,63;PLN;Ma≥gorzata Øak
+20.11.2025;FV-1249;Hurtownia Øubr Sp. z o.o.;P0007;Sok jab≥kowy;40;800,91;PLN;£ukasz Dπbrowski
+20.11.2025;FV-1250;Bar Mleczny Pod RÛøπ;P0021;Ciastka maúlane;35;294,90;PLN;Zofia £ukasiewicz
+20.11.2025;FV-1250;Bar Mleczny Pod RÛøπ;P0003;TwarÛg pÛ≥t≥usty;31;315,69;PLN;Ma≥gorzata Øak
+20.11.2025;FV-1250;Bar Mleczny Pod RÛøπ;P0012;Mπka pszenna;39;813,54;PLN;Piotr Wiúniewski
+21.11.2025;FV-1251;Hurtownia Øubr Sp. z o.o.;P0024;Sos pomidorowy;20;74,41;PLN;Ma≥gorzata Øak
+21.11.2025;FV-1251;Hurtownia Øubr Sp. z o.o.;P0016;Kie≥basa úlπska;33;319,75;PLN;Ma≥gorzata Øak
+21.11.2025;FV-1252;Zak≥ady MiÍsne £uøycka;P0021;Ciastka maúlane;18;168,55;PLN;£ukasz Dπbrowski
+21.11.2025;FV-1252;Zak≥ady MiÍsne £uøycka;P0005;Chleb øytni;22;346,27;PLN;£ukasz Dπbrowski
+21.11.2025;FV-1253;Szko≥a Podstawowa nr 5;P0002;Mas≥o extra 82%;5;95,82;PLN;Ma≥gorzata Øak
+21.11.2025;FV-1253;Szko≥a Podstawowa nr 5;P0016;Kie≥basa úlπska;16;143,77;PLN;Zofia £ukasiewicz
+21.11.2025;FV-1253;Szko≥a Podstawowa nr 5;P0016;Kie≥basa úlπska;10;98,40;PLN;Zofia £ukasiewicz
+22.11.2025;FV-1254;Zajazd Pod DÍbem;P0001;Mleko 3,2% 1 l;12;48,41;PLN;Ma≥gorzata Øak
+22.11.2025;FV-1254;Zajazd Pod DÍbem;P0019;MiÛd 400 g;24;546,84;PLN;Zofia £ukasiewicz
+24.11.2025;FV-1255;Hurtownia Øubr Sp. z o.o.;P0012;Mπka pszenna;13;296,87;PLN;Ma≥gorzata Øak
+24.11.2025;FV-1255;Hurtownia Øubr Sp. z o.o.;P0005;Chleb øytni;19;322,09;PLN;Piotr Wiúniewski
+24.11.2025;FV-1256;Hurtownia Øubr Sp. z o.o.;P0017;Ryba mroøona;20;433,11;PLN;Piotr Wiúniewski
+24.11.2025;FV-1256;Hurtownia Øubr Sp. z o.o.;P0006;Bu≥ka pszenna;15;133,28;PLN;Zofia £ukasiewicz
+24.11.2025;FV-1256;Hurtownia Øubr Sp. z o.o.;P0006;Bu≥ka pszenna;39;327,24;PLN;Zofia £ukasiewicz
+24.11.2025;FV-1257;Zak≥ady MiÍsne £uøycka;P0012;Mπka pszenna;32;761,37;PLN;Zofia £ukasiewicz
+24.11.2025;FV-1258;PrzetwÛrnia OwocÛw £Íczyca;P0010;Herbata czarna;18;331,06;PLN;Zofia £ukasiewicz
+24.11.2025;FV-1258;PrzetwÛrnia OwocÛw £Íczyca;P0021;Ciastka maúlane;8;74,57;PLN;Piotr Wiúniewski
+24.11.2025;FV-1258;PrzetwÛrnia OwocÛw £Íczyca;P0022;Groszek konserwowy;1;23,13;PLN;Zofia £ukasiewicz
+24.11.2025;FV-1259;Hurtownia Øubr Sp. z o.o.;P0008;Woda mineralna;24;291,28;PLN;Ma≥gorzata Øak
+24.11.2025;FV-1259;Hurtownia Øubr Sp. z o.o.;P0014;Makaron úwiderki;3;72,16;PLN;Zofia £ukasiewicz
+24.11.2025;FV-1259;Hurtownia Øubr Sp. z o.o.;P0007;Sok jab≥kowy;11;226,51;PLN;£ukasz Dπbrowski
+25.11.2025;FV-1260;Market Øabka Partner;P0014;Makaron úwiderki;22;547,49;PLN;Ma≥gorzata Øak
+25.11.2025;FV-1260;Market Øabka Partner;P0014;Makaron úwiderki;5;118,69;PLN;Ma≥gorzata Øak
+25.11.2025;FV-1260;Market Øabka Partner;P0005;Chleb øytni;7;118,34;PLN;£ukasz Dπbrowski
+25.11.2025;FV-1261;Bar Mleczny Pod RÛøπ;P0007;Sok jab≥kowy;26;594,99;PLN;Ma≥gorzata Øak
+25.11.2025;FV-1261;Bar Mleczny Pod RÛøπ;P0008;Woda mineralna;22;268,87;PLN;Piotr Wiúniewski
+25.11.2025;FV-1262;Zak≥ady MiÍsne £uøycka;P0004;Ser Oscypek;18;373,20;PLN;Zofia £ukasiewicz
+25.11.2025;FV-1262;Zak≥ady MiÍsne £uøycka;P0004;Ser Oscypek;20;408,56;PLN;Zofia £ukasiewicz
+25.11.2025;FV-1262;Zak≥ady MiÍsne £uøycka;P0021;Ciastka maúlane;38;374,04;PLN;£ukasz Dπbrowski
+25.11.2025;FV-1263;Zak≥ady MiÍsne £uøycka;P0001;Mleko 3,2% 1 l;21;91,02;PLN;£ukasz Dπbrowski
+25.11.2025;FV-1263;Zak≥ady MiÍsne £uøycka;P0014;Makaron úwiderki;11;267,33;PLN;Ma≥gorzata Øak
+25.11.2025;FV-1263;Zak≥ady MiÍsne £uøycka;P0017;Ryba mroøona;17;346,93;PLN;£ukasz Dπbrowski
+26.11.2025;FV-1264;Kuchnia £Ûdzka;P0005;Chleb øytni;24;395,58;PLN;Zofia £ukasiewicz
+26.11.2025;FV-1265;Restauracja Z≥ota £Ûdü;P0014;Makaron úwiderki;22;490,63;PLN;Piotr Wiúniewski
+26.11.2025;FV-1265;Restauracja Z≥ota £Ûdü;P0006;Bu≥ka pszenna;33;292,21;PLN;Piotr Wiúniewski
+26.11.2025;FV-1266;Zak≥ady MiÍsne £uøycka;P0022;Groszek konserwowy;35;959,97;PLN;Ma≥gorzata Øak
+26.11.2025;FV-1267;Zak≥ady MiÍsne £uøycka;P0021;Ciastka maúlane;16;137,45;PLN;£ukasz Dπbrowski
+26.11.2025;FV-1267;Zak≥ady MiÍsne £uøycka;P0013;Olej rzepakowy;18;248,24;PLN;£ukasz Dπbrowski
+27.11.2025;FV-1268;Hurtownia Øubr Sp. z o.o.;P0001;Mleko 3,2% 1 l;23;111,52;PLN;Piotr Wiúniewski
+27.11.2025;FV-1269;Hurtownia Øubr Sp. z o.o.;P0002;Mas≥o extra 82%;24;420,32;PLN;Zofia £ukasiewicz
+27.11.2025;FV-1269;Hurtownia Øubr Sp. z o.o.;P0009;Kawa mielona 500 g;6;169,43;PLN;Piotr Wiúniewski
+27.11.2025;FV-1269;Hurtownia Øubr Sp. z o.o.;P0006;Bu≥ka pszenna;7;56,85;PLN;Zofia £ukasiewicz
+27.11.2025;FV-1270;Hurtownia Øubr Sp. z o.o.;P0018;Jaja klasa L;26;401,65;PLN;Zofia £ukasiewicz
+27.11.2025;FV-1271;Piekarnia èrÛd≥o;P0014;Makaron úwiderki;17;377,66;PLN;£ukasz Dπbrowski
+28.11.2025;FV-1272;Catering Øurawia;P0011;Cukier 1 kg;24;220,65;PLN;Zofia £ukasiewicz
+28.11.2025;FV-1272;Catering Øurawia;P0016;Kie≥basa úlπska;2;19,29;PLN;£ukasz Dπbrowski
+28.11.2025;FV-1272;Catering Øurawia;P0014;Makaron úwiderki;20;524,32;PLN;Piotr Wiúniewski
+28.11.2025;FV-1273;Hurtownia Øubr Sp. z o.o.;P0020;Czekolada mleczna;12;242,79;PLN;Ma≥gorzata Øak
+28.11.2025;FV-1274;Hurtownia Øubr Sp. z o.o.;P0001;Mleko 3,2% 1 l;32;142,25;PLN;Piotr Wiúniewski
+29.11.2025;FV-1275;Firma Handlowa WÛjcik;P0020;Czekolada mleczna;16;314,21;PLN;Zofia £ukasiewicz
+29.11.2025;FV-1275;Firma Handlowa WÛjcik;P0008;Woda mineralna;36;464,79;PLN;Zofia £ukasiewicz
+01.12.2025;FV-1276;Zak≥ady MiÍsne £uøycka;P0013;Olej rzepakowy;19;261,58;PLN;£ukasz Dπbrowski
+01.12.2025;FV-1276;Zak≥ady MiÍsne £uøycka;P0013;Olej rzepakowy;30;390,25;PLN;£ukasz Dπbrowski
+01.12.2025;FV-1277;Piekarnia èrÛd≥o;P0002;Mas≥o extra 82%;29;510,61;PLN;£ukasz Dπbrowski
+01.12.2025;FV-1277;Piekarnia èrÛd≥o;P0016;Kie≥basa úlπska;20;199,72;PLN;Piotr Wiúniewski
+01.12.2025;FV-1278;Firma Handlowa WÛjcik;P0009;Kawa mielona 500 g;4;105,91;PLN;£ukasz Dπbrowski
+01.12.2025;FV-1278;Firma Handlowa WÛjcik;P0005;Chleb øytni;12;229,74;PLN;£ukasz Dπbrowski
+01.12.2025;FV-1278;Firma Handlowa WÛjcik;P0004;Ser Oscypek;33;777,28;PLN;Zofia £ukasiewicz
+01.12.2025;FV-1279;Hurtownia Øubr Sp. z o.o.;P0002;Mas≥o extra 82%;13;235,82;PLN;Zofia £ukasiewicz
+01.12.2025;FV-1279;Hurtownia Øubr Sp. z o.o.;P0012;Mπka pszenna;38;855,45;PLN;Ma≥gorzata Øak
+01.12.2025;FV-1280;Zajazd Pod DÍbem;P0016;Kie≥basa úlπska;5;47,55;PLN;£ukasz Dπbrowski
+02.12.2025;FV-1281;Market Øabka Partner;P0024;Sos pomidorowy;24;81,85;PLN;Zofia £ukasiewicz
+02.12.2025;FV-1281;Market Øabka Partner;P0019;MiÛd 400 g;38;908,35;PLN;Piotr Wiúniewski
+02.12.2025;FV-1282;Hurtownia Øubr Sp. z o.o.;P0001;Mleko 3,2% 1 l;35;169,68;PLN;Piotr Wiúniewski
+02.12.2025;FV-1282;Hurtownia Øubr Sp. z o.o.;P0015;Ryø bia≥y;23;323,66;PLN;£ukasz Dπbrowski
+02.12.2025;FV-1282;Hurtownia Øubr Sp. z o.o.;P0019;MiÛd 400 g;21;576,26;PLN;£ukasz Dπbrowski
+02.12.2025;FV-1283;Hurtownia Øubr Sp. z o.o.;P0023;OgÛrki kiszone;11;191,53;PLN;£ukasz Dπbrowski
+02.12.2025;FV-1284;SieÊ SklepÛw GÛrnik;P0013;Olej rzepakowy;14;195,73;PLN;Ma≥gorzata Øak
+02.12.2025;FV-1284;SieÊ SklepÛw GÛrnik;P0003;TwarÛg pÛ≥t≥usty;4;40,36;PLN;Zofia £ukasiewicz
+03.12.2025;FV-1285;Dystrybucja PÛ≥noc;P0012;Mπka pszenna;40;913,95;PLN;Piotr Wiúniewski
+03.12.2025;FV-1286;Catering Øurawia;P0022;Groszek konserwowy;12;301,18;PLN;Piotr Wiúniewski
+03.12.2025;FV-1287;Zak≥ady MiÍsne £uøycka;P0008;Woda mineralna;13;167,19;PLN;Zofia £ukasiewicz
+04.12.2025;FV-1288;Zak≥ady MiÍsne £uøycka;P0002;Mas≥o extra 82%;12;217,46;PLN;Ma≥gorzata Øak
+04.12.2025;FV-1289;Catering Øurawia;P0016;Kie≥basa úlπska;27;271,89;PLN;£ukasz Dπbrowski
+04.12.2025;FV-1289;Catering Øurawia;P0004;Ser Oscypek;30;661,90;PLN;£ukasz Dπbrowski
+04.12.2025;FV-1290;Hurtownia Øubr Sp. z o.o.;P0005;Chleb øytni;30;496,54;PLN;Piotr Wiúniewski
+04.12.2025;FV-1290;Hurtownia Øubr Sp. z o.o.;P0015;Ryø bia≥y;20;291,10;PLN;£ukasz Dπbrowski
+05.12.2025;FV-1291;Zajazd Pod DÍbem;P0018;Jaja klasa L;32;445,85;PLN;Piotr Wiúniewski
+05.12.2025;FV-1291;Zajazd Pod DÍbem;P0020;Czekolada mleczna;40;770,46;PLN;£ukasz Dπbrowski
+05.12.2025;FV-1292;Catering Øurawia;P0002;Mas≥o extra 82%;31;569,51;PLN;Piotr Wiúniewski
+05.12.2025;FV-1292;Catering Øurawia;P0023;OgÛrki kiszone;36;566,25;PLN;Zofia £ukasiewicz
+05.12.2025;FV-1293;Piekarnia èrÛd≥o;P0010;Herbata czarna;23;442,36;PLN;£ukasz Dπbrowski
+05.12.2025;FV-1293;Piekarnia èrÛd≥o;P0024;Sos pomidorowy;16;62,16;PLN;Piotr Wiúniewski
+05.12.2025;FV-1294;Zak≥ady MiÍsne £uøycka;P0009;Kawa mielona 500 g;16;448,87;PLN;£ukasz Dπbrowski
+05.12.2025;FV-1294;Zak≥ady MiÍsne £uøycka;P0008;Woda mineralna;23;296,39;PLN;Zofia £ukasiewicz
+05.12.2025;FV-1295;Piekarnia èrÛd≥o;P0013;Olej rzepakowy;40;579,58;PLN;Zofia £ukasiewicz
+05.12.2025;KR-95;Hurtownia Øubr Sp. z o.o.;P0013;Olej rzepakowy;-10;-3†248,00;PLN;Piotr Wiúniewski
+06.12.2025;FV-1296;Hurt-Pol Sp. j.;P0015;Ryø bia≥y;28;440,79;PLN;£ukasz Dπbrowski
+08.12.2025;FV-1297;Hurtownia Øubr Sp. z o.o.;P0012;Mπka pszenna;12;247,26;PLN;Ma≥gorzata Øak
+08.12.2025;FV-1297;Hurtownia Øubr Sp. z o.o.;P0003;TwarÛg pÛ≥t≥usty;38;415,61;PLN;£ukasz Dπbrowski
+08.12.2025;FV-1298;Restauracja Z≥ota £Ûdü;P0001;Mleko 3,2% 1 l;27;110,21;PLN;Ma≥gorzata Øak
+08.12.2025;FV-1299;Hurtownia Øubr Sp. z o.o.;P0015;Ryø bia≥y;11;179,74;PLN;£ukasz Dπbrowski
+08.12.2025;FV-1299;Hurtownia Øubr Sp. z o.o.;P0020;Czekolada mleczna;12;229,03;PLN;Ma≥gorzata Øak
+08.12.2025;FV-1300;Cukiernia ånieøka;P0011;Cukier 1 kg;27;233,48;PLN;Ma≥gorzata Øak
+08.12.2025;FV-1300;Cukiernia ånieøka;P0008;Woda mineralna;35;405,64;PLN;Piotr Wiúniewski
+08.12.2025;FV-1301;Hurtownia Øubr Sp. z o.o.;P0002;Mas≥o extra 82%;16;332,90;PLN;Zofia £ukasiewicz
+08.12.2025;FV-1301;Hurtownia Øubr Sp. z o.o.;P0018;Jaja klasa L;33;513,33;PLN;Zofia £ukasiewicz
+08.12.2025;FV-1301;Hurtownia Øubr Sp. z o.o.;P0010;Herbata czarna;9;180,84;PLN;Zofia £ukasiewicz
+09.12.2025;FV-1302;Hurtownia Øubr Sp. z o.o.;P0012;Mπka pszenna;24;566,10;PLN;Ma≥gorzata Øak
+09.12.2025;FV-1302;Hurtownia Øubr Sp. z o.o.;P0004;Ser Oscypek;39;925,23;PLN;Ma≥gorzata Øak
+09.12.2025;FV-1302;Hurtownia Øubr Sp. z o.o.;P0020;Czekolada mleczna;29;555,58;PLN;Ma≥gorzata Øak
+09.12.2025;FV-1303;Hurtownia Øubr Sp. z o.o.;P0013;Olej rzepakowy;4;48,93;PLN;Piotr Wiúniewski
+09.12.2025;FV-1303;Hurtownia Øubr Sp. z o.o.;P0008;Woda mineralna;15;185,72;PLN;Ma≥gorzata Øak
+09.12.2025;FV-1303;Hurtownia Øubr Sp. z o.o.;P0007;Sok jab≥kowy;38;825,67;PLN;£ukasz Dπbrowski
+09.12.2025;FV-1304;Hurtownia Øubr Sp. z o.o.;P0017;Ryba mroøona;10;230,87;PLN;Piotr Wiúniewski
+09.12.2025;FV-1304;Hurtownia Øubr Sp. z o.o.;P0003;TwarÛg pÛ≥t≥usty;7;80,52;PLN;£ukasz Dπbrowski
+09.12.2025;FV-1304;Hurtownia Øubr Sp. z o.o.;P0004;Ser Oscypek;15;363,68;PLN;Ma≥gorzata Øak
+09.12.2025;FV-1305;Piekarnia èrÛd≥o;P0021;Ciastka maúlane;20;166,42;PLN;Zofia £ukasiewicz
+09.12.2025;FV-1305;Piekarnia èrÛd≥o;P0022;Groszek konserwowy;39;914,70;PLN;£ukasz Dπbrowski
+09.12.2025;FV-1305;Piekarnia èrÛd≥o;P0001;Mleko 3,2% 1 l;26;113,66;PLN;Zofia £ukasiewicz
+10.12.2025;FV-1306;SieÊ SklepÛw GÛrnik;P0004;Ser Oscypek;9;185,60;PLN;£ukasz Dπbrowski
+10.12.2025;FV-1306;SieÊ SklepÛw GÛrnik;P0014;Makaron úwiderki;30;807,69;PLN;Piotr Wiúniewski
+10.12.2025;FV-1306;SieÊ SklepÛw GÛrnik;P0006;Bu≥ka pszenna;30;227,31;PLN;Piotr Wiúniewski
+10.12.2025;FV-1307;Szko≥a Podstawowa nr 5;P0014;Makaron úwiderki;31;804,32;PLN;Ma≥gorzata Øak
+10.12.2025;FV-1308;Market Øabka Partner;P0013;Olej rzepakowy;24;298,40;PLN;£ukasz Dπbrowski
+10.12.2025;FV-1308;Market Øabka Partner;P0001;Mleko 3,2% 1 l;8;33,99;PLN;£ukasz Dπbrowski
+10.12.2025;FV-1308;Market Øabka Partner;P0024;Sos pomidorowy;14;57,51;PLN;Zofia £ukasiewicz
+10.12.2025;FV-1309;Firma Handlowa WÛjcik;P0005;Chleb øytni;33;554,68;PLN;£ukasz Dπbrowski
+10.12.2025;FV-1309;Firma Handlowa WÛjcik;P0002;Mas≥o extra 82%;34;707,29;PLN;Ma≥gorzata Øak
+10.12.2025;FV-1309;Firma Handlowa WÛjcik;P0002;Mas≥o extra 82%;3;61,73;PLN;Ma≥gorzata Øak
+11.12.2025;FV-1310;Cukiernia ånieøka;P0024;Sos pomidorowy;9;36,13;PLN;Piotr Wiúniewski
+11.12.2025;FV-1310;Cukiernia ånieøka;P0020;Czekolada mleczna;2;42,06;PLN;Piotr Wiúniewski
+11.12.2025;FV-1311;Hurtownia Øubr Sp. z o.o.;P0009;Kawa mielona 500 g;3;78,24;PLN;Piotr Wiúniewski
+11.12.2025;FV-1311;Hurtownia Øubr Sp. z o.o.;P0002;Mas≥o extra 82%;13;246,65;PLN;Zofia £ukasiewicz
+11.12.2025;FV-1312;Hurtownia Øubr Sp. z o.o.;P0013;Olej rzepakowy;36;480,84;PLN;Piotr Wiúniewski
+12.12.2025;FV-1313;Warzywniak åwiÍtokrzyski;P0017;Ryba mroøona;3;64,71;PLN;£ukasz Dπbrowski
+12.12.2025;FV-1314;Dystrybucja PÛ≥noc;P0005;Chleb øytni;7;132,34;PLN;Zofia £ukasiewicz
+12.12.2025;FV-1315;Hurtownia Øubr Sp. z o.o.;P0008;Woda mineralna;5;58,53;PLN;Ma≥gorzata Øak
+12.12.2025;FV-1315;Hurtownia Øubr Sp. z o.o.;P0010;Herbata czarna;21;397,44;PLN;Zofia £ukasiewicz
+12.12.2025;FV-1316;Hurtownia Øubr Sp. z o.o.;P0012;Mπka pszenna;10;227,84;PLN;Ma≥gorzata Øak
+12.12.2025;FV-1316;Hurtownia Øubr Sp. z o.o.;P0017;Ryba mroøona;8;179,11;PLN;Piotr Wiúniewski
+12.12.2025;FV-1317;Zak≥ady MiÍsne £uøycka;P0010;Herbata czarna;27;517,51;PLN;Ma≥gorzata Øak
+12.12.2025;FV-1317;Zak≥ady MiÍsne £uøycka;P0016;Kie≥basa úlπska;16;160,66;PLN;Zofia £ukasiewicz
+12.12.2025;FV-1317;Zak≥ady MiÍsne £uøycka;P0009;Kawa mielona 500 g;2;49,95;PLN;£ukasz Dπbrowski
+13.12.2025;FV-1318;PPUH Nowak;P0014;Makaron úwiderki;37;866,99;PLN;Zofia £ukasiewicz
+13.12.2025;FV-1318;PPUH Nowak;P0018;Jaja klasa L;36;540,55;PLN;Zofia £ukasiewicz
+15.12.2025;FV-1319;Dystrybucja PÛ≥noc;P0011;Cukier 1 kg;38;310,07;PLN;Ma≥gorzata Øak
+15.12.2025;FV-1320;Hurtownia Øubr Sp. z o.o.;P0013;Olej rzepakowy;26;352,03;PLN;Piotr Wiúniewski
+15.12.2025;FV-1320;Hurtownia Øubr Sp. z o.o.;P0002;Mas≥o extra 82%;18;347,06;PLN;Zofia £ukasiewicz
+15.12.2025;FV-1321;Bar Mleczny Pod RÛøπ;P0002;Mas≥o extra 82%;14;256,18;PLN;£ukasz Dπbrowski
+15.12.2025;FV-1321;Bar Mleczny Pod RÛøπ;P0024;Sos pomidorowy;28;98,51;PLN;Piotr Wiúniewski
+15.12.2025;FV-1321;Bar Mleczny Pod RÛøπ;P0002;Mas≥o extra 82%;14;245,32;PLN;£ukasz Dπbrowski
