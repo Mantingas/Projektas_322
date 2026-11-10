@@ -38,7 +38,7 @@ export function Workspace() {
   }, [version]);
   return (
     <div className="space-y-6">
-      <div role="tablist" className="no-print flex gap-1 overflow-x-auto border-b border-slate-200 dark:border-slate-800">
+      <div role="tablist" className="no-print flex gap-1 overflow-x-auto border-b [mask-image:linear-gradient(to_right,black_92%,transparent)] sm:[mask-image:none] border-slate-200 dark:border-slate-800">
         {TABS.map((k) => (
           <button
             key={k}

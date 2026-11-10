@@ -53,10 +53,11 @@ export function PilotView({ version, goImport, onChanged }: { version: number; g
 
   // the pilot is a SUPPLIER-side validation: receivable findings are out of scope
   const trust = (exec?.model.trust ?? []).filter((r) => r.side === 'payable');
-  const data: PilotData = useMemo(() => ({ ...flatten(trust), reviews, missed, meta, imports, withheldOther: exec?.model.withheld.length ?? 0 }), [trust, reviews, missed, meta, imports, exec]);
+  const data: PilotData = useMemo(() => ({ ...flatten(trust), reviews, missed, meta, imports, withheldOther: imports.length ? exec?.model.withheld.length ?? 0 : 0 }), [trust, reviews, missed, meta, imports, exec]);
   const m = useMemo(() => metricsOf(data), [data]);
   const all = useMemo(() => trust.flatMap((r) => r.findings.map((f) => ({ f, r }))), [trust]);
   const reviewOf = (id: string) => reviews.find((x) => x.id === id);
+  const otherWithheld = imports.length && exec ? exec.model.withheld : [];
   const shown = all.filter(({ f }) => f.status !== 'withheld' && (filterAll || (reviewOf(f.id)?.decision ?? 'not_reviewed') === 'not_reviewed'));
   const label = (s: string) => (redact ? mask(s) : s);
   const cur = (c: string, n: number) => money(n, { lang, currency: c });
@@ -137,10 +138,10 @@ export function PilotView({ version, goImport, onChanged }: { version: number; g
       </section>
 
       <section className="space-y-2" data-testid="pilot-withheld">
-        <h2 className="text-lg font-semibold">{t('pilot.sec.withheld')} ({exec.model.withheld.length + all.filter(({ f }) => f.status === 'withheld').length})</h2>
+        <h2 className="text-lg font-semibold">{t('pilot.sec.withheld')} ({otherWithheld.length + all.filter(({ f }) => f.status === 'withheld').length})</h2>
         <ul className="list-disc space-y-1 pl-5 text-sm text-slate-600 dark:text-slate-400">
           {all.filter(({ f }) => f.status === 'withheld').slice(0, 20).map(({ f, r }) => <li key={f.id}>{findingTitle(f, lang)}</li>)}
-          {exec.model.withheld.slice(0, 20).map((w, i) => <li key={i}>{withheldText(w, lang)}</li>)}
+          {otherWithheld.slice(0, 20).map((w, i) => <li key={i}>{withheldText(w, lang)}</li>)}
         </ul>
       </section>
 
@@ -169,7 +170,7 @@ export function PilotView({ version, goImport, onChanged }: { version: number; g
 
       <section className="space-y-2" data-testid="pilot-completeness">
         <h2 className="text-lg font-semibold">{t('pilot.sec.completeness')} – <span data-testid="pilot-pct">{Math.round(m.completeness * 100)}%</span></h2>
-        <Card><ul className="space-y-1 text-sm">{m.checks.map((c) => <li key={c.id} data-testid={`check-${c.id}`} data-ok={c.ok} className="flex flex-wrap gap-2"><Badge tone={c.ok ? 'opportunity' : 'warn'}>{c.ok ? '✓' : '–'}</Badge>{t(`pilot.check.${c.id}` as MessageKey)}{c.params && ['snapshot', 'period', 'findings_reviewed'].includes(c.id) && <span className="text-xs text-slate-500">{t(`pilot.check.${c.id}.d` as MessageKey, c.params)}</span>}</li>)}</ul></Card>
+        <Card><ul className="space-y-1 text-sm">{m.checks.map((c) => <li key={c.id} data-testid={`check-${c.id}`} data-ok={c.ok} className="flex items-start gap-2"><Badge tone={c.ok ? 'opportunity' : 'warn'}>{c.ok ? '✓' : '–'}</Badge><span>{t(`pilot.check.${c.id}` as MessageKey)}{c.params && ['snapshot', 'period', 'findings_reviewed'].includes(c.id) && <span className="text-xs text-slate-500">{t(`pilot.check.${c.id}.d` as MessageKey, c.params)}</span>}</span></li>)}</ul></Card>
       </section>
 
       <section className="space-y-2" data-testid="pilot-export">
