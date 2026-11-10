@@ -6,6 +6,7 @@ import inv from './inv.lt';
 import fin from './fin.lt';
 import uni from './uni.lt';
 import exe from './exe.lt';
+import trust from './trust.lt';
 
 const lt: Messages = {
   ...dash,
@@ -15,6 +16,7 @@ const lt: Messages = {
   ...fin,
   ...uni,
   ...exe,
+  ...trust,
   'app.name': 'Excel įžvalgos',
   'app.tagline': 'Verslo įžvalgos iš jūsų Excel failų',
   'nav.home': 'Pradžia', 'nav.import': 'Importas', 'nav.insights': 'Įžvalgos', 'nav.history': 'Istorija', 'nav.settings': 'Nustatymai',

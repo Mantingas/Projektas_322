@@ -21,6 +21,7 @@ const d: Record<keyof typeof p, string> = {
   'import.needCounterparty': 'Nepasirinktas kliento / tiekėjo stulpelis. Pasirinkite kodą arba pavadinimą.',
   'issue.missing_counterparty': 'Trūksta kliento / tiekėjo', 'issue.missing_due_date': 'Trūksta apmokėjimo termino', 'issue.invalid_due_date': 'Neįskaitomas apmokėjimo terminas', 'issue.invalid_payment_date': 'Neįskaitoma mokėjimo data', 'issue.missing_invoice_number': 'Trūksta sąskaitos numerio',
   'issue.outstanding_derived': 'Neapmokėta suma išvesta iš pradinė − sumokėta tos pačios eilutės', 'issue.negative_outstanding': 'Neigiamas likutis (kredito likutis / permoka)', 'issue.duplicate_invoice_number': 'Sąskaitos numeris registre kartojasi',
+  'issue.negative_assumed_credit': 'Neigiama suma sąskaitų registre laikoma kreditine sąskaita (prielaida – failas to nenurodo)',
   'issue.payment_without_reference': 'Mokėjimas be nuorodos į sąskaitą (negalima susieti)', 'issue.aging_total_mismatch': 'Bendra suma skiriasi nuo senėjimo intervalų sumos', 'issue.missing_outstanding': 'Trūksta neapmokėtos sumos',
 
   'metric.f_outstanding': 'Neapmokėtas likutis', 'metric.f_overdue': 'Pradelsta suma', 'metric.f_overdue_share': 'Pradelstų dalis nuo likučio', 'metric.f_overdue_count': 'Pradelstos sąskaitos', 'metric.f_due_soon': 'Terminas ateinančias 14 d.',

@@ -5,7 +5,9 @@ import type { ReportInput } from '@/engine/report/export';
 import type { Insight } from '@/engine/types';
 import { changeText, fmtUnit, metricLabel, type T } from './dashFormat';
 import { formatEvidence, formatImpact, renderInsight } from './report';
-import { fmtDate, translate, type Lang, type MessageKey } from '@/i18n';
+import { assessInsight } from '@/engine/trust/evidence';
+import { findingTitle, tr } from './evidence';
+import { fmtDate, money, translate, type Lang, type MessageKey } from '@/i18n';
 
 const MODULE_ORDER = ['sales', 'purchasing', 'inventory', 'finance'] as const;
 export const kpiLabel = (k: ExecKpi, t: T) => `${t(`mod.${k.module}` as MessageKey)}${k.side ? ` – ${t(`fin.side.short.${k.side}` as MessageKey)}` : ''}: ${metricLabel(k.id, (k.basis ?? 'net') as 'net' | 'gross' | 'unknown', t)}`;
@@ -25,10 +27,21 @@ const itemRow = (r: RankedItem, lang: Lang, t: T) => {
   const c = cur(r);
   const x = renderInsight(r.insight, lang, c);
   const cert = r.insight.certainty ? t(`cert.${r.insight.certainty}` as MessageKey) : '';
-  const label = `${t(`exe.class.${r.class}` as MessageKey)}${cert ? ` · ${cert}` : ''} · ${t(`mod.${r.module}` as MessageKey)}`;
+  const dossier = assessInsight(r.insight, { basis: r.basis, currency: c });
+  const label = `${t(`trust.status.${dossier.status}` as MessageKey)} · ${t(`exe.class.${r.class}` as MessageKey)}${cert ? ` · ${cert}` : ''} · ${t(`mod.${r.module}` as MessageKey)}`;
   const why = [translate(lang, r.insight.whyKey as MessageKey, r.insight.params, c), disclosureText(r.insight, lang, t)].filter(Boolean).join(' ');
-  return { x, label, c, why };
+  return { x, label, c, why, dossier };
 };
+
+const RULE_KEY = { sales: 'rule', purchasing: 'prule', inventory: 'irule', finance: 'frule', cross: 'cross.rule' } as const;
+const REASON_KEY = { sales: 'unavail', purchasing: 'punavail', inventory: 'iunavail', finance: 'funavail', cross: 'cross.unavail' } as const;
+/** "<module> – <rule>: <reason>" for a conclusion that was not drawn */
+export function withheldText(w: { source: keyof typeof RULE_KEY; rule: string; reason: string }, lang: Lang): string {
+  const tt = (k: string) => translate(lang, k as MessageKey);
+  const rule = tt(w.source === 'cross' ? `cross.rule.${w.rule}` : `${RULE_KEY[w.source]}.${w.rule}`);
+  const reason = tt(w.source === 'cross' ? `cross.unavail.${w.reason}` : `${REASON_KEY[w.source]}.${w.reason}`);
+  return `${tt(`mod.${w.source}`)}: ${translate(lang, 'trust.withheldModule' as MessageKey, { rule, reason })}`;
+}
 
 export function executiveLines(m: ExecutiveModel, lang: Lang, t: T): string[] {
   const lines: string[] = [];
@@ -60,6 +73,27 @@ export function coverageLimitations(m: ExecutiveModel, t: T, lang: Lang = 'en'):
   return out;
 }
 
+/** The five separated groups of an evidence-based report, plus the exposure to verify (never summed across currencies, never "savings"). */
+export function evidenceSections(m: ExecutiveModel, lang: Lang): NonNullable<SummaryDoc['sections']> {
+  const t: T = (k, p) => translate(lang, k, p);
+  const line = (r: RankedItem) => { const { x, dossier, c } = itemRow(r, lang, t); return `${x.title} — ${t(`trust.status.${dossier.status}` as MessageKey)} · ${t(`mod.${r.module}` as MessageKey)} · ${formatImpact(r.insight, lang, c)}${r.insight.impact.unit === 'money' ? ` ${c}` : ''}`; };
+  const statusOf = (r: RankedItem) => assessInsight(r.insight, { basis: r.basis, currency: r.currency }).status;
+  const confirmed = m.insights.filter((r) => statusOf(r) === 'verified');
+  const trustFindings = m.trust.flatMap((s) => s.findings.map((f) => ({ f, s })));
+  const tf = ({ f, s }: (typeof trustFindings)[number]) => `${findingTitle(f, lang)} — ${t(`trust.status.${f.status}` as MessageKey)}${f.exposure ? ` · ${money(f.exposure.amount, { lang, currency: s.currency })} (${t(`trust.exposure.${f.exposure.kind}` as MessageKey)})` : ''} · ${t(`trust.find.side.${f.side}` as MessageKey)} ${s.currency}`;
+  const out: NonNullable<SummaryDoc['sections']> = [
+    { title: t('trust.rep.confirmed'), items: confirmed.map(line), note: t('trust.disclaimer') },
+    { title: t('trust.rep.opps'), items: m.opportunities.map(line), note: t('exe.class.d.opportunity') },
+    { title: t('trust.rep.risks'), items: m.risks.map(line) },
+    { title: t('trust.rep.scenarios'), items: m.scenarios.map(line), note: t('exe.class.d.scenario') },
+    { title: t('trust.find.title'), items: trustFindings.filter(({ f }) => f.status !== 'withheld').map(tf), note: t('trust.find.intro') },
+    { title: t('trust.rep.potential'), items: m.trust.filter((s) => s.potential.parts.length).map((s) => `${t(`trust.find.side.${s.side}` as MessageKey)} ${s.currency}: ${money(s.potential.total, { lang, currency: s.currency })} — ${t('trust.rep.composition')}: ${s.potential.parts.map((p) => `${p.label} ${money(p.amount, { lang, currency: s.currency })} (${t(`trust.status.${p.status}` as MessageKey)})`).join('; ')}`), note: t('trust.find.potential.note') },
+    { title: t('trust.rep.withheld'), items: [...m.withheld.map((w) => withheldText(w, lang)), ...trustFindings.filter(({ f }) => f.status === 'withheld').map(({ f, s }) => `${findingTitle(f, lang)} — ${f.withheldReason ? tr(lang, f.withheldReason, s.currency) : ''}`)] },
+    { title: t('trust.rep.verify'), items: [t('trust.rep.verifyAction')] },
+  ];
+  return out;
+}
+
 export function buildExecutiveSummaryDoc(m: ExecutiveModel, lang: Lang): SummaryDoc {
   const t: T = (k, p) => translate(lang, k, p);
   const kpis = m.kpis.map((k) => {
@@ -80,7 +114,7 @@ export function buildExecutiveSummaryDoc(m: ExecutiveModel, lang: Lang): Summary
   const periodLine = dates.length ? dates.map((c) => `${t(`mod.${c.module}` as MessageKey)}: ${fmtDate(c.from!, lang)} – ${fmtDate(c.to!, lang)}`).join(' · ') : t('exe.lastImport.none');
   return {
     lang, title: t('exe.rep.title'), subtitle: `${t('exe.title')}${m.lastImportedAt ? ` · ${t('exe.lastImport', { when: when(m.lastImportedAt, lang) })}` : ''}`, generatedAt: new Date().toISOString().slice(0, 16).replace('T', ' '), periodLine,
-    executive: executiveLines(m, lang, t), kpis, charts, insights, limitations: coverageLimitations(m, t, lang), methodology: (['exe.an.m1', 'exe.an.m2', 'exe.an.m3', 'exe.an.m4', 'exe.an.m5'] as const).map((k) => t(k)),
+    executive: executiveLines(m, lang, t), kpis, charts, insights, sections: evidenceSections(m, lang), limitations: coverageLimitations(m, t, lang), methodology: (['exe.an.m1', 'exe.an.m2', 'exe.an.m3', 'exe.an.m4', 'exe.an.m5'] as const).map((k) => t(k)),
     labels: { executive: t('exe.rep.exec'), kpi: t('exe.rep.kpis'), metric: t('rep.metric'), current: t('kpi.current'), previous: t('kpi.previous'), change: t('kpi.change'), charts: t('exe.sec.trends'), insights: t('exe.sec.insights'), contributors: t('ins.contributors'), why: t('ins.why'), action: t('ins.action'), sufficiency: t('ins.sufficiency'), impact: t('ins.impact'), limitations: t('exe.rep.coverage'), methodology: t('rep.methodology'), association: t('ins.association'), footer: t('rep.local') },
   };
 }
@@ -90,10 +124,12 @@ export function buildExecutiveReport(m: ExecutiveModel, lang: Lang): ReportInput
   return {
     title: t('exe.rep.title'), subtitle: t('exe.title'), generatedAt: new Date().toISOString().slice(0, 16).replace('T', ' '), lang,
     kpis: m.kpis.map((k) => ({ label: kpiLabel(k, t), value: `${fmtUnit(k.metric.unit, k.metric.current!, lang, k.currency)} (${k.currency})` })),
-    insights: m.insights.map((r) => {
+    insights: [...m.insights.map((r) => {
       const { x, label, c, why } = itemRow(r, lang, t);
       return { title: x.title, body: x.body, action: x.action, reliability: `${label} · ${t(`rel.${r.insight.reliability}` as MessageKey)}`, impact: formatImpact(r.insight, lang, c), evidence: [...r.insight.evidence.filter((e) => e.label !== 'period').map((e) => formatEvidence(e, lang, c)), ...(r.insight.cross ? [why] : [])] };
-    }),
+    }), ...csvTrust(m, lang)],
     labels: { insights: t('exe.sec.insights'), action: t('ins.action'), reliability: t('ins.reliability'), impact: t('ins.impact'), footer: t('report.footer'), kpis: 'KPI' },
   };
 }
+
+const csvTrust = (m: ExecutiveModel, lang: Lang) => m.trust.flatMap((s) => s.findings.map((f) => ({ title: findingTitle(f, lang), body: tr(lang, f.calculation, s.currency), action: translate(lang, 'trust.rep.verifyAction' as MessageKey), reliability: `${translate(lang, `trust.status.${f.status}` as MessageKey)} · ${s.currency}`, impact: f.exposure ? `${money(f.exposure.amount, { lang, currency: s.currency })} (${translate(lang, `trust.exposure.${f.exposure.kind}` as MessageKey)})` : '–', evidence: [...f.limitations.map((x) => tr(lang, x)), ...f.missing.map((x) => `${translate(lang, 'trust.panel.missing' as MessageKey)}: ${tr(lang, x)}`), ...f.records.map((r) => `${translate(lang, `trust.role.${r.role}` as MessageKey)} ${r.documentId ?? ''} ${fmtDate(r.date, lang)} ${money(r.amount, { lang, currency: s.currency })} #${r.sourceRow}`)] })));

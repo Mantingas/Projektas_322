@@ -2,6 +2,7 @@ import type { MetricComparison } from '../analytics/compare';
 import type { EntityLink } from '../entities/links';
 import type { CrossReason } from './cross';
 import type { FinanceSide, Insight } from '../types';
+import type { SettlementResult } from '../trust/types';
 
 export type ExecModule = 'sales' | 'purchasing' | 'inventory' | 'finance';
 export type ExecSource = ExecModule | 'cross';
@@ -26,6 +27,8 @@ export interface ModuleSnapshot {
   base: number | null;
   pendingHeld: number;
   unknownBasis?: boolean;
+  /** rules that could not run, and why (module reason codes) */
+  unavailable?: { rule: string; reason: string }[];
 }
 
 export const WEIGHTS = { materiality: 0.35, confidence: 0.2, urgency: 0.2, actionability: 0.15, novelty: 0.1 } as const;
@@ -42,6 +45,8 @@ export interface RankedItem {
   module: ExecSource;
   side?: FinanceSide;
   currency?: string;
+  /** VAT basis of the series the finding was computed in (sales / purchasing only) */
+  basis?: 'net' | 'gross' | 'unknown';
   class: ExecClass;
   parts: { materiality: number; confidence: number; urgency: number; actionability: number; novelty: number };
   score: number;
@@ -65,6 +70,10 @@ export interface ExecutiveModel {
   suppressed: { id: string; reason: 'duplicate' | 'contradiction'; by: string; title: { key: string; params: Insight['params']; currency?: string }; byTitle: { key: string; params: Insight['params']; currency?: string } }[];
   cross: { reasons: { rule: string; reason: CrossReason }[]; confirmedLinks: number; proposedLinks: number };
   lastImportedAt?: number;
+  /** settlement findings per side and currency (never combined across currencies) */
+  trust: SettlementResult[];
+  /** conclusions that were not drawn, and the module reason code */
+  withheld: { source: ExecSource; rule: string; reason: string }[];
 }
 
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
@@ -124,7 +133,7 @@ function productIds(r: RankedItem, links: EntityLink[], g: ReturnType<typeof pro
   return out;
 }
 
-export interface ComposeInput { snapshots: ModuleSnapshot[]; cross: { insights: Insight[]; unavailable: { rule: string; reason: CrossReason }[] }; links: EntityLink[]; proposedLinks?: number; now?: number }
+export interface ComposeInput { trust?: SettlementResult[]; snapshots: ModuleSnapshot[]; cross: { insights: Insight[]; unavailable: { rule: string; reason: CrossReason }[] }; links: EntityLink[]; proposedLinks?: number; now?: number }
 
 export function composeExecutive(inp: ComposeInput): ExecutiveModel {
   const snaps = inp.snapshots;
@@ -153,7 +162,7 @@ export function composeExecutive(inp: ComposeInput): ExecutiveModel {
     for (const i of s.insights) {
       const it = { insight: i, module: s.module as ExecSource };
       const parts = partsOf(it, s.base);
-      items.push({ ...it, side: s.side, currency: s.series.currency, class: classOf(i), parts, score: scoreOf(parts), related: [] });
+      items.push({ ...it, side: s.side, currency: s.series.currency, basis: s.module === 'sales' || s.module === 'purchasing' ? (s.series.basis as RankedItem['basis']) : undefined, class: classOf(i), parts, score: scoreOf(parts), related: [] });
     }
   }
   for (const i of inp.cross.insights) {
@@ -229,6 +238,7 @@ export function composeExecutive(inp: ComposeInput): ExecutiveModel {
   return {
     empty, kpis: shownKpis, insights: top, risks: byClass('risk'), opportunities: byClass('opportunity'), scenarios: byClass('scenario'), facts: byClass('fact'), changes, actions,
     trends: snaps.filter((s) => s.trend.length >= 3).map((s) => ({ module: s.module, side: s.side, currency: s.series.currency, points: s.trend })), coverage, suppressed,
-    cross: { reasons: inp.cross.unavailable, confirmedLinks: confirmed.length, proposedLinks: inp.proposedLinks ?? 0 }, lastImportedAt,
+    cross: { reasons: inp.cross.unavailable, confirmedLinks: confirmed.length, proposedLinks: inp.proposedLinks ?? 0 }, lastImportedAt, trust: inp.trust ?? [],
+    withheld: [...snaps.flatMap((s) => (s.unavailable ?? []).filter((u) => u.reason !== 'nothing_found').map((u) => ({ source: s.module as ExecSource, rule: u.rule, reason: u.reason }))), ...inp.cross.unavailable.filter((u) => u.reason !== 'nothing_found').map((u) => ({ source: 'cross' as ExecSource, rule: u.rule, reason: u.reason }))],
   };
 }

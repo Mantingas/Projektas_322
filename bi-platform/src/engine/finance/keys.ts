@@ -24,10 +24,13 @@ export function financeScope(kind: FinanceKind, side: FinanceSide, cp: string): 
 }
 
 export function financeBaseKey(r: Omit<FinanceRecord, 'key' | 'sourceRow'>): string {
-  return hash106([
+  const parts = [
     r.kind, r.side, r.date, norm(r.documentId), norm(r.invoiceNo), norm(r.reference), cpKey(r), r.invoiceDate ?? '', r.dueDate ?? '',
     r.amount?.toFixed(4) ?? '', r.outstanding?.toFixed(4) ?? '', r.paid?.toFixed(4) ?? '', r.buckets ? Object.values(r.buckets).map((x) => x.toFixed(2)).join(',') : '', r.currency,
-  ].join('\u001f'));
+  ];
+  // a credit note and its reversal have the same magnitude: only the original sign tells them apart (keys of ordinary rows are unchanged)
+  if (r.rawAmount !== undefined && r.amount !== undefined && r.rawAmount !== r.amount && r.rawAmount !== Math.abs(r.rawAmount) && r.kind === 'credit_note') parts.push(`raw${r.rawAmount.toFixed(4)}`);
+  return hash106(parts.join('\u001f'));
 }
 
 /** Genuinely identical lines in one file get occurrence numbers, so re-importing the same file yields the same keys. */

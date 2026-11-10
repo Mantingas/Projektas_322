@@ -27,6 +27,7 @@ import { ParetoChart, RankingChart, WaterfallChart } from '../dashboard/Charts';
 import { EntityTableView } from '../dashboard/EntityTable';
 import { DrillDrawer, type DrillState } from '../dashboard/DrillDrawer';
 import { InsightCard } from '../dashboard/InsightPanel';
+import { TrustFindings } from '../trust/TrustFindings';
 import { AgingChart, BehaviourTable, CreditTable, DuplicatesTable, DueTimelineChart, MatchingCard, OverdueLinesTable, OverdueRankTable, OverdueTrendChart, OverviewCard } from './FinanceCharts';
 import { fmtDate, type MessageKey } from '@/i18n';
 
@@ -247,6 +248,7 @@ export function FinanceView({ version, goImport, initialSide = 'receivable' }: {
           <OverdueLinesTable view={view} />
           <BehaviourTable view={view} onDrill={drillPay} />
           <MatchingCard view={view} />
+          {res.trust && <TrustFindings results={[res.trust]} fileNames={importNames} testid="fin-trust" />}
           <CreditTable view={view} />
           <DuplicatesTable view={view} onDrill={(title, keys) => openDrill(title, flow(['payment'], {}, { from: FAR_PAST, to: view.periods.current.to }, keys))} />
           {view.charts.some((c) => !c.available) && (

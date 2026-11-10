@@ -6,19 +6,23 @@ import { Button } from '../ui/button';
 import { Card, CardTitle } from '../ui/card';
 import { explainInsight } from '@/engine/insights/explain';
 import { formatEvidence, formatImpact, renderInsight } from '@/lib/report';
+import { EvidencePanel, StatusBadge } from '../trust/EvidencePanel';
+import { assessInsight, type AssessCtx } from '@/engine/trust/evidence';
 import type { Insight } from '@/engine/types';
 import type { MessageKey } from '@/i18n';
 
 /** One finding with its numbers, certainty and (when it has them) its cross-module disclosure. Used where no dashboard model exists (any-table analysis, executive overview). */
-export function SimpleInsight({ insight, currency, badges, footer, testid = 'insight' }: { insight: Insight; currency: string; badges?: ReactNode; footer?: ReactNode; testid?: string }) {
+export function SimpleInsight({ insight, currency, badges, footer, testid = 'insight', ctx = {}, fileNames = {} }: { insight: Insight; currency: string; badges?: ReactNode; footer?: ReactNode; testid?: string; ctx?: AssessCtx; fileNames?: Record<string, string> }) {
   const { t, lang } = useLang();
   const [open, setOpen] = useState(false);
   const r = renderInsight(insight, lang, currency);
   const ex = explainInsight(insight);
+  const dossier = assessInsight(insight, { currency, ...ctx });
   return (
     <Card data-testid={testid} data-insight-id={insight.id} className="space-y-2">
       <div className="flex flex-wrap items-center gap-2">
         {badges}
+        <StatusBadge status={dossier.status} />
         <Badge tone={insight.severity}>{t(`sev.${insight.severity}` as MessageKey)}</Badge>
         {insight.certainty && <Badge tone={insight.certainty === 'fact' ? 'opportunity' : insight.certainty === 'possible' ? 'warn' : 'info'} data-testid="certainty-badge" data-certainty={insight.certainty} title={t(`cert.${insight.certainty}.d` as MessageKey)}>{t(`cert.${insight.certainty}` as MessageKey)}</Badge>}
         <span className="text-xs text-slate-500">{t('ins.sufficiency')}: <b>{t(`rel.${insight.reliability}` as MessageKey)}</b> · {t('ins.impact')}: <b>{formatImpact(insight, lang, currency)}</b></span>
@@ -39,6 +43,7 @@ export function SimpleInsight({ insight, currency, badges, footer, testid = 'ins
           <div><div className="font-medium">{t('ins.why')}</div><p className="text-slate-600 dark:text-slate-400">{t(insight.whyKey as MessageKey, insight.params, currency)}</p></div>
           <div><div className="font-medium">{t('ins.sufficiency')}</div><p className="text-slate-600 dark:text-slate-400">{t(`rel.${insight.reliability}` as MessageKey)} – {r.reliabilityReason}</p></div>
           {insight.cross && <CrossDisclosureView insight={insight} />}
+          <EvidencePanel dossier={dossier} title={r.title} fileNames={fileNames} currency={currency} />
         </div>
       )}
     </Card>

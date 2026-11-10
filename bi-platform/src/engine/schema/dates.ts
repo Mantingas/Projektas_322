@@ -68,6 +68,19 @@ export function inferDateOrder(values: CellValue[]): DateOrder {
   return 'dmy';
 }
 
+/** True when the column gives NO evidence for day-first or month-first (no ISO dates, and every value has both parts ≤ 12): the order is a guess. */
+export function dateOrderIsGuess(values: CellValue[]): boolean {
+  let any = false;
+  for (const v of values) {
+    if (typeof v !== 'string') continue;
+    const p = split(v);
+    if (!p) continue;
+    any = true;
+    if (p.ymd || p.a > 12 || p.b > 12) return false;
+  }
+  return any;
+}
+
 export function parseDate(v: CellValue, order: DateOrder = 'dmy'): string | null {
   if (v === null || v === '' || typeof v === 'boolean') return null;
   if (typeof v === 'number') return excelSerialToIso(v);

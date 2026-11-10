@@ -53,6 +53,11 @@ import { linkWorkflow, type LinkWorkflow } from '@/engine/executive/linking';
 import type { EntityLink } from '@/engine/entities/links';
 import type { Insight } from '@/engine/types';
 import { newId } from '@/db/store';
+import { analyseSettlement } from '@/engine/trust/settlement';
+import { analyseAllSettlement } from '@/engine/trust/evidence';
+import type { SettlementResult } from '@/engine/trust/types';
+import { buildImportTrust, type TrustItem } from '@/engine/trust/importTrust';
+import type { DateOrder } from '@/engine/schema/dates';
 
 // ───────── message shapes (plain data only: they cross the worker boundary) ─────────
 export interface ParseResult {
@@ -99,9 +104,11 @@ export interface ImportRequest {
   currency?: string;
   mode: ExportMode;
   policy?: ImportPolicy;
+  /** day/month order chosen by the user for date columns whose order cannot be known from the values */
+  dateOrders?: Record<number, DateOrder>;
 }
 export type ImportError = 'missing_date' | 'missing_amount' | 'currency_required' | 'missing_product' | 'missing_quantity' | 'missing_counterparty';
-export type PreviewResult = { ok: true; preview: MergePreview; stats: ImportStats; diagnostics: ImportDiagnostics; discountMode?: string; inventoryKind?: string; snapshotDates?: string[]; financeKind?: string; financeGrain?: string; financeSide?: string } | { ok: false; error: ImportError };
+export type PreviewResult = { ok: true; preview: MergePreview; stats: ImportStats; diagnostics: ImportDiagnostics; discountMode?: string; inventoryKind?: string; snapshotDates?: string[]; financeKind?: string; financeGrain?: string; financeSide?: string; trust: TrustItem[] } | { ok: false; error: ImportError };
 export type CommitOutcome =
   | { status: 'duplicate_file'; existing: ImportRow }
   | { status: 'needs_confirmation'; preview: MergePreview }
@@ -198,6 +205,8 @@ export interface BuildFinanceResult {
   identity: 'document' | 'mixed' | 'content';
   /** which sides have any data in this currency */
   sides: FinanceSide[];
+  /** settlement findings of the shown side and series (evidence-classified) */
+  trust?: SettlementResult;
 }
 
 export interface BuildInventoryRequest {
@@ -260,6 +269,20 @@ export interface UniversalBuildResult {
   options: Record<number, { value: string; count: number }[]>;
 }
 export interface ExecutiveResult { model: ExecutiveModel }
+
+/** VAT rates implied by lines that state a VAT amount (vat ÷ net, rounded to 0.5 points); 0 = exempt or zero-rated. Never invents a rate for lines without a VAT amount. */
+function impliedVatRates(records: { amount?: number; vatAmount?: number; basis?: string }[], basis: string): { rate: number; n: number }[] {
+  const m = new Map<number, number>();
+  for (const r of records) {
+    const v = (r as { vatAmount?: number }).vatAmount;
+    if (v === undefined || r.amount === undefined || r.amount === 0) continue;
+    const net = basis === 'gross' ? r.amount - v : r.amount;
+    if (!(net > 0) || basis === 'unknown') continue;
+    const rate = Math.round((v / net) * 100 * 2) / 2;
+    m.set(rate, (m.get(rate) ?? 0) + 1);
+  }
+  return [...m.entries()].map(([rate, n]) => ({ rate, n })).sort((a, b) => b.n - a.n).slice(0, 6);
+}
 
 const toRow = (r: SalesRecord): DrillRow => ({ key: r.key, date: r.date, documentId: r.documentId, party: r.customerName ?? r.customerId, product: r.productName ?? r.productId, quantity: r.quantity, amount: r.amount, importId: r.importId, sourceRow: r.sourceRow });
 const toPurchaseRow = (r: PurchaseRecord): DrillRow => ({ key: r.key, date: r.date, documentId: r.documentId, party: r.supplierName ?? r.supplierId, product: r.productName ?? r.productId, quantity: r.quantity, unit: r.unit, amount: r.amount, importId: r.importId, sourceRow: r.sourceRow });
@@ -344,11 +367,12 @@ export class EngineSession {
     const cached = this.analyses.get(`${module}:${req.sheetIdx}`);
     if (!cached) throw new Error('no_analysis');
     const hasCurrencyCol = req.entries.some((e) => e.field === 'currency');
-    const key = JSON.stringify([module, req.sheetIdx, req.entries.map((e) => [e.field, e.columnIndex]), hasCurrencyCol ? '' : req.currency ?? '', req.asOfDate ?? '', req.side ?? '']);
+    const key = JSON.stringify([module, req.sheetIdx, req.entries.map((e) => [e.field, e.columnIndex]), hasCurrencyCol ? '' : req.currency ?? '', req.asOfDate ?? '', req.side ?? '', req.dateOrders ?? {}]);
     if (this.norm?.key === key) return { ok: true, ...this.norm };
     try {
       const mapping = confirmedFromEntries(req.entries, hasCurrencyCol ? undefined : req.currency);
-      const opts = { profiles: cached.raw.profiles, mapping, rowNumbers: cached.raw.table.dataRowNumbers, skippedTotalRows: cached.raw.table.skippedTotalRows };
+      const profiles = req.dateOrders ? cached.raw.profiles.map((p) => (req.dateOrders![p.index] ? { ...p, dateOrder: req.dateOrders![p.index]!, dateOrderGuess: false } : p)) : cached.raw.profiles;
+      const opts = { profiles, mapping, rowNumbers: cached.raw.table.dataRowNumbers, skippedTotalRows: cached.raw.table.skippedTotalRows };
       const amountBasis = mapping.columns.net_amount !== undefined ? 'net' : mapping.columns.gross_amount !== undefined ? 'gross' : 'unknown';
       let res: { key: string; module: ModuleId; records: (SalesRecord | PurchaseRecord | InventoryRecord | FinanceRecord)[]; stats: ImportStats; basis: SalesRecord['basis']; discountMode?: string; inventoryKind?: string; snapshotDates?: string[]; financeKind?: string; financeGrain?: string; financeSide?: string };
       if (module === 'finance') {
@@ -381,7 +405,12 @@ export class EngineSession {
       structure: cached.structure, profiles: cached.profiles, entries: req.entries, stats: n.stats,
       ...(n.module === 'finance' ? { metrics: predictFinanceMetrics(n.records as FinanceRecord[], req.side ?? 'receivable') } : n.module === 'inventory' ? { metrics: predictInventoryMetrics(n.records as InventoryRecord[]) } : n.module === 'purchasing' ? { metrics: predictPurchaseMetrics(n.records as PurchaseRecord[], n.basis) } : { records: n.records as SalesRecord[], basis: n.basis }),
     });
-    return { ok: true, preview, stats: n.stats, diagnostics, discountMode: n.discountMode, inventoryKind: n.inventoryKind, snapshotDates: n.snapshotDates, financeKind: n.financeKind, financeGrain: n.financeGrain, financeSide: n.financeSide };
+    const hasCurrencyCol = req.entries.some((e) => e.field === 'currency');
+    const imports = await this.db.imports.toArray();
+    const stored = imports.filter((i) => i.added > 0).flatMap((i) => (i.stats.currencies.length ? i.stats.currencies : ['']).filter(Boolean).map((currency) => ({ module: i.module ?? 'sales', currency, basis: (i.module ?? 'sales') === 'sales' || i.module === 'purchasing' ? (i.mapping.columns.net_amount !== undefined ? 'net' : i.mapping.columns.gross_amount !== undefined ? 'gross' : 'unknown') : undefined })));
+    const basis = n.module === 'sales' || n.module === 'purchasing' ? (req.entries.some((e) => e.field === 'net_amount') ? 'net' : req.entries.some((e) => e.field === 'gross_amount') ? 'gross' : 'unknown') as 'net' | 'gross' | 'unknown' : 'not_stated' as const;
+    const trust = buildImportTrust({ module: n.module, profiles: cached.profiles, entries: req.entries, stats: n.stats, currencyFromColumn: hasCurrencyCol, currency: req.currency, basis, duplicates: preview.duplicates, rows: n.stats.rowsImported, stored, dateOrders: req.dateOrders ?? {}, vatRates: impliedVatRates(n.records, n.basis) });
+    return { ok: true, preview, stats: n.stats, diagnostics, discountMode: n.discountMode, inventoryKind: n.inventoryKind, snapshotDates: n.snapshotDates, financeKind: n.financeKind, financeGrain: n.financeGrain, financeSide: n.financeSide, trust };
   }
 
   async commit(req: ImportRequest & { confirmed: boolean; allowSameChecksum: boolean; remember: boolean }): Promise<CommitOutcome> {
@@ -624,7 +653,7 @@ export class EngineSession {
       by.set(k, e);
     }
     const options: BuildFinanceResult['options'] = { [dim]: [...by.values()].sort((a, b) => b.value - a.value || a.label.localeCompare(b.label)).slice(0, 2000) };
-    return { empty: false, series, allSeries, model: view, analysis, options, bounds: { dateMin: dmin, dateMax: dmax }, presets: availablePresets({ dateMin: dmin, dateMax: dmax }), imports: importsLite, pendingHeld, identity, sides };
+    return { empty: false, series, allSeries, model: view, analysis, options, bounds: { dateMin: dmin, dateMax: dmax }, presets: availablePresets({ dateMin: dmin, dateMax: dmax }), imports: importsLite, pendingHeld, identity, sides, trust: analyseSettlement(seriesRecords.filter((r) => r.side === side), side, series.currency) };
   }
 
 
@@ -720,15 +749,15 @@ export class EngineSession {
 
     if (recs.sales.length) {
       const r = await this.build({ version: req.version, filters: {}, period });
-      if (!r.empty && r.model && r.series) snapshots.push({ module: 'sales', series: { currency: r.series.currency, basis: r.series.basis }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend: pt(r.model.trend), bounds: r.bounds!, lines: recs.sales.length, imports: importsOf('sales'), base: baseOf(r.model.kpis, 'sales'), pendingHeld: r.pendingHeld, unknownBasis: r.series.basis === 'unknown' });
+      if (!r.empty && r.model && r.series) snapshots.push({ module: 'sales', series: { currency: r.series.currency, basis: r.series.basis }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend: pt(r.model.trend), unavailable: r.analysis?.unavailable, bounds: r.bounds!, lines: recs.sales.length, imports: importsOf('sales'), base: baseOf(r.model.kpis, 'sales'), pendingHeld: r.pendingHeld, unknownBasis: r.series.basis === 'unknown' });
     }
     if (recs.purchases.length) {
       const r = await this.buildPurchasing({ version: req.version, filters: {}, period });
-      if (!r.empty && r.model && r.series) snapshots.push({ module: 'purchasing', series: { currency: r.series.currency, basis: r.series.basis }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend: pt(r.model.trend), bounds: r.bounds!, lines: recs.purchases.length, imports: importsOf('purchasing'), base: baseOf(r.model.kpis, 'p_spend'), pendingHeld: r.pendingHeld, unknownBasis: r.series.basis === 'unknown' });
+      if (!r.empty && r.model && r.series) snapshots.push({ module: 'purchasing', series: { currency: r.series.currency, basis: r.series.basis }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend: pt(r.model.trend), unavailable: r.analysis?.unavailable, bounds: r.bounds!, lines: recs.purchases.length, imports: importsOf('purchasing'), base: baseOf(r.model.kpis, 'p_spend'), pendingHeld: r.pendingHeld, unknownBasis: r.series.basis === 'unknown' });
     }
     if (recs.inventory.length) {
       const r = await this.buildInventory({ version: req.version, filters: {}, period });
-      if (!r.empty && r.model && r.series) snapshots.push({ module: 'inventory', series: { currency: r.series.currency }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), asOf: r.model.periods.current.to, kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend: pt(r.model.trend), bounds: r.bounds!, lines: recs.inventory.length, imports: importsOf('inventory'), base: baseOf(r.model.kpis, 'i_value'), pendingHeld: r.pendingHeld });
+      if (!r.empty && r.model && r.series) snapshots.push({ module: 'inventory', series: { currency: r.series.currency }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), asOf: r.model.periods.current.to, kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend: pt(r.model.trend), unavailable: r.analysis?.unavailable, bounds: r.bounds!, lines: recs.inventory.length, imports: importsOf('inventory'), base: baseOf(r.model.kpis, 'i_value'), pendingHeld: r.pendingHeld });
     }
     if (recs.finance.length) {
       const first = await this.buildFinance({ version: req.version, side: 'receivable', filters: {}, period });
@@ -736,13 +765,13 @@ export class EngineSession {
         const r = side === 'receivable' ? first : await this.buildFinance({ version: req.version, side, filters: {}, period });
         if (r.empty || !r.model || !r.series) continue;
         const trend = r.model.overdueTrend.filter((p) => p.overdue !== null).map((p) => ({ x: p.date, y: p.overdue! }));
-        snapshots.push({ module: 'finance', side, series: { currency: r.series.currency }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), asOf: r.model.asOf.current ?? undefined, kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend, bounds: r.bounds!, lines: recs.finance.filter((x) => x.side === side).length, imports: importsOf('finance'), base: baseOf(r.model.kpis, 'f_outstanding'), pendingHeld: r.pendingHeld });
+        snapshots.push({ module: 'finance', side, series: { currency: r.series.currency }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), asOf: r.model.asOf.current ?? undefined, kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend, unavailable: r.analysis?.unavailable, bounds: r.bounds!, lines: recs.finance.filter((x) => x.side === side).length, imports: importsOf('finance'), base: baseOf(r.model.kpis, 'f_outstanding'), pendingHeld: r.pendingHeld });
       }
     }
     const links = await this.decidedLinks();
     const wf = linkWorkflow(recs, links);
     const cross = crossInsights({ ...recs, links });
-    return { model: composeExecutive({ snapshots, cross, links, proposedLinks: wf.proposed.length }) };
+    return { model: composeExecutive({ snapshots, cross, links, proposedLinks: wf.proposed.length, trust: analyseAllSettlement(recs.finance) }) };
   }
 
   /** Test helper: the cached normalised records of the last preview. */

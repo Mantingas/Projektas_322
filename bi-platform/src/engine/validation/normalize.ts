@@ -132,6 +132,12 @@ export function normalizeSales(dataRows: CellValue[][], opts: NormalizeOptions):
     const rawVat = get(row, 'vat_amount');
     if (rawVat !== null && rawVat !== '') vat = parseNumber(rawVat, decimalOf('vat_amount')) ?? undefined;
 
+    // net + VAT must equal gross (within a cent of rounding); a file where it does not has contradictory columns
+    if (col.net_amount !== undefined && col.gross_amount !== undefined && vat !== undefined) {
+      const n = parseNumber(get(row, 'net_amount'), decimalOf('net_amount')), g = parseNumber(get(row, 'gross_amount'), decimalOf('gross_amount'));
+      if (n !== null && g !== null && Math.abs(n + vat - g) > 0.02) note('warnings', 'vat_inconsistent', rowNo);
+    }
+
     const customerName = clean(get(row, 'customer_name'));
     const customerId = clean(get(row, 'customer_id'));
     const productName = clean(get(row, 'product_name'));

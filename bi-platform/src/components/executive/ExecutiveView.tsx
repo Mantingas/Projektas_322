@@ -7,6 +7,8 @@ import { Button } from '../ui/button';
 import { Card, CardTitle } from '../ui/card';
 import { SimpleInsight } from './SimpleInsight';
 import { LinksPanel } from './LinksPanel';
+import { TrustFindings } from '../trust/TrustFindings';
+import { withheldText } from '@/lib/executiveSummary';
 import { DrillDrawer, type DrillState } from '../dashboard/DrillDrawer';
 import { engine } from '@/lib/engineClient';
 import type { ExecutiveResult } from '@/lib/engineSession';
@@ -108,7 +110,7 @@ export function ExecutiveView({ version, goImport, goModule, onChanged }: { vers
         <h2 className="text-lg font-semibold">{t('exe.sec.insights')} ({m.insights.length})</h2>
         {m.insights.length === 0 && <p className="text-sm text-slate-500">{t('exe.sum.none')}</p>}
         {m.insights.map((r, i) => (
-          <SimpleInsight key={r.insight.id} insight={r.insight} currency={r.currency ?? 'EUR'} testid="exec-insight"
+          <SimpleInsight key={r.insight.id} insight={r.insight} currency={r.currency ?? 'EUR'} ctx={{ basis: r.basis }} fileNames={names} testid="exec-insight"
             badges={<><span className="text-sm font-bold text-slate-400">#{i + 1}</span><Badge tone={CLASS_TONE[r.class]} data-testid="exec-class" data-class={r.class} title={t(`exe.class.d.${r.class}` as MessageKey)}>{t(`exe.class.${r.class}` as MessageKey)}</Badge><Badge tone={r.module === 'cross' ? 'warn' : 'neutral'} data-testid="exec-source" data-source={r.module}>{t(`mod.${r.module}` as MessageKey)}{r.side ? ` · ${t(`fin.side.short.${r.side}` as MessageKey)}` : ''}</Badge></>}
             footer={<>
               {r.module !== 'cross' && <Button size="sm" variant="ghost" onClick={() => open(r)} data-testid="exec-open-module">{t('exe.src.open', { module: t(`mod.${r.module}` as MessageKey) })}</Button>}
@@ -119,6 +121,12 @@ export function ExecutiveView({ version, goImport, goModule, onChanged }: { vers
             </>} />
         ))}
       </section>
+
+      <TrustFindings results={m.trust} fileNames={names} testid="exec-trust" />
+      {m.withheld.length > 0 && (
+        <details className="text-sm" data-testid="exec-withheld"><summary className="cursor-pointer text-lg font-semibold">{t('trust.rep.withheld')} ({m.withheld.length})</summary>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-600 dark:text-slate-400">{m.withheld.map((w, i) => <li key={i}>{withheldText(w, lang)}</li>)}</ul></details>
+      )}
 
       <div className="grid gap-4 lg:grid-cols-2">
         {([['risks', m.risks, 'risk'], ['opportunities', m.opportunities, 'opportunity']] as const).map(([k, items, cls]) => (

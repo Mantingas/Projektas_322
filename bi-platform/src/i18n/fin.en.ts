@@ -20,6 +20,7 @@ const p = {
   'import.needCounterparty': 'No customer / supplier column is mapped. Choose a code or a name.',
   'issue.missing_counterparty': 'Missing customer / supplier', 'issue.missing_due_date': 'Missing due date', 'issue.invalid_due_date': 'Unreadable due date', 'issue.invalid_payment_date': 'Unreadable payment date', 'issue.missing_invoice_number': 'Missing invoice number',
   'issue.outstanding_derived': 'Outstanding derived from original − paid on the same line', 'issue.negative_outstanding': 'Negative balance (credit balance / overpayment)', 'issue.duplicate_invoice_number': 'Invoice number repeated in the register',
+  'issue.negative_assumed_credit': 'Negative amount in an invoice register treated as a credit note (an assumption – the file does not say so)',
   'issue.payment_without_reference': 'Payment without an invoice reference (cannot be matched)', 'issue.aging_total_mismatch': 'Total differs from the sum of the aging buckets', 'issue.missing_outstanding': 'Missing outstanding amount',
 
   'metric.f_outstanding': 'Outstanding balance', 'metric.f_overdue': 'Overdue amount', 'metric.f_overdue_share': 'Overdue share of outstanding', 'metric.f_overdue_count': 'Overdue invoices', 'metric.f_due_soon': 'Falling due within 14 days',

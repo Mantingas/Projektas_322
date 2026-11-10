@@ -163,7 +163,13 @@ export function buildUniverse(recs: FinanceRecord[]): Universe {
     if (r.kind !== 'open_item' || !r.invoiceNo) continue;
     const k = `${cpKey(r)}|${norm(r.invoiceNo)}`;
     const have = map.get(k);
-    if (have) { if (!have.due && r.dueDate) have.due = r.dueDate; if (have.amount === undefined && r.amount !== undefined) have.amount = r.amount; continue; }
+    if (have) {
+      if (!have.due && r.dueDate) have.due = r.dueDate;
+      if (have.amount === undefined && r.amount !== undefined) have.amount = r.amount;
+      // the register and the open-item report disagree about what the invoice was worth: neither is trusted for matching or totals
+      else if (have.source === 'invoice' && r.amount !== undefined && have.amount !== undefined && Math.abs(r.amount - have.amount) > EPS) { have.conflicting = true; conflicts++; }
+      continue;
+    }
     add({ key: k, cp: cpKey(r), label: cpLabel(r), no: r.invoiceNo, date: r.invoiceDate, due: r.dueDate, amount: r.amount, source: 'open_item', conflicting: false });
   }
   return { map, byNo, identicalDuplicates, conflicts };

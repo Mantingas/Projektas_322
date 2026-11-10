@@ -229,3 +229,18 @@ Code: `src/engine/finance/*` (keys, kind, ledger, metrics, dashboard, insights, 
 
 **Test reliability finding (120 000-line import).** Measured with a long-animation-frame probe: in the failing runs the long task (500–1 300 ms, `render@end`, no script attribution) started immediately after `setInputFiles({buffer})` – Playwright decoding and constructing the 5 MB `File` in the page's main thread; its duration scaled with CPU load. With a file *path* the task disappears, the app's own longest task is 100–200 ms (157–214 ms with three runs in parallel). Worker scheduling, IndexedDB writes and rendering were not the cause. The test now uses a path, the limit is tightened from 1 000 ms to 600 ms, and `e2e/phase21.spec.ts` contains regression tests proving the watchdog still detects genuine blocking (a 700 ms busy loop) and that a mid-size path import produces no long task.
 
+## Phase 7 – Financial trust layer
+`src/engine/trust/`: `types.ts` (EvidenceStatus, EvidenceDossier, TrustFinding, PotentialValue), `settlement.ts` (`analyseSettlement` per side and currency, `potentialValue`), `evidence.ts` (`assessInsight`, `analyseAllSettlement`), `importTrust.ts` (`buildImportTrust`). UI: `src/components/trust/*`, import card in `ImportFlow`. Texts: `src/i18n/trust.{en,lt,pl}.ts`.
+
+**Derived, not stored.** Findings are computed from stored records inside the worker (`buildExecutive`, `buildFinance`, `preview`); no schema change (IndexedDB v7), so deletion, backup and restore cover them. Only each finding's few supporting records cross the worker boundary.
+
+**Status rules.** `assessInsight` maps each rule id to an evidence family (arithmetic / fact / link fact → verified; statistical → candidate; threshold / scenario / proxy → estimate) and applies downgrades only (low reliability, unknown VAT basis, name-only identity, stale snapshot). The amount is never read (property-tested). Settlement statuses: *verified* requires the open-item report itself to show the credit balance and the document to be recognised by more than its sign; otherwise *candidate*; contradictions and missing settlement evidence are *withheld* with a reason.
+
+**Matching and netting.** Payments link to invoices only by exact reference under the same counterparty (invoice numbers are scoped by counterparty; the same number at two suppliers stays two invoices). Reversals and refunds are netted first; credits share an invoice's room; rounding ≤ 0.05 is ignored; recurring monthly charges and instalments are not duplicates. A register/report disagreement makes an invoice `conflicting` and withholds conclusions about it. Lookups are indexed (linear on 90 000 records).
+
+**Units and bases.** Cross-module findings require identical or unstated units (`unit_mismatch` otherwise) and compatible currency and VAT basis; incompatibilities are withheld, listed, and shown at import time before the data is stored.
+
+**Exposure total.** `potentialValue` sums only verified open credit balances and candidate possible-excess amounts, per side and currency, counting findings that share a record once.
+
+**Date dimension.** Every dossier states which date the period refers to (mapped document date, report date, due dates, payment dates).
+

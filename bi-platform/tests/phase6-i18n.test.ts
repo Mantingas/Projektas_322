@@ -12,10 +12,10 @@ const CHART_REASONS = ['trend_day', 'trend_week', 'trend_month', 'ranking', 'par
 const SKIP = ['no_date', 'few_points', 'no_measure', 'no_dimension', 'no_meaningful_correlation', 'few_values', 'flat'];
 const UNI_RULES = ['missing', 'duplicates', 'outliers', 'trend_change', 'concentration', 'correlation'];
 const CROSS = ['stock_cover_low', 'stock_excess', 'margin_squeeze', 'customer_exposure', 'stock_vs_purchasing'];
-const CROSS_REASONS = ['no_links', 'no_data', 'currency_mismatch', 'basis_mismatch', 'stale_snapshot', 'short_coverage', 'nothing_found', 'no_value', 'no_position', 'no_due_dates'];
+const CROSS_REASONS = ['no_links', 'no_data', 'currency_mismatch', 'basis_mismatch', 'stale_snapshot', 'short_coverage', 'nothing_found', 'no_value', 'no_position', 'no_due_dates', 'unit_mismatch'];
 const CROSS_RULES = ['stock_cover', 'stock_cover_low', 'stock_excess_vs_demand', 'margin_squeeze', 'customer_exposure', 'stock_vs_purchasing'];
 const CMP = ['no_date', 'short_span', 'no_measure', 'few_rows'];
-const L = ['units_assumed', 'no_lead_time', 'snapshot_date', 'proxy_margin', 'no_freight', 'vat_basis_shares', 'not_summed', 'not_loss'];
+const L = ['units_assumed', 'units_checked', 'no_lead_time', 'snapshot_date', 'proxy_margin', 'no_freight', 'vat_basis_shares', 'not_summed', 'not_loss'];
 
 const dynamic = [
   ...UTYPES.map((u) => `utype.${u}`), ...REASONS.map((r) => `utype.why.${r}`), ...QUESTIONS.flatMap((q) => [`uch.${q}`, `uch.q.${q}`]), ...CHART_REASONS.map((r) => `uch.why.${r}`), ...SKIP.map((r) => `uch.skip.${r}`), ...CMP.map((r) => `uni.cmp.blocked.${r}`),

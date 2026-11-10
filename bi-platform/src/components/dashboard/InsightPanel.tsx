@@ -13,6 +13,8 @@ import { formatEvidence, formatImpact, renderInsight } from '@/lib/report';
 import type { MessageKey } from '@/i18n';
 
 import { FILTER_FIELD as FIELD } from '@/lib/dimMaps';
+import { EvidencePanel, StatusBadge } from '../trust/EvidencePanel';
+import { assessInsight } from '@/engine/trust/evidence';
 
 export function InsightCard({ insight, model, expanded, onToggle, onDrill, onFilter, extraChart, drillFor }: {
   /** module-specific records behind one evidence row (inventory: stock lines at the closing date, or movements) */
@@ -31,9 +33,12 @@ export function InsightCard({ insight, model, expanded, onToggle, onDrill, onFil
   const r = renderInsight(insight, lang, cur);
   const ex = explainInsight(insight);
   const contributors = ex.contributors;
+  const basis = (model.series as { basis?: 'net' | 'gross' | 'unknown' }).basis;
+  const dossier = assessInsight(insight, { basis: model.module === 'inventory' || model.module === 'finance' ? undefined : basis, currency: cur });
   return (
     <Card data-testid="insight" data-insight-id={insight.id} className="space-y-2">
       <div className="flex flex-wrap items-center gap-2">
+        <StatusBadge status={dossier.status} />
         <Badge tone={insight.severity}>{t(`sev.${insight.severity}` as MessageKey)}</Badge>
         {insight.certainty && <Badge tone={insight.certainty === 'fact' ? 'opportunity' : insight.certainty === 'possible' ? 'warn' : 'info'} data-testid="certainty-badge" data-certainty={insight.certainty} title={t(`cert.${insight.certainty}.d` as MessageKey)}>{t(`cert.${insight.certainty}` as MessageKey)}</Badge>}
         {insight.savings && <Badge tone={insight.savings.kind === 'actual' ? 'opportunity' : insight.savings.kind === 'potential' ? 'info' : 'neutral'} data-testid="savings-badge" data-kind={insight.savings.kind} title={t(`sav.${insight.savings.kind}.d` as MessageKey)}>{t(`sav.${insight.savings.kind}` as MessageKey)}</Badge>}
@@ -73,6 +78,7 @@ export function InsightCard({ insight, model, expanded, onToggle, onDrill, onFil
           <Section title={t('ins.why')}>{t(insight.whyKey as MessageKey, insight.params, cur)}</Section>
           <Section title={t('ins.action')}>{r.action}</Section>
           <Section title={t('ins.sufficiency')}>{t(`rel.${insight.reliability}` as MessageKey)} – {r.reliabilityReason}</Section>
+          <EvidencePanel dossier={dossier} title={r.title} currency={cur} />
           {insight.chart && <Section title={t('ins.chart')}>{extraChart?.(insight) ?? <ChartById id={insight.chart} model={model} dim={insight.dimension} onFilter={onFilter} />}</Section>}
         </div>
       )}

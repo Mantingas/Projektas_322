@@ -24,3 +24,7 @@ accounting program's own report). Synthetic fixtures exercise the framework but 
 | example-synthetic-lt-csv | _example | synthetic | ready | pass |
 
 See [`tests/compat/README.md`](../tests/compat/README.md) for how to add an anonymised real export.
+
+## Phase 7 status
+No real ERP export has been verified. Every ERP remains **unverified**; synthetic export *variants* (encodings, separators, titles, footers, headings) are tested but do not prove compatibility with any system. See `docs/ERP_VALIDATION_PROTOCOL.md` for the protocol and the datasets needed.
+

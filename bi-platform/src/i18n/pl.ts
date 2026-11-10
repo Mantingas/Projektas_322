@@ -6,6 +6,7 @@ import inv from './inv.pl';
 import fin from './fin.pl';
 import uni from './uni.pl';
 import exe from './exe.pl';
+import trust from './trust.pl';
 
 const pl: Messages = {
   ...dash,
@@ -15,6 +16,7 @@ const pl: Messages = {
   ...fin,
   ...uni,
   ...exe,
+  ...trust,
   'app.name': 'Excel Insights',
   'app.tagline': 'Wnioski biznesowe z Twoich plików Excel',
   'nav.home': 'Start', 'nav.import': 'Import', 'nav.insights': 'Wnioski', 'nav.history': 'Historia', 'nav.settings': 'Ustawienia',

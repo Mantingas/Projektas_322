@@ -45,6 +45,8 @@ export interface ColumnProfile {
   /** Number format inferred from the column as a whole. */
   decimal: ',' | '.';
   dateOrder: 'dmy' | 'mdy' | 'ymd';
+  /** A date column whose day/month order cannot be known from its values (every value could be read both ways). */
+  dateOrderGuess?: boolean;
   /** Count of numbers whose format could not be determined from the column. */
   ambiguousNumbers: number;
 }
@@ -328,6 +330,10 @@ export interface FinanceRecord {
   buckets?: AgingBuckets;
   /** Merge scope (see docKey): document numbers are only comparable within it. */
   scope?: string;
+  /** The amount exactly as the file states it (signed). `amount` of invoices / credit notes is a magnitude; this keeps the original sign so reversals can be recognised. */
+  rawAmount?: number;
+  /** Why a register row became a credit note: the file says so (`register` = credit-note register, `type` = a document-type column) or ONLY its negative sign suggests it (`sign` – an assumption). */
+  creditEvidence?: 'register' | 'type' | 'sign';
   basis: AmountBasis;
   currency: string;
   sourceRow: number;
@@ -375,6 +381,8 @@ export type IssueCode =
   | 'negative_outstanding'
   | 'duplicate_invoice_number'
   | 'payment_without_reference'
+  | 'negative_assumed_credit'
+  | 'vat_inconsistent'
   | 'aging_total_mismatch'
   | 'missing_outstanding';
 

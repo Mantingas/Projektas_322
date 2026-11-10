@@ -148,7 +148,7 @@ export function normalizeFinance(dataRows: CellValue[][], opts: NormalizeOptions
       // a lone document-number column in a payment file names the invoice that is paid (a payment's own number is the payment reference)
       const invRef = clean(get(row, 'invoice_reference')) ?? clean(get(row, 'credit_reference')) ?? docNo;
       if (!invRef) note('warnings', 'payment_without_reference', rowNo); // cannot be linked to an invoice
-      drafts.push({ ...base, kind: rk, date, documentId: payRef, reference: invRef, amount: paid, scope: financeScope('payment', side, cp) });
+      drafts.push({ ...base, kind: rk, date, documentId: payRef, reference: invRef, amount: paid, rawAmount: paid, scope: financeScope('payment', side, cp) });
       return;
     }
 
@@ -158,10 +158,15 @@ export function normalizeFinance(dataRows: CellValue[][], opts: NormalizeOptions
     if (amount === null) { note('errors', 'invalid_amount', rowNo); stats.rowsSkipped++; return; }
     const credit = kind === 'credit_notes' || amount < 0 || (col.document_type !== undefined && isCreditType(clean(get(row, 'document_type'))));
     if (!docNo) note('warnings', 'missing_invoice_number', rowNo);
+    const rawAmount = amount;
+    const typed = col.document_type !== undefined && isCreditType(clean(get(row, 'document_type')));
+    const creditEvidence: 'register' | 'type' | 'sign' | undefined = !credit ? undefined : kind === 'credit_notes' ? 'register' : typed ? 'type' : 'sign';
+    // a negative amount in an invoice register is only ASSUMED to be a credit note: say so, the findings built on it are qualified
+    if (creditEvidence === 'sign') note('warnings', 'negative_assumed_credit', rowNo);
     amount = Math.abs(amount);
     const ref = clean(get(row, 'credit_reference')) ?? clean(get(row, 'invoice_reference'));
     const k = credit ? 'credit_note' : 'invoice';
-    drafts.push({ ...base, kind: k, date, documentId: docNo, reference: credit ? ref : undefined, dueDate: credit ? undefined : dueDate, amount, scope: financeScope(k, side, cp) });
+    drafts.push({ ...base, kind: k, date, documentId: docNo, reference: credit ? ref : undefined, dueDate: credit ? undefined : dueDate, amount, rawAmount, ...(creditEvidence ? { creditEvidence } : {}), scope: financeScope(k, side, cp) });
   });
 
   // identical invoice numbers inside one register (an invoice register has ONE line per invoice)

@@ -13,9 +13,14 @@ export const COST_RISE_PCT = 3;
 export const STOCK_MONTHS_FLAG = 6;
 export const CUSTOMER_SHARE_FLAG = 0.2;
 
-export type CrossReason = 'no_links' | 'no_data' | 'currency_mismatch' | 'basis_mismatch' | 'stale_snapshot' | 'short_coverage' | 'nothing_found' | 'no_value' | 'no_position' | 'no_due_dates';
+export type CrossReason = 'unit_mismatch' | 'no_links' | 'no_data' | 'currency_mismatch' | 'basis_mismatch' | 'stale_snapshot' | 'short_coverage' | 'nothing_found' | 'no_value' | 'no_position' | 'no_due_dates';
 export interface CrossInput { sales: SalesRecord[]; purchases: PurchaseRecord[]; inventory: InventoryRecord[]; finance: FinanceRecord[]; links: EntityLink[] }
 export interface CrossResult { insights: Insight[]; unavailable: { rule: string; reason: CrossReason }[] }
+
+/** Units of one product in one module: exactly one unit, none stated, or several (several = not comparable). Packaging units never convert into pieces. */
+const unitsOf = (us: (string | undefined)[]): { unit?: string; mixed: boolean } => { const k = [...new Set(us.filter((x): x is string => !!x))]; return k.length > 1 ? { mixed: true } : { unit: k[0], mixed: false }; };
+/** 'mismatch' only when BOTH sides state a unit and the units differ (or either side mixes units); an unstated unit stays an assumption */
+const unitsCompatible = (a: { unit?: string; mixed: boolean }, b: { unit?: string; mixed: boolean }) => !a.mixed && !b.mixed && (!a.unit || !b.unit || a.unit === b.unit);
 
 const lastDate = (xs: { date: string }[]) => xs.reduce((m, r) => (r.date > m ? r.date : m), '');
 const firstDate = (xs: { date: string }[]) => xs.reduce((m, r) => (m === '' || r.date < m ? r.date : m), '');
@@ -61,10 +66,17 @@ export function crossInsights(inp: CrossInput): CrossResult {
     else {
       const rows: { label: string; demandPerDay: number; onHand: number; cover: number; value: number | null; qty90: number; cur?: string }[] = [];
       const used: Pair[] = [];
+      let unitExcluded = 0;
+      const ipPairs = confirmedPairs(inp.links, 'product', 'inventory', 'purchasing');
       for (const p of si) {
         const sales = inp.sales.filter((r) => salesKey(r) === p.a && r.date >= start && r.date <= end && r.quantity !== undefined);
         const stock = snaps.filter((r) => invKey(r) === p.b && r.date === invDate);
         if (!sales.length || !stock.length) continue;
+        // the stock must be counted in one unit, and in the unit the purchasing file uses for the same confirmed product
+        const invUnit = unitsOf(stock.map((r) => r.unit));
+        const buyPair = ipPairs.find((x) => x.a === p.b);
+        const buyUnit = unitsOf(buyPair ? inp.purchases.filter((r) => purchKey(r) === buyPair.b).map((r) => r.unit) : []);
+        if (!unitsCompatible(invUnit, buyUnit)) { unitExcluded++; continue; }
         const qty = sum(sales.map((r) => r.quantity!));
         if (qty <= 0) continue;
         const onHand = sum(stock.map((r) => r.quantity!));
@@ -74,9 +86,10 @@ export function crossInsights(inp: CrossInput): CrossResult {
         rows.push({ label: p.link.a.label, demandPerDay: d, onHand, cover: onHand / d, value, qty90: qty, cur: stock[0]!.currency });
         used.push(p);
       }
+      if (!rows.length && unitExcluded) skip('stock_cover', 'unit_mismatch');
       const disc = (ps: Pair[]): CrossDisclosure => ({
         sources: [{ module: 'sales', from: firstDate(inp.sales), to: salesEnd, lines: inp.sales.length }, { module: 'inventory', from: firstDate(snaps), to: invDate, lines: snaps.length, note: 'snapshot' }],
-        links: linkInfo(ps), period: { from: start, to: end }, methodKey: 'cross.m.stock_cover', limits: ['cross.l.units_assumed', 'cross.l.no_lead_time', 'cross.l.snapshot_date'], confidenceKey: lag <= 14 ? 'cross.c.medium_fresh' : 'cross.c.low_lag',
+        links: linkInfo(ps), period: { from: start, to: end }, methodKey: 'cross.m.stock_cover', limits: ['cross.l.units_assumed', ...(used.length && ipPairs.length ? ['cross.l.units_checked'] : []), 'cross.l.no_lead_time', 'cross.l.snapshot_date'], confidenceKey: lag <= 14 ? 'cross.c.medium_fresh' : 'cross.c.low_lag',
       });
       const low = rows.filter((r) => r.cover < COVER_LOW_DAYS && r.onHand >= 0).sort((a, b) => b.demandPerDay - a.demandPerDay);
       const high = rows.filter((r) => r.cover > COVER_EXCESS_DAYS && r.onHand > 0).sort((a, b) => (b.value ?? b.onHand) - (a.value ?? a.onHand));
@@ -122,10 +135,15 @@ export function crossInsights(inp: CrossInput): CrossResult {
         const unit = (rs: { quantity?: number; amount: number }[]) => { const q = sum(rs.map((r) => r.quantity ?? 0)); return q > 0 ? sum(rs.map((r) => r.amount)) / q : null; };
         const found: { label: string; cost0: number; cost1: number; m0: number; m1: number; extra: number }[] = [];
         const used: Pair[] = [];
+        let marginUnitExcluded = 0;
         for (const p of ps) {
           const pr = pN.filter((r) => purchKey(r) === p.a && r.quantity !== undefined && r.quantity > 0 && r.amount > 0);
           const sr = sN.filter((r) => salesKey(r) === p.b && r.quantity !== undefined && r.quantity > 0 && r.amount > 0);
           if (new Set(pr.map((r) => r.unit ?? '')).size > 1) continue; // several units: cost per unit is not comparable
+          // a purchase unit that differs from the unit the stock is counted in (box vs piece) makes cost per unit incomparable with the sales price
+          const mInv = confirmedPairs(inp.links, 'product', 'inventory', 'purchasing').find((x) => x.b === p.a);
+          const stockUnit = unitsOf(mInv ? snaps.filter((r) => invKey(r) === mInv.a).map((r) => r.unit) : []);
+          if (!unitsCompatible(unitsOf(pr.map((r) => r.unit)), stockUnit)) { marginUnitExcluded++; continue; }
           const [p0, p1] = [pr.filter((r) => inW(r.date, w0)), pr.filter((r) => inW(r.date, w1))];
           const [s0, s1] = [sr.filter((r) => inW(r.date, w0)), sr.filter((r) => inW(r.date, w1))];
           if ([p0, p1, s0, s1].some((x) => x.length < 2)) continue;
@@ -148,7 +166,7 @@ export function crossInsights(inp: CrossInput): CrossResult {
               links: linkInfo(used), period: { from: w0.from, to: w1.to }, methodKey: 'cross.m.margin_squeeze', limits: ['cross.l.units_assumed', 'cross.l.proxy_margin', 'cross.l.no_freight'], confidenceKey: 'cross.c.medium',
             },
           }));
-        } else skip('margin_squeeze', 'nothing_found');
+        } else skip('margin_squeeze', marginUnitExcluded ? 'unit_mismatch' : 'nothing_found');
       }
     }
   }

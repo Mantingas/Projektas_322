@@ -1,5 +1,5 @@
 import type { CellValue, ColumnProfile } from '../types';
-import { inferDateOrder, looksLikeDate } from './dates';
+import { dateOrderIsGuess, inferDateOrder, looksLikeDate } from './dates';
 import { detectCurrencyInText, inferColumnDecimal, interpretNumberString, type Decimal } from './numbers';
 
 const PROFILE_SAMPLE = 20000;
@@ -60,6 +60,7 @@ export function profileColumns(headers: string[], dataRows: CellValue[][], decim
       type,
       decimal,
       dateOrder: inferDateOrder(values),
+      dateOrderGuess: dateRatio >= 0.8 && dateOrderIsGuess(values),
       ambiguousNumbers: ambiguous,
     } satisfies ColumnProfile;
   });

@@ -38,7 +38,9 @@ describe('executive dashboard reconciles with the modules', () => {
     expect(model.kpis.length).toBeLessThanOrEqual(MAX_KPIS);
     expect(new Set(model.kpis.map((k) => `${k.module}|${k.side}|${k.id}`)).size).toBe(model.kpis.length);
     expect(model.kpis.every((k) => k.currency === 'EUR' && (k.window || k.asOf))).toBe(true);
-    expect(JSON.stringify(model)).not.toMatch(/"total(Impact|Value)?"/);
+    // no cross-module total exists: the only totals are per-currency, per-side exposure inside the settlement findings
+    expect(Object.keys(model).filter((k) => /total|sum/i.test(k))).toEqual([]);
+    expect(JSON.stringify({ ...model, trust: [] })).not.toMatch(/"total(Impact|Value)?"/);
     expect(model.kpis.map((k) => k.module)).toEqual(expect.arrayContaining(['sales', 'purchasing', 'inventory', 'finance']));
   });
 
@@ -119,9 +121,11 @@ describe('executive dashboard reconciles with the modules', () => {
 
   it('the result is plain data: it can be cloned across the worker boundary and holds no source records', () => {
     expect(() => structuredClone(model)).not.toThrow();
-    const json = JSON.stringify(model);
+    // settlement findings carry the few supporting records of each finding (document, amount, file, row); nothing else of a record leaves the worker
+    const json = JSON.stringify({ ...model, trust: [] });
     expect(json).not.toMatch(/SF-\d+-P0/);
     expect(json).not.toContain('sourceRow');
+    expect(JSON.stringify(model.trust)).not.toMatch(/"(counterpartyId|dueDate|scope|basis)"/);
   });
 });
 

@@ -21,6 +21,7 @@ const d: Record<keyof typeof p, string> = {
   'import.needCounterparty': 'Nie wybrano kolumny klienta / dostawcy. Wybierz kod lub nazwę.',
   'issue.missing_counterparty': 'Brak klienta / dostawcy', 'issue.missing_due_date': 'Brak terminu płatności', 'issue.invalid_due_date': 'Nieczytelny termin płatności', 'issue.invalid_payment_date': 'Nieczytelna data płatności', 'issue.missing_invoice_number': 'Brak numeru faktury',
   'issue.outstanding_derived': 'Saldo wyprowadzone z kwota pierwotna − zapłacona z tego samego wiersza', 'issue.negative_outstanding': 'Saldo ujemne (nadpłata / saldo kredytowe)', 'issue.duplicate_invoice_number': 'Numer faktury powtarza się w rejestrze',
+  'issue.negative_assumed_credit': 'Ujemna kwota w rejestrze faktur traktowana jako korekta (założenie – plik tego nie podaje)',
   'issue.payment_without_reference': 'Płatność bez odniesienia do faktury (nie można dopasować)', 'issue.aging_total_mismatch': 'Suma różni się od sumy przedziałów wiekowania', 'issue.missing_outstanding': 'Brak kwoty do zapłaty',
 
   'metric.f_outstanding': 'Saldo do zapłaty', 'metric.f_overdue': 'Kwota po terminie', 'metric.f_overdue_share': 'Udział należności po terminie', 'metric.f_overdue_count': 'Faktury po terminie', 'metric.f_due_soon': 'Termin w ciągu 14 dni',

@@ -5,6 +5,7 @@ import inv from './inv.en';
 import fin from './fin.en';
 import uni from './uni.en';
 import exe from './exe.en';
+import trust from './trust.en';
 
 const en = {
   ...dash,
@@ -14,6 +15,7 @@ const en = {
   ...fin,
   ...uni,
   ...exe,
+  ...trust,
   'app.name': 'Excel Insights',
   'app.tagline': 'Business insights from your Excel files',
   'nav.home': 'Home', 'nav.import': 'Import', 'nav.insights': 'Insights', 'nav.history': 'History', 'nav.settings': 'Settings',

@@ -11,6 +11,8 @@ export interface SummaryDoc {
   kpis: { label: string; current: string; previous: string; change: string; note: string; tone: 'good' | 'bad' | 'flat' | 'na' }[];
   charts: { title: string; note: string; svg: string }[];
   insights: { title: string; body: string; impact: string; contributors: string[]; why: string; action: string; sufficiency: string }[];
+  /** extra bullet sections (e.g. confirmed calculations, opportunities, risks, scenarios, withheld conclusions) */
+  sections?: { title: string; items: string[]; note?: string }[];
   limitations: string[];
   methodology: string[];
   labels: { executive: string; kpi: string; metric: string; current: string; previous: string; change: string; charts: string; insights: string; contributors: string; why: string; action: string; sufficiency: string; impact: string; limitations: string; methodology: string; association: string; footer: string };
@@ -40,6 +42,7 @@ footer{margin-top:28px;padding-top:8px;border-top:1px solid #e2e8f0;color:#64748
 <h2>${e(L.kpi)}</h2><table><thead><tr><th>${e(L.metric)}</th><th class="n">${e(L.current)}</th><th class="n">${e(L.previous)}</th><th class="n">${e(L.change)}</th><th></th></tr></thead><tbody>${kpiRows}</tbody></table>
 ${d.charts.length ? `<h2>${e(L.charts)}</h2>${charts}` : ''}
 <h2>${e(L.insights)}</h2>${ins}<p class="m">${e(L.association)}</p>
+${(d.sections ?? []).map((x) => `<h2>${e(x.title)}</h2>${x.note ? `<p class="m">${e(x.note)}</p>` : ''}${x.items.length ? `<ul class="sec">${x.items.map((i) => `<li>${e(i)}</li>`).join('')}</ul>` : '<p class="m">–</p>'}`).join('')}
 <h2>${e(L.limitations)}</h2><ul class="lim">${d.limitations.map((x) => `<li>${e(x)}</li>`).join('')}</ul>
 <h2>${e(L.methodology)}</h2><ul class="meth">${d.methodology.map((x) => `<li>${e(x)}</li>`).join('')}</ul>
 <footer>${e(L.footer)}</footer></body></html>`;

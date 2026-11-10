@@ -15,6 +15,8 @@ import type { ImportPolicy } from '@/engine/import/merge';
 import { FINANCE_FIELDS, INVENTORY_FIELDS, PURCHASE_FIELDS, SALES_FIELDS, type ExportMode, type FieldId, type FinanceSide, type ImportStats, type MappingEntry, type ModuleId } from '@/engine/types';
 import { downloadText } from '@/lib/download';
 import { fmtDate, pct, type MessageKey } from '@/i18n';
+import type { DateOrder } from '@/engine/schema/dates';
+import type { TrustItem } from '@/engine/trust/importTrust';
 import { cn } from '@/lib/cn';
 
 const CURRENCIES = ['EUR', 'PLN', 'USD', 'GBP', 'CZK', 'SEK'];
@@ -33,6 +35,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   const [analysis, setAnalysis] = useState<AnalysisLite | null>(null);
   const [module, setModule] = useState<ModuleId>('sales');
   const [asOf, setAsOf] = useState('');
+  const [dateOrders, setDateOrders] = useState<Record<number, DateOrder>>({});
   const [side, setSide] = useState<FinanceSide>('receivable');
   const [assign, setAssign] = useState<Record<number, FieldId | ''>>({});
   const [confs, setConfs] = useState<Record<number, number>>({});
@@ -59,7 +62,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   const reset = useCallback(() => {
     void engine().call('discard', []);
     setParsed(null); setAnalysis(null); setAssign({}); setConfs({}); setSources({}); setError(null); setDupAccepted(false); setResult(null); setSheetIdx(0);
-    setPv(null); setPolicy(null); setConfirmChecked(false); setMode('unknown'); setModule('sales'); setAsOf(''); setSide('receivable');
+    setPv(null); setPolicy(null); setConfirmChecked(false); setMode('unknown'); setModule('sales'); setAsOf(''); setSide('receivable'); setDateOrders({});
     if (input.current) input.current.value = '';
   }, []);
 
@@ -132,14 +135,14 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
     const my = ++seq.current;
     setPvBusy(true);
     const timer = setTimeout(() => {
-      engine().call('preview', [{ module, side, asOfDate: needsAsOf ? asOf : undefined, sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: policy ?? undefined }])
+      engine().call('preview', [{ module, side, asOfDate: needsAsOf ? asOf : undefined, sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: policy ?? undefined, dateOrders }])
         .then((r) => { if (seq.current === my) setPv(r.ok ? r : null); })
         .catch((e: unknown) => { if (seq.current === my) { setPv(null); setError(errText(e)); } })
         .finally(() => { if (seq.current === my) setPvBusy(false); });
     }, 150);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [analysis, entriesKey, currency, mode, policy, module, asOf, side]);
+  }, [analysis, entriesKey, currency, mode, policy, module, asOf, side, dateOrders]);
 
   const needs = pv?.preview.needsConfirmation ?? [];
   const confirmable = Boolean(pv) && isMappingConfirmable(warnings) && (hasCurrencyCol || Boolean(currency)) && (!parsed?.duplicateOf || dupAccepted) && (needs.length === 0 || confirmChecked) && !pvBusy;
@@ -149,7 +152,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
     setBusy(true);
     setError(null);
     try {
-      const r = await engine().call('commit', [{ module, side, asOfDate: needsAsOf ? asOf : undefined, sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: pv.preview.policy, confirmed: confirmChecked, allowSameChecksum: dupAccepted, remember }]);
+      const r = await engine().call('commit', [{ module, side, asOfDate: needsAsOf ? asOf : undefined, sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: pv.preview.policy, confirmed: confirmChecked, allowSameChecksum: dupAccepted, remember, dateOrders }]);
       if (r.status === 'ok') {
         setResult({ row: r.import, stats: r.stats, module, side });
         onImported();
@@ -425,6 +428,8 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
             </div>
           )}
 
+          {pv && analysis && <ImportTrustCard items={pv.trust} headers={analysis.headers} dateOrders={dateOrders} setOrder={(col, o) => setDateOrders((prev) => ({ ...prev, [col]: o }))} />}
+
           {p && (
             <Card className="space-y-3" data-testid="import-preview">
               <CardTitle>{t('import.previewTitle')}</CardTitle>
@@ -509,5 +514,49 @@ function Stat({ label, value, testid }: { label: string; value: number | string;
       <dt className="text-xs text-slate-500">{label}</dt>
       <dd className="text-lg font-semibold" data-testid={testid}>{value}</dd>
     </div>
+  );
+}
+
+const LEVEL_TONE = { ok: 'opportunity', info: 'info', warn: 'warn', confirm: 'risk' } as const;
+
+/** What a person should know before trusting this import: currency, VAT basis, date reading, missing identifiers, duplicates, coverage and clashes with other modules. */
+function ImportTrustCard({ items, headers, dateOrders, setOrder }: { items: TrustItem[]; headers: string[]; dateOrders: Record<number, DateOrder>; setOrder: (col: number, o: DateOrder) => void }) {
+  const { t, lang } = useLang();
+  const text = (it: TrustItem): string => {
+    const p = it.params;
+    switch (it.code) {
+      case 'currency': return t(p.source === 'chosen' ? 'itrust.currency.chosen' : it.level === 'warn' ? 'itrust.currency.multi' : 'itrust.currency.column', { list: String(p.list) });
+      case 'vat_basis': return t(`itrust.vat.${p.basis}` as MessageKey);
+      case 'date_order': return t('itrust.date_order', { n: Number(p.n), order: t(`itrust.order.${p.order}` as MessageKey) });
+      case 'dates': return it.level === 'warn' ? t('itrust.dates.bad', { bad: Number(p.bad) }) : t('itrust.dates.ok', { order: t(`itrust.order.${p.order}` as MessageKey) });
+      case 'identifiers': return t('itrust.identifiers', { n: Number(p.n) });
+      case 'duplicates': return t(it.level === 'warn' ? 'itrust.duplicates.invoice' : 'itrust.duplicates.stored', { n: Number(p.n) });
+      case 'vat_rates': return t('itrust.vat_rates', { list: String(p.list) }) + (p.mixed ? ' ' + t('itrust.vat_mixed') : '');
+      case 'vat_inconsistent': return t('itrust.vat_inconsistent', { n: Number(p.n) });
+      case 'credit_sign': return t('itrust.credit_sign', { n: Number(p.n) });
+      case 'amount_sign': return t('itrust.amount_sign', { n: Number(p.n) });
+      case 'coverage': return t('itrust.coverage', { from: fmtDate(String(p.from), lang), to: fmtDate(String(p.to), lang), rows: Number(p.rows) });
+      case 'compat_currency': return t('itrust.compat_currency', { module: t(`mod.${p.module}` as MessageKey), other: String(p.other), mine: String(p.mine) });
+      case 'compat_basis': return t('itrust.compat_basis', { module: t(`mod.${p.module}` as MessageKey), other: String(p.other), mine: String(p.mine) });
+      default: return '';
+    }
+  };
+  const attention = items.filter((i) => i.level === 'warn' || i.level === 'confirm');
+  return (
+    <Card className="space-y-2" data-testid="import-trust" data-attention={attention.length}>
+      <CardTitle>{t('itrust.title')}</CardTitle>
+      {attention.length === 0 && <p className="text-sm text-emerald-700 dark:text-emerald-400" data-testid="trust-allclear">{t('itrust.allClear')}</p>}
+      <ul className="space-y-2 text-sm">
+        {items.map((it, i) => (
+          <li key={`${it.code}${i}`} className="flex flex-wrap items-start gap-2" data-testid={`trust-item-${it.code}`} data-level={it.level}>
+            <Badge tone={LEVEL_TONE[it.level]}>{t(`itrust.level.${it.level}` as MessageKey)}</Badge>
+            <span className="min-w-0 flex-1">{text(it)}</span>
+            {it.choice === 'date_order' && it.columns?.map((c) => (
+              <label key={c} className="flex items-center gap-1 text-xs">{headers[c]}: <select data-testid={`date-order-${c}`} value={dateOrders[c] ?? 'dmy'} onChange={(e) => setOrder(c, e.target.value as DateOrder)} className="rounded-md border border-slate-300 bg-transparent px-1 py-0.5 dark:border-slate-700 dark:bg-slate-900">{(['dmy', 'mdy'] as DateOrder[]).map((o) => <option key={o} value={o}>{t(`itrust.order.${o}` as MessageKey)}</option>)}</select></label>
+            ))}
+          </li>
+        ))}
+      </ul>
+    </Card>
   );
 }
