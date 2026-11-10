@@ -26,10 +26,10 @@ describe('evidence-based executive report', () => {
 
   it('every significant finding names its evidence status', () => {
     const doc = buildExecutiveSummaryDoc(m, 'en');
-    for (const i of doc.insights) expect(i.sufficiency).toMatch(/Verified from data|High-confidence candidate|Estimate \/ scenario|Withheld/);
+    for (const i of doc.insights) expect(i.sufficiency).toMatch(/Supported by records|High-confidence candidate|Estimate \/ scenario|Withheld/);
     const sec = evidenceSections(m, 'en');
     const risks = sec.find((s) => s.title === 'Business risks')!.items;
-    for (const line of risks) expect(line).toMatch(/Verified from data|High-confidence candidate|Estimate \/ scenario/);
+    for (const line of risks) expect(line).toMatch(/Supported by records|High-confidence candidate|Estimate \/ scenario/);
   });
 
   it('the exposure total is per currency and side, lists its composition, and is never presented as savings', () => {

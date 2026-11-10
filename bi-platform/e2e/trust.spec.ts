@@ -60,7 +60,7 @@ test.describe('overview: evidence you can inspect', () => {
     const first = page.locator('[data-testid=exec-insight]').first();
     await first.getByTestId('insight-details-btn').click();
     const panel = first.getByTestId('evidence-panel');
-    for (const w of ['Evidence', 'Verified from data', 'Calculation', 'Currency and amount basis', 'Assumptions', 'Limitations', 'Evidence that is missing', 'Why this status']) await expect(panel).toContainText(w);
+    for (const w of ['Evidence', 'Supported by records', 'Calculation', 'Currency and amount basis', 'Assumptions', 'Limitations', 'Evidence that is missing', 'Why this status']) await expect(panel).toContainText(w);
     await expect(panel).toContainText('does not mean the underlying business records were audited');
     expect(reqs.filter((r) => !isLocal(r.url(), baseURL!))).toEqual([]);
   });

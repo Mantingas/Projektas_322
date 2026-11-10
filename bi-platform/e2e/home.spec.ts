@@ -8,7 +8,7 @@ test.describe('landing page', () => {
   test('LT / PL / EN: result-oriented hero, synthetic example finding, stage notice, pilot block – no pricing, no raw keys, no sideways scroll on a phone', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('/');
-    for (const [lang, title, stage] of [['lt', /Atraskite, ką verta patikrinti/, /dar nebuvo/], ['pl', /Sprawdź, co warto zweryfikować/, /jeszcze się nie odbyły/], ['en', /Find what is worth checking/, /No pilots/]] as const) {
+    for (const [lang, title, stage] of [['lt', /Atraskite, ką verta patikrinti/, /dar neatlikti/], ['pl', /Sprawdź, co warto zweryfikować/, /nie zostały jeszcze przeprowadzone/], ['en', /Find what is worth checking/, /not been carried out/]] as const) {
       await page.getByTestId(`lang-${lang}`).click();
       await expect(page.getByTestId('hero-title')).toHaveText(title);
       await expect(page.getByTestId('hero-finding')).toBeVisible();
@@ -121,14 +121,44 @@ test.describe('one-click demo', () => {
 });
 
 test.describe('final review checks', () => {
-  test('the hero example cannot be mistaken for a confirmed real loss: synthetic label + plain-language status note in every language, engine status kept', async ({ page }) => {
+  test('the hero example cannot be mistaken for a confirmed real loss: synthetic label, status "supported by records", ONE caveat, engine status kept', async ({ page }) => {
     await page.goto('/');
-    for (const [lang, note] of [['lt', /nepatvirtina tikro nuostolio/], ['pl', /Nie potwierdza|nie potwierdza/], ['en', /does not confirm a real loss/]] as const) {
+    for (const [lang, badge, caveat] of [['lt', 'Pagrįsta įrašais', 'Ar tai tikras finansinis neatitikimas, reikia patikrinti'], ['pl', 'Poparte zapisami', 'trzeba sprawdzić'], ['en', 'Supported by records', 'has to be checked']] as const) {
       await page.getByTestId(`lang-${lang}`).click();
       await expect(page.getByTestId('hero-finding-label')).toBeVisible();
-      await expect(page.getByTestId('hero-finding-status-note')).toContainText(note);
+      await expect(page.getByTestId('hero-finding').getByTestId('evidence-status').first()).toHaveText(badge);
+      await expect(page.getByTestId('hero-finding-caveat')).toContainText(caveat);
+      await expect(page.getByTestId('hero-finding-status-note')).toHaveCount(0);   // no second warning on the card
       await expect(page.getByTestId('hero-finding')).toHaveAttribute('data-status', 'verified'); // the engine's own classification is untouched
+      await expect(page.getByTestId('hero-finding').locator('[data-testid=evidence-status]').first()).toHaveAttribute('data-status', 'verified');
     }
+  });
+
+  test('compact page: five areas, four one-line steps, three privacy facts with the technical detail folded, a single pilot card', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+    await page.getByTestId('lang-lt').click();
+    for (const k of ['purchasing', 'debts', 'sales', 'inventory', 'universal']) await expect(page.getByTestId(`area-${k}`)).toBeVisible();
+    await expect(page.getByTestId('how').locator('li')).toHaveCount(4);
+    await expect(page.getByTestId('privacy').locator('> ul > li')).toHaveCount(3);
+    const details = page.getByTestId('privacy-details');
+    await expect(details).not.toHaveAttribute('open', '');
+    await details.locator('summary').click();
+    await expect(details).toContainText('Web Worker'); await expect(details).toContainText('IndexedDB'); await expect(details).toContainText('talpinimo žurnalai');
+    await expect(page.getByTestId('pilot').locator('li')).toHaveCount(2);
+    const h = await page.evaluate(() => document.documentElement.scrollHeight);
+    expect(h).toBeLessThan(2900);                       // was ≈ 3770 px before the compaction
+    expect(await noOverflow(page)).toBe(true);
+  });
+
+  test('no clipped button or link text anywhere on the landing page or the demo banner (390 px, LT / PL / EN)', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const clipped = (root = 'body') => page.evaluate((r) => [...document.querySelectorAll(`${r} a, ${r} button, ${r} summary`)].filter((e) => { const r = e.getBoundingClientRect(); return r.width > 0 && (e.scrollWidth > e.clientWidth + 1 || e.scrollHeight > e.clientHeight + 1); }).map((e) => e.textContent?.trim().slice(0, 40)), root);
+    await page.goto('/');
+    for (const lang of ['lt', 'pl', 'en']) { await page.getByTestId(`lang-${lang}`).click(); await page.getByTestId('hero-finding-evidence').locator('summary').click(); expect(await clipped(), `landing ${lang}`).toEqual([]); await page.getByTestId('hero-finding-evidence').locator('summary').click(); }
+    await page.getByTestId('cta-demo').click();
+    await expect(page.getByTestId('demo-banner')).toHaveAttribute('data-phase', 'ready', { timeout: 60_000 });
+    for (const lang of ['pl', 'lt', 'en']) { await page.getByTestId(`lang-${lang}`).click(); expect(await clipped('[data-testid=demo-banner]'), `demo banner ${lang}`).toEqual([]); expect(await clipped('header'), `header ${lang}`).toEqual([]); }
   });
 
   test('without a published contact the pilot block is a plan: no invitation, no dead-end sentence, no form / link / address', async ({ page }) => {
@@ -141,11 +171,11 @@ test.describe('final review checks', () => {
     const text = await pilot.innerText();
     expect(text).not.toMatch(/[\w.+-]+@[\w-]+\.[\w.]+/);
     expect(text).not.toMatch(/užsiregistruoti negalima|nie można się tu zapisać|nothing can be signed up|kol kas nėra paraiškų|Ieškome pirmųjų/i);
-    await expect(pilot.getByRole('heading', { level: 2 })).toHaveText(/Planuojame nemokamą pilotą/);
+    await expect(pilot.getByRole('heading', { level: 2 })).toHaveText(/Ruošiame nemokamą pilotą/);
     await page.getByTestId('lang-pl').click();
-    await expect(pilot.getByRole('heading', { level: 2 })).toHaveText(/Planujemy bezpłatny pilotaż/);
+    await expect(pilot.getByRole('heading', { level: 2 })).toHaveText(/Przygotowujemy bezpłatny pilotaż/);
     await page.getByTestId('lang-en').click();
-    await expect(pilot.getByRole('heading', { level: 2 })).toHaveText(/We plan a free pilot/);
+    await expect(pilot.getByRole('heading', { level: 2 })).toHaveText(/We are preparing a free pilot/);
   });
 
   test('the demo banner has a clear, primary way back to the own workspace, also after a manual visit to /app/', async ({ page }) => {

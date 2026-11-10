@@ -23,7 +23,7 @@ describe('pilot contact: an invitation is shown only when the owner has publishe
   it('the plan heading does not invite or promise a signup, and the dead-end "no channel" sentence is gone', () => {
     for (const d of [en, lt, pl] as Record<string, string>[]) {
       expect(Object.keys(d)).not.toContain('home.pilot.note');
-      expect(d['home.pilot.title.plan']).not.toMatch(/ieškome|szukamy|looking for|registr|sign/i);
+      expect(d['home.pilot.title.plan']).not.toMatch(/ieškome|szukamy|looking for|registr|sign|apply|zapis/i);
     }
   });
 });

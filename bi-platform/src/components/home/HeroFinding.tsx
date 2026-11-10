@@ -21,7 +21,7 @@ export function HeroFinding() {
   const amount = finding.exposure?.amount ?? 0;
   const cur = finding.currency ?? 'EUR';
   return (
-    <Card className="mx-auto w-full max-w-xl space-y-3 text-left" data-testid="hero-finding" data-status={finding.status} data-rule={finding.rule}>
+    <Card className="mx-auto w-full max-w-xl space-y-2 p-4 text-left sm:space-y-3 sm:p-5" data-testid="hero-finding" data-status={finding.status} data-rule={finding.rule}>
       <div className="flex flex-wrap items-center gap-2">
         <span className="rounded bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300" data-testid="hero-finding-label">{t('home.ex.label')}</span>
         <span className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">{t('home.ex.kind')}</span>
@@ -32,18 +32,16 @@ export function HeroFinding() {
         <span className="text-sm text-slate-500">{t('home.ex.amount')}</span>
         <StatusBadge status={finding.status} />
       </div>
-      <p className="text-sm">{t('home.ex.what', { amount: money(amount, { lang, currency: cur }) })}</p>
       <div className="text-sm">
         <div className="font-medium">{t('home.ex.why')}</div>
         <p className="text-slate-700 dark:text-slate-300">{tr(lang, finding.rationale, cur)}</p>
       </div>
       <p className="text-sm text-slate-600 dark:text-slate-400">{t('home.ex.records', { n: finding.records.length })}</p>
-      <p className="rounded-md bg-slate-50 p-2 text-xs text-slate-700 dark:bg-slate-900 dark:text-slate-300" data-testid="hero-finding-status-note">{t('home.ex.status')}</p>
       <details className="text-sm" data-testid="hero-finding-evidence">
         <summary className="cursor-pointer font-medium text-indigo-700 dark:text-indigo-300">{t('home.ex.show')}</summary>
         <div className="mt-2"><EvidencePanel dossier={finding} title={findingTitle(finding, lang)} fileNames={demo.fileNames} currency={cur} /></div>
       </details>
-      <p className="text-xs text-slate-500">{t('home.ex.note')}</p>
+      <p className="text-xs text-slate-600 dark:text-slate-400" data-testid="hero-finding-caveat">{t('home.ex.caveat')}</p>
       <Link href="/app/?demo=1" className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'h-auto whitespace-normal py-2 text-center')} data-testid="hero-finding-open">{t('home.ex.open')}</Link>
     </Card>
   );
