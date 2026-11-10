@@ -12,6 +12,7 @@
     "test": "vitest run",
     "test:e2e": "playwright test --trace off",
     "samples": "tsx scripts/make-samples.ts",
+    "demo:finding": "tsx scripts/demo-finding.ts",
     "compat:report": "tsx scripts/compat-report.ts",
     "compat:new": "tsx scripts/compat-new.ts"
   },

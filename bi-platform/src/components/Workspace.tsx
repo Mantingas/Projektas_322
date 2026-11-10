@@ -10,6 +10,7 @@ import { InventoryView } from './inventory/InventoryView';
 import { FinanceView } from './finance/FinanceView';
 import { ExecutiveView } from './executive/ExecutiveView';
 import { PilotView } from './pilot/PilotView';
+import { DemoBanner } from './DemoBanner';
 import { UniversalImport } from './universal/UniversalImport';
 import { UniversalView } from './universal/UniversalView';
 import type { FinanceSide, ModuleId } from '@/engine/types';
@@ -38,6 +39,7 @@ export function Workspace() {
   }, [version]);
   return (
     <div className="space-y-6">
+      <DemoBanner onReady={() => { bump(); setModule('finance'); setFinSide('receivable'); setTab('insights'); }} />
       <div role="tablist" className="no-print flex gap-1 overflow-x-auto border-b [mask-image:linear-gradient(to_right,black_92%,transparent)] sm:[mask-image:none] border-slate-200 dark:border-slate-800">
         {TABS.map((k) => (
           <button

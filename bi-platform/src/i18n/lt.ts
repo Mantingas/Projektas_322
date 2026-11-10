@@ -8,6 +8,7 @@ import uni from './uni.lt';
 import exe from './exe.lt';
 import trust from './trust.lt';
 import pilot from './pilot.lt';
+import home from './home.lt';
 
 const lt: Messages = {
   ...dash,
@@ -19,29 +20,12 @@ const lt: Messages = {
   ...exe,
   ...trust,
   ...pilot,
+  ...home,
   'app.name': 'Excel įžvalgos',
   'app.tagline': 'Verslo įžvalgos iš jūsų Excel failų',
   'nav.home': 'Pradžia', 'nav.import': 'Importas', 'nav.insights': 'Įžvalgos', 'nav.history': 'Istorija', 'nav.settings': 'Nustatymai',
   'lang.label': 'Kalba',
 
-  'hero.title': 'Įkelkite Excel. Pamatykite, kas išsiskiria jūsų verslo duomenyse – su kiekvieno radinio įrodymais.',
-  'hero.sub': 'Be programavimo. Be sudėtingų ataskaitų. Jūsų duomenys lieka jūsų kompiuteryje.',
-  'hero.cta': 'Išbandyti su savo failu', 'hero.sample': 'Parsisiųsti pavyzdinį failą',
-  'privacy.title': 'Jūsų duomenys nepalieka šios naršyklės',
-  'privacy.1': 'Failai skaitomi ir analizuojami jūsų naršyklėje – niekas nėra siunčiama į serverį.',
-  'privacy.2': 'Importuoti duomenys saugomi jūsų naršyklėje (IndexedDB) ir ištrinami vienu paspaudimu.',
-  'privacy.3': 'Jokio išorinio DI, jokių analitikos ar klaidų sekimo paslaugų, kurios galėtų matyti jūsų skaičius.',
-  'how.title': 'Kaip tai veikia',
-  'how.1': 'Įkelkite Excel arba CSV failą', 'how.2': 'Patvirtinkite pasiūlytas stulpelių reikšmes', 'how.3': 'Patikriname duomenis ir paskaičiuojame KPI', 'how.4': 'Perskaitykite svarbiausias įžvalgas ir eksportuokite ataskaitą',
-  'modules.title': 'Moduliai',
-  'module.sales': 'Pardavimai', 'module.sales.d': 'Apyvarta, klientai, prekės, pardavėjai, pokyčiai ir marža, kai nurodyta savikaina.',
-  'module.purchasing': 'Pirkimai ir tiekėjai', 'module.purchasing.d': 'Pirkimo kainų pokyčiai, tiekėjų koncentracija, galimi sutaupymai, kuriuos reikia patikrinti.',
-  'module.inventory': 'Sandėlio likučiai', 'module.inventory.d': 'Atsargų vertė, nejudančios prekės, trūkumo rizika.',
-  'module.debts': 'Skolos ir pinigai', 'module.debts.d': 'Pradelstos sąskaitos, skolų senėjimas, galimi pasikartojantys mokėjimai ir galbūt nepanaudotos kreditinės – patikrinimui.',
-  'module.universal': 'Universalus analizatorius', 'module.universal.d': 'Bet kokios lentelės tendencijos, anomalijos ir duomenų kokybė.',
-  'module.available': 'Veikia su demonstraciniais duomenimis', 'module.soon': 'Netrukus',
-  'pricing.title': 'Kainodara – dar nesiūloma (tikrinama idėja; nieko nusipirkti negalima)',
-  'pricing.lt': 'Idėja Lietuvai: nemokamai pirmosioms įmonėms. Tai nėra pasiūlymas.', 'pricing.pl': 'Idėja Lenkijai: bandomasis laikotarpis, vėliau mėnesinis mokestis. Kaina nenustatyta.',
 
   'import.title': 'Failo importas',
   'import.drop': 'Nutempkite Excel arba CSV failą čia', 'import.choose': 'Pasirinkti failą',

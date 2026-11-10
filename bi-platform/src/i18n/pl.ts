@@ -8,6 +8,7 @@ import uni from './uni.pl';
 import exe from './exe.pl';
 import trust from './trust.pl';
 import pilot from './pilot.pl';
+import home from './home.pl';
 
 const pl: Messages = {
   ...dash,
@@ -19,29 +20,12 @@ const pl: Messages = {
   ...exe,
   ...trust,
   ...pilot,
+  ...home,
   'app.name': 'Excel Insights',
   'app.tagline': 'Wnioski biznesowe z Twoich plików Excel',
   'nav.home': 'Start', 'nav.import': 'Import', 'nav.insights': 'Wnioski', 'nav.history': 'Historia', 'nav.settings': 'Ustawienia',
   'lang.label': 'Język',
 
-  'hero.title': 'Wgraj Excel. Zobacz, co wyróżnia się w danych Twojej firmy – z dowodami dla każdego ustalenia.',
-  'hero.sub': 'Bez programowania. Bez skomplikowanych raportów. Twoje dane zostają na Twoim komputerze.',
-  'hero.cta': 'Wypróbuj na swoim pliku', 'hero.sample': 'Pobierz przykładowy plik',
-  'privacy.title': 'Twoje dane nie opuszczają tej przeglądarki',
-  'privacy.1': 'Pliki są odczytywane i analizowane w przeglądarce – nic nie jest wysyłane na serwer.',
-  'privacy.2': 'Zaimportowane dane są zapisane w przeglądarce (IndexedDB) i można je usunąć jednym kliknięciem.',
-  'privacy.3': 'Bez zewnętrznej AI i bez usług analitycznych lub śledzenia błędów, które mogłyby zobaczyć Twoje liczby.',
-  'how.title': 'Jak to działa',
-  'how.1': 'Wgraj plik Excel lub CSV', 'how.2': 'Potwierdź proponowane znaczenie kolumn', 'how.3': 'Sprawdzamy dane i liczymy wskaźniki', 'how.4': 'Przeczytaj najważniejsze wnioski i wyeksportuj raport',
-  'modules.title': 'Moduły',
-  'module.sales': 'Sprzedaż', 'module.sales.d': 'Obrót, klienci, towary, handlowcy, zmiany oraz marża, gdy podano koszt.',
-  'module.purchasing': 'Zakupy i dostawcy', 'module.purchasing.d': 'Zmiany cen zakupu, koncentracja dostawców, możliwe oszczędności do sprawdzenia.',
-  'module.inventory': 'Stany magazynowe', 'module.inventory.d': 'Wartość zapasów, towary bez ruchu, ryzyko braków.',
-  'module.debts': 'Należności i gotówka', 'module.debts.d': 'Przeterminowane faktury, wiekowanie, możliwe podwójne płatności i korekty, które mogą być niewykorzystane – do weryfikacji.',
-  'module.universal': 'Analizator uniwersalny', 'module.universal.d': 'Trendy, anomalie i jakość danych w dowolnej tabeli.',
-  'module.available': 'Działa na danych demonstracyjnych', 'module.soon': 'Wkrótce',
-  'pricing.title': 'Cennik – jeszcze nieoferowany (testowany pomysł; niczego nie można kupić)',
-  'pricing.lt': 'Pomysł dla Litwy: bezpłatnie dla pierwszych firm. To nie jest oferta.', 'pricing.pl': 'Pomysł dla Polski: okres próbny, potem opłata miesięczna. Cena nie jest ustalona.',
 
   'import.title': 'Import pliku',
   'import.drop': 'Upuść tutaj plik Excel lub CSV', 'import.choose': 'Wybierz plik',

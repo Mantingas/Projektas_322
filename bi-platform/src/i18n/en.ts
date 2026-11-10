@@ -7,6 +7,7 @@ import uni from './uni.en';
 import exe from './exe.en';
 import trust from './trust.en';
 import pilot from './pilot.en';
+import home from './home.en';
 
 const en = {
   ...dash,
@@ -18,29 +19,12 @@ const en = {
   ...exe,
   ...trust,
   ...pilot,
+  ...home,
   'app.name': 'Excel Insights',
   'app.tagline': 'Business insights from your Excel files',
   'nav.home': 'Home', 'nav.import': 'Import', 'nav.insights': 'Insights', 'nav.history': 'History', 'nav.settings': 'Settings',
   'lang.label': 'Language',
 
-  'hero.title': 'Upload your Excel. See what stands out in your business data – with the evidence behind every finding.',
-  'hero.sub': 'No coding. No complicated reports. Your data stays on your computer.',
-  'hero.cta': 'Try it with your file', 'hero.sample': 'Download a sample file',
-  'privacy.title': 'Your data never leaves this browser',
-  'privacy.1': 'Files are read and analysed inside your browser – nothing is uploaded.',
-  'privacy.2': 'Imported data is stored in your browser (IndexedDB) and can be deleted with one click.',
-  'privacy.3': 'No external AI, no analytics or error-tracking services that could see your numbers.',
-  'how.title': 'How it works',
-  'how.1': 'Upload an Excel or CSV file', 'how.2': 'Confirm the suggested column meanings', 'how.3': 'We validate the data and calculate KPIs', 'how.4': 'Read the most important insights and export a report',
-  'modules.title': 'Modules',
-  'module.sales': 'Sales', 'module.sales.d': 'Revenue, customers, products, salespeople, changes and margin when cost is provided.',
-  'module.purchasing': 'Purchasing & suppliers', 'module.purchasing.d': 'Purchase price changes, supplier concentration, possible savings to check.',
-  'module.inventory': 'Inventory', 'module.inventory.d': 'Stock value, slow movers, shortage risk.',
-  'module.debts': 'Debts & cash', 'module.debts.d': 'Overdue invoices, ageing, possible duplicate payments and credit notes that may be unapplied – to verify.',
-  'module.universal': 'Universal analyser', 'module.universal.d': 'Trends, anomalies and data quality for any table.',
-  'module.available': 'Works with demo data', 'module.soon': 'Coming next',
-  'pricing.title': 'Pricing – not offered yet (an idea being tested; nothing can be bought)',
-  'pricing.lt': 'Idea for Lithuania: free for the first companies. Not an offer.', 'pricing.pl': 'Idea for Poland: a trial period, then a monthly fee. The price is not set.',
 
   'import.title': 'Import a file',
   'import.drop': 'Drop an Excel or CSV file here', 'import.choose': 'Choose file',

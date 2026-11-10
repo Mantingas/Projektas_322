@@ -1,4 +1,5 @@
 import Dexie, { type Table } from 'dexie';
+import { REAL_DB, activeDbName } from './dbName';
 import { docKey } from '@/engine/import/merge';
 import type { Missed, PilotMeta, Review } from '@/engine/pilot/types';
 import type { UDataset } from '@/engine/universal/types';
@@ -124,7 +125,7 @@ export class AppDB extends Dexie {
   settings!: Table<SettingRow, string>;
   audit!: Table<AuditEntry, number>;
 
-  constructor(name = 'bi-platform') {
+  constructor(name = REAL_DB) {
     super(name);
     this.version(1).stores({
       imports: 'id, checksum, importedAt',
@@ -155,6 +156,9 @@ export class AppDB extends Dexie {
 
 let shared: AppDB | null = null;
 export function getDb(): AppDB {
-  if (!shared) shared = new AppDB();
+  const name = activeDbName();
+  // switching between the visitor's workspace and the demo inside one page session must never keep using the other database
+  if (shared && shared.name !== name) { shared.close(); shared = null; }
+  if (!shared) shared = new AppDB(name);
   return shared;
 }

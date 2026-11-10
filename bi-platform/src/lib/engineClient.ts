@@ -1,4 +1,5 @@
 import { EngineSession } from './engineSession';
+import { activeDbName, isDemoMode } from '@/db/dbName';
 
 export class EngineError extends Error {
   constructor(public readonly code: string, message?: string) {
@@ -20,6 +21,8 @@ export class EngineClient {
   private local: EngineSession | null = null;
   private seq = 0;
   private pending = new Map<number, { resolve: (v: unknown) => void; reject: (e: Error) => void; timer: ReturnType<typeof setTimeout> }>();
+
+  private localDemo = false;
 
   private start(): Worker | null {
     if (this.worker) return this.worker;
@@ -55,7 +58,9 @@ export class EngineClient {
   async call<K extends Methods>(method: K, args: Fn<K>['args'], transfer: Transferable[] = []): Promise<Fn<K>['result']> {
     const w = this.start();
     if (!w) {
+      if (this.local && this.localDemo !== isDemoMode()) this.local = null;
       this.local ??= new EngineSession();
+      this.localDemo = isDemoMode();
       try {
         return (await (this.local[method] as (...a: unknown[]) => unknown)(...(args as unknown[]))) as Fn<K>['result'];
       } catch (e) {
@@ -66,10 +71,17 @@ export class EngineClient {
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => this.reset(new EngineError('timeout')), TIMEOUT[method]);
       this.pending.set(id, { resolve: resolve as (v: unknown) => void, reject, timer });
-      w.postMessage({ id, method, args }, transfer);
+      w.postMessage({ id, method, args, db: activeDbName() }, transfer);
     });
   }
 }
 
 let shared: EngineClient | null = null;
 export const engine = () => (shared ??= new EngineClient());
+/** Node-side use (generating the landing-page example, tests): run calls in-process on the given session instead of a Web Worker. */
+export function setEngineForTests(session: EngineSession): void {
+  const c = new EngineClient();
+  (c as unknown as { local: EngineSession; start: () => null }).local = session;
+  (c as unknown as { start: () => null }).start = () => null;
+  shared = c;
+}

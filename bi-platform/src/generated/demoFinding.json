@@ -1,0 +1,83 @@
+{
+  "finding": {
+    "currency": "EUR",
+    "amountBasis": "as_stated",
+    "side": "receivable",
+    "dateDimension": "document_payment",
+    "id": "credit:0w5bwudqi591djv78s14x5#0",
+    "rule": "unapplied_credit",
+    "cp": "c03",
+    "label": "AB Gama pienas",
+    "state": "open_in_report",
+    "status": "verified",
+    "period": {
+      "from": "2025-06-02",
+      "to": "2025-12-15"
+    },
+    "records": [
+      {
+        "key": "0w5bwudqi591djv78s14x5#0",
+        "kind": "credit_note",
+        "role": "credit",
+        "date": "2025-11-18",
+        "documentId": "KR-3",
+        "counterparty": "AB Gama pienas",
+        "amount": 300,
+        "importId": "sample_lt_saskaitos.csv",
+        "sourceRow": 245
+      },
+      {
+        "key": "223dohc4ise1yaogxenypi#0",
+        "kind": "open_item",
+        "role": "open_balance",
+        "date": "2025-12-15",
+        "documentId": "KR-3",
+        "counterparty": "AB Gama pienas",
+        "amount": -300,
+        "importId": "sample_lt_gautinos_atviros.csv",
+        "sourceRow": 269
+      }
+    ],
+    "exposure": {
+      "amount": 300,
+      "kind": "open_credit_balance"
+    },
+    "calculation": {
+      "key": "trust.calc.credit_open",
+      "params": {
+        "amount": {
+          "money": 300
+        },
+        "asof": {
+          "date": "2025-12-15"
+        }
+      }
+    },
+    "assumptions": [],
+    "limitations": [
+      {
+        "key": "trust.lim.basis_as_stated"
+      },
+      {
+        "key": "trust.lim.not_audit"
+      }
+    ],
+    "missing": [],
+    "rationale": {
+      "key": "trust.why.credit_open"
+    }
+  },
+  "fileNames": {
+    "sample_lt_gautinos_atviros.csv": "sample_lt_gautinos_atviros.csv",
+    "sample_lt_saskaitos.csv": "sample_lt_saskaitos.csv"
+  },
+  "sampleFiles": [
+    "sample_lt_pardavimai.csv",
+    "sample_lt_pirkimai.csv",
+    "sample_lt_likuciai.csv",
+    "sample_lt_judejimai.csv",
+    "sample_lt_gautinos_atviros.csv",
+    "sample_lt_saskaitos.csv",
+    "sample_lt_mokejimai.csv"
+  ]
+}
