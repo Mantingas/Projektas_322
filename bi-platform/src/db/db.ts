@@ -1,12 +1,13 @@
 import Dexie, { type Table } from 'dexie';
 import { docKey } from '@/engine/import/merge';
+import type { UDataset } from '@/engine/universal/types';
 import type { ConfirmedMapping, ExportMode, FieldId, ImportStats, FinanceRecord, InventoryRecord, ModuleId, PurchaseRecord, SalesRecord } from '@/engine/types';
 
 /** Everything below lives ONLY in this browser's IndexedDB. Nothing here is ever sent anywhere. */
 export interface ImportRow {
   id: string;
   /** Which module the file belongs to (rows stored before purchasing existed have none = sales). */
-  module?: ModuleId;
+  module?: ModuleId | 'universal';
   checksum: string;
   fileName: string;
   sheetName: string;
@@ -58,6 +59,19 @@ export interface StoredMeta {
 export type StoredPurchase = PurchaseRecord & StoredMeta;
 export type StoredInventory = InventoryRecord & StoredMeta;
 export type StoredFinance = FinanceRecord & StoredMeta;
+/** A universal (free-form) table: typed columns, kept whole in this browser. */
+export type StoredUniversal = UDataset & { importId: string };
+/** A cross-module relationship the user decided on. Only `confirmed` links ever join data; `rejected` ones are remembered so they are not proposed again. */
+export interface StoredLink {
+  id: string;
+  kind: 'product' | 'counterparty';
+  a: { module: string; key: string; label: string };
+  b: { module: string; key: string; label: string };
+  basis: 'identifier_equal' | 'user_confirmed';
+  status: 'confirmed' | 'rejected';
+  evidence: string;
+  decidedAt: number;
+}
 
 export interface StoredRecord extends SalesRecord {
   importId: string;
@@ -85,7 +99,7 @@ export interface AuditEntry {
   id?: number;
   at: number;
   importId?: string;
-  action: 'import' | 'delete_import' | 'resolve_conflict';
+  action: 'import' | 'delete_import' | 'resolve_conflict' | 'link_decision';
   detail: Record<string, string | number | boolean>;
 }
 
@@ -100,6 +114,8 @@ export class AppDB extends Dexie {
   purchases!: Table<StoredPurchase, string>;
   inventory!: Table<StoredInventory, string>;
   finance!: Table<StoredFinance, string>;
+  universal!: Table<StoredUniversal, string>;
+  links!: Table<StoredLink, string>;
   mappings!: Table<SavedMapping, string>;
   settings!: Table<SettingRow, string>;
   audit!: Table<AuditEntry, number>;
@@ -126,6 +142,8 @@ export class AppDB extends Dexie {
     this.version(5).stores({ inventory: 'key, importId, date, docKey, heldBy' });
     // v6: receivables / payables / cash lines (open items, aging, balances, invoices, payments, credit notes)
     this.version(6).stores({ finance: 'key, importId, date, docKey, heldBy' });
+    // v7: universal tables and the user's cross-module link decisions
+    this.version(7).stores({ universal: 'id, importId', links: 'id, status, kind' });
   }
 }
 

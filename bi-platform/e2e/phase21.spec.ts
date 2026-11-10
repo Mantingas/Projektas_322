@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import JSZip from 'jszip';
 import { makeTruth } from '../tests/fixtures/truth';
-import { isLocal, trackRequests } from './helpers';
+import { installWatchdog, isLocal, readWatchdog, trackRequests } from './helpers';
 
 const sample = (n: string) => path.join(process.cwd(), 'public/samples', n);
 const truth = makeTruth('lt');
@@ -263,18 +263,11 @@ test.describe('hostile and very large input', () => {
     await expect(page.getByTestId('mapping-table')).toBeVisible();
   });
 
-  test('a 120 000-line file is imported and analysed without freezing the page', async ({ page }) => {
+  test('a 120 000-line file is imported and analysed without freezing the page', async ({ page }, testInfo) => {
     test.setTimeout(240_000);
     await page.goto('/app/');
     await page.getByTestId('lang-en').click();
-    // main-thread watchdog: records every task longer than 50 ms and the worst timer delay
-    await page.evaluate(() => {
-      const w = window as unknown as { __long: number[]; __gap: number };
-      w.__long = []; w.__gap = 0;
-      new PerformanceObserver((l) => l.getEntries().forEach((e) => w.__long.push(e.duration))).observe({ entryTypes: ['longtask'] });
-      let last = performance.now();
-      setInterval(() => { const n = performance.now(); w.__gap = Math.max(w.__gap, n - last - 50); last = n; }, 50);
-    });
+    await installWatchdog(page);
     const lines: string[] = [];
     for (let i = 0; i < 120_000; i++) {
       const d = new Date(Date.UTC(2024, 0, 1) + (i % 700) * 86400000).toISOString().slice(0, 10);
@@ -282,7 +275,12 @@ test.describe('hostile and very large input', () => {
     }
     const buf = Buffer.from('﻿' + head + lines.join('\r\n') + '\r\n');
     expect(buf.length).toBeGreaterThan(5_000_000);
-    await page.getByTestId('file-input').setInputFiles({ name: 'big.csv', mimeType: 'text/csv', buffer: buf });
+    // Hand the browser a FILE PATH, like a real file picker does. Passing the 5 MB as an in-memory `buffer` makes Playwright decode and
+    // build the File object inside the page's main thread: a 500–1300 ms task (render@end, no script attribution) that depends on CPU load
+    // and has nothing to do with the app. That harness task was the source of the intermittent `worst < 1000` failure.
+    const bigPath = testInfo.outputPath('big.csv');
+    fs.writeFileSync(bigPath, buf);
+    await page.getByTestId('file-input').setInputFiles(bigPath);
     await page.getByTestId('mapping-table').waitFor({ timeout: 120_000 });
     await page.getByTestId('currency-select').selectOption('EUR');
     await expect(page.getByTestId('import-preview')).toBeVisible({ timeout: 120_000 });
@@ -298,11 +296,38 @@ test.describe('hostile and very large input', () => {
     await page.getByTestId('kpi-revenue').waitFor();
     await page.getByTestId('mode-analyst').click();
     await expect(page.getByTestId('chart-trend')).toBeVisible();
-    const { long, gap } = await page.evaluate(() => { const w = window as unknown as { __long: number[]; __gap: number }; return { long: w.__long, gap: w.__gap }; });
-    const worst = Math.max(0, ...long);
-    console.log(`main-thread: longest task ${Math.round(worst)} ms, worst timer delay ${Math.round(gap)} ms, long tasks: ${long.length}`);
-    expect(worst).toBeLessThan(1000);
-    expect(gap).toBeLessThan(1000);
+    const { worst, gap, tasks } = await readWatchdog(page);
+    console.log(`main-thread: longest task ${Math.round(worst)} ms, worst timer delay ${Math.round(gap)} ms, long tasks: ${tasks}`);
+    // measured without the harness task: longest app task 100–200 ms (≈ 2.4× under heavy CPU contention), so 600 ms is tighter than the old 1000 ms
+    expect(worst).toBeLessThan(600);
+    expect(gap).toBeLessThan(600);
+  });
+});
+
+test.describe('large-file test reliability (regression for the intermittent 120 000-line failure)', () => {
+  // Cause, measured: Playwright's in-memory `buffer` upload built the 5 MB File inside the page's main thread – a 500–1300 ms task with no script
+  // attribution that grew with CPU load. The app itself blocked for ≤ 200 ms. The big test now uploads a file PATH; these tests keep it honest.
+  test('the watchdog sees genuine main-thread blocking, so the 600 ms limit of the large-file test is not blind', async ({ page }) => {
+    await page.goto('/app/');
+    await installWatchdog(page);
+    await page.evaluate(() => new Promise<void>((done) => setTimeout(() => { const t = performance.now(); while (performance.now() - t < 700) { /* block */ } done(); }, 100)));
+    await page.waitForTimeout(200);
+    const w = await readWatchdog(page);
+    expect(w.worst).toBeGreaterThan(600);
+    expect(w.gap).toBeGreaterThan(600);
+  });
+
+  test('importing a mid-size file from a file path leaves the page responsive (no long task from file handling)', async ({ page }, testInfo) => {
+    await page.goto('/app/');
+    await page.getByTestId('lang-en').click();
+    await installWatchdog(page);
+    const lines = Array.from({ length: 20_000 }, (_, i) => `${new Date(Date.UTC(2024, 0, 1) + (i % 300) * 86400000).toISOString().slice(0, 10)};DOC-${Math.floor(i / 3)};Customer ${i % 80};Product ${i % 150};${1 + (i % 9)};${(10 + (i % 97)).toFixed(2).replace('.', ',')}`);
+    const p = testInfo.outputPath('mid.csv');
+    fs.writeFileSync(p, '\ufeff' + head + lines.join('\r\n') + '\r\n');
+    await page.getByTestId('file-input').setInputFiles(p);
+    await page.getByTestId('mapping-table').waitFor({ timeout: 60_000 });
+    const w = await readWatchdog(page);
+    expect(w.worst).toBeLessThan(400);
   });
 });
 

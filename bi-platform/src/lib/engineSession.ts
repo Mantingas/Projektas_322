@@ -40,6 +40,19 @@ import { listSeries, type Series } from '@/engine/sales/kpi';
 import { getDb, type AppDB, type ImportRow } from '@/db/db';
 import { commitImport, getSavedMapping, loadAllFinance, loadAllInventory, loadAllPurchases, loadAllSales, pendingHeldCount, previewImport, saveMapping, type CommitResult, type MergePreview } from '@/db/store';
 import { purchaseDimensionOf } from '@/engine/purchasing/entities';
+import { detectTable } from '@/engine/schema/header';
+import { buildDataset, profileTable, type UniversalProfile } from '@/engine/universal/dataset';
+import { analyzeUniversal } from '@/engine/universal/analyze';
+import { recommendCharts, type UChart, type Skipped } from '@/engine/universal/charts';
+import { universalInsights } from '@/engine/universal/insights';
+import type { UColumn, UConfig, UDataset, UType } from '@/engine/universal/types';
+import type { UniversalAnalysis } from '@/engine/universal/analyze';
+import { composeExecutive, type ExecutiveModel, type ModuleSnapshot } from '@/engine/executive/compose';
+import { crossInsights } from '@/engine/executive/cross';
+import { linkWorkflow, type LinkWorkflow } from '@/engine/executive/linking';
+import type { EntityLink } from '@/engine/entities/links';
+import type { Insight } from '@/engine/types';
+import { newId } from '@/db/store';
 
 // ───────── message shapes (plain data only: they cross the worker boundary) ─────────
 export interface ParseResult {
@@ -221,6 +234,32 @@ export interface BuildPurchasingResult {
   pendingHeld: number;
   identity: 'document' | 'mixed' | 'content';
 }
+
+
+// ───────── universal tables and the executive overview ─────────
+export interface UniversalProfileResult {
+  sheetIdx: number;
+  headers: string[];
+  columns: UColumn[];
+  rowCount: number;
+  headerRow: number;
+  truncated: boolean;
+  previewRows: string[][];
+  /** open decisions: ambiguous columns the user has not decided yet */
+  duplicateOf?: { id: string; importedAt: number; fileName: string };
+}
+export type UniversalCommitOutcome = { status: 'ok'; id: string; rows: number } | { status: 'unresolved'; columns: number[] } | { status: 'duplicate_file'; existing: { id: string; importedAt: number; fileName: string } };
+export interface UniversalListItem { id: string; fileName: string; sheetName: string; importedAt: number; rows: number; columns: number }
+export interface UniversalBuildResult {
+  dataset: { id: string; fileName: string; sheetName: string; importedAt: number; rowCount: number; columns: UColumn[] };
+  analysis: UniversalAnalysis;
+  charts: UChart[];
+  skipped: Skipped[];
+  insights: Insight[];
+  /** distinct values of the filterable columns (top 100 by frequency) */
+  options: Record<number, { value: string; count: number }[]>;
+}
+export interface ExecutiveResult { model: ExecutiveModel }
 
 const toRow = (r: SalesRecord): DrillRow => ({ key: r.key, date: r.date, documentId: r.documentId, party: r.customerName ?? r.customerId, product: r.productName ?? r.productId, quantity: r.quantity, amount: r.amount, importId: r.importId, sourceRow: r.sourceRow });
 const toPurchaseRow = (r: PurchaseRecord): DrillRow => ({ key: r.key, date: r.date, documentId: r.documentId, party: r.supplierName ?? r.supplierId, product: r.productName ?? r.productId, quantity: r.quantity, unit: r.unit, amount: r.amount, importId: r.importId, sourceRow: r.sourceRow });
@@ -586,6 +625,124 @@ export class EngineSession {
     }
     const options: BuildFinanceResult['options'] = { [dim]: [...by.values()].sort((a, b) => b.value - a.value || a.label.localeCompare(b.label)).slice(0, 2000) };
     return { empty: false, series, allSeries, model: view, analysis, options, bounds: { dateMin: dmin, dateMax: dmax }, presets: availablePresets({ dateMin: dmin, dateMax: dmax }), imports: importsLite, pendingHeld, identity, sides };
+  }
+
+
+  // ───────── universal tables ─────────
+  private uState: { sheetIdx: number; decimal: ',' | '.'; table: NonNullable<ReturnType<typeof detectTable>>; prof: UniversalProfile } | null = null;
+
+  async universalProfile(sheetIdx: number, decimalHint: ',' | '.'): Promise<UniversalProfileResult | null> {
+    if (!this.parsed) throw new Error('no_file');
+    const sheet = this.parsed.file.sheets[sheetIdx];
+    if (!sheet) return null;
+    const table = detectTable(sheet.rows);
+    if (!table || table.dataRows.length === 0) return null;
+    const prof = profileTable(table, decimalHint);
+    this.uState = { sheetIdx, decimal: decimalHint, table, prof };
+    const existing = await this.db.imports.where('checksum').equals(this.parsed.checksum).first();
+    return {
+      sheetIdx, headers: table.headers, columns: prof.columns, rowCount: table.dataRows.length, headerRow: table.headerRow, truncated: sheet.truncated,
+      previewRows: table.dataRows.slice(0, 6).map((r) => table.headers.map((_, ci) => short(r[ci], 30))),
+      duplicateOf: existing ? { id: existing.id, importedAt: existing.importedAt, fileName: existing.fileName } : undefined,
+    };
+  }
+
+  async universalCommit(req: { sheetIdx: number; decimalHint: ',' | '.'; decisions: Record<number, UType>; allowSameChecksum: boolean }): Promise<UniversalCommitOutcome> {
+    if (!this.parsed) throw new Error('no_file');
+    if (!this.uState || this.uState.sheetIdx !== req.sheetIdx || this.uState.decimal !== req.decimalHint) await this.universalProfile(req.sheetIdx, req.decimalHint);
+    const st = this.uState!;
+    const existing = await this.db.imports.where('checksum').equals(this.parsed.checksum).first();
+    if (existing && !req.allowSameChecksum) return { status: 'duplicate_file', existing: { id: existing.id, importedAt: existing.importedAt, fileName: existing.fileName } };
+    const id = newId();
+    const now = Date.now();
+    const built = buildDataset(st.table, st.prof, req.decisions, { id, fileName: this.parsed.file.fileName, sheetName: this.parsed.file.sheets[req.sheetIdx]!.name, importedAt: now });
+    if (!built.ok) return { status: 'unresolved', columns: built.unresolved };
+    const ds = built.dataset;
+    const row: ImportRow = {
+      id, module: 'universal', checksum: this.parsed.checksum, fileName: ds.fileName, sheetName: ds.sheetName, importedAt: now, exportMode: 'full',
+      stats: { rowsRead: ds.rowCount, rowsImported: ds.rowCount, rowsSkipped: 0, errors: {}, warnings: {}, examples: [], currencies: [] },
+      added: ds.rowCount, duplicates: 0, conflicts: 0, revisedDocs: 0, supersededLines: 0, staleLines: 0, confirmed: true, identity: 'document', idCoverage: 1, mapping: { columns: {} },
+    };
+    await this.db.transaction('rw', [this.db.imports, this.db.universal, this.db.audit], async () => {
+      await this.db.universal.add({ ...ds, importId: id });
+      await this.db.imports.add(row);
+      await this.db.audit.add({ at: now, importId: id, action: 'import', detail: { module: 'universal', rows: ds.rowCount, columns: ds.columns.length, ambiguousDecided: Object.keys(req.decisions).length } });
+    });
+    return { status: 'ok', id, rows: ds.rowCount };
+  }
+
+  async universalList(): Promise<UniversalListItem[]> {
+    const all = await this.db.universal.toArray();
+    return all.map((d) => ({ id: d.id, fileName: d.fileName, sheetName: d.sheetName, importedAt: d.importedAt, rows: d.rowCount, columns: d.columns.length })).sort((a, b) => b.importedAt - a.importedAt);
+  }
+
+  async universalBuild(req: { id: string; cfg: UConfig }): Promise<UniversalBuildResult | null> {
+    const ds: UDataset | undefined = await this.db.universal.get(req.id);
+    if (!ds) return null;
+    const analysis = analyzeUniversal(ds, req.cfg);
+    const { charts, skipped } = recommendCharts(ds, analysis);
+    const options: UniversalBuildResult['options'] = {};
+    for (const c of ds.columns) {
+      if (c.type !== 'category' && c.type !== 'boolean' && c.type !== 'identifier') continue;
+      if (c.type === 'identifier') continue;
+      const m = new Map<string, number>();
+      for (const v of ds.cols[c.index]!) if (v !== null) m.set(String(v), (m.get(String(v)) ?? 0) + 1);
+      options[c.index] = [...m.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 100).map(([value, count]) => ({ value, count }));
+    }
+    return { dataset: { id: ds.id, fileName: ds.fileName, sheetName: ds.sheetName, importedAt: ds.importedAt, rowCount: ds.rowCount, columns: ds.columns }, analysis, charts, skipped, insights: universalInsights(analysis), options };
+  }
+
+  // ───────── cross-module links and the executive overview ─────────
+  private async allRecords(version: number) {
+    const [sales, purchases, inventory, finance] = await Promise.all([this.sales(version), this.purchases(version), this.inventory(version), this.finance(version)]);
+    return { sales, purchases, inventory, finance };
+  }
+
+  private async decidedLinks(): Promise<EntityLink[]> {
+    const rows = await this.db.links.toArray();
+    return rows.map((l) => ({ id: l.id, kind: l.kind, a: l.a as EntityLink['a'], b: l.b as EntityLink['b'], basis: l.basis, status: l.status, evidence: l.evidence }));
+  }
+
+  async linkWorkflow(req: { version: number }): Promise<LinkWorkflow> {
+    return linkWorkflow(await this.allRecords(req.version), await this.decidedLinks());
+  }
+
+  async buildExecutive(req: { version: number }): Promise<ExecutiveResult> {
+    const recs = await this.allRecords(req.version);
+    const imports = await this.db.imports.toArray();
+    const importsOf = (m: ModuleId) => imports.filter((i) => (i.module ?? 'sales') === m).map((i) => ({ fileName: i.fileName, added: i.added, importedAt: i.importedAt, kind: i.inventoryKind ?? i.financeKind }));
+    const seriesNote = (all: Series[], used: Series) => all.filter((x) => !(x.currency === used.currency && x.basis === used.basis)).map((x) => `${x.currency}|${x.basis}`);
+    const snapshots: ModuleSnapshot[] = [];
+    const period = { preset: 'r30' } as const;
+    const win = (p: { current: { from: string; to: string }; previous: { from: string; to: string } } | undefined) => (p ? { from: p.current.from, to: p.current.to, prevFrom: p.previous.from, prevTo: p.previous.to } : undefined);
+    const baseOf = (kpis: { id: string; current: number | null }[], id: string) => kpis.find((k) => k.id === id)?.current ?? null;
+    const pt = (trend: { start: string; revenue: number; lines: number }[]) => trend.filter((p) => p.lines > 0).map((p) => ({ x: p.start, y: p.revenue }));
+
+    if (recs.sales.length) {
+      const r = await this.build({ version: req.version, filters: {}, period });
+      if (!r.empty && r.model && r.series) snapshots.push({ module: 'sales', series: { currency: r.series.currency, basis: r.series.basis }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend: pt(r.model.trend), bounds: r.bounds!, lines: recs.sales.length, imports: importsOf('sales'), base: baseOf(r.model.kpis, 'sales'), pendingHeld: r.pendingHeld, unknownBasis: r.series.basis === 'unknown' });
+    }
+    if (recs.purchases.length) {
+      const r = await this.buildPurchasing({ version: req.version, filters: {}, period });
+      if (!r.empty && r.model && r.series) snapshots.push({ module: 'purchasing', series: { currency: r.series.currency, basis: r.series.basis }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend: pt(r.model.trend), bounds: r.bounds!, lines: recs.purchases.length, imports: importsOf('purchasing'), base: baseOf(r.model.kpis, 'p_spend'), pendingHeld: r.pendingHeld, unknownBasis: r.series.basis === 'unknown' });
+    }
+    if (recs.inventory.length) {
+      const r = await this.buildInventory({ version: req.version, filters: {}, period });
+      if (!r.empty && r.model && r.series) snapshots.push({ module: 'inventory', series: { currency: r.series.currency }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), asOf: r.model.periods.current.to, kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend: pt(r.model.trend), bounds: r.bounds!, lines: recs.inventory.length, imports: importsOf('inventory'), base: baseOf(r.model.kpis, 'i_value'), pendingHeld: r.pendingHeld });
+    }
+    if (recs.finance.length) {
+      const first = await this.buildFinance({ version: req.version, side: 'receivable', filters: {}, period });
+      for (const side of first.sides) {
+        const r = side === 'receivable' ? first : await this.buildFinance({ version: req.version, side, filters: {}, period });
+        if (r.empty || !r.model || !r.series) continue;
+        const trend = r.model.overdueTrend.filter((p) => p.overdue !== null).map((p) => ({ x: p.date, y: p.overdue! }));
+        snapshots.push({ module: 'finance', side, series: { currency: r.series.currency }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), asOf: r.model.asOf.current ?? undefined, kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend, bounds: r.bounds!, lines: recs.finance.filter((x) => x.side === side).length, imports: importsOf('finance'), base: baseOf(r.model.kpis, 'f_outstanding'), pendingHeld: r.pendingHeld });
+      }
+    }
+    const links = await this.decidedLinks();
+    const wf = linkWorkflow(recs, links);
+    const cross = crossInsights({ ...recs, links });
+    return { model: composeExecutive({ snapshots, cross, links, proposedLinks: wf.proposed.length }) };
   }
 
   /** Test helper: the cached normalised records of the last preview. */

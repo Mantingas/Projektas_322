@@ -316,7 +316,15 @@ export async function resolveConflicts(db: AppDB, items: { importId: string; doc
 
 export async function deleteImport(db: AppDB, id: string): Promise<void> {
   const row = await db.imports.get(id);
-  const m: ModuleId = row?.module ?? 'sales';
+  if (row?.module === 'universal') {
+    await db.transaction('rw', [db.imports, db.universal, db.audit], async () => {
+      await db.universal.where('importId').equals(id).delete();
+      await db.imports.delete(id);
+      await db.audit.add({ at: Date.now(), importId: id, action: 'delete_import', detail: { module: 'universal' } });
+    });
+    return;
+  }
+  const m: ModuleId = (row?.module as ModuleId | undefined) ?? 'sales';
   const tbl = table(db, m);
   await db.transaction('rw', [db.imports, db.sales, db.purchases, db.inventory, db.finance, db.audit], async () => {
     const own = await tbl.where('importId').equals(id).count();
@@ -334,8 +342,8 @@ export async function deleteImport(db: AppDB, id: string): Promise<void> {
 
 /** "Delete everything": removes every table's contents. */
 export async function wipeAll(db: AppDB): Promise<void> {
-  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.inventory, db.finance, db.mappings, db.settings, db.audit], async () => {
-    await Promise.all([db.imports.clear(), db.sales.clear(), db.purchases.clear(), db.inventory.clear(), db.finance.clear(), db.mappings.clear(), db.settings.clear(), db.audit.clear()]);
+  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.inventory, db.finance, db.universal, db.links, db.mappings, db.settings, db.audit], async () => {
+    await Promise.all([db.imports.clear(), db.sales.clear(), db.purchases.clear(), db.inventory.clear(), db.finance.clear(), db.universal.clear(), db.links.clear(), db.mappings.clear(), db.settings.clear(), db.audit.clear()]);
   });
 }
 
@@ -352,18 +360,22 @@ export interface Backup {
   purchases?: (PurchaseRecord & StoredMeta)[];
   inventory?: (InventoryRecord & StoredMeta)[];
   finance?: (FinanceRecord & StoredMeta)[];
+  universal?: import('./db').StoredUniversal[];
+  links?: import('./db').StoredLink[];
   mappings: SavedMapping[];
   audit?: import('./db').AuditEntry[];
 }
 
 export async function exportBackup(db: AppDB): Promise<Backup> {
-  return { version: 1, exportedAt: new Date().toISOString(), imports: await db.imports.toArray(), sales: await db.sales.toArray(), purchases: await db.purchases.toArray(), inventory: await db.inventory.toArray(), finance: await db.finance.toArray(), mappings: await db.mappings.toArray(), audit: await db.audit.toArray() };
+  return { version: 1, exportedAt: new Date().toISOString(), imports: await db.imports.toArray(), sales: await db.sales.toArray(), purchases: await db.purchases.toArray(), inventory: await db.inventory.toArray(), finance: await db.finance.toArray(), universal: await db.universal.toArray(), links: await db.links.toArray(), mappings: await db.mappings.toArray(), audit: await db.audit.toArray() };
 }
 
 export async function restoreBackup(db: AppDB, b: Backup): Promise<void> {
   if (b?.version !== 1 || !Array.isArray(b.imports) || !Array.isArray(b.sales)) throw new Error('invalid_backup');
-  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.inventory, db.finance, db.mappings, db.audit], async () => {
+  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.inventory, db.finance, db.universal, db.links, db.mappings, db.audit], async () => {
     await db.imports.bulkPut(b.imports);
+    if (Array.isArray(b.universal)) await db.universal.bulkPut(b.universal);
+    if (Array.isArray(b.links)) await db.links.bulkPut(b.links);
     await db.sales.bulkPut(b.sales.map((r) => ({ ...r, docKey: docKey(r) })) as never);
     if (Array.isArray(b.purchases)) await db.purchases.bulkPut(b.purchases.map((r) => ({ ...r, docKey: docKey(r) })) as never);
     if (Array.isArray(b.inventory)) await db.inventory.bulkPut(b.inventory.map((r) => ({ ...r, docKey: docKey(r) })) as never);
@@ -372,3 +384,18 @@ export async function restoreBackup(db: AppDB, b: Backup): Promise<void> {
     if (Array.isArray(b.audit)) await db.audit.bulkPut(b.audit.map(({ id: _id, ...a }) => (void _id, a)));
   });
 }
+
+// ───────── cross-module link decisions (the user's own; only `confirmed` ones ever join data) ─────────
+export async function decideLink(db: AppDB, link: Pick<import('./db').StoredLink, 'id' | 'kind' | 'a' | 'b' | 'basis' | 'evidence'>, status: 'confirmed' | 'rejected'): Promise<void> {
+  await db.transaction('rw', [db.links, db.audit], async () => {
+    await db.links.put({ ...link, status, decidedAt: Date.now() });
+    await db.audit.add({ at: Date.now(), action: 'link_decision', detail: { link: link.id, status, kind: link.kind, basis: link.basis } });
+  });
+}
+export async function clearLink(db: AppDB, id: string): Promise<void> {
+  await db.transaction('rw', [db.links, db.audit], async () => {
+    await db.links.delete(id);
+    await db.audit.add({ at: Date.now(), action: 'link_decision', detail: { link: id, status: 'undone' } });
+  });
+}
+export const listLinks = (db: AppDB) => db.links.toArray();

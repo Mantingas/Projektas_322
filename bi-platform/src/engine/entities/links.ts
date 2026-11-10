@@ -12,7 +12,8 @@
  */
 export type Scheme = 'product_code';
 
-export type LinkModule = 'sales' | 'purchasing' | 'inventory' | 'payables';
+export type LinkModule = 'sales' | 'purchasing' | 'inventory' | 'payables' | 'finance';
+export type LinkKind = 'product' | 'counterparty';
 
 export interface EntityEnd {
   module: LinkModule;
@@ -23,7 +24,7 @@ export interface EntityEnd {
 
 export interface EntityLink {
   id: string;
-  kind: 'product';
+  kind: LinkKind;
   a: EntityEnd;
   b: EntityEnd;
   /** how the link was established */
@@ -54,14 +55,20 @@ interface Ref {
   label: string;
 }
 
-function collect(rows: { productId?: string; productName?: string }[]): Map<string, Ref> {
+/** Entity key of a product row inside any module (`sku:<code>` when a code exists, else `name:<name>`). */
+export const productKeyOf = (r: ProductRow): string | undefined => (r.productId ? `sku:${norm(r.productId)}` : r.productName ? `name:${norm(r.productName)}` : undefined);
+/** Entity key of a counterparty (customer / supplier / debtor / creditor) row: `cp:<id>` when an identifier exists, else `cpname:<name>`. */
+export const counterpartyKeyOf = (r: { id?: string; name?: string }): string | undefined => (r.id ? `cp:${norm(r.id)}` : r.name ? `cpname:${norm(r.name)}` : undefined);
+
+type ColRow = { code?: string; name?: string };
+function collect(rows: ColRow[], keyOf: (r: ColRow) => string | undefined): Map<string, Ref> {
   const m = new Map<string, Ref>();
   for (const r of rows) {
-    const code = r.productId ? norm(r.productId) : undefined;
-    const name = r.productName ? norm(r.productName) : undefined;
-    const key = code ? `sku:${code}` : name ? `name:${name}` : undefined;
+    const code = r.code ? norm(r.code) : undefined;
+    const name = r.name ? norm(r.name) : undefined;
+    const key = keyOf(r);
     if (!key) continue;
-    const e = m.get(key) ?? { code, names: new Set<string>(), label: r.productName ?? r.productId ?? key };
+    const e = m.get(key) ?? { code, names: new Set<string>(), label: r.name ?? r.code ?? key };
     if (name) e.names.add(name);
     m.set(key, e);
   }
@@ -70,10 +77,24 @@ function collect(rows: { productId?: string; productName?: string }[]): Map<stri
 
 type ProductRow = { productId?: string; productName?: string };
 
+const prodCol = (r: ProductRow): ColRow => ({ code: r.productId, name: r.productName });
+const prodKey = (r: ColRow) => productKeyOf({ productId: r.code, productName: r.name });
+const cpCol = (r: { id?: string; name?: string }): ColRow => ({ code: r.id, name: r.name });
+const cpKey = (r: ColRow) => counterpartyKeyOf({ id: r.code, name: r.name });
+
 /** Proposes product links between ANY two modules, from equal verified codes only. */
 export function proposeLinks(left: { module: LinkModule; rows: ProductRow[] }, right: { module: LinkModule; rows: ProductRow[] }): LinkProposal {
-  const s = collect(left.rows);
-  const p = collect(right.rows);
+  return proposeEntities('product', { module: left.module, rows: left.rows.map(prodCol) }, { module: right.module, rows: right.rows.map(prodCol) }, prodKey);
+}
+
+/** Proposes customer / supplier ↔ debtor / creditor links between two modules from equal verified identifiers only. */
+export function proposeCounterpartyLinks(left: { module: LinkModule; rows: { id?: string; name?: string }[] }, right: { module: LinkModule; rows: { id?: string; name?: string }[] }): LinkProposal {
+  return proposeEntities('counterparty', { module: left.module, rows: left.rows.map(cpCol) }, { module: right.module, rows: right.rows.map(cpCol) }, cpKey);
+}
+
+function proposeEntities(kind: LinkKind, left: { module: LinkModule; rows: ColRow[] }, right: { module: LinkModule; rows: ColRow[] }, keyOf: (r: ColRow) => string | undefined): LinkProposal {
+  const s = collect(left.rows, keyOf);
+  const p = collect(right.rows, keyOf);
   const out: LinkProposal = { proposed: [], unverified: [], ambiguous: [] };
   const amb = new Set<string>();
   for (const [module, map] of [[left.module, s], [right.module, p]] as const) {
@@ -84,8 +105,8 @@ export function proposeLinks(left: { module: LinkModule; rows: ProductRow[] }, r
     const rp = p.get(ks);
     if (!rp || amb.has(`${right.module}|${ks}`)) continue;
     out.proposed.push({
-      id: `product:${left.module}-${right.module}:${ks}`, kind: 'product', a: { module: left.module, key: ks, label: rs.label }, b: { module: right.module, key: ks, label: rp.label },
-      basis: 'identifier_equal', status: 'proposed', evidence: `equal product code "${rs.code}" on both sides`,
+      id: `${kind}:${left.module}-${right.module}:${ks}`, kind, a: { module: left.module, key: ks, label: rs.label }, b: { module: right.module, key: ks, label: rp.label },
+      basis: 'identifier_equal', status: 'proposed', evidence: `equal ${kind === 'product' ? 'product code' : 'identifier'} "${rs.code}" on both sides`,
     });
   }
   // same NAME without a shared code is NOT evidence of identity
@@ -95,7 +116,7 @@ export function proposeLinks(left: { module: LinkModule; rows: ProductRow[] }, r
     for (const n of rs.names) {
       const hit = byName.get(n);
       if (!hit || out.proposed.some((l) => l.a.key === ks && l.b.key === hit.key)) continue;
-      if (ks === hit.key && ks.startsWith('sku:')) continue; // same code: handled above
+      if (ks === hit.key && (ks.startsWith('sku:') || ks.startsWith('cp:'))) continue; // same code: handled above
       out.unverified.push({ a: { module: left.module, key: ks, label: rs.label }, b: { module: right.module, key: hit.key, label: hit.label }, reason: 'same_name_only' });
     }
   }
@@ -110,9 +131,9 @@ export const proposeInventoryLinks = (inventory: ProductRow[], other: { module: 
  * The ONLY way another module may reach an item: through a link the user CONFIRMED. Proposed, rejected and name-only candidates never resolve.
  * Returns the counterpart in `to`, or undefined.
  */
-export function confirmedCounterpart(links: EntityLink[], from: EntityEnd, to: LinkModule): EntityEnd | undefined {
+export function confirmedCounterpart(links: EntityLink[], from: EntityEnd, to: LinkModule, kind?: LinkKind): EntityEnd | undefined {
   for (const l of links) {
-    if (l.status !== 'confirmed') continue;
+    if (l.status !== 'confirmed' || (kind && l.kind !== kind)) continue;
     if (l.a.module === from.module && l.a.key === from.key && l.b.module === to) return l.b;
     if (l.b.module === from.module && l.b.key === from.key && l.a.module === to) return l.a;
   }

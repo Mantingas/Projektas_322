@@ -3,6 +3,8 @@ import dash2 from './dash2.en';
 import purch from './purch.en';
 import inv from './inv.en';
 import fin from './fin.en';
+import uni from './uni.en';
+import exe from './exe.en';
 
 const en = {
   ...dash,
@@ -10,6 +12,8 @@ const en = {
   ...purch,
   ...inv,
   ...fin,
+  ...uni,
+  ...exe,
   'app.name': 'Excel Insights',
   'app.tagline': 'Business insights from your Excel files',
   'nav.home': 'Home', 'nav.import': 'Import', 'nav.insights': 'Insights', 'nav.history': 'History', 'nav.settings': 'Settings',

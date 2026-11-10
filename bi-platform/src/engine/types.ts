@@ -402,7 +402,7 @@ export type ExportMode = 'full' | 'incremental' | 'partial' | 'unknown';
 
 // ---------- Insights ----------
 
-export type InsightModule = 'sales' | 'purchasing' | 'inventory' | 'debts' | 'universal';
+export type InsightModule = 'sales' | 'purchasing' | 'inventory' | 'debts' | 'universal' | 'cross';
 export type Reliability = 'high' | 'medium' | 'low';
 
 export type ParamValue =
@@ -424,6 +424,18 @@ export interface EvidenceRow {
   unit: 'money' | 'qty' | 'pct' | 'price';
 }
 
+/** What a cross-module finding must tell the reader: where the numbers come from, which confirmed links joined them, how they were calculated and what limits them. */
+export interface CrossDisclosure {
+  sources: { module: 'sales' | 'purchasing' | 'inventory' | 'finance'; currency?: string; from: string; to: string; lines: number; note?: string }[];
+  links: { id: string; kind: 'product' | 'counterparty'; a: string; b: string; basis: 'identifier_equal' | 'user_confirmed' }[];
+  period: { from: string; to: string };
+  /** i18n key of the calculation description */
+  methodKey: string;
+  /** i18n keys of the limitations that apply */
+  limits: string[];
+  confidenceKey: string;
+}
+
 export interface Insight {
   id: string;
   /** Insights on the same topic are collapsed to the best one. */
@@ -442,6 +454,8 @@ export interface Insight {
   chart?: 'aging' | 'overdueTrend' | 'dueTimeline' | 'behaviour' | 'creditReview' | 'duplicates' | 'overdueRank' | 'stockTrend' | 'warehouseComparison' | 'slowMoving' | 'stockoutRisk' | 'movementTrend' | 'abc' | 'trend' | 'comparison' | 'topCustomers' | 'topProducts' | 'salespeople' | 'category' | 'waterfall' | 'pareto' | 'topSuppliers' | 'priceTrend' | 'priceVariance' | 'spendBridge' | 'quantityComparison';
   /** Finance: a confirmed fact in the data, a possible match that needs checking, or a risk indicator. Never mixed. */
   certainty?: 'fact' | 'possible' | 'indicator';
+  /** Cross-module findings only: sources, confirmed links, period, method and limits. */
+  cross?: CrossDisclosure;
   /** Purchasing: what kind of saving (if any) the finding describes. Never mixed: actual ≠ potential ≠ hypothetical. */
   savings?: { kind: 'actual' | 'potential' | 'hypothetical'; amount: number };
   params: Record<string, ParamValue>;
