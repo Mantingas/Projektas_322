@@ -57,6 +57,11 @@ Receivables, payables and cash intelligence (module "Receivables & payables"): i
 - Reports separate verified calculations, opportunities, risks, hypothetical scenarios, items to verify, exposure and withheld conclusions.
 - See `docs/PHASE7_VALIDATION.md` (what is and is not verified, measurements), `docs/PILOT_READINESS.md` and `docs/ERP_VALIDATION_PROTOCOL.md`. **Readiness level: technically validated with synthetic data. No real ERP export has been verified and no ERP compatibility is claimed.**
 
+## Phase 8 additions (pilot tooling – no real data was available)
+- **Pilot tab** to conduct and review a supplier-side validation: dataset coverage, warnings, findings awaiting independent verification (decision, reconciliation, reason, amounts, minutes), known misses, withheld conclusions, completeness, qualified results, CFO report. Value tiers (exposure, confirmed discrepancy, recoverable, recovered, prevented) are never added together; precision is shown as counts until 30 decisions; recall only with an attested complete reference list. Commercial validation is **NOT STARTED** until real data is attested and decided.
+- **Local pseudonymiser** (`scripts/pilot-pseudonymize.ts`): keyed deterministic pseudonyms across files, amounts / dates / currencies untouched, output only in git-ignored `pilot-data/`. It is pseudonymisation, not anonymisation.
+- See `docs/PHASE8_PILOT_EXECUTION.md`, `PILOT_DATA_CHECKLIST.md`, `PILOT_RESULTS_TEMPLATE.md`, `COMMERCIAL_VALIDATION.md` (go / no-go: **no-go for a paying customer; go for a free controlled pilot**).
+
 ## What works
 - LT / PL / EN interface; `.xlsx`, `.csv`, `.tsv`; sheet selection; header row detection under report titles; totals rows skipped.
 - UTF-8 / Windows-1257 / Windows-1250 CSV; `1 234,56`, `1.234,56`, `1,234.56`, `€`/`zł` suffixes; ISO, `dd.mm.yyyy`, `dd/mm/yyyy`, `yyyy.mm.dd`, Excel serial dates.

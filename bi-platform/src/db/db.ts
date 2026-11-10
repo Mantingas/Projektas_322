@@ -1,5 +1,6 @@
 import Dexie, { type Table } from 'dexie';
 import { docKey } from '@/engine/import/merge';
+import type { Missed, PilotMeta, Review } from '@/engine/pilot/types';
 import type { UDataset } from '@/engine/universal/types';
 import type { ConfirmedMapping, ExportMode, FieldId, ImportStats, FinanceRecord, InventoryRecord, ModuleId, PurchaseRecord, SalesRecord } from '@/engine/types';
 
@@ -99,7 +100,7 @@ export interface AuditEntry {
   id?: number;
   at: number;
   importId?: string;
-  action: 'import' | 'delete_import' | 'resolve_conflict' | 'link_decision';
+  action: 'import' | 'delete_import' | 'resolve_conflict' | 'link_decision' | 'review_decision';
   detail: Record<string, string | number | boolean>;
 }
 
@@ -116,6 +117,9 @@ export class AppDB extends Dexie {
   finance!: Table<StoredFinance, string>;
   universal!: Table<StoredUniversal, string>;
   links!: Table<StoredLink, string>;
+  reviews!: Table<Review, string>;
+  missed!: Table<Missed, string>;
+  pilot!: Table<PilotMeta, string>;
   mappings!: Table<SavedMapping, string>;
   settings!: Table<SettingRow, string>;
   audit!: Table<AuditEntry, number>;
@@ -144,6 +148,8 @@ export class AppDB extends Dexie {
     this.version(6).stores({ finance: 'key, importId, date, docKey, heldBy' });
     // v7: universal tables and the user's cross-module link decisions
     this.version(7).stores({ universal: 'id, importId', links: 'id, status, kind' });
+    // v8: pilot validation – an independent reviewer's decisions, known misses and the pilot's own facts (nothing else changes)
+    this.version(8).stores({ reviews: 'id, decision', missed: 'id', pilot: 'key' });
   }
 }
 

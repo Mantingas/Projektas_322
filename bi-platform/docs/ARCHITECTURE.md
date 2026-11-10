@@ -244,3 +244,6 @@ Code: `src/engine/finance/*` (keys, kind, ledger, metrics, dashboard, insights, 
 
 **Date dimension.** Every dossier states which date the period refers to (mapped document date, report date, due dates, payment dates).
 
+## Phase 8 – Pilot tooling
+`src/engine/pilot/`: `pseudonymize.ts` (HMAC injected, pure), `types.ts` (Review, Missed, PilotMeta), `metrics.ts` (`pilotMetrics`). IndexedDB **v8** adds `reviews`, `missed`, `pilot` (nothing else changes); included in backup / restore / wipe; review decisions are audited (`review_decision`). UI: `src/components/pilot/PilotView.tsx`; report: `src/lib/pilotReport.ts`. Findings are the Phase 7 settlement findings restricted to the payable side; their ids are content-derived, so reviews survive re-imports of identical data and are reported as *orphaned* when the underlying records change or are deleted. Status never reaches "validated": `not_started` → `in_progress` → `evidence_complete` (single-company result).
+

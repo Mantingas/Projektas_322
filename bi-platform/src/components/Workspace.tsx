@@ -9,6 +9,7 @@ import { PurchasingView } from './purchasing/PurchasingView';
 import { InventoryView } from './inventory/InventoryView';
 import { FinanceView } from './finance/FinanceView';
 import { ExecutiveView } from './executive/ExecutiveView';
+import { PilotView } from './pilot/PilotView';
 import { UniversalImport } from './universal/UniversalImport';
 import { UniversalView } from './universal/UniversalView';
 import type { FinanceSide, ModuleId } from '@/engine/types';
@@ -17,8 +18,8 @@ import { SettingsView } from './SettingsView';
 import { cn } from '@/lib/cn';
 import type { MessageKey } from '@/i18n';
 
-type Tab = 'import' | 'overview' | 'insights' | 'history' | 'settings';
-const TABS: Tab[] = ['import', 'overview', 'insights', 'history', 'settings'];
+type Tab = 'import' | 'overview' | 'insights' | 'pilot' | 'history' | 'settings';
+const TABS: Tab[] = ['import', 'overview', 'insights', 'pilot', 'history', 'settings'];
 type ViewId = ModuleId | 'universal';
 
 export function Workspace() {
@@ -75,6 +76,7 @@ export function Workspace() {
           {module === 'sales' ? <InsightsView version={version} goImport={() => setTab('import')} /> : module === 'purchasing' ? <PurchasingView version={version} goImport={() => setTab('import')} /> : module === 'inventory' ? <InventoryView version={version} goImport={() => setTab('import')} /> : module === 'universal' ? <UniversalView version={version} goImport={() => setTab('import')} onChanged={bump} /> : <FinanceView version={version} goImport={() => setTab('import')} initialSide={finSide} />}
         </div>
       )}
+      {tab === 'pilot' && <PilotView version={version} goImport={() => setTab('import')} onChanged={bump} />}
       {tab === 'history' && <HistoryView version={version} onChanged={bump} />}
       {tab === 'settings' && <SettingsView version={version} onChanged={bump} />}
     </div>

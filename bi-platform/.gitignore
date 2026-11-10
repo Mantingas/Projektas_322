@@ -5,3 +5,8 @@ out
 next-env.d.ts
 test-results
 playwright-report
+
+# pilot data: confidential, never committed
+pilot-data/
+*.pilot-key.json
+pseudonym-key.json

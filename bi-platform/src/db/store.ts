@@ -342,8 +342,8 @@ export async function deleteImport(db: AppDB, id: string): Promise<void> {
 
 /** "Delete everything": removes every table's contents. */
 export async function wipeAll(db: AppDB): Promise<void> {
-  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.inventory, db.finance, db.universal, db.links, db.mappings, db.settings, db.audit], async () => {
-    await Promise.all([db.imports.clear(), db.sales.clear(), db.purchases.clear(), db.inventory.clear(), db.finance.clear(), db.universal.clear(), db.links.clear(), db.mappings.clear(), db.settings.clear(), db.audit.clear()]);
+  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.inventory, db.finance, db.universal, db.links, db.reviews, db.missed, db.pilot, db.mappings, db.settings, db.audit], async () => {
+    await Promise.all([db.reviews.clear(), db.missed.clear(), db.pilot.clear(), db.imports.clear(), db.sales.clear(), db.purchases.clear(), db.inventory.clear(), db.finance.clear(), db.universal.clear(), db.links.clear(), db.mappings.clear(), db.settings.clear(), db.audit.clear()]);
   });
 }
 
@@ -362,18 +362,24 @@ export interface Backup {
   finance?: (FinanceRecord & StoredMeta)[];
   universal?: import('./db').StoredUniversal[];
   links?: import('./db').StoredLink[];
+  reviews?: import('@/engine/pilot/types').Review[];
+  missed?: import('@/engine/pilot/types').Missed[];
+  pilot?: import('@/engine/pilot/types').PilotMeta[];
   mappings: SavedMapping[];
   audit?: import('./db').AuditEntry[];
 }
 
 export async function exportBackup(db: AppDB): Promise<Backup> {
-  return { version: 1, exportedAt: new Date().toISOString(), imports: await db.imports.toArray(), sales: await db.sales.toArray(), purchases: await db.purchases.toArray(), inventory: await db.inventory.toArray(), finance: await db.finance.toArray(), universal: await db.universal.toArray(), links: await db.links.toArray(), mappings: await db.mappings.toArray(), audit: await db.audit.toArray() };
+  return { version: 1, exportedAt: new Date().toISOString(), imports: await db.imports.toArray(), sales: await db.sales.toArray(), purchases: await db.purchases.toArray(), inventory: await db.inventory.toArray(), finance: await db.finance.toArray(), universal: await db.universal.toArray(), links: await db.links.toArray(), reviews: await db.reviews.toArray(), missed: await db.missed.toArray(), pilot: await db.pilot.toArray(), mappings: await db.mappings.toArray(), audit: await db.audit.toArray() };
 }
 
 export async function restoreBackup(db: AppDB, b: Backup): Promise<void> {
   if (b?.version !== 1 || !Array.isArray(b.imports) || !Array.isArray(b.sales)) throw new Error('invalid_backup');
-  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.inventory, db.finance, db.universal, db.links, db.mappings, db.audit], async () => {
+  await db.transaction('rw', [db.imports, db.sales, db.purchases, db.inventory, db.finance, db.universal, db.links, db.reviews, db.missed, db.pilot, db.mappings, db.audit], async () => {
     await db.imports.bulkPut(b.imports);
+    if (Array.isArray(b.reviews)) await db.reviews.bulkPut(b.reviews);
+    if (Array.isArray(b.missed)) await db.missed.bulkPut(b.missed);
+    if (Array.isArray(b.pilot)) await db.pilot.bulkPut(b.pilot);
     if (Array.isArray(b.universal)) await db.universal.bulkPut(b.universal);
     if (Array.isArray(b.links)) await db.links.bulkPut(b.links);
     await db.sales.bulkPut(b.sales.map((r) => ({ ...r, docKey: docKey(r) })) as never);
@@ -399,3 +405,17 @@ export async function clearLink(db: AppDB, id: string): Promise<void> {
   });
 }
 export const listLinks = (db: AppDB) => db.links.toArray();
+
+// ───────── pilot review data (the reviewer's own decisions; local, audited, backed up, wiped with everything else) ─────────
+export async function saveReview(db: AppDB, r: import('@/engine/pilot/types').Review): Promise<void> {
+  await db.transaction('rw', [db.reviews, db.audit], async () => {
+    await db.reviews.put(r);
+    await db.audit.add({ at: Date.now(), action: 'review_decision', detail: { finding: r.id, decision: r.decision, category: r.category } });
+  });
+}
+export async function clearReview(db: AppDB, id: string): Promise<void> {
+  await db.transaction('rw', [db.reviews, db.audit], async () => { await db.reviews.delete(id); await db.audit.add({ at: Date.now(), action: 'review_decision', detail: { finding: id, decision: 'cleared' } }); });
+}
+export const saveMissed = (db: AppDB, m: import('@/engine/pilot/types').Missed) => db.missed.put(m);
+export const deleteMissed = (db: AppDB, id: string) => db.missed.delete(id);
+export const savePilotMeta = (db: AppDB, m: import('@/engine/pilot/types').PilotMeta) => db.pilot.put({ ...m, updatedAt: Date.now() });
