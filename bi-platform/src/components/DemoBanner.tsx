@@ -46,9 +46,9 @@ export function DemoBanner({ onReady }: { onReady: () => void }) {
     <div className="no-print space-y-1 rounded-md border border-indigo-300 bg-indigo-50 px-3 py-2 text-sm dark:border-indigo-900 dark:bg-indigo-950/40" data-testid="demo-banner" data-phase={st.phase} role="status">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span className="font-medium">{st.phase === 'loading' ? t('demo.loading', { done: st.done, total: st.total }) : st.phase === 'failed' ? t('demo.failed') : t('demo.banner')}</span>
-        <span className="flex gap-2">
-          <Button size="sm" variant="outline" disabled={st.phase === 'loading'} onClick={() => void run(true)} data-testid="demo-restart">{t('demo.restart')}</Button>
-          <Button size="sm" variant="outline" onClick={leaveDemo} data-testid="demo-exit">{t('demo.exit')}</Button>
+        <span className="flex w-full flex-wrap gap-2 sm:w-auto">
+          <Button size="sm" variant="outline" className="h-auto whitespace-normal py-1.5 text-center" disabled={st.phase === 'loading'} onClick={() => void run(true)} data-testid="demo-restart">{t('demo.restart')}</Button>
+          <Button size="sm" className="h-auto whitespace-normal py-1.5 text-center" onClick={leaveDemo} data-testid="demo-exit">{t('demo.exit')}</Button>
         </span>
       </div>
       <p className="text-xs text-slate-600 dark:text-slate-400">{t('demo.note')}</p>

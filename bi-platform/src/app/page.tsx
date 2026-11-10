@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { clearDemoFlag } from '@/db/dbName';
+import { PILOT_EMAIL, pilotSection } from '@/config/contact';
 import { useLang } from '@/components/LangProvider';
 import { Card, CardTitle } from '@/components/ui/card';
 import { buttonVariants } from '@/components/ui/button';
@@ -11,6 +12,8 @@ import type { MessageKey } from '@/i18n';
 
 /** Order follows docs/COMMERCIAL_VALUE_AUDIT.md: purchasing prices → debts / credits / payments → sales & margins → stock → any table. */
 const AREAS = ['purchasing', 'debts', 'sales', 'inventory', 'universal'] as const;
+
+const pilot = pilotSection(PILOT_EMAIL);
 
 export default function Home() {
   const { t } = useLang();
@@ -75,7 +78,7 @@ export default function Home() {
       </section>
 
       <section className="space-y-4" data-testid="pilot">
-        <h2 className="text-xl font-semibold">{t('home.pilot.title')}</h2>
+        <h2 className="text-xl font-semibold">{t(pilot.mode === 'invite' ? 'home.pilot.title' : 'home.pilot.title.plan')}</h2>
         <div className="grid gap-3 sm:grid-cols-3">
           {(['what', 'how', 'fb'] as const).map((k) => (
             <Card key={k}>
@@ -84,7 +87,11 @@ export default function Home() {
             </Card>
           ))}
         </div>
-        <p className="text-sm text-slate-600 dark:text-slate-400" data-testid="pilot-note">{t('home.pilot.note')}</p>
+        {pilot.mode === 'invite' && (
+          <p className="text-sm" data-testid="pilot-contact">
+            {t('home.pilot.contact.lead')} <a href={pilot.mailto} className="font-medium text-indigo-700 underline dark:text-indigo-300">{pilot.email}</a>. {t('home.pilot.contact.safe')}
+          </p>
+        )}
       </section>
     </div>
   );

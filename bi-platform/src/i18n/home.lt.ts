@@ -41,12 +41,13 @@ const lt: Record<keyof typeof home, string> = {
   'home.pilot.what.t': 'Ką galėtumėte išbandyti', 'home.pilot.what.d': 'Savo eksportus – pavyzdžiui, neapmokėtų sąskaitų ataskaitą, pirkimų, pardavimų eilutes ar likučius. Failai lieka jūsų kompiuteryje.',
   'home.pilot.how.t': 'Kaip tikrinami radiniai', 'home.pilot.how.d': 'Jūsų apskaitą išmanantis žmogus peržiūri kiekvieną radinį ir pažymi: patvirtintas, atmestas ar neaišku. Skaičiuojame, kiek radinių pasitvirtino.',
   'home.pilot.fb.t': 'Kokio grįžtamojo ryšio prašytume', 'home.pilot.fb.d': 'Ką radinys parodė, ko trūko ir kas buvo klaidinga. Pilotui nieko neparduodame, o kainų kol kas nėra.',
-  'home.pilot.note': 'Šiame puslapyje kol kas nėra paraiškų kanalo, todėl užsiregistruoti negalima. Kai atsiras būdas susisiekti, jis bus paskelbtas.',
+  'home.pilot.title.plan': 'Planuojame nemokamą pilotą su pirmosiomis įmonėmis.',
+  'home.pilot.contact.lead': 'Norite dalyvauti? Parašykite:', 'home.pilot.contact.safe': 'Pirmame laiške prašome nesiųsti finansinių failų – pirmiausia aptarsime, kaip duomenys lieka pas jus.',
 
   'demo.banner': 'Demonstracija · sintetiniai duomenys – jūsų duomenys čia nenaudojami.',
   'demo.loading': 'Įkeliami sintetiniai pavyzdiniai failai… {done}/{total}',
   'demo.failed': 'Demonstracijos failų nepavyko įkelti pilnai. Atnaujinkite puslapį arba paleiskite demonstraciją iš naujo.',
-  'demo.restart': 'Pradėti demonstraciją iš naujo', 'demo.exit': 'Išeiti iš demonstracijos',
+  'demo.restart': 'Pradėti demonstraciją iš naujo', 'demo.exit': 'Grįžti į savo darbo vietą',
   'demo.note': 'Pavyzdiniai failai su lietuviškomis antraštėmis ir išgalvotais įmonių pavadinimais. Tai ne tikros įmonės ir ne ERP eksportai.',
 };
 export default lt;

@@ -41,12 +41,13 @@ const pl: Record<keyof typeof home, string> = {
   'home.pilot.what.t': 'Co możesz wypróbować', 'home.pilot.what.d': 'Własne eksporty – na przykład raport niezapłaconych faktur, pozycje zakupów i sprzedaży albo stany magazynowe. Pliki zostają na Twoim komputerze.',
   'home.pilot.how.t': 'Jak sprawdzamy wyniki', 'home.pilot.how.d': 'Osoba znająca Twoją księgowość przegląda każdy wynik i oznacza go: potwierdzony, odrzucony lub niejasny. Liczymy, ile wyników się potwierdziło.',
   'home.pilot.fb.t': 'O jaką opinię prosimy', 'home.pilot.fb.d': 'Co pokazał wynik, czego brakowało i co było błędne. W pilotażu niczego nie sprzedajemy, a cen jeszcze nie ma.',
-  'home.pilot.note': 'Na tej stronie nie ma jeszcze kanału zgłoszeń, więc nie można się tu zapisać. Sposób kontaktu zostanie opublikowany, gdy będzie dostępny.',
+  'home.pilot.title.plan': 'Planujemy bezpłatny pilotaż z pierwszymi firmami.',
+  'home.pilot.contact.lead': 'Chcesz wziąć udział? Napisz:', 'home.pilot.contact.safe': 'W pierwszej wiadomości prosimy nie wysyłać plików finansowych – najpierw ustalimy, jak Twoje dane pozostają u Ciebie.',
 
   'demo.banner': 'Demonstracja · dane syntetyczne – Twoje dane nie są tu używane.',
   'demo.loading': 'Wczytywanie syntetycznych plików przykładowych… {done}/{total}',
   'demo.failed': 'Nie udało się w pełni wczytać plików demonstracyjnych. Odśwież stronę lub uruchom demonstrację ponownie.',
-  'demo.restart': 'Uruchom demonstrację od nowa', 'demo.exit': 'Wyjdź z demonstracji',
+  'demo.restart': 'Uruchom demonstrację od nowa', 'demo.exit': 'Wróć do własnego obszaru roboczego',
   'demo.note': 'Pliki przykładowe mają litewskie nagłówki i zmyślone nazwy firm. To nie są prawdziwe firmy ani eksporty ERP.',
 };
 export default pl;

@@ -131,13 +131,35 @@ test.describe('final review checks', () => {
     }
   });
 
-  test('the pilot block offers no signup: no form, no input, no mail or tel link, no e-mail address – and says so', async ({ page }) => {
+  test('without a published contact the pilot block is a plan: no invitation, no dead-end sentence, no form / link / address', async ({ page }) => {
     await page.goto('/');
+    await page.getByTestId('lang-lt').click();
     const pilot = page.getByTestId('pilot');
-    await expect(page.getByTestId('pilot-note')).toBeVisible();
+    await expect(pilot).toBeVisible();
+    await expect(page.getByTestId('pilot-contact')).toHaveCount(0);
     await expect(pilot.locator('form, input, textarea, button, a[href^="mailto:"], a[href^="tel:"]')).toHaveCount(0);
-    expect(await pilot.innerText()).not.toMatch(/[\w.+-]+@[\w-]+\.[\w.]+/);
-    for (const lang of ['pl', 'en']) { await page.getByTestId(`lang-${lang}`).click(); await expect(page.getByTestId('pilot-note')).toBeVisible(); }
+    const text = await pilot.innerText();
+    expect(text).not.toMatch(/[\w.+-]+@[\w-]+\.[\w.]+/);
+    expect(text).not.toMatch(/užsiregistruoti negalima|nie można się tu zapisać|nothing can be signed up|kol kas nėra paraiškų|Ieškome pirmųjų/i);
+    await expect(pilot.getByRole('heading', { level: 2 })).toHaveText(/Planuojame nemokamą pilotą/);
+    await page.getByTestId('lang-pl').click();
+    await expect(pilot.getByRole('heading', { level: 2 })).toHaveText(/Planujemy bezpłatny pilotaż/);
+    await page.getByTestId('lang-en').click();
+    await expect(pilot.getByRole('heading', { level: 2 })).toHaveText(/We plan a free pilot/);
+  });
+
+  test('the demo banner has a clear, primary way back to the own workspace, also after a manual visit to /app/', async ({ page }) => {
+    await page.goto('/');
+    await page.getByTestId('lang-lt').click();
+    await page.getByTestId('cta-demo').click();
+    await expect(page.getByTestId('demo-banner')).toHaveAttribute('data-phase', 'ready', { timeout: 60_000 });
+    await expect(page.getByTestId('demo-exit')).toHaveText('Grįžti į savo darbo vietą');
+    await page.goto('/app/');                                   // typed by hand: still the demo workspace, but clearly marked
+    await expect(page.getByTestId('demo-banner')).toBeVisible();
+    await expect(page.getByTestId('demo-exit')).toBeVisible();
+    await page.getByTestId('demo-exit').click();
+    await expect(page.getByTestId('demo-banner')).toHaveCount(0);
+    await expect(page.getByTestId('tab-import')).toHaveAttribute('aria-selected', 'true');
   });
 
   test('the demo is the primary action: first in the page, a filled button next to an outline one', async ({ page }) => {

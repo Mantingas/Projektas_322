@@ -41,12 +41,13 @@ const home = {
   'home.pilot.what.t': 'What you could try', 'home.pilot.what.d': 'Your own exports – for example an open-invoice report, purchase lines, sales lines or stock balances. The files stay on your computer.',
   'home.pilot.how.t': 'How findings are checked', 'home.pilot.how.d': 'A person who knows your accounts reviews each finding and marks it confirmed, rejected or unclear. We count how many hold up.',
   'home.pilot.fb.t': 'Feedback we would ask for', 'home.pilot.fb.d': 'What the finding showed, what was missing and what was wrong. Nothing is sold during the pilot and no prices exist yet.',
-  'home.pilot.note': 'There is no application channel on this page yet, so nothing can be signed up for here. A way to get in touch will be published when it exists.',
+  'home.pilot.title.plan': 'We plan a free pilot with the first companies.',
+  'home.pilot.contact.lead': 'Want to take part? Write to:', 'home.pilot.contact.safe': 'Please do not send financial files in the first e-mail – we will first agree how your data stays with you.',
 
   'demo.banner': 'Demo · synthetic data – your own data is not involved.',
   'demo.loading': 'Loading the synthetic sample files… {done}/{total}',
   'demo.failed': 'The demo files could not be loaded completely. Reload the page or start the demo again.',
-  'demo.restart': 'Restart demo', 'demo.exit': 'Leave demo',
+  'demo.restart': 'Restart demo', 'demo.exit': 'Back to my workspace',
   'demo.note': 'Sample files use Lithuanian headers and invented company names. They are not real companies or ERP exports.',
 } as const;
 export default home;
