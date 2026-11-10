@@ -12,6 +12,7 @@ const home = {
   'home.ex.what': 'A credit note that may still be unused. The balance is {amount}.',
   'home.ex.why': 'Why was this flagged?',
   'home.ex.records': 'Records behind it: {n}',
+  'home.ex.status': 'The status describes the records in the loaded files only: they support the calculation. It does not confirm a real loss, a real debt or a mistake in anyone’s books.',
   'home.ex.note': 'Demo example from synthetic data, produced by the same analysis the app runs on your files. It is a lead to verify, not a confirmed loss.',
   'home.ex.open': 'Open the demo and see the evidence',
   'home.ex.show': 'Show the evidence',
@@ -40,6 +41,7 @@ const home = {
   'home.pilot.what.t': 'What you could try', 'home.pilot.what.d': 'Your own exports – for example an open-invoice report, purchase lines, sales lines or stock balances. The files stay on your computer.',
   'home.pilot.how.t': 'How findings are checked', 'home.pilot.how.d': 'A person who knows your accounts reviews each finding and marks it confirmed, rejected or unclear. We count how many hold up.',
   'home.pilot.fb.t': 'Feedback we would ask for', 'home.pilot.fb.d': 'What the finding showed, what was missing and what was wrong. Nothing is sold during the pilot and no prices exist yet.',
+  'home.pilot.note': 'There is no application channel on this page yet, so nothing can be signed up for here. A way to get in touch will be published when it exists.',
 
   'demo.banner': 'Demo · synthetic data – your own data is not involved.',
   'demo.loading': 'Loading the synthetic sample files… {done}/{total}',

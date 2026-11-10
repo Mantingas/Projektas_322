@@ -50,10 +50,11 @@ test.describe('one-click demo', () => {
     await expect(page).toHaveURL(/\/app\/\?demo=1/);
     await expect(page.getByTestId('demo-banner')).toBeVisible();
     await expect(page.getByTestId('demo-banner')).toHaveAttribute('data-phase', 'ready', { timeout: 60_000 });
-    // lands on the debts view with the real finding and its evidence
-    await expect(page.getByTestId('tab-insights')).toHaveAttribute('aria-selected', 'true');
-    await expect(page.getByTestId('module-view-finance')).toHaveAttribute('aria-pressed', 'true');
-    await expect(page.getByText(/Gama pienas/).first()).toBeVisible({ timeout: 30_000 });
+    // lands on the overview, scrolled to the findings with their evidence
+    await expect(page.getByTestId('tab-overview')).toHaveAttribute('aria-selected', 'true');
+    await expect(page.getByTestId('exec-trust')).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByTestId('exec-trust').getByText(/Gama pienas/).first()).toBeVisible();
+    await expect(page.getByTestId('exec-trust')).toBeInViewport({ timeout: 10_000 });
     expect(reqs.filter((r) => !isLocal(r.url(), baseURL!))).toEqual([]);
   });
 
@@ -118,3 +119,115 @@ test.describe('one-click demo', () => {
     await expect(page.getByTestId('demo-banner')).toContainText(/Demo · synthetic data/);
   });
 });
+
+test.describe('final review checks', () => {
+  test('the hero example cannot be mistaken for a confirmed real loss: synthetic label + plain-language status note in every language, engine status kept', async ({ page }) => {
+    await page.goto('/');
+    for (const [lang, note] of [['lt', /nepatvirtina tikro nuostolio/], ['pl', /Nie potwierdza|nie potwierdza/], ['en', /does not confirm a real loss/]] as const) {
+      await page.getByTestId(`lang-${lang}`).click();
+      await expect(page.getByTestId('hero-finding-label')).toBeVisible();
+      await expect(page.getByTestId('hero-finding-status-note')).toContainText(note);
+      await expect(page.getByTestId('hero-finding')).toHaveAttribute('data-status', 'verified'); // the engine's own classification is untouched
+    }
+  });
+
+  test('the pilot block offers no signup: no form, no input, no mail or tel link, no e-mail address – and says so', async ({ page }) => {
+    await page.goto('/');
+    const pilot = page.getByTestId('pilot');
+    await expect(page.getByTestId('pilot-note')).toBeVisible();
+    await expect(pilot.locator('form, input, textarea, button, a[href^="mailto:"], a[href^="tel:"]')).toHaveCount(0);
+    expect(await pilot.innerText()).not.toMatch(/[\w.+-]+@[\w-]+\.[\w.]+/);
+    for (const lang of ['pl', 'en']) { await page.getByTestId(`lang-${lang}`).click(); await expect(page.getByTestId('pilot-note')).toBeVisible(); }
+  });
+
+  test('the demo is the primary action: first in the page, a filled button next to an outline one', async ({ page }) => {
+    await page.goto('/');
+    const demo = page.getByTestId('cta-demo'), own = page.getByTestId('cta');
+    const [a, b] = [await demo.boundingBox(), await own.boundingBox()];
+    expect(a!.y).toBeLessThanOrEqual(b!.y + 1);
+    expect(await demo.evaluate((e) => getComputedStyle(e).backgroundColor)).not.toBe('rgba(0, 0, 0, 0)');
+    expect(await own.evaluate((e) => getComputedStyle(e).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
+  });
+
+  test('what the demo shows equals what the landing page shows (same finding, amount, status and records)', async ({ page }) => {
+    await page.goto('/');
+    await page.getByTestId('lang-lt').click();
+    const heroAmount = (await page.getByTestId('hero-finding-amount').innerText()).trim();
+    await page.getByTestId('hero-finding-evidence').locator('summary').click();
+    const heroRecords = (await page.getByTestId('evidence-records').innerText()).replace(/\s+/g, ' ');
+    await page.getByTestId('cta-demo').click();
+    await expect(page.getByTestId('demo-banner')).toHaveAttribute('data-phase', 'ready', { timeout: 60_000 });
+    const row = page.getByTestId('trust-finding').filter({ hasText: 'Gama pienas' }).filter({ has: page.locator('[data-testid=trust-amount]') }).first();
+    await expect(row).toHaveAttribute('data-rule', 'unapplied_credit', { timeout: 30_000 });
+    await expect(row).toHaveAttribute('data-status', 'verified');
+    expect((await row.getByTestId('trust-amount').innerText()).trim()).toBe(heroAmount);
+    await row.getByTestId('trust-open').click();
+    const appRecords = (await page.getByTestId('evidence-records').first().innerText()).replace(/\s+/g, ' ');
+    for (const part of ['KR-3', '300,00', 'sample_lt_saskaitos.csv', 'sample_lt_gautinos_atviros.csv']) { expect(heroRecords).toContain(part); expect(appRecords).toContain(part); }
+  });
+
+  test('isolation under stress: refresh, repeated open / leave, restart, worker operations – the visitor’s real database stays byte-for-byte identical', async ({ page, context }) => {
+    // a second, clean visitor who never used the app: demo must not even create the real database
+    const clean = await context.browser()!.newContext();
+    const cp = await clean.newPage();
+    await cp.goto('/');
+    await cp.getByTestId('cta-demo').click();
+    await expect(cp.getByTestId('demo-banner')).toHaveAttribute('data-phase', 'ready', { timeout: 60_000 });
+    expect((await cp.evaluate(async () => (await indexedDB.databases()).map((d) => d.name))).sort()).toEqual(['bi-platform-demo']);
+    await clean.close();
+
+    // a visitor with real data in every kind of store the demo also writes to
+    await page.goto('/app/');
+    await page.getByTestId('tab-settings').click();
+    await page.evaluate(async () => {
+      const db: IDBDatabase = await new Promise((res, rej) => { const r = indexedDB.open('bi-platform'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+      const rows: Record<string, unknown[]> = {
+        imports: [{ id: 'real-1', fileName: 'my-private.xlsx', checksum: 'abc', importedAt: 1, added: 1, module: 'sales', stats: { currencies: ['EUR'] }, mapping: { columns: {} } }],
+        sales: [{ key: 'real-k1', importId: 'real-1', date: '2025-01-01', docKey: 'd1', amount: 123.45 }],
+        finance: [{ key: 'real-f1', importId: 'real-1', date: '2025-01-01', docKey: 'f1', amount: 99 }],
+        settings: [{ key: 'own-marker', value: 'mine' }],
+        links: [{ id: 'real-link', status: 'confirmed', kind: 'product' }],
+      };
+      await new Promise<void>((res, rej) => { const tx = db.transaction(Object.keys(rows), 'readwrite'); for (const [s, rs] of Object.entries(rows)) for (const r of rs) tx.objectStore(s).put(r); tx.oncomplete = () => res(); tx.onerror = () => rej(tx.error); });
+      db.close();
+    });
+    const dump = () => page.evaluate(async () => {
+      const db: IDBDatabase = await new Promise((res, rej) => { const r = indexedDB.open('bi-platform'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+      const out: Record<string, unknown> = { version: db.version };
+      for (const s of Array.from(db.objectStoreNames).sort()) out[s] = await new Promise((res) => { const q = db.transaction(s).objectStore(s).getAll(); q.onsuccess = () => res(q.result); });
+      db.close();
+      return JSON.stringify(out);
+    });
+    const before = await dump();
+    expect(before).toContain('my-private.xlsx');
+
+    const demoCount = () => page.evaluate(async () => {
+      const db: IDBDatabase = await new Promise((res, rej) => { const r = indexedDB.open('bi-platform-demo'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+      const n = await new Promise<number>((res) => { const q = db.transaction('imports').objectStore('imports').count(); q.onsuccess = () => res(q.result); });
+      db.close();
+      return n;
+    });
+    const ready = () => expect(page.getByTestId('demo-banner')).toHaveAttribute('data-phase', 'ready', { timeout: 60_000 });
+
+    for (let round = 0; round < 3; round++) {
+      await page.goto('/');
+      await page.getByTestId('cta-demo').click();
+      await ready();
+      expect(await demoCount()).toBe(7);                       // opened again: never duplicated
+      await page.reload();                                      // refresh inside demo
+      await ready();
+      expect(await demoCount()).toBe(7);
+      if (round === 1) { await page.getByTestId('demo-restart').click(); await ready(); expect(await demoCount()).toBe(7); }
+      await page.getByTestId('tab-history').click();            // worker-backed views run against the demo DB only
+      await page.getByTestId('tab-overview').click();
+      await page.getByTestId('demo-exit').click();
+      await expect(page).toHaveURL(/\/app\/$/);
+    }
+    expect(await dump()).toBe(before);
+    // and the own workspace still shows the visitor's own import, not the demo
+    await page.getByTestId('tab-history').click();
+    await expect(page.getByText('my-private.xlsx')).toBeVisible();
+    await expect(page.getByText('sample_lt_pardavimai.csv')).toHaveCount(0);
+  });
+});
+

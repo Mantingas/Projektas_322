@@ -26,9 +26,10 @@ export async function importDemoFile(d: DemoFile, load: (name: string) => Promis
   if (!a) return false;
   const r = await e.call('commit', [{
     sheetIdx: 0, module: d.module, side: d.side, entries: a.proposal.entries, currency: a.proposal.detectedCurrency ?? 'EUR', asOfDate: d.asOf,
-    mode: 'full', confirmed: true, allowSameChecksum: true, remember: false,
+    mode: 'full', confirmed: true, allowSameChecksum: false, remember: false,
   }]);
-  return r.status === 'ok';
+  // 'duplicate_file' = this exact file is already in the demo database (e.g. another tab got there first): nothing is added twice
+  return r.status === 'ok' || r.status === 'duplicate_file';
 }
 
 export async function loadDemoData(onStep?: (done: number, total: number) => void): Promise<boolean> {

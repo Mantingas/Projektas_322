@@ -2,7 +2,7 @@
 
 > **What this is.** An *expert potential assessment* of the findings the code really produces today. It is **not** proof of customer savings: no real company data has been analysed (see `COMMERCIAL_VALIDATION.md`, verdict: NO-GO for a paying customer, GO for a free controlled pilot). Scores are the author's judgement, 1 = very low, 10 = very high, and exist to decide what the first page should emphasise and what a pilot should test first.
 >
-> **Scope.** Only rules that exist in `src/engine` and run in the app. Nothing planned is listed as working. Test references are test files that mention the rule id (or whose assertions exercise it); where a rule is only exercised through a shared test, that is stated.
+> **Scope.** Only rules that exist in `src/engine` and run in the app. Nothing planned is listed as working. Code references name the file; every rule is found by its id (`grep "id: '<rule>'"`) – line numbers are deliberately not used because they drift. Test references are test files that mention the rule id (or whose assertions exercise it); where a rule is only exercised through a shared test, that is stated.
 
 ## 1. Modules at a glance
 
@@ -25,70 +25,70 @@ Columns: **Impact** = potential financial benefit to the client · **Freq** = ho
 
 | Finding | Kind | Impact | Freq | Verify | Data | MRR | Evidence shown | Code | Tests |
 |---|---|---|---|---|---|---|---|---|---|
-| `purchasing.price_increase` – purchase price rose vs previous period | $ (actual extra cost) | 8 | 9 | 8 | 7 | 8 | per-product previous/current price, quantity, lines | `purchasing/insights.ts:74` | `purchasing-insights`, `purchasing-analytics`, `executive-dashboard` |
-| `purchasing.price_decrease` | $ (actual saving) | 4 | 7 | 8 | 7 | 4 | same | `:91` | `purchasing-insights` |
-| `purchasing.supplier_price_gap` – same item cheaper at another supplier | $ (potential, tagged) | 9 | 6 | 7 | 6 | 8 | price per supplier, volume | `:106` | `purchasing-insights`, `executive-dashboard` |
-| `purchasing.supplier_cost_increase` | $ | 7 | 7 | 8 | 7 | 6 | supplier spend bridge | `:123` | `purchasing-insights`, `executive-dashboard` |
-| `purchasing.spend_change` | $ | 5 | 9 | 9 | 8 | 5 | period totals | `:53` | `purchasing-insights`, `executive-dashboard` |
-| `purchasing.supplier_concentration` | risk | 5 | 6 | 9 | 7 | 4 | top-N shares | `:143` | `purchasing-insights` |
-| `purchasing.unusual_quantity` – ≥ 3× median order | risk | 6 | 5 | 8 | 7 | 6 | the lines, median | `:166` | `purchasing-insights` |
-| `purchasing.spend_anomaly` – week far above history | risk | 5 | 5 | 8 | 7 | 5 | the weeks | `:190` | `purchasing-insights`, `executive-dashboard` |
-| `purchasing.credit_notes_reduced` – fewer supplier credits than before | risk | 6 | 4 | 6 | 6 | 5 | credit share previous/current | `:212` | `purchasing-insights` |
-| `purchasing.historical_price_scenario` | $ (**hypothetical**, never summed with actual) | 3 | 6 | 3 | 6 | 2 | scenario assumptions | `:244` | `purchasing-insights`, `executive-dashboard` |
+| `purchasing.price_increase` – purchase price rose vs previous period | $ (actual extra cost) | 8 | 9 | 8 | 7 | 8 | per-product previous/current price, quantity, lines | `purchasing/insights.ts` | `purchasing-insights`, `purchasing-analytics`, `executive-dashboard` |
+| `purchasing.price_decrease` | $ (actual saving) | 4 | 7 | 8 | 7 | 4 | same | `purchasing/insights.ts` | `purchasing-insights` |
+| `purchasing.supplier_price_gap` – same item cheaper at another supplier | $ (potential, tagged) | 9 | 6 | 7 | 6 | 8 | price per supplier, volume | `purchasing/insights.ts` | `purchasing-insights`, `executive-dashboard` |
+| `purchasing.supplier_cost_increase` | $ | 7 | 7 | 8 | 7 | 6 | supplier spend bridge | `purchasing/insights.ts` | `purchasing-insights`, `executive-dashboard` |
+| `purchasing.spend_change` | $ | 5 | 9 | 9 | 8 | 5 | period totals | `purchasing/insights.ts` | `purchasing-insights`, `executive-dashboard` |
+| `purchasing.supplier_concentration` | risk | 5 | 6 | 9 | 7 | 4 | top-N shares | `purchasing/insights.ts` | `purchasing-insights` |
+| `purchasing.unusual_quantity` – ≥ 3× median order | risk | 6 | 5 | 8 | 7 | 6 | the lines, median | `purchasing/insights.ts` | `purchasing-insights` |
+| `purchasing.spend_anomaly` – week far above history | risk | 5 | 5 | 8 | 7 | 5 | the weeks | `purchasing/insights.ts` | `purchasing-insights`, `executive-dashboard` |
+| `purchasing.credit_notes_reduced` – fewer supplier credits than before | risk | 6 | 4 | 6 | 6 | 5 | credit share previous/current | `purchasing/insights.ts` | `purchasing-insights` |
+| `purchasing.historical_price_scenario` | $ (**hypothetical**, never summed with actual) | 3 | 6 | 3 | 6 | 2 | scenario assumptions | `purchasing/insights.ts` | `purchasing-insights`, `executive-dashboard` |
 
 ### 2.2 Debts & cash (reports + payment registers)
 
 | Finding | Kind | Impact | Freq | Verify | Data | MRR | Evidence shown | Code | Tests |
 |---|---|---|---|---|---|---|---|---|---|
-| `finance.unmatched_credits` / settlement `unapplied_credit` – credit note with no matching use | $ (open credit balance) | 8 | 7 | 8 | 7 | 8 | credit, invoices and payments considered, state (`open_in_report`, `partially_applied`…) | `finance/insights.ts:123`, `trust/settlement.ts:90` | `finance-insights`, `trust-settlement`, `trust-adversarial`, `trust-evidence` |
-| `finance.duplicate_payments` / settlement `duplicate_payment` – same invoice paid twice | $ (candidate or verified excess) | 8 | 5 | 8 | 6 | 8 | both payments, invoice, dates | `finance/insights.ts:139`, `trust/settlement.ts:162` | `finance-insights`, `trust-settlement`, `trust-adversarial` |
-| settlement `overpayment` – paid more than invoiced | $ | 7 | 5 | 8 | 6 | 7 | invoice, payments | `trust/settlement.ts:104` | `trust-settlement`, `trust-adversarial` |
-| settlement `unmatched_payment`, `counterparty_conflict`, `unclear_settlement` | $ (**investigate** – never counted as recoverable) | 4 | 6 | 5 | 5 | 4 | the payment/invoices | `trust/settlement.ts:197-208` | `trust-settlement`, `trust-recall` |
-| `finance.largest_overdue` | $ | 7 | 9 | 9 | 7 | 7 | ranked counterparties | `:42` | `finance-insights`, `executive-dashboard` |
-| `finance.long_overdue` – older than 90 days | $ | 7 | 8 | 9 | 7 | 7 | buckets | `:105` | `finance-insights`, `executive-dashboard` |
-| `finance.overdue_growth` – vs previous snapshot | $ | 6 | 6 | 9 | 5 | 6 | two snapshots | `:62` | `finance-insights` |
-| `finance.due_soon` | $ | 5 | 8 | 9 | 7 | 5 | open items due ≤ N days | `:190` | `finance-insights` |
-| `finance.working_capital` (receivables) | $ (**possible**) | 6 | 7 | 6 | 7 | 5 | late share | `:216` | `finance-insights` |
-| `finance.concentration` | risk | 5 | 7 | 9 | 7 | 4 | top shares | `:83` | `finance-insights` |
-| `finance.payment_delay` / `finance.behaviour_change` | risk (indicator) | 5 | 6 | 6 | 4 | 5 | matched payments per counterparty | `:158-190` | `finance-insights` |
+| `finance.unmatched_credits` / settlement `unapplied_credit` – credit note with no matching use | $ (open credit balance) | 8 | 7 | 8 | 7 | 8 | credit, invoices and payments considered, state (`open_in_report`, `partially_applied`…) | `finance/insights.ts`, `trust/settlement.ts` | `finance-insights`, `trust-settlement`, `trust-adversarial`, `trust-evidence` |
+| `finance.duplicate_payments` / settlement `duplicate_payment` – same invoice paid twice | $ (candidate or verified excess) | 8 | 5 | 8 | 6 | 8 | both payments, invoice, dates | `finance/insights.ts`, `trust/settlement.ts` | `finance-insights`, `trust-settlement`, `trust-adversarial` |
+| settlement `overpayment` – paid more than invoiced | $ | 7 | 5 | 8 | 6 | 7 | invoice, payments | `trust/settlement.ts` | `trust-settlement`, `trust-adversarial` |
+| settlement `unmatched_payment`, `counterparty_conflict`, `unclear_settlement` | $ (**investigate** – never counted as recoverable) | 4 | 6 | 5 | 5 | 4 | the payment/invoices | `trust/settlement.ts` | `trust-settlement`, `trust-recall` |
+| `finance.largest_overdue` | $ | 7 | 9 | 9 | 7 | 7 | ranked counterparties | `finance/insights.ts` | `finance-insights`, `executive-dashboard` |
+| `finance.long_overdue` – older than 90 days | $ | 7 | 8 | 9 | 7 | 7 | buckets | `finance/insights.ts` | `finance-insights`, `executive-dashboard` |
+| `finance.overdue_growth` – vs previous snapshot | $ | 6 | 6 | 9 | 5 | 6 | two snapshots | `finance/insights.ts` | `finance-insights` |
+| `finance.due_soon` | $ | 5 | 8 | 9 | 7 | 5 | open items due ≤ N days | `finance/insights.ts` | `finance-insights` |
+| `finance.working_capital` (receivables) | $ (**possible**) | 6 | 7 | 6 | 7 | 5 | late share | `finance/insights.ts` | `finance-insights` |
+| `finance.concentration` | risk | 5 | 7 | 9 | 7 | 4 | top shares | `finance/insights.ts` | `finance-insights` |
+| `finance.payment_delay` / `finance.behaviour_change` | risk (indicator) | 5 | 6 | 6 | 4 | 5 | matched payments per counterparty | `finance/insights.ts` | `finance-insights` |
 
 ### 2.3 Sales
 
 | Finding | Kind | Impact | Freq | Verify | Data | MRR | Evidence shown | Code | Tests |
 |---|---|---|---|---|---|---|---|---|---|
-| `sales.low_margin_products` (only if cost on ≥ 80 % of lines and net basis) | $ (revenue at low margin) | 8 | 7 | 8 | 5 | 8 | product, revenue, margin | `insights/rules.ts:236` | `insights`, `trust-evidence`, `phase7-i18n` |
-| `sales.customers_declined` | $ (revenue lost vs previous period) | 7 | 8 | 8 | 9 | 7 | customer table, previous/current | `:62` | `period-insights`, `insights`, e2e |
-| `sales.revenue_change` | $ | 5 | 10 | 9 | 10 | 5 | period totals, bridge | `:36` | `period-insights`, `executive-dashboard` |
-| `sales.product_decline` / `sales.product_growth` | $ | 5 | 9 | 8 | 9 | 5 | product waterfall | `:154` | `period-insights` |
-| `sales.salesperson_decline` | $ | 5 | 6 | 8 | 6 | 5 | salesperson table | `:216` | `insights` |
-| `sales.customer_concentration` | risk | 5 | 7 | 9 | 9 | 4 | pareto | `:90` | via `analytics` (pareto) – rule id not asserted directly |
-| `sales.product_pareto` | trend | 3 | 7 | 9 | 9 | 3 | pareto | `:119` | via `analytics` (pareto) |
-| `sales.new_customers` | trend | 3 | 7 | 8 | 9 | 3 | list | `:187` | not asserted by id |
-| `sales.margin_overview` | trend | 4 | 6 | 8 | 5 | 3 | margin | `:237` | covered by "no cost → no margin claims" tests |
-| `sales.credit_notes` – credit notes ≥ 2 % of sales | risk | 5 | 5 | 8 | 8 | 4 | the notes | `:262` | `period-insights` |
+| `sales.low_margin_products` (only if cost on ≥ 80 % of lines and net basis) | $ (revenue at low margin) | 8 | 7 | 8 | 5 | 8 | product, revenue, margin | `insights/rules.ts` | `insights`, `trust-evidence`, `phase7-i18n` |
+| `sales.customers_declined` | $ (revenue lost vs previous period) | 7 | 8 | 8 | 9 | 7 | customer table, previous/current | `insights/rules.ts` | `period-insights`, `insights`, e2e |
+| `sales.revenue_change` | $ | 5 | 10 | 9 | 10 | 5 | period totals, bridge | `insights/rules.ts` | `period-insights`, `executive-dashboard` |
+| `sales.product_decline` / `sales.product_growth` | $ | 5 | 9 | 8 | 9 | 5 | product waterfall | `insights/rules.ts` | `period-insights` |
+| `sales.salesperson_decline` | $ | 5 | 6 | 8 | 6 | 5 | salesperson table | `insights/rules.ts` | `insights` |
+| `sales.customer_concentration` | risk | 5 | 7 | 9 | 9 | 4 | pareto | `insights/rules.ts` | via `analytics` (pareto) – rule id not asserted directly |
+| `sales.product_pareto` | trend | 3 | 7 | 9 | 9 | 3 | pareto | `insights/rules.ts` | via `analytics` (pareto) |
+| `sales.new_customers` | trend | 3 | 7 | 8 | 9 | 3 | list | `insights/rules.ts` | not asserted by id |
+| `sales.margin_overview` | trend | 4 | 6 | 8 | 5 | 3 | margin | `insights/rules.ts` | covered by "no cost → no margin claims" tests |
+| `sales.credit_notes` – credit notes ≥ 2 % of sales | risk | 5 | 5 | 8 | 8 | 4 | the notes | `insights/rules.ts` | `period-insights` |
 
 ### 2.4 Inventory
 
 | Finding | Kind | Impact | Freq | Verify | Data | MRR | Evidence shown | Code | Tests |
 |---|---|---|---|---|---|---|---|---|---|
-| `inventory.excess_stock` – cover above threshold | $ (value tied up) | 7 | 8 | 7 | 6 | 7 | items, cover, value | `inventory/insights.ts:121` | `inventory-insights`, `executive-dashboard` |
-| `inventory.non_moving` / `inventory.slow_moving` | $ | 7 | 9 | 8 | 6 | 7 | last-movement date, value | `:141` | `inventory-insights` |
-| `inventory.stockout_risk` | risk (count) | 7 | 7 | 7 | 5 | 7 | min/cover per item | `:173` | `inventory-insights`, `executive-dashboard` |
-| `inventory.negative_stock` | risk | 4 | 6 | 10 | 8 | 5 | item list (stored values) | `:190` | `inventory-insights` |
-| `inventory.stock_inconsistent` – snapshots don't reconcile with movements | risk | 5 | 5 | 8 | 4 | 5 | opening + movements vs closing | `:205` | `inventory-insights` |
-| `inventory.valuation_anomaly` – conflicting values, cost outliers | risk | 5 | 5 | 8 | 6 | 5 | rows | `:253` | `inventory-insights` |
-| `inventory.unusual_movements` | risk | 5 | 5 | 8 | 5 | 5 | movements | `:219` | `inventory-insights` |
-| `inventory.value_concentration` / `inventory.value_increase` | trend | 3–4 | 7 | 9 | 6 | 3 | shares / delta | `:70`, `:97` | `inventory-insights` |
+| `inventory.excess_stock` – cover above threshold | $ (value tied up) | 7 | 8 | 7 | 6 | 7 | items, cover, value | `inventory/insights.ts` | `inventory-insights`, `executive-dashboard` |
+| `inventory.non_moving` / `inventory.slow_moving` | $ | 7 | 9 | 8 | 6 | 7 | last-movement date, value | `inventory/insights.ts` | `inventory-insights` |
+| `inventory.stockout_risk` | risk (count) | 7 | 7 | 7 | 5 | 7 | min/cover per item | `inventory/insights.ts` | `inventory-insights`, `executive-dashboard` |
+| `inventory.negative_stock` | risk | 4 | 6 | 10 | 8 | 5 | item list (stored values) | `inventory/insights.ts` | `inventory-insights` |
+| `inventory.stock_inconsistent` – snapshots don't reconcile with movements | risk | 5 | 5 | 8 | 4 | 5 | opening + movements vs closing | `inventory/insights.ts` | `inventory-insights` |
+| `inventory.valuation_anomaly` – conflicting values, cost outliers | risk | 5 | 5 | 8 | 6 | 5 | rows | `inventory/insights.ts` | `inventory-insights` |
+| `inventory.unusual_movements` | risk | 5 | 5 | 8 | 5 | 5 | movements | `inventory/insights.ts` | `inventory-insights` |
+| `inventory.value_concentration` / `inventory.value_increase` | trend | 3–4 | 7 | 9 | 6 | 3 | shares / delta | `inventory/insights.ts`, `inventory/insights.ts` | `inventory-insights` |
 
 ### 2.5 Cross-module (only through confirmed links)
 
 | Finding | Kind | Impact | Freq | Verify | Data | MRR | Code | Tests |
 |---|---|---|---|---|---|---|---|---|
-| `cross.margin_squeeze` – purchase price up while selling price flat | $ | 8 | 5 | 7 | 4 | 8 | `executive/cross.ts:161` | `executive-cross` |
-| `cross.stock_cover_low` – demand outpaces stock | risk | 7 | 5 | 7 | 4 | 7 | `:98` | `executive-cross`, `trust-adversarial` |
-| `cross.stock_excess_vs_demand` | $ | 6 | 5 | 7 | 4 | 6 | `:107` | `executive-cross`, `trust-adversarial` |
-| `cross.customer_exposure` – overdue balance of a major customer | $ | 7 | 4 | 7 | 4 | 6 | `:211` | `executive-cross` |
-| `cross.stock_vs_purchasing` | risk | 5 | 4 | 6 | 4 | 5 | `:256` | `executive-cross` |
+| `cross.margin_squeeze` – purchase price up while selling price flat | $ | 8 | 5 | 7 | 4 | 8 | `executive/cross.ts` | `executive-cross` |
+| `cross.stock_cover_low` – demand outpaces stock | risk | 7 | 5 | 7 | 4 | 7 | `executive/cross.ts` | `executive-cross`, `trust-adversarial` |
+| `cross.stock_excess_vs_demand` | $ | 6 | 5 | 7 | 4 | 6 | `executive/cross.ts` | `executive-cross`, `trust-adversarial` |
+| `cross.customer_exposure` – overdue balance of a major customer | $ | 7 | 4 | 7 | 4 | 6 | `executive/cross.ts` | `executive-cross` |
+| `cross.stock_vs_purchasing` | risk | 5 | 4 | 6 | 4 | 5 | `executive/cross.ts` | `executive-cross` |
 
 ### 2.6 Universal analyser
 
@@ -101,20 +101,22 @@ The universal analyser never states a monetary effect. Its value is breadth (any
 
 ## 3. Ten most commercially promising working features
 
-Ranked by the mean of Impact, Verify and MRR, with ties broken by Data availability. All ten are implemented, covered by tests and visible in the demo data.
+Ranking rule: mean of **Impact, Verify and MRR** (section 2 scores); ties are broken by **Data** availability. Scores are the author's judgement (1–10). "Technically proven" below means: implemented, covered by automated tests and shown in the demo on **synthetic** data. **None of these has been validated on real company data**, so none is commercially proven.
 
-| # | Feature | Why it ranks | Implementation | Tests |
-|---|---|---|---|---|
-| 1 | Credit notes that may be unapplied (`unapplied_credit`, `finance.unmatched_credits`) | Concrete amount, each record checkable in the client's accounting system, recurs for every supplier/customer relationship | `trust/settlement.ts`, `finance/insights.ts` | `trust-settlement`, `trust-adversarial`, `finance-insights` |
-| 2 | Purchase price increases (`purchasing.price_increase`) | Price list drift is common and the extra cost is calculable per line | `purchasing/insights.ts`, `purchasing/prices.ts` | `purchasing-insights`, `purchasing-analytics` |
-| 3 | Same item, different supplier price (`purchasing.supplier_price_gap`) | Directly names a potential saving (tagged *potential*) | `purchasing/insights.ts` | `purchasing-insights` |
-| 4 | Possible duplicate payments / overpayments | Verified excess is a direct cash recovery; candidates stay candidates | `trust/settlement.ts` | `trust-settlement`, `trust-adversarial` |
-| 5 | Overdue and long-overdue receivables | Most frequent and most verifiable cash finding | `finance/insights.ts`, `finance/metrics.ts` | `finance-insights`, `finance-analytics` |
-| 6 | Low-margin products (`sales.low_margin_products`) | Connects directly to profit; guarded against missing cost/VAT basis | `insights/rules.ts` | `insights`, `trust-evidence` |
-| 7 | Margin squeeze (`cross.margin_squeeze`) | Strongest "profit leak" story; needs confirmed product links | `executive/cross.ts` | `executive-cross` |
-| 8 | Excess, slow and non-moving stock | Cash tied up; frequent in trading companies | `inventory/insights.ts` | `inventory-insights` |
-| 9 | Stock-out risk (`inventory.stockout_risk`, `cross.stock_cover_low`) | Lost sales; needs history or minimum stock | `inventory/insights.ts`, `executive/cross.ts` | `inventory-insights`, `executive-cross` |
-| 10 | Declining customers (`sales.customers_declined`) | Early churn signal, data nearly always available | `insights/rules.ts` | `period-insights`, `insights` |
+| # | Feature | Impact | Freq | Verify | Data | MRR | Mean (I,V,M) | Input needed | Biggest limitation | Technically proven (synthetic) | Commercially proven |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Credit note that may be unapplied (`unapplied_credit`, `finance.unmatched_credits`) | 8 | 7 | 8 | 7 | 8 | 8.0 | Receivables/payables report with credit-note rows (and ideally invoice + payment registers with document references) | Without a payment register it can only say the report still shows the credit open; real ERP exports may not link credit notes to the invoices they offset | Yes – `trust-settlement`, `trust-adversarial`, `finance-insights` | No |
+| 2 | Purchase price increases (`purchasing.price_increase`) | 8 | 9 | 8 | 7 | 8 | 8.0 | Purchase lines: date, supplier/product, quantity, amount (unit helps) | Needs the same item identified consistently (SKU) and comparable units; name-only matching lowers reliability to *low* | Yes – `purchasing-insights`, `purchasing-analytics` | No |
+| 3 | Same item cheaper at another supplier (`purchasing.supplier_price_gap`) | 9 | 6 | 7 | 6 | 8 | 8.0 | Purchase lines with supplier and product on at least two suppliers | The amount is a *potential* saving: availability, minimum quantities, quality and delivery terms are not in the data | Yes – `purchasing-insights` | No |
+| 4 | Possible duplicate payments / overpayments (`duplicate_payment`, `overpayment`) | 8 | 5 | 8 | 6 | 8 | 8.0 | Payment register with invoice references plus invoices | Repeat payments are often legitimate (instalments, recurring bills); candidates stay *candidates* until a person confirms | Yes – `trust-settlement`, `trust-adversarial` | No |
+| 5 | Low-margin products (`sales.low_margin_products`) | 8 | 7 | 8 | 5 | 8 | 8.0 | Sales lines with a cost column on ≥ 80 % of lines, net amounts | Silent by design when cost or VAT basis is missing – many sales exports do not contain cost | Yes – `insights`, `trust-evidence` | No |
+| 6 | Overdue and long-overdue receivables (`finance.largest_overdue`, `finance.long_overdue`) | 7 | 9 | 9 | 7 | 7 | 7.7 | Open-item report with due dates (or ageing buckets) | Already visible in most ERP reports, so the app adds ranking and evidence rather than new information | Yes – `finance-insights`, `finance-analytics` | No |
+| 7 | Margin squeeze (`cross.margin_squeeze`) | 8 | 5 | 7 | 4 | 8 | 7.7 | Purchases and sales **plus user-confirmed product links** | Depends on the user confirming links between two files; without them it is withheld | Yes – `executive-cross` | No |
+| 8 | Declining customers (`sales.customers_declined`) | 7 | 8 | 8 | 9 | 7 | 7.3 | Sales lines with customer and two comparable periods | Decline can be seasonal or a one-off order; the app cannot tell why | Yes – `period-insights`, `insights`, e2e | No |
+| 9 | Excess, slow and non-moving stock (`inventory.excess_stock`, `slow_moving`, `non_moving`) | 7 | 8 | 7 | 6 | 7 | 7.0 | Stock snapshot with cost plus movements (history) | Cover and thresholds are generic (e.g. 180 days); seasonal or project stock can be flagged wrongly | Yes – `inventory-insights` | No |
+| 10 | Stock-out risk (`inventory.stockout_risk`, `cross.stock_cover_low`) | 7 | 7 | 7 | 5 | 7 | 7.0 | Movements history or minimum stock levels; cross rule also needs demand and confirmed links | Reports a count, not money; lead times and open purchase orders are not known | Yes – `inventory-insights`, `executive-cross` | No |
+
+**Reading the table.** Commercial *potential* is the Impact / MRR columns (judgement). Technical *proof* is the second-to-last column (tests on synthetic data). The gap between them is exactly what the free pilot must close: precision (how many findings a reviewer confirms) and recall (what real problems the app missed). Until then every claim on the website must stay at "possible" / "worth checking".
 
 ## 4. Conclusions that drive the first page
 

@@ -12,6 +12,7 @@ const pl: Record<keyof typeof home, string> = {
   'home.ex.what': 'Nota kredytowa, która może być jeszcze niewykorzystana. Saldo wynosi {amount}.',
   'home.ex.why': 'Dlaczego to oznaczono?',
   'home.ex.records': 'Powiązane zapisy: {n}',
+  'home.ex.status': 'Status opisuje wyłącznie zapisy w wczytanych plikach: uzasadniają one obliczenie. Nie potwierdza rzeczywistej straty, rzeczywistego długu ani błędu w czyichkolwiek księgach.',
   'home.ex.note': 'Przykład demonstracyjny z danych syntetycznych, wygenerowany tą samą analizą, która działa na Twoich plikach. To wskazówka do weryfikacji, a nie potwierdzona strata.',
   'home.ex.open': 'Otwórz demonstrację i zobacz dowody',
   'home.ex.show': 'Pokaż dowody',
@@ -40,6 +41,7 @@ const pl: Record<keyof typeof home, string> = {
   'home.pilot.what.t': 'Co możesz wypróbować', 'home.pilot.what.d': 'Własne eksporty – na przykład raport niezapłaconych faktur, pozycje zakupów i sprzedaży albo stany magazynowe. Pliki zostają na Twoim komputerze.',
   'home.pilot.how.t': 'Jak sprawdzamy wyniki', 'home.pilot.how.d': 'Osoba znająca Twoją księgowość przegląda każdy wynik i oznacza go: potwierdzony, odrzucony lub niejasny. Liczymy, ile wyników się potwierdziło.',
   'home.pilot.fb.t': 'O jaką opinię prosimy', 'home.pilot.fb.d': 'Co pokazał wynik, czego brakowało i co było błędne. W pilotażu niczego nie sprzedajemy, a cen jeszcze nie ma.',
+  'home.pilot.note': 'Na tej stronie nie ma jeszcze kanału zgłoszeń, więc nie można się tu zapisać. Sposób kontaktu zostanie opublikowany, gdy będzie dostępny.',
 
   'demo.banner': 'Demonstracja · dane syntetyczne – Twoje dane nie są tu używane.',
   'demo.loading': 'Wczytywanie syntetycznych plików przykładowych… {done}/{total}',

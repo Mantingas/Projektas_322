@@ -12,6 +12,7 @@ const lt: Record<keyof typeof home, string> = {
   'home.ex.what': 'Kreditinė sąskaita, kuri galimai dar nepanaudota. Likutis – {amount}.',
   'home.ex.why': 'Kodėl tai pažymėta?',
   'home.ex.records': 'Susiję įrašai: {n}',
+  'home.ex.status': 'Būsena apibūdina tik įkeltų failų įrašus: jie pagrindžia skaičiavimą. Tai nepatvirtina tikro nuostolio, tikros skolos ar kieno nors apskaitos klaidos.',
   'home.ex.note': 'Demonstracinis pavyzdys iš sintetinių duomenų, sukurtas ta pačia analize, kuri veikia su jūsų failais. Tai užuomina patikrinimui, o ne patvirtintas nuostolis.',
   'home.ex.open': 'Atidaryti demonstraciją ir peržiūrėti įrodymus',
   'home.ex.show': 'Rodyti įrodymus',
@@ -40,6 +41,7 @@ const lt: Record<keyof typeof home, string> = {
   'home.pilot.what.t': 'Ką galėtumėte išbandyti', 'home.pilot.what.d': 'Savo eksportus – pavyzdžiui, neapmokėtų sąskaitų ataskaitą, pirkimų, pardavimų eilutes ar likučius. Failai lieka jūsų kompiuteryje.',
   'home.pilot.how.t': 'Kaip tikrinami radiniai', 'home.pilot.how.d': 'Jūsų apskaitą išmanantis žmogus peržiūri kiekvieną radinį ir pažymi: patvirtintas, atmestas ar neaišku. Skaičiuojame, kiek radinių pasitvirtino.',
   'home.pilot.fb.t': 'Kokio grįžtamojo ryšio prašytume', 'home.pilot.fb.d': 'Ką radinys parodė, ko trūko ir kas buvo klaidinga. Pilotui nieko neparduodame, o kainų kol kas nėra.',
+  'home.pilot.note': 'Šiame puslapyje kol kas nėra paraiškų kanalo, todėl užsiregistruoti negalima. Kai atsiras būdas susisiekti, jis bus paskelbtas.',
 
   'demo.banner': 'Demonstracija · sintetiniai duomenys – jūsų duomenys čia nenaudojami.',
   'demo.loading': 'Įkeliami sintetiniai pavyzdiniai failai… {done}/{total}',

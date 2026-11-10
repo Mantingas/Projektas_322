@@ -38,12 +38,13 @@ export function HeroFinding() {
         <p className="text-slate-700 dark:text-slate-300">{tr(lang, finding.rationale, cur)}</p>
       </div>
       <p className="text-sm text-slate-600 dark:text-slate-400">{t('home.ex.records', { n: finding.records.length })}</p>
+      <p className="rounded-md bg-slate-50 p-2 text-xs text-slate-700 dark:bg-slate-900 dark:text-slate-300" data-testid="hero-finding-status-note">{t('home.ex.status')}</p>
       <details className="text-sm" data-testid="hero-finding-evidence">
         <summary className="cursor-pointer font-medium text-indigo-700 dark:text-indigo-300">{t('home.ex.show')}</summary>
         <div className="mt-2"><EvidencePanel dossier={finding} title={findingTitle(finding, lang)} fileNames={demo.fileNames} currency={cur} /></div>
       </details>
       <p className="text-xs text-slate-500">{t('home.ex.note')}</p>
-      <Link href="/app/?demo=1" className={cn(buttonVariants({ variant: 'outline', size: 'sm' }))} data-testid="hero-finding-open">{t('home.ex.open')}</Link>
+      <Link href="/app/?demo=1" className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'h-auto whitespace-normal py-2 text-center')} data-testid="hero-finding-open">{t('home.ex.open')}</Link>
     </Card>
   );
 }

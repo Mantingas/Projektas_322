@@ -18,10 +18,10 @@ export default function Home() {
   useEffect(() => { clearDemoFlag(); }, []);
   return (
     <div className="space-y-12">
-      <section className="grid items-start gap-8 py-6 lg:grid-cols-2" data-testid="hero">
-        <div className="space-y-5">
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl" data-testid="hero-title">{t('home.hero.title')}</h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400">{t('home.hero.sub')}</p>
+      <section className="grid items-start gap-6 py-2 sm:gap-8 sm:py-6 lg:grid-cols-2" data-testid="hero">
+        <div className="space-y-4 sm:space-y-5">
+          <h1 className="text-[1.65rem] font-bold leading-tight tracking-tight sm:text-4xl" data-testid="hero-title">{t('home.hero.title')}</h1>
+          <p className="text-base text-slate-600 sm:text-lg dark:text-slate-400">{t('home.hero.sub')}</p>
           <div className="flex flex-wrap gap-3">
             <Link href="/app/?demo=1" className={cn(buttonVariants({ size: 'lg' }))} data-testid="cta-demo">{t('home.hero.demo')}</Link>
             <Link href="/app/" className={cn(buttonVariants({ size: 'lg', variant: 'outline' }))} data-testid="cta">{t('home.hero.own')}</Link>
@@ -84,6 +84,7 @@ export default function Home() {
             </Card>
           ))}
         </div>
+        <p className="text-sm text-slate-600 dark:text-slate-400" data-testid="pilot-note">{t('home.pilot.note')}</p>
       </section>
     </div>
   );

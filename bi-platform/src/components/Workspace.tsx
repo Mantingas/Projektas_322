@@ -23,6 +23,17 @@ type Tab = 'import' | 'overview' | 'insights' | 'pilot' | 'history' | 'settings'
 const TABS: Tab[] = ['import', 'overview', 'insights', 'pilot', 'history', 'settings'];
 type ViewId = ModuleId | 'universal';
 
+/** After the demo has loaded: bring the settlement findings (with their evidence) into view, once the overview has rendered them. */
+function scrollToEvidence() {
+  let tries = 0;
+  const tick = () => {
+    const el = document.querySelector('[data-testid=exec-trust]');
+    if (el) el.scrollIntoView({ block: 'start' });
+    else if (++tries < 40) setTimeout(tick, 250);
+  };
+  setTimeout(tick, 250);
+}
+
 export function Workspace() {
   const { t } = useLang();
   const [tab, setTab] = useState<Tab>('import');
@@ -39,7 +50,7 @@ export function Workspace() {
   }, [version]);
   return (
     <div className="space-y-6">
-      <DemoBanner onReady={() => { bump(); setModule('finance'); setFinSide('receivable'); setTab('insights'); }} />
+      <DemoBanner onReady={() => { bump(); setTab('overview'); scrollToEvidence(); }} />
       <div role="tablist" className="no-print flex gap-1 overflow-x-auto border-b [mask-image:linear-gradient(to_right,black_92%,transparent)] sm:[mask-image:none] border-slate-200 dark:border-slate-800">
         {TABS.map((k) => (
           <button

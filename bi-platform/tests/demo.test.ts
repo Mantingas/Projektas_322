@@ -27,6 +27,15 @@ describe('the landing-page example finding is produced by the real engine', () =
     expect(f.amountBasis).toBe('as_stated');
   });
 
+  it('every evidence record points at the real row of the real source file (document id and amount match the CSV)', () => {
+    for (const r of committed.finding.records) {
+      const lines = fs.readFileSync(`public/samples/${r.importId}`, 'utf8').split(/\r?\n/);
+      const row = lines[r.sourceRow - 1]!; // sourceRow is the 1-based line of the file, header on line 1
+      expect(row, `${r.importId}:${r.sourceRow}`).toContain(r.documentId!);
+      expect(row).toContain(String(Math.abs(r.amount)).replace('.', ','));
+    }
+  });
+
   it('only uses the shipped synthetic samples (no real data can end up on the landing page)', () => {
     for (const n of committed.sampleFiles) expect(fs.existsSync(`public/samples/${n}`)).toBe(true);
     expect(JSON.stringify(committed)).not.toMatch(/@|https?:\/\//);
@@ -68,6 +77,10 @@ describe('demo files import completely through the normal engine', () => {
     expect(await db.purchases.count()).toBeGreaterThan(0);
     expect(await db.inventory.count()).toBeGreaterThan(0);
     expect(await db.finance.count()).toBeGreaterThan(0);
+    // importing the whole set a second time (a second tab, a refresh mid-way) adds nothing
+    const before = { imports: await db.imports.count(), sales: await db.sales.count(), purchases: await db.purchases.count(), inventory: await db.inventory.count(), finance: await db.finance.count() };
+    for (const d of DEMO_FILES) expect(await importDemoFile(d, load), d.file).toBe(true);
+    expect({ imports: await db.imports.count(), sales: await db.sales.count(), purchases: await db.purchases.count(), inventory: await db.inventory.count(), finance: await db.finance.count() }).toEqual(before);
   }, 60_000);
 });
 
