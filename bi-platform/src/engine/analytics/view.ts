@@ -10,7 +10,7 @@ import type { ResolvedPeriods } from './periods';
  */
 export interface ChartModel {
   /** Purchasing dashboards say "spend" instead of "sales" in chart titles and tooltips. */
-  module?: 'purchasing' | 'inventory';
+  module?: 'purchasing' | 'inventory' | 'finance';
   series: Series;
   bounds: { dateMin: string; dateMax: string };
   periods: ResolvedPeriods;

@@ -8,13 +8,15 @@ export interface LineLike {
   currency: string;
   supplierId?: string;
   supplierName?: string;
+  /** Finance: document kind / side / counterparty the number belongs to. */
+  scope?: string;
 }
 
 /** Document numbers are only comparable within one currency / numbering series. */
-export const docKey = (r: { documentId?: string; currency: string; supplierId?: string; supplierName?: string }) => {
+export const docKey = (r: { documentId?: string; currency: string; supplierId?: string; supplierName?: string; scope?: string }) => {
   if (!r.documentId) return undefined;
   // Purchase-document numbers are only unique per supplier. Sales records have no supplier, so their keys keep the original format.
-  const scope = (r.supplierId ?? r.supplierName ?? '').trim().toLowerCase().replace(/\s+/g, ' ');
+  const scope = (r.scope ?? r.supplierId ?? r.supplierName ?? '').trim().toLowerCase().replace(/\s+/g, ' ');
   return scope ? `${r.currency}|${scope}|${r.documentId.trim().toLowerCase()}` : `${r.currency}|${r.documentId.trim().toLowerCase()}`;
 };
 

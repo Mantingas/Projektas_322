@@ -204,3 +204,17 @@ Period-aware insights (`analyzeSalesPeriod`), year-to-date (offered only when da
 **Insights** (`analyzeInventoryPeriod`): value concentration, value increase, excess stock, slow-moving, non-moving, stockout risk, negative stock, snapshots vs movements, unusual movements, valuation anomalies. Each has evidence, reliability with a stated reason, an action and a "why". Amounts for slow / non-moving / excess stock are *capital tied up, not losses*; no inventory text promises savings (tested).
 
 **Cross-module foundation.** `proposeLinks` / `proposeInventoryLinks` / `confirmedCounterpart` (`src/engine/entities/links.ts`): links are proposed only from equal verified product codes, stay `proposed` until the user decides, name-only matches are unverified candidates, ambiguous codes are never proposed, and another module can reach an item only through a link the user confirmed. Nothing joins data yet.
+
+## Phase 5 – Receivables, payables and cash intelligence
+Code: `src/engine/finance/*` (keys, kind, ledger, metrics, dashboard, insights, drill), `src/engine/validation/normalizeFinance.ts`, `src/components/finance/*`, `src/lib/financeSummary.ts`, texts in `src/i18n/fin.{en,lt,pl}.ts`. Module id `finance` (Dexie table `finance`, schema v6); everything else (worker, store, merge planner, chart architecture, drill-down, reports) is reused.
+
+**Dataset kind and grain** come only from the confirmed mapping: aging buckets → aging; payment date / payment reference → payments; credit reference → credit notes; outstanding + document id → open items; outstanding without document → balance; otherwise invoices. Credit rows inside an invoice register (document-type or negative amount) are split off. The side (receivable / payable) is suggested from headers and confirmed by the user.
+
+**Snapshots vs flows.** Open-item, aging and balance reports are *positions*: each gets a synthetic document id (`<kind> <side> <date>`), so a conflicting re-export of the same date is held for review, never merged or summed. Position choice = newest snapshot ≤ the as-of date (open item > aging > balance on ties). Invoice, payment and credit registers are *flows*, merged by real document numbers (scoped by counterparty where numbers are not globally unique). Flows are shown only if the register covers the window, and are never turned into balances.
+
+**Aging** is computed from due dates at the snapshot date (due on the as-of date = not overdue; buckets 1–30 / 31–60 / 61–90 / >90; no due date → separate bucket; negative lines → credits).
+
+**Matching.** A payment links to an invoice only by exact reference under the same counterparty (status matched / unreferenced / not_found / counterparty_conflict). Credit notes: matched / reference_not_found / no_reference; same-counterparty-same-amount candidates are displayed as possible matches only. Duplicate tiers: exact_repeat, same_invoice, overpaid, lookalike (≤ 7 days) – all "possible".
+
+**Certainty classes** on every insight: `fact` (read directly from data), `possible` (needs checking), `indicator` (pattern-based risk). DSO/DPO = outstanding / invoiced × days, requires ≥ 10 invoices and a covering register; payment delay requires ≥ 5 matched payments. Link contract: counterparty and document keys are stable for future joins with sales/purchasing; no join is implemented.
+

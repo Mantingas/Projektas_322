@@ -13,10 +13,12 @@ export interface NormalizeOptions {
   today?: string;
   /** Inventory: the snapshot date to use when the file has no date column (the user states it). */
   asOfDate?: string;
+  /** Finance: receivables or payables (the user's choice). */
+  side?: 'receivable' | 'payable';
 }
 
 export class MappingError extends Error {
-  constructor(public readonly code: 'missing_date' | 'missing_amount' | 'currency_required' | 'missing_product' | 'missing_quantity') {
+  constructor(public readonly code: 'missing_date' | 'missing_amount' | 'currency_required' | 'missing_product' | 'missing_quantity' | 'missing_counterparty') {
     super(code);
   }
 }

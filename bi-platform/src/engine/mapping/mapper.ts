@@ -1,5 +1,5 @@
 import type { ColumnProfile, FieldId, MappingEntry, MappingProposal, MappingWarning, ModuleId } from '../types';
-import { GROSS_HINT_TOKENS, INVENTORY_WORDS, NET_HINT_TOKENS, PURCHASING_WORDS, SALES_WORDS, SPECS, type ModuleSpec } from './dictionary';
+import { FINANCE_WORDS, GROSS_HINT_TOKENS, INVENTORY_WORDS, PAYABLE_WORDS, RECEIVABLE_WORDS, NET_HINT_TOKENS, PURCHASING_WORDS, SALES_WORDS, SPECS, type ModuleSpec } from './dictionary';
 import { levenshtein, normalizeHeader, tokens } from './normalize';
 import { matchTemplate } from './templates';
 import { normalizeCurrency } from '../schema/numbers';
@@ -34,7 +34,7 @@ function basisHint(header: string): 'net' | 'gross' | null {
 
 function valueCompat(field: FieldId, p: ColumnProfile, spec: ModuleSpec): number {
   if (p.nonEmpty === 0) return 0;
-  if (field === 'document_date' || field === 'snapshot_date' || field === 'movement_date') return Math.max(p.dateRatio, p.serialDateRatio);
+  if (field === 'document_date' || field === 'snapshot_date' || field === 'movement_date' || field === 'due_date' || field === 'payment_date') return Math.max(p.dateRatio, p.serialDateRatio);
   if (spec.numeric.includes(field)) return p.numberRatio;
   if (field === 'unit' || field === 'document_type' || field === 'movement_type') return p.textRatio > 0.8 && p.avgTextLength <= 20 && (p.distinctRatio < 0.2 || p.distinctRatio * p.nonEmpty <= 12) ? 1 : 0.3; // few distinct values: a categorical column, even in a short file
   if (spec.text.includes(field)) return p.numberRatio > 0.8 || p.dateRatio > 0.8 ? 0.1 : p.textRatio;
@@ -150,6 +150,15 @@ export function suggestMapping(profiles: ColumnProfile[], opts: MapperOptions = 
 export function validateMapping(entries: Pick<MappingEntry, 'field' | 'confidence'>[], module: ModuleId = 'sales', ctx: { hasDefaultDate?: boolean } = {}): MappingWarning[] {
   const w: MappingWarning[] = [];
   const has = (f: FieldId) => entries.some((e) => e.field === f);
+  if (module === 'finance') {
+    // a finance file needs: a counterparty, an amount (or aging buckets) and a date (a column, or the as-of date the user states)
+    if (!has('counterparty_id') && !has('counterparty_name')) w.push({ code: 'missing_counterparty' });
+    const amount = ['original_amount', 'outstanding_amount', 'paid_amount', 'aging_current', 'aging_1_30', 'aging_31_60', 'aging_61_90', 'aging_90_plus'].some((f) => has(f as FieldId));
+    if (!amount) w.push({ code: 'missing_amount' });
+    if (!['document_date', 'snapshot_date', 'payment_date'].some((f) => has(f as FieldId)) && !ctx.hasDefaultDate) w.push({ code: 'missing_date' });
+    for (const e of entries) if (e.confidence < LOW_CONFIDENCE) w.push({ code: 'low_confidence', field: e.field });
+    return w;
+  }
   if (module === 'inventory') {
     // a stock file needs: a date (a column, or the as-of date the user states), a product, and a quantity or a stock value
     if (!has('snapshot_date') && !has('movement_date') && !ctx.hasDefaultDate) w.push({ code: 'missing_date' });
@@ -170,7 +179,7 @@ export function validateMapping(entries: Pick<MappingEntry, 'field' | 'confidenc
 
 /** A mapping can only be confirmed when it has a date and at least one amount column. */
 export function isMappingConfirmable(warnings: MappingWarning[]): boolean {
-  return !warnings.some((w) => w.code === 'missing_date' || w.code === 'missing_amount' || w.code === 'missing_product' || w.code === 'missing_quantity');
+  return !warnings.some((w) => w.code === 'missing_date' || w.code === 'missing_amount' || w.code === 'missing_product' || w.code === 'missing_quantity' || w.code === 'missing_counterparty');
 }
 
 /** Makes a mapping reusable on another file with the same layout. */
@@ -189,11 +198,20 @@ export function layoutSignature(headers: string[], module: ModuleId = 'sales'): 
  * Suggests which kind of file this is from header words. Ambiguous words ("kontrahent", "pardavėjas") count for neither;
  * ties and unclear files default to sales. The user always confirms the choice.
  */
-export function detectModule(headers: string[]): { module: ModuleId; purchasing: number; sales: number; inventory: number } {
+/** Receivable (customers) or payable (suppliers) from header words; null when the words do not decide. */
+export function detectSide(headers: string[]): 'receivable' | 'payable' | null {
+  const toks = new Set(headers.flatMap((h) => normalizeHeader(h).split(' ')));
+  const r = RECEIVABLE_WORDS.filter((w) => toks.has(w)).length;
+  const p = PAYABLE_WORDS.filter((w) => toks.has(w)).length;
+  return r > p ? 'receivable' : p > r ? 'payable' : null;
+}
+
+export function detectModule(headers: string[]): { module: ModuleId; purchasing: number; sales: number; inventory: number; finance: number } {
   const toks = new Set(headers.flatMap((h) => normalizeHeader(h).split(' ')));
   const purchasing = PURCHASING_WORDS.filter((w) => toks.has(w)).length;
   const sales = SALES_WORDS.filter((w) => toks.has(w)).length;
   const inventory = INVENTORY_WORDS.filter((w) => toks.has(w)).length;
-  const module: ModuleId = inventory > purchasing && inventory > sales ? 'inventory' : purchasing > sales ? 'purchasing' : 'sales';
-  return { module, purchasing, sales, inventory };
+  const finance = FINANCE_WORDS.filter((w) => toks.has(w)).length;
+  const module: ModuleId = finance >= 2 && finance >= Math.max(purchasing, sales, inventory) ? 'finance' : inventory > purchasing && inventory > sales ? 'inventory' : purchasing > sales ? 'purchasing' : 'sales';
+  return { module, purchasing, sales, inventory, finance };
 }

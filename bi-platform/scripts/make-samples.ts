@@ -3,6 +3,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { buildFixtures } from '../tests/fixtures/formats';
 import { buildPurchasingFixtures } from '../tests/fixtures/purchasingFormats';
 import { buildInventoryFixtures } from '../tests/fixtures/inventoryFormats';
+import { buildFinanceFixtures } from '../tests/fixtures/financeFormats';
 
 const names: Record<string, string> = {
   'lt-csv-utf8': 'sample_lt_pardavimai.csv',
@@ -32,6 +33,17 @@ const iNames: Record<string, string> = {
 };
 for (const f of await buildInventoryFixtures()) {
   const name = iNames[f.id];
+  if (name) writeFileSync(`public/samples/${name}`, f.bytes);
+}
+const fNames: Record<string, string> = {
+  'ar-open-items-history': 'sample_lt_gautinos_atviros.csv',
+  'ar-payments': 'sample_lt_mokejimai.csv',
+  'ar-invoices': 'sample_lt_saskaitos.csv',
+  'ap-open-items': 'sample_en_ap_open_items.csv',
+  'pl-aging-ap': 'sample_pl_wiekowanie_zobowiazan.csv',
+};
+for (const f of await buildFinanceFixtures()) {
+  const name = fNames[f.id];
   if (name) writeFileSync(`public/samples/${name}`, f.bytes);
 }
 console.log('samples written');

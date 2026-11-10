@@ -69,7 +69,7 @@ export function ConflictReview({ version, onChanged }: { version: number; onChan
   );
 }
 
-function LinesTable({ title, rows, cur, sumLabel, testid }: { title: string; rows: { key: string; date: string; productName?: string; productId?: string; supplierName?: string; supplierId?: string; warehouse?: string; unit?: string; quantity?: number; amount: number }[]; cur: string; sumLabel: string; testid: string }) {
+function LinesTable({ title, rows, cur, sumLabel, testid }: { title: string; rows: { key: string; date: string; productName?: string; productId?: string; supplierName?: string; supplierId?: string; warehouse?: string; counterpartyName?: string; invoiceNo?: string; documentId?: string; kind?: string; unit?: string; quantity?: number; amount: number }[]; cur: string; sumLabel: string; testid: string }) {
   const { t, lang } = useLang();
   return (
     <div data-testid={testid}>
@@ -77,7 +77,7 @@ function LinesTable({ title, rows, cur, sumLabel, testid }: { title: string; row
       <table className="w-full text-left text-xs">
         <thead><tr><th className="px-2 py-1 text-slate-500">{t('cr.date')}</th><th className="px-2 py-1 text-slate-500">{t('cr.product')}</th><th className="px-2 py-1 text-right text-slate-500">{t('cr.amount')}</th></tr></thead>
         <tbody>
-          {rows.map((r) => <tr key={r.key} className="border-t border-slate-100 dark:border-slate-800"><td className="px-2 py-1">{fmtDate(r.date, lang)}</td><td className="px-2 py-1">{r.supplierName || r.supplierId ? `${r.supplierName ?? r.supplierId} · ` : r.warehouse ? `${r.warehouse} · ` : ''}{r.productName ?? r.productId ?? '–'}{r.quantity !== undefined && r.unit ? ` (${r.quantity} ${r.unit})` : ''}</td><td className="px-2 py-1 text-right tabular-nums">{money(r.amount, { lang, currency: cur })}</td></tr>)}
+          {rows.map((r) => <tr key={r.key} className="border-t border-slate-100 dark:border-slate-800"><td className="px-2 py-1">{fmtDate(r.date, lang)}</td><td className="px-2 py-1">{r.counterpartyName ? `${r.counterpartyName} · ${r.invoiceNo ?? r.documentId ?? ''}` : r.supplierName || r.supplierId ? `${r.supplierName ?? r.supplierId} · ` : r.warehouse ? `${r.warehouse} · ` : ''}{r.counterpartyName ? '' : (r.productName ?? r.productId ?? '–')}{r.quantity !== undefined && r.unit ? ` (${r.quantity} ${r.unit})` : ''}</td><td className="px-2 py-1 text-right tabular-nums">{money(r.amount, { lang, currency: cur })}</td></tr>)}
           <tr className="border-t border-slate-300 font-semibold dark:border-slate-700"><td className="px-2 py-1" colSpan={2}>{sumLabel}</td><td className="px-2 py-1 text-right tabular-nums">{money(rows.reduce((s, r) => s + r.amount, 0), { lang, currency: cur })}</td></tr>
         </tbody>
       </table>

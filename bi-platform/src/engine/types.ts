@@ -123,9 +123,33 @@ export const INVENTORY_FIELDS = [
 ] as const;
 export type InventoryField = (typeof INVENTORY_FIELDS)[number];
 
+export const FINANCE_FIELDS = [
+  'document_date',
+  'snapshot_date',
+  'due_date',
+  'payment_date',
+  'document_id',
+  'counterparty_id',
+  'counterparty_name',
+  'original_amount',
+  'outstanding_amount',
+  'paid_amount',
+  'currency',
+  'document_type',
+  'credit_reference',
+  'invoice_reference',
+  'payment_reference',
+  'aging_current',
+  'aging_1_30',
+  'aging_31_60',
+  'aging_61_90',
+  'aging_90_plus',
+] as const;
+export type FinanceField = (typeof FINANCE_FIELDS)[number];
+
 /** Any semantic field of any module. */
-export type FieldId = SalesField | PurchaseField | InventoryField;
-export type ModuleId = 'sales' | 'purchasing' | 'inventory';
+export type FieldId = SalesField | PurchaseField | InventoryField | FinanceField;
+export type ModuleId = 'sales' | 'purchasing' | 'inventory' | 'finance';
 
 export type AmountBasis = 'net' | 'gross' | 'unknown';
 
@@ -152,6 +176,7 @@ export type MappingWarning =
   | { code: 'missing_supplier' }
   | { code: 'missing_product' }
   | { code: 'missing_quantity' }
+  | { code: 'missing_counterparty' }
   | { code: 'low_confidence'; field: FieldId }
   | { code: 'multiple_amounts' };
 
@@ -258,6 +283,57 @@ export interface InventoryRecord {
   importId?: string;
 }
 
+/** Receivables (customers owe us) or payables (we owe suppliers). The user states which one a file is. */
+export type FinanceSide = 'receivable' | 'payable';
+/**
+ * What one finance line IS – never mixed:
+ *  open_item  – an invoice still open in a ledger report AT a date (snapshot line)
+ *  aging      – a counterparty's balance split into aging buckets AT a date (summary line)
+ *  balance    – a counterparty's balance AT a date (summary line)
+ *  invoice    – an invoice issued (flow)      payment – a payment made / received (flow)      credit_note – a credit note issued (flow)
+ */
+export type FinanceKind = 'open_item' | 'aging' | 'balance' | 'invoice' | 'payment' | 'credit_note';
+
+export interface AgingBuckets {
+  /** not yet due */
+  nd: number;
+  d30: number;
+  d60: number;
+  d90: number;
+  d90p: number;
+}
+
+export interface FinanceRecord {
+  key: string;
+  kind: FinanceKind;
+  side: FinanceSide;
+  /** Snapshot kinds: the as-of date. Flows: the invoice / payment / credit-note date. */
+  date: string;
+  /** Identity for merging: snapshot kinds get "<kind> <side> <date>"; flows carry the real document / payment number. */
+  documentId?: string;
+  /** Open items: the invoice number. */
+  invoiceNo?: string;
+  /** Payments: the invoice paid. Credit notes: the invoice credited. */
+  reference?: string;
+  counterpartyId?: string;
+  counterpartyName?: string;
+  invoiceDate?: string;
+  dueDate?: string;
+  /** Original / invoiced / credited amount (magnitude); payments: the amount paid (negative = reversal). NEVER an outstanding balance. */
+  amount?: number;
+  /** Open items, balances, aging totals: what is still owed AT `date` (negative = credit balance / overpayment). */
+  outstanding?: number;
+  /** Open items: paid so far, when the report states it. */
+  paid?: number;
+  buckets?: AgingBuckets;
+  /** Merge scope (see docKey): document numbers are only comparable within it. */
+  scope?: string;
+  basis: AmountBasis;
+  currency: string;
+  sourceRow: number;
+  importId?: string;
+}
+
 export type IssueCode =
   | 'invalid_date'
   | 'date_out_of_range'
@@ -289,7 +365,18 @@ export type IssueCode =
   | 'value_mismatch'
   | 'negative_stock'
   | 'missing_cost'
-  | 'date_from_as_of';
+  | 'date_from_as_of'
+  | 'missing_counterparty'
+  | 'missing_due_date'
+  | 'invalid_due_date'
+  | 'invalid_payment_date'
+  | 'missing_invoice_number'
+  | 'outstanding_derived'
+  | 'negative_outstanding'
+  | 'duplicate_invoice_number'
+  | 'payment_without_reference'
+  | 'aging_total_mismatch'
+  | 'missing_outstanding';
 
 export interface ImportStats {
   rowsRead: number;
@@ -352,7 +439,9 @@ export interface Insight {
   whyKey: string;
   /** Dimension the evidence rows belong to, and the chart that best shows the finding. */
   dimension?: 'customer' | 'product' | 'salesperson' | 'category' | 'supplier' | 'warehouse';
-  chart?: 'stockTrend' | 'warehouseComparison' | 'slowMoving' | 'stockoutRisk' | 'movementTrend' | 'abc' | 'trend' | 'comparison' | 'topCustomers' | 'topProducts' | 'salespeople' | 'category' | 'waterfall' | 'pareto' | 'topSuppliers' | 'priceTrend' | 'priceVariance' | 'spendBridge' | 'quantityComparison';
+  chart?: 'aging' | 'overdueTrend' | 'dueTimeline' | 'behaviour' | 'creditReview' | 'duplicates' | 'overdueRank' | 'stockTrend' | 'warehouseComparison' | 'slowMoving' | 'stockoutRisk' | 'movementTrend' | 'abc' | 'trend' | 'comparison' | 'topCustomers' | 'topProducts' | 'salespeople' | 'category' | 'waterfall' | 'pareto' | 'topSuppliers' | 'priceTrend' | 'priceVariance' | 'spendBridge' | 'quantityComparison';
+  /** Finance: a confirmed fact in the data, a possible match that needs checking, or a risk indicator. Never mixed. */
+  certainty?: 'fact' | 'possible' | 'indicator';
   /** Purchasing: what kind of saving (if any) the finding describes. Never mixed: actual ≠ potential ≠ hypothetical. */
   savings?: { kind: 'actual' | 'potential' | 'hypothetical'; amount: number };
   params: Record<string, ParamValue>;

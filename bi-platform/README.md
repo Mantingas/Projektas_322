@@ -38,6 +38,9 @@ Purchasing and supplier intelligence: import purchase exports (supplier, SKU, un
 ## Phase 4 additions
 Inventory intelligence: import stock balances, valuation reports, historical snapshots and movement reports (data type recognised and shown before import), a dashboard with manager / analyst modes (stock value and trend, warehouse comparison, top items, ABC / Pareto, turnover and days on hand, slow-moving / non-moving stock, stockout risk, movements, snapshot-vs-movement reconciliation), explainable insights, drill-down to source lines and a local management summary. Metrics that the data cannot support are withheld with the reason. Samples: `public/samples/sample_lt_likuciai.csv`, `sample_lt_judejimai.csv`, `sample_pl_wycena_zapasow.csv`, `sample_en_stock_movements.csv` (synthetic). Details: `docs/ARCHITECTURE.md` (Phase 4), screenshots in `docs/screenshots/phase-4/`.
 
+## Phase 5 additions
+Receivables, payables and cash intelligence (module "Receivables & payables"): import AR/AP open-item reports, aging reports, balance snapshots, invoice / payment / credit-note registers (dataset kind, grain and side are shown and confirmed before import). Dashboard with manager / analyst modes: outstanding, overdue amount / share / count, aging buckets, overdue trend, due-date timeline, counterparty ranking, payment behaviour, payment matching, credit-note review and duplicate-payment review, with source-document drill-down and local HTML/CSV reports. Insights are labelled **Fact**, **Possible match** or **Risk indicator**; a potential duplicate is never called a confirmed overpayment. Synthetic samples: `public/samples/sample_lt_gautinos_atviros.csv`, `sample_lt_mokejimai.csv`, `sample_lt_saskaitos.csv`, `sample_en_ap_open_items.csv`, `sample_pl_wiekowanie_zobowiazan.csv`. Screenshots: `docs/screenshots/phase-5/`.
+
 ## What works
 - LT / PL / EN interface; `.xlsx`, `.csv`, `.tsv`; sheet selection; header row detection under report titles; totals rows skipped.
 - UTF-8 / Windows-1257 / Windows-1250 CSV; `1 234,56`, `1.234,56`, `1,234.56`, `€`/`zł` suffixes; ISO, `dd.mm.yyyy`, `dd/mm/yyyy`, `yyyy.mm.dd`, Excel serial dates.
@@ -61,3 +64,14 @@ See the final report in the pull request / session summary. Notably: legacy `.xl
 - Balances are never reconstructed from movements; positions need snapshots. Turnover is per period (not annualised) and uses the average of the opening and closing snapshot only.
 - Lot / batch / expiry, bin locations and multi-currency valuation are not modelled; each currency is its own series.
 - Thresholds (180 / 90 / 14 days, 60-day minimum history) are fixed and shown, not yet configurable.
+
+### Phase 5 limitations
+- No real ERP receivable / payable export has been verified (only synthetic LT/PL/EN fixtures); see `docs/COMPATIBILITY.md`. No ERP compatibility is claimed.
+- Outstanding balances come only from open-item / aging / balance snapshots; they are never derived from invoices minus payments. Snapshots are never summed.
+- A payment is linked to an invoice only by an exact reference under the same counterparty. Payments without a usable reference stay unmatched; credit-note "possible matches" are suggestions and are never applied.
+- Duplicate-payment findings are review indicators. Advance payments, split payments and unloaded credit notes can look like duplicates.
+- DSO / DPO need a covering invoice register and enough invoices; they are withheld otherwise. Aging uses due dates as of the snapshot date; aging-only files give bucket totals without invoice evidence.
+- Overdue KPIs are withheld when too many lines lack a due date (< 80 % known) and for plain balance snapshots.
+- Multi-currency: each currency is its own series, no conversion. Thresholds (14 / 90 / 7 days, 5 matched payments) are fixed and shown.
+- A supplier invoice register can be auto-detected as purchasing; select the finance module manually in that case.
+- Cash forecasting, interest/penalties, and cross-module (sales/purchasing) joins are not implemented.

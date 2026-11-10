@@ -1,6 +1,6 @@
 import Dexie, { type Table } from 'dexie';
 import { docKey } from '@/engine/import/merge';
-import type { ConfirmedMapping, ExportMode, FieldId, ImportStats, InventoryRecord, ModuleId, PurchaseRecord, SalesRecord } from '@/engine/types';
+import type { ConfirmedMapping, ExportMode, FieldId, ImportStats, FinanceRecord, InventoryRecord, ModuleId, PurchaseRecord, SalesRecord } from '@/engine/types';
 
 /** Everything below lives ONLY in this browser's IndexedDB. Nothing here is ever sent anywhere. */
 export interface ImportRow {
@@ -35,6 +35,9 @@ export interface ImportRow {
   discountMode?: string;
   /** Inventory: what the file was recognised as (snapshot / valuation / history / movements). */
   inventoryKind?: string;
+  /** Finance: what the file was recognised as (open_items / aging / balance / invoices / payments / credit_notes) and which side. */
+  financeKind?: string;
+  financeSide?: string;
   /** How reliable transaction identity was for this file. */
   identity: 'document' | 'mixed' | 'content';
   idCoverage: number;
@@ -54,6 +57,7 @@ export interface StoredMeta {
 
 export type StoredPurchase = PurchaseRecord & StoredMeta;
 export type StoredInventory = InventoryRecord & StoredMeta;
+export type StoredFinance = FinanceRecord & StoredMeta;
 
 export interface StoredRecord extends SalesRecord {
   importId: string;
@@ -95,6 +99,7 @@ export class AppDB extends Dexie {
   sales!: Table<StoredRecord, string>;
   purchases!: Table<StoredPurchase, string>;
   inventory!: Table<StoredInventory, string>;
+  finance!: Table<StoredFinance, string>;
   mappings!: Table<SavedMapping, string>;
   settings!: Table<SettingRow, string>;
   audit!: Table<AuditEntry, number>;
@@ -119,6 +124,8 @@ export class AppDB extends Dexie {
     this.version(4).stores({ purchases: 'key, importId, date, docKey, heldBy' });
     // v5: inventory lines (snapshots and movements) in their own table
     this.version(5).stores({ inventory: 'key, importId, date, docKey, heldBy' });
+    // v6: receivables / payables / cash lines (open items, aging, balances, invoices, payments, credit notes)
+    this.version(6).stores({ finance: 'key, importId, date, docKey, heldBy' });
   }
 }
 

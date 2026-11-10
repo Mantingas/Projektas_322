@@ -18,7 +18,7 @@ export interface DrillState {
 const PAGE = 25;
 
 /** Shows the exact lines behind a number. The lines stay in the worker; only the visible page is transferred. */
-export function DrillDrawer({ drill, currency, version, seriesKey, importNames, onClose, module = 'sales' }: { module?: 'sales' | 'purchasing' | 'inventory'; drill: DrillState; currency: string; version: number; seriesKey?: string; importNames: Record<string, string>; onClose: () => void }) {
+export function DrillDrawer({ drill, currency, version, seriesKey, importNames, onClose, module = 'sales' }: { module?: 'sales' | 'purchasing' | 'inventory' | 'finance'; drill: DrillState; currency: string; version: number; seriesKey?: string; importNames: Record<string, string>; onClose: () => void }) {
   const { t, lang } = useLang();
   const [page, setPage] = useState(0);
   const [data, setData] = useState<DrillResult | null>(null);
@@ -37,7 +37,10 @@ export function DrillDrawer({ drill, currency, version, seriesKey, importNames, 
   const pages = data ? Math.max(1, Math.ceil(data.lines / PAGE)) : 1;
   const purchasing = module === 'purchasing';
   const inventory = module === 'inventory';
-  const cols = (inventory
+  const finance = module === 'finance';
+  const cols = (finance
+    ? ['drill.date', 'drill.document', 'drill.counterparty', 'drill.type', 'drill.reference', 'drill.due', 'drill.daysOverdue', 'drill.outstanding', 'drill.amount', 'drill.source', 'drill.row']
+    : inventory
     ? ['drill.date', 'drill.document', 'drill.warehouse', 'drill.product', 'drill.qty', 'drill.unit', 'drill.type', 'drill.amount', 'drill.source', 'drill.row']
     : purchasing
       ? ['drill.date', 'drill.document', 'drill.supplier', 'drill.product', 'drill.qty', 'drill.unit', 'drill.amount', 'drill.source', 'drill.row']
@@ -64,15 +67,24 @@ export function DrillDrawer({ drill, currency, version, seriesKey, importNames, 
         {data && <div className="text-xs"><b>{t('drill.sources')}:</b> {data.sources.map((s) => `${fileOf(s.importId)} (${s.lines})`).join(', ')}</div>}
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-800"><tr>{cols.map((k) => <th key={k} className={`px-2 py-1.5 text-slate-500 ${k === 'drill.qty' || k === 'drill.amount' ? 'text-right' : ''}`}>{t(k)}</th>)}</tr></thead>
+            <thead className="bg-slate-50 dark:bg-slate-800"><tr>{cols.map((k) => <th key={k} className={`px-2 py-1.5 text-slate-500 ${k === 'drill.qty' || k === 'drill.amount' || k === 'drill.outstanding' || k === 'drill.daysOverdue' ? 'text-right' : ''}`}>{t(k)}</th>)}</tr></thead>
             <tbody>
               {(data?.rows ?? []).map((r) => (
-                <tr key={r.key} className="border-t border-slate-100 dark:border-slate-800">
+                finance ? (
+                <tr key={r.key} className="border-t border-slate-100 dark:border-slate-800" data-testid="drill-row">
+                  <td className="whitespace-nowrap px-2 py-1">{fmtDate(r.date, lang)}</td><td className="px-2 py-1">{r.documentId ?? '–'}</td>
+                  <td className="max-w-[10rem] truncate px-2 py-1">{r.party ?? '–'}</td><td className="px-2 py-1" data-testid="drill-type">{r.type ? t(`fk.${r.type}` as MessageKey) : '–'}</td>
+                  <td className="px-2 py-1">{r.product ?? '–'}</td><td className="whitespace-nowrap px-2 py-1">{r.due ? fmtDate(r.due, lang) : '–'}</td>
+                  <td className="px-2 py-1 text-right tabular-nums">{r.days !== undefined ? r.days : '–'}</td><td className="px-2 py-1 text-right tabular-nums">{r.outstanding !== undefined ? m(r.outstanding) : '–'}</td>
+                  <td className="px-2 py-1 text-right tabular-nums">{m(r.amount)}</td>
+                  <td className="max-w-[9rem] truncate px-2 py-1">{fileOf(r.importId)}</td><td className="px-2 py-1">{r.sourceRow}</td>
+                </tr>
+              ) : (<tr key={r.key} className="border-t border-slate-100 dark:border-slate-800">
                   <td className="whitespace-nowrap px-2 py-1">{fmtDate(r.date, lang)}</td><td className="px-2 py-1">{r.documentId ?? '–'}</td>
                   <td className="max-w-[10rem] truncate px-2 py-1">{r.party ?? '–'}</td><td className="max-w-[10rem] truncate px-2 py-1">{r.product ?? '–'}</td>
                   <td className="px-2 py-1 text-right tabular-nums">{r.quantity ?? '–'}</td>{(purchasing || inventory) && <td className="px-2 py-1">{r.unit ?? '–'}</td>}{inventory && <td className="px-2 py-1" data-testid="drill-type">{r.type ? t(`mt.${r.type}` as MessageKey) : '–'}</td>}<td className="px-2 py-1 text-right tabular-nums">{m(r.amount)}</td>
                   <td className="max-w-[9rem] truncate px-2 py-1">{fileOf(r.importId)}</td><td className="px-2 py-1">{r.sourceRow}</td>
-                </tr>
+                </tr>)
               ))}
             </tbody>
           </table>

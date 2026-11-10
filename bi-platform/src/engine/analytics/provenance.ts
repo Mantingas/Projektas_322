@@ -16,6 +16,8 @@ export interface DrillSpec {
   /** Inventory: show movement lines (inside `range`), optionally only these movement types. */
   movements?: boolean;
   moveTypes?: string[];
+  /** Finance: the lines behind a receivables / payables number. */
+  fin?: { side: 'receivable' | 'payable'; mode: 'position' | 'flow'; asOf?: string; kinds?: string[]; bucket?: 'nd' | 'd30' | 'd60' | 'd90' | 'd90p' | 'noDue' | 'credits' | 'overdue' | 'dueSoon'; keys?: string[] };
 }
 
 export function drillRecords(records: SalesRecord[], spec: DrillSpec): SalesRecord[] {

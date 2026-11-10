@@ -83,7 +83,7 @@ export const NET_HINT_TOKENS = ['netto', 'neto', 'net', 'excl', 'excluding'];
 export const GROSS_HINT_TOKENS = ['brutto', 'bruto', 'gross', 'incl', 'including'];
 
 // ───────────────────────── purchasing ─────────────────────────
-import type { FieldId, InventoryField, ModuleId, PurchaseField } from '../types';
+import type { FieldId, FinanceField, InventoryField, ModuleId, PurchaseField } from '../types';
 
 /**
  * Purchasing-specific header synonyms (normalised). Fields not listed here fall back to SALES_SYNONYMS (date, document, product, amounts…).
@@ -161,7 +161,7 @@ export interface ModuleSpec {
   synonyms(field: FieldId): string[];
 }
 
-import { SALES_FIELDS, PURCHASE_FIELDS, INVENTORY_FIELDS } from '../types';
+import { SALES_FIELDS, PURCHASE_FIELDS, INVENTORY_FIELDS, FINANCE_FIELDS } from '../types';
 
 export const SALES_SPEC: ModuleSpec = {
   id: 'sales',
@@ -274,7 +274,44 @@ export const INVENTORY_SPEC: ModuleSpec = {
   },
 };
 
-export const SPECS: Record<ModuleId, ModuleSpec> = { sales: SALES_SPEC, purchasing: PURCHASE_SPEC, inventory: INVENTORY_SPEC };
+// ───────────────────────── receivables / payables / cash ─────────────────────────
+/**
+ * Finance header synonyms (normalised). Note "1-30" → "1 30" and "90+" → "90" after normalisation.
+ * Fields not listed fall back to the sales vocabulary (currency …).
+ */
+export const FINANCE_SYNONYMS: Partial<Record<FinanceField, string[]>> = {
+  document_date: ['saskaitos data', 'israsymo data', 'dokumento data', 'saskaitos israsymo data', 'data faktury', 'data wystawienia', 'data dokumentu', 'invoice date', 'issue date', 'document date', 'posting date', 'date', 'data'],
+  snapshot_date: ['ataskaitos data', 'likucio data', 'skolos data', 'skolu data', 'busenos data', 'data pagal', 'stan na dzien', 'stan na', 'na dzien', 'data raportu', 'data salda', 'as of', 'as of date', 'report date', 'balance date', 'aging date', 'ageing date', 'snapshot date', 'statement date', 'cut off date'],
+  due_date: ['apmokejimo terminas', 'terminas', 'moketi iki', 'apmoketi iki', 'mokejimo terminas', 'termino data', 'galutinis terminas', 'termin platnosci', 'termin', 'platne do', 'termin zaplaty', 'data terminu', 'due date', 'due', 'payment due', 'payable by', 'maturity date', 'pay by'],
+  payment_date: ['apmokejimo data', 'mokejimo data', 'sumokejimo data', 'apmokejimo diena', 'data zaplaty', 'data wplaty', 'data przelewu', 'data platnosci', 'payment date', 'paid on', 'date paid', 'receipt date', 'value date', 'bank date'],
+  document_id: ['saskaitos nr', 'saskaitos numeris', 'saskaita', 'dokumento nr', 'dok nr', 'numeris', 'nr', 'dokumentas', 'kreditines nr', 'numer faktury', 'nr faktury', 'numer dokumentu', 'nr dokumentu', 'faktura', 'dokument', 'invoice no', 'invoice number', 'invoice', 'document no', 'document number', 'doc no', 'credit note no', 'credit note number', 'number'],
+  counterparty_name: ['klientas', 'pirkejas', 'tiekejas', 'kontrahentas', 'partneris', 'imone', 'pavadinimas', 'skolininkas', 'kreditorius', 'kliento pavadinimas', 'tiekejo pavadinimas', 'kontrahent', 'nabywca', 'dostawca', 'odbiorca', 'dluznik', 'wierzyciel', 'nazwa kontrahenta', 'klient', 'customer', 'customer name', 'supplier', 'supplier name', 'vendor', 'vendor name', 'client', 'debtor', 'creditor', 'counterparty', 'name', 'account name', 'party', 'bill to'],
+  counterparty_id: ['kliento kodas', 'tiekejo kodas', 'kodas', 'imones kodas', 'partnerio kodas', 'kontrahento kodas', 'kod kontrahenta', 'kod klienta', 'kod dostawcy', 'nip', 'symbol kontrahenta', 'customer id', 'customer code', 'supplier id', 'supplier code', 'vendor id', 'vendor code', 'account no', 'counterparty id', 'party id'],
+  original_amount: ['saskaitos suma', 'sask suma', 'suma', 'israsyta suma', 'bendra suma', 'viso', 'verte', 'dokumento suma', 'kreditines suma', 'kwota faktury', 'wartosc faktury', 'kwota brutto', 'wartosc brutto', 'razem', 'kwota', 'wartosc', 'invoice amount', 'original amount', 'invoice total', 'amount', 'total', 'gross amount', 'document amount', 'face value', 'credit amount', 'credit note amount'],
+  outstanding_amount: ['neapmoketa suma', 'neapmoketa', 'neapmoketas likutis', 'likutis', 'skola', 'skolos suma', 'moketina suma', 'lieka sumoketi', 'nesumoketa suma', 'nesumoketa', 'neatsiskaityta', 'saldo', 'do zaplaty', 'pozostalo do zaplaty', 'pozostalo', 'nierozliczone', 'nierozliczona kwota', 'zaleglosc', 'naleznosc', 'outstanding', 'outstanding amount', 'balance', 'open amount', 'amount due', 'remaining', 'unpaid', 'open balance', 'balance due'],
+  paid_amount: ['sumoketa suma', 'sumoketa', 'apmoketa suma', 'apmoketa', 'sumokejimai', 'mokejimo suma', 'sumoketas', 'gauta suma', 'zaplacono', 'kwota zaplacona', 'wplata', 'zaplata', 'kwota wplaty', 'kwota platnosci', 'paid', 'paid amount', 'payment', 'payment amount', 'amount paid', 'received', 'received amount'],
+  document_type: ['dokumento tipas', 'dok tipas', 'tipas', 'rusis', 'typ dokumentu', 'rodzaj dokumentu', 'typ', 'rodzaj', 'document type', 'doc type', 'type', 'transaction type'],
+  credit_reference: ['kreditinio pagrindas', 'pagrindine saskaita', 'pagrindas', 'koreguojama saskaita', 'saskaita kuriai', 'faktura korygowana', 'dokument zrodlowy', 'nr faktury korygowanej', 'korygowana faktura', 'original invoice', 'original invoice no', 'credited invoice', 'credit reference', 'against invoice'],
+  invoice_reference: ['apmoketa saskaita', 'apmokamos saskaitos nr', 'saskaitos nr apmokejimui', 'dotyczy faktury', 'faktura rozliczana', 'nr faktury rozliczanej', 'rozliczana faktura', 'applied to invoice', 'paid invoice', 'invoice paid', 'invoice ref', 'invoice reference', 'settles invoice'],
+  payment_reference: ['mokejimo nr', 'mokejimo numeris', 'mokejimo nuoroda', 'pavedimo nr', 'banko operacijos nr', 'nr platnosci', 'numer platnosci', 'numer przelewu', 'referencja platnosci', 'payment reference', 'payment ref', 'payment no', 'payment id', 'transaction id', 'bank reference', 'remittance reference', 'transfer id'],
+  aging_current: ['nepradelsta', 'nepradelsti', 'dar nepasibaiges', 'terminas nepasibaiges', 'neprosrocone', 'biezace', 'nieprzeterminowane', 'current', 'not due', 'not yet due', 'undue', '0 days', 'nepasibaiges terminas'],
+  aging_1_30: ['1 30', '1 30 d', '1 30 dienu', 'vely 1 30', 'po termino 1 30', '1 30 dni', 'do 30 dni', '1 30 days', '0 30', 'overdue 1 30', '1 to 30', 'pradelsta 1 30'],
+  aging_31_60: ['31 60', '31 60 d', '31 60 dienu', 'vely 31 60', '31 60 dni', '31 60 days', '31 to 60', 'overdue 31 60', 'pradelsta 31 60'],
+  aging_61_90: ['61 90', '61 90 d', '61 90 dienu', 'vely 61 90', '61 90 dni', '61 90 days', '61 to 90', 'overdue 61 90', 'pradelsta 61 90'],
+  aging_90_plus: ['90', '91', 'daugiau nei 90', 'virs 90', 'ponad 90', 'powyzej 90', 'over 90', 'more than 90', '90 plus', '91 plus', 'older than 90', 'pradelsta virs 90'],
+};
+
+export const FINANCE_SPEC: ModuleSpec = {
+  id: 'finance',
+  fields: FINANCE_FIELDS,
+  numeric: ['original_amount', 'outstanding_amount', 'paid_amount', 'aging_current', 'aging_1_30', 'aging_31_60', 'aging_61_90', 'aging_90_plus'],
+  text: ['counterparty_name'],
+  ids: ['document_id', 'counterparty_id', 'credit_reference', 'invoice_reference', 'payment_reference'],
+  short: ['currency', 'document_type'],
+  synonyms: (f) => FINANCE_SYNONYMS[f as FinanceField] ?? SALES_SYNONYMS[f as keyof typeof SALES_SYNONYMS] ?? [],
+};
+
+export const SPECS: Record<ModuleId, ModuleSpec> = { sales: SALES_SPEC, purchasing: PURCHASE_SPEC, inventory: INVENTORY_SPEC, finance: FINANCE_SPEC };
 
 // Words that identify the kind of file. Ambiguous words (e.g. "kontrahent", "pardavėjas") are deliberately in neither list.
 export const PURCHASING_WORDS = ['tiekejas', 'tiekejo', 'dostawca', 'dostawcy', 'supplier', 'vendor', 'pirkimo', 'pirkimai', 'zakupu', 'zakup', 'purchase', 'purchases'];
@@ -282,3 +319,9 @@ export const SALES_WORDS = ['klientas', 'kliento', 'pirkejas', 'pirkejo', 'nabyw
 
 /** Inventory-only words. "Sandėlis" / "magazyn" / "warehouse" are deliberately in no list: purchase exports have them too. */
 export const INVENTORY_WORDS = ['likutis', 'likuciai', 'likucio', 'atsargos', 'atsargu', 'inventorius', 'stan', 'magazynowy', 'zapas', 'zapasy', 'zapasow', 'stock', 'inventory', 'hand', 'movement', 'judejimo', 'ruchu', 'snapshot', 'reorder', 'minimalus', 'minimalny'];
+
+/** Receivables / payables words. Generic words (invoice, amount, date) are deliberately in no list. */
+export const FINANCE_WORDS = ['terminas', 'apmokejimo', 'neapmoketa', 'nesumoketa', 'skola', 'skolos', 'skolininkas', 'skolininkai', 'gautinos', 'moketinos', 'vely', 'pradelsta', 'pradelsti', 'termin', 'platnosci', 'zaplacono', 'zaleglosc', 'zaleglosci', 'przeterminowane', 'nierozliczone', 'naleznosci', 'zobowiazania', 'dluznik', 'wierzyciel', 'kreditorius', 'overdue', 'outstanding', 'receivable', 'receivables', 'payable', 'payables', 'due', 'aging', 'ageing', 'debtor', 'creditor', 'unpaid', 'maturity', 'mokejimo', 'sumoketa', 'apmoketa', 'kreditines', 'pagrindine', 'payment', 'paid', 'credit', 'zaplata', 'wplata', 'nieprzeterminowane', 'nepradelsta', 'nepradelsti', 'nepasibaiges', '60', '90'];
+/** Who owes whom: customer-side words mean receivables, supplier-side words payables. */
+export const RECEIVABLE_WORDS = ['klientas', 'kliento', 'pirkejas', 'pirkejo', 'skolininkas', 'skolininkai', 'gautinos', 'nabywca', 'klient', 'klienta', 'odbiorca', 'dluznik', 'naleznosci', 'customer', 'client', 'buyer', 'debtor', 'receivable', 'receivables'];
+export const PAYABLE_WORDS = ['tiekejas', 'tiekejo', 'kreditorius', 'moketinos', 'dostawca', 'dostawcy', 'wierzyciel', 'zobowiazania', 'supplier', 'vendor', 'creditor', 'payable', 'payables', 'pardavejas'];

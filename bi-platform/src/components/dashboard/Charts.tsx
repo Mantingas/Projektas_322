@@ -52,10 +52,11 @@ function useFmt(model: ChartModel) {
   const short = (n: number) => new Intl.NumberFormat(lang === 'en' ? 'en-GB' : lang === 'pl' ? 'pl-PL' : 'lt-LT', { notation: 'compact', maximumFractionDigits: 1 }).format(n);
   const purchasing = model.module === 'purchasing';
   const inventory = model.module === 'inventory';
-  /** the value series is called "Sales", "Spend" or "Value"; the main titles differ per module */
-  const vl = t(inventory ? 'ich.unitValue' : purchasing ? 'ch.spend' : 'ch.sales');
-  const ttl = (id: 'trend' | 'comparison' | 'waterfall' | 'pareto') => t((inventory ? `ich.${id}` : purchasing ? `pch.${id}` : `ch.${id}`) as MessageKey);
-  return { lang, t, cur, m, short, vl, ttl, purchasing, inventory };
+  const finance = model.module === 'finance';
+  /** the value series is called "Sales", "Spend", "Value" or "Outstanding"; the main titles differ per module */
+  const vl = t(finance ? 'ot.outstanding' : inventory ? 'ich.unitValue' : purchasing ? 'ch.spend' : 'ch.sales');
+  const ttl = (id: 'trend' | 'comparison' | 'waterfall' | 'pareto') => t((finance ? `fch.${id}` : inventory ? `ich.${id}` : purchasing ? `pch.${id}` : `ch.${id}`) as MessageKey);
+  return { lang, t, cur, m, short, vl, ttl, purchasing, inventory, finance };
 }
 
 export function TrendChart({ model }: ChartProps) {
@@ -199,13 +200,13 @@ export function WaterfallChart({ model, dim, onFilter }: ChartProps & { dim?: Di
 }
 
 export function ParetoChart({ model, dim }: ChartProps & { dim?: Dimension }) {
-  const { lang, t, cur, m, short, vl, ttl, purchasing, inventory } = useFmt(model);
+  const { lang, t, cur, m, short, vl, ttl, purchasing, inventory, finance } = useFmt(model);
   const d = dim ?? model.pareto!.dimension;
   const p = dim ? { dimension: d, ...pareto(model.tables[d]!.rows) } : model.pareto!;
   const data = p.points.slice(0, 30).map((x, i) => ({ name: x.label, n: i + 1, value: x.value, cum: x.cumulativeShare }));
   return (
     <ChartCard id="pareto" title={`${ttl('pareto')} – ${t(`dim.${d}` as MessageKey)}`} subtitle={dateRange(model.periods.current.from, model.periods.current.to, lang)} unit={t('ch.unit', { currency: cur })}
-      note={t((inventory ? 'ch.pareto80.stock' : purchasing ? 'ch.pareto80.spend' : 'ch.pareto80') as MessageKey, { n: p.countFor80, total: p.points.length, entity: t(`dim1.${d}` as MessageKey) })}
+      note={t((finance ? 'ch.pareto80.debt' : inventory ? 'ch.pareto80.stock' : purchasing ? 'ch.pareto80.spend' : 'ch.pareto80') as MessageKey, { n: p.countFor80, total: p.points.length, entity: t(`dim1.${d}` as MessageKey) })}
       alt={{ headers: [t('ch.item'), vl, t('ch.cumulative')], rows: p.points.map((x) => [x.label, m(x.value), pct(x.cumulativeShare, lang)]) }}>
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={data} margin={{ left: 4, right: 8, top: 8, bottom: 4 }}>

@@ -7,7 +7,8 @@ import { ImportFlow } from './ImportFlow';
 import { InsightsView } from './InsightsView';
 import { PurchasingView } from './purchasing/PurchasingView';
 import { InventoryView } from './inventory/InventoryView';
-import type { ModuleId } from '@/engine/types';
+import { FinanceView } from './finance/FinanceView';
+import type { FinanceSide, ModuleId } from '@/engine/types';
 import { HistoryView } from './HistoryView';
 import { SettingsView } from './SettingsView';
 import { cn } from '@/lib/cn';
@@ -20,6 +21,7 @@ export function Workspace() {
   const { t } = useLang();
   const [tab, setTab] = useState<Tab>('import');
   const [module, setModule] = useState<ModuleId>('sales');
+  const [finSide, setFinSide] = useState<FinanceSide>('receivable');
   const [version, setVersion] = useState(0);
   const bump = () => setVersion((v) => v + 1);
   const [held, setHeld] = useState(0);
@@ -45,15 +47,15 @@ export function Workspace() {
           </button>
         ))}
       </div>
-      {tab === 'import' && <ImportFlow onImported={bump} goInsights={(m) => { setModule(m); setTab('insights'); }} goReview={() => setTab('history')} />}
+      {tab === 'import' && <ImportFlow onImported={bump} goInsights={(m, s) => { setModule(m); if (s) setFinSide(s); setTab('insights'); }} goReview={() => setTab('history')} />}
       {tab === 'insights' && (
         <div className="space-y-4">
-          <div role="group" aria-label={t('mod.view')} className="no-print flex w-fit overflow-hidden rounded-md border border-slate-300 text-sm dark:border-slate-700">
-            {(['sales', 'purchasing', 'inventory'] as ModuleId[]).map((m) => (
-              <button key={m} data-testid={`module-view-${m}`} aria-pressed={module === m} onClick={() => setModule(m)} className={cn('px-4 py-1.5 font-medium', module === m ? 'bg-indigo-600 text-white' : 'hover:bg-slate-100 dark:hover:bg-slate-800')}>{t(`mod.${m}` as MessageKey)}</button>
+          <div role="group" aria-label={t('mod.view')} className="no-print flex w-fit max-w-full overflow-hidden rounded-md border border-slate-300 text-sm dark:border-slate-700">
+            {(['sales', 'purchasing', 'inventory', 'finance'] as ModuleId[]).map((m) => (
+              <button key={m} data-testid={`module-view-${m}`} aria-pressed={module === m} onClick={() => setModule(m)} className={cn('px-2 py-1.5 font-medium sm:px-4', module === m ? 'bg-indigo-600 text-white' : 'hover:bg-slate-100 dark:hover:bg-slate-800')}>{t(`mod.${m}` as MessageKey)}</button>
             ))}
           </div>
-          {module === 'sales' ? <InsightsView version={version} goImport={() => setTab('import')} /> : module === 'purchasing' ? <PurchasingView version={version} goImport={() => setTab('import')} /> : <InventoryView version={version} goImport={() => setTab('import')} />}
+          {module === 'sales' ? <InsightsView version={version} goImport={() => setTab('import')} /> : module === 'purchasing' ? <PurchasingView version={version} goImport={() => setTab('import')} /> : module === 'inventory' ? <InventoryView version={version} goImport={() => setTab('import')} /> : <FinanceView version={version} goImport={() => setTab('import')} initialSide={finSide} />}
         </div>
       )}
       {tab === 'history' && <HistoryView version={version} onChanged={bump} />}

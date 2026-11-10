@@ -11,7 +11,7 @@ const MODULES: { k: 'sales' | 'purchasing' | 'inventory' | 'debts' | 'universal'
   { k: 'sales', available: true },
   { k: 'purchasing', available: true },
   { k: 'inventory', available: true },
-  { k: 'debts', available: false },
+  { k: 'debts', available: true },
   { k: 'universal', available: false },
 ];
 

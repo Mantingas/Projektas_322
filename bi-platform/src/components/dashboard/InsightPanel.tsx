@@ -35,6 +35,7 @@ export function InsightCard({ insight, model, expanded, onToggle, onDrill, onFil
     <Card data-testid="insight" data-insight-id={insight.id} className="space-y-2">
       <div className="flex flex-wrap items-center gap-2">
         <Badge tone={insight.severity}>{t(`sev.${insight.severity}` as MessageKey)}</Badge>
+        {insight.certainty && <Badge tone={insight.certainty === 'fact' ? 'opportunity' : insight.certainty === 'possible' ? 'warn' : 'info'} data-testid="certainty-badge" data-certainty={insight.certainty} title={t(`cert.${insight.certainty}.d` as MessageKey)}>{t(`cert.${insight.certainty}` as MessageKey)}</Badge>}
         {insight.savings && <Badge tone={insight.savings.kind === 'actual' ? 'opportunity' : insight.savings.kind === 'potential' ? 'info' : 'neutral'} data-testid="savings-badge" data-kind={insight.savings.kind} title={t(`sav.${insight.savings.kind}.d` as MessageKey)}>{t(`sav.${insight.savings.kind}` as MessageKey)}</Badge>}
         <span className="text-xs text-slate-500">{t('ins.sufficiency')}: <b>{t(`rel.${insight.reliability}` as MessageKey)}</b> · {t('ins.impact')}: <b>{formatImpact(insight, lang, cur)}</b></span>
       </div>
@@ -67,8 +68,9 @@ export function InsightCard({ insight, model, expanded, onToggle, onDrill, onFil
               <p className="mt-2 rounded-md bg-amber-50 p-2 text-xs text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">{t('ins.association')}</p>
             </Section>
           )}
+          {insight.certainty && <Section title={t(`cert.${insight.certainty}` as MessageKey)}>{t(`cert.${insight.certainty}.d` as MessageKey)}</Section>}
           {insight.savings && <Section title={t(`sav.${insight.savings.kind}` as MessageKey)}>{t(`sav.${insight.savings.kind}.d` as MessageKey)}</Section>}
-          <Section title={t('ins.why')}>{t(insight.whyKey as MessageKey)}</Section>
+          <Section title={t('ins.why')}>{t(insight.whyKey as MessageKey, insight.params, cur)}</Section>
           <Section title={t('ins.action')}>{r.action}</Section>
           <Section title={t('ins.sufficiency')}>{t(`rel.${insight.reliability}` as MessageKey)} – {r.reliabilityReason}</Section>
           {insight.chart && <Section title={t('ins.chart')}>{extraChart?.(insight) ?? <ChartById id={insight.chart} model={model} dim={insight.dimension} onFilter={onFilter} />}</Section>}

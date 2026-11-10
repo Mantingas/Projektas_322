@@ -1,0 +1,283 @@
+﻿Data;Sąskaitos Nr.;Kliento kodas;Klientas;Sąskaitos suma;Apmokėjimo terminas;Dokumento tipas
+2025-06-02;SF-1000;C01;UAB Alfa prekyba;400,00;2025-06-16;Sąskaita faktūra
+2025-06-03;SF-1001;C02;UAB Beta grupė;550,00;2025-07-03;Sąskaita faktūra
+2025-06-04;SF-1002;C03;AB Gama pienas;700,00;2025-07-19;Sąskaita faktūra
+2025-06-05;SF-1003;C04;MB Delta paslaugos;850,00;2025-07-05;Sąskaita faktūra
+2025-06-06;SF-1004;C05;UAB Epsilon;1000,00;2025-07-06;Sąskaita faktūra
+2025-06-07;SF-1005;C06;UAB Žalioji dirbtuvė;1150,00;2025-07-07;Sąskaita faktūra
+2025-06-08;SF-1006;C07;UAB Eta logistika;1300,00;2025-06-22;Sąskaita faktūra
+2025-06-09;SF-1007;C01;UAB Alfa prekyba;440,00;2025-06-23;Sąskaita faktūra
+2025-06-09;SF-1008;C08;UAB Teta statyba;1450,00;2025-07-09;Sąskaita faktūra
+2025-06-10;SF-1009;C02;UAB Beta grupė;605,00;2025-07-10;Sąskaita faktūra
+2025-06-10;SF-1010;C09;AB Jota maistas;1600,00;2025-07-10;Sąskaita faktūra
+2025-06-11;SF-1011;C03;AB Gama pienas;770,00;2025-07-26;Sąskaita faktūra
+2025-06-11;SF-1012;C10;UAB Kapa transportas;1750,00;2025-07-26;Sąskaita faktūra
+2025-06-12;SF-1013;C04;MB Delta paslaugos;935,00;2025-07-12;Sąskaita faktūra
+2025-06-13;SF-1014;C05;UAB Epsilon;1100,00;2025-07-13;Sąskaita faktūra
+2025-06-14;SF-1015;C06;UAB Žalioji dirbtuvė;1265,00;2025-07-14;Sąskaita faktūra
+2025-06-15;SF-1016;C07;UAB Eta logistika;1430,00;2025-06-29;Sąskaita faktūra
+2025-06-16;SF-1017;C01;UAB Alfa prekyba;480,00;2025-06-30;Sąskaita faktūra
+2025-06-16;SF-1018;C08;UAB Teta statyba;1595,00;2025-07-16;Sąskaita faktūra
+2025-06-17;SF-1019;C02;UAB Beta grupė;660,00;2025-07-17;Sąskaita faktūra
+2025-06-17;SF-1020;C09;AB Jota maistas;1760,00;2025-07-17;Sąskaita faktūra
+2025-06-18;SF-1021;C03;AB Gama pienas;840,00;2025-08-02;Sąskaita faktūra
+2025-06-18;SF-1022;C10;UAB Kapa transportas;1925,00;2025-08-02;Sąskaita faktūra
+2025-06-19;SF-1023;C04;MB Delta paslaugos;1020,00;2025-07-19;Sąskaita faktūra
+2025-06-20;SF-1024;C05;UAB Epsilon;1200,00;2025-07-20;Sąskaita faktūra
+2025-06-21;SF-1025;C06;UAB Žalioji dirbtuvė;1380,00;2025-07-21;Sąskaita faktūra
+2025-06-22;SF-1026;C07;UAB Eta logistika;1560,00;2025-07-06;Sąskaita faktūra
+2025-06-23;SF-1027;C01;UAB Alfa prekyba;400,00;2025-07-07;Sąskaita faktūra
+2025-06-23;SF-1028;C08;UAB Teta statyba;1740,00;2025-07-23;Sąskaita faktūra
+2025-06-24;SF-1029;C02;UAB Beta grupė;550,00;2025-07-24;Sąskaita faktūra
+2025-06-24;SF-1030;C09;AB Jota maistas;1920,00;2025-07-24;Sąskaita faktūra
+2025-06-25;SF-1031;C03;AB Gama pienas;300,00;2025-08-09;Sąskaita faktūra
+2025-06-25;SF-1032;C10;UAB Kapa transportas;2100,00;2025-08-09;Sąskaita faktūra
+2025-06-26;SF-1033;C04;MB Delta paslaugos;850,00;2025-07-26;Sąskaita faktūra
+2025-06-27;SF-1034;C05;UAB Epsilon;1000,00;2025-07-27;Sąskaita faktūra
+2025-06-28;SF-1035;C06;UAB Žalioji dirbtuvė;1150,00;2025-07-28;Sąskaita faktūra
+2025-06-29;SF-1036;C07;UAB Eta logistika;1300,00;2025-07-13;Sąskaita faktūra
+2025-06-30;SF-1037;C01;UAB Alfa prekyba;440,00;2025-07-14;Sąskaita faktūra
+2025-06-30;SF-1038;C08;UAB Teta statyba;1450,00;2025-07-30;Sąskaita faktūra
+2025-07-01;SF-1039;C02;UAB Beta grupė;605,00;2025-07-31;Sąskaita faktūra
+2025-07-01;SF-1040;C09;AB Jota maistas;1600,00;2025-07-31;Sąskaita faktūra
+2025-07-02;SF-1041;C03;AB Gama pienas;770,00;2025-08-16;Sąskaita faktūra
+2025-07-02;SF-1042;C10;UAB Kapa transportas;1750,00;2025-08-16;Sąskaita faktūra
+2025-07-03;SF-1043;C04;MB Delta paslaugos;935,00;2025-08-02;Sąskaita faktūra
+2025-07-04;SF-1044;C05;UAB Epsilon;1100,00;2025-08-03;Sąskaita faktūra
+2025-07-05;SF-1045;C06;UAB Žalioji dirbtuvė;1265,00;2025-08-04;Sąskaita faktūra
+2025-07-06;SF-1046;C07;UAB Eta logistika;1430,00;2025-07-20;Sąskaita faktūra
+2025-07-07;SF-1047;C01;UAB Alfa prekyba;480,00;2025-07-21;Sąskaita faktūra
+2025-07-07;SF-1048;C08;UAB Teta statyba;1595,00;2025-08-06;Sąskaita faktūra
+2025-07-08;SF-1049;C02;UAB Beta grupė;660,00;2025-08-07;Sąskaita faktūra
+2025-07-08;SF-1050;C09;AB Jota maistas;1760,00;2025-08-07;Sąskaita faktūra
+2025-07-09;SF-1051;C03;AB Gama pienas;840,00;2025-08-23;Sąskaita faktūra
+2025-07-09;SF-1052;C10;UAB Kapa transportas;1925,00;2025-08-23;Sąskaita faktūra
+2025-07-10;SF-1053;C04;MB Delta paslaugos;1020,00;2025-08-09;Sąskaita faktūra
+2025-07-11;SF-1054;C05;UAB Epsilon;1200,00;2025-08-10;Sąskaita faktūra
+2025-07-12;SF-1055;C06;UAB Žalioji dirbtuvė;1380,00;2025-08-11;Sąskaita faktūra
+2025-07-13;SF-1056;C07;UAB Eta logistika;1560,00;2025-07-27;Sąskaita faktūra
+2025-07-14;SF-1057;C01;UAB Alfa prekyba;400,00;2025-07-28;Sąskaita faktūra
+2025-07-14;SF-1058;C08;UAB Teta statyba;1740,00;2025-08-13;Sąskaita faktūra
+2025-07-15;SF-1059;C02;UAB Beta grupė;550,00;2025-08-14;Sąskaita faktūra
+2025-07-15;SF-1060;C09;AB Jota maistas;1920,00;2025-08-14;Sąskaita faktūra
+2025-07-16;SF-1061;C03;AB Gama pienas;700,00;2025-08-30;Sąskaita faktūra
+2025-07-16;SF-1062;C10;UAB Kapa transportas;2100,00;2025-08-30;Sąskaita faktūra
+2025-07-17;SF-1063;C04;MB Delta paslaugos;850,00;2025-08-16;Sąskaita faktūra
+2025-07-18;SF-1064;C05;UAB Epsilon;1000,00;2025-08-17;Sąskaita faktūra
+2025-07-19;SF-1065;C06;UAB Žalioji dirbtuvė;1150,00;2025-08-18;Sąskaita faktūra
+2025-07-20;SF-1066;C07;UAB Eta logistika;1300,00;2025-08-03;Sąskaita faktūra
+2025-07-21;SF-1067;C01;UAB Alfa prekyba;440,00;2025-08-04;Sąskaita faktūra
+2025-07-21;SF-1068;C08;UAB Teta statyba;1450,00;2025-08-20;Sąskaita faktūra
+2025-07-22;SF-1069;C02;UAB Beta grupė;605,00;2025-08-21;Sąskaita faktūra
+2025-07-22;SF-1070;C09;AB Jota maistas;1600,00;2025-08-21;Sąskaita faktūra
+2025-07-23;SF-1071;C03;AB Gama pienas;770,00;2025-09-06;Sąskaita faktūra
+2025-07-23;SF-1072;C10;UAB Kapa transportas;1750,00;2025-09-06;Sąskaita faktūra
+2025-07-24;SF-1073;C04;MB Delta paslaugos;935,00;2025-08-23;Sąskaita faktūra
+2025-07-25;SF-1074;C05;UAB Epsilon;1100,00;2025-08-24;Sąskaita faktūra
+2025-07-26;SF-1075;C06;UAB Žalioji dirbtuvė;1265,00;2025-08-25;Sąskaita faktūra
+2025-07-27;SF-1076;C07;UAB Eta logistika;1430,00;2025-08-10;Sąskaita faktūra
+2025-07-28;SF-1077;C01;UAB Alfa prekyba;480,00;2025-08-11;Sąskaita faktūra
+2025-07-28;SF-1078;C08;UAB Teta statyba;1595,00;2025-08-27;Sąskaita faktūra
+2025-07-29;SF-1079;C02;UAB Beta grupė;660,00;2025-08-28;Sąskaita faktūra
+2025-07-29;SF-1080;C09;AB Jota maistas;1760,00;2025-08-28;Sąskaita faktūra
+2025-07-30;SF-1081;C03;AB Gama pienas;840,00;2025-09-13;Sąskaita faktūra
+2025-07-30;SF-1082;C10;UAB Kapa transportas;1925,00;2025-09-13;Sąskaita faktūra
+2025-07-31;SF-1083;C04;MB Delta paslaugos;1020,00;2025-08-30;Sąskaita faktūra
+2025-08-01;SF-1084;C05;UAB Epsilon;1200,00;2025-08-31;Sąskaita faktūra
+2025-08-02;SF-1085;C06;UAB Žalioji dirbtuvė;1380,00;2025-09-01;Sąskaita faktūra
+2025-08-03;SF-1086;C07;UAB Eta logistika;1560,00;2025-08-17;Sąskaita faktūra
+2025-08-04;SF-1087;C01;UAB Alfa prekyba;400,00;2025-08-18;Sąskaita faktūra
+2025-08-04;SF-1088;C08;UAB Teta statyba;1740,00;2025-09-03;Sąskaita faktūra
+2025-08-05;SF-1089;C02;UAB Beta grupė;550,00;2025-09-04;Sąskaita faktūra
+2025-08-05;SF-1090;C09;AB Jota maistas;1920,00;2025-09-04;Sąskaita faktūra
+2025-08-06;SF-1091;C03;AB Gama pienas;700,00;2025-09-20;Sąskaita faktūra
+2025-08-06;SF-1092;C10;UAB Kapa transportas;2100,00;2025-09-20;Sąskaita faktūra
+2025-08-07;SF-1093;C04;MB Delta paslaugos;850,00;2025-09-06;Sąskaita faktūra
+2025-08-08;SF-1094;C05;UAB Epsilon;1000,00;2025-09-07;Sąskaita faktūra
+2025-08-09;SF-1095;C06;UAB Žalioji dirbtuvė;1150,00;2025-09-08;Sąskaita faktūra
+2025-08-10;SF-1096;C07;UAB Eta logistika;1300,00;2025-08-24;Sąskaita faktūra
+2025-08-11;SF-1097;C01;UAB Alfa prekyba;440,00;2025-08-25;Sąskaita faktūra
+2025-08-11;SF-1098;C08;UAB Teta statyba;1450,00;2025-09-10;Sąskaita faktūra
+2025-08-12;SF-1099;C02;UAB Beta grupė;605,00;2025-09-11;Sąskaita faktūra
+2025-08-12;SF-1100;C09;AB Jota maistas;1600,00;2025-09-11;Sąskaita faktūra
+2025-08-13;SF-1101;C03;AB Gama pienas;770,00;2025-09-27;Sąskaita faktūra
+2025-08-13;SF-1102;C10;UAB Kapa transportas;1750,00;2025-09-27;Sąskaita faktūra
+2025-08-14;SF-1103;C04;MB Delta paslaugos;935,00;2025-09-13;Sąskaita faktūra
+2025-08-15;SF-1104;C05;UAB Epsilon;1100,00;2025-09-14;Sąskaita faktūra
+2025-08-16;SF-1105;C06;UAB Žalioji dirbtuvė;1265,00;2025-09-15;Sąskaita faktūra
+2025-08-17;SF-1106;C07;UAB Eta logistika;1430,00;2025-08-31;Sąskaita faktūra
+2025-08-18;SF-1107;C01;UAB Alfa prekyba;480,00;2025-09-01;Sąskaita faktūra
+2025-08-18;SF-1108;C08;UAB Teta statyba;1595,00;2025-09-17;Sąskaita faktūra
+2025-08-19;SF-1109;C02;UAB Beta grupė;660,00;2025-09-18;Sąskaita faktūra
+2025-08-19;SF-1110;C09;AB Jota maistas;1760,00;2025-09-18;Sąskaita faktūra
+2025-08-20;SF-1111;C03;AB Gama pienas;840,00;2025-10-04;Sąskaita faktūra
+2025-08-20;SF-1112;C10;UAB Kapa transportas;1925,00;2025-10-04;Sąskaita faktūra
+2025-08-21;SF-1113;C04;MB Delta paslaugos;1020,00;2025-09-20;Sąskaita faktūra
+2025-08-22;SF-1114;C05;UAB Epsilon;1200,00;2025-09-21;Sąskaita faktūra
+2025-08-23;SF-1115;C06;UAB Žalioji dirbtuvė;1380,00;2025-09-22;Sąskaita faktūra
+2025-08-24;SF-1116;C07;UAB Eta logistika;1560,00;2025-09-07;Sąskaita faktūra
+2025-08-25;SF-1117;C01;UAB Alfa prekyba;400,00;2025-09-08;Sąskaita faktūra
+2025-08-25;SF-1118;C08;UAB Teta statyba;1740,00;2025-09-24;Sąskaita faktūra
+2025-08-26;SF-1119;C02;UAB Beta grupė;550,00;2025-09-25;Sąskaita faktūra
+2025-08-26;SF-1120;C09;AB Jota maistas;1920,00;2025-09-25;Sąskaita faktūra
+2025-08-27;SF-1121;C03;AB Gama pienas;700,00;2025-10-11;Sąskaita faktūra
+2025-08-27;SF-1122;C10;UAB Kapa transportas;2100,00;2025-10-11;Sąskaita faktūra
+2025-08-28;SF-1123;C04;MB Delta paslaugos;850,00;2025-09-27;Sąskaita faktūra
+2025-08-29;SF-1124;C05;UAB Epsilon;1000,00;2025-09-28;Sąskaita faktūra
+2025-08-30;SF-1125;C06;UAB Žalioji dirbtuvė;1150,00;2025-09-29;Sąskaita faktūra
+2025-08-31;SF-1126;C07;UAB Eta logistika;1300,00;2025-09-14;Sąskaita faktūra
+2025-09-01;SF-1127;C01;UAB Alfa prekyba;440,00;2025-09-15;Sąskaita faktūra
+2025-09-01;SF-1128;C08;UAB Teta statyba;1450,00;2025-10-01;Sąskaita faktūra
+2025-09-02;SF-1129;C02;UAB Beta grupė;605,00;2025-10-02;Sąskaita faktūra
+2025-09-02;SF-1130;C09;AB Jota maistas;1600,00;2025-10-02;Sąskaita faktūra
+2025-09-03;SF-1131;C03;AB Gama pienas;770,00;2025-10-18;Sąskaita faktūra
+2025-09-03;SF-1132;C10;UAB Kapa transportas;1750,00;2025-10-18;Sąskaita faktūra
+2025-09-04;SF-1133;C04;MB Delta paslaugos;935,00;2025-10-04;Sąskaita faktūra
+2025-09-05;SF-1134;C05;UAB Epsilon;1100,00;2025-10-05;Sąskaita faktūra
+2025-09-06;SF-1135;C06;UAB Žalioji dirbtuvė;1265,00;2025-10-06;Sąskaita faktūra
+2025-09-07;SF-1136;C07;UAB Eta logistika;1430,00;2025-09-21;Sąskaita faktūra
+2025-09-08;SF-1137;C01;UAB Alfa prekyba;480,00;2025-09-22;Sąskaita faktūra
+2025-09-08;SF-1138;C08;UAB Teta statyba;1595,00;2025-10-08;Sąskaita faktūra
+2025-09-09;SF-1139;C02;UAB Beta grupė;660,00;2025-10-09;Sąskaita faktūra
+2025-09-09;SF-1140;C09;AB Jota maistas;1760,00;2025-10-09;Sąskaita faktūra
+2025-09-10;SF-1141;C03;AB Gama pienas;840,00;2025-10-25;Sąskaita faktūra
+2025-09-10;SF-1142;C10;UAB Kapa transportas;1925,00;2025-10-25;Sąskaita faktūra
+2025-09-11;SF-1143;C04;MB Delta paslaugos;1020,00;2025-10-11;Sąskaita faktūra
+2025-09-12;SF-1144;C05;UAB Epsilon;1200,00;2025-10-12;Sąskaita faktūra
+2025-09-13;SF-1145;C06;UAB Žalioji dirbtuvė;1380,00;2025-10-13;Sąskaita faktūra
+2025-09-14;SF-1146;C07;UAB Eta logistika;1560,00;2025-09-28;Sąskaita faktūra
+2025-09-15;SF-1147;C01;UAB Alfa prekyba;400,00;2025-09-29;Sąskaita faktūra
+2025-09-15;SF-1148;C08;UAB Teta statyba;1740,00;2025-10-15;Sąskaita faktūra
+2025-09-16;SF-1149;C02;UAB Beta grupė;550,00;2025-10-16;Sąskaita faktūra
+2025-09-16;SF-1150;C09;AB Jota maistas;1920,00;2025-10-16;Sąskaita faktūra
+2025-09-17;SF-1151;C03;AB Gama pienas;700,00;2025-11-01;Sąskaita faktūra
+2025-09-17;SF-1152;C10;UAB Kapa transportas;2100,00;2025-11-01;Sąskaita faktūra
+2025-09-18;SF-1153;C04;MB Delta paslaugos;850,00;2025-10-18;Sąskaita faktūra
+2025-09-19;SF-1154;C05;UAB Epsilon;1000,00;2025-10-19;Sąskaita faktūra
+2025-09-20;SF-1155;C06;UAB Žalioji dirbtuvė;1150,00;2025-10-20;Sąskaita faktūra
+2025-09-21;SF-1156;C07;UAB Eta logistika;1300,00;2025-10-05;Sąskaita faktūra
+2025-09-22;SF-1157;C01;UAB Alfa prekyba;440,00;2025-10-06;Sąskaita faktūra
+2025-09-22;SF-1158;C08;UAB Teta statyba;1450,00;2025-10-22;Sąskaita faktūra
+2025-09-23;SF-1159;C02;UAB Beta grupė;605,00;2025-10-23;Sąskaita faktūra
+2025-09-23;SF-1160;C09;AB Jota maistas;1600,00;2025-10-23;Sąskaita faktūra
+2025-09-24;SF-1161;C03;AB Gama pienas;770,00;2025-11-08;Sąskaita faktūra
+2025-09-24;SF-1162;C10;UAB Kapa transportas;1750,00;2025-11-08;Sąskaita faktūra
+2025-09-25;SF-1163;C04;MB Delta paslaugos;935,00;2025-10-25;Sąskaita faktūra
+2025-09-26;SF-1164;C05;UAB Epsilon;1100,00;2025-10-26;Sąskaita faktūra
+2025-09-27;SF-1165;C06;UAB Žalioji dirbtuvė;1265,00;2025-10-27;Sąskaita faktūra
+2025-09-28;SF-1166;C07;UAB Eta logistika;1430,00;2025-10-12;Sąskaita faktūra
+2025-09-29;SF-1167;C01;UAB Alfa prekyba;480,00;2025-10-13;Sąskaita faktūra
+2025-09-29;SF-1168;C08;UAB Teta statyba;1595,00;2025-10-29;Sąskaita faktūra
+2025-09-30;SF-1169;C02;UAB Beta grupė;660,00;2025-10-30;Sąskaita faktūra
+2025-09-30;SF-1170;C09;AB Jota maistas;1760,00;2025-10-30;Sąskaita faktūra
+2025-10-01;SF-1171;C03;AB Gama pienas;840,00;2025-11-15;Sąskaita faktūra
+2025-10-01;SF-1172;C10;UAB Kapa transportas;1925,00;2025-11-15;Sąskaita faktūra
+2025-10-02;SF-1173;C04;MB Delta paslaugos;1020,00;2025-11-01;Sąskaita faktūra
+2025-10-03;SF-1174;C05;UAB Epsilon;1200,00;2025-11-02;Sąskaita faktūra
+2025-10-04;SF-1175;C06;UAB Žalioji dirbtuvė;1380,00;2025-11-03;Sąskaita faktūra
+2025-10-05;SF-1176;C07;UAB Eta logistika;1560,00;2025-10-19;Sąskaita faktūra
+2025-10-06;SF-1177;C01;UAB Alfa prekyba;400,00;2025-10-20;Sąskaita faktūra
+2025-10-06;SF-1178;C08;UAB Teta statyba;1740,00;2025-11-05;Sąskaita faktūra
+2025-10-07;SF-1179;C02;UAB Beta grupė;550,00;2025-11-06;Sąskaita faktūra
+2025-10-07;SF-1180;C09;AB Jota maistas;1920,00;2025-11-06;Sąskaita faktūra
+2025-10-08;SF-1181;C03;AB Gama pienas;700,00;2025-11-22;Sąskaita faktūra
+2025-10-08;SF-1182;C10;UAB Kapa transportas;2100,00;2025-11-22;Sąskaita faktūra
+2025-10-09;SF-1183;C04;MB Delta paslaugos;850,00;2025-11-08;Sąskaita faktūra
+2025-10-10;SF-1184;C05;UAB Epsilon;1000,00;2025-11-09;Sąskaita faktūra
+2025-10-11;SF-1185;C06;UAB Žalioji dirbtuvė;1150,00;2025-11-10;Sąskaita faktūra
+2025-10-12;SF-1186;C07;UAB Eta logistika;1300,00;2025-10-26;Sąskaita faktūra
+2025-10-13;SF-1187;C01;UAB Alfa prekyba;440,00;2025-10-27;Sąskaita faktūra
+2025-10-13;SF-1188;C08;UAB Teta statyba;1450,00;2025-11-12;Sąskaita faktūra
+2025-10-14;SF-1189;C02;UAB Beta grupė;605,00;2025-11-13;Sąskaita faktūra
+2025-10-14;SF-1190;C09;AB Jota maistas;1600,00;2025-11-13;Sąskaita faktūra
+2025-10-15;SF-1191;C03;AB Gama pienas;770,00;2025-11-29;Sąskaita faktūra
+2025-10-15;SF-1192;C10;UAB Kapa transportas;1750,00;2025-11-29;Sąskaita faktūra
+2025-10-16;SF-1193;C04;MB Delta paslaugos;935,00;2025-11-15;Sąskaita faktūra
+2025-10-17;SF-1194;C05;UAB Epsilon;1100,00;2025-11-16;Sąskaita faktūra
+2025-10-18;SF-1195;C06;UAB Žalioji dirbtuvė;1265,00;2025-11-17;Sąskaita faktūra
+2025-10-19;SF-1196;C07;UAB Eta logistika;1430,00;2025-11-02;Sąskaita faktūra
+2025-10-20;SF-1197;C01;UAB Alfa prekyba;480,00;2025-11-03;Sąskaita faktūra
+2025-10-20;SF-1198;C08;UAB Teta statyba;1595,00;2025-11-19;Sąskaita faktūra
+2025-10-21;SF-1199;C02;UAB Beta grupė;660,00;2025-11-20;Sąskaita faktūra
+2025-10-21;SF-1200;C09;AB Jota maistas;1760,00;2025-11-20;Sąskaita faktūra
+2025-10-22;SF-1201;C03;AB Gama pienas;840,00;2025-12-06;Sąskaita faktūra
+2025-10-22;SF-1202;C10;UAB Kapa transportas;1925,00;2025-12-06;Sąskaita faktūra
+2025-10-23;SF-1203;C04;MB Delta paslaugos;1020,00;2025-11-22;Sąskaita faktūra
+2025-10-24;SF-1204;C05;UAB Epsilon;1200,00;2025-11-23;Sąskaita faktūra
+2025-10-25;SF-1205;C06;UAB Žalioji dirbtuvė;1380,00;2025-11-24;Sąskaita faktūra
+2025-10-26;SF-1206;C07;UAB Eta logistika;1560,00;2025-11-09;Sąskaita faktūra
+2025-10-27;SF-1207;C01;UAB Alfa prekyba;400,00;2025-11-10;Sąskaita faktūra
+2025-10-27;SF-1208;C08;UAB Teta statyba;1740,00;2025-11-26;Sąskaita faktūra
+2025-10-28;SF-1209;C02;UAB Beta grupė;550,00;2025-11-27;Sąskaita faktūra
+2025-10-28;SF-1210;C09;AB Jota maistas;1920,00;2025-11-27;Sąskaita faktūra
+2025-10-29;SF-1211;C03;AB Gama pienas;700,00;2025-12-13;Sąskaita faktūra
+2025-10-29;SF-1212;C10;UAB Kapa transportas;2100,00;2025-12-13;Sąskaita faktūra
+2025-10-30;SF-1213;C04;MB Delta paslaugos;850,00;2025-11-29;Sąskaita faktūra
+2025-10-31;SF-1214;C05;UAB Epsilon;1000,00;2025-11-30;Sąskaita faktūra
+2025-11-01;SF-1215;C06;UAB Žalioji dirbtuvė;1150,00;2025-12-01;Sąskaita faktūra
+2025-11-02;SF-1216;C07;UAB Eta logistika;1300,00;2025-11-16;Sąskaita faktūra
+2025-11-03;SF-1217;C01;UAB Alfa prekyba;440,00;2025-11-17;Sąskaita faktūra
+2025-11-03;SF-1218;C08;UAB Teta statyba;1450,00;2025-12-03;Sąskaita faktūra
+2025-11-04;SF-1219;C02;UAB Beta grupė;605,00;2025-12-04;Sąskaita faktūra
+2025-11-04;SF-1220;C09;AB Jota maistas;1600,00;2025-12-04;Sąskaita faktūra
+2025-11-05;SF-1221;C03;AB Gama pienas;770,00;2025-12-20;Sąskaita faktūra
+2025-11-05;SF-1222;C10;UAB Kapa transportas;1750,00;2025-12-20;Sąskaita faktūra
+2025-11-05;KR-1;C06;UAB Žalioji dirbtuvė;200,00;;Kreditinė sąskaita
+2025-11-06;SF-1223;C04;MB Delta paslaugos;935,00;2025-12-06;Sąskaita faktūra
+2025-11-07;SF-1224;C05;UAB Epsilon;1100,00;2025-12-07;Sąskaita faktūra
+2025-11-08;SF-1225;C06;UAB Žalioji dirbtuvė;1265,00;2025-12-08;Sąskaita faktūra
+2025-11-09;SF-1226;C07;UAB Eta logistika;1430,00;2025-11-23;Sąskaita faktūra
+2025-11-10;SF-1227;C01;UAB Alfa prekyba;480,00;2025-11-24;Sąskaita faktūra
+2025-11-10;SF-1228;C08;UAB Teta statyba;1595,00;2025-12-10;Sąskaita faktūra
+2025-11-11;SF-1229;C02;UAB Beta grupė;660,00;2025-12-11;Sąskaita faktūra
+2025-11-11;SF-1230;C09;AB Jota maistas;1760,00;2025-12-11;Sąskaita faktūra
+2025-11-12;SF-1231;C03;AB Gama pienas;840,00;2025-12-27;Sąskaita faktūra
+2025-11-12;SF-1232;C10;UAB Kapa transportas;1925,00;2025-12-27;Sąskaita faktūra
+2025-11-12;KR-2;C02;UAB Beta grupė;150,00;;Kreditinė sąskaita
+2025-11-13;SF-1233;C04;MB Delta paslaugos;1020,00;2025-12-13;Sąskaita faktūra
+2025-11-14;SF-1234;C05;UAB Epsilon;1200,00;2025-12-14;Sąskaita faktūra
+2025-11-15;SF-1235;C06;UAB Žalioji dirbtuvė;1380,00;2025-12-15;Sąskaita faktūra
+2025-11-16;SF-1236;C07;UAB Eta logistika;1560,00;2025-11-30;Sąskaita faktūra
+2025-11-17;SF-1237;C01;UAB Alfa prekyba;400,00;2025-12-01;Sąskaita faktūra
+2025-11-17;SF-1238;C08;UAB Teta statyba;1740,00;2025-12-17;Sąskaita faktūra
+2025-11-18;SF-1239;C02;UAB Beta grupė;550,00;2025-12-18;Sąskaita faktūra
+2025-11-18;SF-1240;C09;AB Jota maistas;1920,00;2025-12-18;Sąskaita faktūra
+2025-11-18;KR-3;C03;AB Gama pienas;300,00;;Kreditinė sąskaita
+2025-11-19;SF-1241;C03;AB Gama pienas;700,00;2026-01-03;Sąskaita faktūra
+2025-11-19;SF-1242;C10;UAB Kapa transportas;2100,00;2026-01-03;Sąskaita faktūra
+2025-11-20;SF-1243;C04;MB Delta paslaugos;850,00;2025-12-20;Sąskaita faktūra
+2025-11-21;SF-1244;C05;UAB Epsilon;1000,00;2025-12-21;Sąskaita faktūra
+2025-11-22;SF-1245;C06;UAB Žalioji dirbtuvė;1150,00;2025-12-22;Sąskaita faktūra
+2025-11-23;SF-1246;C07;UAB Eta logistika;1300,00;2025-12-07;Sąskaita faktūra
+2025-11-24;SF-1247;C01;UAB Alfa prekyba;440,00;2025-12-08;Sąskaita faktūra
+2025-11-24;SF-1248;C08;UAB Teta statyba;1450,00;2025-12-24;Sąskaita faktūra
+2025-11-25;SF-1249;C02;UAB Beta grupė;605,00;2025-12-25;Sąskaita faktūra
+2025-11-25;SF-1250;C09;AB Jota maistas;1600,00;2025-12-25;Sąskaita faktūra
+2025-11-26;SF-1251;C03;AB Gama pienas;770,00;2026-01-10;Sąskaita faktūra
+2025-11-26;SF-1252;C10;UAB Kapa transportas;1750,00;2026-01-10;Sąskaita faktūra
+2025-11-27;SF-1253;C04;MB Delta paslaugos;935,00;2025-12-27;Sąskaita faktūra
+2025-11-28;SF-1254;C05;UAB Epsilon;1100,00;2025-12-28;Sąskaita faktūra
+2025-11-29;SF-1255;C06;UAB Žalioji dirbtuvė;1265,00;2025-12-29;Sąskaita faktūra
+2025-11-30;SF-1256;C07;UAB Eta logistika;1430,00;2025-12-14;Sąskaita faktūra
+2025-12-01;SF-1257;C01;UAB Alfa prekyba;480,00;2025-12-15;Sąskaita faktūra
+2025-12-01;SF-1258;C08;UAB Teta statyba;1595,00;2025-12-31;Sąskaita faktūra
+2025-12-02;SF-1259;C02;UAB Beta grupė;660,00;2026-01-01;Sąskaita faktūra
+2025-12-02;SF-1260;C09;AB Jota maistas;1760,00;2026-01-01;Sąskaita faktūra
+2025-12-03;SF-1261;C03;AB Gama pienas;840,00;2026-01-17;Sąskaita faktūra
+2025-12-03;SF-1262;C10;UAB Kapa transportas;1925,00;2026-01-17;Sąskaita faktūra
+2025-12-04;SF-1263;C04;MB Delta paslaugos;1020,00;2026-01-03;Sąskaita faktūra
+2025-12-05;SF-1264;C05;UAB Epsilon;1200,00;2026-01-04;Sąskaita faktūra
+2025-12-06;SF-1265;C06;UAB Žalioji dirbtuvė;1380,00;2026-01-05;Sąskaita faktūra
+2025-12-07;SF-1266;C07;UAB Eta logistika;1560,00;2025-12-21;Sąskaita faktūra
+2025-12-08;SF-1267;C01;UAB Alfa prekyba;400,00;2025-12-22;Sąskaita faktūra
+2025-12-08;SF-1268;C08;UAB Teta statyba;1740,00;2026-01-07;Sąskaita faktūra
+2025-12-09;SF-1269;C02;UAB Beta grupė;550,00;2026-01-08;Sąskaita faktūra
+2025-12-09;SF-1270;C09;AB Jota maistas;1920,00;2026-01-08;Sąskaita faktūra
+2025-12-10;SF-1271;C03;AB Gama pienas;700,00;2026-01-24;Sąskaita faktūra
+2025-12-10;SF-1272;C10;UAB Kapa transportas;2100,00;2026-01-24;Sąskaita faktūra
+2025-12-11;SF-1273;C04;MB Delta paslaugos;850,00;2026-01-10;Sąskaita faktūra
+2025-12-12;SF-1274;C05;UAB Epsilon;1000,00;2026-01-11;Sąskaita faktūra
+2025-12-13;SF-1275;C06;UAB Žalioji dirbtuvė;1150,00;2026-01-12;Sąskaita faktūra
+2025-12-14;SF-1276;C07;UAB Eta logistika;1300,00;2025-12-28;Sąskaita faktūra
+2025-12-15;SF-1277;C01;UAB Alfa prekyba;440,00;2025-12-29;Sąskaita faktūra
+2025-12-15;SF-1278;C08;UAB Teta statyba;1450,00;2026-01-14;Sąskaita faktūra

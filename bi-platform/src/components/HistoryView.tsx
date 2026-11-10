@@ -39,7 +39,7 @@ export function HistoryView({ version, onChanged }: { version: number; onChanged
             {rows.map((r) => (
               <tr key={r.id} className="border-t border-slate-200 dark:border-slate-800">
                 <td className="px-3 py-2 font-medium">{r.fileName}</td>
-                <td className="px-3 py-2" data-testid="hist-module">{t(`mod.${r.module ?? 'sales'}` as MessageKey)}{r.inventoryKind && <span className="block text-xs text-slate-500" data-testid="hist-kind">{t(`inv.kind.${r.inventoryKind}` as MessageKey)}</span>}</td>
+                <td className="px-3 py-2" data-testid="hist-module">{t(`mod.${r.module ?? 'sales'}` as MessageKey)}{r.inventoryKind && <span className="block text-xs text-slate-500" data-testid="hist-kind">{t(`inv.kind.${r.inventoryKind}` as MessageKey)}</span>}{r.financeKind && <span className="block text-xs text-slate-500" data-testid="hist-kind">{t(`fin.kind.${r.financeKind}` as MessageKey)}{r.financeSide ? ` · ${t(`fin.side.short.${r.financeSide}` as MessageKey)}` : ''}</span>}</td>
                 <td className="px-3 py-2">{fmtDate(new Date(r.importedAt).toISOString().slice(0, 10), lang)}</td>
                 <td className="px-3 py-2">{r.stats.dateMin && r.stats.dateMax ? `${fmtDate(r.stats.dateMin, lang)} – ${fmtDate(r.stats.dateMax, lang)}` : '—'}</td>
                 <td className="px-3 py-2">{r.stats.rowsRead}</td>

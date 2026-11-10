@@ -1,7 +1,7 @@
 import type { Dimension, SalesDimension } from './filters';
 
-export type ChartId = 'trend' | 'comparison' | 'topCustomers' | 'topProducts' | 'salespeople' | 'category' | 'waterfall' | 'pareto' | 'topSuppliers' | 'priceTrend' | 'priceVariance' | 'spendBridge' | 'quantityComparison' | 'stockTrend' | 'warehouseComparison' | 'slowMoving' | 'stockoutRisk' | 'movementTrend' | 'abc';
-export type HiddenReason = 'needs_dimension' | 'too_few_points' | 'no_comparison' | 'too_few_entities' | 'no_price_data' | 'no_snapshot' | 'needs_movements' | 'no_value' | 'short_history';
+export type ChartId = 'trend' | 'comparison' | 'topCustomers' | 'topProducts' | 'salespeople' | 'category' | 'waterfall' | 'pareto' | 'topSuppliers' | 'priceTrend' | 'priceVariance' | 'spendBridge' | 'quantityComparison' | 'stockTrend' | 'warehouseComparison' | 'slowMoving' | 'stockoutRisk' | 'movementTrend' | 'abc' | 'aging' | 'overdueTrend' | 'dueTimeline' | 'behaviour' | 'creditReview' | 'duplicates' | 'overdueRank';
+export type HiddenReason = 'needs_dimension' | 'too_few_points' | 'no_comparison' | 'too_few_entities' | 'no_price_data' | 'no_snapshot' | 'needs_movements' | 'no_value' | 'short_history' | 'no_ledger' | 'needs_open_items' | 'needs_payments' | 'needs_due_dates';
 
 export interface ChartInputs {
   trendPoints: number;
