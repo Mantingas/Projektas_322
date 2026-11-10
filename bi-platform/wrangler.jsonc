@@ -1,0 +1,10 @@
+{
+  // Cloudflare Workers Builds: serves the static export (out/) – no server code, no data leaves the browser
+  "name": "projektas-322",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "./out",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
