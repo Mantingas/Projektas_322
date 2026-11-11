@@ -36,7 +36,7 @@ export function KpiCards({ model, filters, onDrill, showHidden, drillFor }: { mo
                 <button className="text-indigo-700 underline dark:text-indigo-300" onClick={() => setOpen(open === k.id ? null : k.id)} aria-expanded={open === k.id}>{t('kpi.howCalc')}</button>
                 <button className="text-indigo-700 underline dark:text-indigo-300" data-testid={`drill-${k.id}`} onClick={() => onDrill(label, drillFor?.(k.id) ?? { filter: { ...filters }, range: model.periods.current, ...(k.id === 'returns' || k.id === 'p_credits' ? { sign: 'negative' as const } : {}) })}>{t('kpi.viewRecords')}</button>
               </div>
-              {open === k.id && <p className="mt-2 rounded-md bg-slate-50 p-2 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300">{t(`explain.${k.id}` as MessageKey, { ...Object.fromEntries(Object.entries(inputs).map(([key, v]) => [key, key.endsWith('Value') ? { money: v } : v])), returns: { money: inputs.returns ?? 0 }, credits: { money: inputs.credits ?? 0 } })}</p>}
+              {open === k.id && <p className="mt-2 rounded-md bg-slate-50 p-2 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300">{t(`explain.${k.id}` as MessageKey, { ...Object.fromEntries(Object.entries(inputs).map(([key, v]) => [key, key.endsWith('Value') ? { money: Number(v) } : v])), returns: { money: Number(inputs.returns ?? 0) }, credits: { money: Number(inputs.credits ?? 0) } })}</p>}
             </Card>
           );
         })}

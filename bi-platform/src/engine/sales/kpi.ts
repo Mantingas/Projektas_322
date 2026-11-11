@@ -1,4 +1,6 @@
 import type { AmountBasis, SalesRecord } from '../types';
+import { aggregate } from '../analytics/aggregate';
+import { evaluateMargin } from '../analytics/metrics';
 
 export interface Series {
   currency: string;
@@ -121,7 +123,7 @@ export interface SalesKpis {
   dateMax: string;
   monthly: { month: string; revenue: number }[];
   /** Present only when cost data covers enough lines. Never estimated. */
-  margin?: { costCoverage: number; profit: number; marginPct: number };
+  margin?: { costCoverage: number; revenueCoverage: number; profit: number; marginPct: number; wholeTurnover: boolean };
 }
 
 export const MIN_COST_COVERAGE = 0.8;
@@ -132,16 +134,11 @@ export function computeKpis(records: SalesRecord[], series: Pick<Series, 'curren
   let dateMin = records[0]!.date;
   let dateMax = records[0]!.date;
   const docs = new Set<string>();
-  const docTotals = new Map<string, number>();
   const customers = new Set<string>();
   const products = new Set<string>();
   const monthly = new Map<string, number>();
   let qty = 0;
   let hasQty = false;
-  let positive = 0;
-  let withCost = 0;
-  let revWithCost = 0;
-  let cost = 0;
   for (const r of records) {
     revenue += r.amount;
     if (r.date < dateMin) dateMin = r.date;
@@ -149,7 +146,6 @@ export function computeKpis(records: SalesRecord[], series: Pick<Series, 'curren
     if (r.documentId) {
       const dk = r.documentId.trim().toLowerCase();
       docs.add(dk);
-      docTotals.set(dk, (docTotals.get(dk) ?? 0) + r.amount);
     }
     const c = customerOf(r);
     if (c) customers.add(c.key);
@@ -161,14 +157,6 @@ export function computeKpis(records: SalesRecord[], series: Pick<Series, 'curren
     }
     const mk = r.date.slice(0, 7);
     monthly.set(mk, (monthly.get(mk) ?? 0) + r.amount);
-    if (r.amount > 0) {
-      positive++;
-      if (r.cost !== undefined) {
-        withCost++;
-        revWithCost += r.amount;
-        cost += r.cost;
-      }
-    }
   }
   const kpis: SalesKpis = {
     currency: series.currency,
@@ -185,15 +173,14 @@ export function computeKpis(records: SalesRecord[], series: Pick<Series, 'curren
     dateMax,
     monthly: [...monthly.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([month, rev]) => ({ month, revenue: rev })),
   };
-  const positiveDocs = [...docTotals.values()].filter((v) => v > 0);
+  const agg = aggregate(records);
+  const positiveDocs = [...agg.docTotals.values()].filter((v) => v > 0);
   if (positiveDocs.length) {
     kpis.orders = positiveDocs.length;
     kpis.averageDocumentValue = positiveDocs.reduce((a, b) => a + b, 0) / positiveDocs.length;
   }
-  // Margin only on net revenue, only with sufficient cost coverage; computed on lines that actually have a cost.
-  if (series.basis === 'net' && positive > 0 && withCost / positive >= MIN_COST_COVERAGE) {
-    const profit = revWithCost - cost;
-    kpis.margin = { costCoverage: withCost / positive, profit, marginPct: revWithCost > 0 ? profit / revWithCost : 0 };
-  }
+  // One margin rule for KPI, tables and findings (see evaluateMargin): net basis, cost on ≥ 80 % of lines AND of revenue, returns netted.
+  const m = evaluateMargin(agg, series.basis);
+  if (m.ok) kpis.margin = { costCoverage: m.r.lineCoverage, revenueCoverage: m.r.revenueCoverage, profit: m.r.profit, marginPct: m.r.value, wholeTurnover: m.r.wholeTurnover };
   return kpis;
 }

@@ -22,5 +22,5 @@ export interface ChartModel {
   waterfall: { dimension: Dimension; data: Waterfall } | null;
   composition: { label: string; value: number; share: number; other?: boolean }[];
   charts: ChartPlan[];
-  explain: Partial<Record<string, Record<string, number>>>;
+  explain: Partial<Record<string, Record<string, number | string>>>;
 }

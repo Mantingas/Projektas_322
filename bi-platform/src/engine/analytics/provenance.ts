@@ -3,7 +3,7 @@ import { applyFilters, type FilterSpec } from './filters';
 import { inRange } from './compare';
 import type { Range } from './periods';
 import type { Aggregate } from './aggregate';
-import type { MetricId } from './metrics';
+import { evaluateMargin, quantityInOneUnit, type MetricId } from './metrics';
 
 /** What a drill-down shows: filters + optional date range. The SAME filter engine the dashboard uses. */
 export interface DrillSpec {
@@ -46,16 +46,20 @@ export function sourcesOf(records: { importId?: string; amount: number }[]): Sou
 }
 
 /** Inputs behind a metric value, for the "how is this calculated" explanation. */
-export function explainMetricInputs(id: MetricId, a: Aggregate): Record<string, number> {
+export function explainMetricInputs(id: MetricId, a: Aggregate): Record<string, number | string> {
   const orders = [...a.docTotals.values()].filter((v) => v > 0).length;
   switch (id) {
     case 'sales': return { lines: a.lines, positive: a.positiveLines, negative: a.negativeLines, returns: a.returns };
     case 'returns': return { lines: a.negativeLines };
-    case 'quantity': return { lines: a.qtyLines, all: a.lines };
+    case 'quantity': { const q = quantityInOneUnit(a); return { lines: a.qtyLines, all: a.lines, unit: q.ok ? (q.unit ?? '') : '' }; }
     case 'orders': return { docs: a.docTotals.size, orders, credit: a.docTotals.size - orders };
     case 'aov': return { orders };
     case 'customers': return { customers: [...a.customerTotals.values()].filter((v) => v > 0).length, all: a.customerTotals.size };
-    case 'asp': return { lines: a.qtyLines, quantity: a.quantity };
-    case 'margin': return { lines: a.costLines, positive: a.positiveLines };
+    case 'asp': { const q = quantityInOneUnit(a); return { lines: a.qtyLines, quantity: q.ok ? q.value : a.quantity, unit: q.ok ? (q.unit ?? '') : '' }; }
+    case 'margin': {
+      const m = evaluateMargin(a, 'net');
+      const cov = a.gross > 0 ? Math.round(((a.revenueWithCost + a.zeroCostRevenue) / a.gross) * 100) : 0;
+      return { lines: a.costLines + a.zeroCostLines, positive: a.positiveLines, coverage: m.ok ? Math.round(m.r.revenueCoverage * 100) : cov, whole: m.ok && m.r.wholeTurnover ? 1 : 0, returnsKnownValue: m.ok ? m.r.returnsIncluded : a.returnsKnownRevenue };
+    }
   }
 }

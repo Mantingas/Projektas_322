@@ -7,7 +7,7 @@ import {
 } from './compare';
 import { lengthDays } from './dates';
 import { applyFilters, hasDimension, type FilterSpec, type SalesDimension } from './filters';
-import { KPI_ORDER, type MetricContext, type MetricId } from './metrics';
+import { KPI_ORDER, evaluateMargin, type MetricContext, type MetricId } from './metrics';
 import { explainMetricInputs } from './provenance';
 import { inRange } from './compare';
 import { isComparisonBlocked, resolvePeriods, type PeriodSelection, type PeriodWarning, type ResolvedPeriods } from './periods';
@@ -21,7 +21,9 @@ export type Limitation =
   | { code: 'filtered' }
   | { code: 'no_comparison' }
   | { code: 'negative_lines'; lines: number }
-  | { code: 'held_pending'; lines: number };
+  | { code: 'held_pending'; lines: number }
+  | { code: 'units_unstated' }
+  | { code: 'margin_partial'; pct: number };
 
 export interface DashboardOptions {
   series: Series;
@@ -54,7 +56,7 @@ export interface DashboardModel {
   warnings: PeriodWarning[];
   limitations: Limitation[];
   /** Inputs behind each metric of the current period, for the "how is this calculated" explanation. */
-  explain: Partial<Record<MetricId, Record<string, number>>>;
+  explain: Partial<Record<MetricId, Record<string, number | string>>>;
 }
 
 const DIMS: SalesDimension[] = ['customer', 'product', 'salesperson', 'category'];
@@ -109,6 +111,8 @@ export function buildDashboard(all: SalesRecord[], o: DashboardOptions): Dashboa
   if (neg) limitations.push({ code: 'negative_lines', lines: neg });
   if (o.heldPending) limitations.push({ code: 'held_pending', lines: o.heldPending });
   const curAgg = aggregate(inRange(records, periods.current));
+  if (curAgg.qtyLines > 0 && [...curAgg.qtyByUnit.keys()].every((u) => u === '') && cmp.metrics.some((m) => m.id === 'quantity' && m.current !== null)) limitations.push({ code: 'units_unstated' });
+  { const mg = evaluateMargin(curAgg, o.series.basis); if (mg.ok && mg.r.revenueCoverage < 0.999) limitations.push({ code: 'margin_partial', pct: mg.r.revenueCoverage }); }
   const explain: DashboardModel['explain'] = {};
   for (const k of KPI_ORDER) explain[k] = explainMetricInputs(k, curAgg);
 

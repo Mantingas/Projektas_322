@@ -3,6 +3,8 @@ import {
   customerOf, groupBy, productOf, salespersonOf, sum, type Group, type Periods, type SalesKpis,
 } from '../sales/kpi';
 import { pctChange, reliabilityFor } from './helpers';
+import { groupAggregates } from '../analytics/aggregate';
+import { evaluateMargin } from '../analytics/metrics';
 
 export interface RuleContext {
   /** Lines inside the analysed scope (the selected current period on the dashboard; everything for the legacy rolling analysis). */
@@ -236,27 +238,35 @@ export function salespersonDecline(ctx: RuleContext): RuleResult {
 // 8 ────────────────────────────────────────────────────────────────────────────
 export function lowMargin(ctx: RuleContext): RuleResult {
   const m = ctx.kpis.margin;
-  if (!m) return { unavailable: 'no_cost' }; // no cost column, VAT basis not net, or <80 % coverage → no margin claims
-  const products = [...groupBy(ctx.records.filter((r) => r.amount > 0 && r.cost !== undefined), productOf).values()];
+  if (!m) return { unavailable: 'no_cost' }; // no usable cost, VAT basis not net, thin line / revenue coverage, or returns of unknown cost → no margin claims
   const rel = reliabilityFor(ctx.kpis.lines);
-  const low = products.filter((g: Group) => g.revenueWithCost >= ctx.kpis.revenue * 0.01 && (g.revenueWithCost - g.cost) / g.revenueWithCost < Math.min(0.1, m.marginPct / 2));
+  // The same rule as the product table: a product is judged only if ITS OWN cost covers ≥ 80 % of its lines and revenue (a margin from 3 costed lines of 40 is not a margin).
+  const { groups } = groupAggregates(ctx.records, 'product');
+  const judged = [...groups.values()].flatMap((g) => {
+    const pm = evaluateMargin(g.agg, ctx.kpis.basis);
+    return pm.ok ? [{ key: g.key, label: g.label, revenue: g.agg.gross, margin: pm.r.value }] : [];
+  });
+  const low = judged.filter((g) => g.revenue >= ctx.kpis.revenue * 0.01 && g.margin < Math.min(0.1, m.marginPct / 2));
+  const relLevel = m.revenueCoverage >= 0.95 ? rel.level : 'medium';
+  const relReason = m.revenueCoverage >= 0.95 ? rel.reasonKey : 'rel.partialCost';
   if (low.length === 0) {
     return ok({
       id: 'sales.margin_overview', whyKey: 'sales.margin_overview.why', dimension: 'product', chart: 'topProducts', topic: 'margin', group: 'margin', severity: 'info', actionable: false,
-      titleKey: 'sales.margin_overview.title', bodyKey: 'sales.margin_overview.body', actionKey: 'sales.margin_overview.action',
-      params: { margin: { pct: m.marginPct }, profit: { money: m.profit }, coverage: { pct: m.costCoverage } },
-      reliability: m.costCoverage >= 0.95 ? rel.level : 'medium', reliabilityReasonKey: m.costCoverage >= 0.95 ? rel.reasonKey : 'rel.partialCost',
+      titleKey: 'sales.margin_overview.title', bodyKey: m.wholeTurnover ? 'sales.margin_overview.body' : 'sales.margin_overview.body_partial', actionKey: 'sales.margin_overview.action',
+      params: { margin: { pct: m.marginPct }, profit: { money: m.profit }, coverage: { pct: m.revenueCoverage } },
+      reliability: relLevel, reliabilityReasonKey: relReason,
       impact: { value: Math.abs(m.profit), unit: 'money' }, evidence: [],
     });
   }
-  const lowRev = sum(low.map((g) => g.revenueWithCost));
+  // the amount is the WHOLE positive revenue of those products, not just the lines that happen to have a cost
+  const lowRev = sum(low.map((g) => g.revenue));
   return ok({
     id: 'sales.low_margin_products', whyKey: 'sales.low_margin_products.why', dimension: 'product', chart: 'topProducts', topic: 'margin', group: 'margin', severity: 'risk',
     titleKey: 'sales.low_margin_products.title', bodyKey: 'sales.low_margin_products.body', actionKey: 'sales.low_margin_products.action',
-    params: { count: low.length, revenue: { money: lowRev }, margin: { pct: m.marginPct }, coverage: { pct: m.costCoverage } },
-    reliability: m.costCoverage >= 0.95 ? rel.level : 'medium', reliabilityReasonKey: m.costCoverage >= 0.95 ? rel.reasonKey : 'rel.partialCost',
+    params: { count: low.length, revenue: { money: lowRev }, margin: { pct: m.marginPct }, coverage: { pct: m.revenueCoverage } },
+    reliability: relLevel, reliabilityReasonKey: relReason,
     impact: { value: lowRev, unit: 'money' },
-    evidence: top(low, 5, (g) => g.revenueWithCost).map((g) => ({ key: g.key, label: g.label, current: (g.revenueWithCost - g.cost) / g.revenueWithCost, unit: 'pct' as const })),
+    evidence: top(low, 5, (g) => g.revenue).map((g) => ({ key: g.key, label: g.label, current: g.margin, unit: 'pct' as const })),
   });
 }
 

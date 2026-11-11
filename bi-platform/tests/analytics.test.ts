@@ -37,7 +37,8 @@ function ref(truth: TruthLine[], from: string, to: string) {
     docs.set(t.doc, (docs.get(t.doc) ?? 0) + t.net);
     cust.set(t.customer, (cust.get(t.customer) ?? 0) + t.net);
     if (t.net < 0) returns += -t.net;
-    if (t.net > 0) { cost += t.cost; revCost += t.net; }
+    // Phase 10B (M2): margin is NET of returns. Here every line (incl. credit notes, whose cost has the sign of their amount) has a cost, so the whole turnover is used.
+    if (t.net !== 0) { cost += t.cost; revCost += t.net; }
   }
   const orders = [...docs.values()].filter((v) => v > 0);
   return {
