@@ -144,7 +144,7 @@ async function plan(db: AppDB, m: ModuleId, records: AnyLine[], mode: ExportMode
   }
   const proposed = defaultPolicy(mode, identity, overlapRisk);
   const policy = policyIn ?? proposed;
-  const mp = planMerge(records as LineLike[], existingByKey, existingActiveByDoc, { mode, policy, stored: range, yearScoped: m === 'sales' }) as MergePlan<AnyLine>;
+  const mp = planMerge(records as LineLike[], existingByKey, existingActiveByDoc, { mode, policy, stored: range, yearScoped: true }) as MergePlan<AnyLine>;
   return { mp, identity, coverage, overlapRisk, proposed, policy };
 }
 

@@ -94,7 +94,8 @@ export interface MergeOptions {
   policy: ImportPolicy;
   /**
    * A document is identified by its number AND the year of its lines. Many sales ledgers restart numbering every year, so "SF-1" of 2025 is not the
-   * document "SF-1" of 2024: without this, importing a new year would REPLACE last year's documents. Used for sales only; other modules keep their behaviour.
+   * document "SF-1" of 2024: without this, importing a new year would REPLACE last year's documents. Dated documents only: snapshot records carry their as-of date in the
+   * document id, so they are unaffected. The supplier / counterparty scope of `docKey` is kept (the same number at two suppliers is two documents).
    */
   yearScoped?: boolean;
   /** Date range of data already stored (for the content policies). */
