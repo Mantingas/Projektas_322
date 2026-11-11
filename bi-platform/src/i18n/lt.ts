@@ -9,6 +9,7 @@ import exe from './exe.lt';
 import trust from './trust.lt';
 import pilot from './pilot.lt';
 import home from './home.lt';
+import fix from './fix.lt';
 
 const lt: Messages = {
   ...dash,
@@ -21,6 +22,7 @@ const lt: Messages = {
   ...trust,
   ...pilot,
   ...home,
+  ...fix,
   'app.name': 'Excel įžvalgos',
   'app.tagline': 'Verslo įžvalgos iš jūsų Excel failų',
   'nav.home': 'Pradžia', 'nav.import': 'Importas', 'nav.insights': 'Įžvalgos', 'nav.history': 'Istorija', 'nav.settings': 'Nustatymai',

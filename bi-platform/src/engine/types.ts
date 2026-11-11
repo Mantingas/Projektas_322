@@ -82,6 +82,10 @@ export const SALES_FIELDS = [
   'currency',
   'salesperson',
   'product_category',
+  /** Credit notes / returns are recognised from this column (the sign of the amount alone is not trusted). */
+  'document_type',
+  /** Unit of measure of `quantity`; without it quantities of different products cannot be added safely. */
+  'unit',
 ] as const;
 export type SalesField = (typeof SALES_FIELDS)[number];
 
@@ -202,6 +206,8 @@ export interface SalesRecord {
   productName?: string;
   productId?: string;
   quantity?: number;
+  /** Canonical unit code of `quantity` (e.g. kg, g, l, pcs, box) when the file states one. Never converted at import. */
+  unit?: string;
   /** The revenue amount of this line. Which kind it is is stated in `basis`. */
   amount: number;
   basis: AmountBasis;
@@ -384,7 +390,12 @@ export type IssueCode =
   | 'negative_assumed_credit'
   | 'vat_inconsistent'
   | 'aging_total_mismatch'
-  | 'missing_outstanding';
+  | 'missing_outstanding'
+  | 'credit_sign_ambiguous'
+  | 'quantity_sign_normalised'
+  | 'quantity_sign_ambiguous'
+  | 'cost_suspect'
+  | 'cost_zero';
 
 export interface ImportStats {
   rowsRead: number;

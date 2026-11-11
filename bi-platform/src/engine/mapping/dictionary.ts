@@ -70,6 +70,16 @@ export const SALES_SYNONYMS: Record<SalesField, string[]> = {
     'handlowiec', 'sprzedawca', 'opiekun', 'przedstawiciel', 'opiekun handlowy',
     'salesperson', 'sales rep', 'seller', 'sales manager', 'account manager', 'rep', 'sales person',
   ],
+  document_type: [
+    'dokumento tipas', 'dok tipas', 'operacijos tipas', 'dokumento rusis', 'tipas', 'rusis',
+    'typ dokumentu', 'rodzaj dokumentu', 'rodzaj', 'typ',
+    'document type', 'doc type', 'transaction type', 'type',
+  ],
+  unit: [
+    'matavimo vnt', 'mato vnt', 'mato vienetas', 'matavimo vienetas', 'vienetas', 'mv', 'unit',
+    'jednostka miary', 'jm', 'j m', 'jednostka', 'miara',
+    'uom', 'unit of measure', 'unit of measurement', 'measure',
+  ],
 };
 
 export const NUMERIC_FIELDS: SalesField[] = [
@@ -169,7 +179,7 @@ export const SALES_SPEC: ModuleSpec = {
   numeric: NUMERIC_FIELDS,
   text: TEXT_FIELDS,
   ids: ID_FIELDS,
-  short: ['currency'],
+  short: ['currency', 'unit', 'document_type'],
   synonyms: (f) => SALES_SYNONYMS[f as keyof typeof SALES_SYNONYMS] ?? [],
 };
 

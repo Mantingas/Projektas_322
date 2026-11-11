@@ -9,6 +9,7 @@ import exe from './exe.pl';
 import trust from './trust.pl';
 import pilot from './pilot.pl';
 import home from './home.pl';
+import fix from './fix.pl';
 
 const pl: Messages = {
   ...dash,
@@ -21,6 +22,7 @@ const pl: Messages = {
   ...trust,
   ...pilot,
   ...home,
+  ...fix,
   'app.name': 'Excel Insights',
   'app.tagline': 'Wnioski biznesowe z Twoich plików Excel',
   'nav.home': 'Start', 'nav.import': 'Import', 'nav.insights': 'Wnioski', 'nav.history': 'Historia', 'nav.settings': 'Ustawienia',

@@ -3,7 +3,7 @@ import type { ColumnProfile, FieldId, ImportStats, ModuleId } from '../types';
 export type TrustLevel = 'ok' | 'info' | 'warn' | 'confirm';
 export interface TrustItem {
   /** i18n suffix `itrust.<code>` (title) and `itrust.<code>.d` (explanation) */
-  code: 'vat_rates' | 'vat_inconsistent' | 'currency' | 'vat_basis' | 'dates' | 'date_order' | 'identifiers' | 'duplicates' | 'coverage' | 'credit_sign' | 'compat_currency' | 'compat_basis' | 'doc_semantics' | 'amount_sign';
+  code: 'vat_rates' | 'vat_inconsistent' | 'currency' | 'vat_basis' | 'dates' | 'date_order' | 'identifiers' | 'duplicates' | 'coverage' | 'credit_sign' | 'compat_currency' | 'compat_basis' | 'doc_semantics' | 'amount_sign' | 'credit_ambiguous';
   level: TrustLevel;
   params: Record<string, string | number>;
   /** the user can resolve this here (date order, currency, VAT basis) */
@@ -79,6 +79,9 @@ export function buildImportTrust(i: ImportTrustInput): TrustItem[] {
   if (signCredits) out.push({ code: 'credit_sign', level: 'warn', params: { n: signCredits } });
   const normalised = n('credit_sign_normalised') + n('negative_amount') + n('negative_outstanding');
   if (normalised) out.push({ code: 'amount_sign', level: 'info', params: { n: normalised } });
+
+  const ambCredit = n('credit_sign_ambiguous');
+  if (ambCredit) out.push({ code: 'credit_ambiguous', level: 'warn', params: { n: ambCredit } });
 
   // coverage
   if (i.stats.dateMin && i.stats.dateMax) out.push({ code: 'coverage', level: 'ok', params: { from: i.stats.dateMin, to: i.stats.dateMax, rows: i.rows } });

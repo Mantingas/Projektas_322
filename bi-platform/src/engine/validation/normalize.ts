@@ -2,6 +2,7 @@ import type { CellValue, ColumnProfile, ConfirmedMapping, ImportStats, IssueCode
 import { parseDate } from '../schema/dates';
 import { normalizeCurrency, parseNumber } from '../schema/numbers';
 import { assignKeys } from '../import/keys';
+import { isCreditType, normalizeUnit } from '../purchasing/units';
 
 export interface NormalizeOptions {
   profiles: ColumnProfile[];
@@ -68,6 +69,7 @@ export function normalizeSales(dataRows: CellValue[][], opts: NormalizeOptions):
 
   const get = (row: CellValue[], f: SalesField): CellValue => (col[f] === undefined ? null : (row[col[f]!] ?? null));
   const partial: Omit<SalesRecord, 'key'>[] = [];
+  const creditTypedRow: boolean[] = [];
   const currencies = new Set<string>();
 
   dataRows.forEach((row, i) => {
@@ -107,7 +109,9 @@ export function normalizeSales(dataRows: CellValue[][], opts: NormalizeOptions):
         return;
       } else note('warnings', 'unknown_currency', rowNo);
     }
-    if (amount < 0) note('warnings', 'negative_amount', rowNo);
+    const docType = clean(get(row, 'document_type'));
+    const creditTyped = col.document_type !== undefined && isCreditType(docType);
+    if (amount < 0 && !creditTyped) note('warnings', 'negative_amount', rowNo);
 
     let quantity: number | undefined;
     const rawQty = get(row, 'quantity');
@@ -115,6 +119,12 @@ export function normalizeSales(dataRows: CellValue[][], opts: NormalizeOptions):
       const q = parseNumber(rawQty, decimalOf('quantity'));
       if (q === null) note('warnings', 'invalid_quantity', rowNo);
       else quantity = q;
+    }
+    let unit: string | undefined;
+    if (col.unit !== undefined) {
+      const u = normalizeUnit(clean(get(row, 'unit')));
+      if (u) unit = u.code;
+      else if (quantity !== undefined) note('warnings', 'missing_unit', rowNo);
     }
     let cost: number | undefined;
     const rawCost = get(row, 'cost_amount');
@@ -154,6 +164,7 @@ export function normalizeSales(dataRows: CellValue[][], opts: NormalizeOptions):
       productName,
       productId,
       quantity,
+      unit,
       amount,
       basis,
       vatAmount: vat,
@@ -163,9 +174,54 @@ export function normalizeSales(dataRows: CellValue[][], opts: NormalizeOptions):
       category: clean(get(row, 'product_category')),
       sourceRow: rowNo,
     });
+    creditTypedRow.push(creditTyped);
   });
 
-  const records = assignKeys(partial);
+  // ── credit notes: the document-type column decides, the sign is only checked against it ───────────────────────────────
+  // All credit-typed amounts positive → the file writes credit notes as positive numbers: they are made negative (with a notice).
+  // All already negative → left alone (never flipped twice). A mix of both → ambiguous: the positive ones are NOT imported (they would
+  // silently be counted as sales) and the user is told how many, so the file can be corrected.
+  const creditIdx = partial.map((_, i) => i).filter((i) => creditTypedRow[i] && partial[i]!.amount !== 0);
+  const creditPos = creditIdx.filter((i) => partial[i]!.amount > 0);
+  const creditNeg = creditIdx.length - creditPos.length;
+  const drop = new Set<number>();
+  if (creditPos.length > 0 && creditNeg > 0) {
+    for (const i of creditPos) { drop.add(i); note('errors', 'credit_sign_ambiguous', partial[i]!.sourceRow); }
+    stats.rowsSkipped += creditPos.length;
+  } else if (creditPos.length > 0) {
+    for (const i of creditPos) {
+      const r = partial[i]!;
+      r.amount = -r.amount;
+      if (r.vatAmount !== undefined) r.vatAmount = -r.vatAmount;
+      // the cost of a credit line keeps the convention of its amount: positive amount & positive cost → both negative; any other combination is left for the cost sanity check
+      if (r.cost !== undefined && r.cost > 0) r.cost = -r.cost;
+      else if (r.cost !== undefined && r.cost < 0) { r.cost = undefined; note('warnings', 'cost_suspect', r.sourceRow); } // a negative cost on a positive credit amount contradicts itself
+      note('warnings', 'credit_sign_normalised', r.sourceRow);
+    }
+  }
+  const kept = partial.filter((_, i) => !drop.has(i));
+
+  // ── quantity sign must follow the amount sign (a return reduces the quantity) ────────────────────────────────────────
+  const negQty = kept.filter((r) => r.amount < 0 && r.quantity !== undefined && r.quantity !== 0);
+  const negQtyPositive = negQty.filter((r) => r.quantity! > 0);
+  if (negQtyPositive.length > 0 && negQtyPositive.length === negQty.length) {
+    // every negative-amount line carries a positive quantity: that is the file's convention for returns
+    for (const r of negQtyPositive) { r.quantity = -r.quantity!; note('warnings', 'quantity_sign_normalised', r.sourceRow); }
+  } else if (negQtyPositive.length > 0) {
+    // the file mixes conventions: the quantity of the lines whose sign disagrees is not trustworthy → not used
+    for (const r of negQtyPositive) { r.quantity = undefined; r.unit = undefined; note('warnings', 'quantity_sign_ambiguous', r.sourceRow); }
+  }
+  for (const r of kept) if (r.amount > 0 && r.quantity !== undefined && r.quantity < 0) { r.quantity = undefined; r.unit = undefined; note('warnings', 'quantity_sign_ambiguous', r.sourceRow); }
+
+  // ── cost sanity: only reported here (the figures are protected where margins are computed, so already stored data is protected too) ──
+  for (const r of kept) {
+    if (r.cost === undefined) continue;
+    if (r.amount > 0 && (r.cost < 0 || r.cost > 5 * r.amount)) note('warnings', 'cost_suspect', r.sourceRow);
+    else if (r.amount < 0 && r.cost > 0) note('warnings', 'cost_suspect', r.sourceRow);
+    else if (r.amount > 0 && r.cost === 0) note('warnings', 'cost_zero', r.sourceRow);
+  }
+
+  const records = assignKeys(kept);
   stats.rowsImported = records.length;
   stats.currencies = [...currencies].sort();
   for (const r of records) {
