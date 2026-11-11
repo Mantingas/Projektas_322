@@ -93,6 +93,20 @@ export interface AnalysisLite {
   detected: { module: ModuleId; purchasing: number; sales: number; inventory: number; finance: number; side: FinanceSide | null };
 }
 
+/** Keeps only valid ISO dates and a from ≤ to order: a declaration that contradicts itself is ignored, never guessed. */
+export function cleanCoverage(c?: { from?: string; to?: string }): { from?: string; to?: string } | undefined {
+  const ok = (d?: string) => (d && /^\d{4}-\d{2}-\d{2}$/.test(d) && !Number.isNaN(Date.parse(d)) ? d : undefined);
+  const from = ok(c?.from), to = ok(c?.to);
+  if (from && to && from > to) return undefined;
+  return from || to ? { ...(from ? { from } : {}), ...(to ? { to } : {}) } : undefined;
+}
+/** The widest export period declared over a module's imports. */
+export function declaredCoverage(rows: ImportRow[]): { from?: string; to?: string } {
+  const froms = rows.map((r) => r.coverage?.from).filter((x): x is string => Boolean(x)).sort();
+  const tos = rows.map((r) => r.coverage?.to).filter((x): x is string => Boolean(x)).sort();
+  return { from: froms[0], to: tos[tos.length - 1] };
+}
+
 export interface ImportRequest {
   sheetIdx: number;
   module?: ModuleId;
@@ -106,6 +120,8 @@ export interface ImportRequest {
   policy?: ImportPolicy;
   /** day/month order chosen by the user for date columns whose order cannot be known from the values */
   dateOrders?: Record<number, DateOrder>;
+  /** The period the report covers, when the user knows it (ISO dates, both optional). */
+  coverage?: { from?: string; to?: string };
 }
 export type ImportError = 'missing_date' | 'missing_amount' | 'currency_required' | 'missing_product' | 'missing_quantity' | 'missing_counterparty';
 export type PreviewResult = { ok: true; preview: MergePreview; stats: ImportStats; diagnostics: ImportDiagnostics; discountMode?: string; inventoryKind?: string; snapshotDates?: string[]; financeKind?: string; financeGrain?: string; financeSide?: string; trust: TrustItem[] } | { ok: false; error: ImportError };
@@ -423,7 +439,7 @@ export class EngineSession {
     const res: CommitResult = await commitImport(this.db, {
       module: n.module, extra: n.discountMode ? { discountMode: n.discountMode } : n.inventoryKind ? { inventoryKind: n.inventoryKind } : n.financeKind ? { financeKind: n.financeKind, financeSide: n.financeSide } : undefined,
       checksum: this.parsed.checksum, fileName: this.parsed.file.fileName, sheetName: this.parsed.file.sheets[req.sheetIdx]!.name, exportMode: req.mode,
-      records: n.records, stats: n.stats, mapping, templateId: cached.proposal.templateId, allowSameChecksum: req.allowSameChecksum, policy: req.policy, confirmed: req.confirmed,
+      records: n.records, stats: n.stats, mapping, templateId: cached.proposal.templateId, allowSameChecksum: req.allowSameChecksum, policy: req.policy, confirmed: req.confirmed, coverage: cleanCoverage(req.coverage),
     });
     if (res.status !== 'ok') return res;
     if (req.remember) {
@@ -486,7 +502,7 @@ export class EngineSession {
     if (allSeries.length === 0) return { empty: true, allSeries, options: {}, presets: [], imports: importsLite, pendingHeld, identity };
     const series = allSeries.find((s) => `${s.currency}|${s.basis}` === req.seriesKey) ?? allSeries[0]!;
     const seriesRecords = records.filter((r) => r.currency === series.currency && r.basis === series.basis);
-    const built = buildDashboardWithInsights(records, { series, filters: req.filters, period: req.period, identity, heldPending: pendingHeld })!;
+    const built = buildDashboardWithInsights(records, { series, filters: req.filters, period: req.period, identity, heldPending: pendingHeld, coverage: declaredCoverage(imports.filter((i) => (i.module ?? 'sales') === 'sales')) })!;
     const { records: modelRecords, ...view } = built.model;
     let dmin = seriesRecords[0]!.date;
     let dmax = dmin;
@@ -565,7 +581,7 @@ export class EngineSession {
     if (allSeries.length === 0) return { empty: true, allSeries, options: {}, presets: [], imports: importsLite, pendingHeld, identity };
     const series = allSeries.find((x) => `${x.currency}|${x.basis}` === req.seriesKey) ?? allSeries[0]!;
     const seriesRecords = records.filter((r) => r.currency === series.currency && r.basis === series.basis);
-    const opts: PurchasingOptions = { series, filters: req.filters, period: req.period, unitPolicy: req.unitPolicy, identity, heldPending: pendingHeld, discountUnverified: mine.some((i) => i.discountMode === 'unverified') };
+    const opts: PurchasingOptions = { series, filters: req.filters, period: req.period, unitPolicy: req.unitPolicy, identity, heldPending: pendingHeld, discountUnverified: mine.some((i) => i.discountMode === 'unverified'), coverage: declaredCoverage(mine) };
     const model = buildPurchasingDashboard(records, opts)!;
     const analysis = analyzePurchasingPeriod(model);
     const { records: _r, analysis: _a, ...view } = model;

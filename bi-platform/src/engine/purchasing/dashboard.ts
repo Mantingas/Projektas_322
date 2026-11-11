@@ -42,6 +42,8 @@ export interface PurchasingOptions {
   heldPending?: number;
   /** A discount column exists but the arithmetic did not settle whether amounts are net of it. */
   discountUnverified?: boolean;
+  /** The export period the user declared at import (earliest start, latest end). */
+  coverage?: { from?: string; to?: string };
 }
 
 export interface PurchasingView {
@@ -120,7 +122,7 @@ export function buildPurchasingDashboard(all: PurchaseRecord[], o: PurchasingOpt
   let sMax = sMin;
   const dates = new Set<string>();
   for (const r of seriesRecords) { if (r.date < sMin) sMin = r.date; if (r.date > sMax) sMax = r.date; dates.add(r.date); }
-  const periods = resolvePeriods(o.period, { dateMin: sMin, dateMax: sMax, dates });
+  const periods = resolvePeriods(o.period, { dateMin: sMin, dateMax: sMax, dates, checkCoverage: true, declaredFrom: o.coverage?.from, declaredTo: o.coverage?.to });
   const hasUnitColumn = seriesRecords.some((r) => r.unit !== undefined);
   const ctx: PurchaseMetricContext = { basis: o.series.basis, unitPolicy: policy, hasUnitColumn, singleProduct: (o.filters.products?.length ?? 0) === 1 };
 

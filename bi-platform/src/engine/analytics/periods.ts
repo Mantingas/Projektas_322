@@ -20,6 +20,10 @@ export type PeriodWarning =
   | { code: 'history_starts_late'; dataFrom: string } // previous starts before the first date in the data
   | { code: 'ytd_coverage'; dataFrom: string } // year-to-date requested but the data does not reach back to 1 January
   | { code: 'no_previous_data' }
+  /** The previous window starts well before the first loaded transaction and the export period was NOT declared: whether the export covers it is UNKNOWN (not proven incomplete). */
+  | { code: 'previous_unverified'; dataFrom: string; days: number }
+  /** The user declared the export period and it starts after the previous window's start: proven partial. */
+  | { code: 'previous_declared_incomplete'; declaredFrom: string; days: number }
   | { code: 'no_current_data' }
   | { code: 'length_mismatch'; current: number; previous: number }
   | { code: 'sparse_data'; which: 'current' | 'previous'; daysWithData: number; days: number };
@@ -52,6 +56,11 @@ export interface ResolvedPeriods {
 export interface DataBounds {
   dateMin: string;
   dateMax: string;
+  /** Modules whose changes compare two windows of transactions opt in: the previous window must be known to be covered by the data (see previousCoverage). */
+  checkCoverage?: boolean;
+  /** The export period the user stated at import (earliest start / latest end over the imports). Without it the first / last transaction is all we know. */
+  declaredFrom?: string;
+  declaredTo?: string;
   /** Distinct dates that have at least one record. */
   dates?: ReadonlySet<string>;
 }
@@ -69,7 +78,8 @@ const countDaysWithData = (r: Range, dates?: ReadonlySet<string>) => {
  * of the previous period and flagged; comparing it with the whole previous period requires `fullPrevious` and always warns.
  */
 export function resolvePeriods(sel: PeriodSelection, data: DataBounds): ResolvedPeriods {
-  const anchor = data.dateMax;
+  // a declared export end later than the last transaction means the trailing days are a real quiet period, not missing data
+  const anchor = data.checkCoverage && data.declaredTo && data.declaredTo > data.dateMax ? data.declaredTo : data.dateMax;
   const warnings: PeriodWarning[] = [];
   let current: Range;
   let previous: Range;
@@ -145,6 +155,11 @@ export function resolvePeriods(sel: PeriodSelection, data: DataBounds): Resolved
 
   if (previous.from < data.dateMin) warnings.push({ code: 'history_starts_late', dataFrom: data.dateMin });
   if (previous.to < data.dateMin || previous.from > data.dateMax) warnings.push({ code: 'no_previous_data' });
+  if (data.checkCoverage) {
+    const c = previousCoverage(previous, previousDays, data.dateMin, data.declaredFrom);
+    if (c.state === 'unknown') warnings.push({ code: 'previous_unverified', dataFrom: data.dateMin, days: c.leadingDays });
+    else if (c.state === 'declared_incomplete') warnings.push({ code: 'previous_declared_incomplete', declaredFrom: c.declaredFrom, days: c.leadingDays });
+  }
   if (current.to < data.dateMin || current.from > data.dateMax) warnings.push({ code: 'no_current_data' });
   for (const [which, r, days] of [['current', current, currentDays], ['previous', previous, previousDays]] as const) {
     const withData = countDaysWithData({ from: max(r.from, data.dateMin), to: min(r.to, data.dateMax) }, data.dates);
@@ -155,17 +170,32 @@ export function resolvePeriods(sel: PeriodSelection, data: DataBounds): Resolved
 }
 
 /** True when the comparison cannot support a trustworthy change figure. */
-export const isComparisonBlocked = (p: ResolvedPeriods) => p.warnings.some((w) => w.code === 'no_previous_data' || w.code === 'no_current_data');
+export const isComparisonBlocked = (p: ResolvedPeriods) => p.warnings.some((w) => w.code === 'no_previous_data' || w.code === 'no_current_data' || w.code === 'previous_unverified' || w.code === 'previous_declared_incomplete');
 export const isComparisonCaveated = (p: ResolvedPeriods) => p.warnings.length > 0;
 
+export type PreviousCoverage =
+  | { state: 'covered' }
+  | { state: 'tolerated'; leadingDays: number }
+  | { state: 'unknown'; leadingDays: number; dataFrom: string }
+  | { state: 'declared_incomplete'; leadingDays: number; declaredFrom: string }
+  | { state: 'none' };
+
 /**
- * Is the PREVIOUS window only partly covered by the loaded data? Judged from the data's first date against the window – NOT from how many
- * days happen to have transactions (a quiet business has many empty days). A few leading days without data are tolerated
- * (max(3 days, 10 % of the window)); more than that and a "change" would compare a full period with a partial one.
+ * Is the PREVIOUS comparison window covered by the loaded export? Four honest answers instead of a guess from the number of days with transactions:
+ *  covered              – there is evidence of data at or before the window's start (a transaction, or the export period the user declared);
+ *  tolerated            – the first evidence is a few days (max(3, 10 % of the window)) after the start: a quiet beginning, comparison allowed;
+ *  unknown              – the first transaction is later than that and the export period was NOT declared: the export may start there OR the business may simply have had no
+ *                         transactions earlier – we cannot tell, so the change is withheld and labelled UNKNOWN (never "proven incomplete");
+ *  declared_incomplete  – the user stated that the export starts after the window's start: proven partial;
+ *  none                 – no previous data at all (already reported as `no_previous_data`).
+ * A declared start later than the first transaction contradicts the file and is ignored.
  */
-export function previousIncomplete(p: ResolvedPeriods, dataMin: string): { missingDays: number; previousFrom: string; dataFrom: string } | null {
-  if (p.previous.from >= dataMin) return null;
-  if (p.previous.to < dataMin) return null; // no previous data at all: already blocked as `no_previous_data`
-  const missingDays = daysBetween(p.previous.from, dataMin);
-  return missingDays > Math.max(3, Math.ceil(0.1 * p.previousDays)) ? { missingDays, previousFrom: p.previous.from, dataFrom: dataMin } : null;
+export function previousCoverage(previous: Range, previousDays: number, dataMin: string, declaredFrom?: string): PreviousCoverage {
+  const declared = declaredFrom && declaredFrom <= dataMin ? declaredFrom : undefined;
+  const evidence = declared ?? dataMin;
+  if (previous.from >= evidence) return { state: 'covered' };
+  if (previous.to < evidence) return { state: 'none' };
+  const leadingDays = daysBetween(previous.from, evidence);
+  if (leadingDays <= Math.max(3, Math.ceil(0.1 * previousDays))) return { state: 'tolerated', leadingDays };
+  return declared ? { state: 'declared_incomplete', leadingDays, declaredFrom: declared } : { state: 'unknown', leadingDays, dataFrom: dataMin };
 }

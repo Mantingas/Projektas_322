@@ -24,6 +24,10 @@ export interface ImportRow {
   revisedDocs: number;
   supersededLines: number;
   staleLines: number;
+  /** The export period the user declared at import (optional). Lets a quiet start / end be told apart from missing data. */
+  coverage?: { from?: string; to?: string };
+  /** Version of the import rules the file was read with (2 = Phase 10B: credit-note type, quantity signs, units). Rows without it were imported with the older rules. */
+  rules?: number;
   /** Lines stored but held out of analytics until the user decides (ambiguous changes). */
   heldLines?: number;
   heldDocs?: number;

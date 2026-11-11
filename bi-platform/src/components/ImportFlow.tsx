@@ -45,6 +45,8 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   const [policy, setPolicy] = useState<ImportPolicy | null>(null);
   const [confirmChecked, setConfirmChecked] = useState(false);
   const [remember, setRemember] = useState(true);
+  const [coverFrom, setCoverFrom] = useState('');
+  const [coverTo, setCoverTo] = useState('');
   const [dupAccepted, setDupAccepted] = useState(false);
   const [pv, setPv] = useState<OkPreview | null>(null);
   const [pvBusy, setPvBusy] = useState(false);
@@ -62,7 +64,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   const reset = useCallback(() => {
     void engine().call('discard', []);
     setParsed(null); setAnalysis(null); setAssign({}); setConfs({}); setSources({}); setError(null); setDupAccepted(false); setResult(null); setSheetIdx(0);
-    setPv(null); setPolicy(null); setConfirmChecked(false); setMode('unknown'); setModule('sales'); setAsOf(''); setSide('receivable'); setDateOrders({});
+    setPv(null); setPolicy(null); setConfirmChecked(false); setMode('unknown'); setModule('sales'); setAsOf(''); setSide('receivable'); setDateOrders({}); setCoverFrom(''); setCoverTo('');
     if (input.current) input.current.value = '';
   }, []);
 
@@ -152,7 +154,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
     setBusy(true);
     setError(null);
     try {
-      const r = await engine().call('commit', [{ module, side, asOfDate: needsAsOf ? asOf : undefined, sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: pv.preview.policy, confirmed: confirmChecked, allowSameChecksum: dupAccepted, remember, dateOrders }]);
+      const r = await engine().call('commit', [{ module, side, asOfDate: needsAsOf ? asOf : undefined, sheetIdx, entries, currency: hasCurrencyCol ? undefined : currency, mode, policy: pv.preview.policy, confirmed: confirmChecked, allowSameChecksum: dupAccepted, remember, dateOrders, coverage: { from: coverFrom || undefined, to: coverTo || undefined } }]);
       if (r.status === 'ok') {
         setResult({ row: r.import, stats: r.stats, module, side });
         onImported();
@@ -485,6 +487,16 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
             </Card>
           )}
 
+          {(module === 'sales' || module === 'purchasing') && (
+            <fieldset className="space-y-2 rounded-xl border border-slate-200 p-3 text-sm dark:border-slate-800" data-testid="export-period">
+              <legend className="px-1 font-medium">{t('import.cover.title')}</legend>
+              <div className="flex flex-wrap gap-3">
+                <label className="flex items-center gap-2">{t('import.cover.from')} <input type="date" value={coverFrom} onChange={(e) => setCoverFrom(e.target.value)} data-testid="cover-from" className="rounded-md border border-slate-300 bg-transparent px-2 py-1 dark:border-slate-700" /></label>
+                <label className="flex items-center gap-2">{t('import.cover.to')} <input type="date" value={coverTo} onChange={(e) => setCoverTo(e.target.value)} data-testid="cover-to" className="rounded-md border border-slate-300 bg-transparent px-2 py-1 dark:border-slate-700" /></label>
+              </div>
+              <p className="text-xs text-slate-500">{t('import.cover.help')}</p>
+            </fieldset>
+          )}
           <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} /> {t('import.remember')}</label>
 
           <details className="rounded-xl border border-slate-200 p-3 dark:border-slate-800">

@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto';
 import { describe, expect, it } from 'vitest';
 import { H, addDays, importCsv, kpi, mkSession, runSales, type Cell } from './fixtures/salesCsv';
-import { previousIncomplete, resolvePeriods } from '@/engine/analytics/periods';
+import { previousCoverage, resolvePeriods } from '@/engine/analytics/periods';
 import { planMerge, type ExistingLine } from '@/engine/import/merge';
 import { buildSummaryDoc } from '@/lib/summary';
 
@@ -21,8 +21,10 @@ describe('S2 – a change is never reported against a previous window the data d
     expect(s.status).toBe('blocked');                          // was ok with pct = 2 (+200 %)
     expect(s.pct).toBeNull();
     expect(r.b.model!.comparable).toBe(false);
-    expect(r.b.model!.previousIncomplete).toBe(true);
-    expect(r.b.model!.limitations.find((l) => l.code === 'previous_incomplete')).toMatchObject({ missing: 20 });
+    expect(r.b.model!.warnings.map((w) => w.code)).toContain('previous_unverified');
+    // coverage is UNKNOWN (no declared period), never presented as proven incompleteness
+    expect(r.b.model!.limitations.map((l) => l.code)).toContain('previous_unknown');
+    expect(r.b.model!.limitations.map((l) => l.code)).not.toContain('previous_incomplete');
     expect(ins(r)).not.toContain('sales.revenue_change');
     expect(ins(r)).not.toContain('sales.product_growth');
     expect(ins(r)).not.toContain('sales.customers_declined');
@@ -37,17 +39,17 @@ describe('S2 – a change is never reported against a previous window the data d
     expect(s.status).toBe('ok');
     expect(s.pct).toBe(0);
     expect(s.direction).toBe('flat');
-    expect(r.b.model!.previousIncomplete).toBe(false);
+    expect(r.b.model!.warnings.map((w) => w.code)).not.toContain('previous_unverified');
   });
   it('a business with few sales days is NOT judged by its number of days with sales: every 5th day over 100 days still compares', async () => {
     const r = await runSales(H, flat(100, 5));
-    expect(r.b.model!.previousIncomplete).toBe(false);
+    expect(r.b.model!.warnings.map((w) => w.code)).not.toContain('previous_unverified');
     expect(kpi(r.b, 'sales').status).toBe('ok');
   });
   it('a couple of empty leading days (within the tolerance) do not block the comparison; the existing warning stays', async () => {
     const rows = flat(60).slice(2);                                // data starts 2 days after the window
     const r = await runSales(H, rows);
-    expect(r.b.model!.previousIncomplete).toBe(false);
+    expect(r.b.model!.warnings.map((w) => w.code)).not.toContain('previous_unverified');
     expect(r.b.model!.warnings.map((w) => w.code)).toContain('history_starts_late');
     expect(kpi(r.b, 'sales').status).toBe('ok');
   });
@@ -55,15 +57,15 @@ describe('S2 – a change is never reported against a previous window the data d
     const rows: Cell[][] = [];
     for (let d = '2025-05-20'; d <= END; d = addDays(d, 1)) rows.push([d, 'M' + d, 'K1', 'P', 1, 100, '']);
     const r = await runSales(H, rows, { preset: 'mom' });
-    expect(r.b.model!.previousIncomplete).toBe(true);
+    expect(r.b.model!.warnings.map((w) => w.code)).toContain('previous_unverified');
     expect(kpi(r.b, 'sales').status).toBe('blocked');
   });
-  it('previousIncomplete: pure function', () => {
+  it('previousCoverage: pure function (see period-coverage.test.ts for the full model)', () => {
     const p = resolvePeriods({ preset: 'r30' }, { dateMin: '2025-05-01', dateMax: END });
-    expect(previousIncomplete(p, '2025-05-01')).toBeNull();                                  // window starts 2025-05-02: covered
-    expect(previousIncomplete(p, '2025-05-05')).toBeNull();                                  // 3 days missing: tolerated
-    expect(previousIncomplete(p, '2025-05-06')).toMatchObject({ missingDays: 4 });
-    expect(previousIncomplete(p, '2025-07-01')).toBeNull();                                  // no previous data at all is the existing "no_previous_data" case
+    expect(previousCoverage(p.previous, p.previousDays, '2025-05-01').state).toBe('covered');   // window starts 2025-05-02
+    expect(previousCoverage(p.previous, p.previousDays, '2025-05-05').state).toBe('tolerated'); // 3 days later
+    expect(previousCoverage(p.previous, p.previousDays, '2025-05-06').state).toBe('unknown');
+    expect(previousCoverage(p.previous, p.previousDays, '2025-07-01').state).toBe('none');      // no previous data at all is the existing "no_previous_data" case
   });
 });
 

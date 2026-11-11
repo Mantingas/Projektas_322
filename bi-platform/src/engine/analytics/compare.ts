@@ -63,15 +63,10 @@ export interface ComparisonResult {
   metrics: MetricComparison[];
 }
 
-/** `incompletePrevious`: the previous window is only partly covered by the data, so no change may be reported (values stay, comparisons are blocked). */
-export function comparePeriods(records: SalesRecord[], periods: ResolvedPeriods, ids: MetricId[], ctx: MetricContext, incompletePrevious = false): ComparisonResult {
+export function comparePeriods(records: SalesRecord[], periods: ResolvedPeriods, ids: MetricId[], ctx: MetricContext): ComparisonResult {
   const current = aggregate(inRange(records, periods.current));
   const previous = aggregate(inRange(records, periods.previous));
-  const metrics = ids.map((id) => {
-    const m = compareMetric(id, current, previous, ctx, periods);
-    return incompletePrevious && m.status !== 'unavailable' ? { ...m, previous: null, abs: null, pct: null, direction: null, good: null, status: 'blocked' as const } : m;
-  });
-  return { periods, current, previous, metrics };
+  return { periods, current, previous, metrics: ids.map((id) => compareMetric(id, current, previous, ctx, periods)) };
 }
 
 // ───────── time series ─────────

@@ -29,7 +29,12 @@ export interface CommitInput {
   confirmed?: boolean;
   /** Extra facts stored on the import row (e.g. purchasing discount mode). */
   extra?: Partial<ImportRow>;
+  /** The export period the user declared (ISO dates, both optional). */
+  coverage?: { from?: string; to?: string };
 }
+
+/** Version of the import rules written to every new import row (see ImportRow.rules). */
+export const IMPORT_RULES_VERSION = 2;
 
 export type ConfirmReason = 'replacements' | 'removals' | 'add_alongside' | 'content_overlap';
 
@@ -193,7 +198,7 @@ export async function commitImport(db: AppDB, input: CommitInput): Promise<Commi
       added: mp.toAdd.length, duplicates: mp.duplicates, conflicts: mp.toHold.length, revisedDocs: mp.docs.replaced, supersededLines: mp.supersede.length, staleLines: mp.stale,
       heldLines: mp.toHold.length, heldDocs: mp.docs.held, removedDocs: mp.docs.removed, skippedLines: mp.skipped,
       policy: { conflicts: policy.conflicts, content: policy.content }, confirmed: Boolean(input.confirmed),
-      identity, idCoverage: coverage, mapping: input.mapping, templateId: input.templateId, ...input.extra,
+      identity, idCoverage: coverage, mapping: input.mapping, templateId: input.templateId, rules: IMPORT_RULES_VERSION, ...(input.coverage && (input.coverage.from || input.coverage.to) ? { coverage: input.coverage } : {}), ...input.extra,
     };
     await db.imports.add(row);
     await markSuperseded(db, module, mp.supersede, id);

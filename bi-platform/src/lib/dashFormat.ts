@@ -35,6 +35,8 @@ export function warningText(w: PeriodWarning, t: T): string {
     case 'history_starts_late': return t('pw.history_starts_late', { dataFrom: w.dataFrom });
     case 'ytd_coverage': return t('pw.ytd_coverage', { dataFrom: w.dataFrom });
     case 'no_previous_data': return t('pw.no_previous_data');
+    case 'previous_unverified': return t('pw.previous_unverified', { dataFrom: { date: w.dataFrom } });
+    case 'previous_declared_incomplete': return t('pw.previous_declared_incomplete', { declaredFrom: { date: w.declaredFrom } });
     case 'no_current_data': return t('pw.no_current_data');
     case 'length_mismatch': return t('pw.length_mismatch', { current: w.current, previous: w.previous });
     case 'sparse_data': return t('pw.sparse_data', { daysWithData: w.daysWithData, days: w.days, which: t(`pw.which.${w.which}` as MessageKey) });

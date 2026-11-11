@@ -32,3 +32,14 @@ export async function runSales(header: string[], rows: Cell[][], period: unknown
   return { s, b, ...imp };
 }
 export const kpi = (b: Awaited<ReturnType<typeof runSales>>['b'], id: string) => b.model!.kpis.find((k) => k.id === id)!;
+
+/** Same as importCsv for any module (purchasing, finance, inventory); extra request fields (side, coverage …) are passed through. */
+export async function importAny(s: EngineSession, module: 'sales' | 'purchasing' | 'finance' | 'inventory', header: string[], rows: Cell[][], name: string, extra: Record<string, unknown> = {}, confirmed = true) {
+  await s.parse(enc(csv(header, rows)), name);
+  const a = (await s.analyze(0, ',', module)) as AnalysisLite;
+  const req: any = { sheetIdx: 0, module, entries: a.proposal.entries, currency: 'EUR', mode: 'full', ...extra };
+  const pv: any = await s.preview(req);
+  const commit: any = await s.commit({ ...req, confirmed, allowSameChecksum: true, remember: false });
+  return { a, pv, commit };
+}
+export const PH = ['Data', 'Tiekėjo sąskaitos Nr.', 'Tiekėjas', 'Prekė', 'Kiekis', 'Matavimo vnt.', 'Suma be PVM'];
