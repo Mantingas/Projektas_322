@@ -1,5 +1,6 @@
 import type { AmountBasis, SalesRecord } from '../types';
 import { aggregate } from '../analytics/aggregate';
+import { dimensionOf } from '../analytics/filters';
 import { evaluateMargin } from '../analytics/metrics';
 
 export interface Series {
@@ -34,14 +35,9 @@ export function addDays(iso: string, n: number): string {
 }
 
 const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ');
-export const customerOf = (r: SalesRecord) => {
-  const label = r.customerName ?? r.customerId;
-  return label ? { key: norm(label), label } : null;
-};
-export const productOf = (r: SalesRecord) => {
-  const label = r.productName ?? r.productId;
-  return label ? { key: norm(label), label } : null;
-};
+/** Same identity rule as every dashboard table and filter (code before name): see analytics/filters.ts. */
+export const customerOf = (r: SalesRecord) => dimensionOf.customer(r);
+export const productOf = (r: SalesRecord) => dimensionOf.product(r);
 export const salespersonOf = (r: SalesRecord) => (r.salesperson ? { key: norm(r.salesperson), label: r.salesperson } : null);
 
 export interface Group {

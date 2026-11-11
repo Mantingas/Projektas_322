@@ -1,6 +1,6 @@
 import type { SalesRecord } from '../types';
 import { aggregate, groupAggregates, type Aggregate } from './aggregate';
-import { dimensionOf, type Dimension, type SalesDimension } from './filters';
+import { dimensionOf, disambiguateLabels, type Dimension, type SalesDimension } from './filters';
 import { addDays, daysBetween, lengthDays, monthStart, weekStart } from './dates';
 import { evaluate, METRICS, type MetricContext, type MetricId, type MetricUnit, type Unavailable } from './metrics';
 import { isComparisonBlocked, type Range, type ResolvedPeriods } from './periods';
@@ -177,7 +177,7 @@ export function entityTable(records: SalesRecord[], dim: SalesDimension, periods
       margin: a ? evaluate('margin', a, ctx).value : null,
     };
   });
-  return { dimension: dim, rows, unassigned: { current: cur.unassigned.revenue, previous: prev.unassigned.revenue }, totalCurrent, totalPrevious };
+  return { dimension: dim, rows: disambiguateLabels(rows), unassigned: { current: cur.unassigned.revenue, previous: prev.unassigned.revenue }, totalCurrent, totalPrevious };
 }
 
 export function topBottom(rows: EntityRow[], n: number): { top: EntityRow[]; bottom: EntityRow[] } {

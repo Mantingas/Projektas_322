@@ -23,12 +23,30 @@ export interface FilterSpec {
 
 const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ');
 
+/**
+ * Identity of a customer / product. A stable CODE wins over the display name: two different customers that share a name stay two customers,
+ * and one customer written in two ways ("UAB Beta" / "Beta, UAB") stays one as long as the code is the same. Without a code the normalised name is used
+ * (that is all the file offers). Keys: `id:<code>` or `name:<name>`.
+ */
+const entity = (id: string | undefined, name: string | undefined): { key: string; label: string } | null => {
+  if (id && id.trim()) return { key: `id:${norm(id)}`, label: (name && name.trim()) || id };
+  if (name && name.trim()) return { key: `name:${norm(name)}`, label: name };
+  return null;
+};
+
 export const dimensionOf = {
-  customer: (r: SalesRecord) => (r.customerName ?? r.customerId) ? { key: norm((r.customerName ?? r.customerId)!), label: (r.customerName ?? r.customerId)! } : null,
-  product: (r: SalesRecord) => (r.productName ?? r.productId) ? { key: norm((r.productName ?? r.productId)!), label: (r.productName ?? r.productId)! } : null,
+  customer: (r: SalesRecord) => entity(r.customerId, r.customerName),
+  product: (r: SalesRecord) => entity(r.productId, r.productName),
   salesperson: (r: SalesRecord) => (r.salesperson ? { key: norm(r.salesperson), label: r.salesperson } : null),
   category: (r: SalesRecord) => (r.category ? { key: norm(r.category), label: r.category } : null),
 } satisfies Record<SalesDimension, (r: SalesRecord) => { key: string; label: string } | null>;
+
+/** Two different entities with the same label (e.g. two customers named "UAB Alfa") must be told apart on screen: the code is appended. */
+export function disambiguateLabels<T extends { key: string; label: string }>(rows: T[]): T[] {
+  const count = new Map<string, number>();
+  for (const r of rows) count.set(r.label, (count.get(r.label) ?? 0) + 1);
+  return rows.map((r) => ((count.get(r.label) ?? 0) > 1 && r.key.startsWith('id:') ? { ...r, label: `${r.label} · ${r.key.slice(3)}` } : r));
+}
 
 export const hasDimension = (records: SalesRecord[], d: SalesDimension) => records.some((r) => dimensionOf[d](r));
 

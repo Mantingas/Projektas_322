@@ -71,6 +71,10 @@ Receivables, payables and cash intelligence (module "Receivables & payables"): i
 - The app still makes no network requests of its own: the samples are bundled into a lazily loaded chunk (the privacy tests forbid `fetch`/XHR in `src/`).
 - The pilot block is informational. An invitation with a `mailto:` link appears only when `PILOT_EMAIL` in `src/config/contact.ts` holds a valid public address chosen by the owner (empty by default). The landing page was then compacted for phones (≈ 35 % shorter) and the privacy section shows three facts with the technical details folded.
 
+## Phase 10B additions (sales financial correctness)
+
+Remediation of the Phase 10 audit – see `docs/SALES_FINANCIAL_CORRECTNESS.md`: credit notes recognised from a document-type column, margin needing revenue AND line cost coverage and netting returns, cost sanity checks, unit-safe quantities and prices, comparisons withheld when the previous period is not covered by the data, sales documents identified by number + year, code-first customer/product identity, and wording that never calls a sales decline a "loss". No schema change; files imported before this change should be re-imported to benefit from the import-time protections.
+
 ## What works
 - LT / PL / EN interface; `.xlsx`, `.csv`, `.tsv`; sheet selection; header row detection under report titles; totals rows skipped.
 - UTF-8 / Windows-1257 / Windows-1250 CSV; `1 234,56`, `1.234,56`, `1,234.56`, `€`/`zł` suffixes; ISO, `dd.mm.yyyy`, `dd/mm/yyyy`, `yyyy.mm.dd`, Excel serial dates.

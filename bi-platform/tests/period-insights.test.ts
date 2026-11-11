@@ -3,7 +3,7 @@ import { buildDashboardWithInsights, buildDashboard } from '@/engine/analytics/d
 import { analyzeSales } from '@/engine/insights/engine';
 import { availablePresets, resolvePeriods, type PeriodSelection } from '@/engine/analytics/periods';
 import { drillRecords } from '@/engine/analytics/provenance';
-import { applyFilters } from '@/engine/analytics/filters';
+import { applyFilters, dimensionOf } from '@/engine/analytics/filters';
 import { aggregate } from '@/engine/analytics/aggregate';
 import { buildFixtures, type Fixture } from './fixtures/formats';
 import { makeTruth, type TruthLine } from './fixtures/truth';
@@ -12,6 +12,9 @@ import type { Insight, SalesRecord } from '@/engine/types';
 
 const NET = { currency: 'EUR', basis: 'net' as const };
 let recs: SalesRecord[] = [];
+// Phase 10B (I1): filter keys come from the engine (`id:<code>` or `name:<name>`)
+const ckey = (name: string) => dimensionOf.customer(recs.find((r) => r.customerName === name)!)!.key;
+const pkey = (name: string) => dimensionOf.product(recs.find((r) => r.productName === name)!)!.key;
 let truth: TruthLine[] = [];
 let fx: Fixture[] = [];
 beforeAll(async () => {
@@ -95,7 +98,7 @@ describe('primary insights follow the selected period', () => {
 describe('insights use the same filters as the dashboard', () => {
   it('a product filter restricts insight amounts to that product', () => {
     const prod = truth[0]!.product;
-    const f = { products: [prod.toLowerCase()] };
+    const f = { products: [pkey(prod)] };
     const { model, analysis } = run({ preset: 'r30' }, f);
     expect(model.records.every((r) => r.productName === prod)).toBe(true);
     const sales = model.kpis.find((k) => k.id === 'sales')!;
@@ -224,8 +227,8 @@ describe('explicit incomplete-period indicators', () => {
 describe('filter behaviour is identical across every view', () => {
   it('model records, tables, aligned series and drill-down all see the same filtered lines', () => {
     const name = truth[2]!.customer;
-    const d = buildDashboard(recs, { series: NET, filters: { customers: [name.toLowerCase()], text: truth[2]!.product.slice(0, 5) }, period: { preset: 'r30' } })!;
-    const expected = applyFilters(recs, { customers: [name.toLowerCase()], text: truth[2]!.product.slice(0, 5) });
+    const d = buildDashboard(recs, { series: NET, filters: { customers: [ckey(name)], text: truth[2]!.product.slice(0, 5) }, period: { preset: 'r30' } })!;
+    const expected = applyFilters(recs, { customers: [ckey(name)], text: truth[2]!.product.slice(0, 5) });
     expect(d.records).toHaveLength(expected.length);
     const total = expected.filter((r) => r.date >= '2025-11-16').reduce((s, r) => s + r.amount, 0);
     expect(d.kpis.find((k) => k.id === 'sales')!.current).toBeCloseTo(total, 6);

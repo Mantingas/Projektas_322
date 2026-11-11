@@ -50,6 +50,9 @@ function ref(truth: TruthLine[], from: string, to: string) {
 
 let fx: Fixture[] = [];
 let recs: SalesRecord[] = [];
+// Phase 10B (I1): entity filter keys are `id:<code>` when the file has a code, else `name:<name>`: take them from the engine instead of hard-coding the old lower-cased names
+const ckey = (name: string) => dimensionOf.customer(recs.find((r) => r.customerName === name)!)!.key;
+const pkey = (name: string) => dimensionOf.product(recs.find((r) => r.productName === name)!)!.key;
 let truth: TruthLine[] = [];
 beforeAll(async () => {
   fx = await buildFixtures();
@@ -142,7 +145,7 @@ describe('KPIs equal independent reference values', () => {
     const p = resolvePeriods({ preset: 'r30' }, bounds('2025-09-01', '2025-12-15'));
     expect(get(comparePeriods(recs, p, ['asp'], CTX), 'asp').status).toBe('unavailable');
     const one = truth[0]!.product;
-    const sub = applyFilters(recs, { products: [one.toLowerCase()] });
+    const sub = applyFilters(recs, { products: [pkey(one)] });
     const m = comparePeriods(sub, p, ['asp'], { ...CTX, singleProduct: true });
     const rows = truth.filter((t) => t.product === one && t.date >= p.current.from && t.date <= p.current.to);
     const expected = rows.reduce((s, t) => s + t.net, 0) / 100 / rows.reduce((s, t) => s + t.qty, 0);
@@ -272,7 +275,7 @@ describe('aggregation, filters and views stay consistent', () => {
   });
   it('a customer filter changes KPIs, tables and charts consistently and equals a brute-force calculation', () => {
     const name = truth[0]!.customer;
-    const d = buildDashboard(recs, { ...base, filters: { customers: [name.toLowerCase()] } })!;
+    const d = buildDashboard(recs, { ...base, filters: { customers: [ckey(name)] } })!;
     const p = d.periods;
     const expected = ref(truth.filter((t) => t.customer === name), p.current.from, p.current.to);
     expect(d.kpis.find((k) => k.id === 'sales')!.current).toBeCloseTo(expected.net, 2);
@@ -285,7 +288,7 @@ describe('aggregation, filters and views stay consistent', () => {
   });
   it('filter dimensions combine (AND) and text search matches documents', () => {
     const t = truth[3]!;
-    const f = applyFilters(recs, { customers: [t.customer.toLowerCase()], products: [t.product.toLowerCase()] });
+    const f = applyFilters(recs, { customers: [ckey(t.customer)], products: [pkey(t.product)] });
     expect(f.length).toBe(truth.filter((x) => x.customer === t.customer && x.product === t.product).length);
     expect(applyFilters(recs, { text: t.doc }).every((r) => r.documentId === t.doc)).toBe(true);
     expect(applyFilters(recs, { categories: [t.category.toLowerCase()] }).length).toBe(truth.filter((x) => x.category === t.category).length);

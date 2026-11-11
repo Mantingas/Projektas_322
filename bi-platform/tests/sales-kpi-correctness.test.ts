@@ -143,13 +143,13 @@ describe('U1 – quantities of different units are never added', () => {
   });
   it('kg and g of the same product are converted exactly: 100 kg + 5000 g = 105 kg; the price is per kg (was 0.041 per mixed unit)', async () => {
     const rows: Cell[][] = [[D, 'U1', 'K1', 'Miltai', 100, 'kg', 200], [D, 'U2', 'K2', 'Miltai', 5000, 'g', 10]];
-    const r = await runSales(UH, rows, { preset: 'r30' }, { products: ['miltai'] });
+    const r = await runSales(UH, rows, { preset: 'r30' }, { products: ['name:miltai'] });
     expect(kpi(r.b, 'quantity').current).toBeCloseTo(105, 9);
     expect(kpi(r.b, 'asp').current).toBeCloseTo(210 / 105, 9);
     expect(r.b.model!.explain.asp).toMatchObject({ unit: 'kg' });
   });
   it('boxes and pieces of one product have no stated rule: quantity and price are withheld', async () => {
-    const r = await runSales(UH, [[D, 'U1', 'K1', 'Kiaušiniai', 10, 'dėžė', 100], [D, 'U2', 'K2', 'Kiaušiniai', 100, 'vnt.', 90]], { preset: 'r30' }, { products: ['kiaušiniai'] });
+    const r = await runSales(UH, [[D, 'U1', 'K1', 'Kiaušiniai', 10, 'dėžė', 100], [D, 'U2', 'K2', 'Kiaušiniai', 100, 'vnt.', 90]], { preset: 'r30' }, { products: ['name:kiaušiniai'] });
     expect(kpi(r.b, 'quantity').unavailable).toBe('mixed_units');
     expect(kpi(r.b, 'asp').unavailable).toBe('mixed_units');
     expect(r.b.model!.tables.product!.rows[0]!.quantity).toBeNull();

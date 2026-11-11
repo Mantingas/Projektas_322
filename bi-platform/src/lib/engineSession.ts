@@ -32,7 +32,7 @@ import type { UnitPolicy } from '@/engine/purchasing/units';
 import { analyzeSales, type SalesAnalysis } from '@/engine/insights/engine';
 import { buildDashboardWithInsights, type DashboardOptions, type DashboardView } from '@/engine/analytics/dashboard';
 import { availablePresets, type PeriodPreset } from '@/engine/analytics/periods';
-import { dimensionOf, type Dimension, type SalesDimension, type PurchaseDimension, type FilterSpec } from '@/engine/analytics/filters';
+import { dimensionOf, disambiguateLabels, type Dimension, type SalesDimension, type PurchaseDimension, type FilterSpec } from '@/engine/analytics/filters';
 import { groupAggregates } from '@/engine/analytics/aggregate';
 import { drillRecords, sourcesOf, type DrillSpec, type SourceSummary } from '@/engine/analytics/provenance';
 import { csvCell } from '@/engine/report/export';
@@ -498,7 +498,7 @@ export class EngineSession {
     for (const d of ['customer', 'product', 'salesperson', 'category'] as SalesDimension[]) {
       if (!seriesRecords.some((r) => dimensionOf[d](r))) continue;
       const { groups } = groupAggregates(seriesRecords, d);
-      options[d] = [...groups.values()].map((g) => ({ key: g.key, label: g.label, value: g.agg.revenue })).sort((a, b) => b.value - a.value).slice(0, 2000);
+      options[d] = disambiguateLabels([...groups.values()].map((g) => ({ key: g.key, label: g.label, value: g.agg.revenue }))).sort((a, b) => b.value - a.value).slice(0, 2000);
     }
     return {
       empty: false, series, allSeries, model: view, analysis: built.analysis,
