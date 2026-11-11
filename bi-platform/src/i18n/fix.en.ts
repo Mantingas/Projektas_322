@@ -10,5 +10,7 @@ const fix = {
   'mu.cost_revenue_coverage': 'Cost is known for under 80% of sales REVENUE (even if it is present on many lines)', 'mu.returns_cost_unknown': 'Returns / credit notes are material and their cost is missing or of unknown sign', 'mu.mixed_units': 'Quantities are in different units that cannot be added (e.g. kg and pcs)', 'mu.units_missing': 'Some quantities have no unit while others do',
   'lim.units_unstated': 'The file does not state units of measure, so quantities are added as they are and assumed to be in the same unit.',
   'lim.margin_partial': 'The margin covers only {pct} of sales revenue (the lines with a usable cost). It is not the margin of the whole turnover.',
+  'lim.previous_incomplete': 'The previous comparison period starts on {from}, but your data starts on {dataFrom}: {missing} days of it are not in the file. Changes and comparison-based findings are not shown, because they would compare a full period with a partial one. Load an earlier export or choose a shorter period.',
+  'mp.sharedNumber': 'Documents sharing a number with another year', 'mp.sharedNumberNote': 'These document numbers are already stored for a different year (numbering often restarts every year). They are kept as separate documents and do not replace the older ones. If they are corrected versions of the same invoices, the dates in the file must be the original dates.',
 } as const;
 export default fix;

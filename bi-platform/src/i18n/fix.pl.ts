@@ -10,5 +10,7 @@ const pl: Record<keyof typeof fix, string> = {
   'mu.cost_revenue_coverage': 'Koszt znany dla mniej niż 80% PRZYCHODU ze sprzedaży (nawet jeśli jest w wielu pozycjach)', 'mu.returns_cost_unknown': 'Zwroty / korekty są istotne, a ich koszt jest nieznany lub o nieznanym znaku', 'mu.mixed_units': 'Ilości w różnych jednostkach, których nie można dodać (np. kg i szt.)', 'mu.units_missing': 'Część ilości nie ma jednostki, a inne mają',
   'lim.units_unstated': 'Plik nie podaje jednostek miary, więc ilości są sumowane tak, jak są, przy założeniu tej samej jednostki.',
   'lim.margin_partial': 'Marża obejmuje tylko {pct} przychodu ze sprzedaży (pozycje z odpowiednim kosztem). To nie jest marża całego obrotu.',
+  'lim.previous_incomplete': 'Poprzedni okres porównawczy zaczyna się {from}, a Twoje dane zaczynają się {dataFrom}: brakuje {missing} dni w pliku. Zmiany i wnioski oparte na porównaniu nie są pokazywane, bo porównywałyby pełny okres z częściowym. Wczytaj wcześniejszy eksport lub wybierz krótszy okres.',
+  'mp.sharedNumber': 'Dokumenty o numerze z innego roku', 'mp.sharedNumberNote': 'Te numery dokumentów są już zapisane dla innego roku (numeracja często zaczyna się od nowa co roku). Są traktowane jako osobne dokumenty i nie zastępują starszych. Jeśli to poprawione wersje tych samych faktur, w pliku muszą być oryginalne daty.',
 };
 export default pl;

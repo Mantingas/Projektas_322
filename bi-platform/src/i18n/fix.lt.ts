@@ -10,5 +10,7 @@ const lt: Record<keyof typeof fix, string> = {
   'mu.cost_revenue_coverage': 'Savikaina žinoma mažiau nei 80 % pardavimų PAJAMŲ (net jei ji yra daugelyje eilučių)', 'mu.returns_cost_unknown': 'Grąžinimai / kreditinės reikšmingi, o jų savikainos nėra arba ženklas nežinomas', 'mu.mixed_units': 'Kiekiai skirtingais vienetais, kurių sudėti negalima (pvz., kg ir vnt.)', 'mu.units_missing': 'Dalis kiekių neturi vieneto, o kiti turi',
   'lim.units_unstated': 'Faile nenurodyti matavimo vienetai, todėl kiekiai sudedami tokie, kokie yra, laikant, kad jie tuo pačiu vienetu.',
   'lim.margin_partial': 'Marža apima tik {pct} pardavimų pajamų (eilutes su tinkama savikaina). Tai ne visos apyvartos marža.',
+  'lim.previous_incomplete': 'Ankstesnis palyginimo laikotarpis prasideda {from}, o jūsų duomenys – {dataFrom}: {missing} d. jo faile nėra. Pokyčiai ir radiniai, pagrįsti palyginimu, nerodomi, nes būtų lyginamas pilnas laikotarpis su daliniu. Įkelkite ankstesnį eksportą arba pasirinkite trumpesnį laikotarpį.',
+  'mp.sharedNumber': 'Dokumentai, kurių numeris sutampa su kitų metų', 'mp.sharedNumberNote': 'Šie dokumentų numeriai jau išsaugoti kitiems metams (numeracija dažnai prasideda iš naujo kiekvienais metais). Jie laikomi atskirais dokumentais ir senųjų nepakeičia. Jei tai tų pačių sąskaitų pataisytos versijos, faile turi būti originalios datos.',
 };
 export default lt;

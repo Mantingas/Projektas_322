@@ -1,4 +1,4 @@
-import { addDays, addMonths, addYears, lengthDays, max, min, monthEnd, monthStart, weekStart } from './dates';
+import { addDays, addMonths, addYears, daysBetween, lengthDays, max, min, monthEnd, monthStart, weekStart } from './dates';
 
 const yearStart = (iso: string) => iso.slice(0, 4) + '-01-01';
 
@@ -157,3 +157,15 @@ export function resolvePeriods(sel: PeriodSelection, data: DataBounds): Resolved
 /** True when the comparison cannot support a trustworthy change figure. */
 export const isComparisonBlocked = (p: ResolvedPeriods) => p.warnings.some((w) => w.code === 'no_previous_data' || w.code === 'no_current_data');
 export const isComparisonCaveated = (p: ResolvedPeriods) => p.warnings.length > 0;
+
+/**
+ * Is the PREVIOUS window only partly covered by the loaded data? Judged from the data's first date against the window – NOT from how many
+ * days happen to have transactions (a quiet business has many empty days). A few leading days without data are tolerated
+ * (max(3 days, 10 % of the window)); more than that and a "change" would compare a full period with a partial one.
+ */
+export function previousIncomplete(p: ResolvedPeriods, dataMin: string): { missingDays: number; previousFrom: string; dataFrom: string } | null {
+  if (p.previous.from >= dataMin) return null;
+  if (p.previous.to < dataMin) return null; // no previous data at all: already blocked as `no_previous_data`
+  const missingDays = daysBetween(p.previous.from, dataMin);
+  return missingDays > Math.max(3, Math.ceil(0.1 * p.previousDays)) ? { missingDays, previousFrom: p.previous.from, dataFrom: dataMin } : null;
+}

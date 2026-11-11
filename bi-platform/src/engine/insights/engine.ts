@@ -107,7 +107,7 @@ export function analyzeSales(all: SalesRecord[], seriesChoice?: Pick<Series, 'cu
  * PRIMARY analysis: uses exactly the dashboard's series, filters and resolved comparison periods.
  * `history` = series lines after the dashboard's entity filters (all dates). Lines of the current period are the scope.
  */
-export function analyzeSalesPeriod(history: SalesRecord[], series: Pick<Series, 'currency' | 'basis'>, rp: ResolvedPeriods): SalesAnalysis | null {
+export function analyzeSalesPeriod(history: SalesRecord[], series: Pick<Series, 'currency' | 'basis'>, rp: ResolvedPeriods, previousIncomplete = false): SalesAnalysis | null {
   if (history.length === 0) return null;
   const inR = (r: Range) => history.filter((x) => x.date >= r.from && x.date <= r.to);
   const current = inR(rp.current);
@@ -116,7 +116,7 @@ export function analyzeSalesPeriod(history: SalesRecord[], series: Pick<Series, 
     days: rp.currentDays, currentFrom: rp.current.from, currentTo: rp.current.to, previousFrom: rp.previous.from, previousTo: rp.previous.to,
     current, previous, equivalent: rp.equivalent, previousDays: rp.previousDays,
   };
-  const blocked = isComparisonBlocked(rp);
+  const blocked = isComparisonBlocked(rp) || previousIncomplete;
   const res = run(history, current, series, blocked ? null : periods);
   return { ...res, allSeries: [] };
 }

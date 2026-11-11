@@ -10,7 +10,7 @@ import { applyFilters, hasDimension, type FilterSpec, type SalesDimension } from
 import { KPI_ORDER, evaluateMargin, type MetricContext, type MetricId } from './metrics';
 import { explainMetricInputs } from './provenance';
 import { inRange } from './compare';
-import { isComparisonBlocked, resolvePeriods, type PeriodSelection, type PeriodWarning, type ResolvedPeriods } from './periods';
+import { isComparisonBlocked, previousIncomplete, resolvePeriods, type PeriodSelection, type PeriodWarning, type ResolvedPeriods } from './periods';
 
 export type Limitation =
   | { code: 'basis_unknown' }
@@ -22,6 +22,7 @@ export type Limitation =
   | { code: 'no_comparison' }
   | { code: 'negative_lines'; lines: number }
   | { code: 'held_pending'; lines: number }
+  | { code: 'previous_incomplete'; missing: number; from: { date: string }; dataFrom: { date: string } }
   | { code: 'units_unstated' }
   | { code: 'margin_partial'; pct: number };
 
@@ -55,6 +56,8 @@ export interface DashboardModel {
   charts: ChartPlan[];
   warnings: PeriodWarning[];
   limitations: Limitation[];
+  /** The previous comparison window is only partly covered by the data: changes and comparison-based findings are withheld. */
+  previousIncomplete: boolean;
   /** Inputs behind each metric of the current period, for the "how is this calculated" explanation. */
   explain: Partial<Record<MetricId, Record<string, number | string>>>;
 }
@@ -84,8 +87,9 @@ export function buildDashboard(all: SalesRecord[], o: DashboardOptions): Dashboa
   }
   const periods = resolvePeriods(o.period, { dateMin: sMin, dateMax: sMax, dates: new Set(seriesRecords.map((r) => r.date)) });
   const ctx: MetricContext = { basis: o.series.basis, singleProduct: (o.filters.products?.length ?? 0) === 1 };
-  const cmp = comparePeriods(records, periods, KPI_ORDER, ctx);
-  const comparable = !isComparisonBlocked(periods) && cmp.previous.lines > 0 && cmp.current.lines > 0;
+  const incomplete = previousIncomplete(periods, sMin);
+  const cmp = comparePeriods(records, periods, KPI_ORDER, ctx, incomplete !== null);
+  const comparable = !isComparisonBlocked(periods) && !incomplete && cmp.previous.lines > 0 && cmp.current.lines > 0;
 
   const tables = Object.fromEntries(DIMS.map((d) => [d, hasDimension(records, d) ? entityTable(records, d, periods, ctx) : null])) as Record<SalesDimension, EntityTable | null>;
   const trend = salesTrend(records, { from: dateMin, to: dateMax });
@@ -106,7 +110,8 @@ export function buildDashboard(all: SalesRecord[], o: DashboardOptions): Dashboa
   const otherSeries = new Set(all.map((r) => `${r.currency}|${r.basis}`)).size - 1;
   if (otherSeries > 0) limitations.push({ code: 'other_series_hidden', count: otherSeries });
   if (records.length !== seriesRecords.length) limitations.push({ code: 'filtered' });
-  if (!comparable) limitations.push({ code: 'no_comparison' });
+  if (incomplete) limitations.push({ code: 'previous_incomplete', missing: incomplete.missingDays, from: { date: incomplete.previousFrom }, dataFrom: { date: incomplete.dataFrom } });
+  else if (!comparable) limitations.push({ code: 'no_comparison' });
   const neg = records.filter((r) => r.amount < 0).length;
   if (neg) limitations.push({ code: 'negative_lines', lines: neg });
   if (o.heldPending) limitations.push({ code: 'held_pending', lines: o.heldPending });
@@ -119,7 +124,7 @@ export function buildDashboard(all: SalesRecord[], o: DashboardOptions): Dashboa
   return {
     series: o.series, ctx, bounds: { dateMin, dateMax }, records, periods, comparable, kpis: cmp.metrics, trend, aligned: alignedSeries(records, periods), tables,
     pareto: par, waterfall: wDim ? { dimension: wDim, data: waterfall(tables[wDim]!) } : null,
-    composition: tables.category ? composition(tables.category) : [], charts, warnings: periods.warnings, limitations, explain,
+    composition: tables.category ? composition(tables.category) : [], charts, warnings: periods.warnings, limitations, explain, previousIncomplete: incomplete !== null,
   };
 }
 
@@ -137,7 +142,7 @@ import { analyzeSalesPeriod, type SalesAnalysis } from '../insights/engine';
 export function buildDashboardWithInsights(all: SalesRecord[], o: DashboardOptions): { model: DashboardModel; analysis: SalesAnalysis | null } | null {
   const model = buildDashboard(all, o);
   if (!model) return null;
-  return { model, analysis: analyzeSalesPeriod(model.records, o.series, model.periods) };
+  return { model, analysis: analyzeSalesPeriod(model.records, o.series, model.periods, model.previousIncomplete) };
 }
 
 /** What the UI receives: the model without the (potentially huge) record list, which stays in the worker. */

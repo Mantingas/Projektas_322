@@ -112,6 +112,8 @@ export interface MergePreview {
   /** Documents that gain lines. */
   additionsDocs: number;
   newDocs: number;
+  /** Sales: documents whose number is also used by a stored document of another year (numbering restarts yearly): kept as separate documents. */
+  sharedNumberDocs: number;
   /** Stored documents inside the file's date range that are absent from the file – reported, never touched. */
   absentDocs: number;
   skippedLines: number;
@@ -137,7 +139,7 @@ async function plan(db: AppDB, m: ModuleId, records: AnyLine[], mode: ExportMode
   }
   const proposed = defaultPolicy(mode, identity, overlapRisk);
   const policy = policyIn ?? proposed;
-  const mp = planMerge(records as LineLike[], existingByKey, existingActiveByDoc, { mode, policy, stored: range }) as MergePlan<AnyLine>;
+  const mp = planMerge(records as LineLike[], existingByKey, existingActiveByDoc, { mode, policy, stored: range, yearScoped: m === 'sales' }) as MergePlan<AnyLine>;
   return { mp, identity, coverage, overlapRisk, proposed, policy };
 }
 
@@ -165,7 +167,7 @@ export async function previewImport(db: AppDB, records: AnyLine[], mode: ExportM
   return {
     mode, policy, proposedPolicy: proposed, identity, idCoverage: coverage,
     added: mp.toAdd.length, duplicates: mp.duplicates, stale: mp.stale, revisedDocs: mp.docs.replaced, supersededLines: mp.supersede.length,
-    removedDocs: mp.docs.removed, omittedDocs: mp.docs.omitted, heldLines: mp.toHold.length, heldDocs: mp.docs.held, additionsDocs: mp.docs.additions, newDocs: mp.docs.added,
+    removedDocs: mp.docs.removed, omittedDocs: mp.docs.omitted, heldLines: mp.toHold.length, heldDocs: mp.docs.held, additionsDocs: mp.docs.additions, newDocs: mp.docs.added, sharedNumberDocs: mp.docs.sharedNumber,
     absentDocs, skippedLines: mp.skipped, overlapRisk, needsConfirmation: needs, ambiguous: mp.toHold.length,
   };
 }

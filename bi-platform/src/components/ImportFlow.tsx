@@ -443,10 +443,12 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
                 {p.heldLines > 0 && <Stat label={t('mp.held')} value={`${p.heldLines} (${p.heldDocs || '–'})`} testid="pv-held" />}
                 {p.omittedDocs > 0 && <Stat label={t('mp.omitted')} value={p.omittedDocs} />}
                 {p.absentDocs > 0 && <Stat label={t('mp.absent')} value={p.absentDocs} testid="pv-absent" />}
+                {p.sharedNumberDocs > 0 && <Stat label={t('mp.sharedNumber')} value={p.sharedNumberDocs} testid="pv-shared" />}
                 {p.stale > 0 && <Stat label={t('import.preview.stale')} value={p.stale} />}
                 {p.skippedLines > 0 && <Stat label={t('mp.skipped')} value={p.skippedLines} />}
                 <Stat label={t('import.result.identity')} value={t(`identity.${p.identity}` as MessageKey)} />
               </dl>
+              {p.sharedNumberDocs > 0 && <p className="rounded-md bg-sky-50 p-3 text-sm text-sky-900 dark:bg-sky-950/40 dark:text-sky-200" data-testid="pv-shared-note">ℹ {t('mp.sharedNumberNote')}</p>}
               {p.heldLines > 0 && <p className="rounded-md bg-sky-50 p-3 text-sm text-sky-900 dark:bg-sky-950/40 dark:text-sky-200">ℹ {t('mp.heldNote')}</p>}
               {p.overlapRisk && <p role="alert" className="rounded-md bg-amber-50 p-3 text-sm text-amber-900 dark:bg-amber-950/40 dark:text-amber-200" data-testid="overlap-risk">⚠ {t('import.preview.overlapRisk')}</p>}
               {p.identity === 'content' && !p.overlapRisk && <p className="text-xs text-slate-500">{t('import.preview.contentIdentity')}</p>}

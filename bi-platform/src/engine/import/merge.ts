@@ -84,12 +84,19 @@ export interface MergePlan<R extends LineLike = LineLike> {
     held: number; // documents with lines held for review
     omitted: number; // stored lines absent from the file but kept (completeness unknown)
     identical: number;
+    /** year-scoped modules only: documents that share their number with a stored document of ANOTHER year and were therefore treated as separate documents */
+    sharedNumber: number;
   };
 }
 
 export interface MergeOptions {
   mode: ExportMode;
   policy: ImportPolicy;
+  /**
+   * A document is identified by its number AND the year of its lines. Many sales ledgers restart numbering every year, so "SF-1" of 2025 is not the
+   * document "SF-1" of 2024: without this, importing a new year would REPLACE last year's documents. Used for sales only; other modules keep their behaviour.
+   */
+  yearScoped?: boolean;
   /** Date range of data already stored (for the content policies). */
   stored?: { min: string; max: string };
 }
@@ -102,14 +109,17 @@ export function planMerge<R extends LineLike>(
 ): MergePlan<R> {
   const plan: MergePlan<R> = {
     toAdd: [], toHold: [], holdReplaces: new Map(), supersede: [], duplicates: 0, stale: 0, skipped: 0,
-    docs: { added: 0, additions: 0, replaced: 0, removed: 0, held: 0, omitted: 0, identical: 0 },
+    docs: { added: 0, additions: 0, replaced: 0, removed: 0, held: 0, omitted: 0, identical: 0, sharedNumber: 0 },
   };
   const { mode, policy } = opts;
   const byDoc = new Map<string, R[]>();
   const noDoc: R[] = [];
+  const baseOf = new Map<string, string>(); // grouping id → plain document key
+  const yearOf = (x: { date?: string }) => (x.date ?? '').slice(0, 4);
   for (const r of incoming) {
-    const d = docKey(r);
-    if (d) (byDoc.get(d) ?? byDoc.set(d, []).get(d)!).push(r);
+    const base = docKey(r);
+    const d = base && opts.yearScoped ? `${base}|${yearOf(r)}` : base;
+    if (d) { baseOf.set(d, base!); (byDoc.get(d) ?? byDoc.set(d, []).get(d)!).push(r); }
     else noDoc.push(r);
   }
 
@@ -129,7 +139,10 @@ export function planMerge<R extends LineLike>(
       else fresh.push(r);
     }
     plan.duplicates += dup;
-    const old = existingActiveByDoc.get(d);
+    const stored = existingActiveByDoc.get(baseOf.get(d)!) ?? [];
+    const year = yearOf(lines[0]!);
+    const old = opts.yearScoped ? stored.filter((o) => yearOf(o as { date?: string }) === year) : stored;
+    if (opts.yearScoped && old.length === 0 && stored.length > 0 && fresh.length) plan.docs.sharedNumber++;
     if (!old || old.length === 0) {
       if (fresh.length) {
         plan.toAdd.push(...fresh);
@@ -172,7 +185,7 @@ export function planMerge<R extends LineLike>(
       plan.docs.additions++;
     } else {
       plan.toHold.push(...fresh);
-      plan.holdReplaces.set(d, oldOnly.map((o) => o.key));
+      plan.holdReplaces.set(baseOf.get(d)!, oldOnly.map((o) => o.key));
       plan.docs.held++;
     }
   }
