@@ -188,6 +188,7 @@ export function normalizeSales(dataRows: CellValue[][], opts: NormalizeOptions):
   if (creditPos.length > 0 && creditNeg > 0) {
     for (const i of creditPos) { drop.add(i); note('errors', 'credit_sign_ambiguous', partial[i]!.sourceRow); }
     stats.rowsSkipped += creditPos.length;
+    stats.ambiguousCreditAmount = creditPos.reduce((acc, i) => acc + Math.abs(partial[i]!.amount), 0);
   } else if (creditPos.length > 0) {
     for (const i of creditPos) {
       const r = partial[i]!;

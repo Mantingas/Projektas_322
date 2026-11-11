@@ -5,7 +5,7 @@ const pl: Record<keyof typeof fix, string> = {
   'issue.quantity_sign_ambiguous': 'Ilość zignorowana: jej znak nie zgadza się ze znakiem kwoty',
   'issue.cost_suspect': 'Koszt nieużyty: ujemny, znacznie wyższy od ceny albo o nieznanym znaku przy zwrocie',
   'issue.cost_zero': 'Zerowy koszt sprzedaży (zachowany; jeśli oznacza „nieznany”, marża będzie zawyżona)',
-  'itrust.credit_ambiguous': '{n} wierszy jest oznaczonych jako noty kredytowe, ale mają kwotę DODATNIĄ, podczas gdy inne noty są ujemne. Plik miesza dwie konwencje znaków, więc te wiersze nie zostały zaimportowane (inaczej liczyłyby się jako sprzedaż). Popraw znaki w pliku i zaimportuj ponownie.',
+  'itrust.credit_ambiguous': '{n} wierszy (o wartości {amount}) jest oznaczonych jako noty kredytowe, ale mają kwotę DODATNIĄ, podczas gdy inne noty są ujemne. Plik miesza dwie konwencje znaków, więc te wiersze nie zostały zaimportowane (inaczej liczyłyby się jako sprzedaż). Popraw znaki w pliku i zaimportuj ponownie.',
   'sales.margin_overview.body_partial': 'Zysk brutto to {profit} ze sprzedaży z kosztem, po odjęciu zwrotów ze znanym kosztem. Ta sprzedaż to tylko {coverage} całego przychodu, więc to nie jest marża całego obrotu.',
   'mu.cost_revenue_coverage': 'Koszt znany dla mniej niż 80% PRZYCHODU ze sprzedaży (nawet jeśli jest w wielu pozycjach)', 'mu.returns_cost_unknown': 'Zwroty / korekty są istotne, a ich koszt jest nieznany lub o nieznanym znaku', 'mu.mixed_units': 'Ilości w różnych jednostkach, których nie można dodać (np. kg i szt.)', 'mu.units_missing': 'Część ilości nie ma jednostki, a inne mają',
   'lim.units_unstated': 'Plik nie podaje jednostek miary, więc ilości są sumowane tak, jak są, przy założeniu tej samej jednostki.',
@@ -17,5 +17,10 @@ const pl: Record<keyof typeof fix, string> = {
   'lim.previous_incomplete': 'Podałeś, że eksport zaczyna się {declaredFrom}, a poprzedni okres porównawczy zaczyna się {from}: jest pokryty tylko częściowo. Zmiany i wnioski oparte na porównaniu nie są pokazywane. Wczytaj wcześniejszy eksport lub wybierz krótszy okres.',
   'import.cover.title': 'Okres eksportu (opcjonalnie)', 'import.cover.from': 'Od', 'import.cover.to': 'Do',
   'import.cover.help': 'Jeśli wiesz, jaki okres obejmuje raport, podaj go. Wtedy spokojny początek lub koniec (bez transakcji) odróżnimy od brakujących danych, a porównaniom z wcześniejszym okresem można ufać. Zostaw puste, jeśli nie wiesz: znana jest wtedy tylko pierwsza i ostatnia transakcja.',
+  'lim.legacy_import': '{n} import(ów) sprzedaży wykonano przed obecnymi regułami importu (typ dokumentu korekty, znaki ilości, jednostki miary). Jeśli Twoje pliki mają takie kolumny, te reguły nie zostały do nich zastosowane. Zaimportuj je ponownie: usuń stary import w Historii, a potem zaimportuj plik jeszcze raz. Nic nie jest zmieniane ani usuwane automatycznie.',
+  'lim.credit_rows_excluded': '{n} wierszy not kredytowych o wartości {amount} NIE zaimportowano, bo ich znak był niejednoznaczny (plik miesza dodatnie i ujemne noty). Sprzedaż może być zawyżona do tej kwoty, dopóki plik nie zostanie poprawiony i zaimportowany ponownie.',
+  'lim.cost_ignored': '{n} wierszy sprzedaży ma koszt zignorowany jako niewiarygodny (ujemny, ponad 5 razy wyższy od ceny lub kolumna zer oznaczająca „nieznany”). Nie wchodzą do marży.',
+  'mu.cost_suspect': 'Wartości kosztu zignorowano jako niewiarygodne (ujemne, znacznie wyższe od ceny lub kolumna zer), a pozostałe nie obejmują wystarczającej części sprzedaży',
+  'hist.legacy': 'starsze reguły importu – zalecany ponowny import', 'hist.creditExcluded': '{n} wierszy not nie zaimportowano',
 };
 export default pl;

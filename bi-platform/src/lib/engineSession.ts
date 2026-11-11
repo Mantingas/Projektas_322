@@ -52,7 +52,7 @@ import { crossInsights } from '@/engine/executive/cross';
 import { linkWorkflow, type LinkWorkflow } from '@/engine/executive/linking';
 import type { EntityLink } from '@/engine/entities/links';
 import type { Insight } from '@/engine/types';
-import { newId } from '@/db/store';
+import { IMPORT_RULES_VERSION, newId } from '@/db/store';
 import { analyseSettlement } from '@/engine/trust/settlement';
 import { analyseAllSettlement } from '@/engine/trust/evidence';
 import type { SettlementResult } from '@/engine/trust/types';
@@ -502,7 +502,8 @@ export class EngineSession {
     if (allSeries.length === 0) return { empty: true, allSeries, options: {}, presets: [], imports: importsLite, pendingHeld, identity };
     const series = allSeries.find((s) => `${s.currency}|${s.basis}` === req.seriesKey) ?? allSeries[0]!;
     const seriesRecords = records.filter((r) => r.currency === series.currency && r.basis === series.basis);
-    const built = buildDashboardWithInsights(records, { series, filters: req.filters, period: req.period, identity, heldPending: pendingHeld, coverage: declaredCoverage(imports.filter((i) => (i.module ?? 'sales') === 'sales')) })!;
+    const salesImports = imports.filter((i) => (i.module ?? 'sales') === 'sales');
+    const built = buildDashboardWithInsights(records, { series, filters: req.filters, period: req.period, identity, heldPending: pendingHeld, coverage: declaredCoverage(salesImports), legacyImports: salesImports.filter((i) => i.added > 0 && (i.rules ?? 1) < IMPORT_RULES_VERSION).length, excludedCredits: { rows: salesImports.reduce((a, i) => a + (i.stats?.errors?.credit_sign_ambiguous ?? 0), 0), amount: salesImports.reduce((a, i) => a + (i.stats?.ambiguousCreditAmount ?? 0), 0) } })!;
     const { records: modelRecords, ...view } = built.model;
     let dmin = seriesRecords[0]!.date;
     let dmax = dmin;

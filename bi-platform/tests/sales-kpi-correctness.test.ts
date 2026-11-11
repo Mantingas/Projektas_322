@@ -86,7 +86,7 @@ describe('Z1 – zero, negative and absurd costs', () => {
   it('a column of zeros is a placeholder for "unknown": no margin (was 100 %)', async () => {
     const r = await runSales(H, Array.from({ length: 6 }, (_, i) => [D, `Z${i}`, 'K' + i, 'P' + i, 1, 100, 0]));
     expect(kpi(r.b, 'margin').current).toBeNull();
-    expect(kpi(r.b, 'margin').unavailable).toBe('no_cost');
+    expect(kpi(r.b, 'margin').unavailable).toBe('cost_suspect');       // 10C: the reason says the zeros were ignored, not that there is no cost column
   });
   it('an occasional real zero cost (free goods) stays a real value', async () => {
     const rows: Cell[][] = Array.from({ length: 9 }, (_, i) => [D, `Z${i}`, 'K' + i, 'P' + i, 1, 100, 60]);

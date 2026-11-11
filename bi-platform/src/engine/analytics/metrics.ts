@@ -13,7 +13,7 @@ export interface MetricContext {
 
 export type Unavailable =
   | 'no_quantity' | 'no_orders' | 'no_customers' | 'no_cost' | 'needs_single_product' | 'cost_needs_net' | 'no_data'
-  | 'cost_revenue_coverage' | 'returns_cost_unknown' | 'mixed_units' | 'units_missing';
+  | 'cost_revenue_coverage' | 'returns_cost_unknown' | 'mixed_units' | 'units_missing' | 'cost_suspect';
 
 export interface MetricValue {
   id: MetricId;
@@ -51,6 +51,15 @@ export interface MarginResult {
   returnsExcluded: number;
   zeroCostLines: number;
   suspectCostLines: number;
+  /** lines whose cost was ignored as unreliable: negative / absurd costs and a column of zeros that stands for "unknown" */
+  ignoredCostLines: number;
+}
+
+/** Cost values that are NOT used: negative or absurd costs, and zeros when the zeros are the column's placeholder for "unknown". */
+export function ignoredCostLines(a: Aggregate): number {
+  const costed = a.costLines + a.zeroCostLines;
+  const placeholderZero = costed > 0 && a.zeroCostLines / costed >= 0.5;
+  return a.suspectCostLines + (placeholderZero ? a.zeroCostLines : 0);
 }
 
 /**
@@ -64,14 +73,16 @@ export interface MarginResult {
 export function evaluateMargin(a: Aggregate, basis: AmountBasis): { ok: true; r: MarginResult } | { ok: false; reason: Unavailable } {
   if (basis !== 'net') return { ok: false, reason: 'cost_needs_net' };
   const costed = a.costLines + a.zeroCostLines;
-  if (!a.positiveLines || a.gross <= 0 || costed === 0) return { ok: false, reason: 'no_cost' };
+  const ignored = ignoredCostLines(a);
+  if (!a.positiveLines || a.gross <= 0 || (costed === 0 && a.suspectCostLines === 0)) return { ok: false, reason: 'no_cost' };
+  if (costed === 0) return { ok: false, reason: 'cost_suspect' };
   const placeholderZero = a.zeroCostLines / costed >= 0.5;
   const lines = a.costLines + (placeholderZero ? 0 : a.zeroCostLines);
   const rev = a.revenueWithCost + (placeholderZero ? 0 : a.zeroCostRevenue);
   const lineCoverage = lines / a.positiveLines;
   const revenueCoverage = rev / a.gross;
-  if (lineCoverage < MIN_COVERAGE || rev <= 0) return { ok: false, reason: 'no_cost' };
-  if (revenueCoverage < MIN_COVERAGE) return { ok: false, reason: 'cost_revenue_coverage' };
+  if (lineCoverage < MIN_COVERAGE || rev <= 0) return { ok: false, reason: ignored > 0 ? 'cost_suspect' : 'no_cost' };
+  if (revenueCoverage < MIN_COVERAGE) return { ok: false, reason: ignored > 0 ? 'cost_suspect' : 'cost_revenue_coverage' };
   if (a.returnsUnknownRevenue > MAX_UNKNOWN_RETURNS * a.gross) return { ok: false, reason: 'returns_cost_unknown' };
   const base = rev - a.returnsKnownRevenue;
   const profit = rev - a.cost - (a.returnsKnownRevenue + a.returnsKnownCost);
@@ -80,7 +91,7 @@ export function evaluateMargin(a: Aggregate, basis: AmountBasis): { ok: true; r:
     ok: true,
     r: {
       value: profit / base, profit, base, lineCoverage, revenueCoverage, wholeTurnover: revenueCoverage >= 0.999 && a.returnsUnknownRevenue === 0,
-      returnsIncluded: a.returnsKnownRevenue, returnsExcluded: a.returnsUnknownRevenue, zeroCostLines: a.zeroCostLines, suspectCostLines: a.suspectCostLines,
+      returnsIncluded: a.returnsKnownRevenue, returnsExcluded: a.returnsUnknownRevenue, zeroCostLines: a.zeroCostLines, suspectCostLines: a.suspectCostLines, ignoredCostLines: ignored,
     },
   };
 }

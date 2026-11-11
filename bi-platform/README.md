@@ -75,6 +75,10 @@ Receivables, payables and cash intelligence (module "Receivables & payables"): i
 
 Remediation of the Phase 10 audit – see `docs/SALES_FINANCIAL_CORRECTNESS.md`: credit notes recognised from a document-type column, margin needing revenue AND line cost coverage and netting returns, cost sanity checks, unit-safe quantities and prices, comparisons withheld when the previous period is not covered by the data, sales documents identified by number + year, code-first customer/product identity, and wording that never calls a sales decline a "loss". No schema change; files imported before this change should be re-imported to benefit from the import-time protections.
 
+## Phase 10C additions (cross-module correctness gate)
+
+See `docs/CROSS_MODULE_CORRECTNESS_GATE.md`: previous-period coverage model with an optional declared export period (sales and purchasing, executive follows), year-aware document identity for every module, and visible warnings for old imports, ignored costs and excluded credit rows. No schema change; nothing is migrated or deleted automatically.
+
 ## What works
 - LT / PL / EN interface; `.xlsx`, `.csv`, `.tsv`; sheet selection; header row detection under report titles; totals rows skipped.
 - UTF-8 / Windows-1257 / Windows-1250 CSV; `1 234,56`, `1.234,56`, `1,234.56`, `€`/`zł` suffixes; ISO, `dd.mm.yyyy`, `dd/mm/yyyy`, `yyyy.mm.dd`, Excel serial dates.

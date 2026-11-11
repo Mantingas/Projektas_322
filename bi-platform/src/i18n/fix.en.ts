@@ -5,7 +5,7 @@ const fix = {
   'issue.quantity_sign_ambiguous': 'Quantity ignored: its sign disagrees with the amount',
   'issue.cost_suspect': 'Cost not used: negative, far above the price, or of unknown sign on a return',
   'issue.cost_zero': 'Zero cost on a sale (kept; if it means “unknown” the margin will be too high)',
-  'itrust.credit_ambiguous': '{n} row(s) are typed as credit notes but have a POSITIVE amount, while other credit rows are negative. The file mixes two sign conventions, so these rows were not imported (they would otherwise be counted as sales). Correct the signs in the file and import again.',
+  'itrust.credit_ambiguous': '{n} row(s) (worth {amount}) are typed as credit notes but have a POSITIVE amount, while other credit rows are negative. The file mixes two sign conventions, so these rows were not imported (they would otherwise be counted as sales). Correct the signs in the file and import again.',
   'sales.margin_overview.body_partial': 'Gross profit is {profit} on the sales that have a cost, net of returns with a known cost. These sales are only {coverage} of all sales revenue, so this is not the margin of the whole turnover.',
   'mu.cost_revenue_coverage': 'Cost is known for under 80% of sales REVENUE (even if it is present on many lines)', 'mu.returns_cost_unknown': 'Returns / credit notes are material and their cost is missing or of unknown sign', 'mu.mixed_units': 'Quantities are in different units that cannot be added (e.g. kg and pcs)', 'mu.units_missing': 'Some quantities have no unit while others do',
   'lim.units_unstated': 'The file does not state units of measure, so quantities are added as they are and assumed to be in the same unit.',
@@ -17,5 +17,10 @@ const fix = {
   'lim.previous_incomplete': 'You stated that the export starts on {declaredFrom}, but the previous comparison period starts on {from}: it is only partly covered. Changes and comparison-based findings are not shown. Load an earlier export or choose a shorter period.',
   'import.cover.title': 'Export period (optional)', 'import.cover.from': 'From', 'import.cover.to': 'To',
   'import.cover.help': 'If you know which period the report covers, state it. Then a quiet start or end (no transactions) is told apart from missing data, and comparisons with the earlier period can be trusted. Leave empty if unknown: the first and last transaction are then all that is known.',
+  'lim.legacy_import': '{n} sales import(s) were made before the current import rules (credit-note document type, signs of quantities, units of measure). If your files have such columns, those rules were not applied to them. Re-import them: delete the old import in History, then import the file again. Nothing is changed or deleted automatically.',
+  'lim.credit_rows_excluded': '{n} credit-note row(s) worth {amount} were NOT imported because their sign was ambiguous (the file mixes positive and negative credit notes). Sales are overstated by up to this amount until the file is corrected and imported again.',
+  'lim.cost_ignored': '{n} sales line(s) have a cost that was ignored as unreliable (negative, more than 5 times the price, or a column of zeros meaning “unknown”). They are not part of the margin.',
+  'mu.cost_suspect': 'Cost values were ignored as unreliable (negative, far above the price, or a column of zeros), and the rest does not cover enough of the sales',
+  'hist.legacy': 'older import rules – re-import recommended', 'hist.creditExcluded': '{n} credit rows not imported',
 } as const;
 export default fix;

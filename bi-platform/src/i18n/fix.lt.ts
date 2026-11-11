@@ -5,7 +5,7 @@ const lt: Record<keyof typeof fix, string> = {
   'issue.quantity_sign_ambiguous': 'Kiekis ignoruotas: jo ženklas nesutampa su sumos ženklu',
   'issue.cost_suspect': 'Savikaina nenaudojama: neigiama, gerokai viršija kainą arba nežinomo ženklo grąžinimo savikaina',
   'issue.cost_zero': 'Nulinė pardavimo savikaina (paliekama; jei reiškia „nežinoma“, marža bus per didelė)',
-  'itrust.credit_ambiguous': '{n} eil. pažymėta kaip kreditinės, bet jų suma TEIGIAMA, o kitos kreditinės neigiamos. Faile sumaišytos dvi ženklų taisyklės, todėl šios eilutės neimportuotos (kitaip jos būtų skaičiuojamos kaip pardavimai). Pataisykite ženklus faile ir importuokite iš naujo.',
+  'itrust.credit_ambiguous': '{n} eil. (už {amount}) pažymėta kaip kreditinės, bet jų suma TEIGIAMA, o kitos kreditinės neigiamos. Faile sumaišytos dvi ženklų taisyklės, todėl šios eilutės neimportuotos (kitaip jos būtų skaičiuojamos kaip pardavimai). Pataisykite ženklus faile ir importuokite iš naujo.',
   'sales.margin_overview.body_partial': 'Bendrasis pelnas – {profit} iš pardavimų, kuriems yra savikaina, atėmus grąžinimus su žinoma savikaina. Šie pardavimai sudaro tik {coverage} visų pardavimų pajamų, todėl tai ne visos apyvartos marža.',
   'mu.cost_revenue_coverage': 'Savikaina žinoma mažiau nei 80 % pardavimų PAJAMŲ (net jei ji yra daugelyje eilučių)', 'mu.returns_cost_unknown': 'Grąžinimai / kreditinės reikšmingi, o jų savikainos nėra arba ženklas nežinomas', 'mu.mixed_units': 'Kiekiai skirtingais vienetais, kurių sudėti negalima (pvz., kg ir vnt.)', 'mu.units_missing': 'Dalis kiekių neturi vieneto, o kiti turi',
   'lim.units_unstated': 'Faile nenurodyti matavimo vienetai, todėl kiekiai sudedami tokie, kokie yra, laikant, kad jie tuo pačiu vienetu.',
@@ -17,5 +17,10 @@ const lt: Record<keyof typeof fix, string> = {
   'lim.previous_incomplete': 'Nurodėte, kad eksportas prasideda {declaredFrom}, o ankstesnis palyginimo laikotarpis prasideda {from}: jis padengtas tik iš dalies. Pokyčiai ir palyginimu pagrįsti radiniai nerodomi. Įkelkite ankstesnį eksportą arba pasirinkite trumpesnį laikotarpį.',
   'import.cover.title': 'Eksporto laikotarpis (neprivaloma)', 'import.cover.from': 'Nuo', 'import.cover.to': 'Iki',
   'import.cover.help': 'Jei žinote, kokį laikotarpį apima ataskaita, nurodykite. Tada ramus pradžios ar pabaigos laikotarpis (be operacijų) atskiriamas nuo trūkstamų duomenų, o palyginimais su ankstesniu laikotarpiu galima pasitikėti. Jei nežinote, palikite tuščią: žinoma tik pirma ir paskutinė operacija.',
+  'lim.legacy_import': '{n} pardavimų importas (-ai) atliktas prieš dabartines importo taisykles (kreditinių dokumento tipas, kiekių ženklai, matavimo vienetai). Jei jūsų failuose yra tokių stulpelių, tos taisyklės jiems netaikytos. Importuokite iš naujo: Istorijoje ištrinkite seną importą ir importuokite failą dar kartą. Niekas automatiškai nekeičiama ir netrinama.',
+  'lim.credit_rows_excluded': '{n} kreditinių eil. už {amount} NEimportuota, nes jų ženklas buvo dviprasmiškas (faile sumaišytos teigiamos ir neigiamos kreditinės). Pardavimai gali būti padidinti iki šios sumos, kol failas nepataisytas ir neimportuotas iš naujo.',
+  'lim.cost_ignored': '{n} pardavimo eil. savikaina ignoruota kaip nepatikima (neigiama, daugiau nei 5 kartus didesnė už kainą arba nulių stulpelis, reiškiantis „nežinoma“). Jos nepatenka į maržą.',
+  'mu.cost_suspect': 'Savikainos reikšmės ignoruotos kaip nepatikimos (neigiamos, gerokai didesnės už kainą ar nulių stulpelis), o likusios neapima pakankamai pardavimų',
+  'hist.legacy': 'senesnės importo taisyklės – rekomenduojama importuoti iš naujo', 'hist.creditExcluded': '{n} kreditinių eil. neimportuota',
 };
 export default lt;

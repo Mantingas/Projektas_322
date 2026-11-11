@@ -4,6 +4,7 @@ import { useLang } from './LangProvider';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { getDb, type AuditEntry, type ImportRow } from '@/db/db';
+import { IMPORT_RULES_VERSION } from '@/db/store';
 import { ConflictReview } from './ConflictReview';
 import { deleteImport } from '@/db/store';
 import { fmtDate } from '@/i18n';
@@ -38,7 +39,10 @@ export function HistoryView({ version, onChanged }: { version: number; onChanged
           <tbody>
             {rows.map((r) => (
               <tr key={r.id} className="border-t border-slate-200 dark:border-slate-800">
-                <td className="px-3 py-2 font-medium">{r.fileName}</td>
+                <td className="px-3 py-2 font-medium">{r.fileName}
+                  {(r.module ?? 'sales') === 'sales' && r.added > 0 && (r.rules ?? 1) < IMPORT_RULES_VERSION && <span className="mt-1 block text-xs font-normal text-amber-700 dark:text-amber-300" data-testid="hist-legacy">⚠ {t('hist.legacy')}</span>}
+                  {(r.stats.errors?.credit_sign_ambiguous ?? 0) > 0 && <span className="mt-1 block text-xs font-normal text-amber-700 dark:text-amber-300" data-testid="hist-credit-excluded">⚠ {t('hist.creditExcluded', { n: r.stats.errors?.credit_sign_ambiguous ?? 0 })}</span>}
+                </td>
                 <td className="px-3 py-2" data-testid="hist-module">{t(`mod.${r.module ?? 'sales'}` as MessageKey)}{r.inventoryKind && <span className="block text-xs text-slate-500" data-testid="hist-kind">{t(`inv.kind.${r.inventoryKind}` as MessageKey)}</span>}{r.financeKind && <span className="block text-xs text-slate-500" data-testid="hist-kind">{t(`fin.kind.${r.financeKind}` as MessageKey)}{r.financeSide ? ` · ${t(`fin.side.short.${r.financeSide}` as MessageKey)}` : ''}</span>}</td>
                 <td className="px-3 py-2">{fmtDate(new Date(r.importedAt).toISOString().slice(0, 10), lang)}</td>
                 <td className="px-3 py-2">{r.stats.dateMin && r.stats.dateMax ? `${fmtDate(r.stats.dateMin, lang)} – ${fmtDate(r.stats.dateMax, lang)}` : '—'}</td>

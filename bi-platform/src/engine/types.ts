@@ -408,6 +408,8 @@ export interface ImportStats {
   dateMin?: string;
   dateMax?: string;
   currencies: string[];
+  /** Sales: total (absolute) amount of the credit-note rows that were NOT imported because their sign was ambiguous (see `credit_sign_ambiguous`). */
+  ambiguousCreditAmount?: number;
 }
 
 /**

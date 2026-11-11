@@ -7,7 +7,7 @@ import {
 } from './compare';
 import { lengthDays } from './dates';
 import { applyFilters, hasDimension, type FilterSpec, type SalesDimension } from './filters';
-import { KPI_ORDER, evaluateMargin, type MetricContext, type MetricId } from './metrics';
+import { KPI_ORDER, evaluateMargin, ignoredCostLines, type MetricContext, type MetricId } from './metrics';
 import { explainMetricInputs } from './provenance';
 import { inRange } from './compare';
 import { isComparisonBlocked, resolvePeriods, type PeriodSelection, type PeriodWarning, type ResolvedPeriods } from './periods';
@@ -24,6 +24,9 @@ export type Limitation =
   | { code: 'held_pending'; lines: number }
   | { code: 'previous_unknown'; from: { date: string }; dataFrom: { date: string } }
   | { code: 'previous_incomplete'; from: { date: string }; declaredFrom: { date: string } }
+  | { code: 'legacy_import'; n: number }
+  | { code: 'credit_rows_excluded'; n: number; amount: { money: number } }
+  | { code: 'cost_ignored'; n: number }
   | { code: 'units_unstated' }
   | { code: 'margin_partial'; pct: number };
 
@@ -39,6 +42,10 @@ export interface DashboardOptions {
   paretoDimension?: SalesDimension;
   /** The export period the user declared at import (earliest start, latest end). */
   coverage?: { from?: string; to?: string };
+  /** Stored imports made before the current import rules (credit-note type, quantity signs, units): their files should be re-imported. */
+  legacyImports?: number;
+  /** Credit-note rows that were not imported because their sign was ambiguous (count and absolute amount, from the import records). */
+  excludedCredits?: { rows: number; amount: number };
 }
 
 export interface DashboardModel {
@@ -120,6 +127,9 @@ export function buildDashboard(all: SalesRecord[], o: DashboardOptions): Dashboa
   if (o.heldPending) limitations.push({ code: 'held_pending', lines: o.heldPending });
   const curAgg = aggregate(inRange(records, periods.current));
   if (curAgg.qtyLines > 0 && [...curAgg.qtyByUnit.keys()].every((u) => u === '') && cmp.metrics.some((m) => m.id === 'quantity' && m.current !== null)) limitations.push({ code: 'units_unstated' });
+  if (o.legacyImports) limitations.push({ code: 'legacy_import', n: o.legacyImports });
+  if (o.excludedCredits && o.excludedCredits.rows > 0) limitations.push({ code: 'credit_rows_excluded', n: o.excludedCredits.rows, amount: { money: o.excludedCredits.amount } });
+  { const ign = ignoredCostLines(curAgg); if (ign > 0) limitations.push({ code: 'cost_ignored', n: ign }); }
   { const mg = evaluateMargin(curAgg, o.series.basis); if (mg.ok && mg.r.revenueCoverage < 0.999) limitations.push({ code: 'margin_partial', pct: mg.r.revenueCoverage }); }
   const explain: DashboardModel['explain'] = {};
   for (const k of KPI_ORDER) explain[k] = explainMetricInputs(k, curAgg);

@@ -81,7 +81,7 @@ export function buildImportTrust(i: ImportTrustInput): TrustItem[] {
   if (normalised) out.push({ code: 'amount_sign', level: 'info', params: { n: normalised } });
 
   const ambCredit = n('credit_sign_ambiguous');
-  if (ambCredit) out.push({ code: 'credit_ambiguous', level: 'warn', params: { n: ambCredit } });
+  if (ambCredit) out.push({ code: 'credit_ambiguous', level: 'warn', params: { n: ambCredit, amount: Math.round((i.stats.ambiguousCreditAmount ?? 0) * 100) / 100 } });
 
   // coverage
   if (i.stats.dateMin && i.stats.dateMax) out.push({ code: 'coverage', level: 'ok', params: { from: i.stats.dateMin, to: i.stats.dateMax, rows: i.rows } });

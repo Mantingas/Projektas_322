@@ -1,5 +1,7 @@
 # Sales module – financial correctness remediation (Phase 10B)
 
+> Phase 10C refined S2 (an unknown export start is now *unknown*, not "proven incomplete", and can be declared at import), extended D1 to purchasing, finance and inventory and added visibility for ignored costs, excluded credit rows and old imports – see `CROSS_MODULE_CORRECTNESS_GATE.md`.
+
 Result of the Phase 10 audit (every finding was reproduced with a synthetic scenario before it was fixed). Principle: **bad, partial or ambiguous data must not produce a figure that looks reliable – a withheld figure is better than a wrong one.**
 
 | ID | Was | Now | Where | Regression tests |
