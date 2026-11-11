@@ -50,6 +50,8 @@ export function executiveLines(m: ExecutiveModel, lang: Lang, t: T): string[] {
     const ch = changeText(k.metric, lang, k.currency, t);
     lines.push(t('exe.sum.kpi', { label: kpiLabel(k, t), value: fmtUnit(k.metric.unit, k.metric.current!, lang, k.currency), change: ch.text !== '–' ? ` (${ch.text})` : '' }));
   }
+  // figures that rest on incomplete data are said to be incomplete BEFORE anything else is concluded from them
+  for (const c of m.coverage) for (const f of c.flags) if (f === 'excluded_credits' || f === 'comparison_withheld') lines.push(`${t(`mod.${c.module}` as MessageKey)}: ${t(`exe.flag.${f}` as MessageKey)}`);
   const risk = m.risks[0], opp = m.opportunities[0];
   if (risk) lines.push(t('exe.sum.risk', { title: renderInsight(risk.insight, lang, cur(risk)).title }));
   if (opp) lines.push(t('exe.sum.opp', { title: renderInsight(opp.insight, lang, cur(opp)).title }));

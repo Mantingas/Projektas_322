@@ -102,7 +102,7 @@ export function InsightsView({ version, goImport }: { version: number; goImport:
   const exec = executiveLines(model, insights, lang, tt);
 
   const exportSummary = () => downloadText('management-summary.html', 'text/html', renderManagementSummary(buildSummaryDoc(model, insights, lang, labels, filters)));
-  const exportCsv = () => res.analysis && downloadText('insights-report.csv', 'text/csv', renderReportCsv(buildReport(res.analysis, lang)));
+  const exportCsv = () => res.analysis && downloadText('insights-report.csv', 'text/csv', renderReportCsv(buildReport(res.analysis, lang, [...model.warnings.map((w) => warningText(w, tt)), ...model.limitations.map((l) => limitationText(l, tt))])));
   const card = (i: Insight) => <InsightCard key={i.id} insight={i} model={model} expanded={open === i.id} onToggle={() => setOpen(open === i.id ? null : i.id)} onDrill={openDrill} onFilter={addFilter} />;
 
   return (

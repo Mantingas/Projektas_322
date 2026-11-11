@@ -94,11 +94,11 @@ const pl: Messages = {
 
   'hist.title': 'Historia importów', 'hist.empty': 'Brak importów.', 'hist.file': 'Plik', 'hist.date': 'Zaimportowano', 'hist.period': 'Okres danych', 'hist.rows': 'Wiersze',
   'hist.added': 'Dodane', 'hist.dups': 'Duplikaty', 'hist.conflicts': 'Konflikty', 'hist.mode': 'Typ', 'hist.delete': 'Usuń import',
-  'hist.confirmDelete': 'Usunąć ten import i jego wiersze z tej przeglądarki?', 'hist.note': 'Wiersze uznane za duplikaty pozostają przypisane do pierwszego importu, który je zawierał.',
+  'hist.confirmDelete': 'Usunąć ten import i jego wiersze z tej przeglądarki? Tego nie można cofnąć, a aplikacja nie przechowuje Twoich plików: upewnij się, że nadal masz oryginalny plik lub kopię zapasową (Ustawienia → Pobierz kopię zapasową).', 'hist.note': 'Wiersze uznane za duplikaty pozostają przypisane do pierwszego importu, który je zawierał.',
 
   'set.title': 'Ustawienia', 'set.language': 'Język interfejsu', 'set.data': 'Twoje dane',
   'set.storage': 'Wszystkie zaimportowane dane są przechowywane tylko w tej przeglądarce. Wyczyszczenie danych witryny je usunie – zrób kopię zapasową, jeśli chcesz je zachować.',
-  'set.deleteAll': 'Usuń wszystkie dane', 'set.deleteConfirm': 'Spowoduje to trwałe usunięcie wszystkich importów, mapowań i ustawień zapisanych w tej przeglądarce. Kontynuować?', 'set.deleted': 'Wszystkie dane lokalne usunięto.',
+  'set.deleteAll': 'Usuń wszystkie dane', 'set.deleteConfirm': 'Spowoduje to trwałe usunięcie wszystkich importów, mapowań i ustawień zapisanych w tej przeglądarce. Nie można tego cofnąć, a aplikacja nie przechowuje Twoich plików: najpierw pobierz kopię zapasową, chyba że nadal masz wszystkie oryginalne pliki. Kontynuować?', 'set.deleted': 'Wszystkie dane lokalne usunięto.',
   'set.backup': 'Pobierz kopię zapasową (JSON)', 'set.restore': 'Przywróć z kopii', 'set.restored': 'Kopię przywrócono.', 'set.restoreFail': 'Plik kopii jest nieprawidłowy.',
   'set.persist': 'Poproś przeglądarkę o zachowanie danych', 'set.persisted': 'Pamięć jest trwała.', 'set.notPersisted': 'Przeglądarka może usunąć dane, gdy zabraknie miejsca.',
   'set.stats': 'Zapisano: {imports} importów, {lines} pozycji',

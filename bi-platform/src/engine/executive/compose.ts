@@ -27,6 +27,8 @@ export interface ModuleSnapshot {
   base: number | null;
   pendingHeld: number;
   unknownBasis?: boolean;
+  /** data-completeness notes that qualify every figure of the module (see ModuleCoverage.flags) */
+  dataNotes?: ('excluded_credits' | 'legacy_import' | 'comparison_withheld' | 'comparison_assumed')[];
   /** rules that could not run, and why (module reason codes) */
   unavailable?: { rule: string; reason: string }[];
 }
@@ -54,7 +56,7 @@ export interface RankedItem {
   related: string[];
 }
 export interface ExecKpi { id: string; module: ExecModule; side?: FinanceSide; metric: MetricComparison; currency: string; basis?: string; asOf?: string; window?: { from: string; to: string } }
-export interface ModuleCoverage { module: ExecModule; present: boolean; files: number; lines: number; from?: string; to?: string; lastImportedAt?: number; series: string; otherSeries: string[]; flags: ('held' | 'unknown_basis' | 'other_series' | 'stale')[]; sides?: FinanceSide[] }
+export interface ModuleCoverage { module: ExecModule; present: boolean; files: number; lines: number; from?: string; to?: string; lastImportedAt?: number; series: string; otherSeries: string[]; flags: ('held' | 'unknown_basis' | 'other_series' | 'stale' | 'excluded_credits' | 'legacy_import' | 'comparison_withheld' | 'comparison_assumed')[]; sides?: FinanceSide[] }
 export interface ExecutiveModel {
   empty: boolean;
   kpis: ExecKpi[];
@@ -225,6 +227,7 @@ export function composeExecutive(inp: ComposeInput): ExecutiveModel {
     if (ss.some((s) => s.pendingHeld > 0)) flags.push('held');
     if (ss.some((s) => s.unknownBasis)) flags.push('unknown_basis');
     if (ss.some((s) => s.otherSeries.length)) flags.push('other_series');
+    for (const n of ['excluded_credits', 'legacy_import', 'comparison_withheld', 'comparison_assumed'] as const) if (ss.some((s) => s.dataNotes?.includes(n))) flags.push(n);
     const to = ss.reduce((a, s) => (s.bounds.dateMax > a ? s.bounds.dateMax : a), '');
     if (latest && (Date.parse(latest) - Date.parse(to)) / 86400000 > STALE_DAYS) flags.push('stale');
     return {

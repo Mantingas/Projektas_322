@@ -26,7 +26,7 @@ export function formatEvidence(e: Insight['evidence'][number], lang: Lang, curre
   return e.previous === undefined ? `${e.label}: ${f(e.current)}` : `${e.label}: ${f(e.previous)} → ${f(e.current)}`;
 }
 
-export function buildReport(a: SalesAnalysis, lang: Lang): ReportInput {
+export function buildReport(a: SalesAnalysis, lang: Lang, notes?: string[]): ReportInput {
   const cur = a.series.currency;
   const t = (k: MessageKey, p: Record<string, string> = {}) => translate(lang, k, p, cur);
   const k = a.kpis;
@@ -44,6 +44,7 @@ export function buildReport(a: SalesAnalysis, lang: Lang): ReportInput {
     subtitle: `${cur}, ${t(`basis.${a.series.basis}` as MessageKey)}`,
     generatedAt: new Date().toISOString().slice(0, 16).replace('T', ' '),
     lang,
+    notes,
     kpis,
     insights: a.insights.map((i) => {
       const r = renderInsight(i, lang, cur);
@@ -55,7 +56,7 @@ export function buildReport(a: SalesAnalysis, lang: Lang): ReportInput {
       };
     }),
     labels: {
-      insights: t('ins.top'), action: t('ins.action'), reliability: t('ins.reliability'), impact: t('ins.impact'), footer: t('report.footer'), kpis: 'KPI',
+      insights: t('ins.top'), action: t('ins.action'), reliability: t('ins.reliability'), impact: t('ins.impact'), footer: t('report.footer'), kpis: 'KPI', notes: t('rep.limitations'),
     },
   };
 }

@@ -94,11 +94,11 @@ const lt: Messages = {
 
   'hist.title': 'Importų istorija', 'hist.empty': 'Importų dar nėra.', 'hist.file': 'Failas', 'hist.date': 'Importuota', 'hist.period': 'Duomenų laikotarpis', 'hist.rows': 'Eilutės',
   'hist.added': 'Pridėta', 'hist.dups': 'Dublikatai', 'hist.conflicts': 'Konfliktai', 'hist.mode': 'Tipas', 'hist.delete': 'Ištrinti importą',
-  'hist.confirmDelete': 'Ištrinti šį importą ir jo eilutes iš šios naršyklės?', 'hist.note': 'Dublikatais pripažintos eilutės lieka prie pirmojo importo, kuriame jos buvo.',
+  'hist.confirmDelete': 'Ištrinti šį importą ir jo eilutes iš šios naršyklės? Tai negrįžtama, o programa jūsų failų nesaugo: įsitikinkite, kad dar turite originalų failą arba atsarginę kopiją (Nustatymai → Atsisiųsti atsarginę kopiją).', 'hist.note': 'Dublikatais pripažintos eilutės lieka prie pirmojo importo, kuriame jos buvo.',
 
   'set.title': 'Nustatymai', 'set.language': 'Sąsajos kalba', 'set.data': 'Jūsų duomenys',
   'set.storage': 'Visi importuoti duomenys saugomi tik šioje naršyklėje. Išvalius svetainės duomenis jie bus prarasti – pasidarykite atsarginę kopiją, jei reikia išsaugoti.',
-  'set.deleteAll': 'Ištrinti visus duomenis', 'set.deleteConfirm': 'Bus visam laikui ištrinti visi šioje naršyklėje saugomi importai, susiejimai ir nustatymai. Tęsti?', 'set.deleted': 'Visi lokalūs duomenys ištrinti.',
+  'set.deleteAll': 'Ištrinti visus duomenis', 'set.deleteConfirm': 'Bus visam laikui ištrinti visi šioje naršyklėje saugomi importai, susiejimai ir nustatymai. Tai negrįžtama, o programa jūsų failų nesaugo: pirmiausia atsisiųskite atsarginę kopiją, nebent dar turite visus originalius failus. Tęsti?', 'set.deleted': 'Visi lokalūs duomenys ištrinti.',
   'set.backup': 'Atsisiųsti atsarginę kopiją (JSON)', 'set.restore': 'Atkurti iš kopijos', 'set.restored': 'Kopija atkurta.', 'set.restoreFail': 'Kopijos failas netinkamas.',
   'set.persist': 'Paprašyti naršyklės išsaugoti duomenis', 'set.persisted': 'Saugykla pastovi.', 'set.notPersisted': 'Naršyklė gali išvalyti duomenis, kai trūksta vietos.',
   'set.stats': 'Saugoma: {imports} importai, {lines} eilučių',

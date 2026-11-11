@@ -125,3 +125,21 @@ describe('demo mode never shares a database with the visitor’s own data', () =
     expect(getDb().name).toBe(REAL_DB);
   });
 });
+
+describe('the demo data never carries data-completeness caveats (it is clean synthetic data imported with the current rules)', () => {
+  it('no legacy-import, excluded-credit, ignored-cost or comparison-withheld notice for the demo sales and purchases', async () => {
+    const { setEngineForTests } = await import('@/lib/engineClient');
+    const { importDemoFile } = await import('@/lib/demo');
+    const db = new AppDB('demo-caveats-' + Math.random());
+    const s = new EngineSession(db);
+    setEngineForTests(s);
+    const load = async (n: string) => { const u = new TextEncoder().encode(DEMO_TEXT[n]!); return u.buffer.slice(u.byteOffset, u.byteOffset + u.byteLength) as ArrayBuffer; };
+    for (const d of DEMO_FILES) expect(await importDemoFile(d, load), d.file).toBe(true);
+    expect((await db.imports.toArray()).every((i) => i.rules === 2)).toBe(true);
+    const b = await s.build({ version: 1, filters: {}, period: { preset: 'r30' } });
+    const codes = b.model!.limitations.map((l) => l.code);
+    for (const bad of ['legacy_import', 'credit_rows_excluded', 'cost_ignored', 'previous_unknown', 'previous_incomplete']) expect(codes, bad).not.toContain(bad);
+    const ex = await s.buildExecutive({ version: 1 });
+    for (const c of ex.model.coverage) for (const f of ['excluded_credits', 'legacy_import', 'comparison_withheld'] as const) expect(c.flags, `${c.module}:${f}`).not.toContain(f);
+  }, 60_000);
+});

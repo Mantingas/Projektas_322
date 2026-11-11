@@ -22,6 +22,7 @@ export type Limitation =
   | { code: 'no_comparison' }
   | { code: 'negative_lines'; lines: number }
   | { code: 'held_pending'; lines: number }
+  | { code: 'previous_tolerated'; days: number; dataFrom: { date: string } }
   | { code: 'previous_unknown'; from: { date: string }; dataFrom: { date: string } }
   | { code: 'previous_incomplete'; from: { date: string }; declaredFrom: { date: string } }
   | { code: 'legacy_import'; n: number }
@@ -122,6 +123,8 @@ export function buildDashboard(all: SalesRecord[], o: DashboardOptions): Dashboa
   if (unverified && unverified.code === 'previous_unverified') limitations.push({ code: 'previous_unknown', from: { date: periods.previous.from }, dataFrom: { date: unverified.dataFrom } });
   else if (declaredPartial && declaredPartial.code === 'previous_declared_incomplete') limitations.push({ code: 'previous_incomplete', from: { date: periods.previous.from }, declaredFrom: { date: declaredPartial.declaredFrom } });
   else if (!comparable) limitations.push({ code: 'no_comparison' });
+  const assumed = periods.warnings.find((w) => w.code === 'previous_tolerated');
+  if (assumed && assumed.code === 'previous_tolerated') limitations.push({ code: 'previous_tolerated', days: assumed.days, dataFrom: { date: assumed.dataFrom } });
   const neg = records.filter((r) => r.amount < 0).length;
   if (neg) limitations.push({ code: 'negative_lines', lines: neg });
   if (o.heldPending) limitations.push({ code: 'held_pending', lines: o.heldPending });
@@ -155,7 +158,19 @@ import { analyzeSalesPeriod, type SalesAnalysis } from '../insights/engine';
 export function buildDashboardWithInsights(all: SalesRecord[], o: DashboardOptions): { model: DashboardModel; analysis: SalesAnalysis | null } | null {
   const model = buildDashboard(all, o);
   if (!model) return null;
-  return { model, analysis: analyzeSalesPeriod(model.records, o.series, model.periods) };
+  const analysis = analyzeSalesPeriod(model.records, o.series, model.periods);
+  if (!analysis) return { model, analysis };
+  // Findings built on incomplete data are never presented as fully reliable:
+  //  - credit-note rows were not imported (sales may be overstated) → at most "medium"
+  //  - the previous window's start is only ASSUMED to be covered → comparison-based findings at most "medium"
+  const excluded = (o.excludedCredits?.rows ?? 0) > 0;
+  const assumedCoverage = model.periods.warnings.some((w) => w.code === 'previous_tolerated');
+  const cap = (i: (typeof analysis.insights)[number]) => {
+    if (excluded && i.reliability === 'high') return { ...i, reliability: 'medium' as const, reliabilityReasonKey: 'rel.excludedCredits' };
+    if (assumedCoverage && i.params.days !== undefined && i.reliability === 'high') return { ...i, reliability: 'medium' as const, reliabilityReasonKey: 'rel.coverageAssumed' };
+    return i;
+  };
+  return { model, analysis: { ...analysis, insights: analysis.insights.map(cap) } };
 }
 
 /** What the UI receives: the model without the (potentially huge) record list, which stays in the worker. */

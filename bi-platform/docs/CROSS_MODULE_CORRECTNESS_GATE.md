@@ -57,3 +57,12 @@ Not changed: finance `covers()` also uses the first transaction date as evidence
 * Thresholds (80 % coverage, 2 % returns, 5× cost, 3 days / 10 % tolerance) are reasoned defaults, not calibrated.
 * Finance `covers()` does not use the declared period (conservative).
 * "Customers who bought less" can still flag customers that order every N days.
+
+## 7. Final pre-deployment safety gate
+Three targeted checks; each confirmed gap was fixed and has a regression test (`tests/predeploy-gate.test.ts`, `e2e/safety-gate.spec.ts`).
+
+1. **Withheld credit notes.** Gap: the executive overview and the findings CSV did not mention them, and findings stayed "high" reliability. Now: findings are capped at "medium" (*some credit-note rows were not imported, so sales may be overstated*), the findings CSV prints the data limitations **before** the figures, and the executive overview/report carry the flag *INCOMPLETE: credit-note rows were not imported …* (also as a line of the executive summary, before any conclusion).
+2. **"Tolerated" coverage.** Gap: it looked like verified coverage. Now it is an explicit **assumption**: period warning + limitation ("shown on the ASSUMPTION that those days had no transactions – not verified"), comparison-based findings capped at "medium", and an executive flag. Boundary tests: first sale 0 / 1 / 2 / 3 days after the start of the previous window (covered / tolerated ×3), 4 days (unknown, withheld), 90-day window 9 vs 10 days, declared export start (verified, no assumption), purchasing.
+3. **Old-import instruction.** Gap: "delete the old import, then import again" could destroy the only copy. Now: the notice says the numbers have *not* changed, that deletion cannot be undone, that the app does not keep files, to re-import **only** with the original file or a backup, and otherwise to keep the old import. Every delete confirmation (one import, all data) warns the same way and points to Settings → Download backup; an old-rules import gets the stronger question ("the only stored copy"). Cancelling deletes nothing (e2e).
+
+Demo and isolation: the demo data carries none of the completeness caveats (test); a deletion made in demo mode touches only the demo database and the visitor's own database stays byte-for-byte identical (e2e).

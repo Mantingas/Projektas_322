@@ -93,6 +93,16 @@ export interface AnalysisLite {
   detected: { module: ModuleId; purchasing: number; sales: number; inventory: number; finance: number; side: FinanceSide | null };
 }
 
+/** Which data-completeness notes of a module qualify its figures in the executive overview (limitation / period-warning codes → coverage flags). */
+export function dataNotesOf(limitationCodes: string[], warningCodes: string[]): ('excluded_credits' | 'legacy_import' | 'comparison_withheld' | 'comparison_assumed')[] {
+  const out: ('excluded_credits' | 'legacy_import' | 'comparison_withheld' | 'comparison_assumed')[] = [];
+  if (limitationCodes.includes('credit_rows_excluded')) out.push('excluded_credits');
+  if (limitationCodes.includes('legacy_import')) out.push('legacy_import');
+  if (warningCodes.includes('previous_unverified') || warningCodes.includes('previous_declared_incomplete')) out.push('comparison_withheld');
+  if (warningCodes.includes('previous_tolerated')) out.push('comparison_assumed');
+  return out;
+}
+
 /** Keeps only valid ISO dates and a from ≤ to order: a declaration that contradicts itself is ignored, never guessed. */
 export function cleanCoverage(c?: { from?: string; to?: string }): { from?: string; to?: string } | undefined {
   const ok = (d?: string) => (d && /^\d{4}-\d{2}-\d{2}$/.test(d) && !Number.isNaN(Date.parse(d)) ? d : undefined);
@@ -766,11 +776,11 @@ export class EngineSession {
 
     if (recs.sales.length) {
       const r = await this.build({ version: req.version, filters: {}, period });
-      if (!r.empty && r.model && r.series) snapshots.push({ module: 'sales', series: { currency: r.series.currency, basis: r.series.basis }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend: pt(r.model.trend), unavailable: r.analysis?.unavailable, bounds: r.bounds!, lines: recs.sales.length, imports: importsOf('sales'), base: baseOf(r.model.kpis, 'sales'), pendingHeld: r.pendingHeld, unknownBasis: r.series.basis === 'unknown' });
+      if (!r.empty && r.model && r.series) snapshots.push({ module: 'sales', series: { currency: r.series.currency, basis: r.series.basis }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend: pt(r.model.trend), unavailable: r.analysis?.unavailable, bounds: r.bounds!, lines: recs.sales.length, imports: importsOf('sales'), base: baseOf(r.model.kpis, 'sales'), pendingHeld: r.pendingHeld, unknownBasis: r.series.basis === 'unknown', dataNotes: dataNotesOf(r.model.limitations.map((l) => l.code), r.model.warnings.map((w) => w.code)) });
     }
     if (recs.purchases.length) {
       const r = await this.buildPurchasing({ version: req.version, filters: {}, period });
-      if (!r.empty && r.model && r.series) snapshots.push({ module: 'purchasing', series: { currency: r.series.currency, basis: r.series.basis }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend: pt(r.model.trend), unavailable: r.analysis?.unavailable, bounds: r.bounds!, lines: recs.purchases.length, imports: importsOf('purchasing'), base: baseOf(r.model.kpis, 'p_spend'), pendingHeld: r.pendingHeld, unknownBasis: r.series.basis === 'unknown' });
+      if (!r.empty && r.model && r.series) snapshots.push({ module: 'purchasing', series: { currency: r.series.currency, basis: r.series.basis }, otherSeries: seriesNote(r.allSeries, r.series), window: win(r.model.periods), kpis: r.model.kpis, insights: r.analysis?.insights ?? [], trend: pt(r.model.trend), unavailable: r.analysis?.unavailable, bounds: r.bounds!, lines: recs.purchases.length, imports: importsOf('purchasing'), base: baseOf(r.model.kpis, 'p_spend'), pendingHeld: r.pendingHeld, unknownBasis: r.series.basis === 'unknown', dataNotes: dataNotesOf([], r.model.warnings.map((w) => w.code)) });
     }
     if (recs.inventory.length) {
       const r = await this.buildInventory({ version: req.version, filters: {}, period });

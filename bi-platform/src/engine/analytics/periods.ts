@@ -24,6 +24,8 @@ export type PeriodWarning =
   | { code: 'previous_unverified'; dataFrom: string; days: number }
   /** The user declared the export period and it starts after the previous window's start: proven partial. */
   | { code: 'previous_declared_incomplete'; declaredFrom: string; days: number }
+  /** The first transaction is a few days after the previous window's start and no export period was declared: those days are ASSUMED to be quiet – not verified. Not blocking. */
+  | { code: 'previous_tolerated'; dataFrom: string; days: number }
   | { code: 'no_current_data' }
   | { code: 'length_mismatch'; current: number; previous: number }
   | { code: 'sparse_data'; which: 'current' | 'previous'; daysWithData: number; days: number };
@@ -159,6 +161,7 @@ export function resolvePeriods(sel: PeriodSelection, data: DataBounds): Resolved
     const c = previousCoverage(previous, previousDays, data.dateMin, data.declaredFrom);
     if (c.state === 'unknown') warnings.push({ code: 'previous_unverified', dataFrom: data.dateMin, days: c.leadingDays });
     else if (c.state === 'declared_incomplete') warnings.push({ code: 'previous_declared_incomplete', declaredFrom: c.declaredFrom, days: c.leadingDays });
+    else if (c.state === 'tolerated' && c.leadingDays > 0 && !(data.declaredFrom && data.declaredFrom <= data.dateMin)) warnings.push({ code: 'previous_tolerated', dataFrom: data.dateMin, days: c.leadingDays });
   }
   if (current.to < data.dateMin || current.from > data.dateMax) warnings.push({ code: 'no_current_data' });
   for (const [which, r, days] of [['current', current, currentDays], ['previous', previous, previousDays]] as const) {

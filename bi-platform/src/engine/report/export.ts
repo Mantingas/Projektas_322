@@ -18,7 +18,9 @@ export interface ReportInput {
   lang: string;
   kpis: { label: string; value: string }[];
   insights: ReportInsight[];
-  labels: { insights: string; action: string; reliability: string; impact: string; footer: string; kpis: string };
+  labels: { insights: string; action: string; reliability: string; impact: string; footer: string; kpis: string; notes?: string };
+  /** Data limitations that qualify every figure below (e.g. rows that were not imported): printed before the figures, never dropped from an export. */
+  notes?: string[];
 }
 
 export function escapeHtml(s: string): string {
@@ -40,6 +42,7 @@ export function renderReportCsv(r: ReportInput): string {
   const rows: (string | number)[][] = [
     [r.title],
     [r.subtitle],
+    ...(r.notes?.length ? [[], [r.labels.notes ?? 'Data limitations'], ...r.notes.map((n) => [n])] : []),
     [],
     [r.labels.kpis],
     ...r.kpis.map((k) => [k.label, k.value]),

@@ -55,7 +55,7 @@ export function HistoryView({ version, onChanged }: { version: number; onChanged
                 <td className="px-3 py-2">{r.identity ? t(`identity.${r.identity}` as MessageKey) : '–'}</td>
                 <td className="px-3 py-2">{t(`mode.${r.exportMode}` as MessageKey)}</td>
                 <td className="px-3 py-2 text-right">
-                  <Button size="sm" variant="ghost" onClick={async () => { if (window.confirm(t('hist.confirmDelete'))) { await deleteImport(getDb(), r.id); onChanged(); } }}>{t('hist.delete')}</Button>
+                  <Button size="sm" variant="ghost" onClick={async () => { if (window.confirm(t((r.module ?? 'sales') === 'sales' && r.added > 0 && (r.rules ?? 1) < IMPORT_RULES_VERSION ? 'hist.confirmDeleteLegacy' : 'hist.confirmDelete'))) { await deleteImport(getDb(), r.id); onChanged(); } }}>{t('hist.delete')}</Button>
                 </td>
               </tr>
             ))}

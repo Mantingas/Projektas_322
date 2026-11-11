@@ -93,11 +93,11 @@ const en = {
 
   'hist.title': 'Import history', 'hist.empty': 'No imports yet.', 'hist.file': 'File', 'hist.date': 'Imported', 'hist.period': 'Data period', 'hist.rows': 'Rows',
   'hist.added': 'Added', 'hist.dups': 'Duplicates', 'hist.conflicts': 'Conflicts', 'hist.mode': 'Type', 'hist.delete': 'Delete import',
-  'hist.confirmDelete': 'Delete this import and its lines from this browser?', 'hist.note': 'Lines that were duplicates stay attached to the first import that contained them.',
+  'hist.confirmDelete': 'Delete this import and its lines from this browser? This cannot be undone and the app does not keep your files: make sure you still have the original file or a backup (Settings → Download backup).', 'hist.note': 'Lines that were duplicates stay attached to the first import that contained them.',
 
   'set.title': 'Settings', 'set.language': 'Interface language', 'set.data': 'Your data',
   'set.storage': 'All imported data is stored only in this browser. Clearing site data removes it – make a backup if you need to keep it.',
-  'set.deleteAll': 'Delete all data', 'set.deleteConfirm': 'This permanently deletes every import, mapping and setting stored in this browser. Continue?', 'set.deleted': 'All local data deleted.',
+  'set.deleteAll': 'Delete all data', 'set.deleteConfirm': 'This permanently deletes every import, mapping and setting stored in this browser. It cannot be undone and the app does not keep your files: download a backup first unless you still have every original file. Continue?', 'set.deleted': 'All local data deleted.',
   'set.backup': 'Download backup (JSON)', 'set.restore': 'Restore from backup', 'set.restored': 'Backup restored.', 'set.restoreFail': 'The backup file is invalid.',
   'set.persist': 'Ask the browser to keep data', 'set.persisted': 'Storage is persistent.', 'set.notPersisted': 'The browser may clear this data when space is low.',
   'set.stats': 'Stored: {imports} imports, {lines} lines',
