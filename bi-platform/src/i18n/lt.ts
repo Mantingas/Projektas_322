@@ -42,6 +42,7 @@ const lt: Messages = {
   'import.needDate': 'Būtinas datos stulpelis.', 'import.needAmount': 'Būtinas sumos stulpelis.',
   'import.basisUnknown': 'Sumos stulpelis nenurodo, ar suma su PVM. Ji bus laikoma „PVM statusas nežinomas“ – marža išjungta, o ataskaitose tai bus nurodyta. Jei žinote, pasirinkite „Suma be PVM“ arba „Suma su PVM“.',
   'import.multiAmount': 'Susieti keli sumų stulpeliai. Pirmenybė: be PVM, tada su PVM, tada nenurodyta.',
+  'import.currencyUnreadable': 'Daugumos stulpelio, priskirto valiutai, reikšmių nėra valiutų kodai, todėl tos eilutės būtų praleistos. Nustatykite šį stulpelį kaip „nenaudojamas“ ir žemiau pasirinkite valiutą.',
   'import.lowConf': 'Mažas patikimumas – patikrinkite: {field}',
   'import.currency': 'Valiuta', 'import.currencyHint': 'Faile nėra valiutos stulpelio. Pasirinkite sumų valiutą.', 'import.currencyDetected': 'Nustatyta pagal reikšmes: {c}',
   'import.exportMode': 'Eksporto tipas', 'mode.full': 'Visas laikotarpis', 'mode.incremental': 'Tik naujos operacijos', 'mode.unknown': 'Nežinau',

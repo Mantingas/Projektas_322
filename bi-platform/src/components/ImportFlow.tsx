@@ -147,7 +147,9 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   }, [analysis, entriesKey, currency, mode, policy, module, asOf, side, dateOrders]);
 
   const needs = pv?.preview.needsConfirmation ?? [];
-  const confirmable = Boolean(pv) && isMappingConfirmable(warnings) && (hasCurrencyCol || Boolean(currency)) && (!parsed?.duplicateOf || dupAccepted) && (needs.length === 0 || confirmChecked) && !pvBusy;
+  // a currency column whose values are not currencies must not silently drop the file: the person decides (unassign the column and pick a currency)
+  const currencyUnreadable = hasCurrencyCol && Boolean(pv) && (pv!.stats.errors?.unknown_currency ?? 0) * 2 >= Math.max(1, pv!.stats.rowsRead);
+  const confirmable = Boolean(pv) && !currencyUnreadable && isMappingConfirmable(warnings) && (hasCurrencyCol || Boolean(currency)) && (!parsed?.duplicateOf || dupAccepted) && (needs.length === 0 || confirmChecked) && !pvBusy;
 
   const confirm = async () => {
     if (!parsed || !pv) return;
@@ -340,6 +342,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
             </table>
           </div>
 
+          {currencyUnreadable && <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-800 dark:bg-red-950 dark:text-red-200" data-testid="currency-unreadable">{t('import.currencyUnreadable')}</p>}
           <ul className="space-y-1 text-sm" aria-live="polite">
             {warnings.map((w, i) => (
               <li key={i} className={cn('rounded-md px-3 py-2', w.code === 'missing_date' || w.code === 'missing_amount' || w.code === 'missing_product' || w.code === 'missing_quantity' || w.code === 'missing_counterparty' ? 'bg-red-50 text-red-800 dark:bg-red-950 dark:text-red-200' : 'bg-amber-50 text-amber-900 dark:bg-amber-950/40 dark:text-amber-200')}>

@@ -42,6 +42,7 @@ const pl: Messages = {
   'import.needDate': 'Wymagana jest kolumna z datą.', 'import.needAmount': 'Wymagana jest kolumna z kwotą.',
   'import.basisUnknown': 'Kolumna kwoty nie wskazuje, czy zawiera VAT. Zostanie potraktowana jako „status VAT nieznany” – marża jest wyłączona, a raporty to zaznaczą. Jeśli wiesz, wybierz „Kwota netto” lub „Kwota brutto”.',
   'import.multiAmount': 'Zmapowano kilka kolumn z kwotami. Priorytet: netto, potem brutto, potem nieokreślona.',
+  'import.currencyUnreadable': 'Większość wartości w kolumnie przypisanej do waluty nie jest kodem waluty, więc te wiersze zostałyby pominięte. Ustaw tę kolumnę jako „nieużywana” i wybierz walutę poniżej.',
   'import.lowConf': 'Niska pewność – sprawdź: {field}',
   'import.currency': 'Waluta', 'import.currencyHint': 'Plik nie ma kolumny waluty. Wybierz walutę kwot.', 'import.currencyDetected': 'Wykryto z wartości: {c}',
   'import.exportMode': 'Typ eksportu', 'mode.full': 'Cały okres', 'mode.incremental': 'Tylko nowe operacje', 'mode.unknown': 'Nie wiem',

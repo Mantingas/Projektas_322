@@ -41,6 +41,7 @@ const en = {
   'import.needDate': 'A date column is required.', 'import.needAmount': 'An amount column is required.',
   'import.basisUnknown': 'The amount column does not say whether VAT is included. It will be treated as "VAT status unknown" – margin is disabled and reports will say so. Choose "Amount excl. VAT" or "Amount incl. VAT" if you know.',
   'import.multiAmount': 'Several amount columns are mapped. Priority: excl. VAT, then incl. VAT, then unspecified.',
+  'import.currencyUnreadable': 'Most values in the column mapped as currency are not currency codes, so those rows would be skipped. Set that column to “not used” and choose the currency below.',
   'import.lowConf': 'Low confidence – please check: {field}',
   'import.currency': 'Currency', 'import.currencyHint': 'The file has no currency column. Choose the currency of the amounts.', 'import.currencyDetected': 'Detected from values: {c}',
   'import.exportMode': 'Export type', 'mode.full': 'Full period', 'mode.incremental': 'Only new transactions', 'mode.unknown': 'Not sure',

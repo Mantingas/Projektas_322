@@ -36,7 +36,7 @@ export const SALES_SYNONYMS: Record<SalesField, string[]> = {
     'product code', 'product id', 'item code', 'item no', 'part number', 'article number',
   ],
   quantity: ['kiekis', 'kiek', 'vnt', 'kiekis vnt', 'parduotas kiekis', 'ilosc', 'il', 'ilosc sprzedana', 'szt', 'quantity', 'qty', 'units', 'units sold'],
-  unit_price: ['kaina', 'vieneto kaina', 'vnt kaina', 'cena', 'cena jednostkowa', 'cena sprzedazy', 'price', 'unit price', 'sales price'],
+  unit_price: ['kaina', 'pardavimo kaina', 'vieneto kaina', 'vnt kaina', 'cena', 'cena jednostkowa', 'cena sprzedazy', 'price', 'unit price', 'sales price'],
   net_amount: [
     'suma be pvm', 'verte be pvm', 'be pvm', 'grynoji suma', 'neto', 'suma neto', 'pardavimo suma be pvm', 'apyvarta be pvm', 'suma eur be pvm', 'pardavimai be pvm',
     'netto', 'wartosc netto', 'kwota netto', 'wartosc sprzedazy netto', 'suma netto', 'sprzedaz netto', 'obrot netto',

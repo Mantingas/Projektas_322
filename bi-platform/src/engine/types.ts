@@ -41,6 +41,8 @@ export interface ColumnProfile {
   negativeRatio: number;
   /** Currency codes seen in the values (e.g. "EUR" from "12,50 €"). */
   currencyHints: string[];
+  /** Share of non-empty values that are currency codes or symbols ("EUR", "€"). */
+  currencyCodeRatio?: number;
   type: ColumnType;
   /** Number format inferred from the column as a whole. */
   decimal: ',' | '.';

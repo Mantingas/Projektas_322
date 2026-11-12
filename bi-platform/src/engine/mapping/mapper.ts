@@ -2,16 +2,36 @@ import type { ColumnProfile, FieldId, MappingEntry, MappingProposal, MappingWarn
 import { FINANCE_WORDS, GROSS_HINT_TOKENS, INVENTORY_WORDS, PAYABLE_WORDS, RECEIVABLE_WORDS, NET_HINT_TOKENS, PURCHASING_WORDS, SALES_WORDS, SPECS, type ModuleSpec } from './dictionary';
 import { levenshtein, normalizeHeader, tokens } from './normalize';
 import { matchTemplate } from './templates';
-import { normalizeCurrency } from '../schema/numbers';
+import { normalizeCurrency, parseNumber } from '../schema/numbers';
+import type { CellValue } from '../types';
 
 export const PROPOSE_THRESHOLD = 0.55;
 export const LOW_CONFIDENCE = 0.75;
+const CONTESTED_MARGIN = 0.03;
+const CONTESTED_CONFIDENCE = 0.7;
+
+/** Currency suffixes ("Suma_EUR", "Kaina PLN") say which currency a column is in, not what it is. */
+const CURRENCY_WORDS = new Set(['eur', 'euro', 'euros', 'pln', 'usd', 'gbp', 'czk', 'sek', 'zl']);
+/** A catalogue / list price is not the price a line was sold at. */
+const LIST_PRICE_WORDS = new Set(['katalogo', 'katalogine', 'katalog', 'katalogowa', 'list', 'cennikowa', 'bazine', 'base']);
+/** A rate, not an amount: "PVM %", "PVM proc", "VAT rate". */
+const RATE_WORDS = new Set(['proc', 'procent', 'procentai', 'percent', 'pct', 'rate', 'tarifas', 'stawka']);
+
+/** Header words without currency suffixes. */
+function coreTokens(header: string): string[] {
+  const t = tokens(header);
+  const core = t.filter((w) => !CURRENCY_WORDS.has(w));
+  return core.length ? core : t;
+}
 
 /** Name-based score of a header for a field: 1 exact, 0.7–0.9 token subset, 0.75 near-match. */
 export function headerScore(header: string, field: FieldId, module: ModuleId = 'sales'): number {
-  const n = normalizeHeader(header);
+  const toks = coreTokens(header);
+  const n = toks.join(' ');
   if (!n) return 0;
-  const toks = n.split(' ');
+  // a header that names the VAT basis ("be PVM", "su PVM", "net", "gross") or a rate is not a VAT amount; a list price is not the sold price
+  if (field === 'vat_amount' && (basisHint(header) || toks.some((t) => RATE_WORDS.has(t)) || header.includes('%'))) return 0;
+  if (field === 'unit_price' && toks.some((t) => LIST_PRICE_WORDS.has(t))) return 0;
   let best = 0;
   for (const syn of SPECS[module].synonyms(field)) {
     if (syn === n) return 1;
@@ -23,7 +43,7 @@ export function headerScore(header: string, field: FieldId, module: ModuleId = '
 }
 
 function basisHint(header: string): 'net' | 'gross' | null {
-  const toks = tokens(header);
+  const toks = coreTokens(header);
   const joined = ` ${toks.join(' ')} `;
   const net = toks.some((t) => NET_HINT_TOKENS.includes(t)) || joined.includes(' be pvm ') || joined.includes(' bez vat ');
   const gross = toks.some((t) => GROSS_HINT_TOKENS.includes(t)) || joined.includes(' su pvm ') || joined.includes(' z vat ');
@@ -36,11 +56,12 @@ function valueCompat(field: FieldId, p: ColumnProfile, spec: ModuleSpec): number
   if (p.nonEmpty === 0) return 0;
   if (field === 'document_date' || field === 'snapshot_date' || field === 'movement_date' || field === 'due_date' || field === 'payment_date') return Math.max(p.dateRatio, p.serialDateRatio);
   if (spec.numeric.includes(field)) return p.numberRatio;
-  if (field === 'unit' || field === 'document_type' || field === 'movement_type') return p.textRatio > 0.8 && p.avgTextLength <= 20 && (p.distinctRatio < 0.2 || p.distinctRatio * p.nonEmpty <= 12) ? 1 : 0.3; // few distinct values: a categorical column, even in a short file
+  if (field === 'unit' || field === 'document_type' || field === 'movement_type') return p.textRatio > 0.8 && p.avgTextLength <= 32 && (p.distinctRatio < 0.2 || p.distinctRatio * p.nonEmpty <= 12) ? 1 : 0.3; // few distinct values: a categorical column, even in a short file
   if (spec.text.includes(field)) return p.numberRatio > 0.8 || p.dateRatio > 0.8 ? 0.1 : p.textRatio;
   // identifiers carry no value evidence: a generic header such as "Vidinis kodas" must not look confident
   if (spec.ids.includes(field)) return p.dateRatio > 0.8 ? 0.1 : 0.6;
-  if (field === 'currency') return p.textRatio > 0.8 && p.avgTextLength <= 5 && p.distinctRatio < 0.2 ? 1 : 0.2;
+  // a currency column holds currency codes; "OE11", "A12" are short and repetitive too, but they are not currencies
+  if (field === 'currency') return p.currencyCodeRatio !== undefined ? (p.currencyCodeRatio >= 0.8 && p.textRatio > 0.8 ? 1 : 0.2) : p.textRatio > 0.8 && p.avgTextLength <= 5 && p.distinctRatio < 0.2 ? 1 : 0.2;
   return 0.5;
 }
 
@@ -112,10 +133,14 @@ export function suggestMapping(profiles: ColumnProfile[], opts: MapperOptions = 
       if (score >= PROPOSE_THRESHOLD) candidates.push({ field, column: p.index, score });
     }
   }
-  candidates.sort((a, b) => b.score - a.score);
+  // ties are settled by header text, not by column position: the same columns in another order must map the same way
+  candidates.sort((a, b) => b.score - a.score || normHeaders[a.column]!.localeCompare(normHeaders[b.column]!) || a.column - b.column);
   for (const c of candidates) {
     if (usedCols.has(c.column) || usedFields.has(c.field)) continue;
-    entries.push({ field: c.field, columnIndex: c.column, confidence: Math.round(c.score * 100) / 100, source: 'heuristic' });
+    // another free column is almost as good a fit for this field: take one, but ask the user to confirm
+    const rival = candidates.some((o) => o.field === c.field && o.column !== c.column && !usedCols.has(o.column) && o.score >= c.score - CONTESTED_MARGIN);
+    const confidence = Math.round((rival ? Math.min(c.score, CONTESTED_CONFIDENCE) : c.score) * 100) / 100;
+    entries.push({ field: c.field, columnIndex: c.column, confidence, source: 'heuristic' });
     usedCols.add(c.column);
     usedFields.add(c.field);
   }
@@ -129,10 +154,10 @@ export function suggestMapping(profiles: ColumnProfile[], opts: MapperOptions = 
       if (hints.length === 1) detectedCurrency = normalizeCurrency(hints[0]!) ?? undefined;
     }
     if (!detectedCurrency) {
-      for (const p of profiles) {
-        const m = /\b(eur|pln|usd|gbp)\b/i.exec(p.header);
-        if (m) detectedCurrency = m[1]!.toUpperCase();
-      }
+      // only when the headers agree on one currency: "Suma_EUR" next to "Suma_USD" says nothing about the file
+      const found = new Set<string>();
+      for (const p of profiles) for (const w of tokens(p.header)) if (['eur', 'pln', 'usd', 'gbp'].includes(w)) found.add(w.toUpperCase());
+      if (found.size === 1) detectedCurrency = [...found][0];
       if (!detectedCurrency && /€/.test(profiles.map((p) => p.header).join(' '))) detectedCurrency = 'EUR';
       if (!detectedCurrency && /zł/i.test(profiles.map((p) => p.header).join(' '))) detectedCurrency = 'PLN';
     }
@@ -145,6 +170,29 @@ export function suggestMapping(profiles: ColumnProfile[], opts: MapperOptions = 
     if (hasType && snap && !entries.some((e) => e.field === 'movement_date')) snap.field = 'movement_date';
   }
   return { entries: entries.sort((a, b) => a.columnIndex - b.columnIndex), templateId, detectedCurrency, warnings: validateMapping(entries, module) };
+}
+
+/**
+ * Cross-checks the amount columns on the data: net + VAT ≈ gross on the same line. If most rows disagree, the header reading is doubtful,
+ * so the three columns are lowered to "please confirm". Only lines are compared with lines (never a unit price with a line total).
+ */
+export function checkAmountConsistency(proposal: MappingProposal, profiles: ColumnProfile[], rows: CellValue[][]): MappingProposal {
+  const col = (f: FieldId) => proposal.entries.find((e) => e.field === f);
+  const net = col('net_amount'), vat = col('vat_amount'), gross = col('gross_amount');
+  if (!net || !vat || !gross) return proposal;
+  let ok = 0, seen = 0;
+  for (let i = 0; i < rows.length && seen < 2000; i++) {
+    const r = rows[i]!;
+    const n = parseNumber(r[net.columnIndex] ?? null, profiles[net.columnIndex]!.decimal);
+    const v = parseNumber(r[vat.columnIndex] ?? null, profiles[vat.columnIndex]!.decimal);
+    const g = parseNumber(r[gross.columnIndex] ?? null, profiles[gross.columnIndex]!.decimal);
+    if (n === null || v === null || g === null || (n === 0 && v === 0 && g === 0)) continue;
+    seen++;
+    if (Math.abs(n + v - g) <= Math.max(0.02, Math.abs(g) * 0.005)) ok++;
+  }
+  if (seen < 5 || ok / seen >= 0.6) return proposal;
+  const entries = proposal.entries.map((e) => (e === net || e === vat || e === gross) ? { ...e, confidence: Math.min(e.confidence, 0.6) } : e);
+  return { ...proposal, entries, warnings: validateMapping(entries, 'sales') };
 }
 
 export function validateMapping(entries: Pick<MappingEntry, 'field' | 'confidence'>[], module: ModuleId = 'sales', ctx: { hasDefaultDate?: boolean } = {}): MappingWarning[] {

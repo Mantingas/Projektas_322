@@ -1,6 +1,6 @@
 import type { CellValue, ColumnProfile } from '../types';
 import { dateOrderIsGuess, inferDateOrder, looksLikeDate } from './dates';
-import { detectCurrencyInText, inferColumnDecimal, interpretNumberString, type Decimal } from './numbers';
+import { detectCurrencyInText, inferColumnDecimal, interpretNumberString, normalizeCurrency, type Decimal } from './numbers';
 
 const PROFILE_SAMPLE = 20000;
 
@@ -21,8 +21,15 @@ export function profileColumns(headers: string[], dataRows: CellValue[][], decim
     let textLen = 0;
     const currencyHits = new Map<string, number>();
     const distinct = new Set<string>();
+    const isCode = new Map<string, boolean>();
+    let codes = 0;
     for (const v of values) {
       distinct.add(String(v));
+      if (typeof v === 'string' && v.length <= 12) {
+        let c = isCode.get(v);
+        if (c === undefined) isCode.set(v, (c = normalizeCurrency(v) !== undefined));
+        if (c) codes++;
+      }
       if (typeof v === 'number') {
         numbers++;
         if (Number.isInteger(v) && v >= 30000 && v <= 60000) serials++;
@@ -56,6 +63,7 @@ export function profileColumns(headers: string[], dataRows: CellValue[][], decim
       distinctRatio: n ? distinct.size / n : 0,
       avgTextLength: texts ? textLen / texts : 0,
       negativeRatio: n ? negatives / n : 0,
+      currencyCodeRatio: n ? codes / n : 0,
       currencyHints: [...currencyHits.entries()].filter(([, c]) => c >= n * 0.5).map(([k]) => k),
       type,
       decimal,

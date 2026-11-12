@@ -2,7 +2,7 @@ import type { ColumnProfile, ConfirmedMapping, FieldId, MappingEntry, MappingPro
 import { detectTable } from './schema/header';
 import { profileColumns } from './schema/profile';
 import type { Decimal } from './schema/numbers';
-import { layoutSignature, suggestMapping } from './mapping/mapper';
+import { checkAmountConsistency, layoutSignature, suggestMapping } from './mapping/mapper';
 
 export interface SheetAnalysis {
   table: TableDetection;
@@ -16,7 +16,8 @@ export function analyzeSheet(sheet: RawSheet, opts: { decimalHint?: Decimal; sav
   const table = detectTable(sheet.rows);
   if (!table || table.dataRows.length === 0) return null;
   const profiles = profileColumns(table.headers, table.dataRows, opts.decimalHint ?? ',');
-  const proposal = suggestMapping(profiles, { saved: opts.savedMapping, module: opts.module });
+  let proposal = suggestMapping(profiles, { saved: opts.savedMapping, module: opts.module });
+  if ((opts.module ?? 'sales') === 'sales') proposal = checkAmountConsistency(proposal, profiles, table.dataRows);
   return { table, profiles, proposal, signature: layoutSignature(table.headers, opts.module) };
 }
 
