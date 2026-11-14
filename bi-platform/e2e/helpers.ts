@@ -40,3 +40,9 @@ export async function seedDatabase(page: Page, data: { imports: unknown[]; sales
     db.close();
   }, data);
 }
+
+/** A file that states no currency asks for one (nothing is assumed from the interface language): pick EUR when the choice is still empty. */
+export async function ensureCurrency(page: Page, code = 'EUR') {
+  const sel = page.getByTestId('currency-select');
+  if ((await sel.count()) && (await sel.inputValue()) === '') await sel.selectOption(code);
+}

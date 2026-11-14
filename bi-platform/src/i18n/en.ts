@@ -43,6 +43,7 @@ const en = {
   'import.multiAmount': 'Several amount columns are mapped. Priority: excl. VAT, then incl. VAT, then unspecified.',
   'import.currencyUnreadable': 'Most values in the column mapped as currency are not currency codes, so those rows would be skipped. Set that column to “not used” and choose the currency below.',
   'import.lowConf': 'Low confidence – please check: {field}',
+  'import.currencyChoose': '— choose currency —',
   'import.currency': 'Currency', 'import.currencyHint': 'The file has no currency column. Choose the currency of the amounts.', 'import.currencyDetected': 'Detected from values: {c}',
   'import.exportMode': 'Export type', 'mode.full': 'Full period', 'mode.incremental': 'Only new transactions', 'mode.unknown': 'Not sure',
   'import.remember': 'Remember this mapping for files with the same layout',

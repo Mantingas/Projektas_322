@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import { buildFinanceFixtures, type FFixture } from '../tests/fixtures/financeFormats';
 import { END, makeFinance, refOutstanding, refOverdue, refOverdueCount, refBucket } from '../tests/fixtures/finance';
-import { isLocal, trackRequests } from './helpers';
+import { isLocal, trackRequests, ensureCurrency } from './helpers';
 
 const eur = (n: number) => new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'EUR' }).format(n);
 let fx: FFixture[] = [];
@@ -15,6 +15,7 @@ async function pickFile(page: Page, f: FFixture, opts: { side?: string; asOf?: s
   if (await page.getByTestId('import-result').count()) await page.getByRole('button', { name: 'Choose file' }).click();
   await page.getByTestId('file-input').setInputFiles(file(f));
   await page.getByTestId('mapping-table').waitFor();
+  await ensureCurrency(page);
   if (opts.module) await page.getByTestId('module-finance').click();
   if (opts.side) await page.getByTestId(`side-${opts.side}`).click();
   if (opts.asOf) await page.getByTestId('asof-input').fill(opts.asOf);
@@ -55,6 +56,7 @@ test.describe('finance: recognition', () => {
     await page.getByTestId('tab-import').click();
     await page.getByTestId('file-input').setInputFiles(file(get('ar-open-items-nodate')));
     await page.getByTestId('mapping-table').waitFor();
+    await ensureCurrency(page);
     await expect(page.getByTestId('asof-input')).toBeVisible();
     await expect(page.getByTestId('confirm-import')).toBeDisabled();
   });

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import JSZip from 'jszip';
 import { makeTruth } from '../tests/fixtures/truth';
-import { installWatchdog, isLocal, readWatchdog, trackRequests } from './helpers';
+import { installWatchdog, isLocal, readWatchdog, trackRequests, ensureCurrency } from './helpers';
 
 const sample = (n: string) => path.join(process.cwd(), 'public/samples', n);
 const truth = makeTruth('lt');
@@ -28,6 +28,7 @@ async function loadSample(page: Page) {
   await page.getByTestId('lang-en').click();
   await page.getByTestId('file-input').setInputFiles(sample('sample_lt_ataskaita.xlsx'));
   await page.getByTestId('mapping-table').waitFor();
+  await ensureCurrency(page);
   await expect(page.getByTestId('import-preview')).toBeVisible();
   await page.getByTestId('confirm-import').click();
   await page.getByTestId('view-insights').click();
@@ -42,6 +43,7 @@ test.describe('import diagnostics screen', () => {
       + '2025-01-02;A1;Acme;Widget;1;100,00;labas;1\r\n2025-01-03;A2;Beta;Widget;2;50,00;;2\r\nnetaisyklinga;A3;Gamma;Widget;1;10,00;;3\r\n2025-01-05;A4;Acme;Widget;1;abc;;4\r\nIš viso;;;;4;160,00;;\r\n';
     await page.getByTestId('file-input').setInputFiles({ name: 'messy.csv', mimeType: 'text/csv', buffer: Buffer.from(messy) });
     await page.getByTestId('mapping-table').waitFor();
+    await ensureCurrency(page);
     const s = page.getByTestId('diag-structure');
     await expect(s).toContainText('csv');
     await expect(s).toContainText('Delimiter: ;');
@@ -261,6 +263,7 @@ test.describe('hostile and very large input', () => {
     // and a normal file still works afterwards
     await page.getByTestId('file-input').setInputFiles(sample('sample_lt_pardavimai.csv'));
     await expect(page.getByTestId('mapping-table')).toBeVisible();
+    await ensureCurrency(page);
   });
 
   test('a 120 000-line file is imported and analysed without freezing the page', async ({ page }, testInfo) => {

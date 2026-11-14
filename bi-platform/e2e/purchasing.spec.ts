@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import path from 'node:path';
 import { CUR, PREV, inWin, makePurchasing, priceMap, sumNet } from '../tests/fixtures/purchasing';
-import { isLocal, trackRequests } from './helpers';
+import { isLocal, trackRequests, ensureCurrency } from './helpers';
 
 const sample = (n: string) => path.join(process.cwd(), 'public/samples', n);
 const truth = makePurchasing('lt');
@@ -12,6 +12,7 @@ async function importPurchasing(page: Page, file = 'sample_lt_pirkimai.csv') {
   await page.getByTestId('lang-en').click();
   await page.getByTestId('file-input').setInputFiles(sample(file));
   await page.getByTestId('mapping-table').waitFor();
+  await ensureCurrency(page);
   await expect(page.getByTestId('import-preview')).toBeVisible();
 }
 async function loadPurchasing(page: Page) {
@@ -51,6 +52,7 @@ test.describe('purchasing: import', () => {
     await page.getByTestId('lang-en').click();
     await page.getByTestId('file-input').setInputFiles(sample('sample_lt_pardavimai.csv'));
     await page.getByTestId('mapping-table').waitFor();
+    await ensureCurrency(page);
     await expect(page.getByTestId('module-sales')).toHaveAttribute('aria-pressed', 'true');
   });
 });
@@ -183,6 +185,7 @@ test.describe('purchasing: reports and privacy', () => {
     await page.getByRole('button', { name: 'Choose file' }).click();
     await page.getByTestId('file-input').setInputFiles(sample('sample_lt_pardavimai.csv'));
     await page.getByTestId('mapping-table').waitFor();
+    await ensureCurrency(page);
     await expect(page.getByTestId('import-preview')).toBeVisible();
     await page.getByTestId('confirm-import').click();
     await page.getByTestId('view-insights').click();

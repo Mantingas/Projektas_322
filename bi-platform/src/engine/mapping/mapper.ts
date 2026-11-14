@@ -8,6 +8,7 @@ import type { CellValue } from '../types';
 export const PROPOSE_THRESHOLD = 0.55;
 export const LOW_CONFIDENCE = 0.75;
 const CONTESTED_MARGIN = 0.03;
+const SUSPECT_SAVED_CONFIDENCE = 0.5;
 const CONTESTED_CONFIDENCE = 0.7;
 
 /** Currency suffixes ("Suma_EUR", "Kaina PLN") say which currency a column is in, not what it is. */
@@ -24,14 +25,21 @@ function coreTokens(header: string): string[] {
   return core.length ? core : t;
 }
 
+/** True when the header's own words rule the field out: a VAT basis or rate is not a VAT amount; a list price is not the price a line was sold at. */
+export function contradictsHeader(header: string, field: FieldId): boolean {
+  const toks = coreTokens(header);
+  if (field === 'vat_amount') return basisHint(header) !== null || toks.some((t) => RATE_WORDS.has(t)) || header.includes('%');
+  if (field === 'unit_price') return toks.some((t) => LIST_PRICE_WORDS.has(t));
+  return false;
+}
+
 /** Name-based score of a header for a field: 1 exact, 0.7–0.9 token subset, 0.75 near-match. */
 export function headerScore(header: string, field: FieldId, module: ModuleId = 'sales'): number {
   const toks = coreTokens(header);
   const n = toks.join(' ');
   if (!n) return 0;
   // a header that names the VAT basis ("be PVM", "su PVM", "net", "gross") or a rate is not a VAT amount; a list price is not the sold price
-  if (field === 'vat_amount' && (basisHint(header) || toks.some((t) => RATE_WORDS.has(t)) || header.includes('%'))) return 0;
-  if (field === 'unit_price' && toks.some((t) => LIST_PRICE_WORDS.has(t))) return 0;
+  if (contradictsHeader(header, field)) return 0;
   let best = 0;
   for (const syn of SPECS[module].synonyms(field)) {
     if (syn === n) return 1;
@@ -90,7 +98,8 @@ export function suggestMapping(profiles: ColumnProfile[], opts: MapperOptions = 
     for (const [field, nh] of Object.entries(map) as [FieldId, string][]) {
       const idx = normHeaders.findIndex((h, i) => h === nh && !usedCols.has(i));
       if (idx < 0 || usedFields.has(field)) continue;
-      entries.push({ field, columnIndex: idx, confidence, source });
+      // a remembered choice does not bypass the header rules: if the header itself rules the field out, keep the choice but ask for review
+      entries.push({ field, columnIndex: idx, confidence: source === 'saved' && contradictsHeader(profiles[idx]!.header, field) ? SUSPECT_SAVED_CONFIDENCE : confidence, source });
       usedCols.add(idx);
       usedFields.add(field);
     }

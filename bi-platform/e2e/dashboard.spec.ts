@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 import { makeTruth } from '../tests/fixtures/truth';
-import { isLocal, trackRequests } from './helpers';
+import { isLocal, trackRequests, ensureCurrency } from './helpers';
 
 const sample = (n: string) => path.join(process.cwd(), 'public/samples', n);
 const truth = makeTruth('lt');
@@ -16,6 +16,7 @@ async function loadDashboard(page: Page) {
   await page.getByTestId('lang-en').click();
   await page.getByTestId('file-input').setInputFiles(sample('sample_lt_ataskaita.xlsx'));
   await page.getByTestId('mapping-table').waitFor();
+  await ensureCurrency(page);
   await page.getByTestId('confirm-import').click();
   await page.getByTestId('view-insights').click();
   await page.getByTestId('kpi-revenue').waitFor();

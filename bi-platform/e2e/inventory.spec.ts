@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import fs from 'node:fs';
 import { buildInventoryFixtures, type IFixture } from '../tests/fixtures/inventoryFormats';
 import { END, valueAt } from '../tests/fixtures/inventory';
-import { isLocal, trackRequests } from './helpers';
+import { isLocal, trackRequests, ensureCurrency } from './helpers';
 
 const eur = (n: number) => new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'EUR' }).format(n);
 let fx: IFixture[] = [];
@@ -15,6 +15,7 @@ async function pickFile(page: Page, f: ReturnType<typeof file>, opts: { mode?: s
   if (await page.getByTestId('import-result').count()) await page.getByRole('button', { name: 'Choose file' }).click();
   await page.getByTestId('file-input').setInputFiles(f);
   await page.getByTestId('mapping-table').waitFor();
+  await ensureCurrency(page);
   if (opts.asOf) await page.getByTestId('asof-input').fill(opts.asOf);
   if (await page.getByTestId('currency-select').count()) await page.getByTestId('currency-select').selectOption('EUR');
   if (opts.mode) await page.getByTestId('mode-select').selectOption(opts.mode);
@@ -76,6 +77,7 @@ test.describe('inventory: import recognises the data type and asks for what is m
     const f = get('lt-snapshot-nodate');
     await page.getByTestId('file-input').setInputFiles(file(f));
     await page.getByTestId('mapping-table').waitFor();
+    await ensureCurrency(page);
     await expect(page.getByTestId('asof-input')).toBeVisible();
     await expect(page.getByTestId('confirm-import')).toBeDisabled();
     await expect(page.getByText('Enter the snapshot date to continue.')).toBeVisible();
@@ -249,6 +251,7 @@ test.describe('inventory: import safety, reports and privacy', () => {
     await page.getByRole('button', { name: 'Choose file' }).click();
     await page.getByTestId('file-input').setInputFiles('public/samples/sample_lt_pirkimai.csv');
     await page.getByTestId('mapping-table').waitFor();
+    await ensureCurrency(page);
     await expect(page.getByTestId('module-purchasing')).toHaveAttribute('aria-pressed', 'true');
     await page.getByTestId('confirm-import').click();
     await page.getByTestId('import-result').waitFor();

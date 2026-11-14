@@ -44,6 +44,7 @@ const pl: Messages = {
   'import.multiAmount': 'Zmapowano kilka kolumn z kwotami. Priorytet: netto, potem brutto, potem nieokreślona.',
   'import.currencyUnreadable': 'Większość wartości w kolumnie przypisanej do waluty nie jest kodem waluty, więc te wiersze zostałyby pominięte. Ustaw tę kolumnę jako „nieużywana” i wybierz walutę poniżej.',
   'import.lowConf': 'Niska pewność – sprawdź: {field}',
+  'import.currencyChoose': '— wybierz walutę —',
   'import.currency': 'Waluta', 'import.currencyHint': 'Plik nie ma kolumny waluty. Wybierz walutę kwot.', 'import.currencyDetected': 'Wykryto z wartości: {c}',
   'import.exportMode': 'Typ eksportu', 'mode.full': 'Cały okres', 'mode.incremental': 'Tylko nowe operacje', 'mode.unknown': 'Nie wiem',
   'import.remember': 'Zapamiętaj to mapowanie dla plików o tym samym układzie',

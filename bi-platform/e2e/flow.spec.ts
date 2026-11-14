@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import path from 'node:path';
-import { isLocal, trackRequests } from './helpers';
+import { isLocal, trackRequests, ensureCurrency } from './helpers';
 
 const sample = (n: string) => path.join(process.cwd(), 'public/samples', n);
 
@@ -12,6 +12,7 @@ test.describe('import → insights → history → delete', () => {
 
     await page.getByTestId('file-input').setInputFiles(sample('sample_lt_pardavimai.csv'));
     await expect(page.getByTestId('mapping-table')).toBeVisible();
+    await ensureCurrency(page);
     // proposals are visible before anything is imported
     await expect(page.getByTestId('map-0')).toHaveValue('document_date');
     const confirm = page.getByTestId('confirm-import');

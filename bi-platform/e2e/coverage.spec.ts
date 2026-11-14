@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { ensureCurrency } from './helpers';
 
 /** 40 days of flat daily sales ending 2025-06-30: the previous 30-day window holds only 10 days of data. */
 function flatCsv(): string {
@@ -20,6 +21,7 @@ test.describe('export period and comparison coverage', () => {
     await page.getByTestId('lang-en').click();
     await page.getByTestId('file-input').setInputFiles(file());
     await expect(page.getByTestId('mapping-table')).toBeVisible();
+    await ensureCurrency(page);
     await expect(page.getByTestId('export-period')).toBeVisible();
     await page.getByTestId('mode-select').selectOption('full');
     await page.getByTestId('confirm-import').click();
@@ -37,6 +39,7 @@ test.describe('export period and comparison coverage', () => {
     await page.getByTestId('tab-import').click();
     await page.getByTestId('file-input').setInputFiles(file());
     await expect(page.getByTestId('mapping-table')).toBeVisible();
+    await ensureCurrency(page);
     await page.getByTestId('cover-from').fill('2025-01-01');
     await page.getByTestId('cover-to').fill('2025-06-30');
     await page.getByTestId('mode-select').selectOption('full');

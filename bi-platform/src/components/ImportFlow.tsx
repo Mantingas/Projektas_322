@@ -40,7 +40,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   const [assign, setAssign] = useState<Record<number, FieldId | ''>>({});
   const [confs, setConfs] = useState<Record<number, number>>({});
   const [sources, setSources] = useState<Record<number, MappingEntry['source']>>({});
-  const [currency, setCurrency] = useState('EUR');
+  const [currency, setCurrency] = useState('');
   const [mode, setMode] = useState<ExportMode>('unknown');
   const [policy, setPolicy] = useState<ImportPolicy | null>(null);
   const [confirmChecked, setConfirmChecked] = useState(false);
@@ -87,7 +87,8 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
       a.profiles.forEach((p) => (asg[p.index] = ''));
       for (const e of a.proposal.entries) { asg[e.columnIndex] = e.field; cf[e.columnIndex] = e.confidence; src[e.columnIndex] = e.source; }
       setAssign(asg); setConfs(cf); setSources(src);
-      setCurrency(a.savedCurrency ?? a.proposal.detectedCurrency ?? (lang === 'pl' ? 'PLN' : 'EUR'));
+      // no guess from the interface language: the currency is the person's choice unless the file or an earlier confirmation for this layout states it
+      setCurrency(a.savedCurrency ?? a.proposal.detectedCurrency ?? '');
     }
   }, [lang]);
 
@@ -378,7 +379,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
             {!hasCurrencyCol && (
               <label className="space-y-1 text-sm">
                 <span className="font-medium">{t('import.currency')}</span>
-                <select data-testid="currency-select" value={currency} onChange={(e) => setCurrency(e.target.value)} className="block w-full rounded-md border border-slate-300 bg-transparent px-2 py-2 dark:border-slate-700 dark:bg-slate-900">{CURRENCIES.map((c) => <option key={c}>{c}</option>)}</select>
+                <select data-testid="currency-select" value={currency} onChange={(e) => setCurrency(e.target.value)} className="block w-full rounded-md border border-slate-300 bg-transparent px-2 py-2 dark:border-slate-700 dark:bg-slate-900"><option value="">{t('import.currencyChoose')}</option>{CURRENCIES.map((c) => <option key={c}>{c}</option>)}</select>
                 <span className="block text-xs text-slate-500">{analysis.proposal.detectedCurrency ? t('import.currencyDetected', { c: analysis.proposal.detectedCurrency }) : t('import.currencyHint')}</span>
               </label>
             )}

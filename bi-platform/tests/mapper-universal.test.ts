@@ -1,6 +1,7 @@
 import 'fake-indexeddb/auto';
 import { describe, expect, it } from 'vitest';
-import { checkAmountConsistency, headerScore, suggestMapping } from '@/engine/mapping/mapper';
+import { checkAmountConsistency, headerScore, layoutSignature, suggestMapping } from '@/engine/mapping/mapper';
+import { getSavedMapping, saveMapping } from '@/db/store';
 import { profileColumns } from '@/engine/schema/profile';
 import type { FieldId } from '@/engine/types';
 import { importCsv as importRaw, mkSession, type Cell } from './fixtures/salesCsv';
@@ -154,4 +155,37 @@ describe('other trading sectors and languages', () => {
       expect(pv.stats.rowsImported).toBe(40);
     });
   }
+});
+
+describe('mappings saved by an earlier version', () => {
+  const header = ['Data', 'Dokumento Nr.', 'Klientas', 'Prekė', 'Kiekis', 'Katalogo_kaina_be_PVM_EUR', 'Pardavimo_kaina_be_PVM_EUR', 'Pardavimo_suma_be_PVM_EUR', 'PVM_EUR'];
+  const rows: Cell[][] = Array.from({ length: 30 }, (_, i) => [`2025-03-${String(1 + (i % 27)).padStart(2, '0')}`, 'D' + i, 'K' + (i % 5), 'P' + (i % 7), 2, 10, 9, 18, 3.78]);
+  // what the old mapper saved for the real export: price taken as VAT, VAT column left out
+  const legacy = { data: 'document_date', 'dokumento nr': 'document_id', klientas: 'customer_name', preke: 'product_name', kiekis: 'quantity', 'katalogo kaina be pvm eur': 'unit_price', 'pardavimo kaina be pvm eur': 'vat_amount', 'pardavimo suma be pvm eur': 'net_amount' };
+  const fields = Object.fromEntries(Object.entries(legacy).map(([h, f]) => [f, h]));
+
+  it('a remembered choice that the header itself rules out is kept for review, not trusted at 0.98', async () => {
+    const s = mkSession();
+    await saveMapping((s as any).db, { signature: layoutSignature(header, 'sales'), fields, updatedAt: 1 } as any);
+    const before = JSON.stringify(await getSavedMapping((s as any).db, layoutSignature(header, 'sales')));
+    await importRaw(s, header, rows).catch(() => undefined);
+    const a: any = await s.analyze(0, ',', 'sales');
+    expect(a.usedSaved).toBe(true);
+    const conf = (h: string) => a.proposal.entries.find((e: any) => a.headers[e.columnIndex] === h)?.confidence;
+    expect(conf('Pardavimo_kaina_be_PVM_EUR')).toBeLessThan(0.75);
+    expect(conf('Katalogo_kaina_be_PVM_EUR')).toBeLessThan(0.75);
+    expect(conf('Pardavimo_suma_be_PVM_EUR')).toBe(0.98);
+    expect(a.proposal.warnings.filter((w: any) => w.code === 'low_confidence').map((w: any) => w.field).sort()).toEqual(['unit_price', 'vat_amount']);
+    // the person's stored mapping is not touched or deleted
+    expect(JSON.stringify(await getSavedMapping((s as any).db, layoutSignature(header, 'sales')))).toBe(before);
+  });
+
+  it('a sound remembered mapping is still applied silently', () => {
+    const p = profileColumns(header, rows.map((r) => r.map(String)), ',');
+    const good = suggestMapping(p, { saved: { document_date: 'data', unit_price: 'pardavimo kaina be pvm eur', net_amount: 'pardavimo suma be pvm eur', vat_amount: 'pvm eur' } });
+    const savedOnes = good.entries.filter((e) => e.source === 'saved');
+    expect(savedOnes).toHaveLength(4);
+    expect(savedOnes.every((e) => e.confidence === 0.98)).toBe(true);
+    expect(good.warnings.some((w) => w.code === 'low_confidence')).toBe(false);
+  });
 });

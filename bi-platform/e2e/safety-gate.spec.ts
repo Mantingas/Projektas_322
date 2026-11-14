@@ -1,7 +1,10 @@
 import { expect, test, type Page } from '@playwright/test';
 
 const seed = async (page: Page, rows: Record<string, unknown[]>) => page.evaluate(async (data) => {
-  const db: IDBDatabase = await new Promise((res, rej) => { const r = indexedDB.open('bi-platform'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+  // the app creates its stores on first load; opening earlier would see an empty database (a timing flake, unrelated to the product)
+  const open = () => new Promise<IDBDatabase>((res, rej) => { const r = indexedDB.open('bi-platform'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+  let db = await open();
+  for (let i = 0; i < 50 && !Object.keys(data).every((s) => db.objectStoreNames.contains(s)); i++) { db.close(); await new Promise((r) => setTimeout(r, 100)); db = await open(); }
   await new Promise<void>((res, rej) => { const tx = db.transaction(Object.keys(data), 'readwrite'); for (const [s, rs] of Object.entries(data)) for (const r of rs) tx.objectStore(s).put(r); tx.oncomplete = () => res(); tx.onerror = () => rej(tx.error); });
   db.close();
 }, rows);
