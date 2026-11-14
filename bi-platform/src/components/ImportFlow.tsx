@@ -7,7 +7,7 @@ import { Badge } from './ui/badge';
 import type { ImportRow } from '@/db/db';
 import { engine, EngineError } from '@/lib/engineClient';
 import type { AnalysisLite, ParseResult, PreviewResult } from '@/lib/engineSession';
-import { isMappingConfirmable, LOW_CONFIDENCE, validateMapping } from '@/engine/mapping/mapper';
+import { isMappingConfirmable, LOW_CONFIDENCE, suspectSavedEntries, validateMapping } from '@/engine/mapping/mapper';
 import { financeKindFromFields, SNAPSHOT_DATASETS } from '@/engine/finance/kind';
 import { SALES_TEMPLATES } from '@/engine/mapping/templates';
 import { renderDiagnosticsText } from '@/engine/import/diagnostics';
@@ -44,6 +44,8 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   const [mode, setMode] = useState<ExportMode>('unknown');
   const [policy, setPolicy] = useState<ImportPolicy | null>(null);
   const [confirmChecked, setConfirmChecked] = useState(false);
+  /** the assignment (file + every column choice) the person confirmed despite a contradicting remembered mapping; any change makes it stale */
+  const [savedOk, setSavedOk] = useState('');
   const [remember, setRemember] = useState(true);
   const [coverFrom, setCoverFrom] = useState('');
   const [coverTo, setCoverTo] = useState('');
@@ -64,7 +66,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   const reset = useCallback(() => {
     void engine().call('discard', []);
     setParsed(null); setAnalysis(null); setAssign({}); setConfs({}); setSources({}); setError(null); setDupAccepted(false); setResult(null); setSheetIdx(0);
-    setPv(null); setPolicy(null); setConfirmChecked(false); setMode('unknown'); setModule('sales'); setAsOf(''); setSide('receivable'); setDateOrders({}); setCoverFrom(''); setCoverTo('');
+    setPv(null); setPolicy(null); setConfirmChecked(false); setSavedOk(''); setMode('unknown'); setModule('sales'); setAsOf(''); setSide('receivable'); setDateOrders({}); setCoverFrom(''); setCoverTo('');
     if (input.current) input.current.value = '';
   }, []);
 
@@ -125,6 +127,9 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   };
 
   const entries = Object.entries(assign).filter(([, f]) => f).map(([c, f]) => ({ field: f as FieldId, columnIndex: Number(c), confidence: confs[Number(c)] ?? 1, source: sources[Number(c)] ?? ('user' as const) }));
+  const suspect = suspectSavedEntries(entries);
+  const assignmentKey = `${parsed?.checksum ?? ''}|${entries.map((e) => `${e.columnIndex}:${e.field}`).sort().join(',')}`;
+  const suspectBlocked = suspect.length > 0 && savedOk !== assignmentKey;
   const finKind = module === 'finance' ? financeKindFromFields(entries.map((e) => e.field)) : null;
   // inventory needs a date; finance ledger reports (open items / aging / balance) are "as of" a date – the file's column or the date the user states
   const needsAsOf = (module === 'inventory' && !entries.some((e) => e.field === 'snapshot_date' || e.field === 'movement_date')) || (finKind !== null && SNAPSHOT_DATASETS.includes(finKind) && !entries.some((e) => e.field === 'snapshot_date'));
@@ -150,7 +155,7 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
   const needs = pv?.preview.needsConfirmation ?? [];
   // a currency column whose values are not currencies must not silently drop the file: the person decides (unassign the column and pick a currency)
   const currencyUnreadable = hasCurrencyCol && Boolean(pv) && (pv!.stats.errors?.unknown_currency ?? 0) * 2 >= Math.max(1, pv!.stats.rowsRead);
-  const confirmable = Boolean(pv) && !currencyUnreadable && isMappingConfirmable(warnings) && (hasCurrencyCol || Boolean(currency)) && (!parsed?.duplicateOf || dupAccepted) && (needs.length === 0 || confirmChecked) && !pvBusy;
+  const confirmable = Boolean(pv) && !currencyUnreadable && !suspectBlocked && isMappingConfirmable(warnings) && (hasCurrencyCol || Boolean(currency)) && (!parsed?.duplicateOf || dupAccepted) && (needs.length === 0 || confirmChecked) && !pvBusy;
 
   const confirm = async () => {
     if (!parsed || !pv) return;
@@ -343,6 +348,13 @@ export function ImportFlow({ onImported, goInsights, goReview }: { onImported: (
             </table>
           </div>
 
+          {suspect.length > 0 && (
+            <div className="space-y-2 rounded-md border border-red-300 bg-red-50 p-3 text-sm dark:border-red-900 dark:bg-red-950/30" data-testid="saved-suspect" role="group" aria-label={t('import.savedSuspect.title')}>
+              <div className="font-semibold">{t('import.savedSuspect.title')}</div>
+              <ul className="list-disc space-y-1 pl-5">{suspect.map((e) => <li key={e.columnIndex}>{t('import.savedSuspect.item', { header: analysis.headers[e.columnIndex] ?? '', field: t(`field.${e.field}` as MessageKey) })}</li>)}</ul>
+              <label className="flex items-center gap-2 font-medium"><input type="checkbox" data-testid="saved-suspect-checkbox" checked={!suspectBlocked} onChange={(e) => setSavedOk(e.target.checked ? assignmentKey : '')} />{t('import.savedSuspect.checkbox')}</label>
+            </div>
+          )}
           {currencyUnreadable && <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-800 dark:bg-red-950 dark:text-red-200" data-testid="currency-unreadable">{t('import.currencyUnreadable')}</p>}
           <ul className="space-y-1 text-sm" aria-live="polite">
             {warnings.map((w, i) => (

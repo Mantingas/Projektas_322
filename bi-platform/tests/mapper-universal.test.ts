@@ -1,6 +1,6 @@
 import 'fake-indexeddb/auto';
 import { describe, expect, it } from 'vitest';
-import { checkAmountConsistency, headerScore, layoutSignature, suggestMapping } from '@/engine/mapping/mapper';
+import { checkAmountConsistency, headerScore, layoutSignature, suggestMapping, suspectSavedEntries } from '@/engine/mapping/mapper';
 import { getSavedMapping, saveMapping } from '@/db/store';
 import { profileColumns } from '@/engine/schema/profile';
 import type { FieldId } from '@/engine/types';
@@ -187,5 +187,17 @@ describe('mappings saved by an earlier version', () => {
     expect(savedOnes).toHaveLength(4);
     expect(savedOnes.every((e) => e.confidence === 0.98)).toBe(true);
     expect(good.warnings.some((w) => w.code === 'low_confidence')).toBe(false);
+  });
+
+  it('only contradicting remembered choices need the person\'s confirmation; sound and user-set ones do not', () => {
+    const p = profileColumns(header, rows.map((r) => r.map(String)), ',');
+    const bad = suggestMapping(p, { saved: fields });
+    expect(suspectSavedEntries(bad.entries).map((e) => e.field).sort()).toEqual(['unit_price', 'vat_amount']);
+    // the person corrects them: user-set entries are no longer remembered ones
+    const fixed = bad.entries.map((e) => (e.field === 'vat_amount' || e.field === 'unit_price' ? { ...e, source: 'user' as const, confidence: 1 } : e));
+    expect(suspectSavedEntries(fixed)).toEqual([]);
+    const good = suggestMapping(p, { saved: { document_date: 'data', unit_price: 'pardavimo kaina be pvm eur', net_amount: 'pardavimo suma be pvm eur', vat_amount: 'pvm eur' } });
+    expect(suspectSavedEntries(good.entries)).toEqual([]);
+    expect(suspectSavedEntries(suggestMapping(p).entries)).toEqual([]);
   });
 });

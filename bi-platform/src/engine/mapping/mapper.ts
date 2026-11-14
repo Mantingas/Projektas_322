@@ -234,6 +234,11 @@ export function validateMapping(entries: Pick<MappingEntry, 'field' | 'confidenc
   return w;
 }
 
+/** Remembered choices the header itself rules out (flagged with low confidence by suggestMapping): an import using them needs the person's explicit confirmation. */
+export function suspectSavedEntries<T extends Pick<MappingEntry, 'source' | 'confidence'>>(entries: T[]): T[] {
+  return entries.filter((e) => e.source === 'saved' && e.confidence < LOW_CONFIDENCE);
+}
+
 /** A mapping can only be confirmed when it has a date and at least one amount column. */
 export function isMappingConfirmable(warnings: MappingWarning[]): boolean {
   return !warnings.some((w) => w.code === 'missing_date' || w.code === 'missing_amount' || w.code === 'missing_product' || w.code === 'missing_quantity' || w.code === 'missing_counterparty');
